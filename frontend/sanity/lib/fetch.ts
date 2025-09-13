@@ -10,6 +10,12 @@ import {
   POSTS_SLUGS_QUERY,
   POSTS_COUNT_QUERY,
 } from "@/sanity/queries/post";
+import {
+  CATEGORY_QUERY,
+  CATEGORIES_SLUGS_QUERY,
+  POSTS_BY_CATEGORY_QUERY,
+  POSTS_BY_CATEGORY_COUNT_QUERY,
+} from "@/sanity/queries/category";
 import { CHANGELOGS_QUERY } from "@/sanity/queries/changelog";
 import { TEAM_QUERY } from "@/sanity/queries/team";
 import {
@@ -24,6 +30,7 @@ import {
   CONTACT_QUERYResult,
   CHANGELOGS_QUERYResult,
   TEAM_QUERYResult,
+  // Types for categories and category post lists will be inferred from generated types at runtime
 } from "@/sanity.types";
 
 export const fetchSanityNavigation =
@@ -80,6 +87,57 @@ export const fetchSanityPosts = async ({
     params: { offset, end },
   });
 
+  return data;
+};
+
+export const fetchSanityCategoryBySlug = async ({
+  slug,
+}: {
+  slug: string;
+}) => {
+  const { data } = await sanityFetch({
+    query: CATEGORY_QUERY,
+    params: { slug },
+  });
+  return data;
+};
+
+export const fetchSanityCategoriesStaticParams = async () => {
+  const { data } = await sanityFetch({
+    query: CATEGORIES_SLUGS_QUERY,
+    perspective: "published",
+    stega: false,
+  });
+  return data;
+};
+
+export const fetchSanityPostsByCategory = async ({
+  slug,
+  page,
+  limit,
+}: {
+  slug: string;
+  page?: number;
+  limit: number;
+}) => {
+  const offset = page && limit ? (page - 1) * limit : 0;
+  const end = offset + limit;
+  const { data } = await sanityFetch({
+    query: POSTS_BY_CATEGORY_QUERY,
+    params: { slug, offset, end },
+  });
+  return data;
+};
+
+export const fetchSanityPostsByCategoryCount = async ({
+  slug,
+}: {
+  slug: string;
+}): Promise<number> => {
+  const { data } = await sanityFetch({
+    query: POSTS_BY_CATEGORY_COUNT_QUERY,
+    params: { slug },
+  });
   return data;
 };
 
