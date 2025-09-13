@@ -1,5 +1,6 @@
 import { groq } from "next-sanity";
 import { imageQuery } from "../../shared/image";
+export { allCategories16Query } from "./all-categories";
 
 // @sanity-typegen-ignore
 export const blog16Query = groq`

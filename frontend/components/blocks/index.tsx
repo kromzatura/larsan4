@@ -34,6 +34,7 @@ import Blog14 from "@/components/blocks/blog/blog14";
 import AllPosts14 from "@/components/blocks/blog/blog14/all-posts";
 import Blog16 from "@/components/blocks/blog/blog16";
 import AllPosts16 from "@/components/blocks/blog/blog16/all-posts";
+import AllCategories16 from "@/components/blocks/blog/blog16/all-categories";
 import Changelog1 from "@/components/blocks/changelog/changelog1";
 import Changelog2 from "@/components/blocks/changelog/changelog2";
 import Changelog3 from "@/components/blocks/changelog/changelog3";
@@ -67,9 +68,9 @@ import Timeline5 from "@/components/blocks/timelines/timeline5";
 import Timeline6 from "@/components/blocks/timelines/timeline6";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
-
-const componentMap: {
-  [K in Block["_type"]]: React.ComponentType<Extract<Block, { _type: K }>>;
+type BaseBlockTypes = Exclude<Block["_type"], "all-categories-16">;
+const baseComponentMap: {
+  [K in BaseBlockTypes]: React.ComponentType<Extract<Block, { _type: K }>>;
 } = {
   "section-header": SectionHeader,
   "hero-12": Hero12,
@@ -139,6 +140,13 @@ const componentMap: {
   "timeline-6": Timeline6,
 };
 
+const componentMap: {
+  [K in Block["_type"]]: React.ComponentType<Extract<Block, { _type: K }>>;
+} = {
+  ...baseComponentMap,
+  "all-categories-16": AllCategories16,
+};
+
 export default function Blocks({
   blocks,
   searchParams,
@@ -159,13 +167,34 @@ export default function Blocks({
           );
           return <div data-type={block._type} key={block._key} />;
         }
-        return (
-          <Component
-            {...(block as any)}
-            key={block._key}
-            searchParams={searchParams}
-          />
+        const key = block._key;
+        const needsSearchParams = (
+          block._type === "all-posts-4" ||
+          block._type === "all-posts-7" ||
+          block._type === "all-posts-13" ||
+          block._type === "all-posts-14" ||
+          block._type === "all-posts-16"
         );
+
+        if (needsSearchParams) {
+          const CompWithSearch = Component as unknown as React.ComponentType<
+            Extract<Block, { _type: typeof block._type }> & {
+              searchParams?: Promise<{ page?: string }>;
+            }
+          >;
+          return (
+            <CompWithSearch
+              {...(block as Extract<Block, { _type: typeof block._type }>)}
+              key={key}
+              searchParams={searchParams}
+            />
+          );
+        }
+
+        const Comp = Component as unknown as React.ComponentType<
+          Extract<Block, { _type: typeof block._type }>
+        >;
+        return <Comp {...(block as Extract<Block, { _type: typeof block._type }>)} key={key} />;
       })}
     </>
   );

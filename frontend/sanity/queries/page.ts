@@ -33,7 +33,7 @@ import { blog13Query } from "./blog/blog13";
 import { allPosts13Query } from "./blog/blog13/all-posts";
 import { blog14Query } from "./blog/blog14";
 import { allPosts14Query } from "./blog/blog14/all-posts";
-import { blog16Query } from "./blog/blog16";
+import { blog16Query, allCategories16Query } from "./blog/blog16";
 import { allPosts16Query } from "./blog/blog16/all-posts";
 import { changelog1Query } from "./blog/changelog/changelog1";
 import { changelog2Query } from "./blog/changelog/changelog2";
@@ -105,6 +105,7 @@ export const PAGE_QUERY = groq`
       ${allPosts14Query},
       ${blog16Query},
       ${allPosts16Query},
+  ${allCategories16Query},
       ${changelog1Query},
       ${changelog2Query},
       ${changelog3Query},

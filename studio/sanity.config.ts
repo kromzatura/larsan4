@@ -1,4 +1,4 @@
-"use client";
+// Studio config runs in Node (CLI) and the browser; do not force client mode.
 
 /**
  * This configuration is used to for the Sanity Studio that's mounted on the `/app/studio/[[...tool]]/page.tsx` route
@@ -10,7 +10,7 @@ import { structureTool } from "sanity/structure";
 import { presentationTool } from "sanity/presentation";
 import { media } from "sanity-plugin-media";
 
-import { schema } from "./schema";
+import { schema as projectSchema } from "./schema";
 import { resolve } from "./presentation/resolve";
 import { structure } from "./structure";
 import { defaultDocumentNode } from "./defaultDocumentNode";
@@ -40,7 +40,7 @@ export default defineConfig({
   dataset,
   // Add and edit the content schema in the './sanity/schema' folder
   schema: {
-    types: schema.types,
+    types: projectSchema.types,
     // Filter out singleton types from the global "New document" menu options
     templates: (templates) =>
       templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
