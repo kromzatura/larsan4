@@ -90,11 +90,7 @@ export const fetchSanityPosts = async ({
   return data;
 };
 
-export const fetchSanityCategoryBySlug = async ({
-  slug,
-}: {
-  slug: string;
-}) => {
+export const fetchSanityCategoryBySlug = async ({ slug }: { slug: string }) => {
   const { data } = await sanityFetch({
     query: CATEGORY_QUERY,
     params: { slug },
