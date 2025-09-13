@@ -34,7 +34,7 @@ export default async function AllCategories16({ padding }: AllCategories16Props)
           categories.map((cat: { _id: string; title?: string; slug?: { current?: string } }) => (
             <Link
               key={cat._id}
-              href={`/blog`}
+              href={cat.slug?.current ? `/categories/${encodeURIComponent(cat.slug.current)}` : `/blog`}
               className="flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors hover:bg-muted"
             >
               {cat.title}
