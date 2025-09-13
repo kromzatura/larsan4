@@ -2014,7 +2014,13 @@ export type Category = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  slug?: Slug;
+  description?: string;
   color?: "red" | "redLight" | "amber" | "amberLight" | "green" | "greenLight" | "blue" | "blueLight" | "indigo" | "indigoLight" | "purple" | "purpleLight" | "cyan" | "cyanLight" | "orange" | "orangeLight";
+  seo?: {
+    title?: string;
+    metaDescription?: string;
+  };
   orderRank?: string;
 };
 
