@@ -137,6 +137,21 @@ export const fetchSanityPostsByCategoryCount = async ({
   return data;
 };
 
+export const fetchSanityAllCategories = async (): Promise<
+  Array<{
+    _id: string;
+    title?: string;
+    slug?: { current?: string };
+  }>
+> => {
+  const { data } = await sanityFetch({
+    query: `*[_type == "category" && defined(slug)]|order(orderRank){ _id, title, slug }`,
+    perspective: "published",
+    stega: false,
+  });
+  return data;
+};
+
 export const fetchSanityChangelogs =
   async (): Promise<CHANGELOGS_QUERYResult> => {
     const { data } = await sanityFetch({

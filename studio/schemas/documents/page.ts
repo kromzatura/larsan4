@@ -50,6 +50,7 @@ export default defineType({
         { type: "all-posts-13" },
         { type: "all-posts-14" },
         { type: "all-posts-16" },
+  { type: "all-categories-16" },
         { type: "changelog-1" },
         { type: "changelog-2" },
         { type: "changelog-3" },
@@ -123,6 +124,7 @@ export default defineType({
                 "all-posts-14",
                 "blog-16",
                 "all-posts-16",
+                "all-categories-16",
               ],
             },
             {
