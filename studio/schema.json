@@ -5628,30 +5628,6 @@
     }
   },
   {
-    "name": "all-categories-16",
-    "type": "type",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "all-categories-16"
-          }
-        },
-        "padding": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "section-padding"
-          },
-          "optional": true
-        }
-      }
-    }
-  },
-  {
     "name": "all-posts-16",
     "type": "type",
     "value": {
@@ -17053,21 +17029,6 @@
                 "rest": {
                   "type": "inline",
                   "name": "all-posts-16"
-                }
-              },
-              {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "rest": {
-                  "type": "inline",
-                  "name": "all-categories-16"
                 }
               },
               {

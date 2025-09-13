@@ -34,7 +34,6 @@ import Blog14 from "@/components/blocks/blog/blog14";
 import AllPosts14 from "@/components/blocks/blog/blog14/all-posts";
 import Blog16 from "@/components/blocks/blog/blog16";
 import AllPosts16 from "@/components/blocks/blog/blog16/all-posts";
-import AllCategories16 from "@/components/blocks/blog/blog16/all-categories";
 import Changelog1 from "@/components/blocks/changelog/changelog1";
 import Changelog2 from "@/components/blocks/changelog/changelog2";
 import Changelog3 from "@/components/blocks/changelog/changelog3";
@@ -67,12 +66,11 @@ import Timeline4 from "@/components/blocks/timelines/timeline4";
 import Timeline5 from "@/components/blocks/timelines/timeline5";
 import Timeline6 from "@/components/blocks/timelines/timeline6";
 
-type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number] & {
-  _type: string;
-  _key: string;
-};
+type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 
-const componentMap: Record<string, React.ComponentType<any>> = {
+const componentMap: {
+  [K in Block["_type"]]: React.ComponentType<Extract<Block, { _type: K }>>;
+} = {
   "section-header": SectionHeader,
   "hero-12": Hero12,
   "hero-13": Hero13,
@@ -155,13 +153,11 @@ export default function Blocks({
       {blocks?.map((block) => {
         const Component = componentMap[block._type];
         if (!Component) {
-          const anyBlock = block as any;
-          if (anyBlock._type === "all-categories-16") {
-            const Dyn = AllCategories16 as unknown as React.ComponentType<any>;
-            return <Dyn key={anyBlock._key} {...anyBlock} />;
-          }
-          console.warn(`No component implemented for block type: ${block._type}`);
-          return <div data-type={(block as any)._type} key={(block as any)._key} />;
+          // Fallback for development/debugging of new component types
+          console.warn(
+            `No component implemented for block type: ${block._type}`
+          );
+          return <div data-type={block._type} key={block._key} />;
         }
         return (
           <Component

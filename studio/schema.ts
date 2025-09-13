@@ -78,7 +78,6 @@ import allPosts14 from "./schemas/blocks/blog/blog14/all-posts";
 // Blog 16
 import blog16 from "./schemas/blocks/blog/blog16";
 import allPosts16 from "./schemas/blocks/blog/blog16/all-posts";
-import allCategories16 from "./schemas/blocks/blog/blog16/all-categories";
 // Changelog
 import changelog1 from "./schemas/blocks/changelog/changelog1";
 import changelog2 from "./schemas/blocks/changelog/changelog2";
@@ -197,7 +196,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     // Blog 16
     blog16,
     allPosts16,
-  allCategories16,
     // Changelog
     changelog1,
     changelog2,
