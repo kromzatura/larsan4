@@ -1,0 +1,14 @@
+{
+  "name": "sanityblocks",
+  "version": "1.1.1",
+  "description": "SanityBlocks: Next.js + Sanity + shadcnblocks.com",
+  "scripts": {
+    "dev": "pnpm --parallel -r run dev",
+    "dev:next": "pnpm run dev --workspace=frontend",
+    "dev:studio": "pnpm run dev --workspace=studio",
+    "typegen": "cd studio && pnpm typegen",
+    "typecheck": "cd frontend && pnpm typecheck",
+    "export": "cd studio && sanity dataset export production sample-data.tar.gz"
+  },
+  "homepage": "https://www.shadcnblocks.com/"
+}

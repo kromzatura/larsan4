@@ -1,0 +1,18 @@
+export const COLOR_VARIANTS = [
+  { title: "Red", value: "red" },
+  { title: "Red Light", value: "redLight" },
+  { title: "Amber", value: "amber" },
+  { title: "Amber Light", value: "amberLight" },
+  { title: "Green", value: "green" },
+  { title: "Green Light", value: "greenLight" },
+  { title: "Blue", value: "blue" },
+  { title: "Blue Light", value: "blueLight" },
+  { title: "Indigo", value: "indigo" },
+  { title: "Indigo Light", value: "indigoLight" },
+  { title: "Purple", value: "purple" },
+  { title: "Purple Light", value: "purpleLight" },
+  { title: "Cyan", value: "cyan" },
+  { title: "Cyan Light", value: "cyanLight" },
+  { title: "Orange", value: "orange" },
+  { title: "Orange Light", value: "orangeLight" },
+];
