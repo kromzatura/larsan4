@@ -5,6 +5,24 @@ export default defineType({
   name: "link-icon",
   type: "object",
   title: "Link Icon",
+  validation: (Rule) =>
+    [
+      Rule.custom((value) => {
+        if (!value) return true;
+        const { isExternal, href, internalLink } = value as any;
+        if (isExternal) {
+          return href ? true : "External links require an href";
+        }
+        return internalLink ? true : "Select an internal link or mark as External";
+      }),
+      Rule.custom((value) => {
+        if (!value) return true;
+        const { isExternal, internalLink } = value as any;
+        if (isExternal || !internalLink) return true;
+        const hasSlug = Boolean(internalLink?.slug?.current);
+        return hasSlug ? true : "missing-slug";
+      }).warning("Selected document has no slug yet"),
+    ],
   fields: [
     defineField({
       name: "iconVariant",

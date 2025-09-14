@@ -15634,14 +15634,34 @@
               "sizeUnit": {
                 "type": "objectAttribute",
                 "value": {
-                  "type": "string"
+                  "type": "union",
+                  "of": [
+                    {
+                      "type": "string",
+                      "value": "kg"
+                    },
+                    {
+                      "type": "string",
+                      "value": "ton"
+                    }
+                  ]
                 },
                 "optional": true
               },
               "packagingType": {
                 "type": "objectAttribute",
                 "value": {
-                  "type": "string"
+                  "type": "union",
+                  "of": [
+                    {
+                      "type": "string",
+                      "value": "Paper bag"
+                    },
+                    {
+                      "type": "string",
+                      "value": "Big Bag"
+                    }
+                  ]
                 },
                 "optional": true
               },
