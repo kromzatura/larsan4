@@ -68,9 +68,8 @@ import Timeline5 from "@/components/blocks/timelines/timeline5";
 import Timeline6 from "@/components/blocks/timelines/timeline6";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
-type BaseBlockTypes = Exclude<Block["_type"], "all-categories-16">;
 const baseComponentMap: {
-  [K in BaseBlockTypes]: React.ComponentType<Extract<Block, { _type: K }>>;
+  [K in Block["_type"]]: React.ComponentType<Extract<Block, { _type: K }>>;
 } = {
   "section-header": SectionHeader,
   "hero-12": Hero12,
@@ -107,6 +106,7 @@ const baseComponentMap: {
   "all-posts-14": AllPosts14,
   "blog-16": Blog16,
   "all-posts-16": AllPosts16,
+  "all-categories-16": AllCategories16,
   "changelog-1": Changelog1,
   "changelog-2": Changelog2,
   "changelog-3": Changelog3,
@@ -140,12 +140,7 @@ const baseComponentMap: {
   "timeline-6": Timeline6,
 };
 
-const componentMap: {
-  [K in Block["_type"]]: React.ComponentType<Extract<Block, { _type: K }>>;
-} = {
-  ...baseComponentMap,
-  "all-categories-16": AllCategories16,
-};
+const componentMap = baseComponentMap;
 
 export default function Blocks({
   blocks,

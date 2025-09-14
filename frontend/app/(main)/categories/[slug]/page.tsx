@@ -4,7 +4,7 @@ import { groq } from "next-sanity";
 import SectionHeader from "@/components/blocks/section-header";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import { getOgImageUrl } from "@/sanity/lib/fetch";
+import { generatePageMetadata } from "@/sanity/lib/metadata";
 
 const CATEGORY_QUERY = groq`
   *[_type == "category" && slug.current == $slug][0]{
@@ -33,26 +33,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
   const { slug } = await props.params;
   const { data: category } = await sanityFetch({ query: CATEGORY_QUERY, params: { slug }, perspective: "published", stega: false });
   if (!category) return {};
-  const isProduction = process.env.NEXT_PUBLIC_SITE_ENV === "production";
-  return {
-    title: category.title,
-    description: category.description || undefined,
-    openGraph: {
-      images: [
-        {
-          url: getOgImageUrl({ type: "page", slug: `categories/${slug}` }),
-          width: 1200,
-          height: 630,
-        },
-      ],
-      locale: "en_US",
-      type: "website",
-    },
-    robots: isProduction ? "index, follow" : "noindex, nofollow",
-    alternates: {
-      canonical: `/categories/${slug}`,
-    },
-  } as const;
+  return generatePageMetadata({ page: category, slug: `categories/${slug}`, type: "page" });
 }
 
 export default async function CategoryPage(props: { params: Promise<{ slug: string }> }) {
