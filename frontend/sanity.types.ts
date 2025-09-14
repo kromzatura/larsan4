@@ -1844,8 +1844,8 @@ export type Product = {
   keyFeatures?: Array<string>;
   packagingOptions?: Array<{
     sizeValue?: number;
-    sizeUnit?: string;
-    packagingType?: string;
+    sizeUnit?: "kg" | "ton";
+    packagingType?: "Paper bag" | "Big Bag";
     weightPerPallet?: string;
     notes?: string;
     _type: "packaging";
