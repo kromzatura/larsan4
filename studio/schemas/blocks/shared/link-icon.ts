@@ -65,4 +65,51 @@ export default defineType({
       title: "Button Variant",
     }),
   ],
+  preview: {
+    select: {
+      isExternal: "isExternal",
+      label: "title",
+      href: "href",
+      ilType: "internalLink._type",
+      ilSlug: "internalLink.slug.current",
+      ilTitle: "internalLink.title",
+      iconVariant: "iconVariant",
+    },
+    prepare({ isExternal, label, href, ilType, ilSlug, ilTitle, iconVariant }) {
+      const icon = iconVariant && iconVariant !== "none" ? ` • ${iconVariant}` : "";
+      if (isExternal) {
+        return {
+          title: label || href || "External link",
+          subtitle: `External${icon}`,
+        };
+      }
+      const typeLabel =
+        ilType === "post"
+          ? "Post"
+          : ilType === "category"
+          ? "Blog Category"
+          : ilType === "product"
+          ? "Product"
+          : ilType === "productCategory"
+          ? "Product Category"
+          : ilType === "page"
+          ? "Page"
+          : "Internal";
+      const path = ilType === "post"
+        ? `/blog/${ilSlug || ""}`
+        : ilType === "category"
+        ? `/blog/category/${ilSlug || ""}`
+        : ilType === "product"
+        ? `/products/${ilSlug || ""}`
+        : ilType === "productCategory"
+        ? `/products/category/${ilSlug || ""}`
+        : ilSlug === "index"
+        ? "/"
+        : `/${ilSlug || ""}`;
+      return {
+        title: label || ilTitle || path || "Link",
+        subtitle: `${typeLabel} • ${path}${icon}`,
+      };
+    },
+  },
 });
