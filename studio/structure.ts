@@ -32,14 +32,6 @@ export const structure = (S: any, context: any) =>
         S,
         context,
       }),
-      S.listItem()
-        .title("Specifications")
-        .schemaType("specification")
-        .child(
-          S.documentTypeList("specification")
-            .title("Specifications")
-            .defaultOrdering([{ field: "name", direction: "asc" }])
-        ),
       S.divider(),
       orderableDocumentListDeskItem({
         type: "page",
