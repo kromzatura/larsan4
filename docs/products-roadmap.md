@@ -1,12 +1,12 @@
 # Products + Categories Implementation Plan (Revised)
 
-Goal: Add Products and Product Categories to Sanity + Next.js, using a scalable, reference-based architecture for product specifications to ensure data consistency and an efficient authoring experience.
+Goal: Add Products and Product Categories to Sanity + Next.js, embedding product specification fields directly on Product for a simpler authoring experience.
 
 ## Overview
 
-- Add Sanity schemas for `specification` (reusable document), `productCategory`, and `product`.
-- The `product` schema references a `specification` document instead of embedding fields.
-- GROQ queries + typed fetch helpers will expand the referenced specification data.
+- Add Sanity schemas for `productCategory` and `product`.
+- The `product` schema contains all specification fields (no separate specification document).
+- GROQ queries + typed fetch helpers will project fields directly from the product document.
 - Next.js routes:
   - `/products/[slug]`: Single product page
   - `/products/category/[slug]`: Products in a category
@@ -21,10 +21,8 @@ Goal: Add Products and Product Categories to Sanity + Next.js, using a scalable,
 - Keep types strict; no `as any`.
 - Keep work focused on the `feat/products-categories` branch.
 
-Phase 1 — Studio Schemas (Corrected)
-Create studio/schemas/documents/specification.ts
-
-Purpose: A reusable, standalone document for a complete product specification sheet.
+Phase 1 — Studio Schemas (Simplified)
+Product specification fields (embedded on Product)
 
 Fields:
 
@@ -60,15 +58,13 @@ productAttributes: string
 
 certification: string
 
-Preview: name, sku
+Preview: title, sku
 
 Type & validation
 fatContent: number
 pungency, bindingCapacity, purity, moisture: string (values like "<10%" or "Very Good")
-Required: name, sku
+Required on Product: title, slug, sku
 Optional: all other fields
-Slug: not required for specification (no public route)
-Single source of truth: keep sku only on specification (do not duplicate on product)
 
 Create studio/schemas/documents/productCategory.ts
 
@@ -77,9 +73,9 @@ Ordering: use `orderRankField` for manual control over display order.
 
 Preview: title
 
-Create studio/schemas/documents/product.ts (Corrected)
+Create studio/schemas/documents/product.ts (Updated)
 
-This schema is now much simpler and focused on marketing content.
+This schema now includes both marketing content and specification fields.
 
 Fields:
 
@@ -87,13 +83,13 @@ title: string (required)
 
 slug: slug (required, unique)
 
-specifications: reference (points to specification document)
+sku: string (required)
 
 keyFeatures: array of { type: 'string' } (for the marketing bullet points)
 
 packagingOptions: array of { type: 'object', fields: [...] }
 
-images: array of image (hotspot enabled)
+image: image (hotspot enabled)
 
 body: Portable Text (optional marketing description)
 
@@ -111,26 +107,26 @@ Register all new schemas in studio/schema.ts and organize them in your desk stru
 
 Acceptance (Phase 1)
 
-[ ] New Specification, Product Category, and Product document types appear in the Studio.
+[x ] Product Category and Product document types appear in the Studio.
 
-[ ] When editing a Product, you can select a Specification from a dropdown list.
+[x ] When editing a Product, you can fill specification fields directly on the Product.
 
-[ ] The Product schema is clean and does not contain redundant fields.
+[x ] The Product schema contains no redundant references to a separate specification doc.
 
-[ ] Typegen runs without errors.
+[ x] Typegen runs without errors.
 
 ## Phase 2 — GROQ + Typegen (Revised)
 
-1. Update `product.ts` query to expand the reference:
-   - PRODUCT_QUERY
-   - Snippet:
-     - `*[_type == "product" && slug.current == $slug][0]{ ..., "specifications": specifications->{ ... } }`
+1. Update `product.ts` query to return product with all fields (no deref):
+    - PRODUCT_QUERY
+    - Snippet:
+       - `*[_type == "product" && slug.current == $slug][0]{ ... }`
 2. Add other queries under `frontend/sanity/queries/product/`:
    - `products.ts`: `PRODUCTS_QUERY` (paginated), `PRODUCTS_COUNT_QUERY`
    - `slugs.ts`: `PRODUCTS_SLUGS_QUERY`
    - `byCategory.ts`: `PRODUCTS_BY_CATEGORY_QUERY`
 3. Add fetch helpers to `frontend/sanity/lib/fetch.ts` for all queries.
-4. Run typegen from Studio and confirm `frontend/sanity.types.ts` includes nested `specifications` types.
+4. Run typegen from Studio and confirm `frontend/sanity.types.ts` includes specification fields on Product.
 
 Defaults
 Pagination: 12 products per page by default
@@ -138,7 +134,7 @@ Sorting: categories by `orderRank`, product listings by `_createdAt desc`
 
 Acceptance (Phase 2)
 
-- [ ] Queries compile and correctly expand the specifications reference.
+- [ ] Queries compile and return product fields directly.
 - [ ] Typegen succeeds; generated types reflect the nested structure.
 
 ## Phase 3 — Frontend Routes
@@ -147,7 +143,7 @@ Acceptance (Phase 2)
    - Implement the single product page. ask user for details - user provide code for a compenent, and advise about design and functionlaity on xl and mobile
    - `generateStaticParams()` from `PRODUCTS_SLUGS_QUERY`
    - `generateMetadata()` via `generatePageMetadata({ page: product, slug: \`products/${slug}\`, type: "page" })`
-   - Data shape includes nested `specifications` (e.g., `product.specifications.sku`).
+   - Data shape includes spec fields directly (e.g., `product.sku`).
 2. `/products/category/[slug]`
    - Find category by slug; list products referencing it
    - `generateMetadata()` uses category object with helper (falls back to title/description)
@@ -157,7 +153,7 @@ Acceptance (Phase 2)
 
 Acceptance (Phase 3)
 
-- [ ] Both routes build and render the correct data, including nested specification details.
+- [ ] Both routes build and render the correct data.
 - [ ] Metadata generated via helper (no manual objects)
 
 ## Phase 4 — Inquiry System Foundation
@@ -283,7 +279,7 @@ Tracking Checklist (High-level)
 - Products will follow the same pattern under `/products/category/[slug]`.
 - If we need filters on listing pages, we’ll re-use `searchParams` and GROQ filtering like posts.
 - If performance becomes a concern, consider a light-weight index query for listing blocks.
-- Studio desk structure: add Specification, Product Categories, and Products to `studio/structure.ts` for clear navigation.
+- Studio desk structure: include Product Categories and Products in `studio/structure.ts` for clear navigation.
 
 ---
 

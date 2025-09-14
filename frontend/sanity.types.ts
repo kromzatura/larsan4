@@ -1826,18 +1826,27 @@ export type Product = {
   _rev: string;
   title?: string;
   slug?: Slug;
-  specifications?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "specification";
-  };
+  bestFor?: string;
+  sku?: string;
+  hsCode?: string;
+  minOrder?: string;
+  origin?: string;
+  botanicalName?: string;
+  pungency?: string;
+  bindingCapacity?: string;
+  fatContent?: number;
+  purity?: string;
+  moisture?: string;
+  shelfLife?: string;
+  allergenInfo?: string;
+  productAttributes?: string;
+  certification?: string;
   keyFeatures?: Array<string>;
   packagingOptions?: Array<{
     sizeValue?: number;
     sizeUnit?: string;
     packagingType?: string;
-    caseWeight?: string;
+    weightPerPallet?: string;
     notes?: string;
     _type: "packaging";
     _key: string;
@@ -1856,6 +1865,7 @@ export type Product = {
     _type: "image";
   };
   body?: BlockContent;
+  excerpt?: string;
   categories?: Array<{
     _ref: string;
     _type: "reference";
@@ -1908,30 +1918,6 @@ export type ProductCategory = {
     };
   };
   orderRank?: string;
-};
-
-export type Specification = {
-  _id: string;
-  _type: "specification";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  sku?: string;
-  bestFor?: string;
-  pungency?: string;
-  bindingCapacity?: string;
-  fatContent?: number;
-  purity?: string;
-  moisture?: string;
-  hsCode?: string;
-  minOrder?: string;
-  origin?: string;
-  botanicalName?: string;
-  shelfLife?: string;
-  allergenInfo?: string;
-  productAttributes?: string;
-  certification?: string;
 };
 
 export type Banner = {
@@ -2565,7 +2551,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = Timeline6 | Timeline5 | Timeline4 | Timeline3 | Gallery10 | Gallery9 | Gallery8 | Gallery4 | Gallery3 | Gallery1 | Compare6 | Compare5 | Compare4 | Compare2 | Compare1 | Team8 | Team6 | Team5 | Team4 | Team3 | Team2 | Team1 | Pricing16 | Pricing9 | Pricing7 | Pricing2 | Pricing1 | Changelog5 | Changelog3 | Changelog2 | Changelog1 | AllCategories16 | AllPosts16 | Blog16 | AllPosts14 | Blog14 | AllPosts13 | Blog13 | AllPosts7 | Blog7 | AllPosts4 | Blog4 | Feature202Card | Feature202 | Feature157Card | Feature157 | Feature117Card | Feature117 | Feature66Card | Feature66 | Feature15Card | Feature15 | Feature12Card | Feature12 | Feature3Card | Feature3 | FeatureImage | FeatureContent | Feature1 | Logos9 | Logos4 | Logos2 | Logos1 | Faq14 | Faq9 | Faq8 | Faq5 | Faq1 | Hero174 | Hero160 | Hero85 | Hero57 | Hero25 | Hero13 | Hero12 | SectionHeader | SectionPadding | ButtonVariant | LinkGroup | BlockContent | Product | ProductCategory | Specification | Banner | Team | Changelog | Contact | Settings | Navigation | Testimonial | Faq | Category | Page | LinkIcon | Link | Post | Author | MediaTag | Code | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = Timeline6 | Timeline5 | Timeline4 | Timeline3 | Gallery10 | Gallery9 | Gallery8 | Gallery4 | Gallery3 | Gallery1 | Compare6 | Compare5 | Compare4 | Compare2 | Compare1 | Team8 | Team6 | Team5 | Team4 | Team3 | Team2 | Team1 | Pricing16 | Pricing9 | Pricing7 | Pricing2 | Pricing1 | Changelog5 | Changelog3 | Changelog2 | Changelog1 | AllCategories16 | AllPosts16 | Blog16 | AllPosts14 | Blog14 | AllPosts13 | Blog13 | AllPosts7 | Blog7 | AllPosts4 | Blog4 | Feature202Card | Feature202 | Feature157Card | Feature157 | Feature117Card | Feature117 | Feature66Card | Feature66 | Feature15Card | Feature15 | Feature12Card | Feature12 | Feature3Card | Feature3 | FeatureImage | FeatureContent | Feature1 | Logos9 | Logos4 | Logos2 | Logos1 | Faq14 | Faq9 | Faq8 | Faq5 | Faq1 | Hero174 | Hero160 | Hero85 | Hero57 | Hero25 | Hero13 | Hero12 | SectionHeader | SectionPadding | ButtonVariant | LinkGroup | BlockContent | Product | ProductCategory | Banner | Team | Changelog | Contact | Settings | Navigation | Testimonial | Faq | Category | Page | LinkIcon | Link | Post | Author | MediaTag | Code | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../frontend/sanity/queries/banner.ts
 // Variable: BANNER_QUERY
