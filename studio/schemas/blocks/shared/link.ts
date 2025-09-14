@@ -15,7 +15,12 @@ export default defineType({
       name: "internalLink",
       type: "reference",
       title: "Internal Link",
-      to: [{ type: "page" }, { type: "post" }],
+      to: [
+        { type: "page" },
+        { type: "post" },
+        { type: "product" },
+        { type: "productCategory" },
+      ],
       hidden: ({ parent }) => parent?.isExternal,
     }),
     defineField({
