@@ -87,6 +87,20 @@ export default defineType({
             defineField({ name: "weightPerPallet", title: "Weight per pallet", type: "string" }),
             defineField({ name: "notes", title: "Notes", type: "string" }),
           ],
+          preview: {
+            select: {
+              packagingType: "packagingType",
+              sizeValue: "sizeValue",
+              sizeUnit: "sizeUnit",
+            },
+            prepare: ({ packagingType, sizeValue, sizeUnit }) => {
+              const size = [sizeValue, sizeUnit].filter(Boolean).join(" ");
+              return {
+                title: packagingType || "Package",
+                subtitle: size || undefined,
+              };
+            },
+          },
         }),
       ],
       group: "content",
