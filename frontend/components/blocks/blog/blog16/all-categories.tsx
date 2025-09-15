@@ -8,7 +8,7 @@ import { groq } from "next-sanity";
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type AllCategories16Props = Extract<Block, { _type: "all-categories-16" }>;
 
-const ALL_CATEGORIES_QUERY = groq`*[_type == "category"] | order(title asc){
+const ALL_CATEGORIES_QUERY = groq`*[_type == "category"] | order(orderRank asc){
   _id,
   title,
   slug
