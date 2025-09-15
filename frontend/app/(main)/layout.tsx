@@ -8,6 +8,7 @@ import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
 import { SanityLive } from "@/sanity/lib/live";
 import { Toaster } from "@/components/ui/sonner";
+import { InquiryProvider } from "@/components/inquiry/InquiryContext";
 
 export default async function MainLayout({
   children,
@@ -17,13 +18,13 @@ export default async function MainLayout({
   const banner = await fetchSanityBanner();
 
   return (
-    <>
+    <InquiryProvider>
       <Navbar1 />
       {banner && banner.length > 0 && (
         <Banner data={banner[0]} component={Banner5} bannerId="banner5" />
       )}
       <main>{children}</main>
-  <Toaster position="top-right" />
+      <Toaster position="top-right" />
       <SanityLive />
       {(await draftMode()).isEnabled && (
         <>
@@ -32,6 +33,6 @@ export default async function MainLayout({
         </>
       )}
       <Footer2 />
-    </>
+    </InquiryProvider>
   );
 }
