@@ -5,6 +5,7 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { Button } from "@/components/ui/button";
+import AddToInquiryButton from "@/components/inquiry/add-to-inquiry-button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle2, Facebook, Linkedin, Twitter } from "lucide-react";
@@ -280,9 +281,16 @@ export default async function ProductPage(props: {
             </div>
 
             <Separator className="my-6" />
-            <Button size="lg" className="w-full" aria-disabled>
-              Add to Inquiry
-            </Button>
+            {product.sku ? (
+              <AddToInquiryButton
+                item={{ id: product.sku, name: product.title || null }}
+                className="w-full"
+              />
+            ) : (
+              <Button size="lg" className="w-full" aria-disabled>
+                Add to Inquiry
+              </Button>
+            )}
           </div>
         </div>
       </article>

@@ -7,6 +7,7 @@ import { DisableDraftMode } from "@/components/disable-draft-mode";
 import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
 import { SanityLive } from "@/sanity/lib/live";
+import { Toaster } from "@/components/ui/sonner";
 
 export default async function MainLayout({
   children,
@@ -22,6 +23,7 @@ export default async function MainLayout({
         <Banner data={banner[0]} component={Banner5} bannerId="banner5" />
       )}
       <main>{children}</main>
+  <Toaster position="top-right" />
       <SanityLive />
       {(await draftMode()).isEnabled && (
         <>
