@@ -1,7 +1,6 @@
 "use server";
 
 import { Resend } from "resend";
-import { setLastContactEmailHtml } from "@/lib/dev-email-store";
 import {
   contactFormSchema,
   type ContactFormValues,
@@ -64,13 +63,7 @@ export async function submitContactForm(
     const html = await render(
       ContactFormEmail({ firstName, lastName, email, message, inquiryItems })
     );
-    if (process.env.NODE_ENV !== "production") {
-      setLastContactEmailHtml(html);
-      console.info("[contact-form] Rendered email HTML length:", html.length);
-      if (inquiryItems?.length) {
-        console.info("[contact-form] Inquiry items included:", inquiryItems.length);
-      }
-    }
+    // (Dev preview removed for simplicity)
 
     await resend.emails.send({
       from: `Website Contact Form <${process.env.NEXT_RESEND_FROM_EMAIL}>`,
