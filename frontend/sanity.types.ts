@@ -1873,6 +1873,12 @@ export type Product = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "productCategory";
   }>;
+  author?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "author";
+  };
   meta?: {
     title?: string;
     description?: string;
