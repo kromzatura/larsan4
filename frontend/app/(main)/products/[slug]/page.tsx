@@ -68,38 +68,42 @@ export default async function ProductPage(props: {
   const product = await fetchSanityProductBySlug({ slug: params.slug });
   if (!product) notFound();
 
+  const spec: any | undefined = Array.isArray((product as any).specifications)
+    ? (product as any).specifications[0]
+    : undefined;
+
   const links = [
     { label: "Products", href: "/products" },
     { label: product.title ?? "Product", href: "#" },
   ];
 
   const atAGlance: SpecPair[] = [
-    { label: "SKU", value: product.sku || undefined },
-    { label: "HS Code", value: product.hsCode || undefined },
-    { label: "Min. order", value: product.minOrder || undefined },
-    { label: "Origin", value: product.origin || undefined },
-    { label: "Botanical name", value: product.botanicalName || undefined },
-    { label: "Best for", value: product.bestFor || undefined },
+    { label: "SKU", value: spec?.sku ?? product.sku ?? undefined },
+    { label: "HS Code", value: spec?.hsCode ?? product.hsCode ?? undefined },
+    { label: "Min. order", value: spec?.minOrder ?? product.minOrder ?? undefined },
+    { label: "Origin", value: spec?.origin ?? product.origin ?? undefined },
+    { label: "Botanical name", value: spec?.botanicalName ?? product.botanicalName ?? undefined },
+    { label: "Best for", value: spec?.bestFor ?? product.bestFor ?? undefined },
   ];
 
   const quality: SpecPair[] = [
-    { label: "Pungency", value: product.pungency || undefined },
-    { label: "Binding capacity", value: product.bindingCapacity || undefined },
+    { label: "Pungency", value: spec?.pungency ?? product.pungency ?? undefined },
+    { label: "Binding capacity", value: spec?.bindingCapacity ?? product.bindingCapacity ?? undefined },
     {
       label: "Fat content",
       value:
-        typeof product.fatContent === "number"
-          ? `${product.fatContent}%`
+        typeof (spec?.fatContent ?? product.fatContent) === "number"
+          ? `${spec?.fatContent ?? product.fatContent}%`
           : undefined,
     },
   ];
 
   const other: SpecPair[] = [
-    { label: "Moisture", value: product.moisture || undefined },
-    { label: "Shelf life", value: product.shelfLife || undefined },
-    { label: "Allergen info", value: product.allergenInfo || undefined },
-    { label: "Attributes", value: product.productAttributes || undefined },
-    { label: "Certification", value: product.certification || undefined },
+    { label: "Moisture", value: spec?.moisture ?? product.moisture ?? undefined },
+    { label: "Shelf life", value: spec?.shelfLife ?? product.shelfLife ?? undefined },
+    { label: "Allergen info", value: spec?.allergenInfo ?? product.allergenInfo ?? undefined },
+    { label: "Attributes", value: spec?.productAttributes ?? product.productAttributes ?? undefined },
+    { label: "Certification", value: spec?.certification ?? product.certification ?? undefined },
   ];
 
   const shareUrl = `${
@@ -281,9 +285,9 @@ export default async function ProductPage(props: {
             </div>
 
             <Separator className="my-6" />
-            {product.sku ? (
+            {spec?.sku ?? product.sku ? (
               <AddToInquiryButton
-                item={{ id: product.sku, name: product.title || null }}
+                item={{ id: (spec?.sku ?? product.sku)!, name: product.title || null }}
                 className="w-full"
               />
             ) : (
