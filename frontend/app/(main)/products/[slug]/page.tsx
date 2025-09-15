@@ -78,32 +78,29 @@ export default async function ProductPage(props: {
   ];
 
   const atAGlance: SpecPair[] = [
-    { label: "SKU", value: spec?.sku ?? product.sku ?? undefined },
-    { label: "HS Code", value: spec?.hsCode ?? product.hsCode ?? undefined },
-    { label: "Min. order", value: spec?.minOrder ?? product.minOrder ?? undefined },
-    { label: "Origin", value: spec?.origin ?? product.origin ?? undefined },
-    { label: "Botanical name", value: spec?.botanicalName ?? product.botanicalName ?? undefined },
-    { label: "Best for", value: spec?.bestFor ?? product.bestFor ?? undefined },
+    { label: "SKU", value: spec?.sku },
+    { label: "HS Code", value: spec?.hsCode },
+    { label: "Min. order", value: spec?.minOrder },
+    { label: "Origin", value: spec?.origin },
+    { label: "Botanical name", value: spec?.botanicalName },
+    { label: "Best for", value: spec?.bestFor },
   ];
 
   const quality: SpecPair[] = [
-    { label: "Pungency", value: spec?.pungency ?? product.pungency ?? undefined },
-    { label: "Binding capacity", value: spec?.bindingCapacity ?? product.bindingCapacity ?? undefined },
+    { label: "Pungency", value: spec?.pungency },
+    { label: "Binding capacity", value: spec?.bindingCapacity },
     {
       label: "Fat content",
-      value:
-        typeof (spec?.fatContent ?? product.fatContent) === "number"
-          ? `${spec?.fatContent ?? product.fatContent}%`
-          : undefined,
+      value: typeof spec?.fatContent === "number" ? `${spec.fatContent}%` : undefined,
     },
   ];
 
   const other: SpecPair[] = [
-    { label: "Moisture", value: spec?.moisture ?? product.moisture ?? undefined },
-    { label: "Shelf life", value: spec?.shelfLife ?? product.shelfLife ?? undefined },
-    { label: "Allergen info", value: spec?.allergenInfo ?? product.allergenInfo ?? undefined },
-    { label: "Attributes", value: spec?.productAttributes ?? product.productAttributes ?? undefined },
-    { label: "Certification", value: spec?.certification ?? product.certification ?? undefined },
+    { label: "Moisture", value: spec?.moisture },
+    { label: "Shelf life", value: spec?.shelfLife },
+    { label: "Allergen info", value: spec?.allergenInfo },
+    { label: "Attributes", value: spec?.productAttributes },
+    { label: "Certification", value: spec?.certification },
   ];
 
   const shareUrl = `${
@@ -285,9 +282,9 @@ export default async function ProductPage(props: {
             </div>
 
             <Separator className="my-6" />
-            {spec?.sku ?? product.sku ? (
+            {spec?.sku ? (
               <AddToInquiryButton
-                item={{ id: (spec?.sku ?? product.sku)!, name: product.title || null }}
+                item={{ id: spec.sku, name: product.title || null }}
                 className="w-full"
               />
             ) : (

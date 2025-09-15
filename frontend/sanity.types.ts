@@ -1813,6 +1813,30 @@ export type BlockContent = Array<{
   _key: string;
 } & Code>;
 
+export type Specification = {
+  _id: string;
+  _type: "specification";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  sku?: string;
+  bestFor?: string;
+  pungency?: string;
+  bindingCapacity?: string;
+  fatContent?: number;
+  purity?: string;
+  moisture?: string;
+  hsCode?: string;
+  minOrder?: string;
+  origin?: string;
+  botanicalName?: string;
+  shelfLife?: string;
+  allergenInfo?: string;
+  productAttributes?: string;
+  certification?: string;
+};
+
 export type Product = {
   _id: string;
   _type: "product";
@@ -1821,21 +1845,13 @@ export type Product = {
   _rev: string;
   title?: string;
   slug?: Slug;
-  bestFor?: string;
-  sku?: string;
-  hsCode?: string;
-  minOrder?: string;
-  origin?: string;
-  botanicalName?: string;
-  pungency?: string;
-  bindingCapacity?: string;
-  fatContent?: number;
-  purity?: string;
-  moisture?: string;
-  shelfLife?: string;
-  allergenInfo?: string;
-  productAttributes?: string;
-  certification?: string;
+  specifications?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "specification";
+  }>;
   keyFeatures?: Array<string>;
   packagingOptions?: Array<{
     sizeValue?: number;
@@ -2565,7 +2581,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = Timeline6 | Timeline5 | Timeline4 | Timeline3 | Gallery10 | Gallery9 | Gallery8 | Gallery4 | Gallery3 | Gallery1 | Compare6 | Compare5 | Compare4 | Compare2 | Compare1 | Team8 | Team6 | Team5 | Team4 | Team3 | Team2 | Team1 | Pricing16 | Pricing9 | Pricing7 | Pricing2 | Pricing1 | Changelog5 | Changelog3 | Changelog2 | Changelog1 | AllPosts16 | Blog16 | AllPosts14 | Blog14 | AllPosts13 | Blog13 | AllPosts7 | Blog7 | AllPosts4 | Blog4 | Feature202Card | Feature202 | Feature157Card | Feature157 | Feature117Card | Feature117 | Feature66Card | Feature66 | Feature15Card | Feature15 | Feature12Card | Feature12 | Feature3Card | Feature3 | FeatureImage | FeatureContent | Feature1 | Logos9 | Logos4 | Logos2 | Logos1 | Faq14 | Faq9 | Faq8 | Faq5 | Faq1 | Hero174 | Hero160 | Hero85 | Hero57 | Hero25 | Hero13 | Hero12 | SectionHeader | SectionPadding | ButtonVariant | LinkGroup | BlockContent | Product | ProductCategory | Banner | Team | Changelog | Contact | Settings | Navigation | Testimonial | Faq | Category | Page | LinkIcon | Link | Post | Author | MediaTag | Code | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = Timeline6 | Timeline5 | Timeline4 | Timeline3 | Gallery10 | Gallery9 | Gallery8 | Gallery4 | Gallery3 | Gallery1 | Compare6 | Compare5 | Compare4 | Compare2 | Compare1 | Team8 | Team6 | Team5 | Team4 | Team3 | Team2 | Team1 | Pricing16 | Pricing9 | Pricing7 | Pricing2 | Pricing1 | Changelog5 | Changelog3 | Changelog2 | Changelog1 | AllPosts16 | Blog16 | AllPosts14 | Blog14 | AllPosts13 | Blog13 | AllPosts7 | Blog7 | AllPosts4 | Blog4 | Feature202Card | Feature202 | Feature157Card | Feature157 | Feature117Card | Feature117 | Feature66Card | Feature66 | Feature15Card | Feature15 | Feature12Card | Feature12 | Feature3Card | Feature3 | FeatureImage | FeatureContent | Feature1 | Logos9 | Logos4 | Logos2 | Logos1 | Faq14 | Faq9 | Faq8 | Faq5 | Faq1 | Hero174 | Hero160 | Hero85 | Hero57 | Hero25 | Hero13 | Hero12 | SectionHeader | SectionPadding | ButtonVariant | LinkGroup | BlockContent | Specification | Product | ProductCategory | Banner | Team | Changelog | Contact | Settings | Navigation | Testimonial | Faq | Category | Page | LinkIcon | Link | Post | Author | MediaTag | Code | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../frontend/sanity/queries/banner.ts
 // Variable: BANNER_QUERY
@@ -6379,25 +6395,29 @@ export type POSTS_COUNT_QUERYResult = number;
 
 // Source: ../frontend/sanity/queries/product.ts
 // Variable: PRODUCT_QUERY
-// Query: *[_type == "product" && slug.current == $slug][0]{  title,  slug,  bestFor,  sku,  hsCode,  minOrder,  origin,  botanicalName,  pungency,  bindingCapacity,  fatContent,  purity,  moisture,  shelfLife,  allergenInfo,  productAttributes,  certification,  keyFeatures[],  packagingOptions[]{    ...,  },  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  body[]{   ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  } },  excerpt,  categories[]->{ _id, title, slug },    meta{    title,    description,    noindex,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  }}
+// Query: *[_type == "product" && slug.current == $slug][0]{  title,  slug,  specifications[]->{    _id,    name,    sku,    bestFor,    pungency,    bindingCapacity,    fatContent,    purity,    moisture,    hsCode,    minOrder,    origin,    botanicalName,    shelfLife,    allergenInfo,    productAttributes,    certification,  },  keyFeatures[],  packagingOptions[]{    ...,  },  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  body[]{   ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  } },  excerpt,  categories[]->{ _id, title, slug },    meta{    title,    description,    noindex,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  }}
 export type PRODUCT_QUERYResult = {
   title: string | null;
   slug: Slug | null;
-  bestFor: string | null;
-  sku: string | null;
-  hsCode: string | null;
-  minOrder: string | null;
-  origin: string | null;
-  botanicalName: string | null;
-  pungency: string | null;
-  bindingCapacity: string | null;
-  fatContent: number | null;
-  purity: string | null;
-  moisture: string | null;
-  shelfLife: string | null;
-  allergenInfo: string | null;
-  productAttributes: string | null;
-  certification: string | null;
+  specifications: Array<{
+    _id: string;
+    name: string | null;
+    sku: string | null;
+    bestFor: string | null;
+    pungency: string | null;
+    bindingCapacity: string | null;
+    fatContent: number | null;
+    purity: string | null;
+    moisture: string | null;
+    hsCode: string | null;
+    minOrder: string | null;
+    origin: string | null;
+    botanicalName: string | null;
+    shelfLife: string | null;
+    allergenInfo: string | null;
+    productAttributes: string | null;
+    certification: string | null;
+  }> | null;
   keyFeatures: Array<string> | null;
   packagingOptions: Array<{
     sizeValue?: number;
@@ -6528,12 +6548,16 @@ export type PRODUCT_QUERYResult = {
   } | null;
 } | null;
 // Variable: PRODUCTS_QUERY
-// Query: *[_type == "product" && defined(slug)] | order(_createdAt desc)[$offset...$end]{  _id,  _createdAt,  title,  slug,  excerpt,  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  categories[]->{ _id, title, slug }}
+// Query: *[_type == "product" && defined(slug)] | order(_createdAt desc)[$offset...$end]{  _id,  _createdAt,  title,  slug,  specifications[]->{ _id, sku },  excerpt,  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  categories[]->{ _id, title, slug }}
 export type PRODUCTS_QUERYResult = Array<{
   _id: string;
   _createdAt: string;
   title: string | null;
   slug: Slug | null;
+  specifications: Array<{
+    _id: string;
+    sku: string | null;
+  }> | null;
   excerpt: string | null;
   image: {
     asset: {
@@ -6751,8 +6775,8 @@ declare module "@sanity/client" {
     "*[_type == \"post\" && defined(slug)] | order(_createdAt desc)[$offset...$end]{\n    _id,\n    _createdAt,\n    title,\n    slug,\n    excerpt,\n    author->{\n      name,\n      title,\n      image {\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    categories[]->{\n      _id,\n      title,\n    },\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && defined(slug)]{slug}": POSTS_SLUGS_QUERYResult;
     "count(*[_type == \"post\"])": POSTS_COUNT_QUERYResult;
-    "*[_type == \"product\" && slug.current == $slug][0]{\n  title,\n  slug,\n  bestFor,\n  sku,\n  hsCode,\n  minOrder,\n  origin,\n  botanicalName,\n  pungency,\n  bindingCapacity,\n  fatContent,\n  purity,\n  moisture,\n  shelfLife,\n  allergenInfo,\n  productAttributes,\n  certification,\n  keyFeatures[],\n  packagingOptions[]{\n    ...,\n  },\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  body[]{ \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n },\n  excerpt,\n  categories[]->{ _id, title, slug },\n  \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n\n}": PRODUCT_QUERYResult;
-    "*[_type == \"product\" && defined(slug)] | order(_createdAt desc)[$offset...$end]{\n  _id,\n  _createdAt,\n  title,\n  slug,\n  excerpt,\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  categories[]->{ _id, title, slug }\n}": PRODUCTS_QUERYResult;
+    "*[_type == \"product\" && slug.current == $slug][0]{\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    name,\n    sku,\n    bestFor,\n    pungency,\n    bindingCapacity,\n    fatContent,\n    purity,\n    moisture,\n    hsCode,\n    minOrder,\n    origin,\n    botanicalName,\n    shelfLife,\n    allergenInfo,\n    productAttributes,\n    certification,\n  },\n  keyFeatures[],\n  packagingOptions[]{\n    ...,\n  },\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  body[]{ \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n },\n  excerpt,\n  categories[]->{ _id, title, slug },\n  \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n\n}": PRODUCT_QUERYResult;
+    "*[_type == \"product\" && defined(slug)] | order(_createdAt desc)[$offset...$end]{\n  _id,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{ _id, sku },\n  excerpt,\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  categories[]->{ _id, title, slug }\n}": PRODUCTS_QUERYResult;
     "*[_type == \"product\" && defined(slug)]{ slug }": PRODUCTS_SLUGS_QUERYResult;
     "count(*[_type == \"product\"])": PRODUCTS_COUNT_QUERYResult;
     "*[_type == \"productCategory\" && defined(slug)] | order(orderRank){\n  _id,\n  title,\n  slug\n}": PRODUCT_CATEGORIES_QUERYResult;
