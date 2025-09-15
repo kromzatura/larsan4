@@ -25,6 +25,14 @@ export const structure = (S: any, context: any) =>
             .title("Products")
             .defaultOrdering([{ field: "_createdAt", direction: "desc" }])
         ),
+      S.listItem()
+        .title("Specifications")
+        .schemaType("specification")
+        .child(
+          S.documentTypeList("specification")
+            .title("Specifications")
+            .defaultOrdering([{ field: "name", direction: "asc" }])
+        ),
       orderableDocumentListDeskItem({
         type: "productCategory",
         title: "Product Categories",

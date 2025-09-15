@@ -36,6 +36,15 @@ export default defineType({
       options: { source: "title", maxLength: 96 },
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: "specifications",
+      title: "Specifications",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "specification" }] }],
+      group: "content",
+      description: "Link one or more specification sheets for this product",
+      validation: (rule) => rule.max(3).warning("Keep specs concise (max 3)"),
+    }),
     // Specification fields moved into product
     defineField({
       name: "bestFor",
