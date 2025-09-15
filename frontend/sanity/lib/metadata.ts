@@ -14,9 +14,14 @@ export function generatePageMetadata({
   slug,
   type,
 }: {
-  page: PAGE_QUERYResult | POST_QUERYResult | CONTACT_QUERYResult | PRODUCT_QUERYResult | ProductCategory;
+  page:
+    | PAGE_QUERYResult
+    | POST_QUERYResult
+    | CONTACT_QUERYResult
+    | PRODUCT_QUERYResult
+    | ProductCategory;
   slug: string;
-  type: "post" | "page" | "product";
+  type: "post" | "page" | "product" | "productCategory";
 }) {
   const imgAsset: any = page?.meta?.image?.asset as any;
   return {
@@ -38,8 +43,8 @@ export function generatePageMetadata({
     robots: !isProduction
       ? "noindex, nofollow"
       : page?.meta?.noindex
-        ? "noindex"
-        : "index, follow",
+      ? "noindex"
+      : "index, follow",
     alternates: {
       canonical: `/${slug === "index" ? "" : slug}`,
     },

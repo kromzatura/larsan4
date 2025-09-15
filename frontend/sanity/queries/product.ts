@@ -57,6 +57,7 @@ export const PRODUCT_CATEGORY_BY_SLUG_QUERY = groq`*[_type == "productCategory" 
   _type,
   title,
   slug,
+  description,
   ${metaQuery}
 }`;
 

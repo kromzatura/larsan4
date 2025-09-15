@@ -42,6 +42,16 @@ import {
   ProductCategory,
 } from "@/sanity.types";
 
+export type ProductCategoryWithMeta = ProductCategory & {
+  description?: string | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    noindex?: boolean | null;
+    image?: any;
+  } | null;
+};
+
 export const fetchSanityNavigation =
   async (): Promise<NAVIGATION_QUERYResult> => {
     const { data } = await sanityFetch({
@@ -135,15 +145,27 @@ export const fetchSanityProductsByCategory = async ({
   slug,
   page,
   limit,
+  sort = "newest",
 }: {
   slug: string;
   page?: number;
   limit: number;
+  sort?: "newest" | "az" | "za";
 }): Promise<PRODUCTS_LIST_QUERYResult> => {
   const offset = page && limit ? (page - 1) * limit : 0;
   const end = offset + limit;
+  const order =
+    sort === "az"
+      ? "title asc"
+      : sort === "za"
+      ? "title desc"
+      : "_createdAt desc";
   const { data } = await sanityFetch({
-    query: PRODUCTS_BY_CATEGORY_QUERY,
+    // Inject dynamic order by string
+    query: PRODUCTS_BY_CATEGORY_QUERY.replace(
+      "order(_createdAt desc)",
+      `order(${order})`
+    ),
     params: { slug, offset, end },
   });
   return data;
@@ -161,32 +183,44 @@ export const fetchSanityProductBySlug = async ({
   return data;
 };
 
-export const fetchSanityProductSlugs = async (): Promise<
-  PRODUCTS_SLUGS_QUERYResult
-> => {
-  const { data } = await sanityFetch({
-    query: PRODUCTS_SLUGS_QUERY,
-    perspective: "published",
-    stega: false,
-  });
-  return data;
-};
+export const fetchSanityProductSlugs =
+  async (): Promise<PRODUCTS_SLUGS_QUERYResult> => {
+    const { data } = await sanityFetch({
+      query: PRODUCTS_SLUGS_QUERY,
+      perspective: "published",
+      stega: false,
+    });
+    return data;
+  };
 
-export const fetchSanityProductCategories = async (): Promise<
-  PRODUCT_CATEGORIES_QUERYResult
-> => {
-  const { data } = await sanityFetch({
-    query: PRODUCT_CATEGORIES_QUERY,
-  });
-  return data;
-};
+export const fetchSanityProductCategories =
+  async (): Promise<PRODUCT_CATEGORIES_QUERYResult> => {
+    const { data } = await sanityFetch({
+      query: PRODUCT_CATEGORIES_QUERY,
+    });
+    return data;
+  };
 
-export const fetchSanityProductCategoryBySlug = async ({ slug }: { slug: string }) => {
+export const fetchSanityProductCategoriesStaticParams =
+  async (): Promise<PRODUCT_CATEGORIES_QUERYResult> => {
+    const { data } = await sanityFetch({
+      query: PRODUCT_CATEGORIES_QUERY,
+      perspective: "published",
+      stega: false,
+    });
+    return data;
+  };
+
+export const fetchSanityProductCategoryBySlug = async ({
+  slug,
+}: {
+  slug: string;
+}): Promise<ProductCategoryWithMeta> => {
   const { data } = await sanityFetch({
     query: PRODUCT_CATEGORY_BY_SLUG_QUERY,
     params: { slug },
   });
-  return data as unknown as ProductCategory;
+  return data as ProductCategoryWithMeta;
 };
 
 export const fetchSanityProductsCount = async (): Promise<number> => {
@@ -196,7 +230,11 @@ export const fetchSanityProductsCount = async (): Promise<number> => {
   return data;
 };
 
-export const fetchSanityProductsCountByCategory = async ({ slug }: { slug: string }): Promise<number> => {
+export const fetchSanityProductsCountByCategory = async ({
+  slug,
+}: {
+  slug: string;
+}): Promise<number> => {
   const { data } = await sanityFetch({
     query: PRODUCTS_COUNT_BY_CATEGORY_QUERY,
     params: { slug },
@@ -255,7 +293,7 @@ export const getOgImageUrl = ({
   type,
   slug,
 }: {
-  type: "post" | "page" | "product";
+  type: "post" | "page" | "product" | "productCategory";
   slug: string;
 }): string => {
   // Clean the slug by removing any path segments before the last slash (e.g. "blog/my-post" becomes "my-post")

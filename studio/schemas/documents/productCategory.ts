@@ -20,6 +20,13 @@ export default defineType({
       validation: (Rule) => Rule.required().error("Title is required"),
     }),
     defineField({
+      name: "description",
+      type: "text",
+      rows: 3,
+      group: "content",
+      description: "Optional description shown on the category page",
+    }),
+    defineField({
       name: "slug",
       type: "slug",
       group: "content",
@@ -32,7 +39,10 @@ export default defineType({
   preview: {
     select: { title: "title", slug: "slug.current" },
     prepare({ title, slug }) {
-      return { title: title || "Untitled Product Category", subtitle: slug ? `/${slug}` : undefined };
+      return {
+        title: title || "Untitled Product Category",
+        subtitle: slug ? `/${slug}` : undefined,
+      };
     },
   },
 });
