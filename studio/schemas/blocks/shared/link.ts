@@ -4,6 +4,23 @@ export default defineType({
   name: "link",
   type: "object",
   title: "Link",
+  validation: (Rule) => [
+    Rule.custom((value) => {
+      if (!value) return true;
+      const { isExternal, href, internalLink } = value as any;
+      if (isExternal) {
+        return href ? true : "External links require an href";
+      }
+      return internalLink ? true : "Select an internal link or mark as External";
+    }),
+    Rule.custom((value) => {
+      if (!value) return true;
+      const { isExternal, internalLink } = value as any;
+      if (isExternal || !internalLink) return true;
+      const hasSlug = Boolean(internalLink?.slug?.current);
+      return hasSlug ? true : "missing-slug";
+    }).warning("Selected document has no slug yet"),
+  ],
   fields: [
     defineField({
       name: "isExternal",
@@ -15,7 +32,13 @@ export default defineType({
       name: "internalLink",
       type: "reference",
       title: "Internal Link",
-      to: [{ type: "page" }, { type: "post" }],
+      to: [
+        { type: "page" },
+        { type: "post" },
+        { type: "category" },
+        { type: "product" },
+        { type: "productCategory" },
+      ],
       hidden: ({ parent }) => parent?.isExternal,
     }),
     defineField({
@@ -46,4 +69,49 @@ export default defineType({
       title: "Button Variant",
     }),
   ],
+  preview: {
+    select: {
+      isExternal: "isExternal",
+      label: "title",
+      href: "href",
+      ilType: "internalLink._type",
+      ilSlug: "internalLink.slug.current",
+      ilTitle: "internalLink.title",
+    },
+    prepare({ isExternal, label, href, ilType, ilSlug, ilTitle }) {
+      if (isExternal) {
+        return {
+          title: label || href || "External link",
+          subtitle: "External",
+        };
+      }
+      const typeLabel =
+        ilType === "post"
+          ? "Post"
+          : ilType === "category"
+          ? "Blog Category"
+          : ilType === "product"
+          ? "Product"
+          : ilType === "productCategory"
+          ? "Product Category"
+          : ilType === "page"
+          ? "Page"
+          : "Internal";
+      const path = ilType === "post"
+        ? `/blog/${ilSlug || ""}`
+        : ilType === "category"
+        ? `/blog/category/${ilSlug || ""}`
+        : ilType === "product"
+        ? `/products/${ilSlug || ""}`
+        : ilType === "productCategory"
+        ? `/products/category/${ilSlug || ""}`
+        : ilSlug === "index"
+        ? "/"
+        : `/${ilSlug || ""}`;
+      return {
+        title: label || ilTitle || path || "Link",
+        subtitle: `${typeLabel} • ${path}`,
+      };
+    },
+  },
 });

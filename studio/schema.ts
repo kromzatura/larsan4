@@ -12,6 +12,8 @@ import contact from "./schemas/documents/contact";
 import changelog from "./schemas/documents/changelog";
 import team from "./schemas/documents/team";
 import banner from "./schemas/documents/banner";
+import productCategory from "./schemas/documents/productCategory";
+import product from "./schemas/documents/product";
 
 // Schema UI shared objects
 import blockContent from "./schemas/blocks/shared/block-content";
@@ -132,6 +134,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     changelog,
     team,
     banner,
+  productCategory,
+  product,
     // shared objects
     blockContent,
     link,
