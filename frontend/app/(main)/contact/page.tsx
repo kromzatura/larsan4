@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { Link as LinkType } from "@/sanity.types";
 import type { InquiryItem } from "@/lib/inquiry";
-import { Suspense } from "react";
+import ContactInquiryWrapper from "@/components/inquiry/contact-inquiry-wrapper";
 
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
@@ -43,8 +43,7 @@ function parseInquiryParam(searchParams: { [key: string]: string | string[] | un
   return [];
 }
 
-export default async function ContactPage(props: { searchParams?: Promise<{ [key: string]: string | string[] | undefined }> }) {
-  const searchParams = (await props.searchParams) || {};
+export default async function ContactPage({ searchParams = {} as { [key: string]: string | string[] | undefined } }: { searchParams?: { [key: string]: string | string[] | undefined } }) {
   const inquiryItems = parseInquiryParam(searchParams);
   const hasInquiry = inquiryItems.length > 0;
 
@@ -115,26 +114,7 @@ export default async function ContactPage(props: { searchParams?: Promise<{ [key
             ))}
           </div>
           <div className="mx-auto flex w-full flex-col gap-6 rounded-lg bg-muted p-10 lg:max-w-[29rem]">
-            <ContactForm onSubmit={submitContactForm}>
-              {hasInquiry && (
-                <>
-                  <div className="space-y-3">
-                    <div>
-                      <p className="text-sm font-medium">Inquiry Items ({inquiryItems.length})</p>
-                    </div>
-                    <ul className="max-h-48 overflow-auto divide-y rounded border bg-background">
-                      {inquiryItems.map((item) => (
-                        <li key={item.id} className="p-3 text-sm">
-                          <p className="font-medium break-all">{item.name || item.id}</p>
-                          <p className="mt-0.5 text-xs text-muted-foreground break-all">SKU: {item.id}</p>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <input type="hidden" name="inquiryItems" value={encodeURIComponent(JSON.stringify(inquiryItems))} />
-                </>
-              )}
-            </ContactForm>
+            <ContactInquiryWrapper initialInquiryItems={inquiryItems} />
           </div>
         </div>
       </div>

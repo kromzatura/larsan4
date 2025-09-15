@@ -15,10 +15,11 @@ import { type ContactFormState } from "@/app/actions/contact-form";
 
 interface ContactFormProps {
   onSubmit: (formData: FormData) => Promise<ContactFormState>;
-  children?: React.ReactNode; // optional hidden fields or extra content injected at top
+  children?: React.ReactNode;
+  onSuccess?: () => void; // optional callback when submission succeeds
 }
 
-export function ContactForm({ onSubmit, children }: ContactFormProps) {
+export function ContactForm({ onSubmit, children, onSuccess }: ContactFormProps) {
   const [isPending, startTransition] = useTransition();
   const [formState, setFormState] = useState<ContactFormState>({});
 
@@ -41,6 +42,7 @@ export function ContactForm({ onSubmit, children }: ContactFormProps) {
 
       if (result.success) {
         form.reset();
+        onSuccess?.();
       } else if (result.errors) {
         const currentValues = form.getValues();
         Object.entries(result.errors).forEach(([key, message]) => {

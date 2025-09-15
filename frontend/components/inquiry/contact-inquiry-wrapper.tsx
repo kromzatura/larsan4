@@ -1,0 +1,47 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { ContactForm } from "@/components/forms/contact-form";
+import { submitContactForm } from "@/app/actions/contact-form";
+import type { InquiryItem } from "@/lib/inquiry";
+import { clearInquiry, getInquiryList } from "@/lib/inquiry";
+
+interface ContactInquiryWrapperProps {
+  initialInquiryItems: InquiryItem[]; // parsed on server for hydration correctness
+}
+
+export default function ContactInquiryWrapper({ initialInquiryItems }: ContactInquiryWrapperProps) {
+  const [items] = useState<InquiryItem[]>(initialInquiryItems);
+  const hasItems = items.length > 0;
+
+  // If SSR parsed empty but client has items (e.g., direct navigation), we could sync but keep simple per spec.
+  // Optionally: const [items,setItems]=useState(initialInquiryItems); useEffect(()=> setItems(getInquiryList()),[]) // skipped for simplicity.
+
+  return (
+    <ContactForm
+      onSubmit={submitContactForm}
+      onSuccess={() => {
+        if (hasItems) clearInquiry();
+      }}
+    >
+      {hasItems && (
+        <>
+          <div className="space-y-3">
+            <div>
+              <p className="text-sm font-medium">Inquiry Items ({items.length})</p>
+            </div>
+            <ul className="max-h-48 overflow-auto divide-y rounded border bg-background">
+              {items.map((item) => (
+                <li key={item.id} className="p-3 text-sm">
+                  <p className="font-medium break-all">{item.name || item.id}</p>
+                  <p className="mt-0.5 text-xs text-muted-foreground break-all">SKU: {item.id}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <input type="hidden" name="inquiryItems" value={encodeURIComponent(JSON.stringify(items))} />
+        </>
+      )}
+    </ContactForm>
+  );
+}
