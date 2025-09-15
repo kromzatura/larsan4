@@ -36,6 +36,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import InquiryBadge from "@/components/inquiry/inquiry-badge";
 
 type NavigationItem = (SanityLink | SanityLinkGroup | SanityLinkIcon) & {
   _key: string;
@@ -178,6 +179,7 @@ export default async function Navbar1({ className }: Navbar1Props) {
             {actionItems?.map((item) => (
               <LinkButton key={item._key} size="sm" link={item as SanityLink} />
             ))}
+            <InquiryBadge />
           </div>
         </nav>
 
@@ -266,6 +268,7 @@ export default async function Navbar1({ className }: Navbar1Props) {
                     {actionItems?.map((item) => (
                       <LinkButton key={item._key} link={item as SanityLink} />
                     ))}
+                    <InquiryBadge className="w-full justify-center" />
                   </div>
                 </div>
               </SheetContent>
