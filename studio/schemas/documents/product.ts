@@ -145,13 +145,6 @@ export default defineType({
       of: [{ type: "reference", to: { type: "productCategory" } }],
       group: "settings",
     }),
-    defineField({
-      name: "author",
-      title: "Author",
-      type: "reference",
-      to: { type: "author" },
-      group: "settings",
-    }),
     meta,
   ],
   preview: {

@@ -4,6 +4,7 @@ import {
   POST_QUERYResult,
   CONTACT_QUERYResult,
 } from "@/sanity.types";
+import type { PRODUCT_QUERYResult } from "@/sanity.types";
 import { getOgImageUrl } from "@/sanity/lib/fetch";
 const isProduction = process.env.NEXT_PUBLIC_SITE_ENV === "production";
 
@@ -12,7 +13,7 @@ export function generatePageMetadata({
   slug,
   type,
 }: {
-  page: PAGE_QUERYResult | POST_QUERYResult | CONTACT_QUERYResult;
+  page: PAGE_QUERYResult | POST_QUERYResult | CONTACT_QUERYResult | PRODUCT_QUERYResult;
   slug: string;
   type: "post" | "page";
 }) {
