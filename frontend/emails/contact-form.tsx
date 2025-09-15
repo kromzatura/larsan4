@@ -17,6 +17,7 @@ interface ContactFormEmailProps {
   lastName: string;
   email: string;
   message: string;
+  inquiryItems?: { id: string; name?: string | null }[];
 }
 
 const ContactFormEmail = ({
@@ -24,6 +25,7 @@ const ContactFormEmail = ({
   lastName,
   email,
   message,
+  inquiryItems,
 }: ContactFormEmailProps) => {
   return (
     <Html>
@@ -88,6 +90,26 @@ const ContactFormEmail = ({
                   </Text>
                 </Section>
                 <Hr className="my-0" />
+
+                {inquiryItems && inquiryItems.length > 0 && (
+                  <>
+                    {/* Inquiry Items */}
+                    <Section className="bg-white pl-[16px]">
+                      <Text className="text-[16px] font-bold text-primary m-0">
+                        Inquiry Items ({inquiryItems.length})
+                      </Text>
+                    </Section>
+                    <Hr className="my-0" />
+                    <Section className="bg-white p-[12px]">
+                      {inquiryItems.map((item, idx) => (
+                        <Text key={item.id + idx} className="text-[14px] text-gray-700 m-0">
+                          {item.name || item.id} (SKU: {item.id})
+                        </Text>
+                      ))}
+                    </Section>
+                    <Hr className="my-0" />
+                  </>
+                )}
                 <Section className="bg-white p-[12px]">
                   <Text className="text-[16px] text-gray-700">{message}</Text>
                 </Section>

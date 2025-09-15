@@ -15,9 +15,10 @@ import { type ContactFormState } from "@/app/actions/contact-form";
 
 interface ContactFormProps {
   onSubmit: (formData: FormData) => Promise<ContactFormState>;
+  children?: React.ReactNode; // optional hidden fields or extra content injected at top
 }
 
-export function ContactForm({ onSubmit }: ContactFormProps) {
+export function ContactForm({ onSubmit, children }: ContactFormProps) {
   const [isPending, startTransition] = useTransition();
   const [formState, setFormState] = useState<ContactFormState>({});
 
@@ -61,6 +62,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
   return (
     <Form {...form}>
       <form action={handleAction} className="space-y-6">
+        {children}
         {formState.success && (
           <div className="p-4 border border-green-500 bg-green-50 text-green-700 rounded-md">
             Message transmitted successfully

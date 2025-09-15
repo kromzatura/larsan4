@@ -39,18 +39,34 @@ export async function submitContactForm(
       message: formData.get("message"),
     };
 
+    let inquiryItems: { id: string; name?: string | null }[] | undefined;
+    const inquiryRaw = formData.get("inquiryItems");
+    if (typeof inquiryRaw === "string" && inquiryRaw.length > 0) {
+      try {
+        const decoded = decodeURIComponent(inquiryRaw);
+        const parsed = JSON.parse(decoded);
+        if (Array.isArray(parsed)) {
+          inquiryItems = parsed
+            .filter((x) => x && typeof x.id === "string")
+            .map((x) => ({ id: x.id as string, name: typeof x.name === "string" ? x.name : null }));
+        }
+      } catch {
+        // ignore malformed inquiry items
+      }
+    }
+
     // Validate the form data
     const validatedData = contactFormSchema.parse(rawData);
     const { firstName, lastName, email, message } = validatedData;
 
     const html = await render(
-      ContactFormEmail({ firstName, lastName, email, message })
+      ContactFormEmail({ firstName, lastName, email, message, inquiryItems })
     );
 
     await resend.emails.send({
       from: `Website Contact Form <${process.env.NEXT_RESEND_FROM_EMAIL}>`,
       to: process.env.NEXT_RESEND_TO_EMAIL,
-      subject: `New Contact from ${firstName} ${lastName}`,
+      subject: `New Contact${inquiryItems && inquiryItems.length ? ` (+${inquiryItems.length} inquiry)` : ""} from ${firstName} ${lastName}`,
       html,
       replyTo: email,
     });
