@@ -13,6 +13,14 @@ import {
 import { CHANGELOGS_QUERY } from "@/sanity/queries/changelog";
 import { TEAM_QUERY } from "@/sanity/queries/team";
 import {
+  PRODUCT_QUERY,
+  PRODUCTS_QUERY as PRODUCTS_LIST_QUERY,
+  PRODUCTS_SLUGS_QUERY,
+  PRODUCTS_COUNT_QUERY,
+  PRODUCT_CATEGORIES_QUERY,
+  PRODUCTS_BY_CATEGORY_QUERY,
+} from "@/sanity/queries/product";
+import {
   PAGE_QUERYResult,
   PAGES_SLUGS_QUERYResult,
   POST_QUERYResult,
@@ -24,6 +32,11 @@ import {
   CONTACT_QUERYResult,
   CHANGELOGS_QUERYResult,
   TEAM_QUERYResult,
+  // Product
+  PRODUCT_QUERYResult,
+  PRODUCTS_QUERYResult as PRODUCTS_LIST_QUERYResult,
+  PRODUCTS_SLUGS_QUERYResult,
+  PRODUCT_CATEGORIES_QUERYResult,
 } from "@/sanity.types";
 
 export const fetchSanityNavigation =
@@ -99,6 +112,79 @@ export const fetchSanityTeam = async (): Promise<TEAM_QUERYResult> => {
   return data;
 };
 
+export const fetchSanityProducts = async ({
+  page,
+  limit,
+}: {
+  page?: number;
+  limit: number;
+}): Promise<PRODUCTS_LIST_QUERYResult> => {
+  const offset = page && limit ? (page - 1) * limit : 0;
+  const end = offset + limit;
+  const { data } = await sanityFetch({
+    query: PRODUCTS_LIST_QUERY,
+    params: { offset, end },
+  });
+  return data;
+};
+
+export const fetchSanityProductsByCategory = async ({
+  slug,
+  page,
+  limit,
+}: {
+  slug: string;
+  page?: number;
+  limit: number;
+}): Promise<PRODUCTS_LIST_QUERYResult> => {
+  const offset = page && limit ? (page - 1) * limit : 0;
+  const end = offset + limit;
+  const { data } = await sanityFetch({
+    query: PRODUCTS_BY_CATEGORY_QUERY,
+    params: { slug, offset, end },
+  });
+  return data;
+};
+
+export const fetchSanityProductBySlug = async ({
+  slug,
+}: {
+  slug: string;
+}): Promise<PRODUCT_QUERYResult> => {
+  const { data } = await sanityFetch({
+    query: PRODUCT_QUERY,
+    params: { slug },
+  });
+  return data;
+};
+
+export const fetchSanityProductSlugs = async (): Promise<
+  PRODUCTS_SLUGS_QUERYResult
+> => {
+  const { data } = await sanityFetch({
+    query: PRODUCTS_SLUGS_QUERY,
+    perspective: "published",
+    stega: false,
+  });
+  return data;
+};
+
+export const fetchSanityProductCategories = async (): Promise<
+  PRODUCT_CATEGORIES_QUERYResult
+> => {
+  const { data } = await sanityFetch({
+    query: PRODUCT_CATEGORIES_QUERY,
+  });
+  return data;
+};
+
+export const fetchSanityProductsCount = async (): Promise<number> => {
+  const { data } = await sanityFetch({
+    query: PRODUCTS_COUNT_QUERY,
+  });
+  return data;
+};
+
 export const fetchSanityPostsCount = async (): Promise<number> => {
   const { data } = await sanityFetch({
     query: POSTS_COUNT_QUERY,
@@ -150,7 +236,7 @@ export const getOgImageUrl = ({
   type,
   slug,
 }: {
-  type: "post" | "page";
+  type: "post" | "page" | "product";
   slug: string;
 }): string => {
   // Clean the slug by removing any path segments before the last slash (e.g. "blog/my-post" becomes "my-post")
