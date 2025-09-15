@@ -1,6 +1,7 @@
 "use server";
 
 import { Resend } from "resend";
+import { setLastContactEmailHtml } from "@/lib/dev-email-store";
 import {
   contactFormSchema,
   type ContactFormValues,
@@ -11,11 +12,6 @@ import { z } from "zod";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// In-memory dev email store (not for production persistence)
-let __lastContactEmailHtml: string | null = null;
-export function getLastContactEmailHtml() {
-  return __lastContactEmailHtml;
-}
 
 export type ContactFormState = {
   success?: boolean;
@@ -69,7 +65,7 @@ export async function submitContactForm(
       ContactFormEmail({ firstName, lastName, email, message, inquiryItems })
     );
     if (process.env.NODE_ENV !== "production") {
-      __lastContactEmailHtml = html;
+      setLastContactEmailHtml(html);
       console.info("[contact-form] Rendered email HTML length:", html.length);
       if (inquiryItems?.length) {
         console.info("[contact-form] Inquiry items included:", inquiryItems.length);

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getLastContactEmailHtml } from "@/app/actions/contact-form";
+import { getLastContactEmailHtml } from "@/lib/dev-email-store";
 
 export async function GET() {
   const html = getLastContactEmailHtml();
