@@ -115,6 +115,15 @@ Acceptance (Phase 1)
 
 [ x] Typegen runs without errors.
 
+### Phase 1 Outcomes (Completed)
+
+- All product specs embedded on `product` (no separate spec doc)
+- Added `excerpt`; improved packaging previews (type + size)
+- Packaging selects: `sizeUnit` (kg/ton, default kg), `packagingType` (Paper bag/Big Bag)
+- Field help/validation: required `sku`; examples for `hsCode`, `minOrder`, `origin`, `moisture`, `shelfLife`
+- Link objects: support `product`, `productCategory`, and blog `category`; resolve paths; preview shows type • path
+- Link validation: require internal target or external href; warn on missing slug
+
 ## Phase 2 — GROQ + Typegen (Revised)
 
 1. Update `product.ts` query to return product with all fields (no deref):
@@ -253,7 +262,7 @@ Acceptance (Phase 8)
 - After approval, merge to `main`
 
 Tracking Checklist (High-level)
-[ ] Phase 1 — Schemas (Corrected)
+[x] Phase 1 — Schemas (Completed)
 
 [ ] Phase 2 — GROQ + Typegen (Revised)
 
@@ -283,4 +292,4 @@ Tracking Checklist (High-level)
 
 ---
 
-Prepared for review and approval. Once approved, I’ll start with Phase 1 on `feat/products-categories`.
+Status: Phase 1 complete (schemas + authoring polish). Next up: Phase 2/3. We will integrate your product page component and design guidance during Phase 3.
