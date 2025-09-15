@@ -56,14 +56,13 @@ export const structure = (S: any, context: any) =>
             .title("Changelog")
             .defaultOrdering([{ field: "date", direction: "desc" }])
         ),
-      S.listItem()
-        .title("Categories")
-        .schemaType("category")
-        .child(
-          S.documentTypeList("category")
-            .title("Category")
-            .defaultOrdering([{ field: "title", direction: "asc" }])
-        ),
+      orderableDocumentListDeskItem({
+        type: "category",
+        title: "Categories",
+        icon: ListCollapse,
+        S,
+        context,
+      }),
       orderableDocumentListDeskItem({
         type: "author",
         title: "Authors",
