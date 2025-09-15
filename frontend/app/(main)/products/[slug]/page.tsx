@@ -6,7 +6,7 @@ import Breadcrumbs from "@/components/ui/breadcrumbs";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import Tag from "@/components/ui/tag";
+import { Badge } from "@/components/ui/badge";
 import { CheckCircle2, Facebook, Linkedin, Twitter } from "lucide-react";
 import {
   fetchSanityProductBySlug,
@@ -19,16 +19,20 @@ import type { PRODUCT_QUERYResult } from "@/sanity.types";
 type SpecPair = { label: string; value?: string | number | null };
 
 function SpecTable({ title, rows }: { title: string; rows: SpecPair[] }) {
-  const filtered = rows.filter((r) => r.value !== undefined && r.value !== null && r.value !== "");
+  const filtered = rows.filter(
+    (r) => r.value !== undefined && r.value !== null && r.value !== ""
+  );
   if (filtered.length === 0) return null;
   return (
-    <div className="mt-5 rounded-lg border p-4">
-      <p className="mb-3 text-sm font-medium">{title}</p>
+    <div className="rounded-lg border p-4">
+      <p className="mb-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+        {title}
+      </p>
       <div className="grid grid-cols-2 gap-y-2 text-sm">
         {filtered.map((r) => (
           <Fragment key={`${title}-${r.label}`}>
             <div className="text-muted-foreground">{r.label}</div>
-            <div className="text-right">{r.value}</div>
+            <div className="text-right font-medium">{r.value}</div>
           </Fragment>
         ))}
       </div>
@@ -43,14 +47,22 @@ export async function generateStaticParams() {
     .map((s) => ({ slug: s.slug!.current! }));
 }
 
-export async function generateMetadata(props: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>;
+}) {
   const params = await props.params;
   const product = await fetchSanityProductBySlug({ slug: params.slug });
   if (!product) notFound();
-  return generatePageMetadata({ page: product, slug: `products/${params.slug}`, type: "product" });
+  return generatePageMetadata({
+    page: product,
+    slug: `products/${params.slug}`,
+    type: "product",
+  });
 }
 
-export default async function ProductPage(props: { params: Promise<{ slug: string }> }) {
+export default async function ProductPage(props: {
+  params: Promise<{ slug: string }>;
+}) {
   const params = await props.params;
   const product = await fetchSanityProductBySlug({ slug: params.slug });
   if (!product) notFound();
@@ -74,7 +86,10 @@ export default async function ProductPage(props: { params: Promise<{ slug: strin
     { label: "Binding capacity", value: product.bindingCapacity || undefined },
     {
       label: "Fat content",
-      value: typeof product.fatContent === "number" ? `${product.fatContent}%` : undefined,
+      value:
+        typeof product.fatContent === "number"
+          ? `${product.fatContent}%`
+          : undefined,
     },
   ];
 
@@ -86,7 +101,9 @@ export default async function ProductPage(props: { params: Promise<{ slug: strin
     { label: "Certification", value: product.certification || undefined },
   ];
 
-  const shareUrl = `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/products/${product.slug?.current}`;
+  const shareUrl = `${
+    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  }/products/${product.slug?.current}`;
 
   return (
     <section className="container py-16 xl:py-20">
@@ -94,7 +111,9 @@ export default async function ProductPage(props: { params: Promise<{ slug: strin
         <Breadcrumbs links={links} />
 
         {product.title && (
-          <h1 className="mt-7 text-3xl font-semibold md:text-5xl">{product.title}</h1>
+          <h1 className="mt-7 text-3xl font-semibold md:text-5xl">
+            {product.title}
+          </h1>
         )}
 
         <div className="mt-12 grid grid-cols-12 gap-8">
@@ -103,7 +122,11 @@ export default async function ProductPage(props: { params: Promise<{ slug: strin
             {product.image?.asset?._id && (
               <div className="mb-8">
                 <Image
-                  src={urlFor(product.image).width(1200).height(800).fit("crop").url()}
+                  src={urlFor(product.image)
+                    .width(1200)
+                    .height(800)
+                    .fit("crop")
+                    .url()}
                   alt={product.image.alt || product.title || "Product image"}
                   width={1200}
                   height={800}
@@ -114,7 +137,9 @@ export default async function ProductPage(props: { params: Promise<{ slug: strin
 
             {/* Mobile excerpt */}
             {product.excerpt && (
-              <p className="text-muted-foreground mb-6 lg:hidden">{product.excerpt}</p>
+              <p className="text-muted-foreground mb-6 lg:hidden">
+                {product.excerpt}
+              </p>
             )}
 
             {/* Body content for desktop */}
@@ -126,68 +151,97 @@ export default async function ProductPage(props: { params: Promise<{ slug: strin
           </div>
 
           {/* Right column */}
-          <div className="col-span-12 h-fit lg:col-span-6 md:sticky md:top-20">
+          <div className="col-span-12 h-fit lg:col-span-6 md:sticky md:top-20 space-y-5">
             {/* Key features */}
-            {Array.isArray(product.keyFeatures) && product.keyFeatures.length > 0 && (
-              <div>
-                <p className="mb-2 text-lg font-semibold">Key features</p>
-                <ul className="flex flex-col gap-2 text-sm">
-                  {product.keyFeatures.map((f, idx) => (
-                    <li key={idx} className="flex items-center gap-2">
-                      <CheckCircle2 className="h-4 w-4" />
-                      <p>{f}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            {Array.isArray(product.keyFeatures) &&
+              product.keyFeatures.length > 0 && (
+                <div className="rounded-lg border p-4">
+                  <p className="mb-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    Key features
+                  </p>
+                  <ul className="flex flex-col gap-2 text-sm">
+                    {product.keyFeatures.map((f, idx) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-foreground/70" />
+                        <p className="leading-5">{f}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
             <SpecTable title="At a glance" rows={atAGlance} />
             <SpecTable title="Quality" rows={quality} />
             <SpecTable title="Other" rows={other} />
 
             {/* Packaging */}
-            {Array.isArray(product.packagingOptions) && product.packagingOptions.length > 0 && (
-              <div className="mt-5">
-                <p className="mb-3 text-sm font-medium">Packaging</p>
-                <ul className="space-y-2 text-sm">
-                  {product.packagingOptions.map((p, i) => {
-                    const parts = [
-                      p.packagingType,
-                      [p.sizeValue, p.sizeUnit].filter(Boolean).join(" "),
-                      p.weightPerPallet,
-                      p.notes,
-                    ].filter(Boolean);
-                    const line = parts.join(" • ");
-                    return (
-                      <li key={i} className="rounded-md border p-3">{line}</li>
-                    );
-                  })}
-                </ul>
-              </div>
-            )}
+            {Array.isArray(product.packagingOptions) &&
+              product.packagingOptions.length > 0 && (
+                <div className="rounded-lg border p-4">
+                  <p className="mb-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    Packaging
+                  </p>
+                  <ul className="space-y-2 text-sm">
+                    {product.packagingOptions.map((p, i) => {
+                      const left = [
+                        p.packagingType,
+                        [p.sizeValue, p.sizeUnit].filter(Boolean).join(" "),
+                      ]
+                        .filter(Boolean)
+                        .join(" · ");
+                      const right = p.weightPerPallet || p.notes || "";
+                      return (
+                        <li
+                          key={i}
+                          className="flex items-center justify-between rounded-md border px-3 py-2 bg-muted/30"
+                        >
+                          <span className="truncate pr-4">{left}</span>
+                          {right && (
+                            <span className="text-right text-muted-foreground">
+                              {right}
+                            </span>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )}
 
             {/* Categories */}
-            {Array.isArray(product.categories) && product.categories.length > 0 && (
-              <div className="mt-5">
-                <p className="mb-3 text-sm font-medium">Categories</p>
-                <div className="flex flex-wrap gap-2">
-                  {product.categories.map((c) => (
-                    <Link key={c?._id} href={`/products/category/${c?.slug?.current || ""}`}>
-                        <Tag title={c?.title || ""} type="badge" />
-                    </Link>
-                  ))}
+            {Array.isArray(product.categories) &&
+              product.categories.length > 0 && (
+                <div className="rounded-lg border p-4">
+                  <p className="mb-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    Categories
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {product.categories.map((c) => (
+                      <Link
+                        key={c?._id}
+                        href={`/products/category/${c?.slug?.current || ""}`}
+                      >
+                        <Badge
+                          variant="outline"
+                          className="rounded-full px-3 py-1 bg-muted/50"
+                        >
+                          {c?.title || ""}
+                        </Badge>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
             {/* Share */}
-            <div className="mt-5 flex items-center justify-between">
+            <div className="flex items-center justify-between rounded-lg border p-4">
               <p className="text-sm font-medium">Share this product</p>
               <ul className="flex gap-2">
                 <li>
                   <a
-                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
+                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                      shareUrl
+                    )}`}
                     target="_blank"
                     rel="noopener"
                     title="Share on Facebook"
@@ -198,7 +252,9 @@ export default async function ProductPage(props: { params: Promise<{ slug: strin
                 </li>
                 <li>
                   <a
-                    href={`https://x.com/intent/tweet?url=${encodeURIComponent(shareUrl)}`}
+                    href={`https://x.com/intent/tweet?url=${encodeURIComponent(
+                      shareUrl
+                    )}`}
                     target="_blank"
                     rel="noopener"
                     title="Share on X (Twitter)"
@@ -209,7 +265,9 @@ export default async function ProductPage(props: { params: Promise<{ slug: strin
                 </li>
                 <li>
                   <a
-                    href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(shareUrl)}`}
+                    href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
+                      shareUrl
+                    )}`}
                     target="_blank"
                     rel="noopener"
                     title="Share on LinkedIn"
