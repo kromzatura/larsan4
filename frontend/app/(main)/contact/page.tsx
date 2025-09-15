@@ -9,9 +9,7 @@ import { Link as LinkType } from "@/sanity.types";
 import type { InquiryItem } from "@/lib/inquiry";
 import ContactInquiryWrapper from "@/components/inquiry/contact-inquiry-wrapper";
 
-export async function generateMetadata(props: {
-  params: Promise<{ slug: string }>;
-}) {
+export async function generateMetadata() {
   const contact = await fetchSanityContact();
 
   if (!contact) {
@@ -43,8 +41,9 @@ function parseInquiryParam(searchParams: { [key: string]: string | string[] | un
   return [];
 }
 
-export default async function ContactPage({ searchParams = {} as { [key: string]: string | string[] | undefined } }: { searchParams?: { [key: string]: string | string[] | undefined } }) {
-  const inquiryItems = parseInquiryParam(searchParams);
+export default async function ContactPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
+  const resolvedSearchParams = await searchParams;
+  const inquiryItems = parseInquiryParam(resolvedSearchParams || {});
   const hasInquiry = inquiryItems.length > 0;
 
   const contact = await fetchSanityContact();
