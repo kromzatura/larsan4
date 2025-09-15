@@ -52,6 +52,14 @@ export const PRODUCT_CATEGORIES_QUERY = groq`*[_type == "productCategory" && def
   slug
 }`;
 
+export const PRODUCT_CATEGORY_BY_SLUG_QUERY = groq`*[_type == "productCategory" && slug.current == $slug][0]{
+  _id,
+  _type,
+  title,
+  slug,
+  ${metaQuery}
+}`;
+
 export const PRODUCTS_BY_CATEGORY_QUERY = groq`*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(_createdAt desc)[$offset...$end]{
   _id,
   _createdAt,
@@ -61,3 +69,5 @@ export const PRODUCTS_BY_CATEGORY_QUERY = groq`*[_type == "product" && reference
   image{ ${imageQuery} },
   categories[]->{ _id, title, slug }
 }`;
+
+export const PRODUCTS_COUNT_BY_CATEGORY_QUERY = groq`count(*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)])`;

@@ -19,6 +19,8 @@ import {
   PRODUCTS_COUNT_QUERY,
   PRODUCT_CATEGORIES_QUERY,
   PRODUCTS_BY_CATEGORY_QUERY,
+  PRODUCTS_COUNT_BY_CATEGORY_QUERY,
+  PRODUCT_CATEGORY_BY_SLUG_QUERY,
 } from "@/sanity/queries/product";
 import {
   PAGE_QUERYResult,
@@ -37,6 +39,7 @@ import {
   PRODUCTS_QUERYResult as PRODUCTS_LIST_QUERYResult,
   PRODUCTS_SLUGS_QUERYResult,
   PRODUCT_CATEGORIES_QUERYResult,
+  ProductCategory,
 } from "@/sanity.types";
 
 export const fetchSanityNavigation =
@@ -178,9 +181,25 @@ export const fetchSanityProductCategories = async (): Promise<
   return data;
 };
 
+export const fetchSanityProductCategoryBySlug = async ({ slug }: { slug: string }) => {
+  const { data } = await sanityFetch({
+    query: PRODUCT_CATEGORY_BY_SLUG_QUERY,
+    params: { slug },
+  });
+  return data as unknown as ProductCategory;
+};
+
 export const fetchSanityProductsCount = async (): Promise<number> => {
   const { data } = await sanityFetch({
     query: PRODUCTS_COUNT_QUERY,
+  });
+  return data;
+};
+
+export const fetchSanityProductsCountByCategory = async ({ slug }: { slug: string }): Promise<number> => {
+  const { data } = await sanityFetch({
+    query: PRODUCTS_COUNT_BY_CATEGORY_QUERY,
+    params: { slug },
   });
   return data;
 };
