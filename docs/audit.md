@@ -1,117 +1,94 @@
-Summarizing assessment to user. Roadmap Progress Assessment (Based on products-roadmap.md and current code)
+Architecture
 
-Phase Status
+Strong:
+Separate specification docs referenced by product: avoids duplication, enables reuse.
+Block-based page composition with a centralized blocks renderer.
+Centralized SEO via generatePageMetadata across routes.
+Weak:
+Blocks passes searchParams to all blocks, not just those that need it (broader typing, slightly leaky API).
+PRODUCTS_BY_CATEGORY_QUERY order injected via string replace; brittle against query refactors.
+Routes & UX
 
-Phase 1 (Schemas): PARTIAL
+Strong:
+/products made dynamic to support ?category= filters; canonical excludes query (SEO safe).
+/products/category/[slug] with generateStaticParams(), sorting, pagination, and breadcrumbs.
+/products/[slug] has rich details and structured spec tables.
+Weak:
+Table rows not fully clickable; only image/title are links.
+No aria annotations for sorting (where used), and minimal table semantics beyond <th>.
+Blocks/UI
 
-productCategory schema: Implemented and aligned with plan (title, description, slug, meta, orderRankField).
-product schema: Implemented BUT currently embeds all specification fields directly (sku, moisture, fatContent, etc.). Roadmap revision calls for a separate specification document and a single reference on product. That decoupling not yet done.
-specification schema: Not present (missing file; not registered).
-Result: Must refactor product spec fields out into new specification document to meet roadmap goal.
-Phase 2 (GROQ + Typegen): PARTIAL
+Strong:
+“All Products 16” matches needed columns, SSR pagination, image/title linking, category badges link to filter.
+Category chips block highlights active and now gracefully handles invalid ?category.
+Empty state when category has no products; hides pagination appropriately.
+Weak:
+Minor spacing/typography polish pending (e.g., consistent cell padding, vertical rhythm).
+Add-to-inquiry button prominence can be increased for scannability.
+Hover feedback great on rows; could add subtle focus-visible styles for keyboard users.
+Data & Queries
 
-Product queries exist (PRODUCT_QUERY, PRODUCTS_QUERY, category queries).
-No dereferenced specifications->{...} projection because there is no specification reference yet.
-Typegen works for current embedded model, but will need regeneration after schema refactor.
-Pagination & count queries present (PRODUCTS_COUNT_QUERY etc.).
-To finish: Add specification doc, change product field to reference specification, update queries to expand it, re-run typegen.
-Phase 3 (Routes): DONE (for initial embedded model)
+Strong:
+List queries project only fields needed for table (sku, purity, attributes, features, image, categories).
+Dedicated count queries to avoid over-fetching.
+Weak:
+Category-order and product-order are encoded in separate queries; ordering injection via replace is error-prone.
+Some fetch helpers return broad shapes; consider narrower types per use case for payload efficiency.
+SEO & Metadata
 
-/products/[slug] implemented with static params + metadata helper.
-/products/category/[slug] implemented with pagination, sorting, metadata.
-These pages rely on embedded spec fields; will need minor adjustments after refactor (rename product.sku etc. if moved under product.specifications.sku).
-Phase 4 (Inquiry System Foundation): DONE (and enhanced)
+Strong:
+Canonicals are correct for all primary pages; filters are not canonicalized (good).
+Sitemap includes pages, products, and product categories.
+Robots config references the sitemap and respects noindex via env + per-doc.
+Weak:
+Optional enhancement: “page > 1” on /products could set robots: noindex (prevents thin duplicates).
+Ensure NEXT_PUBLIC_SITE_URL is set in all environments (sitemap correctness).
+Performance
 
-Inquiry helpers, context, badge, add-to-inquiry button, full flow to contact form with email inclusion.
-Now aligned with original spec data shape: items include SKU, name, productId (\_id), slug, and imageUrl and propagate end-to-end (UI, query param, server action, and email).
-Phase 5 (Reusable “All Products” Block): NOT STARTED
+Strong:
+Next/Image with targeted sizes in listings and detail pages.
+Server-side fetching avoids request waterfalls; pagination caps payloads.
+Weak:
+dynamic = "force-dynamic" on /products disables caching; acceptable for live filters, but consider adding short ISR if your data doesn’t change frequently.
+Add-to-inquiry client component is fine, but when many items render, hydrate cost can add up. Keeping the button isolated is good; avoid turning the whole row into a client component.
+Accessibility
 
-No all-products-16 schema or component.
-No integration in PAGE_QUERY.
-Phase 6 (/products Page via Block): NOT STARTED
+Strong:
+Links and buttons are keyboard accessible; badges-as-links provide clear navigation.
+Product images have meaningful alt text fallback to title.
+Weak:
+Table semantics: add scope="col" on <th> for assistive tech.
+Ensure visible focus states on interactive chips and badges (hover styles exist; focus-visible should be explicit).
+DX & Types
 
-No page.tsx route file using a block-driven page; currently listing appears only via categories and individual pages.
-Phase 7 (Navigation + Linking): PARTIAL
+Strong:
+Sanity TypeGen in use; types in components are strict.
+GROQ composed and grouped logically.
+Weak:
+Blocks uses ...(block as any) when passing props; could narrow per-component prop types via a typed component map for extra safety.
+Risks / Cons
 
-Product detail links to categories; category cards link to products.
-Need confirm header/footer link to /products (route not yet implemented).
-Category chips implemented.
-Add global nav link once /products page exists.
-Phase 8 (SEO & Metadata): PARTIAL
+Plugin ecosystem drift (Studio): Keep Sanity/Studio plugin versions consistent; orderable lists and code-input rely on Sanity v3-compatible versions. Verify lockfile alignment post-reset.
+Order injection hack: String replacement for order() is fragile; test on refactors.
+Recommendations
 
-Metadata helper is used for product + category pages.
-Need to ensure future specification doesn’t require metadata (it won’t have route).
-Sitemap likely missing product & category inclusion if not already coded (need to verify app/sitemap.ts updates).
-OG fallback seems consistent; verify meta.image usage once spec refactor done.
-Phase 9 (QA & Validation): NOT STARTED (post-refactor activity)
+Routing/SEO
+Keep /products dynamic; optionally add short revalidate if acceptable and content isn’t changing minute-to-minute.
+Optionally set noindex for /products?page>1 (only if you care about duplicate inventory pages).
+UI/UX
+Make the full row clickable to the product (add an absolutely-positioned link overlay that excludes the action cell to avoid nested anchors).
+Increase Add-to-Inquiry button width (e.g., className="px-6 w-full max-w-44") and ensure consistent centering.
+Tighten table spacing: standardize px-6 py-4, check alignment of bullet lists (key features) and badges.
+Accessibility
+Add scope="col" to table headers; ensure focus-visible styles for chips/badges (e.g., outline-none focus-visible:ring variants).
+Code & Queries
+Replace string order(...) injection with a small query switch (3 const queries) or accept the replace but encapsulate in a helper function with tests.
+Refine Blocks to pass searchParams only to blocks that consume them; remove any spread by mapping component props per block \_type.
+Content Safety
+Invalid category slugs currently show empty state; that’s good. Optionally show “Unknown category” copy if you want clearer feedback.
+Quick Wins (1–2 hours)
 
-Build passes now; further validation pending spec decoupling & new block.
-Phase 10 (Rollout): NOT STARTED (feature branch workflow not reflected—work done directly on main).
-
-Key Gaps vs Roadmap
-
-Missing externalized specification document and reference model (largest structural deviation).
-Absence of “All Products” block and /products CMS-driven page.
-Navigation lacks finalized /products landing route.
-Inquiry item shape differs from originally planned richer structure (acceptable if minimal is intentional).
-Sitemap and potential structured data for products not yet addressed.
-Roadmap branch strategy not followed (work on main instead of feat/products-categories).
-Recommended Next Actions (Sequenced)
-
-Schema Refactor (Phase 1 completion)
-
-Create specification document schema with fields currently embedded.
-Remove those fields from product schema; add specifications (reference, required).
-Migration plan: For existing products, manually create spec docs & link (since we’re early, manual is fine).
-Query & Types Update (Phase 2 completion)
-
-Update PRODUCT_QUERY to project specifications->{ field list }.
-Update listing queries if any spec fields needed on cards (or keep lean).
-Re-run typegen and adapt product detail page: reference fields under product.specifications.
-Adjust Frontend (Phase 3 alignment)
-
-Modify product page to use product.specifications.sku etc.
-Update inquiry add button to use specifications.sku.
-Keep fallback if specifications missing to avoid runtime errors during transition.
-Introduce All Products Block (Phase 5)
-
-Schema + GROQ fragment + component with pagination via searchParams.page.
-Inject into PAGE_QUERY.
-/products Page Route (Phase 6)
-
-Ensure CMS page with slug products; add block in Studio; confirm metadata.
-Navigation (Phase 7)
-
-Add /products link to navbar + footer.
-SEO Enhancements (Phase 8)
-
-Add JSON-LD (optional phase add-on) for product detail pages using new spec fields.
-Confirm sitemap includes product & category slugs.
-QA (Phase 9)
-
-Edge-case pagination tests (page > total pages).
-Validate missing spec doc gracefully handled (temporary).
-Risk & Effort Notes
-
-Refactoring spec fields now is cheaper than later; strongly advisable before adding more products.
-All Products block leverages existing pagination patterns (low incremental complexity).
-Email/inquiry unaffected by spec refactor (only change path to SKU).
-Effort Estimates (Rough)
-
-Spec refactor (schema + query + frontend adjust + manual linking): 0.5–1 day.
-All Products block + page + nav: 0.5 day.
-Sitemap + SEO touch-ups: 0.25 day.
-QA + cleanup: 0.25 day.
-Decision Points Needed From You
-
-Confirm we proceed with specification extraction now vs postponing.
-Confirm minimal inquiry data shape is acceptable (SKU + name) or expand with image/slug later.
-Confirm pagination size (keep 12) for All Products block.
-Confirm interest in product structured data (JSON-LD) now or defer.
-Let me know:
-
-Proceed with spec refactor now? (yes/no)
-Keep inquiry item minimal? (yes/no)
-Lock page size = 12? (yes/no)
-Add product JSON-LD? (yes/no)
-Reply with answers (e.g. “yes, yes, yes, no”) and I’ll create the execution plan + start edits.
+Full-row click with safe overlay and button preserved.
+Wider action button; consistent table padding/typography.
+th scope="col" and focus-visible ring on chips/badges.
+Swap order injection to a tiny helper or a 3-query switch for category sorting.

@@ -158,7 +158,9 @@ export default function Blocks({
       {blocks?.map((block) => {
         const Component = componentMap[block._type];
         if (!Component) {
-          console.warn(`No component implemented for block type: ${block._type}`);
+          console.warn(
+            `No component implemented for block type: ${block._type}`
+          );
           return <div data-type={block._type} key={block._key} />;
         }
 
