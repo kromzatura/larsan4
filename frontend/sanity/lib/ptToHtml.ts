@@ -28,7 +28,9 @@ export function ptBlocksToHtml(blocks: any[] | null | undefined): string {
               }"/></p>`
             : "",
         code: ({ value }: any) => {
-          const lang = value?.language ? ` class="language-${value.language}"` : "";
+          const lang = value?.language
+            ? ` class="language-${value.language}"`
+            : "";
           const code = typeof value?.code === "string" ? value.code : "";
           return `<pre><code${lang}>${escapeHtml(code)}</code></pre>`;
         },
@@ -39,7 +41,9 @@ export function ptBlocksToHtml(blocks: any[] | null | undefined): string {
           return `<div class="embed-youtube"><iframe src="${src}" title="YouTube video" allowfullscreen loading="lazy"></iframe></div>`;
         },
         alert: ({ value, children }: any) => {
-          const title = value?.title ? `<strong>${escapeHtml(value.title)}</strong> ` : "";
+          const title = value?.title
+            ? `<strong>${escapeHtml(value.title)}</strong> `
+            : "";
           const desc = value?.description ? escapeHtml(value.description) : "";
           return `<div class="alert">${title}${desc}${children ?? ""}</div>`;
         },

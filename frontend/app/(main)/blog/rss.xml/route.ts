@@ -54,8 +54,8 @@ export async function GET() {
     const url = `${SITE_URL}/blog/${p.slug?.current ?? ""}`;
     const title = escape(p.title ?? "Untitled");
     const description = escape(p.excerpt ?? "");
-  const rawDate = p.publishedAt || p._createdAt;
-  const pubDate = rawDate ? new Date(rawDate).toUTCString() : "";
+    const rawDate = p.publishedAt || p._createdAt;
+    const pubDate = rawDate ? new Date(rawDate).toUTCString() : "";
     const categories = Array.isArray(p.categories)
       ? p.categories
           .map((c: any) => c?.title)
@@ -63,8 +63,10 @@ export async function GET() {
           .map((t: string) => `<category>${escape(t)}</category>`)
           .join("")
       : "";
-  const html = ptBlocksToHtml((p as any).body);
-  const creator = p.author?.name ? `<dc:creator>${escape(p.author.name)}</dc:creator>` : "";
+    const html = ptBlocksToHtml((p as any).body);
+    const creator = p.author?.name
+      ? `<dc:creator>${escape(p.author.name)}</dc:creator>`
+      : "";
 
     return `
       <item>
