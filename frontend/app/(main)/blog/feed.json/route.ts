@@ -14,7 +14,7 @@ export async function GET() {
   const siteName = (settings as any)?.siteName || "Blog";
   const feed = {
     version: "https://jsonfeed.org/version/1.1",
-    title: `${siteName} — Blog` ,
+    title: `${siteName} — Blog`,
     home_page_url: `${SITE_URL}/blog`,
     feed_url: `${SITE_URL}/blog/feed.json`,
     items: (posts || []).map((p: any) => {

@@ -63,7 +63,9 @@ export async function GET() {
         <guid isPermaLink="true">${url}</guid>
         <pubDate>${pubDate}</pubDate>
         <description><![CDATA[${p.excerpt ?? ""}]]></description>
-        <content:encoded><![CDATA[${html || p.excerpt || ""}]]></content:encoded>
+        <content:encoded><![CDATA[${
+          html || p.excerpt || ""
+        }]]></content:encoded>
         ${categories}
       </item>`;
   });

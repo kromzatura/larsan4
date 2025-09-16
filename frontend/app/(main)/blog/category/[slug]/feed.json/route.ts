@@ -1,16 +1,25 @@
 import { NextResponse } from "next/server";
 import { sanityFetch } from "@/sanity/lib/live";
 import { FEED_POSTS_BY_CATEGORY_QUERY_NEWEST } from "@/sanity/queries/feed";
-import { fetchSanityBlogCategoryBySlug, fetchSanitySettings } from "@/sanity/lib/fetch";
+import {
+  fetchSanityBlogCategoryBySlug,
+  fetchSanitySettings,
+} from "@/sanity/lib/fetch";
 import { ptBlocksToHtml } from "@/sanity/lib/ptToHtml";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
-export async function GET(_req: Request, { params }: { params: Promise<{ slug: string }> }) {
+export async function GET(
+  _req: Request,
+  { params }: { params: Promise<{ slug: string }> }
+) {
   const { slug } = await params;
   const [cat, { data: posts }, settings] = await Promise.all([
     fetchSanityBlogCategoryBySlug({ slug }),
-    sanityFetch({ query: FEED_POSTS_BY_CATEGORY_QUERY_NEWEST, params: { slug, limit: 50 } }),
+    sanityFetch({
+      query: FEED_POSTS_BY_CATEGORY_QUERY_NEWEST,
+      params: { slug, limit: 50 },
+    }),
     fetchSanitySettings(),
   ]);
   if (!cat) return new NextResponse("Not Found", { status: 404 });

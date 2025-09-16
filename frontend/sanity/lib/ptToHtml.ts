@@ -5,9 +5,8 @@ export function ptBlocksToHtml(blocks: Block[] | null | undefined): string {
   const out: string[] = [];
   for (const b of blocks) {
     if (b?._type === "block") {
-      const tag = ({ h1: "h1", h2: "h2", h3: "h3", h4: "h4" } as any)[
-        b?.style
-      ] || "p";
+      const tag =
+        ({ h1: "h1", h2: "h2", h3: "h3", h4: "h4" } as any)[b?.style] || "p";
       const text = Array.isArray(b.children)
         ? b.children.map((c: any) => c?.text || "").join("")
         : "";

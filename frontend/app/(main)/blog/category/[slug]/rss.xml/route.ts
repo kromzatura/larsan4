@@ -59,14 +59,14 @@ export async function GET(
     const title = escape(p.title ?? "Untitled");
     const description = escape(p.excerpt ?? "");
     const pubDate = p._createdAt ? new Date(p._createdAt).toUTCString() : "";
-  const categories = Array.isArray(p.categories)
+    const categories = Array.isArray(p.categories)
       ? p.categories
           .map((c: any) => c?.title)
           .filter(Boolean)
           .map((t: string) => `<category>${escape(t)}</category>`)
           .join("")
       : "";
-  const html = ptBlocksToHtml((p as any).body);
+    const html = ptBlocksToHtml((p as any).body);
 
     return `
       <item>
@@ -75,7 +75,9 @@ export async function GET(
         <guid isPermaLink="true">${url}</guid>
         <pubDate>${pubDate}</pubDate>
         <description><![CDATA[${p.excerpt ?? ""}]]></description>
-        <content:encoded><![CDATA[${html || p.excerpt || ""}]]></content:encoded>
+        <content:encoded><![CDATA[${
+          html || p.excerpt || ""
+        }]]></content:encoded>
         ${categories}
       </item>`;
   });
