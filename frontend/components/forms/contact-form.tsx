@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
+import Script from "next/script";
 import {
   contactFormSchema,
   type ContactFormValues,
@@ -19,9 +20,17 @@ interface ContactFormProps {
   onSuccess?: () => void; // optional callback when submission succeeds
 }
 
-export function ContactForm({ onSubmit, children, onSuccess }: ContactFormProps) {
+export function ContactForm({
+  onSubmit,
+  children,
+  onSuccess,
+}: ContactFormProps) {
   const [isPending, startTransition] = useTransition();
   const [formState, setFormState] = useState<ContactFormState>({});
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const captchaRef = useRef<HTMLDivElement | null>(null);
+  const widgetIdRef = useRef<number | null>(null);
+  const resolveTokenRef = useRef<((token: string) => void) | null>(null);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -34,9 +43,61 @@ export function ContactForm({ onSubmit, children, onSuccess }: ContactFormProps)
     mode: "onSubmit",
   });
 
+  useEffect(() => {
+    if (!siteKey) return;
+    const tryInit = () => {
+      const grecaptcha = (window as any)?.grecaptcha;
+      if (!grecaptcha || !captchaRef.current || widgetIdRef.current !== null) {
+        return;
+      }
+      try {
+        grecaptcha.ready(() => {
+          if (widgetIdRef.current !== null) return;
+          widgetIdRef.current = grecaptcha.render(captchaRef.current, {
+            sitekey: siteKey,
+            size: "invisible",
+            callback: (token: string) => {
+              resolveTokenRef.current?.(token);
+            },
+          });
+        });
+      } catch {}
+    };
+    tryInit();
+    const id = window.setInterval(tryInit, 500);
+    return () => window.clearInterval(id);
+  }, [siteKey]);
+
   async function handleAction(formData: FormData) {
     form.clearErrors();
     startTransition(async () => {
+      if (
+        siteKey &&
+        typeof window !== "undefined" &&
+        (window as any).grecaptcha
+      ) {
+        const grecaptcha = (window as any).grecaptcha;
+        if (widgetIdRef.current == null) {
+          setFormState({ error: "Captcha not ready. Please try again." });
+          return;
+        }
+        const token = await new Promise<string>((resolve) => {
+          resolveTokenRef.current = resolve;
+          try {
+            grecaptcha.reset(widgetIdRef.current);
+            grecaptcha.execute(widgetIdRef.current);
+          } catch {
+            resolve("");
+          }
+        });
+        if (!token) {
+          setFormState({
+            error: "Captcha verification failed. Please try again.",
+          });
+          return;
+        }
+        formData.set("g-recaptcha-response", token);
+      }
       const result = await onSubmit(formData);
       setFormState(result);
 
@@ -64,6 +125,14 @@ export function ContactForm({ onSubmit, children, onSuccess }: ContactFormProps)
   return (
     <Form {...form}>
       <form action={handleAction} className="space-y-6">
+        {siteKey && (
+          <Script
+            src="https://www.google.com/recaptcha/api.js"
+            async
+            defer
+            strategy="afterInteractive"
+          />
+        )}
         {children}
         {formState.success && (
           <div className="p-4 border border-green-500 bg-green-50 text-green-700 rounded-md">
@@ -149,6 +218,11 @@ export function ContactForm({ onSubmit, children, onSuccess }: ContactFormProps)
             </p>
           )}
         </div>
+        {siteKey && (
+          <div className="pt-2">
+            <div ref={captchaRef} />
+          </div>
+        )}
         <Button className="w-full" type="submit" disabled={isPending}>
           {isPending ? "Sending..." : "Submit"}
         </Button>

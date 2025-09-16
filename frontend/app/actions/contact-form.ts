@@ -21,6 +21,39 @@ export async function submitContactForm(
   formData: FormData
 ): Promise<ContactFormState> {
   try {
+    // Verify reCAPTCHA if configured
+    if (process.env.RECAPTCHA_SECRET_KEY) {
+      const token = formData.get("g-recaptcha-response");
+      if (!token || typeof token !== "string") {
+        return {
+          success: false,
+          error: "Captcha verification failed. Please try again.",
+        };
+      }
+      const verifyRes = await fetch(
+        "https://www.google.com/recaptcha/api/siteverify",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({
+            secret: process.env.RECAPTCHA_SECRET_KEY,
+            response: token,
+          }).toString(),
+          // reCAPTCHA endpoint is external
+          cache: "no-store",
+        }
+      );
+      const verifyJson = (await verifyRes.json()) as {
+        success?: boolean;
+        [k: string]: any;
+      };
+      if (!verifyJson.success) {
+        return {
+          success: false,
+          error: "Captcha verification failed. Please try again.",
+        };
+      }
+    }
     if (!process.env.RESEND_API_KEY) {
       throw new Error("Missing Resend API key");
     }
