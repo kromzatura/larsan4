@@ -20,15 +20,20 @@ export default async function ProductCategories16({
   const active = params?.category;
   return (
     <SectionContainer padding={padding}>
-      <div className="rounded-lg border p-3">
-        <div className="flex items-center gap-3 text-xs uppercase tracking-wide text-muted-foreground">
+      <div className="rounded-lg border p-4">
+        <div className="flex items-center justify-center gap-3 text-xs uppercase tracking-wide text-muted-foreground">
           <span>Filter</span>
           <span>Category:</span>
           <Link href={`/products`}>
-            <Badge variant={active ? "outline" : "secondary"}>Any</Badge>
+            <Badge
+              variant={active ? "outline" : "secondary"}
+              className="px-3 py-1 text-sm transition-colors hover:bg-secondary/80"
+            >
+              Any
+            </Badge>
           </Link>
         </div>
-        <div className="mt-3 flex flex-wrap gap-2">
+        <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
           {cats.map((c) => (
             <Link
               key={c._id}
@@ -36,6 +41,7 @@ export default async function ProductCategories16({
             >
               <Badge
                 variant={active === c.slug?.current ? "secondary" : "outline"}
+                className="px-3 py-1 text-sm transition-colors hover:bg-secondary/80"
               >
                 {c.title}
               </Badge>

@@ -63,11 +63,11 @@ export default async function AllProducts16({
         <table className="min-w-full text-sm">
           <thead className="bg-muted/50 text-left text-xs uppercase tracking-wide text-muted-foreground">
             <tr>
-              <th className="p-3">Products</th>
-              <th className="p-3">Category</th>
-              <th className="p-3">Key features</th>
-              <th className="p-3">Product attributes</th>
-              <th className="p-3 text-right">Action</th>
+              <th className="px-6 py-3">Products</th>
+              <th className="px-6 py-3">Category</th>
+              <th className="px-6 py-3">Key features</th>
+              <th className="px-6 py-3">Product attributes</th>
+              <th className="px-6 py-3 text-center">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -76,21 +76,26 @@ export default async function AllProducts16({
                 ? p.specifications[0]
                 : undefined;
               return (
-                <tr key={p._id} className="border-t">
-                  <td className="p-3">
-                    <div className="flex items-center gap-3">
+                <tr
+                  key={p._id}
+                  className="border-t transition-colors hover:bg-muted/40"
+                >
+                  <td className="px-6 py-4 align-middle">
+                    <div className="flex items-center gap-4">
                       {p.image?.asset?._id && (
-                        <Image
-                          src={urlFor(p.image)
-                            .width(96)
-                            .height(64)
-                            .fit("crop")
-                            .url()}
-                          alt={p.image.alt || p.title || ""}
-                          width={96}
-                          height={64}
-                          className="h-16 w-24 rounded object-cover"
-                        />
+                        <Link href={`/products/${p.slug?.current || ""}`}>
+                          <Image
+                            src={urlFor(p.image)
+                              .width(96)
+                              .height(64)
+                              .fit("crop")
+                              .url()}
+                            alt={p.image.alt || p.title || ""}
+                            width={96}
+                            height={64}
+                            className="h-16 w-24 rounded object-cover"
+                          />
+                        </Link>
                       )}
                       <div className="flex flex-col">
                         <Link
@@ -107,17 +112,25 @@ export default async function AllProducts16({
                       </div>
                     </div>
                   </td>
-                  <td className="p-3 align-top">
-                    <div className="flex flex-wrap gap-2">
+                  <td className="px-6 py-4 align-middle">
+                    <div className="flex flex-wrap items-center gap-2">
                       {Array.isArray(p.categories) &&
                         p.categories.map((c) => (
-                          <Badge key={c?._id} variant="secondary">
-                            {c?.title}
-                          </Badge>
+                          <Link
+                            key={c?._id}
+                            href={`/products?category=${c?.slug?.current || ""}`}
+                          >
+                            <Badge
+                              variant="secondary"
+                              className="transition-colors hover:bg-secondary/80"
+                            >
+                              {c?.title}
+                            </Badge>
+                          </Link>
                         ))}
                     </div>
                   </td>
-                  <td className="p-3 align-top">
+                  <td className="px-6 py-4 align-middle">
                     <ul className="list-disc pl-5">
                       {Array.isArray(p.keyFeatures) &&
                         p.keyFeatures
@@ -125,19 +138,17 @@ export default async function AllProducts16({
                           .map((f, idx) => <li key={idx}>{f}</li>)}
                     </ul>
                   </td>
-                  <td className="p-3 align-top">
-                    <div className="flex flex-wrap gap-2">
+                  <td className="px-6 py-4 align-middle">
+                    <div className="flex flex-wrap items-center gap-2">
                       {spec?.productAttributes && (
-                        <Badge variant="outline">
-                          {spec.productAttributes}
-                        </Badge>
+                        <Badge variant="outline">{spec.productAttributes}</Badge>
                       )}
                       {spec?.purity && (
                         <Badge variant="outline">Purity: {spec.purity}</Badge>
                       )}
                     </div>
                   </td>
-                  <td className="p-3 text-right align-top">
+                  <td className="px-6 py-4 text-center align-middle">
                     {spec?.sku && (
                       <AddToInquiryButton
                         item={{
@@ -147,6 +158,7 @@ export default async function AllProducts16({
                           slug: p.slug?.current || null,
                           imageUrl: p.image?.asset?.url || null,
                         }}
+                        className="px-6"
                       />
                     )}
                   </td>
