@@ -49,7 +49,7 @@ export default async function AllPosts14({
       {posts && posts?.length > 0 && (
         <div className="grid grid-cols-1 gap-10 md:gap-6 lg:grid-cols-3">
           {posts.map((post) => (
-            <div key={post.title} className="flex flex-col items-start gap-4">
+            <div key={post._id} className="flex flex-col items-start gap-4">
               {post.image && post.image.asset?._id && (
                 <Image
                   src={urlFor(post.image).url()}

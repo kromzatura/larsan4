@@ -78,7 +78,7 @@ export default function Blog14({ padding, posts, title, gridColumns }: Blog14) {
             )}
           >
             {posts.slice(1).map((post) => (
-              <div key={post.title} className="flex flex-col items-start gap-4">
+              <div key={post._id} className="flex flex-col items-start gap-4">
                 {post.image && post.image.asset?._id && (
                   <Image
                     src={urlFor(post.image).url()}

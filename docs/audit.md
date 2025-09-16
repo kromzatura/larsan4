@@ -23,7 +23,7 @@ These pages rely on embedded spec fields; will need minor adjustments after refa
 Phase 4 (Inquiry System Foundation): DONE (and enhanced)
 
 Inquiry helpers, context, badge, add-to-inquiry button, full flow to contact form with email inclusion.
-Now aligned with original spec data shape: items include SKU, name, productId (_id), slug, and imageUrl and propagate end-to-end (UI, query param, server action, and email).
+Now aligned with original spec data shape: items include SKU, name, productId (\_id), slug, and imageUrl and propagate end-to-end (UI, query param, server action, and email).
 Phase 5 (Reusable “All Products” Block): NOT STARTED
 
 No all-products-16 schema or component.

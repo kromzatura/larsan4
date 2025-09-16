@@ -4,6 +4,7 @@ import { bodyQuery } from "./shared/body";
 import { metaQuery } from "./shared/meta";
 
 export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]{
+  _id,
     title,
     slug,
     image{
