@@ -65,6 +65,8 @@ import Timeline3 from "@/components/blocks/timelines/timeline3";
 import Timeline4 from "@/components/blocks/timelines/timeline4";
 import Timeline5 from "@/components/blocks/timelines/timeline5";
 import Timeline6 from "@/components/blocks/timelines/timeline6";
+import AllProducts16 from "@/components/blocks/products/all-products-16";
+import ProductCategories16 from "@/components/blocks/products/product-categories-16";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 
@@ -137,6 +139,8 @@ const componentMap: {
   "timeline-4": Timeline4,
   "timeline-5": Timeline5,
   "timeline-6": Timeline6,
+  "all-products-16": AllProducts16,
+  "product-categories-16": ProductCategories16,
 };
 
 export default function Blocks({

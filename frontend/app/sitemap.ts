@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { groq } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
+import { imageQuery } from "@/sanity/queries/shared/image";
 
 async function getPagesSitemap(): Promise<MetadataRoute.Sitemap[]> {
   const pagesQuery = groq`
@@ -46,10 +47,34 @@ async function getPostsSitemap(): Promise<MetadataRoute.Sitemap[]> {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap[]> {
-  const [pages, posts] = await Promise.all([
+  const [pages, posts, products, categories] = await Promise.all([
     getPagesSitemap(),
     getPostsSitemap(),
+    (async () => {
+      const { data } = await sanityFetch({
+        query: groq`*[_type == 'product' && defined(slug)] {
+          'url': $baseUrl + '/products/' + slug.current,
+          'lastModified': _updatedAt,
+          'changeFrequency': 'weekly',
+          'priority': 0.7
+        }`,
+        params: { baseUrl: process.env.NEXT_PUBLIC_SITE_URL },
+      });
+      return data as MetadataRoute.Sitemap[];
+    })(),
+    (async () => {
+      const { data } = await sanityFetch({
+        query: groq`*[_type == 'productCategory' && defined(slug)] | order(orderRank) {
+          'url': $baseUrl + '/products/category/' + slug.current,
+          'lastModified': _updatedAt,
+          'changeFrequency': 'weekly',
+          'priority': 0.6
+        }`,
+        params: { baseUrl: process.env.NEXT_PUBLIC_SITE_URL },
+      });
+      return data as MetadataRoute.Sitemap[];
+    })(),
   ]);
 
-  return [...pages, ...posts];
+  return [...pages, ...posts, ...products, ...categories];
 }

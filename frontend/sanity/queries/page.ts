@@ -66,6 +66,8 @@ import { timeline3Query } from "./timelines/timeline3";
 import { timeline4Query } from "./timelines/timeline4";
 import { timeline5Query } from "./timelines/timeline5";
 import { timeline6Query } from "./timelines/timeline6";
+import { allProducts16Query } from "./products/all-products-16";
+import { productCategories16Query } from "./products/product-categories-16";
 
 export const PAGE_QUERY = groq`
   *[_type == "page" && slug.current == $slug][0]{
@@ -136,6 +138,8 @@ export const PAGE_QUERY = groq`
       ${timeline4Query},
       ${timeline5Query},
       ${timeline6Query},
+      ${productCategories16Query},
+      ${allProducts16Query},
     },
     ${metaQuery},
   }

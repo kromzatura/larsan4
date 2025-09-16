@@ -106,6 +106,8 @@ export default defineType({
         { type: "timeline-4" },
         { type: "timeline-5" },
         { type: "timeline-6" },
+        { type: "all-products-16" },
+        { type: "product-categories-16" },
       ],
       options: {
         insertMenu: {
@@ -212,6 +214,10 @@ export default defineType({
             {
               name: "timeline",
               of: ["timeline-3", "timeline-4", "timeline-5", "timeline-6"],
+            },
+            {
+              name: "products",
+              of: ["product-categories-16", "all-products-16"],
             },
           ],
           views: [

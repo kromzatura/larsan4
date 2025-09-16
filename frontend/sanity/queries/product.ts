@@ -42,7 +42,13 @@ export const PRODUCTS_QUERY = groq`*[_type == "product" && defined(slug)] | orde
   _createdAt,
   title,
   slug,
-  specifications[]->{ _id, sku },
+  specifications[]->{
+    _id,
+    sku,
+    purity,
+    productAttributes,
+  },
+  keyFeatures[],
   excerpt,
   image{ ${imageQuery} },
   categories[]->{ _id, title, slug }
@@ -72,7 +78,13 @@ export const PRODUCTS_BY_CATEGORY_QUERY = groq`*[_type == "product" && reference
   _createdAt,
   title,
   slug,
-  specifications[]->{ _id, sku },
+  specifications[]->{
+    _id,
+    sku,
+    purity,
+    productAttributes,
+  },
+  keyFeatures[],
   excerpt,
   image{ ${imageQuery} },
   categories[]->{ _id, title, slug }
