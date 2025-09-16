@@ -19,6 +19,9 @@ import {
   PRODUCTS_COUNT_QUERY,
   PRODUCT_CATEGORIES_QUERY,
   PRODUCTS_BY_CATEGORY_QUERY,
+  PRODUCTS_BY_CATEGORY_QUERY_NEWEST,
+  PRODUCTS_BY_CATEGORY_QUERY_AZ,
+  PRODUCTS_BY_CATEGORY_QUERY_ZA,
   PRODUCTS_COUNT_BY_CATEGORY_QUERY,
   PRODUCT_CATEGORY_BY_SLUG_QUERY,
 } from "@/sanity/queries/product";
@@ -154,20 +157,13 @@ export const fetchSanityProductsByCategory = async ({
 }): Promise<PRODUCTS_LIST_QUERYResult> => {
   const offset = page && limit ? (page - 1) * limit : 0;
   const end = offset + limit;
-  const order =
+  const query =
     sort === "az"
-      ? "title asc"
+      ? PRODUCTS_BY_CATEGORY_QUERY_AZ
       : sort === "za"
-      ? "title desc"
-      : "_createdAt desc";
-  const { data } = await sanityFetch({
-    // Inject dynamic order by string
-    query: PRODUCTS_BY_CATEGORY_QUERY.replace(
-      "order(_createdAt desc)",
-      `order(${order})`
-    ),
-    params: { slug, offset, end },
-  });
+      ? PRODUCTS_BY_CATEGORY_QUERY_ZA
+      : PRODUCTS_BY_CATEGORY_QUERY_NEWEST;
+  const { data } = await sanityFetch({ query, params: { slug, offset, end } });
   return data;
 };
 
