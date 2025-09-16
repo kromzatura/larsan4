@@ -118,7 +118,9 @@ export default async function AllProducts16({
                         p.categories.map((c) => (
                           <Link
                             key={c?._id}
-                            href={`/products?category=${c?.slug?.current || ""}`}
+                            href={`/products?category=${
+                              c?.slug?.current || ""
+                            }`}
                           >
                             <Badge
                               variant="secondary"
@@ -141,7 +143,9 @@ export default async function AllProducts16({
                   <td className="px-6 py-4 align-middle">
                     <div className="flex flex-wrap items-center gap-2">
                       {spec?.productAttributes && (
-                        <Badge variant="outline">{spec.productAttributes}</Badge>
+                        <Badge variant="outline">
+                          {spec.productAttributes}
+                        </Badge>
                       )}
                       {spec?.purity && (
                         <Badge variant="outline">Purity: {spec.purity}</Badge>

@@ -150,6 +150,7 @@ export default function Blocks({
   blocks: Block[];
   searchParams?: Promise<{
     page?: string;
+    category?: string;
   }>;
 }) {
   return (
