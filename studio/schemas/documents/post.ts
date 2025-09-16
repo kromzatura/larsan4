@@ -46,6 +46,17 @@ export default defineType({
       title: "Excerpt",
       type: "text",
       group: "content",
+      description: "Short summary shown in lists and metadata (≈ 160 chars)",
+      validation: (Rule) =>
+        Rule.max(160).warning("Keep excerpt concise (≤ 160 characters)"),
+    }),
+    defineField({
+      name: "publishedAt",
+      title: "Published At",
+      type: "datetime",
+      group: "settings",
+      description:
+        "Controls display order and scheduling; falls back to system date if empty",
     }),
     defineField({
       name: "author",
@@ -53,6 +64,14 @@ export default defineType({
       type: "reference",
       group: "settings",
       to: { type: "author" },
+    }),
+    defineField({
+      name: "featured",
+      title: "Featured",
+      type: "boolean",
+      group: "settings",
+      initialValue: false,
+      description: "Mark to feature this post in highlighted layouts",
     }),
     image,
     defineField({

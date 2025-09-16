@@ -50,18 +50,21 @@ export async function GET(
     rawW && rawH && width ? Math.round((rawH / rawW) * width) : rawH;
 
   type FeedPost = {
+    publishedAt?: string;
     _createdAt?: string;
     title?: string | null;
     slug?: { current?: string } | null;
     excerpt?: string | null;
     body?: any[] | null;
+    author?: { name?: string | null } | null;
     categories?: Array<{ title?: string | null }> | null;
   };
   const items = ((posts as FeedPost[]) || []).map((p) => {
     const url = `${SITE_URL}/blog/${p.slug?.current ?? ""}`;
     const title = escape(p.title ?? "Untitled");
     const description = escape(p.excerpt ?? "");
-    const pubDate = p._createdAt ? new Date(p._createdAt).toUTCString() : "";
+  const rawDate = p.publishedAt || p._createdAt;
+  const pubDate = rawDate ? new Date(rawDate).toUTCString() : "";
     const categories = Array.isArray(p.categories)
       ? p.categories
           .map((c: any) => c?.title)
@@ -69,7 +72,8 @@ export async function GET(
           .map((t: string) => `<category>${escape(t)}</category>`)
           .join("")
       : "";
-    const html = ptBlocksToHtml((p as any).body);
+  const html = ptBlocksToHtml((p as any).body);
+  const creator = p.author?.name ? `<dc:creator>${escape(p.author.name)}</dc:creator>` : "";
 
     return `
       <item>
@@ -77,6 +81,7 @@ export async function GET(
         <link>${url}</link>
         <guid isPermaLink="true">${url}</guid>
         <pubDate>${pubDate}</pubDate>
+        ${creator}
         <description><![CDATA[${p.excerpt ?? ""}]]></description>
         <content:encoded><![CDATA[${
           html || p.excerpt || ""
@@ -86,7 +91,7 @@ export async function GET(
   });
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
       <title>${escape(siteName)} — ${escape(
     cat.title ?? "Blog Category"

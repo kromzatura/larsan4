@@ -19,13 +19,14 @@ export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]{
         ${imageQuery}
       }
     },
+    publishedAt,
     _createdAt,
     _updatedAt,
     ${metaQuery},
     "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180 ),
 }`;
 
-export const POSTS_QUERY = groq`*[_type == "post" && defined(slug)] | order(_createdAt desc)[$offset...$end]{
+export const POSTS_QUERY = groq`*[_type == "post" && defined(slug)] | order(coalesce(publishedAt, _createdAt) desc)[$offset...$end]{
     _id,
     _createdAt,
     title,

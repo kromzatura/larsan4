@@ -1,3 +1,11 @@
+Status Update — 2025-09-16
+
+- Done (P0): Pagination guards on blog and category; normalized sort SEO (noindex + canonical); counts restricted to `defined(slug)`; listings/counts/feeds use `perspective: "published"` with `stega: false`; typecheck clean.
+- Outstanding:
+	- P1: `excerpt` length rule; `publishedAt` and optional `featured`; optional category `noindex`; extend PT→HTML (lists/code/blockquote/embeds, image alt); add authors and image enclosures in feeds.
+	- P2: JSON‑LD Article and Breadcrumb; improve a11y (aria-current on active sort, clearer labels).
+	- P3: Subscribe (JSON) link and small RSS icon; empty-state for no posts; extract shared chip styles; verify `<Image>` sizes for LCP; re‑confirm sitemap excludes paginated URLs and drafts.
+
 Architecture
 
 Pros:

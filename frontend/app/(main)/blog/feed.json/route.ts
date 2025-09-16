@@ -31,8 +31,10 @@ export async function GET() {
         id: url,
         url,
         title: p.title || "Untitled",
-        date_published: p._createdAt || undefined,
+        date_published: (p as any).publishedAt || p._createdAt || undefined,
         content_html,
+        authors: p.author?.name ? [{ name: p.author.name }] : undefined,
+        image: p.image?.asset?.url || undefined,
         tags: Array.isArray(p.categories)
           ? p.categories.map((c: any) => c?.title).filter(Boolean)
           : undefined,

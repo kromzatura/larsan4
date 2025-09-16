@@ -65,6 +65,14 @@ const category = defineType({
           validation: (Rule) => Rule.max(160).warning(),
         }),
         defineField({
+          name: "noindex",
+          title: "No Index",
+          type: "boolean",
+          initialValue: false,
+          description:
+            "If enabled, search engines are asked not to index this category",
+        }),
+        defineField({
           name: "image",
           title: "OG Image",
           type: "image",
