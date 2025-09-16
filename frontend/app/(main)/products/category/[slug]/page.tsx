@@ -44,6 +44,9 @@ export async function generateMetadata(props: {
             index: false,
             follow: false,
           },
+          alternates: {
+            canonical: `/products/category/${params.slug}`,
+          },
         }
       : {}),
   };

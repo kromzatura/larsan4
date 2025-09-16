@@ -14,11 +14,18 @@ export async function generateMetadata({
   if (!page) return {};
   const sp = searchParams ? await searchParams : undefined;
   const pageNum = sp?.page ? Number(sp.page) : 1;
+  const category = sp?.category || "";
   const base = generatePageMetadata({ page, slug: "products", type: "page" });
   if (pageNum && pageNum > 1) {
+    const isFilteredCategory = Boolean(category);
     return {
       ...base,
       robots: "noindex",
+      alternates: {
+        canonical: isFilteredCategory
+          ? `/products/category/${category}`
+          : "/products",
+      },
     } as any;
   }
   return base as any;
