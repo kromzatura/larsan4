@@ -21,7 +21,7 @@ export default async function ProductCategories16({
   return (
     <SectionContainer padding={padding}>
       <div className="rounded-lg border p-4">
-        <div className="flex items-center justify-center gap-3 text-xs uppercase tracking-wide text-muted-foreground">
+        <div className="flex items-center gap-3 text-xs uppercase tracking-wide text-muted-foreground">
           <span>Filter</span>
           <span>Category:</span>
           <Link href={`/products`}>
@@ -33,7 +33,7 @@ export default async function ProductCategories16({
             </Badge>
           </Link>
         </div>
-        <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
+        <div className="mt-3 flex flex-wrap items-center gap-2">
           {cats.map((c) => (
             <Link
               key={c._id}

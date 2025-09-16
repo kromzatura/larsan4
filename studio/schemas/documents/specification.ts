@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { orderRankField } from "@sanity/orderable-document-list";
 import { FileText, Settings } from "lucide-react";
 
 export default defineType({
@@ -40,6 +41,7 @@ export default defineType({
     defineField({ name: "allergenInfo", title: "Allergen Info", type: "string", group: "content" }),
     defineField({ name: "productAttributes", title: "Product Attributes", type: "string", group: "content" }),
     defineField({ name: "certification", title: "Certification", type: "string", group: "content" }),
+    orderRankField({ type: "specification" }),
   ],
   preview: {
     select: { title: "name", sku: "sku" },
