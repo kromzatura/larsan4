@@ -67,11 +67,21 @@ export default async function AllProducts16({
             <table className="min-w-full text-sm">
               <thead className="bg-muted/50 text-left text-xs uppercase tracking-wide text-muted-foreground">
                 <tr>
-                  <th className="px-6 py-3">Products</th>
-                  <th className="px-6 py-3">Category</th>
-                  <th className="px-6 py-3">Key features</th>
-                  <th className="px-6 py-3">Product attributes</th>
-                  <th className="px-6 py-3 text-center">Action</th>
+                  <th scope="col" className="px-6 py-3">
+                    Products
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Category
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Key features
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Product attributes
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-center">
+                    Action
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -79,15 +89,19 @@ export default async function AllProducts16({
                   const spec = Array.isArray(p.specifications)
                     ? p.specifications[0]
                     : undefined;
+                  const productUrl = `/products/${p.slug?.current || ""}`;
                   return (
                     <tr
                       key={p._id}
-                      className="border-t transition-colors hover:bg-muted/40"
+                      className="group relative border-t transition-colors hover:bg-muted/40"
                     >
                       <td className="px-6 py-4 align-middle">
                         <div className="flex items-center gap-4">
                           {p.image?.asset?._id && (
-                            <Link href={`/products/${p.slug?.current || ""}`}>
+                            <Link
+                              href={productUrl}
+                              className="relative z-10 shrink-0"
+                            >
                               <Image
                                 src={urlFor(p.image)
                                   .width(96)
@@ -103,9 +117,10 @@ export default async function AllProducts16({
                           )}
                           <div className="flex flex-col">
                             <Link
-                              href={`/products/${p.slug?.current || ""}`}
+                              href={productUrl}
                               className="font-semibold hover:underline"
                             >
+                              <span className="absolute inset-0 z-0" />
                               {p.title}
                             </Link>
                             {spec?.sku && (
@@ -117,7 +132,7 @@ export default async function AllProducts16({
                         </div>
                       </td>
                       <td className="px-6 py-4 align-middle">
-                        <div className="flex flex-wrap items-center gap-2">
+                        <div className="relative z-10 flex flex-wrap items-center gap-2">
                           {Array.isArray(p.categories) &&
                             p.categories.map((c) => (
                               <Link
@@ -145,7 +160,7 @@ export default async function AllProducts16({
                         </ul>
                       </td>
                       <td className="px-6 py-4 align-middle">
-                        <div className="flex flex-wrap items-center gap-2">
+                        <div className="relative z-10 flex flex-wrap items-center gap-2">
                           {spec?.productAttributes && (
                             <Badge variant="outline">
                               {spec.productAttributes}
@@ -158,7 +173,7 @@ export default async function AllProducts16({
                           )}
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-center align-middle">
+                      <td className="relative z-10 px-6 py-4 text-center align-middle">
                         {spec?.sku && (
                           <AddToInquiryButton
                             item={{
@@ -168,7 +183,7 @@ export default async function AllProducts16({
                               slug: p.slug?.current || null,
                               imageUrl: p.image?.asset?.url || null,
                             }}
-                            className="px-6"
+                            className="w-full max-w-44 px-6"
                           />
                         )}
                       </td>
