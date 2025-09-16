@@ -75,19 +75,25 @@ export default async function BlogIndex(props: {
       <div className="mt-5 flex flex-wrap gap-2">
         <a
           href={`/blog`}
-          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${sort === "newest" ? "bg-muted" : "hover:bg-muted"}`}
+          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${
+            sort === "newest" ? "bg-muted" : "hover:bg-muted"
+          }`}
         >
           Newest
         </a>
         <a
           href={`/blog?sort=az`}
-          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${sort === "az" ? "bg-muted" : "hover:bg-muted"}`}
+          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${
+            sort === "az" ? "bg-muted" : "hover:bg-muted"
+          }`}
         >
           A–Z
         </a>
         <a
           href={`/blog?sort=za`}
-          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${sort === "za" ? "bg-muted" : "hover:bg-muted"}`}
+          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${
+            sort === "za" ? "bg-muted" : "hover:bg-muted"
+          }`}
         >
           Z–A
         </a>

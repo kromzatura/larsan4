@@ -117,7 +117,11 @@ export const fetchSanityPosts = async ({
   const offset = page && limit ? (page - 1) * limit : 0;
   const end = offset + limit;
   const query =
-    sort === "az" ? POSTS_QUERY_AZ : sort === "za" ? POSTS_QUERY_ZA : POSTS_QUERY;
+    sort === "az"
+      ? POSTS_QUERY_AZ
+      : sort === "za"
+      ? POSTS_QUERY_ZA
+      : POSTS_QUERY;
   const { data } = await sanityFetch({
     query,
     params: { offset, end },
