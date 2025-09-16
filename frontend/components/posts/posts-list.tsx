@@ -52,7 +52,10 @@ export default function PostsList({
   return (
     <div className={cn("w-full", className)}>
       {items.map((post) => (
-        <div key={post._id} className="container grid grid-cols-1 gap-6 py-8 lg:grid-cols-4">
+        <div
+          key={post._id}
+          className="container grid grid-cols-1 gap-6 py-8 lg:grid-cols-4"
+        >
           <div className="hidden items-center gap-3 self-start lg:flex">
             <Avatar className="size-12">
               <AvatarImage src={post.author?.imageUrl || ""} />
@@ -61,16 +64,22 @@ export default function PostsList({
               </AvatarFallback>
             </Avatar>
             <div className="flex flex-col gap-1">
-              {post.author?.name && <span className="font-semibold">{post.author.name}</span>}
+              {post.author?.name && (
+                <span className="font-semibold">{post.author.name}</span>
+              )}
               {post.author?.title && (
-                <span className="text-sm text-muted-foreground">{post.author.title}</span>
+                <span className="text-sm text-muted-foreground">
+                  {post.author.title}
+                </span>
               )}
             </div>
           </div>
           <div className="col-span-2 max-w-xl">
             <span className="mb-2 flex items-center gap-2 text-sm font-medium text-muted-foreground">
               {post.createdAt && <PostDate date={post.createdAt} />}
-              {post.author?.name && <span className="inline lg:hidden"> - {post.author.name}</span>}
+              {post.author?.name && (
+                <span className="inline lg:hidden"> - {post.author.name}</span>
+              )}
             </span>
             <h3 className="text-2xl font-bold hover:underline lg:text-3xl">
               {post.title && (
