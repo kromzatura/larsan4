@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import PostsList, { PostsListItem } from "@/components/posts/posts-list";
 import {
   fetchSanityPageBySlug,
@@ -12,10 +13,13 @@ const POSTS_PER_PAGE = 6;
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams?: Promise<{ page?: string }>;
+  searchParams?: Promise<{ page?: string; sort?: string }>;
 }) {
   const sp = searchParams ? await searchParams : undefined;
   const pageNum = Math.max(1, Number(sp?.page || 1));
+  const sortParam = (sp as any)?.sort;
+  const sort: "newest" | "az" | "za" =
+    sortParam === "az" || sortParam === "za" ? sortParam : "newest";
   const pageDoc = await fetchSanityPageBySlug({ slug: "blog" });
   const base = generatePageMetadata({
     page: pageDoc as any,
@@ -33,7 +37,7 @@ export async function generateMetadata({
       },
     },
   } as any;
-  if (pageNum > 1) {
+  if (pageNum > 1 || sort !== "newest") {
     return {
       ...withRss,
       robots: "noindex",
@@ -57,6 +61,7 @@ export default async function BlogIndex(props: {
     fetchSanityPostsCount(),
   ]);
   const totalPages = Math.max(1, Math.ceil((totalCount || 0) / POSTS_PER_PAGE));
+  if (page > totalPages) notFound();
 
   const items: PostsListItem[] = (posts || []).map((p) => ({
     _id: p._id || "",

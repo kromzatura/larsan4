@@ -20,11 +20,14 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
-  searchParams?: Promise<{ page?: string }>;
+  searchParams?: Promise<{ page?: string; sort?: string }>;
 }) {
   const params = await props.params;
   const sp = props.searchParams ? await props.searchParams : undefined;
   const pageNum = Math.max(1, Number(sp?.page || 1));
+  const sortParam = (sp as any)?.sort;
+  const sort: "newest" | "az" | "za" =
+    sortParam === "az" || sortParam === "za" ? sortParam : "newest";
   const cat = await fetchSanityBlogCategoryBySlug({ slug: params.slug });
   if (!cat) notFound();
   const base = generatePageMetadata({
@@ -43,7 +46,7 @@ export async function generateMetadata(props: {
       },
     },
   } as any;
-  if (pageNum > 1) {
+  if (pageNum > 1 || sort !== "newest") {
     return {
       ...withRss,
       robots: "noindex",
@@ -76,6 +79,7 @@ export default async function BlogCategoryPage(props: {
   ]);
   if (!cat) notFound();
   const totalPages = Math.max(1, Math.ceil((totalCount || 0) / POSTS_PER_PAGE));
+  if (page > totalPages) notFound();
 
   const items: PostsListItem[] = (posts || []).map((p) => ({
     _id: p._id || "",
