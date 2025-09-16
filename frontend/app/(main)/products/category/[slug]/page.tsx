@@ -145,6 +145,12 @@ export default async function CategoryPage(props: {
                   <h2 className="text-lg font-semibold leading-snug">
                     {p.title}
                   </h2>
+                  {Array.isArray(p.specifications) &&
+                    p.specifications[0]?.sku && (
+                      <div className="mt-1 text-xs text-muted-foreground">
+                        SKU: {p.specifications[0].sku}
+                      </div>
+                    )}
                   {p.excerpt && (
                     <p className="mt-2 line-clamp-3 text-sm text-muted-foreground">
                       {p.excerpt}

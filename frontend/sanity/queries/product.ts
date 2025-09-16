@@ -71,6 +71,7 @@ export const PRODUCTS_BY_CATEGORY_QUERY = groq`*[_type == "product" && reference
   _createdAt,
   title,
   slug,
+  specifications[]->{ _id, sku },
   excerpt,
   image{ ${imageQuery} },
   categories[]->{ _id, title, slug }
