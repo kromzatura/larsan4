@@ -32,14 +32,24 @@ export async function generateMetadata(props: {
     slug: `blog/category/${params.slug}`,
     type: "page",
   });
+  const withRss = {
+    ...base,
+    alternates: {
+      ...(base as any)?.alternates,
+      types: {
+        ...(base as any)?.alternates?.types,
+        "application/rss+xml": `/blog/category/${params.slug}/rss.xml`,
+      },
+    },
+  } as any;
   if (pageNum > 1) {
     return {
-      ...base,
+      ...withRss,
       robots: "noindex",
       alternates: { canonical: `/blog/category/${params.slug}` },
     } as any;
   }
-  return base as any;
+  return withRss as any;
 }
 
 export default async function BlogCategoryPage(props: {
@@ -98,6 +108,14 @@ export default async function BlogCategoryPage(props: {
         </p>
       )}
       <div className="mt-5 flex flex-wrap gap-2">
+        <Link
+          href={`${baseUrl}/rss.xml`}
+          prefetch
+          aria-label={`Subscribe to ${cat.title ?? "this category"} RSS feed`}
+          className="inline-flex items-center rounded-md border px-3 py-1.5 text-sm text-muted-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background"
+        >
+          Subscribe (RSS)
+        </Link>
         <Link
           href={`${baseUrl}`}
           prefetch

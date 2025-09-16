@@ -22,14 +22,24 @@ export async function generateMetadata({
     slug: "blog",
     type: "page",
   });
+  const withRss = {
+    ...base,
+    alternates: {
+      ...(base as any)?.alternates,
+      types: {
+        ...(base as any)?.alternates?.types,
+        "application/rss+xml": "/blog/rss.xml",
+      },
+    },
+  } as any;
   if (pageNum > 1) {
     return {
-      ...base,
+      ...withRss,
       robots: "noindex",
       alternates: { canonical: "/blog" },
     } as any;
   }
-  return base as any;
+  return withRss as any;
 }
 
 export default async function BlogIndex(props: {
@@ -71,6 +81,14 @@ export default async function BlogIndex(props: {
     <section className="container py-16 xl:py-20">
       <h1 className="text-3xl font-semibold md:text-5xl">Blog</h1>
       <div className="mt-5 flex flex-wrap gap-2">
+        <Link
+          href="/blog/rss.xml"
+          prefetch
+          aria-label="Subscribe to the blog RSS feed"
+          className="inline-flex items-center rounded-md border px-3 py-1.5 text-sm text-muted-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background"
+        >
+          Subscribe (RSS)
+        </Link>
         <Link
           href={`/blog`}
           prefetch
