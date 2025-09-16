@@ -12,9 +12,12 @@ export const BLOG_CATEGORY_BY_SLUG_QUERY = groq`*[_type == "category" && slug.cu
   title,
   slug,
   description,
-  seo{
-    title,
-    metaDescription,
+  // Normalize to shared meta shape used across site
+  meta: {
+    title: coalesce(seo.title, title),
+    description: seo.metaDescription,
+    noindex: false,
+    image: null,
   }
 }`;
 

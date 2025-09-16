@@ -253,15 +253,52 @@ export const fetchSanityPostsCount = async (): Promise<number> => {
 
 export const fetchSanityBlogCategories = async () => {
   const { data } = await sanityFetch({ query: BLOG_CATEGORIES_QUERY });
-  return data as Array<{ _id: string; title: string; slug: { current: string } }>;
+  return data as Array<{
+    _id: string;
+    title: string;
+    slug: { current: string };
+  }>;
 };
 
-export const fetchSanityBlogCategoryBySlug = async ({ slug }: { slug: string }) => {
-  const { data } = await sanityFetch({ query: BLOG_CATEGORY_BY_SLUG_QUERY, params: { slug } });
-  return data as { _id: string; title?: string | null; slug?: { current?: string } | null; description?: string | null } | null;
+export const fetchSanityBlogCategoriesStaticParams = async () => {
+  const { data } = await sanityFetch({
+    query: BLOG_CATEGORIES_QUERY,
+    perspective: "published",
+    stega: false,
+  });
+  return data as Array<{
+    _id: string;
+    title: string;
+    slug: { current: string };
+  }>;
 };
 
-export const fetchSanityPostsByBlogCategory = async ({ slug, page, limit }: { slug: string; page?: number; limit: number }) => {
+export const fetchSanityBlogCategoryBySlug = async ({
+  slug,
+}: {
+  slug: string;
+}) => {
+  const { data } = await sanityFetch({
+    query: BLOG_CATEGORY_BY_SLUG_QUERY,
+    params: { slug },
+  });
+  return data as {
+    _id: string;
+    title?: string | null;
+    slug?: { current?: string } | null;
+    description?: string | null;
+  } | null;
+};
+
+export const fetchSanityPostsByBlogCategory = async ({
+  slug,
+  page,
+  limit,
+}: {
+  slug: string;
+  page?: number;
+  limit: number;
+}) => {
   const offset = page && limit ? (page - 1) * limit : 0;
   const end = offset + limit;
   const { data } = await sanityFetch({
@@ -271,8 +308,15 @@ export const fetchSanityPostsByBlogCategory = async ({ slug, page, limit }: { sl
   return data as POSTS_QUERYResult;
 };
 
-export const fetchSanityPostsCountByBlogCategory = async ({ slug }: { slug: string }) => {
-  const { data } = await sanityFetch({ query: POSTS_COUNT_BY_BLOG_CATEGORY_QUERY, params: { slug } });
+export const fetchSanityPostsCountByBlogCategory = async ({
+  slug,
+}: {
+  slug: string;
+}) => {
+  const { data } = await sanityFetch({
+    query: POSTS_COUNT_BY_BLOG_CATEGORY_QUERY,
+    params: { slug },
+  });
   return data as number;
 };
 
