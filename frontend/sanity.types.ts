@@ -2646,6 +2646,21 @@ export type BLOG_CATEGORIES_QUERYResult = Array<{
   title: string | null;
   slug: Slug | null;
 }>;
+// Variable: BLOG_CATEGORY_BY_SLUG_QUERY
+// Query: *[_type == "category" && slug.current == $slug][0]{  _id,  _type,  title,  slug,  description,  "meta": {    "title": coalesce(seo.title, title),    "description": seo.metaDescription,    "noindex": false,    "image": null  }}
+export type BLOG_CATEGORY_BY_SLUG_QUERYResult = {
+  _id: string;
+  _type: "category";
+  title: string | null;
+  slug: Slug | null;
+  description: string | null;
+  meta: {
+    title: string | null;
+    description: string | null;
+    noindex: false;
+    image: null;
+  };
+} | null;
 // Variable: POSTS_BY_BLOG_CATEGORY_QUERY_NEWEST
 // Query: *[  _type == "post" && references(*[_type == "category" && slug.current == $slug]._id)] | order(_createdAt desc)[$offset...$end]{  _id,  _createdAt,  title,  slug,  excerpt,  author->{    name,    title,    image{ asset->{ _id, url } }  },  categories[]->{ _id, title },}
 export type POSTS_BY_BLOG_CATEGORY_QUERY_NEWESTResult = Array<{
@@ -6957,6 +6972,7 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "\n  *[_type == \"banner\"]{\n    _type,\n    _key,\n    title,\n    description,\n    link{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      \"/\" + @.internalLink->slug.current\n    )\n,\n    }\n  }\n": BANNER_QUERYResult;
     "*[_type == \"category\" && defined(slug)] | order(orderRank){\n  _id,\n  title,\n  slug\n}": BLOG_CATEGORIES_QUERYResult;
+    "*[_type == \"category\" && slug.current == $slug][0]{\n  _id,\n  _type,\n  title,\n  slug,\n  description,\n  \"meta\": {\n    \"title\": coalesce(seo.title, title),\n    \"description\": seo.metaDescription,\n    \"noindex\": false,\n    \"image\": null\n  }\n}": BLOG_CATEGORY_BY_SLUG_QUERYResult;
     "*[\n  _type == \"post\" && references(*[_type == \"category\" && slug.current == $slug]._id)\n] | order(_createdAt desc)[$offset...$end]{\n  _id,\n  _createdAt,\n  title,\n  slug,\n  excerpt,\n  author->{\n    name,\n    title,\n    image{ asset->{ _id, url } }\n  },\n  categories[]->{ _id, title },\n}": POSTS_BY_BLOG_CATEGORY_QUERY_NEWESTResult;
     "count(*[\n  _type == \"post\" && references(*[_type == \"category\" && slug.current == $slug]._id)\n])": POSTS_COUNT_BY_BLOG_CATEGORY_QUERYResult;
     "*[_type == \"changelog\" && defined(slug)] | order(date desc){\n    _id,\n    title,\n    slug,\n    version,\n    date,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    author->{\n      name,\n      title,\n      image {\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    },\n    categories[]->{\n      _id,\n      title,\n      color\n    },\n}": CHANGELOGS_QUERYResult;
