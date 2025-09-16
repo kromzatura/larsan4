@@ -17605,6 +17605,13 @@
               },
               "optional": true
             },
+            "noindex": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "boolean"
+              },
+              "optional": true
+            },
             "image": {
               "type": "objectAttribute",
               "value": {
@@ -19484,6 +19491,13 @@
         },
         "optional": true
       },
+      "publishedAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "author": {
         "type": "objectAttribute",
         "value": {
@@ -19511,6 +19525,13 @@
             }
           },
           "dereferencesTo": "author"
+        },
+        "optional": true
+      },
+      "featured": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
         },
         "optional": true
       },
