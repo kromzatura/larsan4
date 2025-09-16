@@ -137,9 +137,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     changelog,
     team,
     banner,
-  productCategory,
-  product,
-  specification,
+    productCategory,
+    product,
+    specification,
     // shared objects
     blockContent,
     link,

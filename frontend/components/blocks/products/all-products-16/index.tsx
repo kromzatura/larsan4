@@ -3,7 +3,10 @@ import Link from "next/link";
 import SectionContainer from "@/components/ui/section-container";
 import { Badge } from "@/components/ui/badge";
 import { PAGE_QUERYResult } from "@/sanity.types";
-import { fetchSanityProducts, fetchSanityProductsCount } from "@/sanity/lib/fetch";
+import {
+  fetchSanityProducts,
+  fetchSanityProductsCount,
+} from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
 import Pagination from "@/components/pagination";
 import AddToInquiryButton from "@/components/inquiry/add-to-inquiry-button";
@@ -54,14 +57,20 @@ export default async function AllProducts16({
           </thead>
           <tbody>
             {products.map((p) => {
-              const spec = Array.isArray(p.specifications) ? p.specifications[0] : undefined;
+              const spec = Array.isArray(p.specifications)
+                ? p.specifications[0]
+                : undefined;
               return (
                 <tr key={p._id} className="border-t">
                   <td className="p-3">
                     <div className="flex items-center gap-3">
                       {p.image?.asset?._id && (
                         <Image
-                          src={urlFor(p.image).width(96).height(64).fit("crop").url()}
+                          src={urlFor(p.image)
+                            .width(96)
+                            .height(64)
+                            .fit("crop")
+                            .url()}
                           alt={p.image.alt || p.title || ""}
                           width={96}
                           height={64}
@@ -69,11 +78,16 @@ export default async function AllProducts16({
                         />
                       )}
                       <div className="flex flex-col">
-                        <Link href={`/products/${p.slug?.current || ""}`} className="font-semibold hover:underline">
+                        <Link
+                          href={`/products/${p.slug?.current || ""}`}
+                          className="font-semibold hover:underline"
+                        >
                           {p.title}
                         </Link>
                         {spec?.sku && (
-                          <span className="text-xs text-muted-foreground">SKU: {spec.sku}</span>
+                          <span className="text-xs text-muted-foreground">
+                            SKU: {spec.sku}
+                          </span>
                         )}
                       </div>
                     </div>
@@ -90,17 +104,22 @@ export default async function AllProducts16({
                   </td>
                   <td className="p-3 align-top">
                     <ul className="list-disc pl-5">
-                      {Array.isArray(p.keyFeatures) && p.keyFeatures.slice(0, 3).map((f, idx) => (
-                        <li key={idx}>{f}</li>
-                      ))}
+                      {Array.isArray(p.keyFeatures) &&
+                        p.keyFeatures
+                          .slice(0, 3)
+                          .map((f, idx) => <li key={idx}>{f}</li>)}
                     </ul>
                   </td>
                   <td className="p-3 align-top">
                     <div className="flex flex-wrap gap-2">
                       {spec?.productAttributes && (
-                        <Badge variant="outline">{spec.productAttributes}</Badge>
+                        <Badge variant="outline">
+                          {spec.productAttributes}
+                        </Badge>
                       )}
-                      {spec?.purity && <Badge variant="outline">Purity: {spec.purity}</Badge>}
+                      {spec?.purity && (
+                        <Badge variant="outline">Purity: {spec.purity}</Badge>
+                      )}
                     </div>
                   </td>
                   <td className="p-3 text-right align-top">

@@ -9,7 +9,9 @@ type CategoriesBlockProps = Extract<
   { _type: "product-categories-16" }
 >;
 
-export default async function ProductCategories16({ padding }: CategoriesBlockProps) {
+export default async function ProductCategories16({
+  padding,
+}: CategoriesBlockProps) {
   const cats = await fetchSanityProductCategories();
   return (
     <SectionContainer padding={padding}>
@@ -23,7 +25,10 @@ export default async function ProductCategories16({ padding }: CategoriesBlockPr
         </div>
         <div className="mt-3 flex flex-wrap gap-2">
           {cats.map((c) => (
-            <Link key={c._id} href={`/products/category/${c.slug?.current || ""}`}>
+            <Link
+              key={c._id}
+              href={`/products/category/${c.slug?.current || ""}`}
+            >
               <Badge variant="outline">{c.title}</Badge>
             </Link>
           ))}
