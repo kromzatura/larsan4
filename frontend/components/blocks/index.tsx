@@ -158,19 +158,18 @@ export default function Blocks({
       {blocks?.map((block) => {
         const Component = componentMap[block._type];
         if (!Component) {
-          // Fallback for development/debugging of new component types
-          console.warn(
-            `No component implemented for block type: ${block._type}`
-          );
+          console.warn(`No component implemented for block type: ${block._type}`);
           return <div data-type={block._type} key={block._key} />;
         }
-        return (
-          <Component
-            {...(block as any)}
-            key={block._key}
-            searchParams={searchParams}
-          />
-        );
+
+        const needsSearchParams =
+          block._type === "all-products-16" ||
+          block._type === "product-categories-16";
+
+        const props: any = { ...(block as any) };
+        if (needsSearchParams) props.searchParams = searchParams;
+
+        return <Component {...props} key={block._key} />;
       })}
     </>
   );

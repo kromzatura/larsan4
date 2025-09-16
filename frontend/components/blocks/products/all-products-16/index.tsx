@@ -160,7 +160,7 @@ export default async function AllProducts16({
                         </div>
                       </td>
                       <td className="px-6 py-4 align-middle">
-                        <ul className="list-disc pl-5">
+                        <ul className="list-disc pl-5 space-y-1.5 marker:text-muted-foreground">
                           {Array.isArray(p.keyFeatures) &&
                             p.keyFeatures
                               .slice(0, 3)
@@ -191,7 +191,7 @@ export default async function AllProducts16({
                               slug: p.slug?.current || null,
                               imageUrl: p.image?.asset?.url || null,
                             }}
-                            className="w-full max-w-44 px-6"
+                            className="w-full max-w-44 px-6 mx-auto"
                           />
                         )}
                       </td>
