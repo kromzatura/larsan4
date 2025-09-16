@@ -11,8 +11,13 @@ type CategoriesBlockProps = Extract<
 
 export default async function ProductCategories16({
   padding,
-}: CategoriesBlockProps) {
+  searchParams,
+}: CategoriesBlockProps & {
+  searchParams?: Promise<{ category?: string }>;
+}) {
   const cats = await fetchSanityProductCategories();
+  const params = searchParams ? await searchParams : undefined;
+  const active = params?.category;
   return (
     <SectionContainer padding={padding}>
       <div className="rounded-lg border p-3">
@@ -20,16 +25,20 @@ export default async function ProductCategories16({
           <span>Filter</span>
           <span>Category:</span>
           <Link href={`/products`}>
-            <Badge variant="secondary">Any</Badge>
+            <Badge variant={active ? "outline" : "secondary"}>Any</Badge>
           </Link>
         </div>
         <div className="mt-3 flex flex-wrap gap-2">
           {cats.map((c) => (
             <Link
               key={c._id}
-              href={`/products/category/${c.slug?.current || ""}`}
+              href={`/products?category=${c.slug?.current || ""}`}
             >
-              <Badge variant="outline">{c.title}</Badge>
+              <Badge
+                variant={active === c.slug?.current ? "secondary" : "outline"}
+              >
+                {c.title}
+              </Badge>
             </Link>
           ))}
         </div>

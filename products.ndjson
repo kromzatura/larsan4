@@ -1,0 +1,4 @@
+{"_type":"page","_id":"page.products","title":"Products","slug":{"_type":"slug","current":"products"},"blocks":[
+  {"_type":"product-categories-16","_key":"pc16-1","padding":{"_type":"section-padding","top":true,"bottom":false}},
+  {"_type":"all-products-16","_key":"ap16-1","padding":{"_type":"section-padding","top":false,"bottom":true}}
+],"meta":{"title":"Products","description":"Browse our products and filter by category"}}

@@ -6,6 +6,8 @@ import { PAGE_QUERYResult } from "@/sanity.types";
 import {
   fetchSanityProducts,
   fetchSanityProductsCount,
+  fetchSanityProductsByCategory,
+  fetchSanityProductsCountByCategory,
 } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
 import Pagination from "@/components/pagination";
@@ -28,17 +30,30 @@ export default async function AllProducts16({
   const PAGE_SIZE = 12;
   const params = searchParams ? await searchParams : undefined;
   const currentPage = params?.page ? Math.max(1, parseInt(params.page)) : 1;
+  const activeCategory = params?.category || undefined;
 
-  const [products, total] = await Promise.all([
-    fetchSanityProducts({ page: currentPage, limit: PAGE_SIZE }),
-    fetchSanityProductsCount(),
-  ]);
+  const [products, total] = await Promise.all(
+    activeCategory
+      ? [
+          fetchSanityProductsByCategory({
+            slug: activeCategory,
+            page: currentPage,
+            limit: PAGE_SIZE,
+          }),
+          fetchSanityProductsCountByCategory({ slug: activeCategory }),
+        ]
+      : [
+          fetchSanityProducts({ page: currentPage, limit: PAGE_SIZE }),
+          fetchSanityProductsCount(),
+        ]
+  );
 
   const totalPages = Math.max(1, Math.ceil((total || 0) / PAGE_SIZE));
 
   const createPageUrl = (pageNum: number) => {
     const qp = new URLSearchParams();
     if (pageNum > 1) qp.set("page", String(pageNum));
+    if (activeCategory) qp.set("category", activeCategory);
     return `/products${qp.toString() ? `?${qp.toString()}` : ""}`;
   };
 
