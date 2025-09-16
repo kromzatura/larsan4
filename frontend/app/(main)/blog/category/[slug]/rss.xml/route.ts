@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import {
   fetchSanityBlogCategoryBySlug,
   fetchSanityPostsByBlogCategory,
+  fetchSanitySettings,
 } from "@/sanity/lib/fetch";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
@@ -20,12 +21,28 @@ export async function GET(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params;
-  const cat = await fetchSanityBlogCategoryBySlug({ slug });
+  const [cat, settings] = await Promise.all([
+    fetchSanityBlogCategoryBySlug({ slug }),
+    fetchSanitySettings(),
+  ]);
   if (!cat) return new NextResponse("Not Found", { status: 404 });
 
-  const posts = await fetchSanityPostsByBlogCategory({ slug, limit: 50, sort: "newest" });
+  const posts = await fetchSanityPostsByBlogCategory({
+    slug,
+    limit: 50,
+    sort: "newest",
+  });
   const selfUrl = `${SITE_URL}/blog/category/${slug}/rss.xml`;
   const lastBuildDate = new Date().toUTCString();
+  const siteName = (settings as any)?.siteName || "Blog";
+  const logo = (settings as any)?.logo;
+  const logoUrl: string | null = logo?.asset?.url || null;
+  const dim = logo?.asset?.metadata?.dimensions;
+  const rawW = typeof dim?.width === "number" ? dim.width : undefined;
+  const rawH = typeof dim?.height === "number" ? dim.height : undefined;
+  const maxW = 144;
+  const width = rawW ? Math.min(rawW, maxW) : undefined;
+  const height = rawW && rawH && width ? Math.round((rawH / rawW) * width) : rawH;
 
   const items = (posts || []).map((p) => {
     const url = `${SITE_URL}/blog/${p.slug?.current ?? ""}`;
@@ -36,7 +53,7 @@ export async function GET(
       ? p.categories
           .map((c: any) => c?.title)
           .filter(Boolean)
-          .map((t: string) => `<category>${escape(t)}</category>`) 
+          .map((t: string) => `<category>${escape(t)}</category>`)
           .join("")
       : "";
 
@@ -44,21 +61,28 @@ export async function GET(
       <item>
         <title>${title}</title>
         <link>${url}</link>
-        <guid>${url}</guid>
+        <guid isPermaLink="true">${url}</guid>
         <pubDate>${pubDate}</pubDate>
         <description><![CDATA[${p.excerpt ?? ""}]]></description>
+        <content:encoded><![CDATA[${p.excerpt ?? ""}]]></content:encoded>
         ${categories}
       </item>`;
   });
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
-      <title>${escape(cat.title ?? "Blog Category")}</title>
+      <title>${escape(siteName)} — ${escape(cat.title ?? "Blog Category")}</title>
       <link>${SITE_URL}/blog/category/${slug}</link>
       <description>${escape(cat.description ?? "")}</description>
       <atom:link href="${selfUrl}" rel="self" type="application/rss+xml" />
       <lastBuildDate>${lastBuildDate}</lastBuildDate>
+      <language>en-US</language>
+      <generator>Next.js + Sanity</generator>
+      <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+      <ttl>60</ttl>
+      <category>${escape(cat.title ?? "")}</category>
+      ${logoUrl ? `<image><url>${logoUrl}</url><title>${escape(siteName)}</title><link>${SITE_URL}</link>${width ? `<width>${width}</width>` : ""}${height ? `<height>${height}</height>` : ""}</image>` : ""}
       ${items.join("")}
     </channel>
   </rss>`;
