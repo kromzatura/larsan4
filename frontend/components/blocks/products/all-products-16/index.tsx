@@ -12,6 +12,8 @@ import {
 import { urlFor } from "@/sanity/lib/image";
 import Pagination from "@/components/pagination";
 import AddToInquiryButton from "@/components/inquiry/add-to-inquiry-button";
+import ClickableRow from "./clickable-row";
+import { fetchSanityProductCategoryBySlug } from "@/sanity/lib/fetch";
 
 type AllProducts16Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -47,6 +49,11 @@ export default async function AllProducts16({
           fetchSanityProductsCount(),
         ]
   );
+
+  const categoryDoc = activeCategory
+    ? await fetchSanityProductCategoryBySlug({ slug: activeCategory })
+    : null;
+  const isInvalidCategory = Boolean(activeCategory && !categoryDoc);
 
   const totalPages = Math.max(1, Math.ceil((total || 0) / PAGE_SIZE));
 
@@ -91,7 +98,8 @@ export default async function AllProducts16({
                     : undefined;
                   const productUrl = `/products/${p.slug?.current || ""}`;
                   return (
-                    <tr
+                    <ClickableRow
+                      href={productUrl}
                       key={p._id}
                       className="group relative border-t transition-colors hover:bg-muted/40"
                     >
@@ -120,7 +128,6 @@ export default async function AllProducts16({
                               href={productUrl}
                               className="font-semibold hover:underline"
                             >
-                              <span className="absolute inset-0 z-0" />
                               {p.title}
                             </Link>
                             {spec?.sku && (
@@ -140,6 +147,7 @@ export default async function AllProducts16({
                                 href={`/products?category=${
                                   c?.slug?.current || ""
                                 }`}
+                                className="rounded outline-none focus-visible:ring-2 focus-visible:ring-ring"
                               >
                                 <Badge
                                   variant="secondary"
@@ -187,7 +195,7 @@ export default async function AllProducts16({
                           />
                         )}
                       </td>
-                    </tr>
+                    </ClickableRow>
                   );
                 })}
               </tbody>
@@ -207,7 +215,11 @@ export default async function AllProducts16({
         <div className="rounded-lg border p-8 text-center text-muted-foreground">
           {activeCategory ? (
             <>
-              <p>No products found in this category.</p>
+              <p>
+                {isInvalidCategory
+                  ? "Category not found."
+                  : "No products found in this category."}
+              </p>
               <p className="mt-2">
                 <Link className="underline" href="/products">
                   Clear filter
