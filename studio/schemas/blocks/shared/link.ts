@@ -37,6 +37,7 @@ export default defineType({
         { type: "post" },
         { type: "product" },
         { type: "productCategory" },
+        { type: "contact" },
       ],
       hidden: ({ parent }) => parent?.isExternal,
     }),
@@ -93,6 +94,8 @@ export default defineType({
           ? "Product"
           : ilType === "productCategory"
           ? "Product Category"
+          : ilType === "contact"
+          ? "Contact"
           : ilType === "page"
           ? "Page"
           : "Internal";
@@ -104,6 +107,8 @@ export default defineType({
         ? `/products/${ilSlug || ""}`
         : ilType === "productCategory"
         ? `/products/category/${ilSlug || ""}`
+        : ilType === "contact"
+        ? `/contact`
         : ilSlug === "index"
         ? "/"
         : `/${ilSlug || ""}`;
