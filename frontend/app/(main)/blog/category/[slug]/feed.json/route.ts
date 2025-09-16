@@ -19,6 +19,8 @@ export async function GET(
     sanityFetch({
       query: FEED_POSTS_BY_CATEGORY_QUERY_NEWEST,
       params: { slug, limit: 50 },
+      perspective: "published",
+      stega: false,
     }),
     fetchSanitySettings(),
   ]);

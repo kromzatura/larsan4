@@ -125,6 +125,8 @@ export const fetchSanityPosts = async ({
   const { data } = await sanityFetch({
     query,
     params: { offset, end },
+    perspective: "published",
+    stega: false,
   });
 
   return data;
@@ -240,6 +242,8 @@ export const fetchSanityProductCategoryBySlug = async ({
 export const fetchSanityProductsCount = async (): Promise<number> => {
   const { data } = await sanityFetch({
     query: PRODUCTS_COUNT_QUERY,
+    perspective: "published",
+    stega: false,
   });
   return data;
 };
@@ -252,6 +256,8 @@ export const fetchSanityProductsCountByCategory = async ({
   const { data } = await sanityFetch({
     query: PRODUCTS_COUNT_BY_CATEGORY_QUERY,
     params: { slug },
+    perspective: "published",
+    stega: false,
   });
   return data;
 };
@@ -259,6 +265,8 @@ export const fetchSanityProductsCountByCategory = async ({
 export const fetchSanityPostsCount = async (): Promise<number> => {
   const { data } = await sanityFetch({
     query: POSTS_COUNT_QUERY,
+    perspective: "published",
+    stega: false,
   });
   return data;
 };
@@ -324,6 +332,8 @@ export const fetchSanityPostsByBlogCategory = async ({
   const { data } = await sanityFetch({
     query,
     params: { slug, offset, end },
+    perspective: "published",
+    stega: false,
   });
   return data as POSTS_QUERYResult;
 };
@@ -336,6 +346,8 @@ export const fetchSanityPostsCountByBlogCategory = async ({
   const { data } = await sanityFetch({
     query: POSTS_COUNT_BY_BLOG_CATEGORY_QUERY,
     params: { slug },
+    perspective: "published",
+    stega: false,
   });
   return data as number;
 };

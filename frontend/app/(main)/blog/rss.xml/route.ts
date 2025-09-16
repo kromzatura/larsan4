@@ -17,7 +17,12 @@ function escape(str: string) {
 
 export async function GET() {
   const [{ data: posts }, settings] = await Promise.all([
-    sanityFetch({ query: FEED_POSTS_QUERY_NEWEST, params: { limit: 50 } }),
+    sanityFetch({
+      query: FEED_POSTS_QUERY_NEWEST,
+      params: { limit: 50 },
+      perspective: "published",
+      stega: false,
+    }),
     fetchSanitySettings(),
   ]);
   const selfUrl = `${SITE_URL}/blog/rss.xml`;

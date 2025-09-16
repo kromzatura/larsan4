@@ -56,7 +56,7 @@ export const PRODUCTS_QUERY = groq`*[_type == "product" && defined(slug)] | orde
 
 export const PRODUCTS_SLUGS_QUERY = groq`*[_type == "product" && defined(slug)]{ slug }`;
 
-export const PRODUCTS_COUNT_QUERY = groq`count(*[_type == "product"])`;
+export const PRODUCTS_COUNT_QUERY = groq`count(*[_type == "product" && defined(slug)])`;
 
 export const PRODUCT_CATEGORIES_QUERY = groq`*[_type == "productCategory" && defined(slug)] | order(orderRank){
   _id,

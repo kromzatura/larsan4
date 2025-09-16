@@ -32,6 +32,8 @@ export async function GET(
   const { data: posts } = await sanityFetch({
     query: FEED_POSTS_BY_CATEGORY_QUERY_NEWEST,
     params: { slug, limit: 50 },
+    perspective: "published",
+    stega: false,
   });
   const selfUrl = `${SITE_URL}/blog/category/${slug}/rss.xml`;
   const lastBuildDate = new Date().toUTCString();

@@ -8,7 +8,12 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export async function GET() {
   const [{ data: posts }, settings] = await Promise.all([
-    sanityFetch({ query: FEED_POSTS_QUERY_NEWEST, params: { limit: 50 } }),
+    sanityFetch({
+      query: FEED_POSTS_QUERY_NEWEST,
+      params: { limit: 50 },
+      perspective: "published",
+      stega: false,
+    }),
     fetchSanitySettings(),
   ]);
   const siteName = (settings as any)?.siteName || "Blog";

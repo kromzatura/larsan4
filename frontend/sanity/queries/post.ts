@@ -96,4 +96,4 @@ export const POSTS_QUERY_ZA = groq`*[_type == "post" && defined(slug)] | order(t
 
 export const POSTS_SLUGS_QUERY = groq`*[_type == "post" && defined(slug)]{slug}`;
 
-export const POSTS_COUNT_QUERY = groq`count(*[_type == "post"])`;
+export const POSTS_COUNT_QUERY = groq`count(*[_type == "post" && defined(slug)])`;
