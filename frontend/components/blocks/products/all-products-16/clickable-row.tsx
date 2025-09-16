@@ -9,13 +9,19 @@ type ClickableRowProps = PropsWithChildren<{
   className?: string;
 }>;
 
-export default function ClickableRow({ href, className, children }: ClickableRowProps) {
+export default function ClickableRow({
+  href,
+  className,
+  children,
+}: ClickableRowProps) {
   const router = useRouter();
 
   function isInteractive(el: EventTarget | null) {
     if (!(el instanceof HTMLElement)) return false;
     return Boolean(
-      el.closest("a, button, [role=button], input, select, textarea, [contenteditable=true]")
+      el.closest(
+        "a, button, [role=button], input, select, textarea, [contenteditable=true]"
+      )
     );
   }
 
