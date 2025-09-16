@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import PostsList, { PostsListItem } from "@/components/posts/posts-list";
 import {
@@ -97,30 +98,33 @@ export default async function BlogCategoryPage(props: {
         </p>
       )}
       <div className="mt-5 flex flex-wrap gap-2">
-        <a
+        <Link
           href={`${baseUrl}`}
-          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${
-            sort === "newest" ? "bg-muted" : "hover:bg-muted"
+          prefetch
+          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background ${
+            sort === "newest" ? "bg-muted text-foreground" : "text-muted-foreground hover:bg-muted"
           }`}
         >
           Newest
-        </a>
-        <a
+        </Link>
+        <Link
           href={`${baseUrl}?sort=az`}
-          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${
-            sort === "az" ? "bg-muted" : "hover:bg-muted"
+          prefetch
+          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background ${
+            sort === "az" ? "bg-muted text-foreground" : "text-muted-foreground hover:bg-muted"
           }`}
         >
           A–Z
-        </a>
-        <a
+        </Link>
+        <Link
           href={`${baseUrl}?sort=za`}
-          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${
-            sort === "za" ? "bg-muted" : "hover:bg-muted"
+          prefetch
+          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background ${
+            sort === "za" ? "bg-muted text-foreground" : "text-muted-foreground hover:bg-muted"
           }`}
         >
           Z–A
-        </a>
+        </Link>
       </div>
       <div className="mt-8">
         <PostsList

@@ -118,10 +118,7 @@ export default function PostsList({
                   ) : (
                     <span
                       key={key}
-                      className={cn(
-                        chipBase,
-                        "text-muted-foreground"
-                      )}
+                      className={cn(chipBase, "text-muted-foreground")}
                     >
                       {category.title}
                     </span>

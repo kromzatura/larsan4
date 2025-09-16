@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import Link from "next/link";
 import PostsList, { PostsListItem } from "@/components/posts/posts-list";
 import {
   fetchSanityPageBySlug,
@@ -14,17 +14,14 @@ export async function generateMetadata({
 }: {
   searchParams?: Promise<{ page?: string }>;
 }) {
-  // Prefer Sanity page doc for blog landing metadata when present
-  const pageDoc = await fetchSanityPageBySlug({ slug: "blog" });
-  const base = pageDoc
-    ? generatePageMetadata({ page: pageDoc as any, slug: "blog", type: "page" })
-    : generatePageMetadata({
-        page: { meta: {} } as any,
-        slug: "blog",
-        type: "page",
-      });
   const sp = searchParams ? await searchParams : undefined;
-  const pageNum = sp?.page ? Number(sp.page) : 1;
+  const pageNum = Math.max(1, Number(sp?.page || 1));
+  const pageDoc = await fetchSanityPageBySlug({ slug: "blog" });
+  const base = generatePageMetadata({
+    page: pageDoc as any,
+    slug: "blog",
+    type: "page",
+  });
   if (pageNum > 1) {
     return {
       ...base,
@@ -74,30 +71,39 @@ export default async function BlogIndex(props: {
     <section className="container py-16 xl:py-20">
       <h1 className="text-3xl font-semibold md:text-5xl">Blog</h1>
       <div className="mt-5 flex flex-wrap gap-2">
-        <a
+        <Link
           href={`/blog`}
-          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${
-            sort === "newest" ? "bg-muted" : "hover:bg-muted"
+          prefetch
+          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background ${
+            sort === "newest"
+              ? "bg-muted text-foreground"
+              : "text-muted-foreground hover:bg-muted"
           }`}
         >
           Newest
-        </a>
-        <a
+        </Link>
+        <Link
           href={`/blog?sort=az`}
-          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${
-            sort === "az" ? "bg-muted" : "hover:bg-muted"
+          prefetch
+          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background ${
+            sort === "az"
+              ? "bg-muted text-foreground"
+              : "text-muted-foreground hover:bg-muted"
           }`}
         >
           A–Z
-        </a>
-        <a
+        </Link>
+        <Link
           href={`/blog?sort=za`}
-          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${
-            sort === "za" ? "bg-muted" : "hover:bg-muted"
+          prefetch
+          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background ${
+            sort === "za"
+              ? "bg-muted text-foreground"
+              : "text-muted-foreground hover:bg-muted"
           }`}
         >
           Z–A
-        </a>
+        </Link>
       </div>
       <div className="mt-8">
         <PostsList
