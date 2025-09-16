@@ -1,7 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
 import SectionContainer from "@/components/ui/section-container";
-import { Badge } from "@/components/ui/badge";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import {
   fetchSanityProducts,
@@ -10,9 +8,7 @@ import {
   fetchSanityProductsCountByCategory,
 } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
-import Pagination from "@/components/pagination";
-import AddToInquiryButton from "@/components/inquiry/add-to-inquiry-button";
-import ClickableRow from "./clickable-row";
+import ProductsTable, { ProductsTableItem } from "@/components/products/products-table";
 import { fetchSanityProductCategoryBySlug } from "@/sanity/lib/fetch";
 
 type AllProducts16Props = Extract<
@@ -57,180 +53,65 @@ export default async function AllProducts16({
 
   const totalPages = Math.max(1, Math.ceil((total || 0) / PAGE_SIZE));
 
-  const createPageUrl = (pageNum: number) => {
-    const qp = new URLSearchParams();
-    if (pageNum > 1) qp.set("page", String(pageNum));
-    if (activeCategory) qp.set("category", activeCategory);
-    return `/products${qp.toString() ? `?${qp.toString()}` : ""}`;
-  };
+  const baseUrl = "/products";
+  const baseSearchParams = new URLSearchParams();
+  if (activeCategory) baseSearchParams.set("category", activeCategory);
 
   const isEmpty = !products || products.length === 0;
 
+  const items: ProductsTableItem[] = (products || []).map((p) => {
+    const spec = Array.isArray(p.specifications) ? p.specifications[0] : undefined;
+    return {
+      _id: p._id || "",
+      slug: p.slug?.current || "",
+      title: p.title || null,
+      sku: spec?.sku || null,
+      imageUrl: p.image?.asset?._id
+        ? urlFor(p.image).width(96).height(64).fit("crop").url()
+        : undefined,
+      features: Array.isArray(p.keyFeatures) ? p.keyFeatures.slice(0, 3) : null,
+      productAttributes: spec?.productAttributes || null,
+      purity: spec?.purity || null,
+      categories: Array.isArray(p.categories)
+        ? p.categories.map((c) => ({
+            _id: c?._id || undefined,
+            title: c?.title || null,
+            slug: c?.slug?.current || null,
+          }))
+        : null,
+      href: `/products/${p.slug?.current || ""}`,
+    };
+  });
+
   return (
     <SectionContainer padding={padding}>
-      {!isEmpty ? (
-        <>
-          <div className="overflow-x-auto rounded-lg border">
-            <table className="min-w-full text-sm">
-              <thead className="bg-muted/50 text-left text-xs uppercase tracking-wide text-muted-foreground">
-                <tr>
-                  <th scope="col" className="px-6 py-3">
-                    Products
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Category
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Key features
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Product attributes
-                  </th>
-                  <th scope="col" className="px-6 py-3 text-center">
-                    Action
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.map((p) => {
-                  const spec = Array.isArray(p.specifications)
-                    ? p.specifications[0]
-                    : undefined;
-                  const productUrl = `/products/${p.slug?.current || ""}`;
-                  return (
-                    <ClickableRow
-                      href={productUrl}
-                      key={p._id}
-                      className="group relative border-t transition-colors hover:bg-muted/40"
-                    >
-                      <td className="px-6 py-4 align-middle">
-                        <div className="flex items-center gap-4">
-                          {p.image?.asset?._id && (
-                            <Link
-                              href={productUrl}
-                              className="relative z-10 shrink-0"
-                            >
-                              <Image
-                                src={urlFor(p.image)
-                                  .width(96)
-                                  .height(64)
-                                  .fit("crop")
-                                  .url()}
-                                alt={p.image.alt || p.title || ""}
-                                width={96}
-                                height={64}
-                                className="h-16 w-24 rounded object-cover"
-                              />
-                            </Link>
-                          )}
-                          <div className="flex flex-col">
-                            <Link
-                              href={productUrl}
-                              className="font-semibold hover:underline"
-                            >
-                              {p.title}
-                            </Link>
-                            {spec?.sku && (
-                              <span className="text-xs text-muted-foreground">
-                                SKU: {spec.sku}
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 align-middle">
-                        <div className="relative z-10 flex flex-wrap items-center gap-2">
-                          {Array.isArray(p.categories) &&
-                            p.categories.map((c) => (
-                              <Link
-                                key={c?._id}
-                                href={`/products?category=${
-                                  c?.slug?.current || ""
-                                }`}
-                                className="rounded outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                              >
-                                <Badge
-                                  variant="secondary"
-                                  className="transition-colors hover:bg-secondary/80"
-                                >
-                                  {c?.title}
-                                </Badge>
-                              </Link>
-                            ))}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 align-middle">
-                        <ul className="list-disc pl-5 space-y-1.5 marker:text-muted-foreground">
-                          {Array.isArray(p.keyFeatures) &&
-                            p.keyFeatures
-                              .slice(0, 3)
-                              .map((f, idx) => <li key={idx}>{f}</li>)}
-                        </ul>
-                      </td>
-                      <td className="px-6 py-4 align-middle">
-                        <div className="relative z-10 flex flex-wrap items-center gap-2">
-                          {spec?.productAttributes && (
-                            <Badge variant="outline">
-                              {spec.productAttributes}
-                            </Badge>
-                          )}
-                          {spec?.purity && (
-                            <Badge variant="outline">
-                              Purity: {spec.purity}
-                            </Badge>
-                          )}
-                        </div>
-                      </td>
-                      <td className="relative z-10 px-6 py-4 text-center align-middle">
-                        {spec?.sku && (
-                          <AddToInquiryButton
-                            item={{
-                              id: spec.sku,
-                              name: p.title || null,
-                              productId: p._id || null,
-                              slug: p.slug?.current || null,
-                              imageUrl: p.image?.asset?.url || null,
-                            }}
-                            className="w-full max-w-44 px-6 mx-auto"
-                          />
-                        )}
-                      </td>
-                    </ClickableRow>
-                  );
-                })}
-              </tbody>
-            </table>
+      <ProductsTable
+        items={items}
+        page={currentPage}
+        pageCount={totalPages}
+        baseUrl={baseUrl}
+        baseSearchParams={baseSearchParams.toString()}
+        emptyState={
+          <div className="rounded-lg border p-8 text-center text-muted-foreground">
+            {activeCategory ? (
+              <>
+                <p>
+                  {isInvalidCategory
+                    ? "Category not found."
+                    : "No products found in this category."}
+                </p>
+                <p className="mt-2">
+                  <Link className="underline" href="/products">
+                    Clear filter
+                  </Link>
+                </p>
+              </>
+            ) : (
+              <p>No products found.</p>
+            )}
           </div>
-
-          {totalPages > 1 && (
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              createPageUrl={createPageUrl}
-              className="mt-6"
-            />
-          )}
-        </>
-      ) : (
-        <div className="rounded-lg border p-8 text-center text-muted-foreground">
-          {activeCategory ? (
-            <>
-              <p>
-                {isInvalidCategory
-                  ? "Category not found."
-                  : "No products found in this category."}
-              </p>
-              <p className="mt-2">
-                <Link className="underline" href="/products">
-                  Clear filter
-                </Link>
-              </p>
-            </>
-          ) : (
-            <p>No products found.</p>
-          )}
-        </div>
-      )}
+        }
+      />
     </SectionContainer>
   );
 }
