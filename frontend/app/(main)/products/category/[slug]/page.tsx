@@ -8,7 +8,9 @@ import {
   fetchSanityProductsCountByCategory,
   fetchSanityProductCategoryBySlug,
 } from "@/sanity/lib/fetch";
-import ProductsTable, { ProductsTableItem } from "@/components/products/products-table";
+import ProductsTable, {
+  ProductsTableItem,
+} from "@/components/products/products-table";
 import { urlFor } from "@/sanity/lib/image";
 
 const PAGE_SIZE = 12;
@@ -124,7 +126,9 @@ export default async function CategoryPage(props: {
       <div className="mt-10">
         <ProductsTable
           items={(products || []).map<ProductsTableItem>((p) => {
-            const spec = Array.isArray(p.specifications) ? p.specifications[0] : undefined;
+            const spec = Array.isArray(p.specifications)
+              ? p.specifications[0]
+              : undefined;
             return {
               _id: p._id || "",
               slug: p.slug?.current || "",
@@ -133,7 +137,9 @@ export default async function CategoryPage(props: {
               imageUrl: p.image?.asset?._id
                 ? urlFor(p.image).width(96).height(64).fit("crop").url()
                 : undefined,
-              features: Array.isArray(p.keyFeatures) ? p.keyFeatures.slice(0, 3) : null,
+              features: Array.isArray(p.keyFeatures)
+                ? p.keyFeatures.slice(0, 3)
+                : null,
               productAttributes: spec?.productAttributes || null,
               purity: spec?.purity || null,
               categories: Array.isArray(p.categories)

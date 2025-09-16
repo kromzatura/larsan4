@@ -100,11 +100,16 @@ export default function ProductsTable({
                       </Link>
                     ) : null}
                     <div className="flex flex-col">
-                      <Link href={item.href} className="font-semibold hover:underline">
+                      <Link
+                        href={item.href}
+                        className="font-semibold hover:underline"
+                      >
                         {item.title}
                       </Link>
                       {item.sku && (
-                        <span className="text-xs text-muted-foreground">SKU: {item.sku}</span>
+                        <span className="text-xs text-muted-foreground">
+                          SKU: {item.sku}
+                        </span>
                       )}
                     </div>
                   </div>
@@ -118,7 +123,10 @@ export default function ProductsTable({
                           href={`/products?category=${c?.slug || ""}`}
                           className="rounded outline-none focus-visible:ring-2 focus-visible:ring-ring"
                         >
-                          <Badge variant="secondary" className="transition-colors hover:bg-secondary/80">
+                          <Badge
+                            variant="secondary"
+                            className="transition-colors hover:bg-secondary/80"
+                          >
                             {c?.title}
                           </Badge>
                         </Link>
@@ -127,9 +135,10 @@ export default function ProductsTable({
                 </td>
                 <td className="px-6 py-4 align-middle">
                   <ul className="list-disc pl-5 space-y-1.5 marker:text-muted-foreground">
-                    {Array.isArray(item.features) && item.features?.slice(0, 3).map((f, idx) => (
-                      <li key={idx}>{f}</li>
-                    ))}
+                    {Array.isArray(item.features) &&
+                      item.features
+                        ?.slice(0, 3)
+                        .map((f, idx) => <li key={idx}>{f}</li>)}
                   </ul>
                 </td>
                 <td className="px-6 py-4 align-middle">
@@ -137,7 +146,9 @@ export default function ProductsTable({
                     {item.productAttributes && (
                       <Badge variant="outline">{item.productAttributes}</Badge>
                     )}
-                    {item.purity && <Badge variant="outline">Purity: {item.purity}</Badge>}
+                    {item.purity && (
+                      <Badge variant="outline">Purity: {item.purity}</Badge>
+                    )}
                   </div>
                 </td>
                 <td className="relative z-10 px-6 py-4 text-center align-middle">

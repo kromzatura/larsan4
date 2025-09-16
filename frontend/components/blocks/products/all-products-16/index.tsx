@@ -8,7 +8,9 @@ import {
   fetchSanityProductsCountByCategory,
 } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
-import ProductsTable, { ProductsTableItem } from "@/components/products/products-table";
+import ProductsTable, {
+  ProductsTableItem,
+} from "@/components/products/products-table";
 import { fetchSanityProductCategoryBySlug } from "@/sanity/lib/fetch";
 
 type AllProducts16Props = Extract<
@@ -60,7 +62,9 @@ export default async function AllProducts16({
   const isEmpty = !products || products.length === 0;
 
   const items: ProductsTableItem[] = (products || []).map((p) => {
-    const spec = Array.isArray(p.specifications) ? p.specifications[0] : undefined;
+    const spec = Array.isArray(p.specifications)
+      ? p.specifications[0]
+      : undefined;
     return {
       _id: p._id || "",
       slug: p.slug?.current || "",
