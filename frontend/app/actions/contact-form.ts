@@ -21,6 +21,22 @@ export async function submitContactForm(
   formData: FormData
 ): Promise<ContactFormState> {
   try {
+    // Basic bot checks: honeypot and minimum time on form
+    const honeypot = formData.get("website");
+    const durationMsRaw = formData.get("durationMs");
+    const durationMs =
+      typeof durationMsRaw === "string" ? parseInt(durationMsRaw, 10) : 0;
+    const MIN_DURATION_MS = 2000;
+    if (
+      (typeof honeypot === "string" && honeypot.trim().length > 0) ||
+      durationMs < MIN_DURATION_MS
+    ) {
+      return {
+        success: false,
+        error: "Captcha verification failed. Please try again.",
+      };
+    }
+
     // Verify reCAPTCHA if configured
     if (process.env.RECAPTCHA_SECRET_KEY) {
       const token = formData.get("g-recaptcha-response");

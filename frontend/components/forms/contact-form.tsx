@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useEffect, useRef, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import Script from "next/script";
 import {
   contactFormSchema,
@@ -31,6 +31,7 @@ export function ContactForm({
   const captchaRef = useRef<HTMLDivElement | null>(null);
   const widgetIdRef = useRef<number | null>(null);
   const resolveTokenRef = useRef<((token: string) => void) | null>(null);
+  const mountTime = useMemo(() => Date.now(), []);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -71,6 +72,10 @@ export function ContactForm({
   async function handleAction(formData: FormData) {
     form.clearErrors();
     startTransition(async () => {
+      // Add timing info
+      const durationMs = Math.max(0, Date.now() - mountTime);
+      formData.set("durationMs", String(durationMs));
+
       if (
         siteKey &&
         typeof window !== "undefined" &&
@@ -134,6 +139,17 @@ export function ContactForm({
           />
         )}
         {children}
+        {/* Honeypot field: visually hidden but present in DOM */}
+        <div aria-hidden="true" className="hidden">
+          <label htmlFor="website">Website</label>
+          <input
+            type="text"
+            id="website"
+            name="website"
+            autoComplete="off"
+            tabIndex={-1}
+          />
+        </div>
         {formState.success && (
           <div className="p-4 border border-green-500 bg-green-50 text-green-700 rounded-md">
             Message transmitted successfully

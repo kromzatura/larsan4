@@ -3387,34 +3387,7 @@
           },
           "optional": true
         },
-        "mode": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "freeform"
-              },
-              {
-                "type": "string",
-                "value": "product"
-              }
-            ]
-          },
-          "optional": true
-        },
         "productFields": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "array",
-            "of": {
-              "type": "string"
-            }
-          },
-          "optional": true
-        },
-        "rows": {
           "type": "objectAttribute",
           "value": {
             "type": "array",
@@ -3431,13 +3404,6 @@
             "of": {
               "type": "object",
               "attributes": {
-                "name": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "string"
-                  },
-                  "optional": true
-                },
                 "product": {
                   "type": "objectAttribute",
                   "value": {
@@ -3473,13 +3439,6 @@
                   "value": {
                     "type": "object",
                     "attributes": {
-                      "name": {
-                        "type": "objectAttribute",
-                        "value": {
-                          "type": "string"
-                        },
-                        "optional": true
-                      },
                       "sku": {
                         "type": "objectAttribute",
                         "value": {
@@ -3514,64 +3473,6 @@
                           "type": "number"
                         },
                         "optional": true
-                      }
-                    }
-                  },
-                  "optional": true
-                },
-                "attributes": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "array",
-                    "of": {
-                      "type": "object",
-                      "attributes": {
-                        "value": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string"
-                          },
-                          "optional": true
-                        },
-                        "status": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "union",
-                            "of": [
-                              {
-                                "type": "string",
-                                "value": "neutral"
-                              },
-                              {
-                                "type": "string",
-                                "value": "positive"
-                              },
-                              {
-                                "type": "string",
-                                "value": "negative"
-                              }
-                            ]
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "item"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
                       }
                     }
                   },
@@ -19656,6 +19557,32 @@
                   }
                 },
                 "dereferencesTo": "productCategory"
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_ref": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "_type": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string",
+                      "value": "reference"
+                    }
+                  },
+                  "_weak": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "boolean"
+                    },
+                    "optional": true
+                  }
+                },
+                "dereferencesTo": "contact"
               }
             ]
           },
