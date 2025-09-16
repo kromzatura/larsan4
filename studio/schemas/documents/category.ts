@@ -64,6 +64,13 @@ const category = defineType({
           type: "text",
           validation: (Rule) => Rule.max(160).warning(),
         }),
+        defineField({
+          name: "image",
+          title: "OG Image",
+          type: "image",
+          options: { hotspot: true },
+          description: "Open Graph image for category pages",
+        }),
       ],
     }),
     orderRankField({ type: "category" }),

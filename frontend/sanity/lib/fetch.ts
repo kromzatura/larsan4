@@ -7,6 +7,8 @@ import { CONTACT_QUERY } from "@/sanity/queries/contact";
 import {
   POST_QUERY,
   POSTS_QUERY,
+  POSTS_QUERY_AZ,
+  POSTS_QUERY_ZA,
   POSTS_SLUGS_QUERY,
   POSTS_COUNT_QUERY,
 } from "@/sanity/queries/post";
@@ -48,6 +50,8 @@ import {
   BLOG_CATEGORIES_QUERY,
   BLOG_CATEGORY_BY_SLUG_QUERY,
   POSTS_BY_BLOG_CATEGORY_QUERY_NEWEST,
+  POSTS_BY_BLOG_CATEGORY_QUERY_AZ,
+  POSTS_BY_BLOG_CATEGORY_QUERY_ZA,
   POSTS_COUNT_BY_BLOG_CATEGORY_QUERY,
 } from "@/sanity/queries/blogCategory";
 
@@ -104,14 +108,18 @@ export const fetchSanityPagesStaticParams =
 export const fetchSanityPosts = async ({
   page,
   limit,
+  sort = "newest",
 }: {
   page?: number;
   limit: number;
+  sort?: "newest" | "az" | "za";
 }): Promise<POSTS_QUERYResult> => {
   const offset = page && limit ? (page - 1) * limit : 0;
   const end = offset + limit;
+  const query =
+    sort === "az" ? POSTS_QUERY_AZ : sort === "za" ? POSTS_QUERY_ZA : POSTS_QUERY;
   const { data } = await sanityFetch({
-    query: POSTS_QUERY,
+    query,
     params: { offset, end },
   });
 
@@ -294,15 +302,23 @@ export const fetchSanityPostsByBlogCategory = async ({
   slug,
   page,
   limit,
+  sort = "newest",
 }: {
   slug: string;
   page?: number;
   limit: number;
+  sort?: "newest" | "az" | "za";
 }) => {
   const offset = page && limit ? (page - 1) * limit : 0;
   const end = offset + limit;
+  const query =
+    sort === "az"
+      ? POSTS_BY_BLOG_CATEGORY_QUERY_AZ
+      : sort === "za"
+      ? POSTS_BY_BLOG_CATEGORY_QUERY_ZA
+      : POSTS_BY_BLOG_CATEGORY_QUERY_NEWEST;
   const { data } = await sanityFetch({
-    query: POSTS_BY_BLOG_CATEGORY_QUERY_NEWEST,
+    query,
     params: { slug, offset, end },
   });
   return data as POSTS_QUERYResult;

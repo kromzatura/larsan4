@@ -2150,6 +2150,18 @@ export type Category = {
   seo?: {
     title?: string;
     metaDescription?: string;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
   };
   orderRank?: string;
 };
@@ -2647,7 +2659,7 @@ export type BLOG_CATEGORIES_QUERYResult = Array<{
   slug: Slug | null;
 }>;
 // Variable: BLOG_CATEGORY_BY_SLUG_QUERY
-// Query: *[_type == "category" && slug.current == $slug][0]{  _id,  _type,  title,  slug,  description,  "meta": {    "title": coalesce(seo.title, title),    "description": seo.metaDescription,    "noindex": false,    "image": null  }}
+// Query: *[_type == "category" && slug.current == $slug][0]{  _id,  _type,  title,  slug,  description,  "meta": {    "title": coalesce(seo.title, title),    "description": seo.metaDescription,    "noindex": false,    "image": seo.image{ asset->{ _id, url, mimeType, metadata{ lqip, dimensions{ width, height } } } }  }}
 export type BLOG_CATEGORY_BY_SLUG_QUERYResult = {
   _id: string;
   _type: "category";
@@ -2658,12 +2670,71 @@ export type BLOG_CATEGORY_BY_SLUG_QUERYResult = {
     title: string | null;
     description: string | null;
     noindex: false;
-    image: null;
+    image: {
+      asset: {
+        _id: string;
+        url: string | null;
+        mimeType: string | null;
+        metadata: {
+          lqip: string | null;
+          dimensions: {
+            width: number | null;
+            height: number | null;
+          } | null;
+        } | null;
+      } | null;
+    } | null;
   };
 } | null;
 // Variable: POSTS_BY_BLOG_CATEGORY_QUERY_NEWEST
 // Query: *[  _type == "post" && references(*[_type == "category" && slug.current == $slug]._id)] | order(_createdAt desc)[$offset...$end]{  _id,  _createdAt,  title,  slug,  excerpt,  author->{    name,    title,    image{ asset->{ _id, url } }  },  categories[]->{ _id, title },}
 export type POSTS_BY_BLOG_CATEGORY_QUERY_NEWESTResult = Array<{
+  _id: string;
+  _createdAt: string;
+  title: string | null;
+  slug: Slug | null;
+  excerpt: string | null;
+  author: {
+    name: string | null;
+    title: string | null;
+    image: {
+      asset: {
+        _id: string;
+        url: string | null;
+      } | null;
+    } | null;
+  } | null;
+  categories: Array<{
+    _id: string;
+    title: string | null;
+  }> | null;
+}>;
+// Variable: POSTS_BY_BLOG_CATEGORY_QUERY_AZ
+// Query: *[  _type == "post" && references(*[_type == "category" && slug.current == $slug]._id)] | order(title asc)[$offset...$end]{  _id,  _createdAt,  title,  slug,  excerpt,  author->{    name,    title,    image{ asset->{ _id, url } }  },  categories[]->{ _id, title },}
+export type POSTS_BY_BLOG_CATEGORY_QUERY_AZResult = Array<{
+  _id: string;
+  _createdAt: string;
+  title: string | null;
+  slug: Slug | null;
+  excerpt: string | null;
+  author: {
+    name: string | null;
+    title: string | null;
+    image: {
+      asset: {
+        _id: string;
+        url: string | null;
+      } | null;
+    } | null;
+  } | null;
+  categories: Array<{
+    _id: string;
+    title: string | null;
+  }> | null;
+}>;
+// Variable: POSTS_BY_BLOG_CATEGORY_QUERY_ZA
+// Query: *[  _type == "post" && references(*[_type == "category" && slug.current == $slug]._id)] | order(title desc)[$offset...$end]{  _id,  _createdAt,  title,  slug,  excerpt,  author->{    name,    title,    image{ asset->{ _id, url } }  },  categories[]->{ _id, title },}
+export type POSTS_BY_BLOG_CATEGORY_QUERY_ZAResult = Array<{
   _id: string;
   _createdAt: string;
   title: string | null;
@@ -6458,6 +6529,116 @@ export type POSTS_QUERYResult = Array<{
     title: string | null;
   }> | null;
 }>;
+// Variable: POSTS_QUERY_AZ
+// Query: *[_type == "post" && defined(slug)] | order(title asc)[$offset...$end]{    _id,    _createdAt,    title,    slug,    excerpt,    author->{      name,      title,      image {          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      }    },    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    categories[]->{      _id,      title,    },}
+export type POSTS_QUERY_AZResult = Array<{
+  _id: string;
+  _createdAt: string;
+  title: string | null;
+  slug: Slug | null;
+  excerpt: string | null;
+  author: {
+    name: string | null;
+    title: string | null;
+    image: {
+      asset: {
+        _id: string;
+        url: string | null;
+        mimeType: string | null;
+        metadata: {
+          lqip: string | null;
+          dimensions: {
+            width: number | null;
+            height: number | null;
+          } | null;
+        } | null;
+      } | null;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | null;
+  } | null;
+  image: {
+    asset: {
+      _id: string;
+      url: string | null;
+      mimeType: string | null;
+      metadata: {
+        lqip: string | null;
+        dimensions: {
+          width: number | null;
+          height: number | null;
+        } | null;
+      } | null;
+    } | null;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  categories: Array<{
+    _id: string;
+    title: string | null;
+  }> | null;
+}>;
+// Variable: POSTS_QUERY_ZA
+// Query: *[_type == "post" && defined(slug)] | order(title desc)[$offset...$end]{    _id,    _createdAt,    title,    slug,    excerpt,    author->{      name,      title,      image {          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      }    },    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    categories[]->{      _id,      title,    },}
+export type POSTS_QUERY_ZAResult = Array<{
+  _id: string;
+  _createdAt: string;
+  title: string | null;
+  slug: Slug | null;
+  excerpt: string | null;
+  author: {
+    name: string | null;
+    title: string | null;
+    image: {
+      asset: {
+        _id: string;
+        url: string | null;
+        mimeType: string | null;
+        metadata: {
+          lqip: string | null;
+          dimensions: {
+            width: number | null;
+            height: number | null;
+          } | null;
+        } | null;
+      } | null;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | null;
+  } | null;
+  image: {
+    asset: {
+      _id: string;
+      url: string | null;
+      mimeType: string | null;
+      metadata: {
+        lqip: string | null;
+        dimensions: {
+          width: number | null;
+          height: number | null;
+        } | null;
+      } | null;
+    } | null;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  categories: Array<{
+    _id: string;
+    title: string | null;
+  }> | null;
+}>;
 // Variable: POSTS_SLUGS_QUERY
 // Query: *[_type == "post" && defined(slug)]{slug}
 export type POSTS_SLUGS_QUERYResult = Array<{
@@ -6972,8 +7153,10 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "\n  *[_type == \"banner\"]{\n    _type,\n    _key,\n    title,\n    description,\n    link{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      \"/\" + @.internalLink->slug.current\n    )\n,\n    }\n  }\n": BANNER_QUERYResult;
     "*[_type == \"category\" && defined(slug)] | order(orderRank){\n  _id,\n  title,\n  slug\n}": BLOG_CATEGORIES_QUERYResult;
-    "*[_type == \"category\" && slug.current == $slug][0]{\n  _id,\n  _type,\n  title,\n  slug,\n  description,\n  \"meta\": {\n    \"title\": coalesce(seo.title, title),\n    \"description\": seo.metaDescription,\n    \"noindex\": false,\n    \"image\": null\n  }\n}": BLOG_CATEGORY_BY_SLUG_QUERYResult;
+    "*[_type == \"category\" && slug.current == $slug][0]{\n  _id,\n  _type,\n  title,\n  slug,\n  description,\n  \"meta\": {\n    \"title\": coalesce(seo.title, title),\n    \"description\": seo.metaDescription,\n    \"noindex\": false,\n    \"image\": seo.image{ asset->{ _id, url, mimeType, metadata{ lqip, dimensions{ width, height } } } }\n  }\n}": BLOG_CATEGORY_BY_SLUG_QUERYResult;
     "*[\n  _type == \"post\" && references(*[_type == \"category\" && slug.current == $slug]._id)\n] | order(_createdAt desc)[$offset...$end]{\n  _id,\n  _createdAt,\n  title,\n  slug,\n  excerpt,\n  author->{\n    name,\n    title,\n    image{ asset->{ _id, url } }\n  },\n  categories[]->{ _id, title },\n}": POSTS_BY_BLOG_CATEGORY_QUERY_NEWESTResult;
+    "*[\n  _type == \"post\" && references(*[_type == \"category\" && slug.current == $slug]._id)\n] | order(title asc)[$offset...$end]{\n  _id,\n  _createdAt,\n  title,\n  slug,\n  excerpt,\n  author->{\n    name,\n    title,\n    image{ asset->{ _id, url } }\n  },\n  categories[]->{ _id, title },\n}": POSTS_BY_BLOG_CATEGORY_QUERY_AZResult;
+    "*[\n  _type == \"post\" && references(*[_type == \"category\" && slug.current == $slug]._id)\n] | order(title desc)[$offset...$end]{\n  _id,\n  _createdAt,\n  title,\n  slug,\n  excerpt,\n  author->{\n    name,\n    title,\n    image{ asset->{ _id, url } }\n  },\n  categories[]->{ _id, title },\n}": POSTS_BY_BLOG_CATEGORY_QUERY_ZAResult;
     "count(*[\n  _type == \"post\" && references(*[_type == \"category\" && slug.current == $slug]._id)\n])": POSTS_COUNT_BY_BLOG_CATEGORY_QUERYResult;
     "*[_type == \"changelog\" && defined(slug)] | order(date desc){\n    _id,\n    title,\n    slug,\n    version,\n    date,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    author->{\n      name,\n      title,\n      image {\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    },\n    categories[]->{\n      _id,\n      title,\n      color\n    },\n}": CHANGELOGS_QUERYResult;
     "*[_type == \"contact\"][0]{\n  tagline,\n  title,\n  description,\n  contactMethods[]{\n    icon,\n    title,\n    description,\n    link {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n}": CONTACT_QUERYResult;
@@ -6982,6 +7165,8 @@ declare module "@sanity/client" {
     "*[_type == \"page\" && defined(slug)]{slug}": PAGES_SLUGS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  _id,\n    title,\n    slug,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    author->{\n      name,\n      image {\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    },\n    _createdAt,\n    _updatedAt,\n    \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n    \"estimatedReadingTime\": round(length(pt::text(body)) / 5 / 180 ),\n}": POST_QUERYResult;
     "*[_type == \"post\" && defined(slug)] | order(_createdAt desc)[$offset...$end]{\n    _id,\n    _createdAt,\n    title,\n    slug,\n    excerpt,\n    author->{\n      name,\n      title,\n      image {\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    categories[]->{\n      _id,\n      title,\n    },\n}": POSTS_QUERYResult;
+    "*[_type == \"post\" && defined(slug)] | order(title asc)[$offset...$end]{\n    _id,\n    _createdAt,\n    title,\n    slug,\n    excerpt,\n    author->{\n      name,\n      title,\n      image {\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    categories[]->{\n      _id,\n      title,\n    },\n}": POSTS_QUERY_AZResult;
+    "*[_type == \"post\" && defined(slug)] | order(title desc)[$offset...$end]{\n    _id,\n    _createdAt,\n    title,\n    slug,\n    excerpt,\n    author->{\n      name,\n      title,\n      image {\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    categories[]->{\n      _id,\n      title,\n    },\n}": POSTS_QUERY_ZAResult;
     "*[_type == \"post\" && defined(slug)]{slug}": POSTS_SLUGS_QUERYResult;
     "count(*[_type == \"post\"])": POSTS_COUNT_QUERYResult;
     "*[_type == \"product\" && slug.current == $slug][0]{\n  _id,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    name,\n    sku,\n    bestFor,\n    pungency,\n    bindingCapacity,\n    fatContent,\n    purity,\n    moisture,\n    hsCode,\n    minOrder,\n    origin,\n    botanicalName,\n    shelfLife,\n    allergenInfo,\n    productAttributes,\n    certification,\n  },\n  keyFeatures[],\n  packagingOptions[]{\n    ...,\n  },\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  body[]{ \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n },\n  excerpt,\n  categories[]->{ _id, title, slug },\n  \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n\n}": PRODUCT_QUERYResult;

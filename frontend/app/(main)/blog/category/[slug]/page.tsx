@@ -48,6 +48,9 @@ export default async function BlogCategoryPage(props: {
   const params = await props.params;
   const sp = props.searchParams ? await props.searchParams : undefined;
   const page = Math.max(1, Number(sp?.page || 1));
+  const sortParam = (sp as any)?.sort;
+  const sort: "newest" | "az" | "za" =
+    sortParam === "az" || sortParam === "za" ? sortParam : "newest";
 
   const [cat, posts, totalCount] = await Promise.all([
     fetchSanityBlogCategoryBySlug({ slug: params.slug }),
@@ -55,6 +58,7 @@ export default async function BlogCategoryPage(props: {
       slug: params.slug,
       page,
       limit: POSTS_PER_PAGE,
+      sort,
     }),
     fetchSanityPostsCountByBlogCategory({ slug: params.slug }),
   ]);
@@ -81,6 +85,7 @@ export default async function BlogCategoryPage(props: {
   }));
 
   const baseUrl = `/blog/category/${params.slug}`;
+  const baseSearchParams = sort && sort !== "newest" ? `sort=${sort}` : "";
 
   return (
     <section className="container py-16 xl:py-20">
@@ -90,12 +95,33 @@ export default async function BlogCategoryPage(props: {
           {cat.description}
         </p>
       )}
+      <div className="mt-5 flex flex-wrap gap-2">
+        <a
+          href={`${baseUrl}`}
+          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${sort === "newest" ? "bg-muted" : "hover:bg-muted"}`}
+        >
+          Newest
+        </a>
+        <a
+          href={`${baseUrl}?sort=az`}
+          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${sort === "az" ? "bg-muted" : "hover:bg-muted"}`}
+        >
+          A–Z
+        </a>
+        <a
+          href={`${baseUrl}?sort=za`}
+          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${sort === "za" ? "bg-muted" : "hover:bg-muted"}`}
+        >
+          Z–A
+        </a>
+      </div>
       <div className="mt-8">
         <PostsList
           items={items}
           page={page}
           pageCount={totalPages}
           baseUrl={baseUrl}
+          baseSearchParams={baseSearchParams}
         />
       </div>
     </section>

@@ -47,6 +47,50 @@ export const POSTS_QUERY = groq`*[_type == "post" && defined(slug)] | order(_cre
     },
 }`;
 
+export const POSTS_QUERY_AZ = groq`*[_type == "post" && defined(slug)] | order(title asc)[$offset...$end]{
+    _id,
+    _createdAt,
+    title,
+    slug,
+    excerpt,
+    author->{
+      name,
+      title,
+      image {
+        ${imageQuery}
+      }
+    },
+    image{
+      ${imageQuery}
+    },
+    categories[]->{
+      _id,
+      title,
+    },
+}`;
+
+export const POSTS_QUERY_ZA = groq`*[_type == "post" && defined(slug)] | order(title desc)[$offset...$end]{
+    _id,
+    _createdAt,
+    title,
+    slug,
+    excerpt,
+    author->{
+      name,
+      title,
+      image {
+        ${imageQuery}
+      }
+    },
+    image{
+      ${imageQuery}
+    },
+    categories[]->{
+      _id,
+      title,
+    },
+}`;
+
 export const POSTS_SLUGS_QUERY = groq`*[_type == "post" && defined(slug)]{slug}`;
 
 export const POSTS_COUNT_QUERY = groq`count(*[_type == "post"])`;
