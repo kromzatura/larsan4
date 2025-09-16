@@ -13,8 +13,8 @@ export function ptBlocksToHtml(blocks: any[] | null | undefined): string {
       marks: {
         link: ({ children, value }: any) => {
           const href = value?.href || "#";
-          const rel = href.startsWith("/") ? "" : " rel=\"noopener noreferrer\"";
-          const target = href.startsWith("/") ? "" : " target=\"_blank\"";
+          const rel = href.startsWith("/") ? "" : ' rel="noopener noreferrer"';
+          const target = href.startsWith("/") ? "" : ' target="_blank"';
           return `<a href="${href}"${rel}${target}>${children}</a>`;
         },
       },
