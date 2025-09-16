@@ -58,7 +58,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       getPostsSitemap(),
       (async (): Promise<SitemapEntry[]> => {
         const { data } = await sanityFetch({
-          query: groq`*[_type == 'product' && defined(slug)] {
+          query: groq`*[_type == 'product' && defined(slug.current) && coalesce(meta.noindex, false) == false] {
           'url': $baseUrl + '/products/' + slug.current,
           'lastModified': _updatedAt,
           'changeFrequency': 'weekly',
@@ -72,7 +72,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       })(),
       (async (): Promise<SitemapEntry[]> => {
         const { data } = await sanityFetch({
-          query: groq`*[_type == 'productCategory' && defined(slug)] | order(orderRank) {
+          query: groq`*[_type == 'productCategory' && defined(slug.current) && coalesce(meta.noindex, false) == false] | order(orderRank) {
           'url': $baseUrl + '/products/category/' + slug.current,
           'lastModified': _updatedAt,
           'changeFrequency': 'weekly',
