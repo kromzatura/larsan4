@@ -28,7 +28,7 @@ export default async function ProductCategories16({
         <div className="flex items-center gap-3 text-xs uppercase tracking-wide text-muted-foreground">
           <span>Filter</span>
           <span>Category:</span>
-          <Link href={`/products`}>
+          <Link href={`/products`} className="rounded outline-none focus-visible:ring-2 focus-visible:ring-ring">
             <Badge
               variant={hasValidActive ? "outline" : "secondary"}
               className="px-3 py-1 text-sm transition-colors hover:bg-secondary/80"
@@ -42,6 +42,7 @@ export default async function ProductCategories16({
             <Link
               key={c._id}
               href={`/products?category=${c.slug?.current || ""}`}
+              className="rounded outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <Badge
                 variant={active === c.slug?.current ? "secondary" : "outline"}
