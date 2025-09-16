@@ -10,7 +10,6 @@ export const compareProductsQuery = groq`
     productFields,
     columns[]{
       _key,
-      name,
       product->{
         _id,
         title,
@@ -25,7 +24,6 @@ export const compareProductsQuery = groq`
         }
       },
       overrides{
-        name,
         sku,
         bestFor,
         pungency,

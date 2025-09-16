@@ -29,7 +29,7 @@ export default function CompareProducts({
     if (!columns) return { headers: [], rows: [], cols: [] };
 
     const headers = (columns as any[]).map((c: any) =>
-      (c?.overrides?.name || c?.name || c?.product?.title || "").trim()
+      (c?.product?.title || "").trim()
     );
 
     const fields: string[] =
@@ -166,8 +166,6 @@ export default function CompareProducts({
                               (columns?.[colIdx] as any)?.product?.spec?.sku ??
                               (columns?.[colIdx] as any)?.product?._id,
                             name:
-                              (columns?.[colIdx] as any)?.overrides?.name ??
-                              (columns?.[colIdx] as any)?.name ??
                               (columns?.[colIdx] as any)?.product?.title ??
                               null,
                             productId:

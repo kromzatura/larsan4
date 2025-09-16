@@ -47,13 +47,6 @@ export default defineType({
           type: "object",
           fields: [
             defineField({
-              name: "name",
-              title: "Name",
-              type: "string",
-              description:
-                "Column header. In Product-driven mode this falls back to Product title when empty or you can override via Overrides → Name.",
-            }),
-            defineField({
               name: "product",
               title: "Product",
               type: "reference",
@@ -68,7 +61,6 @@ export default defineType({
               type: "object",
               options: { collapsible: true, collapsed: true },
               fields: [
-                defineField({ name: "name", title: "Name", type: "string" }),
                 defineField({ name: "sku", title: "SKU", type: "string" }),
                 defineField({
                   name: "bestFor",
@@ -92,7 +84,21 @@ export default defineType({
                 }),
               ],
             }),
+            
           ],
+          preview: {
+            select: {
+              title: "product.title",
+              media: "product.image",
+            },
+            prepare({ title, media }) {
+              return {
+                title: title || "Unnamed product",
+                subtitle: title ? undefined : "product: {empty}",
+                media,
+              };
+            },
+          },
         },
       ],
       validation: (Rule) => Rule.required().min(2).max(4),
