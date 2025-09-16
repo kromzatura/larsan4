@@ -39,6 +39,7 @@ export async function generateMetadata(props: {
       types: {
         ...(base as any)?.alternates?.types,
         "application/rss+xml": `/blog/category/${params.slug}/rss.xml`,
+        "application/feed+json": `/blog/category/${params.slug}/feed.json`,
       },
     },
   } as any;

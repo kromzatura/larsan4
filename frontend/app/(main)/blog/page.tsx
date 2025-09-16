@@ -29,6 +29,7 @@ export async function generateMetadata({
       types: {
         ...(base as any)?.alternates?.types,
         "application/rss+xml": "/blog/rss.xml",
+        "application/feed+json": "/blog/feed.json",
       },
     },
   } as any;

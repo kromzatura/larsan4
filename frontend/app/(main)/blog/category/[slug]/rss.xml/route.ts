@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
 import {
   fetchSanityBlogCategoryBySlug,
-  fetchSanityPostsByBlogCategory,
   fetchSanitySettings,
 } from "@/sanity/lib/fetch";
+import { sanityFetch } from "@/sanity/lib/live";
+import { FEED_POSTS_BY_CATEGORY_QUERY_NEWEST } from "@/sanity/queries/feed";
+import { ptBlocksToHtml } from "@/sanity/lib/ptToHtml";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -27,10 +29,9 @@ export async function GET(
   ]);
   if (!cat) return new NextResponse("Not Found", { status: 404 });
 
-  const posts = await fetchSanityPostsByBlogCategory({
-    slug,
-    limit: 50,
-    sort: "newest",
+  const { data: posts } = await sanityFetch({
+    query: FEED_POSTS_BY_CATEGORY_QUERY_NEWEST,
+    params: { slug, limit: 50 },
   });
   const selfUrl = `${SITE_URL}/blog/category/${slug}/rss.xml`;
   const lastBuildDate = new Date().toUTCString();
@@ -42,20 +43,30 @@ export async function GET(
   const rawH = typeof dim?.height === "number" ? dim.height : undefined;
   const maxW = 144;
   const width = rawW ? Math.min(rawW, maxW) : undefined;
-  const height = rawW && rawH && width ? Math.round((rawH / rawW) * width) : rawH;
+  const height =
+    rawW && rawH && width ? Math.round((rawH / rawW) * width) : rawH;
 
-  const items = (posts || []).map((p) => {
+  type FeedPost = {
+    _createdAt?: string;
+    title?: string | null;
+    slug?: { current?: string } | null;
+    excerpt?: string | null;
+    body?: any[] | null;
+    categories?: Array<{ title?: string | null }> | null;
+  };
+  const items = ((posts as FeedPost[]) || []).map((p) => {
     const url = `${SITE_URL}/blog/${p.slug?.current ?? ""}`;
     const title = escape(p.title ?? "Untitled");
     const description = escape(p.excerpt ?? "");
     const pubDate = p._createdAt ? new Date(p._createdAt).toUTCString() : "";
-    const categories = Array.isArray(p.categories)
+  const categories = Array.isArray(p.categories)
       ? p.categories
           .map((c: any) => c?.title)
           .filter(Boolean)
           .map((t: string) => `<category>${escape(t)}</category>`)
           .join("")
       : "";
+  const html = ptBlocksToHtml((p as any).body);
 
     return `
       <item>
@@ -64,7 +75,7 @@ export async function GET(
         <guid isPermaLink="true">${url}</guid>
         <pubDate>${pubDate}</pubDate>
         <description><![CDATA[${p.excerpt ?? ""}]]></description>
-        <content:encoded><![CDATA[${p.excerpt ?? ""}]]></content:encoded>
+        <content:encoded><![CDATA[${html || p.excerpt || ""}]]></content:encoded>
         ${categories}
       </item>`;
   });
@@ -72,7 +83,9 @@ export async function GET(
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
-      <title>${escape(siteName)} — ${escape(cat.title ?? "Blog Category")}</title>
+      <title>${escape(siteName)} — ${escape(
+    cat.title ?? "Blog Category"
+  )}</title>
       <link>${SITE_URL}/blog/category/${slug}</link>
       <description>${escape(cat.description ?? "")}</description>
       <atom:link href="${selfUrl}" rel="self" type="application/rss+xml" />
@@ -82,7 +95,15 @@ export async function GET(
       <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
       <ttl>60</ttl>
       <category>${escape(cat.title ?? "")}</category>
-      ${logoUrl ? `<image><url>${logoUrl}</url><title>${escape(siteName)}</title><link>${SITE_URL}</link>${width ? `<width>${width}</width>` : ""}${height ? `<height>${height}</height>` : ""}</image>` : ""}
+      ${
+        logoUrl
+          ? `<image><url>${logoUrl}</url><title>${escape(
+              siteName
+            )}</title><link>${SITE_URL}</link>${
+              width ? `<width>${width}</width>` : ""
+            }${height ? `<height>${height}</height>` : ""}</image>`
+          : ""
+      }
       ${items.join("")}
     </channel>
   </rss>`;

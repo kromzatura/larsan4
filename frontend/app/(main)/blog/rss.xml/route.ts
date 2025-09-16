@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
-import { fetchSanityPosts, fetchSanitySettings } from "@/sanity/lib/fetch";
+import { fetchSanitySettings } from "@/sanity/lib/fetch";
+import { sanityFetch } from "@/sanity/lib/live";
+import { FEED_POSTS_QUERY_NEWEST } from "@/sanity/queries/feed";
+import { ptBlocksToHtml } from "@/sanity/lib/ptToHtml";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -13,8 +16,8 @@ function escape(str: string) {
 }
 
 export async function GET() {
-  const [posts, settings] = await Promise.all([
-    fetchSanityPosts({ limit: 50, sort: "newest" }),
+  const [{ data: posts }, settings] = await Promise.all([
+    sanityFetch({ query: FEED_POSTS_QUERY_NEWEST, params: { limit: 50 } }),
     fetchSanitySettings(),
   ]);
   const selfUrl = `${SITE_URL}/blog/rss.xml`;
@@ -28,9 +31,18 @@ export async function GET() {
   const rawH = typeof dim?.height === "number" ? dim.height : undefined;
   const maxW = 144; // RSS 2.0 recommends max width 144
   const width = rawW ? Math.min(rawW, maxW) : undefined;
-  const height = rawW && rawH && width ? Math.round((rawH / rawW) * width) : rawH;
+  const height =
+    rawW && rawH && width ? Math.round((rawH / rawW) * width) : rawH;
 
-  const items = (posts || []).map((p) => {
+  type FeedPost = {
+    _createdAt?: string;
+    title?: string | null;
+    slug?: { current?: string } | null;
+    excerpt?: string | null;
+    body?: any[] | null;
+    categories?: Array<{ title?: string | null }> | null;
+  };
+  const items = ((posts as FeedPost[]) || []).map((p) => {
     const url = `${SITE_URL}/blog/${p.slug?.current ?? ""}`;
     const title = escape(p.title ?? "Untitled");
     const description = escape(p.excerpt ?? "");
@@ -42,6 +54,7 @@ export async function GET() {
           .map((t: string) => `<category>${escape(t)}</category>`)
           .join("")
       : "";
+    const html = ptBlocksToHtml((p as any).body);
 
     return `
       <item>
@@ -50,7 +63,7 @@ export async function GET() {
         <guid isPermaLink="true">${url}</guid>
         <pubDate>${pubDate}</pubDate>
         <description><![CDATA[${p.excerpt ?? ""}]]></description>
-        <content:encoded><![CDATA[${p.excerpt ?? ""}]]></content:encoded>
+        <content:encoded><![CDATA[${html || p.excerpt || ""}]]></content:encoded>
         ${categories}
       </item>`;
   });
@@ -67,7 +80,15 @@ export async function GET() {
       <generator>Next.js + Sanity</generator>
       <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
       <ttl>60</ttl>
-      ${logoUrl ? `<image><url>${logoUrl}</url><title>${escape(siteName)}</title><link>${SITE_URL}</link>${width ? `<width>${width}</width>` : ""}${height ? `<height>${height}</height>` : ""}</image>` : ""}
+      ${
+        logoUrl
+          ? `<image><url>${logoUrl}</url><title>${escape(
+              siteName
+            )}</title><link>${SITE_URL}</link>${
+              width ? `<width>${width}</width>` : ""
+            }${height ? `<height>${height}</height>` : ""}</image>`
+          : ""
+      }
       ${items.join("")}
     </channel>
   </rss>`;
