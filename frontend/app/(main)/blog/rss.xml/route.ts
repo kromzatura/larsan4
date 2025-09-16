@@ -48,7 +48,15 @@ export async function GET() {
     excerpt?: string | null;
     body?: any[] | null;
     author?: { name?: string | null } | null;
-    image?: { asset?: { url?: string | null; mimeType?: string | null; metadata?: { dimensions?: { width?: number | null; height?: number | null } | null } | null } | null } | null;
+    image?: {
+      asset?: {
+        url?: string | null;
+        mimeType?: string | null;
+        metadata?: {
+          dimensions?: { width?: number | null; height?: number | null } | null;
+        } | null;
+      } | null;
+    } | null;
     categories?: Array<{ title?: string | null }> | null;
   };
   const items = ((posts as FeedPost[]) || []).map((p) => {
@@ -74,7 +82,9 @@ export async function GET() {
     const w = img?.metadata?.dimensions?.width || null;
     const h = img?.metadata?.dimensions?.height || null;
     const media = imgUrl
-      ? `<media:content url="${imgUrl}"${imgType ? ` type="${imgType}"` : ""}${w ? ` width="${w}"` : ""}${h ? ` height="${h}"` : ""} />`
+      ? `<media:content url="${imgUrl}"${imgType ? ` type="${imgType}"` : ""}${
+          w ? ` width="${w}"` : ""
+        }${h ? ` height="${h}"` : ""} />`
       : "";
 
     return `

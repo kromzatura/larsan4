@@ -159,7 +159,11 @@ export default async function BlogIndex(props: {
       <div className="mt-8">
         {items.length === 0 ? (
           <div className="rounded-md border p-6 text-sm text-muted-foreground">
-            No posts found. Try adjusting your sort, or <a href="/" className="underline underline-offset-2">go back home</a>.
+            No posts found. Try adjusting your sort, or{" "}
+            <a href="/" className="underline underline-offset-2">
+              go back home
+            </a>
+            .
           </div>
         ) : (
           <PostsList

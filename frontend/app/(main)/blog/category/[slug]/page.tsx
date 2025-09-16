@@ -185,7 +185,11 @@ export default async function BlogCategoryPage(props: {
       <div className="mt-8">
         {items.length === 0 ? (
           <div className="rounded-md border p-6 text-sm text-muted-foreground">
-            No posts in this category yet. See <a href="/blog" className="underline underline-offset-2">all posts</a>.
+            No posts in this category yet. See{" "}
+            <a href="/blog" className="underline underline-offset-2">
+              all posts
+            </a>
+            .
           </div>
         ) : (
           <PostsList
