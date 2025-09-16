@@ -40,7 +40,7 @@ export async function submitContactForm(
       message: formData.get("message"),
     };
 
-    let inquiryItems: { id: string; name?: string | null }[] | undefined;
+  let inquiryItems: { id: string; name?: string | null; productId?: string | null; slug?: string | null; imageUrl?: string | null }[] | undefined;
     const inquiryRaw = formData.get("inquiryItems");
     if (typeof inquiryRaw === "string" && inquiryRaw.length > 0) {
       try {
@@ -49,7 +49,13 @@ export async function submitContactForm(
         if (Array.isArray(parsed)) {
           inquiryItems = parsed
             .filter((x) => x && typeof x.id === "string")
-            .map((x) => ({ id: x.id as string, name: typeof x.name === "string" ? x.name : null }));
+            .map((x) => ({
+              id: x.id as string,
+              name: typeof x.name === "string" ? x.name : null,
+              productId: typeof x.productId === "string" ? (x.productId as string) : null,
+              slug: typeof x.slug === "string" ? (x.slug as string) : null,
+              imageUrl: typeof x.imageUrl === "string" ? (x.imageUrl as string) : null,
+            }));
         }
       } catch {
         // ignore malformed inquiry items

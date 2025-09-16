@@ -10,7 +10,17 @@ import { Trash2, X, ArrowLeft, Send } from "lucide-react";
 
 function encodeInquiry(items: InquiryItem[]): string {
   try {
-    return encodeURIComponent(JSON.stringify(items.map(i => ({ id: i.id, name: i.name ?? null }))));
+    return encodeURIComponent(
+      JSON.stringify(
+        items.map((i) => ({
+          id: i.id,
+          name: i.name ?? null,
+          productId: i.productId ?? null,
+          slug: i.slug ?? null,
+          imageUrl: i.imageUrl ?? null,
+        }))
+      )
+    );
   } catch {
     return "";
   }

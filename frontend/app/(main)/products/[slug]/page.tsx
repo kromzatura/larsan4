@@ -284,7 +284,13 @@ export default async function ProductPage(props: {
             <Separator className="my-6" />
             {spec?.sku ? (
               <AddToInquiryButton
-                item={{ id: spec.sku, name: product.title || null }}
+                item={{
+                  id: spec.sku,
+                  name: product.title || null,
+                  productId: (product as any)._id || null,
+                  slug: product.slug?.current || null,
+                  imageUrl: product.image?.asset?.url || null,
+                }}
                 className="w-full"
               />
             ) : (

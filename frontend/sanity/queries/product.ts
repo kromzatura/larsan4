@@ -4,6 +4,7 @@ import { bodyQuery } from "./shared/body";
 import { metaQuery } from "./shared/meta";
 
 export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug][0]{
+  _id,
   title,
   slug,
   specifications[]->{

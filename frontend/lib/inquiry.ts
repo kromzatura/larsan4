@@ -1,6 +1,9 @@
 export type InquiryItem = {
   id: string;
   name?: string | null;
+  productId?: string | null;
+  slug?: string | null;
+  imageUrl?: string | null;
 };
 
 export const INQUIRY_STORAGE_KEY = "inquiry:list";
@@ -12,7 +15,17 @@ function safeParse(json: string | null): InquiryItem[] {
     const parsed = JSON.parse(json);
     if (Array.isArray(parsed)) {
       return parsed
-        .map((x) => (x && typeof x.id === "string" ? { id: x.id, name: x.name ?? null } : null))
+        .map((x) =>
+          x && typeof x.id === "string"
+            ? {
+                id: x.id,
+                name: typeof x.name === "string" ? x.name : null,
+                productId: typeof x.productId === "string" ? x.productId : null,
+                slug: typeof x.slug === "string" ? x.slug : null,
+                imageUrl: typeof x.imageUrl === "string" ? x.imageUrl : null,
+              }
+            : null
+        )
         .filter(Boolean) as InquiryItem[];
     }
   } catch {
@@ -50,7 +63,16 @@ export function addToInquiry(item: InquiryItem): { added: boolean; items: Inquir
   if (items.some((x) => x.id === item.id)) {
     return { added: false, items };
   }
-  const next = [...items, { id: item.id, name: item.name ?? null }];
+  const next = [
+    ...items,
+    {
+      id: item.id,
+      name: item.name ?? null,
+      productId: item.productId ?? null,
+      slug: item.slug ?? null,
+      imageUrl: item.imageUrl ?? null,
+    },
+  ];
   setInquiryList(next);
   return { added: true, items: next };
 }

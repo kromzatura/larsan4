@@ -33,13 +33,35 @@ export default function ContactInquiryWrapper({ initialInquiryItems }: ContactIn
             <ul className="max-h-48 overflow-auto divide-y rounded border bg-background">
               {items.map((item) => (
                 <li key={item.id} className="p-3 text-sm">
-                  <p className="font-medium break-all">{item.name || item.id}</p>
+                  <p className="font-medium break-all">
+                    {item.slug ? (
+                      <a href={`/products/${item.slug}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                        {item.name || item.id}
+                      </a>
+                    ) : (
+                      <>{item.name || item.id}</>
+                    )}
+                  </p>
                   <p className="mt-0.5 text-xs text-muted-foreground break-all">SKU: {item.id}</p>
                 </li>
               ))}
             </ul>
           </div>
-          <input type="hidden" name="inquiryItems" value={encodeURIComponent(JSON.stringify(items))} />
+          <input
+            type="hidden"
+            name="inquiryItems"
+            value={encodeURIComponent(
+              JSON.stringify(
+                items.map((i) => ({
+                  id: i.id,
+                  name: i.name ?? null,
+                  productId: i.productId ?? null,
+                  slug: i.slug ?? null,
+                  imageUrl: i.imageUrl ?? null,
+                }))
+              )
+            )}
+          />
         </>
       )}
     </ContactForm>
