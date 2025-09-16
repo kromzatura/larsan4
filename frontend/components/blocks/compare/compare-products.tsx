@@ -28,9 +28,10 @@ export default function CompareProducts({
   const normalized = useMemo(() => {
     if (!columns) return { headers: [], rows: [], cols: [] };
 
-    const headers = (columns as any[]).map((c: any) =>
-      (c?.product?.title || "").trim()
-    );
+    const headers = (columns as any[]).map((c: any, idx: number) => {
+      const t = (c?.product?.title || "").trim();
+      return t || `Unnamed product ${idx + 1}`;
+    });
 
     const fields: string[] =
       productFields && (productFields as any[]).length > 0
@@ -88,14 +89,14 @@ export default function CompareProducts({
   }, [columns, productFields]);
 
   const [selectedTab, setSelectedTab] = useState<string>(
-    normalized.headers?.[0] || ""
+    (normalized.headers && normalized.headers[0]) || "0"
   );
 
   return (
     <SectionContainer padding={padding}>
       {columns && (columns as any[])?.length > 0 && (
         <Tabs
-          defaultValue={normalized.headers?.[0] || ""}
+          defaultValue={(normalized.headers && normalized.headers[0]) || "0"}
           onValueChange={setSelectedTab}
           className="mb-6 block md:hidden"
         >

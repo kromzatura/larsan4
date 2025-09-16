@@ -100,7 +100,23 @@ export default defineType({
           },
         },
       ],
-      validation: (Rule) => Rule.required().min(2).max(4),
+      validation: (Rule) => [
+        Rule.required().min(2).max(4),
+        Rule.custom((value) => {
+          if (!Array.isArray(value)) return true;
+          const refs = (value as any[])
+            .map((v) => ((v as any)?.product?._ref as string | null) || null)
+            .filter(Boolean) as string[];
+          const seen = new Set<string>();
+          for (const r of refs) {
+            if (seen.has(r)) {
+              return "The same product is selected more than once.";
+            }
+            seen.add(r);
+          }
+          return true;
+        }).warning(),
+      ],
     }),
   ],
   preview: {
