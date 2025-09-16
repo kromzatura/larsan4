@@ -58,7 +58,10 @@ export function isInInquiry(id: string): boolean {
   return getInquiryList().some((x) => x.id === id);
 }
 
-export function addToInquiry(item: InquiryItem): { added: boolean; items: InquiryItem[] } {
+export function addToInquiry(item: InquiryItem): {
+  added: boolean;
+  items: InquiryItem[];
+} {
   const items = getInquiryList();
   if (items.some((x) => x.id === item.id)) {
     return { added: false, items };
@@ -77,7 +80,10 @@ export function addToInquiry(item: InquiryItem): { added: boolean; items: Inquir
   return { added: true, items: next };
 }
 
-export function removeFromInquiry(id: string): { removed: boolean; items: InquiryItem[] } {
+export function removeFromInquiry(id: string): {
+  removed: boolean;
+  items: InquiryItem[];
+} {
   const items = getInquiryList();
   const next = items.filter((x) => x.id !== id);
   const removed = next.length !== items.length;

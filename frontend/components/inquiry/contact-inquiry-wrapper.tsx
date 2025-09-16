@@ -10,7 +10,9 @@ interface ContactInquiryWrapperProps {
   initialInquiryItems: InquiryItem[]; // parsed on server for hydration correctness
 }
 
-export default function ContactInquiryWrapper({ initialInquiryItems }: ContactInquiryWrapperProps) {
+export default function ContactInquiryWrapper({
+  initialInquiryItems,
+}: ContactInquiryWrapperProps) {
   const [items] = useState<InquiryItem[]>(initialInquiryItems);
   const hasItems = items.length > 0;
 
@@ -28,21 +30,30 @@ export default function ContactInquiryWrapper({ initialInquiryItems }: ContactIn
         <>
           <div className="space-y-3">
             <div>
-              <p className="text-sm font-medium">Inquiry Items ({items.length})</p>
+              <p className="text-sm font-medium">
+                Inquiry Items ({items.length})
+              </p>
             </div>
             <ul className="max-h-48 overflow-auto divide-y rounded border bg-background">
               {items.map((item) => (
                 <li key={item.id} className="p-3 text-sm">
                   <p className="font-medium break-all">
                     {item.slug ? (
-                      <a href={`/products/${item.slug}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                      <a
+                        href={`/products/${item.slug}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline"
+                      >
                         {item.name || item.id}
                       </a>
                     ) : (
                       <>{item.name || item.id}</>
                     )}
                   </p>
-                  <p className="mt-0.5 text-xs text-muted-foreground break-all">SKU: {item.id}</p>
+                  <p className="mt-0.5 text-xs text-muted-foreground break-all">
+                    SKU: {item.id}
+                  </p>
                 </li>
               ))}
             </ul>

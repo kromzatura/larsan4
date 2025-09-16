@@ -11,7 +11,6 @@ import { z } from "zod";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-
 export type ContactFormState = {
   success?: boolean;
   error?: string;
@@ -40,7 +39,15 @@ export async function submitContactForm(
       message: formData.get("message"),
     };
 
-  let inquiryItems: { id: string; name?: string | null; productId?: string | null; slug?: string | null; imageUrl?: string | null }[] | undefined;
+    let inquiryItems:
+      | {
+          id: string;
+          name?: string | null;
+          productId?: string | null;
+          slug?: string | null;
+          imageUrl?: string | null;
+        }[]
+      | undefined;
     const inquiryRaw = formData.get("inquiryItems");
     if (typeof inquiryRaw === "string" && inquiryRaw.length > 0) {
       try {
@@ -52,9 +59,13 @@ export async function submitContactForm(
             .map((x) => ({
               id: x.id as string,
               name: typeof x.name === "string" ? x.name : null,
-              productId: typeof x.productId === "string" ? (x.productId as string) : null,
+              productId:
+                typeof x.productId === "string"
+                  ? (x.productId as string)
+                  : null,
               slug: typeof x.slug === "string" ? (x.slug as string) : null,
-              imageUrl: typeof x.imageUrl === "string" ? (x.imageUrl as string) : null,
+              imageUrl:
+                typeof x.imageUrl === "string" ? (x.imageUrl as string) : null,
             }));
         }
       } catch {
@@ -74,7 +85,11 @@ export async function submitContactForm(
     await resend.emails.send({
       from: `Website Contact Form <${process.env.NEXT_RESEND_FROM_EMAIL}>`,
       to: process.env.NEXT_RESEND_TO_EMAIL,
-      subject: `New Contact${inquiryItems && inquiryItems.length ? ` (+${inquiryItems.length} inquiry)` : ""} from ${firstName} ${lastName}`,
+      subject: `New Contact${
+        inquiryItems && inquiryItems.length
+          ? ` (+${inquiryItems.length} inquiry)`
+          : ""
+      } from ${firstName} ${lastName}`,
       html,
       replyTo: email,
     });

@@ -17,7 +17,13 @@ interface ContactFormEmailProps {
   lastName: string;
   email: string;
   message: string;
-  inquiryItems?: { id: string; name?: string | null; productId?: string | null; slug?: string | null; imageUrl?: string | null }[];
+  inquiryItems?: {
+    id: string;
+    name?: string | null;
+    productId?: string | null;
+    slug?: string | null;
+    imageUrl?: string | null;
+  }[];
 }
 
 const ContactFormEmail = ({
@@ -103,19 +109,43 @@ const ContactFormEmail = ({
                     <Section className="bg-white p-[12px]">
                       {inquiryItems.map((item, idx) => {
                         const title = item.name || item.id;
-                        const link = item.slug ? `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/products/${item.slug}` : null;
+                        const link = item.slug
+                          ? `${
+                              process.env.NEXT_PUBLIC_SITE_URL ||
+                              "http://localhost:3000"
+                            }/products/${item.slug}`
+                          : null;
                         return (
                           <Section key={item.id + idx} className="mb-[8px]">
                             {item.imageUrl && (
-                              <img src={item.imageUrl} alt={title} width={120} height={90} style={{ objectFit: "cover", borderRadius: 6, display: "block", marginBottom: 6 }} />
+                              <img
+                                src={item.imageUrl}
+                                alt={title}
+                                width={120}
+                                height={90}
+                                style={{
+                                  objectFit: "cover",
+                                  borderRadius: 6,
+                                  display: "block",
+                                  marginBottom: 6,
+                                }}
+                              />
                             )}
                             <Text className="text-[14px] text-gray-700 m-0">
                               {link ? (
-                                <a href={link} target="_blank" rel="noopener noreferrer">{title}</a>
+                                <a
+                                  href={link}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  {title}
+                                </a>
                               ) : (
                                 title
-                              )} {" "}
-                              <span style={{ color: "#6b7280" }}>(SKU: {item.id})</span>
+                              )}{" "}
+                              <span style={{ color: "#6b7280" }}>
+                                (SKU: {item.id})
+                              </span>
                             </Text>
                           </Section>
                         );

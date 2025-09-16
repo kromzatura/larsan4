@@ -91,7 +91,10 @@ export default async function ProductPage(props: {
     { label: "Binding capacity", value: spec?.bindingCapacity },
     {
       label: "Fat content",
-      value: typeof spec?.fatContent === "number" ? `${spec.fatContent}%` : undefined,
+      value:
+        typeof spec?.fatContent === "number"
+          ? `${spec.fatContent}%`
+          : undefined,
     },
   ];
 
