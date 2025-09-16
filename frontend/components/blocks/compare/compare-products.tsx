@@ -15,35 +15,22 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CircleCheck, CircleMinus, CircleX } from "lucide-react";
+import AddToInquiryButton from "@/components/inquiry/add-to-inquiry-button";
 
 type BlockProps = any;
 
 export default function CompareProducts({
   padding,
   title,
-  mode,
   productFields,
-  rows,
   columns,
 }: BlockProps) {
-  const isProduct = mode !== "freeform";
-
   const normalized = useMemo(() => {
     if (!columns) return { headers: [], rows: [], cols: [] };
 
     const headers = (columns as any[]).map((c: any) =>
       (c?.overrides?.name || c?.name || c?.product?.title || "").trim()
     );
-
-    if (!isProduct) {
-      return {
-        headers,
-        rows: rows || [],
-        cols: (columns as any[]).map((c: any) => ({
-          attributes: c.attributes || [],
-        })),
-      };
-    }
 
     const fields: string[] =
       productFields && (productFields as any[]).length > 0
@@ -58,35 +45,31 @@ export default function CompareProducts({
         case "pungency":
           rowLabels.push("Pungency/Heat");
           valueGetters.push(
-            (c) =>
-              c?.overrides?.pungency ?? c?.product?.specifications?.pungency
+            (c) => c?.overrides?.pungency ?? c?.product?.spec?.pungency
           );
           break;
         case "fatContent":
           rowLabels.push("Fat Content (%)");
           valueGetters.push(
-            (c) =>
-              c?.overrides?.fatContent ?? c?.product?.specifications?.fatContent
+            (c) => c?.overrides?.fatContent ?? c?.product?.spec?.fatContent
           );
           break;
         case "bindingCapacity":
           rowLabels.push("Binding Capacity");
           valueGetters.push(
-            (c) =>
-              c?.overrides?.bindingCapacity ??
-              c?.product?.specifications?.bindingCapacity
+            (c) => c?.overrides?.bindingCapacity ?? c?.product?.spec?.bindingCapacity
           );
           break;
         case "bestFor":
           rowLabels.push("Best for");
           valueGetters.push(
-            (c) => c?.overrides?.bestFor ?? c?.product?.specifications?.bestFor
+            (c) => c?.overrides?.bestFor ?? c?.product?.spec?.bestFor
           );
           break;
         case "sku":
           rowLabels.push("SKU");
           valueGetters.push(
-            (c) => c?.overrides?.sku ?? c?.product?.specifications?.sku
+            (c) => c?.overrides?.sku ?? c?.product?.spec?.sku
           );
           break;
         case "actions":
@@ -103,7 +86,7 @@ export default function CompareProducts({
     }));
 
     return { headers, rows: rowLabels, cols };
-  }, [columns, isProduct, productFields, rows]);
+  }, [columns, productFields]);
 
   const [selectedTab, setSelectedTab] = useState<string>(
     normalized.headers?.[0] || ""
@@ -171,38 +154,28 @@ export default function CompareProducts({
                           : ""
                       )}
                     >
-                      {!isProduct && (
-                        <div className="flex flex-col items-center gap-1 text-muted-foreground">
-                          {status === "positive" && (
-                            <span className="flex size-8 items-center justify-center rounded-full border border-green-200 bg-green-100">
-                              <CircleCheck className="size-4 text-green-700" />
-                            </span>
-                          )}
-                          {status === "negative" && (
-                            <span className="flex size-8 items-center justify-center rounded-full border border-red-200 bg-red-100">
-                              <CircleX className="size-4 text-red-700" />
-                            </span>
-                          )}
-                          {status === "neutral" && (
-                            <span className="flex size-8 items-center justify-center rounded-full border border-amber-200 bg-amber-100">
-                              <CircleMinus className="size-4 text-amber-700" />
-                            </span>
-                          )}
-                          {String(v ?? "")}
-                        </div>
-                      )}
-                      {isProduct && !isAction && (
+                      {!isAction && (
                         <span className="text-muted-foreground">
                           {String(v ?? "—")}
                         </span>
                       )}
-                      {isProduct && isAction && (
-                        <div>
-                          {/* Placeholder: you can wire a CTA/inquiry button here later */}
-                          <span className="text-sm text-muted-foreground">
-                            Contact us
-                          </span>
-                        </div>
+                      {isAction && (
+                        <AddToInquiryButton
+                          item={{
+                            id:
+                              (columns?.[colIdx] as any)?.overrides?.sku ??
+                              (columns?.[colIdx] as any)?.product?.spec?.sku ??
+                              (columns?.[colIdx] as any)?.product?._id,
+                            name:
+                              (columns?.[colIdx] as any)?.overrides?.name ??
+                              (columns?.[colIdx] as any)?.name ??
+                              (columns?.[colIdx] as any)?.product?.title ?? null,
+                            productId: (columns?.[colIdx] as any)?.product?._id ?? null,
+                            slug: (columns?.[colIdx] as any)?.product?.slug ?? null,
+                            imageUrl: null,
+                          }}
+                          className="w-full max-w-44 px-6 mx-auto"
+                        />
                       )}
                     </TableCell>
                   );

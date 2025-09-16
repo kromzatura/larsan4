@@ -7,22 +7,22 @@ export const compareProductsQuery = groq`
     _key,
     padding,
     title,
-    mode,
     productFields,
-    rows,
     columns[]{
       _key,
       name,
       product->{
         _id,
         title,
-        specifications[]->{
+        "slug": slug.current,
+        // First specification projected under 'spec'
+        "spec": specifications[0]->{
           sku,
           bestFor,
           pungency,
           bindingCapacity,
           fatContent
-        }[0]
+        }
       },
       overrides{
         name,
@@ -31,11 +31,6 @@ export const compareProductsQuery = groq`
         pungency,
         bindingCapacity,
         fatContent
-      },
-      attributes[]{
-        _key,
-        value,
-        status,
       },
     },
   }

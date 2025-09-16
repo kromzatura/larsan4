@@ -6,32 +6,18 @@ export default defineType({
   type: "object",
   title: "Compare Products",
   description:
-    "Compare table that can auto-populate rows from selected Products and their Specifications, or be entered manually.",
+    "Compare table that auto-populates rows from selected Products and their Specifications.",
   icon: CheckCircle,
   fields: [
     defineField({ name: "padding", type: "section-padding" }),
     defineField({ name: "title", type: "string" }),
-    defineField({
-      name: "mode",
-      title: "Mode",
-      type: "string",
-      description:
-        "In Product-driven mode, column values come from selected Products (and optional overrides). Freeform allows manual rows/values.",
-      options: {
-        list: [
-          { title: "Freeform (manual rows)", value: "freeform" },
-          { title: "Product-driven (from Product)", value: "product" },
-        ],
-        layout: "radio",
-      },
-      initialValue: "product",
-    }),
+    // Product-driven only
     defineField({
       name: "productFields",
       title: "Product fields to show",
       type: "array",
       description:
-        "Only used in Product-driven mode. Choose which product/specification fields appear as rows.",
+        "Choose which product/specification fields appear as rows.",
       of: [{ type: "string" }],
       options: {
         list: [
@@ -51,14 +37,7 @@ export default defineType({
         "sku",
         "actions",
       ],
-    }),
-    defineField({
-      name: "rows",
-      title: "Rows (Freeform)",
-      type: "array",
-      of: [{ type: "string" }],
-      description:
-        "Manual row labels. Used only in Freeform mode; ignored in Product-driven mode.",
+      validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: "columns",
@@ -82,6 +61,7 @@ export default defineType({
               to: [{ type: "product" }],
               description:
                 "Pick a product to populate rows in Product-driven mode.",
+              validation: (Rule) => Rule.required(),
             }),
             defineField({
               name: "overrides",
@@ -112,32 +92,6 @@ export default defineType({
                   type: "number",
                 }),
               ],
-            }),
-            // Freeform values for this column (mirrors Compare 6)
-            defineField({
-              name: "attributes",
-              title: "Attributes (Freeform)",
-              type: "array",
-              of: [
-                {
-                  name: "item",
-                  type: "object",
-                  fields: [
-                    defineField({ name: "value", type: "string" }),
-                    defineField({
-                      name: "status",
-                      type: "string",
-                      options: {
-                        list: ["neutral", "positive", "negative"],
-                        layout: "radio",
-                      },
-                      initialValue: "neutral",
-                    }),
-                  ],
-                },
-              ],
-              description:
-                "Manual values per row for this column. Used only in Freeform mode; ignored in Product-driven mode.",
             }),
           ],
         },
