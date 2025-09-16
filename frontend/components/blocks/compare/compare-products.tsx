@@ -31,7 +31,7 @@ export default function CompareProducts({
   const normalized = useMemo(() => {
     if (!columns) return { headers: [], rows: [], cols: [] };
 
-  const headers = (columns as any[]).map((c: any) =>
+    const headers = (columns as any[]).map((c: any) =>
       (c?.overrides?.name || c?.name || c?.product?.title || "").trim()
     );
 
@@ -39,11 +39,16 @@ export default function CompareProducts({
       return {
         headers,
         rows: rows || [],
-  cols: (columns as any[]).map((c: any) => ({ attributes: c.attributes || [] })),
+        cols: (columns as any[]).map((c: any) => ({
+          attributes: c.attributes || [],
+        })),
       };
     }
 
-  const fields: string[] = productFields && (productFields as any[]).length > 0 ? (productFields as string[]) : [];
+    const fields: string[] =
+      productFields && (productFields as any[]).length > 0
+        ? (productFields as string[])
+        : [];
 
     const rowLabels: string[] = [];
     const valueGetters: ((col: any) => string | number | undefined)[] = [];
@@ -52,23 +57,37 @@ export default function CompareProducts({
       switch (f) {
         case "pungency":
           rowLabels.push("Pungency/Heat");
-          valueGetters.push((c) => c?.overrides?.pungency ?? c?.product?.specifications?.pungency);
+          valueGetters.push(
+            (c) =>
+              c?.overrides?.pungency ?? c?.product?.specifications?.pungency
+          );
           break;
         case "fatContent":
           rowLabels.push("Fat Content (%)");
-          valueGetters.push((c) => c?.overrides?.fatContent ?? c?.product?.specifications?.fatContent);
+          valueGetters.push(
+            (c) =>
+              c?.overrides?.fatContent ?? c?.product?.specifications?.fatContent
+          );
           break;
         case "bindingCapacity":
           rowLabels.push("Binding Capacity");
-          valueGetters.push((c) => c?.overrides?.bindingCapacity ?? c?.product?.specifications?.bindingCapacity);
+          valueGetters.push(
+            (c) =>
+              c?.overrides?.bindingCapacity ??
+              c?.product?.specifications?.bindingCapacity
+          );
           break;
         case "bestFor":
           rowLabels.push("Best for");
-          valueGetters.push((c) => c?.overrides?.bestFor ?? c?.product?.specifications?.bestFor);
+          valueGetters.push(
+            (c) => c?.overrides?.bestFor ?? c?.product?.specifications?.bestFor
+          );
           break;
         case "sku":
           rowLabels.push("SKU");
-          valueGetters.push((c) => c?.overrides?.sku ?? c?.product?.specifications?.sku);
+          valueGetters.push(
+            (c) => c?.overrides?.sku ?? c?.product?.specifications?.sku
+          );
           break;
         case "actions":
           rowLabels.push("Actions");
@@ -86,11 +105,13 @@ export default function CompareProducts({
     return { headers, rows: rowLabels, cols };
   }, [columns, isProduct, productFields, rows]);
 
-  const [selectedTab, setSelectedTab] = useState<string>(normalized.headers?.[0] || "");
+  const [selectedTab, setSelectedTab] = useState<string>(
+    normalized.headers?.[0] || ""
+  );
 
   return (
     <SectionContainer padding={padding}>
-  {columns && (columns as any[])?.length > 0 && (
+      {columns && (columns as any[])?.length > 0 && (
         <Tabs
           defaultValue={normalized.headers?.[0] || ""}
           onValueChange={setSelectedTab}
@@ -132,8 +153,12 @@ export default function CompareProducts({
                   {rowLabel}
                 </TableCell>
                 {normalized.cols.map((c, colIdx) => {
-                  const v = (c as any).values ? (c as any).values[rowIdx] : (columns?.[colIdx] as any)?.attributes?.[rowIdx]?.value;
-                  const status = (columns?.[colIdx] as any)?.attributes?.[rowIdx]?.status;
+                  const v = (c as any).values
+                    ? (c as any).values[rowIdx]
+                    : (columns?.[colIdx] as any)?.attributes?.[rowIdx]?.value;
+                  const status = (columns?.[colIdx] as any)?.attributes?.[
+                    rowIdx
+                  ]?.status;
 
                   const isAction = v === "__actions__";
                   return (
@@ -141,7 +166,9 @@ export default function CompareProducts({
                       key={colIdx}
                       className={cn(
                         "p-5 text-center whitespace-normal md:table-cell",
-                        normalized.headers[colIdx] !== selectedTab ? "hidden" : ""
+                        normalized.headers[colIdx] !== selectedTab
+                          ? "hidden"
+                          : ""
                       )}
                     >
                       {!isProduct && (
@@ -164,11 +191,17 @@ export default function CompareProducts({
                           {String(v ?? "")}
                         </div>
                       )}
-                      {isProduct && !isAction && <span className="text-muted-foreground">{String(v ?? "—")}</span>}
+                      {isProduct && !isAction && (
+                        <span className="text-muted-foreground">
+                          {String(v ?? "—")}
+                        </span>
+                      )}
                       {isProduct && isAction && (
                         <div>
                           {/* Placeholder: you can wire a CTA/inquiry button here later */}
-                          <span className="text-sm text-muted-foreground">Contact us</span>
+                          <span className="text-sm text-muted-foreground">
+                            Contact us
+                          </span>
                         </div>
                       )}
                     </TableCell>

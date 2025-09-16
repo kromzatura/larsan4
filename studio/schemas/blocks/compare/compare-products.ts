@@ -91,10 +91,26 @@ export default defineType({
               fields: [
                 defineField({ name: "name", title: "Name", type: "string" }),
                 defineField({ name: "sku", title: "SKU", type: "string" }),
-                defineField({ name: "bestFor", title: "Best for", type: "string" }),
-                defineField({ name: "pungency", title: "Pungency/Heat", type: "string" }),
-                defineField({ name: "bindingCapacity", title: "Binding Capacity", type: "string" }),
-                defineField({ name: "fatContent", title: "Fat Content (%)", type: "number" }),
+                defineField({
+                  name: "bestFor",
+                  title: "Best for",
+                  type: "string",
+                }),
+                defineField({
+                  name: "pungency",
+                  title: "Pungency/Heat",
+                  type: "string",
+                }),
+                defineField({
+                  name: "bindingCapacity",
+                  title: "Binding Capacity",
+                  type: "string",
+                }),
+                defineField({
+                  name: "fatContent",
+                  title: "Fat Content (%)",
+                  type: "number",
+                }),
               ],
             }),
             // Freeform values for this column (mirrors Compare 6)
@@ -111,7 +127,10 @@ export default defineType({
                     defineField({
                       name: "status",
                       type: "string",
-                      options: { list: ["neutral", "positive", "negative"], layout: "radio" },
+                      options: {
+                        list: ["neutral", "positive", "negative"],
+                        layout: "radio",
+                      },
                       initialValue: "neutral",
                     }),
                   ],

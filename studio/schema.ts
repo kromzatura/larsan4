@@ -231,7 +231,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     compare4,
     compare5,
     compare6,
-  compareProducts,
+    compareProducts,
     // Gallery
     gallery1,
     gallery3,
