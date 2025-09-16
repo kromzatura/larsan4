@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { fetchSanitySettings } from "@/sanity/lib/fetch";
 import { sanityFetch } from "@/sanity/lib/live";
 import { FEED_POSTS_QUERY_NEWEST } from "@/sanity/queries/feed";
-import { ptBlocksToHtml } from "@/sanity/lib/ptToHtml";
+import { ptBlocksToHtml, getLanguageFromSettings } from "@/sanity/lib/ptToHtml";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -24,6 +24,7 @@ export async function GET() {
   const lastBuildDate = new Date().toUTCString();
   const siteName = (settings as any)?.siteName || "Blog";
   const siteDesc = (settings as any)?.description || "Latest posts";
+  const language = getLanguageFromSettings(settings);
   const logo = (settings as any)?.logo;
   const logoUrl: string | null = logo?.asset?.url || null;
   const dim = logo?.asset?.metadata?.dimensions;
@@ -78,7 +79,7 @@ export async function GET() {
       <description>${escape(siteDesc)}</description>
       <atom:link href="${selfUrl}" rel="self" type="application/rss+xml" />
       <lastBuildDate>${lastBuildDate}</lastBuildDate>
-      <language>en-US</language>
+  <language>${language}</language>
       <generator>Next.js + Sanity</generator>
       <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
       <ttl>60</ttl>

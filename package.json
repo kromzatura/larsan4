@@ -10,5 +10,8 @@
     "typecheck": "cd frontend && pnpm typecheck",
     "export": "cd studio && sanity dataset export production sample-data.tar.gz"
   },
-  "homepage": "https://www.shadcnblocks.com/"
+  "homepage": "https://www.shadcnblocks.com/",
+  "dependencies": {
+    "@portabletext/to-html": "^3.0.0"
+  }
 }

@@ -1,28 +1,29 @@
-type Block = any;
+import { toHTML } from "@portabletext/to-html";
 
-export function ptBlocksToHtml(blocks: Block[] | null | undefined): string {
+export function ptBlocksToHtml(blocks: any[] | null | undefined): string {
   if (!Array.isArray(blocks) || blocks.length === 0) return "";
-  const out: string[] = [];
-  for (const b of blocks) {
-    if (b?._type === "block") {
-      const tag =
-        ({ h1: "h1", h2: "h2", h3: "h3", h4: "h4" } as any)[b?.style] || "p";
-      const text = Array.isArray(b.children)
-        ? b.children.map((c: any) => c?.text || "").join("")
-        : "";
-      out.push(`<${tag}>${escapeHtml(text)}</${tag}>`);
-    } else if (b?._type === "image" && b?.asset?.url) {
-      out.push(`<p><img src="${b.asset.url}" alt=""/></p>`);
-    }
-  }
-  return out.join("");
+  return toHTML(blocks as any, {
+    components: {
+      types: {
+        image: ({ value }: any) =>
+          value?.asset?.url
+            ? `<p><img src="${value.asset.url}" alt=""/></p>`
+            : "",
+      },
+      marks: {
+        link: ({ children, value }: any) => {
+          const href = value?.href || "#";
+          const rel = href.startsWith("/") ? "" : " rel=\"noopener noreferrer\"";
+          const target = href.startsWith("/") ? "" : " target=\"_blank\"";
+          return `<a href="${href}"${rel}${target}>${children}</a>`;
+        },
+      },
+    },
+  });
 }
 
-function escapeHtml(str: string) {
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
+export function getLanguageFromSettings(settings: any): string {
+  const lang = settings?.language || settings?.siteLanguage || settings?.locale;
+  if (typeof lang === "string" && lang.trim()) return lang;
+  return "en-US";
 }

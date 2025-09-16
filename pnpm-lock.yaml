@@ -6,7 +6,11 @@ settings:
 
 importers:
 
-  .: {}
+  .:
+    dependencies:
+      '@portabletext/to-html':
+        specifier: ^3.0.0
+        version: 3.0.0
 
   frontend:
     dependencies:
@@ -10331,7 +10335,7 @@ snapshots:
 
   '@portabletext/toolkit@2.0.17':
     dependencies:
-      '@portabletext/types': 2.0.13
+      '@portabletext/types': 2.0.15
 
   '@portabletext/toolkit@2.0.18':
     dependencies:
