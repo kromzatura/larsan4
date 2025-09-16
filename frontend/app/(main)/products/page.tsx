@@ -5,10 +5,23 @@ import { generatePageMetadata } from "@/sanity/lib/metadata";
 
 export const dynamic = "force-dynamic";
 
-export async function generateMetadata() {
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams?: Promise<{ page?: string; category?: string }>;
+}) {
   const page = await fetchSanityPageBySlug({ slug: "products" });
   if (!page) return {};
-  return generatePageMetadata({ page, slug: "products", type: "page" });
+  const sp = searchParams ? await searchParams : undefined;
+  const pageNum = sp?.page ? Number(sp.page) : 1;
+  const base = generatePageMetadata({ page, slug: "products", type: "page" });
+  if (pageNum && pageNum > 1) {
+    return {
+      ...base,
+      robots: "noindex",
+    } as any;
+  }
+  return base as any;
 }
 
 export default async function ProductsPage(props: {
