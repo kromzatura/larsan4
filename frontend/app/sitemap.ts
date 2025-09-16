@@ -2,7 +2,9 @@ import { MetadataRoute } from "next";
 import { groq } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
 
-async function getPagesSitemap(): Promise<MetadataRoute.Sitemap[]> {
+type SitemapEntry = MetadataRoute.Sitemap[number];
+
+async function getPagesSitemap(): Promise<SitemapEntry[]> {
   const pagesQuery = groq`
     *[_type == 'page' && defined(slug.current) && coalesce(meta.noindex, false) == false] | order(slug.current) {
       'url': $baseUrl + select(slug.current == 'index' => '', '/' + slug.current),
@@ -27,7 +29,7 @@ async function getPagesSitemap(): Promise<MetadataRoute.Sitemap[]> {
   return data;
 }
 
-async function getPostsSitemap(): Promise<MetadataRoute.Sitemap[]> {
+async function getPostsSitemap(): Promise<SitemapEntry[]> {
   const postsQuery = groq`
     *[_type == 'post' && defined(slug.current) && coalesce(meta.noindex, false) == false] | order(_updatedAt desc) {
       'url': $baseUrl + '/blog/' + slug.current,
@@ -49,12 +51,12 @@ async function getPostsSitemap(): Promise<MetadataRoute.Sitemap[]> {
   return data;
 }
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap[]> {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [pages, posts, products, productCategories, blogCategories] =
     await Promise.all([
       getPagesSitemap(),
       getPostsSitemap(),
-      (async () => {
+      (async (): Promise<SitemapEntry[]> => {
         const { data } = await sanityFetch({
           query: groq`*[_type == 'product' && defined(slug)] {
           'url': $baseUrl + '/products/' + slug.current,
@@ -66,9 +68,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap[]> {
           perspective: "published",
           stega: false,
         });
-        return data as MetadataRoute.Sitemap[];
+        return data as SitemapEntry[];
       })(),
-      (async () => {
+      (async (): Promise<SitemapEntry[]> => {
         const { data } = await sanityFetch({
           query: groq`*[_type == 'productCategory' && defined(slug)] | order(orderRank) {
           'url': $baseUrl + '/products/category/' + slug.current,
@@ -80,9 +82,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap[]> {
           perspective: "published",
           stega: false,
         });
-        return data as MetadataRoute.Sitemap[];
+        return data as SitemapEntry[];
       })(),
-      (async () => {
+      (async (): Promise<SitemapEntry[]> => {
         const { data } = await sanityFetch({
           query: groq`*[_type == 'category' && defined(slug) && coalesce(seo.noindex, false) == false] | order(orderRank) {
           'url': $baseUrl + '/blog/category/' + slug.current,
@@ -94,11 +96,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap[]> {
           perspective: "published",
           stega: false,
         });
-        return data as MetadataRoute.Sitemap[];
+        return data as SitemapEntry[];
       })(),
     ]);
 
+  const blogIndex: SitemapEntry = {
+    url: `${process.env.NEXT_PUBLIC_SITE_URL}/blog`,
+    lastModified: new Date().toISOString(),
+    changeFrequency: "daily",
+    priority: 0.8,
+  };
+
   return [
+    blogIndex,
     ...pages,
     ...posts,
     ...products,
