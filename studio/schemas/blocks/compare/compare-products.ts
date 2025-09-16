@@ -16,8 +16,7 @@ export default defineType({
       name: "productFields",
       title: "Product fields to show",
       type: "array",
-      description:
-        "Choose which product/specification fields appear as rows.",
+      description: "Choose which product/specification fields appear as rows.",
       of: [{ type: "string" }],
       options: {
         list: [

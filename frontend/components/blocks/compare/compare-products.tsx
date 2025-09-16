@@ -57,7 +57,8 @@ export default function CompareProducts({
         case "bindingCapacity":
           rowLabels.push("Binding Capacity");
           valueGetters.push(
-            (c) => c?.overrides?.bindingCapacity ?? c?.product?.spec?.bindingCapacity
+            (c) =>
+              c?.overrides?.bindingCapacity ?? c?.product?.spec?.bindingCapacity
           );
           break;
         case "bestFor":
@@ -68,9 +69,7 @@ export default function CompareProducts({
           break;
         case "sku":
           rowLabels.push("SKU");
-          valueGetters.push(
-            (c) => c?.overrides?.sku ?? c?.product?.spec?.sku
-          );
+          valueGetters.push((c) => c?.overrides?.sku ?? c?.product?.spec?.sku);
           break;
         case "actions":
           rowLabels.push("Actions");
@@ -169,9 +168,12 @@ export default function CompareProducts({
                             name:
                               (columns?.[colIdx] as any)?.overrides?.name ??
                               (columns?.[colIdx] as any)?.name ??
-                              (columns?.[colIdx] as any)?.product?.title ?? null,
-                            productId: (columns?.[colIdx] as any)?.product?._id ?? null,
-                            slug: (columns?.[colIdx] as any)?.product?.slug ?? null,
+                              (columns?.[colIdx] as any)?.product?.title ??
+                              null,
+                            productId:
+                              (columns?.[colIdx] as any)?.product?._id ?? null,
+                            slug:
+                              (columns?.[colIdx] as any)?.product?.slug ?? null,
                             imageUrl: null,
                           }}
                           className="w-full max-w-44 px-6 mx-auto"
