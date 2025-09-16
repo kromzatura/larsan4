@@ -44,6 +44,12 @@ import {
   PRODUCT_CATEGORIES_QUERYResult,
   ProductCategory,
 } from "@/sanity.types";
+import {
+  BLOG_CATEGORIES_QUERY,
+  BLOG_CATEGORY_BY_SLUG_QUERY,
+  POSTS_BY_BLOG_CATEGORY_QUERY_NEWEST,
+  POSTS_COUNT_BY_BLOG_CATEGORY_QUERY,
+} from "@/sanity/queries/blogCategory";
 
 export type ProductCategoryWithMeta = ProductCategory & {
   description?: string | null;
@@ -243,6 +249,31 @@ export const fetchSanityPostsCount = async (): Promise<number> => {
     query: POSTS_COUNT_QUERY,
   });
   return data;
+};
+
+export const fetchSanityBlogCategories = async () => {
+  const { data } = await sanityFetch({ query: BLOG_CATEGORIES_QUERY });
+  return data as Array<{ _id: string; title: string; slug: { current: string } }>;
+};
+
+export const fetchSanityBlogCategoryBySlug = async ({ slug }: { slug: string }) => {
+  const { data } = await sanityFetch({ query: BLOG_CATEGORY_BY_SLUG_QUERY, params: { slug } });
+  return data as { _id: string; title?: string | null; slug?: { current?: string } | null; description?: string | null } | null;
+};
+
+export const fetchSanityPostsByBlogCategory = async ({ slug, page, limit }: { slug: string; page?: number; limit: number }) => {
+  const offset = page && limit ? (page - 1) * limit : 0;
+  const end = offset + limit;
+  const { data } = await sanityFetch({
+    query: POSTS_BY_BLOG_CATEGORY_QUERY_NEWEST,
+    params: { slug, offset, end },
+  });
+  return data as POSTS_QUERYResult;
+};
+
+export const fetchSanityPostsCountByBlogCategory = async ({ slug }: { slug: string }) => {
+  const { data } = await sanityFetch({ query: POSTS_COUNT_BY_BLOG_CATEGORY_QUERY, params: { slug } });
+  return data as number;
 };
 
 export const fetchSanityPostBySlug = async ({
