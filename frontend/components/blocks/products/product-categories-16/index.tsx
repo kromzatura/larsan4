@@ -18,6 +18,10 @@ export default async function ProductCategories16({
   const cats = await fetchSanityProductCategories();
   const params = searchParams ? await searchParams : undefined;
   const active = params?.category;
+  const slugs = new Set(
+    cats.map((c) => (c.slug?.current ? String(c.slug.current) : ""))
+  );
+  const hasValidActive = !!(active && slugs.has(active));
   return (
     <SectionContainer padding={padding}>
       <div className="rounded-lg border p-4">
@@ -26,7 +30,7 @@ export default async function ProductCategories16({
           <span>Category:</span>
           <Link href={`/products`}>
             <Badge
-              variant={active ? "outline" : "secondary"}
+              variant={hasValidActive ? "outline" : "secondary"}
               className="px-3 py-1 text-sm transition-colors hover:bg-secondary/80"
             >
               Any
