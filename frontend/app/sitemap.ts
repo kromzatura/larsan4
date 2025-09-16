@@ -1,11 +1,10 @@
 import { MetadataRoute } from "next";
 import { groq } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
-import { imageQuery } from "@/sanity/queries/shared/image";
 
 async function getPagesSitemap(): Promise<MetadataRoute.Sitemap[]> {
   const pagesQuery = groq`
-    *[_type == 'page'] | order(slug.current) {
+    *[_type == 'page' && defined(slug.current) && coalesce(meta.noindex, false) == false] | order(slug.current) {
       'url': $baseUrl + select(slug.current == 'index' => '', '/' + slug.current),
       'lastModified': _updatedAt,
       'changeFrequency': 'daily',
@@ -21,6 +20,8 @@ async function getPagesSitemap(): Promise<MetadataRoute.Sitemap[]> {
     params: {
       baseUrl: process.env.NEXT_PUBLIC_SITE_URL,
     },
+    perspective: "published",
+    stega: false,
   });
 
   return data;
@@ -28,7 +29,7 @@ async function getPagesSitemap(): Promise<MetadataRoute.Sitemap[]> {
 
 async function getPostsSitemap(): Promise<MetadataRoute.Sitemap[]> {
   const postsQuery = groq`
-    *[_type == 'post'] | order(_updatedAt desc) {
+    *[_type == 'post' && defined(slug.current) && coalesce(meta.noindex, false) == false] | order(_updatedAt desc) {
       'url': $baseUrl + '/blog/' + slug.current,
       'lastModified': _updatedAt,
       'changeFrequency': 'weekly',
@@ -41,6 +42,8 @@ async function getPostsSitemap(): Promise<MetadataRoute.Sitemap[]> {
     params: {
       baseUrl: process.env.NEXT_PUBLIC_SITE_URL,
     },
+    perspective: "published",
+    stega: false,
   });
 
   return data;
@@ -60,6 +63,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap[]> {
           'priority': 0.7
         }`,
           params: { baseUrl: process.env.NEXT_PUBLIC_SITE_URL },
+          perspective: "published",
+          stega: false,
         });
         return data as MetadataRoute.Sitemap[];
       })(),
@@ -72,18 +77,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap[]> {
           'priority': 0.6
         }`,
           params: { baseUrl: process.env.NEXT_PUBLIC_SITE_URL },
+          perspective: "published",
+          stega: false,
         });
         return data as MetadataRoute.Sitemap[];
       })(),
       (async () => {
         const { data } = await sanityFetch({
-          query: groq`*[_type == 'category' && defined(slug)] | order(orderRank) {
+          query: groq`*[_type == 'category' && defined(slug) && coalesce(seo.noindex, false) == false] | order(orderRank) {
           'url': $baseUrl + '/blog/category/' + slug.current,
           'lastModified': _updatedAt,
           'changeFrequency': 'weekly',
           'priority': 0.6
         }`,
           params: { baseUrl: process.env.NEXT_PUBLIC_SITE_URL },
+          perspective: "published",
+          stega: false,
         });
         return data as MetadataRoute.Sitemap[];
       })(),

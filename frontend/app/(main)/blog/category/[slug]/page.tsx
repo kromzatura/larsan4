@@ -8,6 +8,7 @@ import {
   fetchSanityPostsCountByBlogCategory,
 } from "@/sanity/lib/fetch";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
+import { chipClass } from "@/components/ui/chip";
 
 const POSTS_PER_PAGE = 6;
 
@@ -158,11 +159,7 @@ export default async function BlogCategoryPage(props: {
           prefetch
           aria-label="Sort by newest"
           aria-current={sort === "newest" ? "page" : undefined}
-          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background ${
-            sort === "newest"
-              ? "bg-muted text-foreground"
-              : "text-muted-foreground hover:bg-muted"
-          }`}
+          className={chipClass(sort === "newest")}
         >
           Newest
         </Link>
@@ -171,11 +168,7 @@ export default async function BlogCategoryPage(props: {
           prefetch
           aria-label="Sort by title A to Z"
           aria-current={sort === "az" ? "page" : undefined}
-          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background ${
-            sort === "az"
-              ? "bg-muted text-foreground"
-              : "text-muted-foreground hover:bg-muted"
-          }`}
+          className={chipClass(sort === "az")}
         >
           A–Z
         </Link>
@@ -184,24 +177,26 @@ export default async function BlogCategoryPage(props: {
           prefetch
           aria-label="Sort by title Z to A"
           aria-current={sort === "za" ? "page" : undefined}
-          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background ${
-            sort === "za"
-              ? "bg-muted text-foreground"
-              : "text-muted-foreground hover:bg-muted"
-          }`}
+          className={chipClass(sort === "za")}
         >
           Z–A
         </Link>
       </div>
       <div className="mt-8">
-        <PostsList
-          items={items}
-          page={page}
-          pageCount={totalPages}
-          baseUrl={baseUrl}
-          baseSearchParams={baseSearchParams}
-          activeCategorySlug={params.slug}
-        />
+        {items.length === 0 ? (
+          <div className="rounded-md border p-6 text-sm text-muted-foreground">
+            No posts in this category yet. See <a href="/blog" className="underline underline-offset-2">all posts</a>.
+          </div>
+        ) : (
+          <PostsList
+            items={items}
+            page={page}
+            pageCount={totalPages}
+            baseUrl={baseUrl}
+            baseSearchParams={baseSearchParams}
+            activeCategorySlug={params.slug}
+          />
+        )}
       </div>
     </section>
   );

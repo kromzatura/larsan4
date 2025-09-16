@@ -57,6 +57,7 @@ export async function GET(
     excerpt?: string | null;
     body?: any[] | null;
     author?: { name?: string | null } | null;
+    image?: { asset?: { url?: string | null; mimeType?: string | null; metadata?: { dimensions?: { width?: number | null; height?: number | null } | null } | null } | null } | null;
     categories?: Array<{ title?: string | null }> | null;
   };
   const items = ((posts as FeedPost[]) || []).map((p) => {
@@ -76,6 +77,14 @@ export async function GET(
     const creator = p.author?.name
       ? `<dc:creator>${escape(p.author.name)}</dc:creator>`
       : "";
+    const img = (p as any)?.image?.asset;
+    const imgUrl = img?.url ? escape(img.url) : null;
+    const imgType = img?.mimeType || null;
+    const w = img?.metadata?.dimensions?.width || null;
+    const h = img?.metadata?.dimensions?.height || null;
+    const media = imgUrl
+      ? `<media:content url="${imgUrl}"${imgType ? ` type="${imgType}"` : ""}${w ? ` width="${w}"` : ""}${h ? ` height="${h}"` : ""} />`
+      : "";
 
     return `
       <item>
@@ -88,12 +97,13 @@ export async function GET(
         <content:encoded><![CDATA[${
           html || p.excerpt || ""
         }]]></content:encoded>
+        ${media}
         ${categories}
       </item>`;
   });
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/">
     <channel>
       <title>${escape(siteName)} — ${escape(
     cat.title ?? "Blog Category"
