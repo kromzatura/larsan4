@@ -65,6 +65,7 @@ export default async function BlogIndex(props: {
       ? p.categories.map((c) => ({
           _id: c?._id || undefined,
           title: c?.title || null,
+          slug: (c as any)?.slug || null,
         }))
       : null,
   }));

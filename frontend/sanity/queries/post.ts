@@ -44,6 +44,7 @@ export const POSTS_QUERY = groq`*[_type == "post" && defined(slug)] | order(_cre
     categories[]->{
       _id,
       title,
+      slug,
     },
 }`;
 
@@ -66,6 +67,7 @@ export const POSTS_QUERY_AZ = groq`*[_type == "post" && defined(slug)] | order(t
     categories[]->{
       _id,
       title,
+      slug,
     },
 }`;
 
@@ -88,6 +90,7 @@ export const POSTS_QUERY_ZA = groq`*[_type == "post" && defined(slug)] | order(t
     categories[]->{
       _id,
       title,
+      slug,
     },
 }`;
 

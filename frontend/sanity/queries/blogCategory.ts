@@ -33,7 +33,7 @@ export const POSTS_BY_BLOG_CATEGORY_QUERY_NEWEST = groq`*[
     title,
     image{ asset->{ _id, url } }
   },
-  categories[]->{ _id, title },
+  categories[]->{ _id, title, slug },
 }`;
 
 export const POSTS_BY_BLOG_CATEGORY_QUERY_AZ = groq`*[
@@ -49,7 +49,7 @@ export const POSTS_BY_BLOG_CATEGORY_QUERY_AZ = groq`*[
     title,
     image{ asset->{ _id, url } }
   },
-  categories[]->{ _id, title },
+  categories[]->{ _id, title, slug },
 }`;
 
 export const POSTS_BY_BLOG_CATEGORY_QUERY_ZA = groq`*[
@@ -65,7 +65,7 @@ export const POSTS_BY_BLOG_CATEGORY_QUERY_ZA = groq`*[
     title,
     image{ asset->{ _id, url } }
   },
-  categories[]->{ _id, title },
+  categories[]->{ _id, title, slug },
 }`;
 
 export const POSTS_COUNT_BY_BLOG_CATEGORY_QUERY = groq`count(*[

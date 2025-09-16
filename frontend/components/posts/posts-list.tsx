@@ -21,6 +21,7 @@ export type PostsListItem = {
   categories?: Array<{
     _id?: string | null;
     title?: string | null;
+    slug?: { current?: string } | null;
   }> | null;
 };
 
@@ -88,14 +89,28 @@ export default function PostsList({
             </h3>
             {post.categories && post.categories.length > 0 && (
               <div className="mt-5 flex flex-wrap gap-2">
-                {post.categories.map((category) => (
-                  <span
-                    key={category._id || `${post._id}-${category.title}`}
-                    className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium text-muted-foreground"
-                  >
-                    {category.title}
-                  </span>
-                ))}
+                {post.categories.map((category) => {
+                  const href = category.slug?.current
+                    ? `/blog/category/${category.slug.current}`
+                    : undefined;
+                  const key = category._id || `${post._id}-${category.title}`;
+                  return href ? (
+                    <Link
+                      key={key}
+                      href={href}
+                      className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium text-muted-foreground hover:bg-muted"
+                    >
+                      {category.title}
+                    </Link>
+                  ) : (
+                    <span
+                      key={key}
+                      className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium text-muted-foreground"
+                    >
+                      {category.title}
+                    </span>
+                  );
+                })}
               </div>
             )}
           </div>

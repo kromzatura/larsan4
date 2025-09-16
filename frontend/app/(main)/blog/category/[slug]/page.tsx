@@ -80,6 +80,7 @@ export default async function BlogCategoryPage(props: {
       ? p.categories.map((c) => ({
           _id: c?._id || undefined,
           title: c?.title || null,
+          slug: (c as any)?.slug || null,
         }))
       : null,
   }));
@@ -98,19 +99,25 @@ export default async function BlogCategoryPage(props: {
       <div className="mt-5 flex flex-wrap gap-2">
         <a
           href={`${baseUrl}`}
-          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${sort === "newest" ? "bg-muted" : "hover:bg-muted"}`}
+          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${
+            sort === "newest" ? "bg-muted" : "hover:bg-muted"
+          }`}
         >
           Newest
         </a>
         <a
           href={`${baseUrl}?sort=az`}
-          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${sort === "az" ? "bg-muted" : "hover:bg-muted"}`}
+          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${
+            sort === "az" ? "bg-muted" : "hover:bg-muted"
+          }`}
         >
           A–Z
         </a>
         <a
           href={`${baseUrl}?sort=za`}
-          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${sort === "za" ? "bg-muted" : "hover:bg-muted"}`}
+          className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm ${
+            sort === "za" ? "bg-muted" : "hover:bg-muted"
+          }`}
         >
           Z–A
         </a>
