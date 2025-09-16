@@ -120,7 +120,9 @@ export default async function PostPage(props: {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.title || undefined,
-    author: post.author?.name ? { "@type": "Person", name: post.author.name } : undefined,
+    author: post.author?.name
+      ? { "@type": "Person", name: post.author.name }
+      : undefined,
     image: post.image?.asset?.url ? [post.image.asset.url] : undefined,
     datePublished: (post as any).publishedAt || post._createdAt || undefined,
     dateModified: post._updatedAt || undefined,
@@ -134,8 +136,18 @@ export default async function PostPage(props: {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
-      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
-      { "@type": "ListItem", position: 3, name: post.title || "Post", item: `${SITE_URL}/blog/${post.slug?.current ?? ""}` },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: `${SITE_URL}/blog`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title || "Post",
+        item: `${SITE_URL}/blog/${post.slug?.current ?? ""}`,
+      },
     ],
   } as const;
 

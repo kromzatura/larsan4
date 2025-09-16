@@ -109,8 +109,18 @@ export default async function BlogCategoryPage(props: {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
-      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
-      { "@type": "ListItem", position: 3, name: cat.title || "Category", item: `${SITE_URL}${baseUrl}` },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: `${SITE_URL}/blog`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: cat.title || "Category",
+        item: `${SITE_URL}${baseUrl}`,
+      },
     ],
   } as const;
 
