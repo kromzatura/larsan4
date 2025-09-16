@@ -55,6 +55,7 @@ import Compare2 from "@/components/blocks/compare/compare2";
 import Compare4 from "@/components/blocks/compare/compare4";
 import Compare5 from "@/components/blocks/compare/compare5";
 import Compare6 from "@/components/blocks/compare/compare6";
+import CompareProducts from "@/components/blocks/compare/compare-products";
 import Gallery1 from "@/components/blocks/gallery/gallery1";
 import Gallery3 from "@/components/blocks/gallery/gallery3";
 import Gallery4 from "@/components/blocks/gallery/gallery4";
@@ -70,9 +71,7 @@ import ProductCategories16 from "@/components/blocks/products/product-categories
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 
-const componentMap: {
-  [K in Block["_type"]]: React.ComponentType<Extract<Block, { _type: K }>>;
-} = {
+const componentMap: Record<string, React.ComponentType<any>> = {
   "section-header": SectionHeader,
   "hero-12": Hero12,
   "hero-13": Hero13,
@@ -129,6 +128,7 @@ const componentMap: {
   "compare-4": Compare4,
   "compare-5": Compare5,
   "compare-6": Compare6,
+  "compare-products": CompareProducts,
   "gallery-1": Gallery1,
   "gallery-3": Gallery3,
   "gallery-4": Gallery4,

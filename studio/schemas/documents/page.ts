@@ -59,6 +59,7 @@ export default defineType({
         { type: "compare-4" },
         { type: "compare-5" },
         { type: "compare-6" },
+  { type: "compare-products" },
         { type: "faq-1" },
         { type: "faq-5" },
         { type: "faq-8" },
@@ -139,6 +140,7 @@ export default defineType({
                 "compare-4",
                 "compare-5",
                 "compare-6",
+                "compare-products",
               ],
             },
             {
