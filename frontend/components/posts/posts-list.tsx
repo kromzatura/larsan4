@@ -31,6 +31,7 @@ export type PostsListProps = {
   pageCount: number;
   baseUrl: string;
   baseSearchParams?: string;
+  activeCategorySlug?: string;
   className?: string;
 };
 
@@ -40,6 +41,7 @@ export default function PostsList({
   pageCount,
   baseUrl,
   baseSearchParams,
+  activeCategorySlug,
   className,
 }: PostsListProps) {
   const createPageUrl = (pageNum: number) => {
@@ -94,18 +96,32 @@ export default function PostsList({
                     ? `/blog/category/${category.slug.current}`
                     : undefined;
                   const key = category._id || `${post._id}-${category.title}`;
+                  const isActive =
+                    Boolean(activeCategorySlug) &&
+                    category.slug?.current === activeCategorySlug;
+                  const chipBase =
+                    "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background";
                   return href ? (
                     <Link
                       key={key}
                       href={href}
-                      className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium text-muted-foreground hover:bg-muted"
+                      prefetch
+                      className={cn(
+                        chipBase,
+                        isActive
+                          ? "bg-muted text-foreground"
+                          : "text-muted-foreground hover:bg-muted"
+                      )}
                     >
                       {category.title}
                     </Link>
                   ) : (
                     <span
                       key={key}
-                      className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium text-muted-foreground"
+                      className={cn(
+                        chipBase,
+                        "text-muted-foreground"
+                      )}
                     >
                       {category.title}
                     </span>

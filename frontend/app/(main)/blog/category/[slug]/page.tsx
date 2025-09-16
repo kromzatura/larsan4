@@ -129,6 +129,7 @@ export default async function BlogCategoryPage(props: {
           pageCount={totalPages}
           baseUrl={baseUrl}
           baseSearchParams={baseSearchParams}
+          activeCategorySlug={params.slug}
         />
       </div>
     </section>
