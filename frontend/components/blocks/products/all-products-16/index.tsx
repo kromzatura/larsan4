@@ -57,10 +57,14 @@ export default async function AllProducts16({
     return `/products${qp.toString() ? `?${qp.toString()}` : ""}`;
   };
 
+  const isEmpty = !products || products.length === 0;
+
   return (
     <SectionContainer padding={padding}>
-      <div className="overflow-x-auto rounded-lg border">
-        <table className="min-w-full text-sm">
+      {!isEmpty ? (
+        <>
+          <div className="overflow-x-auto rounded-lg border">
+            <table className="min-w-full text-sm">
           <thead className="bg-muted/50 text-left text-xs uppercase tracking-wide text-muted-foreground">
             <tr>
               <th className="px-6 py-3">Products</th>
@@ -170,15 +174,34 @@ export default async function AllProducts16({
               );
             })}
           </tbody>
-        </table>
-      </div>
+            </table>
+          </div>
 
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        createPageUrl={createPageUrl}
-        className="mt-6"
-      />
+          {totalPages > 1 && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              createPageUrl={createPageUrl}
+              className="mt-6"
+            />
+          )}
+        </>
+      ) : (
+        <div className="rounded-lg border p-8 text-center text-muted-foreground">
+          {activeCategory ? (
+            <>
+              <p>No products found in this category.</p>
+              <p className="mt-2">
+                <Link className="underline" href="/products">
+                  Clear filter
+                </Link>
+              </p>
+            </>
+          ) : (
+            <p>No products found.</p>
+          )}
+        </div>
+      )}
     </SectionContainer>
   );
 }
