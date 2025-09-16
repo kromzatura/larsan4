@@ -115,9 +115,40 @@ export default async function PostPage(props: {
     : [];
 
   const headings = extractHeadings(post.body);
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const articleLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title || undefined,
+    author: post.author?.name ? { "@type": "Person", name: post.author.name } : undefined,
+    image: post.image?.asset?.url ? [post.image.asset.url] : undefined,
+    datePublished: (post as any).publishedAt || post._createdAt || undefined,
+    dateModified: post._updatedAt || undefined,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/blog/${post.slug?.current ?? ""}`,
+    },
+  } as const;
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+      { "@type": "ListItem", position: 3, name: post.title || "Post", item: `${SITE_URL}/blog/${post.slug?.current ?? ""}` },
+    ],
+  } as const;
 
   return (
     <section className="container py-16 xl:py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <article>
         <Breadcrumbs links={links} />
 

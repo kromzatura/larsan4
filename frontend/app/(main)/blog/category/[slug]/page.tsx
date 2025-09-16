@@ -103,9 +103,23 @@ export default async function BlogCategoryPage(props: {
 
   const baseUrl = `/blog/category/${params.slug}`;
   const baseSearchParams = sort && sort !== "newest" ? `sort=${sort}` : "";
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+      { "@type": "ListItem", position: 3, name: cat.title || "Category", item: `${SITE_URL}${baseUrl}` },
+    ],
+  } as const;
 
   return (
     <section className="container py-16 xl:py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <h1 className="text-3xl font-semibold md:text-5xl">{cat.title}</h1>
       {cat.description && (
         <p className="mt-3 max-w-3xl text-muted-foreground">
@@ -122,8 +136,18 @@ export default async function BlogCategoryPage(props: {
           Subscribe (RSS)
         </Link>
         <Link
+          href={`${baseUrl}/feed.json`}
+          prefetch
+          aria-label={`Subscribe to ${cat.title ?? "this category"} JSON feed`}
+          className="inline-flex items-center rounded-md border px-3 py-1.5 text-sm text-muted-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background"
+        >
+          Subscribe (JSON)
+        </Link>
+        <Link
           href={`${baseUrl}`}
           prefetch
+          aria-label="Sort by newest"
+          aria-current={sort === "newest" ? "page" : undefined}
           className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background ${
             sort === "newest"
               ? "bg-muted text-foreground"
@@ -135,6 +159,8 @@ export default async function BlogCategoryPage(props: {
         <Link
           href={`${baseUrl}?sort=az`}
           prefetch
+          aria-label="Sort by title A to Z"
+          aria-current={sort === "az" ? "page" : undefined}
           className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background ${
             sort === "az"
               ? "bg-muted text-foreground"
@@ -146,6 +172,8 @@ export default async function BlogCategoryPage(props: {
         <Link
           href={`${baseUrl}?sort=za`}
           prefetch
+          aria-label="Sort by title Z to A"
+          aria-current={sort === "za" ? "page" : undefined}
           className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background ${
             sort === "za"
               ? "bg-muted text-foreground"
