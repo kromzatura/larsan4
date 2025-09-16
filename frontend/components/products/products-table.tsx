@@ -62,19 +62,19 @@ export default function ProductsTable({
         <table className="min-w-full text-sm">
           <thead className="bg-muted/50 text-left text-xs uppercase tracking-wide text-muted-foreground">
             <tr>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-4">
                 Products
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-4">
                 Category
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-4">
                 Key features
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-4">
                 Product attributes
               </th>
-              <th scope="col" className="px-6 py-3 text-center">
+              <th scope="col" className="px-6 py-4 text-center">
                 Action
               </th>
             </tr>
@@ -86,8 +86,8 @@ export default function ProductsTable({
                 key={item._id}
                 className="group relative border-t transition-colors hover:bg-muted/40"
               >
-                <td className="px-6 py-4 align-middle">
-                  <div className="flex items-center gap-4">
+                <td className="px-6 py-5 md:py-6 align-middle">
+                  <div className="flex items-center gap-5">
                     {item.imageUrl ? (
                       <Link href={item.href} className="relative z-10 shrink-0">
                         <Image
@@ -95,26 +95,26 @@ export default function ProductsTable({
                           alt={item.title || "Product image"}
                           width={96}
                           height={64}
-                          className="h-16 w-24 rounded object-cover"
+                          className="h-16 w-24 rounded object-cover ring-1 ring-border"
                         />
                       </Link>
                     ) : null}
-                    <div className="flex flex-col">
+                    <div className="flex flex-col gap-1">
                       <Link
                         href={item.href}
-                        className="font-semibold hover:underline"
+                        className="font-semibold hover:underline line-clamp-2 break-words"
                       >
                         {item.title}
                       </Link>
                       {item.sku && (
-                        <span className="text-xs text-muted-foreground">
+                        <span className="text-xs text-muted-foreground truncate block whitespace-nowrap">
                           SKU: {item.sku}
                         </span>
                       )}
                     </div>
                   </div>
                 </td>
-                <td className="px-6 py-4 align-middle">
+                <td className="px-6 py-5 md:py-6 align-top">
                   <div className="relative z-10 flex flex-wrap items-center gap-2">
                     {Array.isArray(item.categories) &&
                       item.categories?.map((c) => (
@@ -133,7 +133,7 @@ export default function ProductsTable({
                       ))}
                   </div>
                 </td>
-                <td className="px-6 py-4 align-middle">
+                <td className="px-6 py-5 md:py-6 align-top">
                   <ul className="list-disc pl-5 space-y-1.5 marker:text-muted-foreground">
                     {Array.isArray(item.features) &&
                       item.features
@@ -141,7 +141,7 @@ export default function ProductsTable({
                         .map((f, idx) => <li key={idx}>{f}</li>)}
                   </ul>
                 </td>
-                <td className="px-6 py-4 align-middle">
+                <td className="px-6 py-5 md:py-6 align-top">
                   <div className="relative z-10 flex flex-wrap items-center gap-2">
                     {item.productAttributes && (
                       <Badge variant="outline">{item.productAttributes}</Badge>
@@ -151,7 +151,7 @@ export default function ProductsTable({
                     )}
                   </div>
                 </td>
-                <td className="relative z-10 px-6 py-4 text-center align-middle">
+                <td className="relative z-10 px-6 py-5 md:py-6 text-center align-middle">
                   {item.sku && (
                     <AddToInquiryButton
                       item={{
