@@ -11,7 +11,9 @@ export default defineType({
       if (isExternal) {
         return href ? true : "External links require an href";
       }
-      return internalLink ? true : "Select an internal link or mark as External";
+      return internalLink
+        ? true
+        : "Select an internal link or mark as External";
     }),
     Rule.custom((value) => {
       if (!value) return true;
@@ -99,19 +101,20 @@ export default defineType({
           : ilType === "page"
           ? "Page"
           : "Internal";
-      const path = ilType === "post"
-        ? `/blog/${ilSlug || ""}`
-        : ilType === "category"
-        ? `/blog/category/${ilSlug || ""}`
-        : ilType === "product"
-        ? `/products/${ilSlug || ""}`
-        : ilType === "productCategory"
-        ? `/products/category/${ilSlug || ""}`
-        : ilType === "contact"
-        ? `/contact`
-        : ilSlug === "index"
-        ? "/"
-        : `/${ilSlug || ""}`;
+      const path =
+        ilType === "post"
+          ? `/blog/${ilSlug || ""}`
+          : ilType === "category"
+          ? `/blog/category/${ilSlug || ""}`
+          : ilType === "product"
+          ? `/products/${ilSlug || ""}`
+          : ilType === "productCategory"
+          ? `/products/category/${ilSlug || ""}`
+          : ilType === "contact"
+          ? `/contact`
+          : ilSlug === "index"
+          ? "/"
+          : `/${ilSlug || ""}`;
       return {
         title: label || ilTitle || path || "Link",
         subtitle: `${typeLabel} • ${path}`,
