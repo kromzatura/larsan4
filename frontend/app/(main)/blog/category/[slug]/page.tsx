@@ -102,7 +102,9 @@ export default async function BlogCategoryPage(props: {
           href={`${baseUrl}`}
           prefetch
           className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background ${
-            sort === "newest" ? "bg-muted text-foreground" : "text-muted-foreground hover:bg-muted"
+            sort === "newest"
+              ? "bg-muted text-foreground"
+              : "text-muted-foreground hover:bg-muted"
           }`}
         >
           Newest
@@ -111,7 +113,9 @@ export default async function BlogCategoryPage(props: {
           href={`${baseUrl}?sort=az`}
           prefetch
           className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background ${
-            sort === "az" ? "bg-muted text-foreground" : "text-muted-foreground hover:bg-muted"
+            sort === "az"
+              ? "bg-muted text-foreground"
+              : "text-muted-foreground hover:bg-muted"
           }`}
         >
           A–Z
@@ -120,7 +124,9 @@ export default async function BlogCategoryPage(props: {
           href={`${baseUrl}?sort=za`}
           prefetch
           className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background ${
-            sort === "za" ? "bg-muted text-foreground" : "text-muted-foreground hover:bg-muted"
+            sort === "za"
+              ? "bg-muted text-foreground"
+              : "text-muted-foreground hover:bg-muted"
           }`}
         >
           Z–A
