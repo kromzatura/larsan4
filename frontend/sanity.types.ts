@@ -2388,6 +2388,7 @@ export type Product = {
       _type: "image";
     };
   };
+  orderRank?: string;
 };
 
 export type Link = {
@@ -7160,9 +7161,10 @@ export type PRODUCT_QUERYResult = {
   } | null;
 } | null;
 // Variable: PRODUCTS_QUERY
-// Query: *[_type == "product" && defined(slug)] | order(_createdAt desc)[$offset...$end]{  _id,  _createdAt,  title,  slug,  specifications[]->{    _id,    sku,    purity,    productAttributes,  },  keyFeatures[],  excerpt,  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  categories[]->{ _id, title, slug }}
+// Query: *[_type == "product" && defined(slug)] | order(orderRank){  _id,  orderRank,  _createdAt,  title,  slug,  specifications[]->{    _id,    sku,    purity,    productAttributes,  },  keyFeatures[],  excerpt,  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  categories[]->{ _id, title, slug }}
 export type PRODUCTS_QUERYResult = Array<{
   _id: string;
+  orderRank: string | null;
   _createdAt: string;
   title: string | null;
   slug: Slug | null;
@@ -7247,9 +7249,10 @@ export type PRODUCT_CATEGORY_BY_SLUG_QUERYResult = {
   } | null;
 } | null;
 // Variable: PRODUCTS_BY_CATEGORY_QUERY
-// Query: *[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(_createdAt desc)[$offset...$end]{  _id,  _createdAt,  title,  slug,  specifications[]->{    _id,    sku,    purity,    productAttributes,  },  keyFeatures[],  excerpt,  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  categories[]->{ _id, title, slug }}
+// Query: *[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(orderRank){  _id,  orderRank,  _createdAt,  title,  slug,  specifications[]->{    _id,    sku,    purity,    productAttributes,  },  keyFeatures[],  excerpt,  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  categories[]->{ _id, title, slug }}
 export type PRODUCTS_BY_CATEGORY_QUERYResult = Array<{
   _id: string;
+  orderRank: string | null;
   _createdAt: string;
   title: string | null;
   slug: Slug | null;
@@ -7287,9 +7290,10 @@ export type PRODUCTS_BY_CATEGORY_QUERYResult = Array<{
   }> | null;
 }>;
 // Variable: PRODUCTS_BY_CATEGORY_QUERY_NEWEST
-// Query: *[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(_createdAt desc)[$offset...$end]{  _id,  _createdAt,  title,  slug,  specifications[]->{    _id,    sku,    purity,    productAttributes,  },  keyFeatures[],  excerpt,  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  categories[]->{ _id, title, slug }}
+// Query: *[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(_createdAt desc){  _id,  orderRank,  _createdAt,  title,  slug,  specifications[]->{    _id,    sku,    purity,    productAttributes,  },  keyFeatures[],  excerpt,  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  categories[]->{ _id, title, slug }}
 export type PRODUCTS_BY_CATEGORY_QUERY_NEWESTResult = Array<{
   _id: string;
+  orderRank: string | null;
   _createdAt: string;
   title: string | null;
   slug: Slug | null;
@@ -7327,9 +7331,10 @@ export type PRODUCTS_BY_CATEGORY_QUERY_NEWESTResult = Array<{
   }> | null;
 }>;
 // Variable: PRODUCTS_BY_CATEGORY_QUERY_AZ
-// Query: *[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(title asc)[$offset...$end]{  _id,  _createdAt,  title,  slug,  specifications[]->{    _id,    sku,    purity,    productAttributes,  },  keyFeatures[],  excerpt,  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  categories[]->{ _id, title, slug }}
+// Query: *[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(title asc){  _id,  orderRank,  _createdAt,  title,  slug,  specifications[]->{    _id,    sku,    purity,    productAttributes,  },  keyFeatures[],  excerpt,  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  categories[]->{ _id, title, slug }}
 export type PRODUCTS_BY_CATEGORY_QUERY_AZResult = Array<{
   _id: string;
+  orderRank: string | null;
   _createdAt: string;
   title: string | null;
   slug: Slug | null;
@@ -7367,9 +7372,10 @@ export type PRODUCTS_BY_CATEGORY_QUERY_AZResult = Array<{
   }> | null;
 }>;
 // Variable: PRODUCTS_BY_CATEGORY_QUERY_ZA
-// Query: *[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(title desc)[$offset...$end]{  _id,  _createdAt,  title,  slug,  specifications[]->{    _id,    sku,    purity,    productAttributes,  },  keyFeatures[],  excerpt,  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  categories[]->{ _id, title, slug }}
+// Query: *[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(title desc){  _id,  orderRank,  _createdAt,  title,  slug,  specifications[]->{    _id,    sku,    purity,    productAttributes,  },  keyFeatures[],  excerpt,  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  categories[]->{ _id, title, slug }}
 export type PRODUCTS_BY_CATEGORY_QUERY_ZAResult = Array<{
   _id: string;
+  orderRank: string | null;
   _createdAt: string;
   title: string | null;
   slug: Slug | null;
@@ -7528,14 +7534,15 @@ declare module "@sanity/client" {
     "*[_type == \"post\" && defined(slug)]{slug}": POSTS_SLUGS_QUERYResult;
     "count(*[_type == \"post\" && defined(slug)])": POSTS_COUNT_QUERYResult;
     "*[_type == \"product\" && slug.current == $slug][0]{\n  _id,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    name,\n    sku,\n    bestFor,\n    pungency,\n    bindingCapacity,\n    fatContent,\n    purity,\n    moisture,\n    hsCode,\n    minOrder,\n    origin,\n    botanicalName,\n    shelfLife,\n    allergenInfo,\n    productAttributes,\n    certification,\n  },\n  keyFeatures[],\n  packagingOptions[]{\n    ...,\n  },\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  body[]{ \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n },\n  excerpt,\n  categories[]->{ _id, title, slug },\n  \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n\n}": PRODUCT_QUERYResult;
-    "*[_type == \"product\" && defined(slug)] | order(_createdAt desc)[$offset...$end]{\n  _id,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    sku,\n    purity,\n    productAttributes,\n  },\n  keyFeatures[],\n  excerpt,\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  categories[]->{ _id, title, slug }\n}": PRODUCTS_QUERYResult;
+    "*[_type == \"product\" && defined(slug)] | order(orderRank){\n  _id,\n  orderRank,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    sku,\n    purity,\n    productAttributes,\n  },\n  keyFeatures[],\n  excerpt,\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  categories[]->{ _id, title, slug }\n}": PRODUCTS_QUERYResult;
     "*[_type == \"product\" && defined(slug)]{ slug }": PRODUCTS_SLUGS_QUERYResult;
     "count(*[_type == \"product\" && defined(slug)])": PRODUCTS_COUNT_QUERYResult;
     "*[_type == \"productCategory\" && defined(slug)] | order(orderRank){\n  _id,\n  title,\n  slug\n}": PRODUCT_CATEGORIES_QUERYResult;
     "*[_type == \"productCategory\" && slug.current == $slug][0]{\n  _id,\n  _type,\n  title,\n  slug,\n  description,\n  \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n\n}": PRODUCT_CATEGORY_BY_SLUG_QUERYResult;
-    "*[_type == \"product\" && references(*[_type == \"productCategory\" && slug.current == $slug]._id)] | order(_createdAt desc)[$offset...$end]{\n  _id,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    sku,\n    purity,\n    productAttributes,\n  },\n  keyFeatures[],\n  excerpt,\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  categories[]->{ _id, title, slug }\n}": PRODUCTS_BY_CATEGORY_QUERYResult | PRODUCTS_BY_CATEGORY_QUERY_NEWESTResult;
-    "*[_type == \"product\" && references(*[_type == \"productCategory\" && slug.current == $slug]._id)] | order(title asc)[$offset...$end]{\n  _id,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    sku,\n    purity,\n    productAttributes,\n  },\n  keyFeatures[],\n  excerpt,\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  categories[]->{ _id, title, slug }\n}": PRODUCTS_BY_CATEGORY_QUERY_AZResult;
-    "*[_type == \"product\" && references(*[_type == \"productCategory\" && slug.current == $slug]._id)] | order(title desc)[$offset...$end]{\n  _id,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    sku,\n    purity,\n    productAttributes,\n  },\n  keyFeatures[],\n  excerpt,\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  categories[]->{ _id, title, slug }\n}": PRODUCTS_BY_CATEGORY_QUERY_ZAResult;
+    "*[_type == \"product\" && references(*[_type == \"productCategory\" && slug.current == $slug]._id)] | order(orderRank){\n  _id,\n  orderRank,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    sku,\n    purity,\n    productAttributes,\n  },\n  keyFeatures[],\n  excerpt,\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  categories[]->{ _id, title, slug }\n}": PRODUCTS_BY_CATEGORY_QUERYResult;
+    "*[_type == \"product\" && references(*[_type == \"productCategory\" && slug.current == $slug]._id)] | order(_createdAt desc){\n  _id,\n  orderRank,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    sku,\n    purity,\n    productAttributes,\n  },\n  keyFeatures[],\n  excerpt,\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  categories[]->{ _id, title, slug }\n}": PRODUCTS_BY_CATEGORY_QUERY_NEWESTResult;
+    "*[_type == \"product\" && references(*[_type == \"productCategory\" && slug.current == $slug]._id)] | order(title asc){\n  _id,\n  orderRank,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    sku,\n    purity,\n    productAttributes,\n  },\n  keyFeatures[],\n  excerpt,\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  categories[]->{ _id, title, slug }\n}": PRODUCTS_BY_CATEGORY_QUERY_AZResult;
+    "*[_type == \"product\" && references(*[_type == \"productCategory\" && slug.current == $slug]._id)] | order(title desc){\n  _id,\n  orderRank,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    sku,\n    purity,\n    productAttributes,\n  },\n  keyFeatures[],\n  excerpt,\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  categories[]->{ _id, title, slug }\n}": PRODUCTS_BY_CATEGORY_QUERY_ZAResult;
     "count(*[_type == \"product\" && references(*[_type == \"productCategory\" && slug.current == $slug]._id)])": PRODUCTS_COUNT_BY_CATEGORY_QUERYResult;
     "*[_type == \"settings\"][0]{\n  _type,\n  siteName,\n  logo{\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  description,\n  copyright\n}": SETTINGS_QUERYResult;
     "*[_type == \"team\" && defined(slug)] | order(orderRank) {\n    _id,\n    name,\n    title,\n    description,\n    slug,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    links[]{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    },\n}": TEAM_QUERYResult;

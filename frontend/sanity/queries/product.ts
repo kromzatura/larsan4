@@ -37,8 +37,9 @@ export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug]
   ${metaQuery}
 }`;
 
-export const PRODUCTS_QUERY = groq`*[_type == "product" && defined(slug)] | order(_createdAt desc)[$offset...$end]{
+export const PRODUCTS_QUERY = groq`*[_type == "product" && defined(slug)] | order(orderRank){
   _id,
+  orderRank,
   _createdAt,
   title,
   slug,
@@ -73,8 +74,9 @@ export const PRODUCT_CATEGORY_BY_SLUG_QUERY = groq`*[_type == "productCategory" 
   ${metaQuery}
 }`;
 
-export const PRODUCTS_BY_CATEGORY_QUERY = groq`*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(_createdAt desc)[$offset...$end]{
+export const PRODUCTS_BY_CATEGORY_QUERY = groq`*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(orderRank){
   _id,
+  orderRank,
   _createdAt,
   title,
   slug,
@@ -91,8 +93,9 @@ export const PRODUCTS_BY_CATEGORY_QUERY = groq`*[_type == "product" && reference
 }`;
 
 // Explicit variants to avoid brittle string replacement when ordering
-export const PRODUCTS_BY_CATEGORY_QUERY_NEWEST = groq`*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(_createdAt desc)[$offset...$end]{
+export const PRODUCTS_BY_CATEGORY_QUERY_NEWEST = groq`*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(_createdAt desc){
   _id,
+  orderRank,
   _createdAt,
   title,
   slug,
@@ -108,8 +111,9 @@ export const PRODUCTS_BY_CATEGORY_QUERY_NEWEST = groq`*[_type == "product" && re
   categories[]->{ _id, title, slug }
 }`;
 
-export const PRODUCTS_BY_CATEGORY_QUERY_AZ = groq`*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(title asc)[$offset...$end]{
+export const PRODUCTS_BY_CATEGORY_QUERY_AZ = groq`*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(title asc){
   _id,
+  orderRank,
   _createdAt,
   title,
   slug,
@@ -125,8 +129,9 @@ export const PRODUCTS_BY_CATEGORY_QUERY_AZ = groq`*[_type == "product" && refere
   categories[]->{ _id, title, slug }
 }`;
 
-export const PRODUCTS_BY_CATEGORY_QUERY_ZA = groq`*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(title desc)[$offset...$end]{
+export const PRODUCTS_BY_CATEGORY_QUERY_ZA = groq`*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(title desc){
   _id,
+  orderRank,
   _createdAt,
   title,
   slug,
