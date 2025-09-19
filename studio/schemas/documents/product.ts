@@ -55,7 +55,12 @@ export default defineType({
           name: "packaging",
           type: "object",
           fields: [
-            defineField({ name: "sizeValue", title: "Size Value", type: "number", validation: (Rule) => Rule.min(0) }),
+            defineField({
+              name: "sizeValue",
+              title: "Size Value",
+              type: "number",
+              validation: (Rule) => Rule.min(0),
+            }),
             defineField({
               name: "sizeUnit",
               title: "Size Unit",
@@ -79,7 +84,11 @@ export default defineType({
                 ],
               },
             }),
-            defineField({ name: "weightPerPallet", title: "Weight per pallet", type: "string" }),
+            defineField({
+              name: "weightPerPallet",
+              title: "Weight per pallet",
+              type: "string",
+            }),
             defineField({ name: "notes", title: "Notes", type: "string" }),
           ],
           preview: {
@@ -101,7 +110,12 @@ export default defineType({
       group: "content",
     }),
     image,
-    defineField({ name: "body", title: "Body", type: "block-content", group: "content" }),
+    defineField({
+      name: "body",
+      title: "Body",
+      type: "block-content",
+      group: "content",
+    }),
     defineField({
       name: "excerpt",
       title: "Excerpt",
@@ -124,6 +138,9 @@ export default defineType({
   ],
   preview: {
     select: { title: "title", media: "image" },
-    prepare: ({ title, media }) => ({ title: title || "Untitled Product", media }),
+    prepare: ({ title, media }) => ({
+      title: title || "Untitled Product",
+      media,
+    }),
   },
 });
