@@ -16,15 +16,14 @@ export const structure = (S: any, context: any) =>
   S.list()
     .title("Content")
     .items([
-      // Products
-      S.listItem()
-        .title("Products")
-        .schemaType("product")
-        .child(
-          S.documentTypeList("product")
-            .title("Products")
-            .defaultOrdering([{ field: "_createdAt", direction: "desc" }])
-        ),
+      // Products (manual ordering)
+      orderableDocumentListDeskItem({
+        type: "product",
+        title: "Products",
+        icon: ListCollapse,
+        S,
+        context,
+      }),
       orderableDocumentListDeskItem({
         type: "specification",
         title: "Specifications",

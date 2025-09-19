@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { orderRankField } from "@sanity/orderable-document-list";
 import { Package, Search, Settings } from "lucide-react";
 import image from "../blocks/shared/image";
 import meta from "../blocks/shared/meta";
@@ -118,6 +119,8 @@ export default defineType({
       group: "settings",
     }),
     meta,
+    // Manual ordering support
+    orderRankField({ type: "product" }),
   ],
   preview: {
     select: { title: "title", media: "image" },
