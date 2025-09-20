@@ -21,15 +21,14 @@ export default function Feature3({ padding, columns }: Feature3) {
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 text-center">
           <div className="grid grid-cols-1 place-items-center gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {columns?.map((column) => {
-              const Component = componentMap[column._type];
+              const Component = componentMap[column._type] as React.ComponentType<typeof column>;
               if (!Component) {
-                // Fallback for development/debugging of new component types
                 console.warn(
                   `No component implemented for column type: ${column._type}`
                 );
                 return <div data-type={column._type} key={column._key} />;
               }
-              return <Component {...(column as any)} key={column._key} />;
+              return <Component {...column} key={column._key} />;
             })}
           </div>
         </div>

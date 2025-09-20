@@ -31,15 +31,14 @@ export default function Feature15({
           )}
         >
           {columns?.map((column) => {
-            const Component = componentMap[column._type];
+            const Component = componentMap[column._type] as React.ComponentType<typeof column>;
             if (!Component) {
-              // Fallback for development/debugging of new component types
               console.warn(
                 `No component implemented for column type: ${column._type}`
               );
               return <div data-type={column._type} key={column._key} />;
             }
-            return <Component {...(column as any)} key={column._key} />;
+            return <Component {...column} key={column._key} />;
           })}
         </div>
       )}

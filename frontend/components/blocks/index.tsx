@@ -71,7 +71,11 @@ import ProductCategories16 from "@/components/blocks/products/product-categories
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 
-const componentMap: Record<string, React.ComponentType<any>> = {
+type ComponentMap = {
+  [K in Block["_type"]]: React.ComponentType<Extract<Block, { _type: K }>>;
+};
+
+const componentMap: ComponentMap = {
   "section-header": SectionHeader,
   "hero-12": Hero12,
   "hero-13": Hero13,
@@ -128,7 +132,12 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   "compare-4": Compare4,
   "compare-5": Compare5,
   "compare-6": Compare6,
-  "compare-products": CompareProducts,
+  // compare-products: productFields arrives from GROQ as string[]; component narrows internally.
+  "compare-products": CompareProducts as React.ComponentType<
+    Omit<Extract<Block, { _type: "compare-products" }>, "productFields"> & {
+      productFields: string[] | null;
+    }
+  >,
   "gallery-1": Gallery1,
   "gallery-3": Gallery3,
   "gallery-4": Gallery4,
@@ -168,10 +177,39 @@ export default function Blocks({
           block._type === "all-products-16" ||
           block._type === "product-categories-16";
 
-        const props: any = { ...(block as any) };
-        if (needsSearchParams) props.searchParams = searchParams;
+        if (needsSearchParams && block._type === "all-products-16") {
+          const C = componentMap["all-products-16"] as React.ComponentType<
+            Extract<Block, { _type: "all-products-16" }> & {
+              searchParams?: Promise<{ page?: string; category?: string }>;
+            }
+          >;
+          return (
+            <C
+              {...(block as Extract<Block, { _type: "all-products-16" }>)}
+              searchParams={searchParams}
+              key={block._key}
+            />
+          );
+        }
+        if (needsSearchParams && block._type === "product-categories-16") {
+          const C = componentMap["product-categories-16"] as React.ComponentType<
+            Extract<Block, { _type: "product-categories-16" }> & {
+              searchParams?: Promise<{ category?: string }>;
+            }
+          >;
+          return (
+            <C
+              {...(block as Extract<Block, { _type: "product-categories-16" }>)}
+              searchParams={searchParams}
+              key={block._key}
+            />
+          );
+        }
 
-        return <Component {...props} key={block._key} />;
+        const C = componentMap[block._type] as React.ComponentType<
+          Extract<Block, { _type: typeof block._type }>
+        >;
+        return <C {...(block as Extract<Block, { _type: typeof block._type }>)} key={block._key} />;
       })}
     </>
   );
