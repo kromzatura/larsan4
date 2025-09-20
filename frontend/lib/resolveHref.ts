@@ -15,6 +15,7 @@ export function resolveHref(docType: string | undefined, slug: string | undefine
       return `/blog/${s}`;
     case "blogCategory":
     case "postCategory": // legacy alias if exists
+    case "category": // legacy generic category
       if (!s) return null;
       return `/blog/category/${s}`;
     case "product":
