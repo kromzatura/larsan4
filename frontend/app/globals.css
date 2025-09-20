@@ -43,6 +43,13 @@
 
 /* New Look Design Tokens */
 :root {
+  /* Surface layering (light) */
+  --surface-root: var(--background);
+  --surface-1: color-mix(in oklch, var(--background) 94%, black 6%);
+  --surface-2: color-mix(in oklch, var(--background) 90%, black 10%);
+  --surface-3: color-mix(in oklch, var(--background) 86%, black 14%);
+  --surface-raise-border: color-mix(in oklch, var(--border) 70%, white 30%);
+
   --background: oklch(0.8798 0.0534 91.7893);
   --foreground: oklch(0.4265 0.0310 59.2153);
   --card: oklch(0.8937 0.0395 87.5676);
@@ -62,6 +69,7 @@
   --border: oklch(0.6918 0.0440 59.8448);
   --input: oklch(0.8361 0.0713 90.3269);
   --ring: oklch(0.7350 0.0564 130.8494);
+  --ring-focus: oklch(0.6762 0.0567 132.4479);
   --chart-1: oklch(0.7350 0.0564 130.8494);
   --chart-2: oklch(0.6762 0.0567 132.4479);
   --chart-3: oklch(0.8185 0.0332 136.6539);
@@ -92,24 +100,31 @@
 }
 
 .dark {
+  /* Dark surfaces use additive lightness layering upward */
+  --surface-root: var(--background);
+  --surface-1: color-mix(in oklch, var(--background) 92%, white 8%);
+  --surface-2: color-mix(in oklch, var(--background) 88%, white 12%);
+  --surface-3: color-mix(in oklch, var(--background) 82%, white 18%);
+  --surface-raise-border: color-mix(in oklch, var(--border) 60%, white 40%);
   --background: oklch(0.3303 0.0214 88.0737);
   --foreground: oklch(0.9217 0.0235 82.1191);
-  --card: oklch(0.3583 0.0165 82.3257);
-  --card-foreground: oklch(0.9217 0.0235 82.1191);
-  --popover: oklch(0.3583 0.0165 82.3257);
-  --popover-foreground: oklch(0.9217 0.0235 82.1191);
+  /* Card / popover slightly lifted against background */
+  --card: var(--surface-1);
+  --card-foreground: var(--foreground);
+  --popover: var(--surface-2);
+  --popover-foreground: var(--foreground);
   --primary: oklch(0.6762 0.0567 132.4479);
   --primary-foreground: oklch(0.2686 0.0105 61.0213);
   --secondary: oklch(0.4448 0.0239 84.5498);
   --secondary-foreground: oklch(0.9217 0.0235 82.1191);
-  --muted: oklch(0.3892 0.0197 82.7084);
-  --muted-foreground: oklch(0.7096 0.0171 73.6179);
-  --accent: oklch(0.6540 0.0723 90.7629);
-  --accent-foreground: oklch(0.2686 0.0105 61.0213);
+  --muted: color-mix(in oklch, var(--background) 70%, white 30%);
+  --muted-foreground: oklch(0.78 0.015 80);
+  --accent: color-mix(in oklch, var(--primary) 55%, var(--muted) 45%);
+  --accent-foreground: var(--foreground);
   --destructive: oklch(0.6287 0.0821 31.2958);
   --destructive-foreground: oklch(0.9357 0.0201 84.5907);
-  --border: oklch(0.4448 0.0239 84.5498);
-  --input: oklch(0.4448 0.0239 84.5498);
+  --border: color-mix(in oklch, var(--foreground) 18%, var(--background) 82%);
+  --input: color-mix(in oklch, var(--foreground) 14%, var(--background) 86%);
   --ring: oklch(0.6762 0.0567 132.4479);
   --chart-1: oklch(0.6762 0.0567 132.4479);
   --chart-2: oklch(0.7350 0.0564 130.8494);
@@ -130,11 +145,11 @@
   --radius: 0.425rem;
   --shadow-2xs: 3px 3px 2px 0px hsl(88 22% 35% / 0.07);
   --shadow-xs: 3px 3px 2px 0px hsl(88 22% 35% / 0.07);
-  --shadow-sm: 3px 3px 2px 0px hsl(88 22% 35% / 0.15), 3px 1px 2px -1px hsl(88 22% 35% / 0.15);
-  --shadow: 3px 3px 2px 0px hsl(88 22% 35% / 0.15), 3px 1px 2px -1px hsl(88 22% 35% / 0.15);
-  --shadow-md: 3px 3px 2px 0px hsl(88 22% 35% / 0.15), 3px 2px 4px -1px hsl(88 22% 35% / 0.15);
-  --shadow-lg: 3px 3px 2px 0px hsl(88 22% 35% / 0.15), 3px 4px 6px -1px hsl(88 22% 35% / 0.15);
-  --shadow-xl: 3px 3px 2px 0px hsl(88 22% 35% / 0.15), 3px 8px 10px -1px hsl(88 22% 35% / 0.15);
+  --shadow-sm: 0 1px 2px -1px color-mix(in oklch, black 60%, transparent), 0 1px 1px color-mix(in oklch, black 55%, transparent);
+  --shadow: 0 2px 4px -2px color-mix(in oklch, black 55%, transparent), 0 4px 6px -1px color-mix(in oklch, black 50%, transparent);
+  --shadow-md: 0 4px 6px -2px color-mix(in oklch, black 55%, transparent), 0 8px 10px -2px color-mix(in oklch, black 50%, transparent);
+  --shadow-lg: 0 8px 10px -4px color-mix(in oklch, black 55%, transparent), 0 16px 20px -4px color-mix(in oklch, black 45%, transparent);
+  --shadow-xl: 0 12px 16px -6px color-mix(in oklch, black 55%, transparent), 0 20px 28px -6px color-mix(in oklch, black 40%, transparent);
   --shadow-2xl: 3px 3px 2px 0px hsl(88 22% 35% / 0.38);
 }
 

@@ -10,6 +10,7 @@ This document summarizes the design token architecture and usage guidelines impl
 | Category | Prefix | Example | Notes |
 |----------|--------|---------|-------|
 | Surface  | `--background`, `--card`, `--popover` | `bg-background` | Paired with matching `*-foreground` tokens |
+| Layered Surfaces | `--surface-root|1|2|3` | custom class usage | Progressive elevation bases (do not use directly in utilities; wrap in components) |
 | Interactive | `--primary`, `--secondary`, `--accent`, `--destructive` | `bg-primary text-primary-foreground` | Semantic intent; never use for layout backgrounds |
 | Neutral | `--muted`, `--muted-foreground`, `--border`, `--input`, `--ring` | `border-border` | Low emphasis & UI chrome |
 | Chart | `--chart-1`..`--chart-5` | custom data viz | Reserved for future graph components |
@@ -41,6 +42,23 @@ The `@theme inline` block maps raw tokens to semantic `--color-*` variants consu
 - Potential extraction of tokens into `tokens.css` for reuse across multiple packages.
 - Introduce motion tokens (e.g., `--ease-emphasized`, `--duration-sm`).
 - Provide chart color scale variants for light/dark accessible palettes.
+- Add semantic elevation utilities mapping `--surface-*` for opt‑in component styling.
+
+## Dark Theme Refinement (Issue 004)
+Implemented layered surface tokens (`--surface-root`, `--surface-1..3`) using `color-mix` in OKLCH for subtle elevation without hue shift. Card & popover now reference these surfaces instead of bespoke values. Borders and inputs use mixed foreground/background ratios to reduce low‑contrast gray flattening. Shadows converted to modern layered blur offsets with transparency mixing tuned for dark backgrounds (avoiding muddy overlays). Added `--ring-focus` to decouple focus outline from general interactive ring color.
+
+Guidelines:
+1. Prefer using existing semantic wrappers (`card`, `popover`, component shells) instead of directly applying `--surface-*` tokens.
+2. When creating a new elevated container: start from `--surface-1` and only step upward if adjacent context demands stronger separation.
+3. Avoid stacking more than two elevation steps in a single visual cluster to prevent contrast washout.
+4. Use `focus-visible` utilities (see `@utility ui-focus`) which now leverage `--ring-focus` for consistent accessibility.
+
+Contrast Checks (Representative Pairs):
+- `foreground` on `background` (dark): AA+ for body text.
+- `muted-foreground` on `muted`: passes large text; reserve for metadata.
+- `accent-foreground` on `accent`: AA for UI iconography at 16px+.
+
+Migration Note: Existing components continue working; no breaking variable renames. Surface tokens are additive.
 
 ## Audit Checklist (Complete)
 - [x] Tokens consolidated in `globals.css`
