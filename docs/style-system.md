@@ -60,6 +60,32 @@ Contrast Checks (Representative Pairs):
 
 Migration Note: Existing components continue working; no breaking variable renames. Surface tokens are additive.
 
+## Contrast Tooling (Issue 005)
+Automated contrast validation prevents regressions:
+
+- Script: `frontend/scripts/contrast-check.ts`
+- Run locally: `pnpm --filter frontend contrast`
+- CI: GitHub Action `.github/workflows/contrast.yml` blocks merges on failure.
+
+Pairs Checked (light & dark):
+- `--foreground` on `--background`
+- `--muted-foreground` on `--muted`
+- `--primary-foreground` on `--primary`
+- `--destructive-foreground` on `--destructive`
+- `--accent-foreground` on `--accent`
+- `--ring-focus` on `--background` (treated as large text threshold)
+
+Thresholds:
+- Normal text: 4.5:1
+- Large / focus ring: 3.0:1
+
+Updating Tokens:
+1. Adjust values in `globals.css`.
+2. Run contrast script.
+3. If intentional reduction (rare), raise a design note—do not ignore failures silently.
+
+Extensibility: Add more pairs by editing the PAIRS array in the script.
+
 ## Audit Checklist (Complete)
 - [x] Tokens consolidated in `globals.css`
 - [x] Dark mode strategy commented

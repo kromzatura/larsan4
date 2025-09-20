@@ -61,15 +61,18 @@
   --secondary: oklch(0.5641 0.0903 65.2594);
   --secondary-foreground: oklch(1.0000 0 0);
   --muted: oklch(0.8532 0.0631 91.1493);
-  --muted-foreground: oklch(0.5761 0.0259 60.9323);
+  /* Increased contrast for muted foreground */
+  --muted-foreground: oklch(0.42 0.022 61);
   --accent: oklch(0.8361 0.0713 90.3269);
   --accent-foreground: oklch(0.4265 0.0310 59.2153);
   --destructive: oklch(0.7136 0.0981 29.9827);
-  --destructive-foreground: oklch(0.9790 0.0082 91.4818);
+  /* Darker destructive foreground for contrast */
+  --destructive-foreground: oklch(0.25 0.02 40);
   --border: oklch(0.6918 0.0440 59.8448);
   --input: oklch(0.8361 0.0713 90.3269);
   --ring: oklch(0.7350 0.0564 130.8494);
-  --ring-focus: oklch(0.6762 0.0567 132.4479);
+  /* Darker focus ring to meet 3:1 against background */
+  --ring-focus: oklch(0.45 0.05 132);
   --chart-1: oklch(0.7350 0.0564 130.8494);
   --chart-2: oklch(0.6762 0.0567 132.4479);
   --chart-3: oklch(0.8185 0.0332 136.6539);
@@ -117,15 +120,18 @@
   --primary-foreground: oklch(0.2686 0.0105 61.0213);
   --secondary: oklch(0.4448 0.0239 84.5498);
   --secondary-foreground: oklch(0.9217 0.0235 82.1191);
-  --muted: color-mix(in oklch, var(--background) 70%, white 30%);
-  --muted-foreground: oklch(0.78 0.015 80);
-  --accent: color-mix(in oklch, var(--primary) 55%, var(--muted) 45%);
-  --accent-foreground: var(--foreground);
-  --destructive: oklch(0.6287 0.0821 31.2958);
-  --destructive-foreground: oklch(0.9357 0.0201 84.5907);
+  /* Explicit dark variants tuned for WCAG */
+  --muted: oklch(0.22 0.01 82);
+  --muted-foreground: oklch(0.78 0.02 82);
+  --accent: oklch(0.50 0.07 132);
+  --accent-foreground: oklch(0.98 0.02 85);
+  --destructive: oklch(0.52 0.09 30);
+  --destructive-foreground: oklch(0.95 0.02 85);
   --border: color-mix(in oklch, var(--foreground) 18%, var(--background) 82%);
   --input: color-mix(in oklch, var(--foreground) 14%, var(--background) 86%);
   --ring: oklch(0.6762 0.0567 132.4479);
+  /* Dedicated focus ring token in dark mode */
+  --ring-focus: oklch(0.85 0.06 132);
   --chart-1: oklch(0.6762 0.0567 132.4479);
   --chart-2: oklch(0.7350 0.0564 130.8494);
   --chart-3: oklch(0.5929 0.0464 137.6224);
