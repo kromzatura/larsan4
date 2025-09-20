@@ -9,53 +9,64 @@ import {
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { chipClass } from "@/components/ui/chip";
 
+type BlogSort = "newest" | "az" | "za";
+interface BlogSearchParams {
+  page?: string;
+  sort?: BlogSort | string; // raw string from URL, will be narrowed
+}
+
+interface MetadataWithAlternates {
+  alternates?: {
+    types?: Record<string, string>;
+    canonical?: string;
+  };
+  robots?: string;
+  [key: string]: unknown;
+}
+
 const POSTS_PER_PAGE = 6;
 
-export async function generateMetadata({
-  searchParams,
-}: {
-  searchParams?: Promise<{ page?: string; sort?: string }>;
-}) {
-  const sp = searchParams ? await searchParams : undefined;
+export async function generateMetadata(
+  props: { searchParams?: Promise<BlogSearchParams> }
+) {
+  const sp = props.searchParams ? await props.searchParams : undefined;
   const pageNum = Math.max(1, Number(sp?.page || 1));
-  const sortParam = (sp as any)?.sort;
-  const sort: "newest" | "az" | "za" =
-    sortParam === "az" || sortParam === "za" ? sortParam : "newest";
+  const rawSort = sp?.sort;
+  const sort: BlogSort = rawSort === "az" || rawSort === "za" ? rawSort : "newest";
   const pageDoc = await fetchSanityPageBySlug({ slug: "blog" });
   const base = generatePageMetadata({
-    page: pageDoc as any,
+    page: pageDoc,
     slug: "blog",
     type: "page",
-  });
-  const withRss = {
+  }) as MetadataWithAlternates;
+  const withRss: MetadataWithAlternates = {
     ...base,
     alternates: {
-      ...(base as any)?.alternates,
+      ...(base.alternates || {}),
       types: {
-        ...(base as any)?.alternates?.types,
+        ...(base.alternates?.types || {}),
         "application/rss+xml": "/blog/rss.xml",
         "application/feed+json": "/blog/feed.json",
       },
     },
-  } as any;
+  };
   if (pageNum > 1 || sort !== "newest") {
     return {
       ...withRss,
       robots: "noindex",
       alternates: { canonical: "/blog" },
-    } as any;
+    } as MetadataWithAlternates;
   }
-  return withRss as any;
+  return withRss;
 }
 
 export default async function BlogIndex(props: {
-  searchParams?: Promise<{ page?: string }>;
+  searchParams?: Promise<BlogSearchParams>;
 }) {
   const sp = props.searchParams ? await props.searchParams : undefined;
   const page = Math.max(1, Number(sp?.page || 1));
-  const sortParam = (sp as any)?.sort;
-  const sort: "newest" | "az" | "za" =
-    sortParam === "az" || sortParam === "za" ? sortParam : "newest";
+  const rawSort = sp?.sort;
+  const sort: BlogSort = rawSort === "az" || rawSort === "za" ? rawSort : "newest";
 
   const [posts, totalCount] = await Promise.all([
     fetchSanityPosts({ page, limit: POSTS_PER_PAGE, sort }),
@@ -79,7 +90,7 @@ export default async function BlogIndex(props: {
       ? p.categories.map((c) => ({
           _id: c?._id || undefined,
           title: c?.title || null,
-          slug: (c as any)?.slug || null,
+          slug: c?.slug || null,
         }))
       : null,
   }));
@@ -160,9 +171,9 @@ export default async function BlogIndex(props: {
         {items.length === 0 ? (
           <div className="rounded-md border p-6 text-sm text-muted-foreground">
             No posts found. Try adjusting your sort, or{" "}
-            <a href="/" className="underline underline-offset-2">
+               <Link href="/" className="underline underline-offset-2">
               go back home
-            </a>
+               </Link>
             .
           </div>
         ) : (

@@ -19,6 +19,7 @@ export const blog13Query = groq`
       categories[]->{
         _id,
         title,
+        slug,
       },
     },
   }

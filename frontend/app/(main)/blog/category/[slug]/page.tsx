@@ -7,8 +7,18 @@ import {
   fetchSanityPostsByBlogCategory,
   fetchSanityPostsCountByBlogCategory,
 } from "@/sanity/lib/fetch";
-import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { chipClass } from "@/components/ui/chip";
+
+type BlogSort = "newest" | "az" | "za";
+interface BlogCategorySearchParams {
+  page?: string;
+  sort?: BlogSort | string;
+}
+interface MetadataWithAlternates {
+  alternates?: { types?: Record<string, string>; canonical?: string };
+  robots?: string;
+  [key: string]: unknown;
+}
 
 const POSTS_PER_PAGE = 6;
 
@@ -21,52 +31,46 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
-  searchParams?: Promise<{ page?: string; sort?: string }>;
+  searchParams?: Promise<BlogCategorySearchParams>;
 }) {
   const params = await props.params;
   const sp = props.searchParams ? await props.searchParams : undefined;
   const pageNum = Math.max(1, Number(sp?.page || 1));
-  const sortParam = (sp as any)?.sort;
-  const sort: "newest" | "az" | "za" =
-    sortParam === "az" || sortParam === "za" ? sortParam : "newest";
+  const rawSort = sp?.sort;
+  const sort: BlogSort = rawSort === "az" || rawSort === "za" ? rawSort : "newest";
   const cat = await fetchSanityBlogCategoryBySlug({ slug: params.slug });
   if (!cat) notFound();
-  const base = generatePageMetadata({
-    page: cat as any,
-    slug: `blog/category/${params.slug}`,
-    type: "page",
-  });
-  const withRss = {
+  // Category documents are not full page documents; cast for metadata helper which accepts broader page-like shapes.
+  const base: MetadataWithAlternates = {
+    title: cat.title || undefined,
+    description: cat.description || undefined,
+    alternates: { canonical: `/blog/category/${params.slug}` },
+  };
+  const withFeeds: MetadataWithAlternates = {
     ...base,
     alternates: {
-      ...(base as any)?.alternates,
+      ...(base.alternates || {}),
       types: {
-        ...(base as any)?.alternates?.types,
         "application/rss+xml": `/blog/category/${params.slug}/rss.xml`,
         "application/feed+json": `/blog/category/${params.slug}/feed.json`,
       },
     },
-  } as any;
+  };
   if (pageNum > 1 || sort !== "newest") {
-    return {
-      ...withRss,
-      robots: "noindex",
-      alternates: { canonical: `/blog/category/${params.slug}` },
-    } as any;
+    return { ...withFeeds, robots: "noindex" } as MetadataWithAlternates;
   }
-  return withRss as any;
+  return withFeeds;
 }
 
 export default async function BlogCategoryPage(props: {
   params: Promise<{ slug: string }>;
-  searchParams?: Promise<{ page?: string }>;
+  searchParams?: Promise<BlogCategorySearchParams>;
 }) {
   const params = await props.params;
   const sp = props.searchParams ? await props.searchParams : undefined;
   const page = Math.max(1, Number(sp?.page || 1));
-  const sortParam = (sp as any)?.sort;
-  const sort: "newest" | "az" | "za" =
-    sortParam === "az" || sortParam === "za" ? sortParam : "newest";
+  const rawSort = sp?.sort;
+  const sort: BlogSort = rawSort === "az" || rawSort === "za" ? rawSort : "newest";
 
   const [cat, posts, totalCount] = await Promise.all([
     fetchSanityBlogCategoryBySlug({ slug: params.slug }),
@@ -97,7 +101,7 @@ export default async function BlogCategoryPage(props: {
       ? p.categories.map((c) => ({
           _id: c?._id || undefined,
           title: c?.title || null,
-          slug: (c as any)?.slug || null,
+          slug: c?.slug || null,
         }))
       : null,
   }));
@@ -186,9 +190,9 @@ export default async function BlogCategoryPage(props: {
         {items.length === 0 ? (
           <div className="rounded-md border p-6 text-sm text-muted-foreground">
             No posts in this category yet. See{" "}
-            <a href="/blog" className="underline underline-offset-2">
+            <Link href="/blog" className="underline underline-offset-2">
               all posts
-            </a>
+            </Link>
             .
           </div>
         ) : (

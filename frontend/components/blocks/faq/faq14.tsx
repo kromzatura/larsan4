@@ -111,7 +111,7 @@ export default function FAQ14({
               <CardContent>
                 {section.faqs && section.faqs?.length > 0 && (
                   <Accordion type="single" collapsible className="w-full">
-                    {section.faqs.map((faq, i) => (
+                    {section.faqs.map((faq) => (
                       <AccordionItem
                         key={faq._id}
                         value={`item-${faq._id}`}

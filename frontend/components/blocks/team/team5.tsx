@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { fetchSanityTeam } from "@/sanity/lib/fetch";

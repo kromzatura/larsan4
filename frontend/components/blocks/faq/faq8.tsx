@@ -18,15 +18,15 @@ export default function FAQ8({ padding, sections }: FAQProps) {
     <SectionContainer padding={padding}>
       {sections && sections?.length > 0 && (
         <div>
-          {sections.map((section, index) => (
+          {sections.map((section) => (
             <div
               key={section._key}
               className="grid gap-4 border-t pt-4 md:grid-cols-3 md:gap-10"
             >
               <h3 className="text-xl font-medium">{section.title}</h3>
               <Accordion type="multiple" className="md:col-span-2">
-                {section.faqs?.map((faq, index) => (
-                  <AccordionItem key={index} value={`item-${index}`}>
+                {section.faqs?.map((faq, idx) => (
+                  <AccordionItem key={idx} value={`item-${idx}`}>
                     <AccordionTrigger className="text-left">
                       {faq.title}
                     </AccordionTrigger>

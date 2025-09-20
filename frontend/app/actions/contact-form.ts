@@ -1,10 +1,7 @@
 "use server";
 
 import { Resend } from "resend";
-import {
-  contactFormSchema,
-  type ContactFormValues,
-} from "@/lib/schemas/contact-form";
+import { contactFormSchema } from "@/lib/schemas/contact-form";
 import ContactFormEmail from "@/emails/contact-form";
 import { render } from "@react-email/render";
 import { z } from "zod";
@@ -59,10 +56,15 @@ export async function submitContactForm(
           cache: "no-store",
         }
       );
-      const verifyJson = (await verifyRes.json()) as {
+      type RecaptchaVerifyResponse = {
         success?: boolean;
-        [k: string]: any;
+        challenge_ts?: string;
+        hostname?: string;
+        score?: number;
+        action?: string;
+        "error-codes"?: string[];
       };
+      const verifyJson = (await verifyRes.json()) as RecaptchaVerifyResponse;
       if (!verifyJson.success) {
         return {
           success: false,

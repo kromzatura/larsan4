@@ -33,6 +33,22 @@ export function ContactForm({
   const resolveTokenRef = useRef<((token: string) => void) | null>(null);
   const mountTime = useMemo(() => Date.now(), []);
 
+  // reCAPTCHA helper types and accessor (shared between effect + submit handler)
+  type Grecaptcha = {
+    ready: (cb: () => void) => void;
+    render: (
+      container: HTMLElement,
+      params: { sitekey: string; size: "invisible"; callback: (token: string) => void }
+    ) => number;
+    reset: (id?: number) => void;
+    execute: (id?: number) => void;
+  };
+  const getGrecaptcha = (): Grecaptcha | null => {
+    if (typeof window === "undefined") return null;
+    const g = (window as unknown as { grecaptcha?: Grecaptcha }).grecaptcha;
+    return g ?? null;
+  };
+
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
@@ -47,14 +63,15 @@ export function ContactForm({
   useEffect(() => {
     if (!siteKey) return;
     const tryInit = () => {
-      const grecaptcha = (window as any)?.grecaptcha;
+      const grecaptcha = getGrecaptcha();
       if (!grecaptcha || !captchaRef.current || widgetIdRef.current !== null) {
         return;
       }
       try {
         grecaptcha.ready(() => {
           if (widgetIdRef.current !== null) return;
-          widgetIdRef.current = grecaptcha.render(captchaRef.current, {
+          // captchaRef.current is guaranteed non-null due to guard above
+          widgetIdRef.current = grecaptcha.render(captchaRef.current as HTMLDivElement, {
             sitekey: siteKey,
             size: "invisible",
             callback: (token: string) => {
@@ -79,9 +96,13 @@ export function ContactForm({
       if (
         siteKey &&
         typeof window !== "undefined" &&
-        (window as any).grecaptcha
+        getGrecaptcha()
       ) {
-        const grecaptcha = (window as any).grecaptcha;
+        const grecaptcha = getGrecaptcha();
+        if (!siteKey || !grecaptcha) {
+          setFormState({ error: "Captcha not ready. Please try again." });
+          return;
+        }
         if (widgetIdRef.current == null) {
           setFormState({ error: "Captcha not ready. Please try again." });
           return;
@@ -89,8 +110,7 @@ export function ContactForm({
         const token = await new Promise<string>((resolve) => {
           resolveTokenRef.current = resolve;
           try {
-            grecaptcha.reset(widgetIdRef.current);
-            grecaptcha.execute(widgetIdRef.current);
+            grecaptcha.execute(widgetIdRef.current ?? undefined);
           } catch {
             resolve("");
           }
@@ -116,7 +136,7 @@ export function ContactForm({
           const fieldValue = currentValues[fieldKey];
           try {
             contactFormSchema.shape[fieldKey].parse(fieldValue);
-          } catch (e) {
+          } catch (_e) {
             form.setError(fieldKey, {
               type: "server",
               message,

@@ -55,13 +55,13 @@ export default async function Footer2({ className }: Footer2Props) {
               </Link>
               <p className="mt-4 font-bold">{settings?.description}</p>
             </div>
-            {footerNavItems?.map((section) => {
+            {footerNavItems?.map((section: any) => {
               if (section._type !== "link-group") return null;
               return (
                 <div key={section._key}>
                   <h3 className="text-base mb-4 font-bold">{section.title}</h3>
                   <ul className="space-y-4 text-muted-foreground">
-                    {section.links?.map((link) => {
+                    {section.links?.map((link: any) => {
                       return (
                         <li key={link._key}>
                           <Link
@@ -96,7 +96,7 @@ export default async function Footer2({ className }: Footer2Props) {
               )}
             </div>
             <ul className="flex gap-4">
-              {bottomNavItems?.map((link) => {
+              {bottomNavItems?.map((link: any) => {
                 if (link._type !== "link") return null;
                 return (
                   <li key={link._key}>

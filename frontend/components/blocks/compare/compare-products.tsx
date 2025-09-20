@@ -2,8 +2,7 @@
 
 import { useMemo, useState } from "react";
 import SectionContainer from "@/components/ui/section-container";
-// Using loose typing because typegen doesn't yet include this new block
-import { PAGE_QUERYResult } from "@/sanity.types";
+import { SectionPadding } from "@/sanity.types";
 import { cn } from "@/lib/utils";
 import {
   Table,
@@ -14,34 +13,79 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CircleCheck, CircleMinus, CircleX } from "lucide-react";
 import AddToInquiryButton from "@/components/inquiry/add-to-inquiry-button";
 
-type BlockProps = any;
+// Field keys supported for comparison. "actions" renders an inquiry button instead of a value.
+type CompareFieldKey =
+  | "pungency"
+  | "fatContent"
+  | "bindingCapacity"
+  | "bestFor"
+  | "sku"
+  | "actions";
+
+interface ProductSpecSubset {
+  pungency?: string | number | null;
+  fatContent?: string | number | null;
+  bindingCapacity?: string | number | null;
+  bestFor?: string | null;
+  sku?: string | null;
+}
+
+interface ProductForCompare {
+  _id?: string | null;
+  title?: string | null;
+  slug?: { current?: string | null } | null;
+  spec?: ProductSpecSubset | null;
+}
+
+type ColumnOverrides = Partial<ProductSpecSubset>;
+
+interface CompareColumn {
+  product?: ProductForCompare | null;
+  overrides?: ColumnOverrides | null;
+  // Legacy attribute shape fallback (kept narrow / optional)
+  attributes?: { value?: string | number | null }[];
+}
+
+interface CompareProductsBlockProps {
+  padding?: SectionPadding | null; // matches SectionContainer expectations
+  title?: string | null;
+  productFields?: CompareFieldKey[] | null;
+  columns?: CompareColumn[] | null;
+}
+
+type CellValue = string | number | null | undefined | "__actions__";
+
+interface NormalizedColumns {
+  headers: string[];
+  rows: string[]; // row labels
+  cols: { values: CellValue[] }[]; // parallel to headers
+}
 
 export default function CompareProducts({
   padding,
   title,
   productFields,
   columns,
-}: BlockProps) {
-  const normalized = useMemo(() => {
-    if (!columns) return { headers: [], rows: [], cols: [] };
+}: CompareProductsBlockProps) {
+  const normalized: NormalizedColumns = useMemo(() => {
+    if (!columns || columns.length === 0)
+      return { headers: [], rows: [], cols: [] };
 
-    const headers = (columns as any[]).map((c: any, idx: number) => {
+    const headers = columns.map((c, idx) => {
       const t = (c?.product?.title || "").trim();
       return t || `Unnamed product ${idx + 1}`;
     });
 
-    const fields: string[] =
-      productFields && (productFields as any[]).length > 0
-        ? (productFields as string[])
-        : [];
+    const fieldKeys: CompareFieldKey[] = Array.isArray(productFields)
+      ? (productFields.filter(Boolean) as CompareFieldKey[])
+      : [];
 
     const rowLabels: string[] = [];
-    const valueGetters: ((col: any) => string | number | undefined)[] = [];
+    const valueGetters: ((col: CompareColumn) => CellValue)[] = [];
 
-    fields.forEach((f) => {
+    fieldKeys.forEach((f) => {
       switch (f) {
         case "pungency":
           rowLabels.push("Pungency/Heat");
@@ -70,18 +114,20 @@ export default function CompareProducts({
           break;
         case "sku":
           rowLabels.push("SKU");
-          valueGetters.push((c) => c?.overrides?.sku ?? c?.product?.spec?.sku);
+          valueGetters.push(
+            (c) => c?.overrides?.sku ?? c?.product?.spec?.sku
+          );
           break;
         case "actions":
           rowLabels.push("Actions");
           valueGetters.push(() => "__actions__");
           break;
         default:
-          break;
+          break; // ignore unknown key
       }
     });
 
-    const cols = (columns as any[]).map((c: any) => ({
+    const cols = columns.map((c) => ({
       values: valueGetters.map((getter) => getter(c)),
     }));
 
@@ -94,7 +140,7 @@ export default function CompareProducts({
 
   return (
     <SectionContainer padding={padding}>
-      {columns && (columns as any[])?.length > 0 && (
+  {columns && columns.length > 0 && (
         <Tabs
           defaultValue={(normalized.headers && normalized.headers[0]) || "0"}
           onValueChange={setSelectedTab}
@@ -109,18 +155,25 @@ export default function CompareProducts({
           </TabsList>
         </Tabs>
       )}
-      <div className="[&>div]:overflow-visible">
-        <Table className="table-fixed [&_td]:border [&_th]:border">
+      <div
+        className="[&>div]:overflow-visible"
+        style={{
+          // Provide number of product columns (excluding first feature label column)
+          // Used by width calc expressions in headers/cells
+          ["--compare-cols" as any]: String(normalized.headers.length || 1),
+        }}
+      >
+        <Table className="[&_td]:border [&_th]:border w-full">
           <TableHeader>
             <TableRow>
-              <TableHead className="sticky top-0 mb-24 w-1/4 bg-background p-5 text-base font-medium text-primary after:absolute after:right-0 after:-bottom-px after:left-0 after:h-px after:bg-border">
+              <TableHead className="sticky top-0 mb-24 w-40 bg-background p-5 text-base font-medium text-primary after:absolute after:right-0 after:-bottom-px after:left-0 after:h-px after:bg-border align-top">
                 {title}
               </TableHead>
               {normalized.headers.map((header, idx) => (
                 <TableHead
                   key={idx}
                   className={cn(
-                    "sticky top-0 mb-24 w-1/4 bg-background p-5 text-center text-base font-medium text-primary after:absolute after:right-0 after:-bottom-px after:left-0 after:h-px after:bg-border md:table-cell",
+                    "sticky top-0 mb-24 bg-background p-5 text-center text-base font-medium text-primary after:absolute after:right-0 after:-bottom-px after:left-0 after:h-px after:bg-border md:table-cell md:[&:nth-child(n+2)]:w-[calc((100%-10rem)/var(--compare-cols))]",
                     header !== selectedTab ? "hidden" : ""
                   )}
                 >
@@ -130,25 +183,21 @@ export default function CompareProducts({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {normalized.rows?.map((rowLabel: string, rowIdx: number) => (
+            {normalized.rows.map((rowLabel, rowIdx) => (
               <TableRow key={rowIdx}>
-                <TableCell className="p-5 font-semibold whitespace-normal">
+                <TableCell className="p-5 font-semibold whitespace-normal w-40 align-top">
                   {rowLabel}
                 </TableCell>
                 {normalized.cols.map((c, colIdx) => {
-                  const v = (c as any).values
-                    ? (c as any).values[rowIdx]
-                    : (columns?.[colIdx] as any)?.attributes?.[rowIdx]?.value;
-                  const status = (columns?.[colIdx] as any)?.attributes?.[
-                    rowIdx
-                  ]?.status;
-
+                  // Primary normalized value; fallback to legacy attributes array if present.
+                  const legacy = columns?.[colIdx]?.attributes?.[rowIdx]?.value;
+                  const v: CellValue = c.values[rowIdx] ?? legacy ?? null;
                   const isAction = v === "__actions__";
                   return (
                     <TableCell
                       key={colIdx}
                       className={cn(
-                        "p-5 text-center whitespace-normal md:table-cell",
+                        "p-5 text-center whitespace-normal md:table-cell md:[&:nth-child(n+2)]:[width:calc((100%-10rem)/var(--compare-cols))]",
                         normalized.headers[colIdx] !== selectedTab
                           ? "hidden"
                           : ""
@@ -163,16 +212,17 @@ export default function CompareProducts({
                         <AddToInquiryButton
                           item={{
                             id:
-                              (columns?.[colIdx] as any)?.overrides?.sku ??
-                              (columns?.[colIdx] as any)?.product?.spec?.sku ??
-                              (columns?.[colIdx] as any)?.product?._id,
-                            name:
-                              (columns?.[colIdx] as any)?.product?.title ??
-                              null,
+                              String(
+                                columns?.[colIdx]?.overrides?.sku ??
+                                  columns?.[colIdx]?.product?.spec?.sku ??
+                                  columns?.[colIdx]?.product?._id ??
+                                  `col-${colIdx}`
+                              ),
+                            name: columns?.[colIdx]?.product?.title ?? null,
                             productId:
-                              (columns?.[colIdx] as any)?.product?._id ?? null,
+                              columns?.[colIdx]?.product?._id ?? null,
                             slug:
-                              (columns?.[colIdx] as any)?.product?.slug ?? null,
+                              columns?.[colIdx]?.product?.slug?.current ?? null,
                             imageUrl: null,
                           }}
                           className="w-full max-w-44 px-6 mx-auto"

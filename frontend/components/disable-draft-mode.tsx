@@ -3,6 +3,7 @@
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 import { useDraftModeEnvironment } from "next-sanity/hooks";
 
@@ -22,7 +23,7 @@ export function DisableDraftMode() {
   }
 
   return (
-    <a
+    <Link
       className={cn(
         buttonVariants({
           size: "lg",
@@ -32,6 +33,6 @@ export function DisableDraftMode() {
       href="/api/draft-mode/disable"
     >
       Disable Draft Mode
-    </a>
+    </Link>
   );
 }

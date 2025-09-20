@@ -53,9 +53,19 @@ export default function Blog4({ padding, posts, gridColumns }: Blog4) {
 
               {post.categories && post.categories.length > 0 && (
                 <div className="flex flex-wrap gap-2">
-                  {post.categories.map((category) => (
-                    <Badge key={category._id}>{category.title}</Badge>
-                  ))}
+                  {post.categories.map((category) => {
+                    const slug = (category as any)?.slug?.current as
+                      | string
+                      | undefined;
+                    return (
+                      <Link
+                        key={category._id}
+                        href={slug ? `/blog/category/${slug}` : `/blog`}
+                      >
+                        <Badge>{category.title}</Badge>
+                      </Link>
+                    );
+                  })}
                 </div>
               )}
               {post.title && (

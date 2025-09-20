@@ -124,7 +124,7 @@ export default async function PostPage(props: {
       ? { "@type": "Person", name: post.author.name }
       : undefined,
     image: post.image?.asset?.url ? [post.image.asset.url] : undefined,
-    datePublished: (post as any).publishedAt || post._createdAt || undefined,
+  datePublished: post.publishedAt || post._createdAt || undefined,
     dateModified: post._updatedAt || undefined,
     mainEntityOfPage: {
       "@type": "WebPage",

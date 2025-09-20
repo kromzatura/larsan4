@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ContactForm } from "@/components/forms/contact-form";
 import { submitContactForm } from "@/app/actions/contact-form";
 import type { InquiryItem } from "@/lib/inquiry";
-import { clearInquiry, getInquiryList } from "@/lib/inquiry";
+import { clearInquiry } from "@/lib/inquiry";
 
 interface ContactInquiryWrapperProps {
   initialInquiryItems: InquiryItem[]; // parsed on server for hydration correctness

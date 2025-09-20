@@ -132,7 +132,10 @@ export default async function Navbar1({ className }: Navbar1Props) {
 
   return (
     <header
-      className={`sticky top-0 w-full z-50 py-4 bg-background ${className}`}
+      className={cn(
+        "sticky top-0 z-50 w-full py-4 bg-background",
+        className
+      )}
     >
       <div className="container">
         {/* Desktop Menu */}
@@ -222,7 +225,7 @@ export default async function Navbar1({ className }: Navbar1Props) {
               <SheetContent className="overflow-y-auto">
                 <SheetHeader>
                   <SheetTitle>
-                    <a href="/" className="flex items-center gap-2">
+                    <Link href="/" className="flex items-center gap-2">
                       {settings?.logo ? (
                         <Image
                           src={urlFor(settings.logo).url()}
@@ -251,7 +254,7 @@ export default async function Navbar1({ className }: Navbar1Props) {
                           {settings?.siteName || "Logo"}
                         </span>
                       )}
-                    </a>
+                    </Link>
                   </SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-6 p-4">
