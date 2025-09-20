@@ -1,5 +1,21 @@
 import { groq } from "next-sanity";
-import { linkQuery } from "./shared/link";
+
+// Leaner navigation link fragment: expose internalType/internalSlug for runtime resolution
+// Keep external href if explicitly set
+export const navigationLinkQuery = groq`
+  _key,
+  _type,
+  title,
+  buttonVariant,
+  target,
+  isExternal,
+  // External href only retained if isExternal
+  "href": select(isExternal => href),
+  "internalType": internalLink->_type,
+  "internalSlug": internalLink->slug.current,
+  iconVariant,
+  description
+`;
 
 export const NAVIGATION_QUERY = groq`
   *[_type == "navigation"]{
@@ -7,10 +23,10 @@ export const NAVIGATION_QUERY = groq`
     _key,
     title,
     links[]{
-      ${linkQuery},
+      ${navigationLinkQuery},
       _type == "link-group" => {
         links[]{
-          ${linkQuery}
+          ${navigationLinkQuery}
         }
       }
     }
