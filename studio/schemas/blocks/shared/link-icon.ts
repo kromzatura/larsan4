@@ -5,24 +5,25 @@ export default defineType({
   name: "link-icon",
   type: "object",
   title: "Link Icon",
-  validation: (Rule) =>
-    [
-      Rule.custom((value) => {
-        if (!value) return true;
-        const { isExternal, href, internalLink } = value as any;
-        if (isExternal) {
-          return href ? true : "External links require an href";
-        }
-        return internalLink ? true : "Select an internal link or mark as External";
-      }),
-      Rule.custom((value) => {
-        if (!value) return true;
-        const { isExternal, internalLink } = value as any;
-        if (isExternal || !internalLink) return true;
-        const hasSlug = Boolean(internalLink?.slug?.current);
-        return hasSlug ? true : "missing-slug";
-      }).warning("Selected document has no slug yet"),
-    ],
+  validation: (Rule) => [
+    Rule.custom((value) => {
+      if (!value) return true;
+      const { isExternal, href, internalLink } = value as any;
+      if (isExternal) {
+        return href ? true : "External links require an href";
+      }
+      return internalLink
+        ? true
+        : "Select an internal link or mark as External";
+    }),
+    Rule.custom((value) => {
+      if (!value) return true;
+      const { isExternal, internalLink } = value as any;
+      if (isExternal || !internalLink) return true;
+      const hasSlug = Boolean(internalLink?.slug?.current);
+      return hasSlug ? true : "missing-slug";
+    }).warning("Selected document has no slug yet"),
+  ],
   fields: [
     defineField({
       name: "iconVariant",
@@ -48,6 +49,7 @@ export default defineType({
         { type: "post" },
         { type: "product" },
         { type: "productCategory" },
+        { type: "contact" },
       ],
       hidden: ({ parent }) => parent?.isExternal,
     }),
@@ -94,7 +96,8 @@ export default defineType({
       iconVariant: "iconVariant",
     },
     prepare({ isExternal, label, href, ilType, ilSlug, ilTitle, iconVariant }) {
-      const icon = iconVariant && iconVariant !== "none" ? ` • ${iconVariant}` : "";
+      const icon =
+        iconVariant && iconVariant !== "none" ? ` • ${iconVariant}` : "";
       if (isExternal) {
         return {
           title: label || href || "External link",
@@ -113,17 +116,20 @@ export default defineType({
           : ilType === "page"
           ? "Page"
           : "Internal";
-      const path = ilType === "post"
-        ? `/blog/${ilSlug || ""}`
-        : ilType === "category"
-        ? `/blog/category/${ilSlug || ""}`
-        : ilType === "product"
-        ? `/products/${ilSlug || ""}`
-        : ilType === "productCategory"
-        ? `/products/category/${ilSlug || ""}`
-        : ilSlug === "index"
-        ? "/"
-        : `/${ilSlug || ""}`;
+      const path =
+        ilType === "post"
+          ? `/blog/${ilSlug || ""}`
+          : ilType === "category"
+          ? `/blog/category/${ilSlug || ""}`
+          : ilType === "product"
+          ? `/products/${ilSlug || ""}`
+          : ilType === "productCategory"
+          ? `/products/category/${ilSlug || ""}`
+          : ilType === "contact"
+          ? `/contact`
+          : ilSlug === "index"
+          ? "/"
+          : `/${ilSlug || ""}`;
       return {
         title: label || ilTitle || path || "Link",
         subtitle: `${typeLabel} • ${path}${icon}`,
