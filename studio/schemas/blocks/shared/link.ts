@@ -19,9 +19,11 @@ export default defineType({
       if (!value) return true;
       const { isExternal, internalLink } = value as any;
       if (isExternal || !internalLink) return true;
+      // Allow contact document (singleton) without slug
+      if (internalLink._type === "contact") return true;
       const hasSlug = Boolean(internalLink?.slug?.current);
       return hasSlug ? true : "missing-slug";
-    }).warning("Selected document has no slug yet"),
+    }).warning("Selected document has no slug yet (except Contact)"),
   ],
   fields: [
     defineField({

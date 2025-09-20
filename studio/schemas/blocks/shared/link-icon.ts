@@ -20,9 +20,10 @@ export default defineType({
       if (!value) return true;
       const { isExternal, internalLink } = value as any;
       if (isExternal || !internalLink) return true;
+      if (internalLink._type === "contact") return true; // singleton contact allowed
       const hasSlug = Boolean(internalLink?.slug?.current);
       return hasSlug ? true : "missing-slug";
-    }).warning("Selected document has no slug yet"),
+    }).warning("Selected document has no slug yet (except Contact)"),
   ],
   fields: [
     defineField({
@@ -113,6 +114,8 @@ export default defineType({
           ? "Product"
           : ilType === "productCategory"
           ? "Product Category"
+          : ilType === "contact"
+          ? "Contact"
           : ilType === "page"
           ? "Page"
           : "Internal";
