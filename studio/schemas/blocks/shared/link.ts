@@ -28,6 +28,7 @@ export default defineType({
       to: [
         { type: "page" },
         { type: "post" },
+        { type: "category" },
         { type: "product" },
         { type: "productCategory" },
         { type: "contact" },
