@@ -1,6 +1,10 @@
 export const linkQuery = `
     _key,
     ...,
+    // Internal link metadata for runtime href resolution
+    "internalType": internalLink->_type,
+    "internalSlug": internalLink->slug.current,
+    // Existing GROQ-computed href (will be overridden in code if internalType present)
     "href": select(
       isExternal => href,
       @.internalLink->slug.current == "index" => "/",

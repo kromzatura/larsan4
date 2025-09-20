@@ -28,7 +28,9 @@ export async function GET(
   if (!cat) return new NextResponse("Not Found", { status: 404 });
 
   const siteName = settings?.siteName || "Blog";
-  const language = getLanguageFromSettings(settings);
+  const language = getLanguageFromSettings(
+    (settings as unknown) as { language?: string; siteLanguage?: string; locale?: string }
+  );
   const feed = {
     version: "https://jsonfeed.org/version/1.1",
     title: `${siteName} — ${cat.title || "Blog Category"}`,
@@ -37,7 +39,9 @@ export async function GET(
     language,
     items: ((posts as FeedPost[]) || []).map((p) => {
       const url = `${SITE_URL}/blog/${p.slug?.current ?? ""}`;
-        const content_html = ptBlocksToHtml(p.body) || p.excerpt || "";
+      const content_html = ptBlocksToHtml(
+        (p.body as any[] | null | undefined) as any
+      ) || p.excerpt || "";
       return {
         id: url,
         url,

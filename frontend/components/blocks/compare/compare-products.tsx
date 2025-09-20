@@ -155,18 +155,25 @@ export default function CompareProducts({
           </TabsList>
         </Tabs>
       )}
-      <div className="[&>div]:overflow-visible">
-        <Table className="table-fixed [&_td]:border [&_th]:border">
+      <div
+        className="[&>div]:overflow-visible"
+        style={{
+          // Provide number of product columns (excluding first feature label column)
+          // Used by width calc expressions in headers/cells
+          ["--compare-cols" as any]: String(normalized.headers.length || 1),
+        }}
+      >
+        <Table className="[&_td]:border [&_th]:border w-full">
           <TableHeader>
             <TableRow>
-              <TableHead className="sticky top-0 mb-24 w-1/4 bg-background p-5 text-base font-medium text-primary after:absolute after:right-0 after:-bottom-px after:left-0 after:h-px after:bg-border">
+              <TableHead className="sticky top-0 mb-24 w-40 bg-background p-5 text-base font-medium text-primary after:absolute after:right-0 after:-bottom-px after:left-0 after:h-px after:bg-border align-top">
                 {title}
               </TableHead>
               {normalized.headers.map((header, idx) => (
                 <TableHead
                   key={idx}
                   className={cn(
-                    "sticky top-0 mb-24 w-1/4 bg-background p-5 text-center text-base font-medium text-primary after:absolute after:right-0 after:-bottom-px after:left-0 after:h-px after:bg-border md:table-cell",
+                    "sticky top-0 mb-24 bg-background p-5 text-center text-base font-medium text-primary after:absolute after:right-0 after:-bottom-px after:left-0 after:h-px after:bg-border md:table-cell md:[&:nth-child(n+2)]:w-[calc((100%-10rem)/var(--compare-cols))]",
                     header !== selectedTab ? "hidden" : ""
                   )}
                 >
@@ -178,7 +185,7 @@ export default function CompareProducts({
           <TableBody>
             {normalized.rows.map((rowLabel, rowIdx) => (
               <TableRow key={rowIdx}>
-                <TableCell className="p-5 font-semibold whitespace-normal">
+                <TableCell className="p-5 font-semibold whitespace-normal w-40 align-top">
                   {rowLabel}
                 </TableCell>
                 {normalized.cols.map((c, colIdx) => {
@@ -190,7 +197,7 @@ export default function CompareProducts({
                     <TableCell
                       key={colIdx}
                       className={cn(
-                        "p-5 text-center whitespace-normal md:table-cell",
+                        "p-5 text-center whitespace-normal md:table-cell md:[&:nth-child(n+2)]:[width:calc((100%-10rem)/var(--compare-cols))]",
                         normalized.headers[colIdx] !== selectedTab
                           ? "hidden"
                           : ""
