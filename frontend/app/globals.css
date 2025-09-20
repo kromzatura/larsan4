@@ -122,6 +122,16 @@
   }
 }
 
+/* Shared focus utility: standardized ring + outline contract */
+@utility ui-focus {
+  @apply focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 outline-ring/50 focus-visible:outline-offset-0;
+}
+
+/* Escape hatch to suppress shared focus (component opts out) */
+@utility no-ui-focus {
+  @apply focus-visible:ring-0 focus-visible:outline-none;
+}
+
 @layer base {
   * {
     @apply border-border;
