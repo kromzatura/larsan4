@@ -44,20 +44,25 @@ export default function Blog13({ padding, posts, gridColumns }: Blog13) {
                 )}
                 {post.categories && post.categories.length > 0 && (
                   <div className="absolute top-4 right-4 flex flex-wrap gap-2">
-                    {post.categories.map((category) => (
-                      <Link
-                        key={category._id}
-                        href={`/blog/category/${category.slug?.current}`}
-                        className="focus:outline-none"
-                      >
-                        <Badge
-                          variant="secondary"
-                          className="bg-background/70 px-3 py-1 text-sm backdrop-blur-sm hover:bg-background/90"
+                    {post.categories.map((category) => {
+                      const slug = (category as any)?.slug?.current as
+                        | string
+                        | undefined;
+                      return (
+                        <Link
+                          key={category._id}
+                          href={slug ? `/blog/category/${slug}` : `/blog`}
+                          className="focus:outline-none"
                         >
-                          {category.title}
-                        </Badge>
-                      </Link>
-                    ))}
+                          <Badge
+                            variant="secondary"
+                            className="bg-background/70 px-3 py-1 text-sm backdrop-blur-sm hover:bg-background/90"
+                          >
+                            {category.title}
+                          </Badge>
+                        </Link>
+                      );
+                    })}
                   </div>
                 )}
               </div>
