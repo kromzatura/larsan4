@@ -143,7 +143,7 @@ To support brand theming or multi-tenant design:
 | No automated contrast audits | Potential a11y regressions | Add CI contrast checks |
 
 ## 13. Quick Wins Checklist
-- [ ] Add `.dark` token override section
+- [x] Add `.dark` token override section
 - [ ] Refactor `tabs.tsx` to CVA (planned Phase 2+; focus utility applied)
 - [x] Extract form control base classes into `cva()` utilities (partial: shared `ui-focus` + invalid consolidation groundwork)
 - [ ] Build a `tokens.md` export script
