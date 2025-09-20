@@ -9,21 +9,11 @@ export default defineType({
     Rule.custom((value) => {
       if (!value) return true;
       const { isExternal, href, internalLink } = value as any;
-      if (isExternal) {
-        return href ? true : "External links require an href";
-      }
+      if (isExternal) return href ? true : "External links require an href";
       return internalLink
         ? true
         : "Select an internal link or mark as External";
     }),
-    Rule.custom((value) => {
-      if (!value) return true;
-      const { isExternal, internalLink } = value as any;
-      if (isExternal || !internalLink) return true;
-      if (internalLink._type === "contact") return true; // singleton contact allowed
-      const hasSlug = Boolean(internalLink?.slug?.current);
-      return hasSlug ? true : "missing-slug";
-    }).warning("Selected document has no slug yet (except Contact)"),
   ],
   fields: [
     defineField({
