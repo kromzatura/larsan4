@@ -38,9 +38,9 @@ export async function GET(
   });
   const selfUrl = `${SITE_URL}/blog/category/${slug}/rss.xml`;
   const lastBuildDate = new Date().toUTCString();
-  const siteName = (settings as any)?.siteName || "Blog";
+  const siteName = settings?.siteName || "Blog";
   const language = getLanguageFromSettings(settings);
-  const logo = (settings as any)?.logo;
+    const logo = settings?.logo;
   const logoUrl: string | null = logo?.asset?.url || null;
   const dim = logo?.asset?.metadata?.dimensions;
   const rawW = typeof dim?.width === "number" ? dim.width : undefined;
@@ -62,7 +62,7 @@ export async function GET(
           .map((t) => (t ? `<category>${escape(t)}</category>` : ""))
           .join("")
       : "";
-    const html = ptBlocksToHtml(p.body as any);
+      const html = ptBlocksToHtml(p.body);
     const creator = p.author?.name
       ? `<dc:creator>${escape(p.author.name)}</dc:creator>`
       : "";
