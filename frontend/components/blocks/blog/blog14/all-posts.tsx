@@ -65,13 +65,21 @@ export default async function AllPosts14({
                   quality={100}
                 />
               )}
-              {posts[0].categories && posts[0].categories.length > 0 && (
+              {post.categories && post.categories.length > 0 && (
                 <div className="flex flex-wrap gap-2">
-                  {posts[0].categories.map((category) => (
-                    <Badge key={category._id} variant="secondary">
-                      {category.title}
-                    </Badge>
-                  ))}
+                  {post.categories.map((category) => {
+                    const slug = (category as any)?.slug?.current as
+                      | string
+                      | undefined;
+                    return (
+                      <Link
+                        key={category._id}
+                        href={slug ? `/blog/category/${slug}` : `/blog`}
+                      >
+                        <Badge variant="secondary">{category.title}</Badge>
+                      </Link>
+                    );
+                  })}
                 </div>
               )}
               {post.title && (

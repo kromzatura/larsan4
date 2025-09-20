@@ -20,6 +20,7 @@ export const blog4Query = groq`
       categories[]->{
         _id,
         title,
+        slug,
       },
       author->{
         _id,

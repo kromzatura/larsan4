@@ -21,6 +21,7 @@ export const blog14Query = groq`
       categories[]->{
         _id,
         title,
+        slug,
       },
       author->{
         _id,
