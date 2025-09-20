@@ -2,6 +2,7 @@ import Blocks from "@/components/blocks";
 import { fetchSanityPageBySlug } from "@/sanity/lib/fetch";
 import { notFound } from "next/navigation";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
+import type { ResolvingMetadata } from "next";
 
 export const revalidate = 60;
 
@@ -9,7 +10,7 @@ export async function generateMetadata({
   searchParams,
 }: {
   searchParams?: Promise<{ page?: string; category?: string }>;
-}) {
+}): Promise<ResolvingMetadata | Record<string, any>> { // fallback loose type union to avoid any casts
   const page = await fetchSanityPageBySlug({ slug: "products" });
   if (!page) return {};
   const sp = searchParams ? await searchParams : undefined;
@@ -26,9 +27,9 @@ export async function generateMetadata({
           ? `/products/category/${category}`
           : "/products",
       },
-    } as any;
+    };
   }
-  return base as any;
+  return base;
 }
 
 export default async function ProductsPage(props: {

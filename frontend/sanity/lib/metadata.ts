@@ -7,6 +7,14 @@ import {
   ProductCategory,
 } from "@/sanity.types";
 import { getOgImageUrl } from "@/sanity/lib/fetch";
+
+type SanityImageAsset = {
+  _id?: string;
+  url?: string;
+  metadata?: {
+    dimensions?: { width?: number; height?: number } | null;
+  } | null;
+};
 const isProduction = process.env.NEXT_PUBLIC_SITE_ENV === "production";
 
 export function generatePageMetadata({
@@ -23,7 +31,7 @@ export function generatePageMetadata({
   slug: string;
   type: "post" | "page" | "product" | "productCategory";
 }) {
-  const imgAsset: any = page?.meta?.image?.asset as any;
+  const imgAsset = page?.meta?.image?.asset as SanityImageAsset | undefined;
   return {
     title: page?.meta?.title,
     description: page?.meta?.description,

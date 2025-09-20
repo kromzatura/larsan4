@@ -61,7 +61,14 @@ export type ProductCategoryWithMeta = ProductCategory & {
     title?: string | null;
     description?: string | null;
     noindex?: boolean | null;
-    image?: any;
+    image?: {
+      asset?: {
+        _id?: string;
+        url?: string;
+        mimeType?: string;
+        metadata?: { dimensions?: { width?: number; height?: number } | null } | null;
+      } | null;
+    } | null;
   } | null;
 };
 

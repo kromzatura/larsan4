@@ -46,8 +46,22 @@ export function ContactForm({
 
   useEffect(() => {
     if (!siteKey) return;
+    type Grecaptcha = {
+      ready: (cb: () => void) => void;
+      render: (
+        container: HTMLElement,
+        params: { sitekey: string; size: "invisible"; callback: (token: string) => void }
+      ) => number;
+      reset: (id?: number) => void;
+      execute: (id?: number) => void;
+    };
+    const getGrecaptcha = (): Grecaptcha | null => {
+      if (typeof window === "undefined") return null;
+      const g = (window as unknown as { grecaptcha?: Grecaptcha }).grecaptcha;
+      return g ?? null;
+    };
     const tryInit = () => {
-      const grecaptcha = (window as any)?.grecaptcha;
+      const grecaptcha = getGrecaptcha();
       if (!grecaptcha || !captchaRef.current || widgetIdRef.current !== null) {
         return;
       }
@@ -79,9 +93,13 @@ export function ContactForm({
       if (
         siteKey &&
         typeof window !== "undefined" &&
-        (window as any).grecaptcha
+        getGrecaptcha()
       ) {
-        const grecaptcha = (window as any).grecaptcha;
+        const grecaptcha = getGrecaptcha();
+        if (!grecaptcha) {
+          setFormState({ error: "Captcha not ready. Please try again." });
+          return;
+        }
         if (widgetIdRef.current == null) {
           setFormState({ error: "Captcha not ready. Please try again." });
           return;
