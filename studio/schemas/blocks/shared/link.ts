@@ -100,21 +100,22 @@ export default defineType({
           ? "Contact"
           : ilType === "page"
           ? "Page"
-          : "Internal";
+          : ilType;
+
       const path =
         ilType === "post"
-          ? `/blog/${ilSlug || ""}`
+          ? `/blog/${ilSlug}`
           : ilType === "category"
-          ? `/blog/category/${ilSlug || ""}`
+          ? `/blog/category/${ilSlug}`
           : ilType === "product"
-          ? `/products/${ilSlug || ""}`
+          ? `/products/${ilSlug}`
           : ilType === "productCategory"
-          ? `/products/category/${ilSlug || ""}`
+          ? `/products/category/${ilSlug}`
           : ilType === "contact"
-          ? `/contact`
+          ? "/contact"
           : ilSlug === "index"
           ? "/"
-          : `/${ilSlug || ""}`;
+          : ilSlug;
       return {
         title: label || ilTitle || path || "Link",
         subtitle: `${typeLabel} • ${path}`,
