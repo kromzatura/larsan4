@@ -6,6 +6,7 @@ import {
 import { sanityFetch } from "@/sanity/lib/live";
 import { FEED_POSTS_BY_CATEGORY_QUERY_NEWEST } from "@/sanity/queries/feed";
 import { ptBlocksToHtml, getLanguageFromSettings } from "@/sanity/lib/ptToHtml";
+import type { FeedPost } from "@/lib/types/content";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -49,43 +50,23 @@ export async function GET(
   const height =
     rawW && rawH && width ? Math.round((rawH / rawW) * width) : rawH;
 
-  type FeedPost = {
-    publishedAt?: string;
-    _createdAt?: string;
-    title?: string | null;
-    slug?: { current?: string } | null;
-    excerpt?: string | null;
-    body?: any[] | null;
-    author?: { name?: string | null } | null;
-    image?: {
-      asset?: {
-        url?: string | null;
-        mimeType?: string | null;
-        metadata?: {
-          dimensions?: { width?: number | null; height?: number | null } | null;
-        } | null;
-      } | null;
-    } | null;
-    categories?: Array<{ title?: string | null }> | null;
-  };
   const items = ((posts as FeedPost[]) || []).map((p) => {
     const url = `${SITE_URL}/blog/${p.slug?.current ?? ""}`;
     const title = escape(p.title ?? "Untitled");
-    const description = escape(p.excerpt ?? "");
     const rawDate = p.publishedAt || p._createdAt;
     const pubDate = rawDate ? new Date(rawDate).toUTCString() : "";
     const categories = Array.isArray(p.categories)
       ? p.categories
-          .map((c: any) => c?.title)
+          .map((c) => c?.title)
           .filter(Boolean)
-          .map((t: string) => `<category>${escape(t)}</category>`)
+          .map((t) => (t ? `<category>${escape(t)}</category>` : ""))
           .join("")
       : "";
-    const html = ptBlocksToHtml((p as any).body);
+    const html = ptBlocksToHtml(p.body as any);
     const creator = p.author?.name
       ? `<dc:creator>${escape(p.author.name)}</dc:creator>`
       : "";
-    const img = (p as any)?.image?.asset;
+    const img = p.image?.asset;
     const imgUrl = img?.url ? escape(img.url) : null;
     const imgType = img?.mimeType || null;
     const w = img?.metadata?.dimensions?.width || null;

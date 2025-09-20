@@ -62,7 +62,7 @@ export default function Timeline3({
         </div>
         {columns && columns?.length > 0 && (
           <div className="flex flex-col gap-12 md:gap-20">
-            {columns.map((column, index) => (
+            {columns.map((column) => (
               <div key={column._key} className="rounded-xl border p-2">
                 {column.image && column.image.asset?._id && (
                   <Image

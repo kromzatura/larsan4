@@ -4,18 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 import PortableTextRenderer from "@/components/portable-text-renderer";
-import { Button } from "@/components/ui/button";
 import AddToInquiryButton from "@/components/inquiry/add-to-inquiry-button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle2, Facebook, Linkedin, Twitter } from "lucide-react";
+import { Facebook, Linkedin, Twitter } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   fetchSanityProductBySlug,
   fetchSanityProductSlugs,
 } from "@/sanity/lib/fetch";
+import type { ProductDocument, ProductSpecification } from "@/lib/types/content";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { urlFor } from "@/sanity/lib/image";
-import type { PRODUCT_QUERYResult } from "@/sanity.types";
 
 type SpecPair = { label: string; value?: string | number | null };
 
@@ -68,8 +68,8 @@ export default async function ProductPage(props: {
   const product = await fetchSanityProductBySlug({ slug: params.slug });
   if (!product) notFound();
 
-  const spec: any | undefined = Array.isArray((product as any).specifications)
-    ? (product as any).specifications[0]
+  const spec: ProductSpecification | undefined = Array.isArray((product as ProductDocument | any)?.specifications)
+    ? (product as ProductDocument).specifications![0]
     : undefined;
 
   const links = [
@@ -290,7 +290,7 @@ export default async function ProductPage(props: {
                 item={{
                   id: spec.sku,
                   name: product.title || null,
-                  productId: (product as any)._id || null,
+                  productId: product._id || null,
                   slug: product.slug?.current || null,
                   imageUrl: product.image?.asset?.url || null,
                 }}

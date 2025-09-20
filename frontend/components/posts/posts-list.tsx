@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 import Pagination from "@/components/pagination";
 import PostDate from "@/components/post-date";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ChevronRight } from "lucide-react";
 
 export type PostsListItem = {
   _id: string;

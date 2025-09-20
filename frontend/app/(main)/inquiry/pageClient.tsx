@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { buttonVariants, Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useInquiry } from "@/components/inquiry/InquiryContext";
 import {
@@ -12,7 +12,7 @@ import {
   INQUIRY_UPDATED_EVENT,
   type InquiryItem,
 } from "@/lib/inquiry";
-import { Trash2, X, ArrowLeft, Send } from "lucide-react";
+import { Trash2, X, Send, ArrowLeft } from "lucide-react";
 
 function encodeInquiry(items: InquiryItem[]): string {
   try {

@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import SectionContainer from "@/components/ui/section-container";
 // Using loose typing because typegen doesn't yet include this new block
-import { PAGE_QUERYResult } from "@/sanity.types";
 import { cn } from "@/lib/utils";
 import {
   Table,
@@ -14,7 +13,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CircleCheck, CircleMinus, CircleX } from "lucide-react";
 import AddToInquiryButton from "@/components/inquiry/add-to-inquiry-button";
 
 type BlockProps = any;
@@ -139,10 +137,6 @@ export default function CompareProducts({
                   const v = (c as any).values
                     ? (c as any).values[rowIdx]
                     : (columns?.[colIdx] as any)?.attributes?.[rowIdx]?.value;
-                  const status = (columns?.[colIdx] as any)?.attributes?.[
-                    rowIdx
-                  ]?.status;
-
                   const isAction = v === "__actions__";
                   return (
                     <TableCell

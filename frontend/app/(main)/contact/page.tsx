@@ -1,7 +1,5 @@
 import { Mail, MapPin, MessagesSquare, Phone } from "lucide-react";
-import { ContactForm } from "@/components/forms/contact-form";
 import { LinkButton } from "@/components/ui/link-button";
-import { submitContactForm } from "@/app/actions/contact-form";
 import { fetchSanityContact } from "@/sanity/lib/fetch";
 import { notFound } from "next/navigation";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
@@ -44,7 +42,7 @@ function parseInquiryParam(searchParams: { [key: string]: string | string[] | un
 export default async function ContactPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
   const resolvedSearchParams = await searchParams;
   const inquiryItems = parseInquiryParam(resolvedSearchParams || {});
-  const hasInquiry = inquiryItems.length > 0;
+  // Note: inquiryItems length not currently used for conditional UI; retain only items list.
 
   const contact = await fetchSanityContact();
 

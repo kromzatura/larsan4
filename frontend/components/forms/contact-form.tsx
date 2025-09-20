@@ -116,7 +116,7 @@ export function ContactForm({
           const fieldValue = currentValues[fieldKey];
           try {
             contactFormSchema.shape[fieldKey].parse(fieldValue);
-          } catch (e) {
+          } catch (_e) {
             form.setError(fieldKey, {
               type: "server",
               message,

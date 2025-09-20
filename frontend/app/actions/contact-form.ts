@@ -1,10 +1,7 @@
 "use server";
 
 import { Resend } from "resend";
-import {
-  contactFormSchema,
-  type ContactFormValues,
-} from "@/lib/schemas/contact-form";
+import { contactFormSchema } from "@/lib/schemas/contact-form";
 import ContactFormEmail from "@/emails/contact-form";
 import { render } from "@react-email/render";
 import { z } from "zod";

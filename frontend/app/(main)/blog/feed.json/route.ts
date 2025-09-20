@@ -3,6 +3,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { FEED_POSTS_QUERY_NEWEST } from "@/sanity/queries/feed";
 import { fetchSanitySettings } from "@/sanity/lib/fetch";
 import { ptBlocksToHtml, getLanguageFromSettings } from "@/sanity/lib/ptToHtml";
+import type { FeedPost } from "@/lib/types/content";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -24,19 +25,19 @@ export async function GET() {
     home_page_url: `${SITE_URL}/blog`,
     feed_url: `${SITE_URL}/blog/feed.json`,
     language,
-    items: (posts || []).map((p: any) => {
+    items: ((posts as FeedPost[]) || []).map((p) => {
       const url = `${SITE_URL}/blog/${p.slug?.current ?? ""}`;
-      const content_html = ptBlocksToHtml(p.body) || p.excerpt || "";
+      const content_html = ptBlocksToHtml(p.body as any) || p.excerpt || "";
       return {
         id: url,
         url,
         title: p.title || "Untitled",
-        date_published: (p as any).publishedAt || p._createdAt || undefined,
+        date_published: p.publishedAt || p._createdAt || undefined,
         content_html,
         authors: p.author?.name ? [{ name: p.author.name }] : undefined,
         image: p.image?.asset?.url || undefined,
         tags: Array.isArray(p.categories)
-          ? p.categories.map((c: any) => c?.title).filter(Boolean)
+          ? p.categories.map((c) => c?.title).filter(Boolean)
           : undefined,
       };
     }),

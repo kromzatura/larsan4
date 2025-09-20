@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
-import { Fragment } from "react";
 import Icon from "@/components/icon";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import SectionContainer from "@/components/ui/section-container";
