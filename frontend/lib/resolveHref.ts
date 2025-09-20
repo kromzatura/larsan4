@@ -1,32 +1,34 @@
 // Centralized route resolution for Sanity document + object like items
 // Extend this map cautiously; keep stable public URLs.
+import { DOC_TYPES, CATEGORY_DOC_TYPES } from "./docTypes";
 
 export function resolveHref(docType: string | undefined, slug: string | undefined): string | null {
   if (!docType) return null;
   // Normalize slug value (some documents may store slug object, caller should pass slug.current)
   const s = slug?.replace(/^\//, "");
   switch (docType) {
-    case "page":
+    case DOC_TYPES.PAGE:
       // Home page (root) sometimes represented by slug 'index' or empty
       if (!s || s === "index" || s === "home") return "/";
       return `/${s}`;
-    case "post":
+    case DOC_TYPES.POST:
       if (!s) return null;
       return `/blog/${s}`;
-    case "blogCategory":
-    case "postCategory": // legacy alias if exists
-    case "category": // legacy generic category
-      if (!s) return null;
-      return `/blog/category/${s}`;
-    case "product":
+    case DOC_TYPES.PRODUCT:
       if (!s) return null;
       return `/products/${s}`;
-    case "productCategory":
+    case DOC_TYPES.PRODUCT_CATEGORY:
       if (!s) return null;
       return `/products/category/${s}`;
+    case DOC_TYPES.CONTACT:
+      return "/contact";
     default:
+      if (CATEGORY_DOC_TYPES.includes(docType as any)) {
+        if (!s) return null;
+        return `/blog/category/${s}`;
+      }
       return null;
-  }
+}
 }
 
 // Narrow helper for items already containing `_type` + `slug` shape
