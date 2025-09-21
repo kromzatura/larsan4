@@ -14,14 +14,20 @@ Ensures content is structured for efficient translation and long-term scalabilit
 ### 1.2 Schema Review
 - **Action:** Add a required `language` (string) field to all translatable document types (e.g., `page`, `post`, `product`, `category`). Enforce `options.list: [{title:"Dutch", value:"nl"}, {title:"English", value:"en"}]` with radio layout.
 - **Shared vs Translated Fields:**
-  - Translated: `title`, `slug`, `excerpt`, `body`, `seo` fields
-  - Shared: `sku`, `price`, `baseImage`, `reference` relations to global taxonomies
+  - Translated: `title`, `slug`, `excerpt`, `body`, `seo` fields, `image alt text`, and potentially `pricing` if future currency / market variants are anticipated.
+  - Shared (initially): `sku`, `baseImage` reference, stable taxonomy references (unless taxonomy itself becomes localized later).
+- **Price Strategy (Deliberate Decision Point):** Even if only EUR is used now, model `pricing` as an object to future-proof (e.g., `{ amount: number, currency: 'EUR', display?: string }`) OR create a localized price wrapper `{ nl: { amount, currency }, en: { amount, currency } }`. Choose one of:
+  1. Minimal (shared numeric): lowest setup, later migration cost higher.
+  2. Structured shared object: moderate prep, still single price.
+  3. Localized object: highest initial effort, zero migration cost if multi-currency emerges.
+  Recommendation: Option 2 (structured shared object) unless differentiated pricing is already on roadmap (< 6 months), then Option 3.
 - **Validation:** Ensure uniqueness of slug per language (e.g., custom rule combining `language + slug.current`).
 
 ### 1.3 Global Content Strategy
-- **Action:** Create a singleton `siteSettings` document.
+- **Action:** Create a singleton `siteSettings` document (per locale or a dual-locale structure).
 - **Fields:** Navigation labels, footer text, cookie banner strings, default meta fields, optional structured data blocks.
-- **Approach:** Either make fields language-aware (array of localized values) or store one document per language (`siteSettings_nl`, `siteSettings_en`). Prefer separate documents for clearer publishing control.
+- **Approach:** Either make fields language-aware (array or keyed object) or store one document per language (`siteSettings_nl`, `siteSettings_en`). Prefer separate documents for clearer publishing control.
+- **Image Alt Text Translation:** All image-bearing blocks or objects must expose a translated `alt` field. Pattern: `alt` becomes `{ nl: string; en: string }` or separate localized sibling docs. Fallback rule: Do not silently use the other language's alt text—if missing, output empty `alt=""` for decorative treatment unless the image conveys critical meaning (then flag in QA).
 
 ### 1.4 Slug Management
 - **Action:** Ensure slug generation respects language. Dutch lives at root (`/over-ons`), English under `/en/about-us`.
@@ -53,6 +59,7 @@ Defines URL shape and search visibility strategy.
 - **Rule:** If `lang === 'nl'` → no prefix. Else prefix `/en`.
 - **Example:** `resolveHref('post','winter-tips','nl') => /blog/winter-tips`; `resolveHref('post','winter-tips','en') => /en/blog/winter-tips`.
 - **Internal Links:** Store only document references; resolve per-request with active locale.
+- **Invariant (Must Adopt):** Every GROQ query fetching localized documents MUST include `language == $lang` (or equivalent param filter). Add a lintable util (string search) or code review checklist item to prevent leakage.
 
 ### 2.4 SEO Metadata Strategy
 - **Dynamic `<html lang>`:** Inject via root layout using current locale param.
@@ -89,7 +96,9 @@ Ensures UI supports localization gracefully.
   - Shows available locales with current highlighted.
   - Links to exact translated path (if exists) else fallback root of target language.
   - Accessible (aria-current, focus ring, keyboard nav, discernible text or lang code).
+  - Persists user choice: write explicit selection to `NEXT_LOCALE` cookie so future visits honor preference over `Accept-Language`.
 - **Lookup:** Use translation linkage from Sanity to resolve the alternate document slug.
+- **Behavioral Edge Case:** If user selects a language lacking a translation for current page, redirect to that locale's home (302) and optionally surface a subtle notice.
 
 ---
 ## Phase 4: Pre-Flight Checklist
@@ -99,18 +108,22 @@ Must answer **Yes** before implementation begins.
 - [ ] `language` field added & validated on all translatable docs.
 - [ ] Strategy chosen for `siteSettings` (per-locale docs or localized fields) and implemented.
 - [ ] Translation linkage established (plugin or custom reference array).
+- [ ] Image alt text fields localized across all image usages.
+- [ ] Pricing localization strategy (Option 1/2/3) explicitly chosen & documented.
 
 ### Routing & SEO
 - [ ] `next.config.js` updated with `i18n` block.
 - [ ] `resolveHref` extended to accept language + tests updated.
+- [ ] All GROQ queries audited to enforce `language == $lang` (no leaks).
 - [ ] `hreflang` generation plan implemented (layout or metadata helper).
 - [ ] Sitemap(s) updated to include alternates.
 
 ### Frontend
 - [ ] All hardcoded strings extracted into locale files.
 - [ ] Key components verified for layout resilience.
-- [ ] Dates/numbers use `Intl` APIs.
-- [ ] Language switcher designed & wired to translation map.
+- [ ] Dates/numbers & potential future prices use `Intl` APIs.
+- [ ] Language switcher designed, wired to translation map, and persists cookie.
+- [ ] Fallback messaging UX defined for missing translations.
 
 ### Risk & Fallbacks
 - [ ] Defined policy for missing translation (fallback to Dutch vs hide link).
@@ -118,30 +131,44 @@ Must answer **Yes** before implementation begins.
 
 ---
 ## Implementation Sequencing Recommendation
-1. Schema changes + siteSettings strategy.
+1. Schema changes + siteSettings strategy (include alt + price model decision).
 2. Data backfill: assign `language` to existing docs (default: `nl`).
-3. Introduce translation linkage (create EN test documents).
-4. Add `i18n` config + `[lang]` routing segment.
-5. Refactor `resolveHref` + update queries to filter by `language`.
-6. Implement metadata + `hreflang` + sitemap alternates.
-7. Extract hardcoded strings and integrate translation framework.
-8. Build language switcher.
-9. QA pass (content parity, SEO tags, link integrity, CLS/layout checks with longer strings).
-10. Launch behind feature flag or staging domain; monitor.
+3. Localize image alt text + introduce pricing object (if Option 2/3).
+4. Introduce translation linkage (create EN test documents).
+5. Add `i18n` config + `[lang]` routing segment.
+6. Refactor `resolveHref(lang)` + update EVERY query to filter by `$lang` + add tests.
+7. Implement metadata + `hreflang` + sitemap alternates.
+8. Extract hardcoded strings and integrate translation framework.
+9. Build language switcher (with persistence cookie) + 404 / fallback handling.
+10. QA pass (parity, alt coverage, hreflang validation, layout resilience, cookie persistence).
+11. Launch behind feature flag or staging domain; monitor.
 
 ---
 ## Success Metrics
 - 0 broken internal links post-launch.
 - 100% coverage of required `language` field across translatable docs.
 - < 5% pages temporarily missing translation (tracked via dashboard).
+- 100% localized image alt coverage on pages containing media.
+- 0 queries returning cross-locale documents (enforced by audit script / tests).
 - All pages emit correct `hreflang` pairs within first crawl cycle.
 
 ---
-## Open Questions (Define Before Build)
-- Do we need draft fallback display (show Dutch when EN missing) or strict locale-only?
-- Will products require localized structured data (schema.org) in both languages initially?
-- Is search planned; if so, will we segment by locale or merge results with locale weighting?
+## Adopted Decisions (Previously Open)
+**Content Fallback Policy:** Strict locale-only. No cross-language content rendering; untranslated pages simply do not expose a language switch link.
 
----
+**Structured Data:** Localized schema.org required from day one; each locale's page emits matching language structured data (Product, Article, BreadcrumbList, etc.).
+
+**Search Strategy:** Segmented by active locale. `/en` searches return only English documents; `/` (nl) returns only Dutch. Future enhancement: optional cross-locale toggle.
+
+**Pricing Strategy Fallback:** No fallback allowed across locales. Price must exist for a product to be publishable in that locale. Missing price ⇒ product hidden or marked "Price unavailable" (non-purchasable state).
+
+**Alt Text Validation:** Phase 1 (first 3–6 months): `warn` validation + dashboard tracking. Phase 2 (after stabilization): escalate to `error` (publish-blocking) for required semantic images.
+
+**Missing Translation Redirect UX:** If user requests non-existent translation, redirect to that locale root with a dismissible notice: "That page is not yet available in English." Provide telemetry event for tracking frequency.
+
+**Additional Operational Notes:**
+- Introduce an editor dashboard surfacing: (1) pages missing counterpart translation, (2) images missing alt in any locale, (3) products missing localized price.
+- Add automated preflight script in CI to fail if new queries omit `language == $lang`.
+
 **Status:** Draft (ready for review)
 
