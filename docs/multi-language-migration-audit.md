@@ -164,17 +164,72 @@ Must answer **Yes** before implementation begins.
 
 ---
 ## Implementation Sequencing Recommendation
-1. Schema changes + siteSettings strategy (include alt + price model decision).
-2. Data backfill: assign `language` to existing docs (default: `nl`).
-3. Localize image alt text + introduce pricing object (if Option 2/3).
-4. Introduce translation linkage (create EN test documents).
-5. Add `i18n` config + `[lang]` routing segment.
-6. Refactor `resolveHref(lang)` + update EVERY query to filter by `$lang` + add tests.
-7. Implement metadata + `hreflang` + sitemap alternates.
-8. Extract hardcoded strings and integrate translation framework.
-9. Build language switcher (with persistence cookie) + 404 / fallback handling.
-10. QA pass (parity, alt coverage, hreflang validation, layout resilience, cookie persistence).
-11. Launch behind feature flag or staging domain; monitor.
+Each step lists required engineering tasks and explicit editor / operations actions.
+
+1. Foundation: Schema + Settings Expansion
+  - Dev: Add `language` field to document-level types (`page`,`post`,`product`,`category`,`settings`). Add pricing object (Option 2) & alt text localization shape.
+  - Dev: Extend `settings` schema with planned global fields.
+  - Editor Action: Review new fields; confirm no missing global text categories.
+
+2. Backup & Plugin Install
+  - Ops: Export current dataset (snapshot) before structural change.
+  - Dev: Install & configure `sanity-plugin-internationalization` (or custom translation linkage) WITHOUT creating translations yet.
+  - Editor Action: Confirm studio shows language selector for configured types.
+
+3. Classification & Language Backfill
+  - Dev Script: Set all existing documents' `language` to `en` (since current content is English-first) via a migration.
+  - Dev: Add guard to prevent creating second `settings` for same language.
+  - Editor Action: Spot check a random sample to verify `language: en` persisted.
+
+4. Dutch Baseline Creation (High-Impact Pages First)
+  - Editor Action: Create Dutch (`nl`) versions for Home, About, Contact, top navigation pages, priority product/category pages.
+  - Dev: Implement translation linkage UI enhancements (ordering, preview badges) if needed.
+  - Dev: Add dashboard query counting missing Dutch counterparts.
+
+5. Introduce `[lang]` Routing & Query Filtering
+  - Dev: Add `i18n` block in `next.config.js` (still keep defaultLocale = `en` UNTIL parity threshold met—defer flip to Step 9.)
+  - Dev: Introduce `[lang]` segment pages; update all GROQ queries to filter by `language == $lang`.
+  - Dev: Extend `resolveHref(docType, slug, lang)` + tests (including language prefix rules).
+  - Editor Action: Validate that English pages resolve correctly under `/en/...` test path (staging) and Dutch under root temp preview (if prototyped) OR under `/nl/` if temporary dual-prefixed phase is used.
+
+6. Metadata & SEO Layer
+  - Dev: Implement `generateMetadata` locale-aware; add `hreflang` builder using translation linkage.
+  - Dev: Generate locale-aware sitemaps (only list hreflang pairs where both exist).
+  - Editor Action: Verify sample pages produce correct `<html lang>` & hreflang tags.
+
+7. Content Localization Expansion
+  - Editor Action: Translate remaining medium-priority pages (articles, secondary products) to reach defined parity threshold (e.g., 80%).
+  - Dev: Add automated report for untranslated slugs.
+  - Dev: Begin embedding localized structured data for pages that now have both locales.
+
+8. UI Internationalization Framework
+  - Dev: Introduce `next-intl` (or chosen lib) + extract hardcoded UI strings into `locales/nl.json`, `locales/en.json`.
+  - Dev: Implement `pickLocale` helpers for embedded localized fields.
+  - Editor Action: Validate UI strings in both locales; flag overflows.
+
+9. Default Locale Flip to Dutch
+  - Preconditions: Baseline parity achieved; critical nav & SEO pages localized.
+  - Dev: Change `defaultLocale` to `nl`; move English under `/en/` prefix; add 301 redirects from old root English URLs → `/en/...`.
+  - Dev: Update sitemap canonical entries; confirm hreflang pairs stable.
+  - Editor Action: Regression pass on navigation + legacy external links.
+
+10. Language Switcher & UX Hardening
+  - Dev: Implement persistent `NEXT_LOCALE` cookie logic & missing translation redirect notice.
+  - Dev: Add monitoring events (locale switch usage, missing translation redirects).
+  - Editor Action: Confirm switch only lists locales where translation exists.
+
+11. QA & Compliance Gate
+  - Dev: Run audit scripts (no query leaks, alt coverage %, pricing completeness).
+  - Editor Action: Approve dashboards (translation coverage, alt warnings, pricing readiness).
+
+12. Launch & Post-Launch Monitoring
+  - Dev: Deploy feature flag removal; enable production caching for dual locales.
+  - Ops: Monitor GSC indexing, hreflang validation, 404/redirect logs.
+  - Editor Action: Continue filling remaining translations; escalate alt text from warn → error at target date.
+
+13. Continuous Improvement
+  - Dev: Add potential third-locale scaffolding (generic locale arrays) only when business signals ready.
+  - Editor Action: Maintain translation SLAs (e.g., new English page must ship Dutch within X days).
 
 ---
 ## Success Metrics
