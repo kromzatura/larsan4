@@ -1,5 +1,7 @@
 # I18n Implementation Action Plan
 
+Source Audit: See core strategy and rationale in [`../multi-language-migration-audit.md`](../multi-language-migration-audit.md) (sections: Implementation Sequencing, Risks & Mitigations, Cutover & Rollback Playbook, Instrumentation & Monitoring).
+
 Status Key: ☐ Not Started | ▶ In Progress | ⏸ Blocked | ✔ Done
 (Track updates directly in this file via commits.)
 

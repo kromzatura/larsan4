@@ -2,6 +2,11 @@
 
 **Objective:** Prepare the architecture for a robust, SEO-friendly, maintainable multi-language implementation supporting Dutch (`nl`, default) and English (`en`).
 
+**Action Plan:** See implementation task tracker in [`docs/action-plan/ACTIONS.md`](./action-plan/ACTIONS.md). Key deep links:
+- Sequencing: Search for heading "Implementation Sequencing Recommendation"
+- Risks: Search for heading "Risks & Mitigations"
+- Cutover Playbook: Search for heading "Cutover & Rollback Playbook"
+
 ---
 ## Phase 1: Content & CMS Architecture Audit (Sanity)
 Ensures content is structured for efficient translation and long-term scalability.
