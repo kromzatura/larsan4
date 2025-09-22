@@ -260,3 +260,94 @@ Each step lists required engineering tasks and explicit editor / operations acti
 
 **Status:** Draft (ready for review)
 
+---
+## Risks & Mitigations
+| Risk | Impact | Probability | Mitigation | Owner | Detection Signal |
+|------|--------|-------------|-----------|-------|------------------|
+| Missing language filter in new GROQ query | Cross-locale content bleed, SEO confusion | Medium | Lint script + CI test scanning `language == $lang` | Dev | CI fails build |
+| Incomplete translation at locale flip | Broken UX or excessive redirects | Medium | Flip only after parity >= threshold & dashboard green | Product Lead | Dashboard parity < threshold |
+| Alt text gaps for semantic images | Accessibility / SEO issues | Medium | Phase gating: warn -> error; weekly report | Accessibility Champ | Alt coverage < target |
+| Incorrect 301 mapping at flip | Loss of rankings / 404 spikes | Low-Med | Pre-generate redirect map & dry run in staging logs | DevOps | 404 log spike post flip |
+| Editors create duplicate settings doc per locale | Config ambiguity | Low | Unique constraint check pre-publish | Dev | Validation error logs |
+| Performance regression from language filter | Slower TTFB | Low | Add query duration logging; index `language` field | Dev | APM query > baseline |
+| Hreflang mismatch (one side missing) | SEO inefficiency | Medium | Sitemaps list only valid pairs; nightly hreflang audit | SEO | Audit diff report |
+| Fallback leakage due to manual component bypass | Policy violation | Low | Add runtime dev assertion if language mismatch object detected | Dev | Console warnings |
+| Translation backlog growth | Brand inconsistency | Medium | SLA metric & weekly triage | Content Lead | Backlog count > threshold |
+| Misconfigured locale cookie | Wrong locale persistence | Low | Integration test + telemetry event when cookie applied | Dev | Error log + event anomaly |
+
+## Cutover & Rollback Playbook
+Cutover = Step 9 (Default Locale Flip to Dutch)
+1. Preconditions Checklist:
+  - Parity >= agreed threshold (e.g., 85% of document-level types localized).
+  - All critical SEO pages (home, category roots, top 20 posts/products) localized.
+  - Redirect map generated & validated in staging (no 404s in sample crawl).
+  - Sitemaps built with hreflang pairs; validation script green.
+2. Execution Order (Deployment Window):
+  - Deploy config change (`defaultLocale: 'nl'`).
+  - Apply redirect rules (root English → `/en/...`).
+  - Purge CDN caches for affected paths.
+  - Trigger sitemap regeneration job.
+  - Verify sample pages (desktop/mobile) for canonical + hreflang tags.
+3. Post-Deployment Verification (T+15m):
+  - Check 404/redirect logs for anomalies.
+  - Confirm no mixed-language documents in home/feed queries.
+  - Validate language switcher mapping on random sample.
+4. Rollback Criteria:
+  - >5% of root traffic returns 404 or mislocalized page.
+  - Hreflang audit shows >10% orphan alternates.
+  - Redirect latency > acceptable threshold (TTFB regression).
+5. Rollback Steps:
+  - Revert config to previous commit (`defaultLocale: 'en'`).
+  - Disable redirect rules, restore prior sitemap.
+  - Issue CDN purge again, announce rollback internally.
+
+## Instrumentation & Monitoring
+Metrics & Events:
+- Translation Coverage % per document-level type (dashboard + timeseries).
+- Missing Translation Redirect count (event: `i18n_missing_redirect`).
+- Language Switch Usage (event: `i18n_switch` with from/to, page type).
+- Query Duration (log execution time for key GROQ queries with language filter).
+- Alt Text Coverage % (semantic images only).
+- Hreflang Pair Completeness (# pages with both locales / total localized pages).
+- Redirect Effectiveness (success vs unexpected 404).
+
+Alert Thresholds (examples):
+- Coverage < 70% after flip → warn.
+- Missing translation redirects > 5% of locale switch events daily → investigate.
+- Query p95 latency increase > 30% week-over-week → performance review.
+- Alt coverage < 95% after enforcement phase → accessibility escalation.
+
+## Migration Scripts Outline
+1. Add Language Field Migration: Iterate over target types; patch docs with `language: 'en'` (initial state) using Sanity mutation script.
+2. Slug Uniqueness Assertion: Query duplicates by composite key `${language}::${slug.current}`; output list; fail script if any collisions.
+3. Translation Coverage Report: For each doc-level type, build map of base slug → locales present; emit missing list (JSON) for dashboard ingestion.
+4. Alt Text Gap Report: Scan image-bearing blocks for empty localized alt fields per locale; tag severity by page traffic if analytics integrated.
+5. Redirect Map Generator (Cutover Prep): For each English root URL pre-flip, produce mapping to `/en/...`; export CSV + JSON for infra.
+
+## Validation Enhancements
+- Add custom publish validation: reject if document-level type missing `language` or slug duplicate in same language.
+- Studio badge: Show locale chip + warning icon if counterpart missing.
+- Pre-deploy test: Snapshot random sample of localized pairs, assert canonical/hreflang symmetry.
+
+## Translation SLA Metric
+- Definition: 90% of new English documents must receive Dutch translation within 7 calendar days (adjust post-launch).
+- Tracking: Creation timestamp of source doc vs creation of target locale doc.
+- Dashboard: Aging buckets (0-2d, 3-5d, 6-7d, >7d) with alert on >7d count.
+
+## Open Questions (To Resolve Before Flip)
+- Do product feeds / external integrations require simultaneous locale launch? (Affects pricing object readiness.)
+- Are there analytics segmentation changes needed for locale dimension? (GTM update.)
+- Confirm legal pages (privacy, terms) translation certification requirements.
+
+## Ownership Matrix (RACI Summary)
+| Area | Responsible | Accountable | Consulted | Informed |
+|------|-------------|-------------|-----------|----------|
+| Schema & Migrations | Dev | Tech Lead | Content Lead | All |
+| Translation Coverage | Content Lead | Product | Dev | All |
+| Accessibility (Alt Text) | Accessibility Champ | Product | Dev, Content | All |
+| SEO (hreflang, sitemap) | SEO Specialist | Product | Dev | All |
+| Cutover Execution | DevOps | Tech Lead | SEO, Content | All |
+| Monitoring & Dashboards | Dev | Tech Lead | SEO, Product | All |
+
+---
+
