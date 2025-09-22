@@ -24,9 +24,11 @@ Ensures content is structured for efficient translation and long-term scalabilit
 - **Validation:** Ensure uniqueness of slug per language (e.g., custom rule combining `language + slug.current`).
 
 ### 1.3 Global Content Strategy
-- **Action:** Create a singleton `siteSettings` document (per locale or a dual-locale structure).
-- **Fields:** Navigation labels, footer text, cookie banner strings, default meta fields, optional structured data blocks.
-- **Approach:** Either make fields language-aware (array or keyed object) or store one document per language (`siteSettings_nl`, `siteSettings_en`). Prefer separate documents for clearer publishing control.
+- **Action:** Reuse and extend existing singleton document `settings` (do NOT introduce a parallel `siteSettings`) to become the authoritative localized global config.
+- **Planned Additions:** Navigation label overrides (if not already fully derived from structured nav docs), footer legal / utility text blocks, cookie banner strings, default SEO fallback fields (title, description), optional social meta defaults, structured data defaults, language switcher labels.
+- **Localization Model:** Per-locale `settings` documents (recommended) by adding a required `language` field and creating one document per locale (`language == 'nl'`, `language == 'en'`). Alternative (single document with localized field objects) only if global field count remains minimal.
+- **Fetch Pattern:** `*[_type == "settings" && language == $lang][0]` with strict locale-only (no fallback) as adopted.
+- **Enforcement:** Validation or tooling to ensure at most one `settings` document per language; editorial dashboard surfaces missing counterpart.
 - **Image Alt Text Translation:** All image-bearing blocks or objects must expose a translated `alt` field. Pattern: `alt` becomes `{ nl: string; en: string }` or separate localized sibling docs. Fallback rule: Do not silently use the other language's alt text—if missing, output empty `alt=""` for decorative treatment unless the image conveys critical meaning (then flag in QA).
 
 ### 1.4 Slug Management
@@ -105,8 +107,8 @@ Ensures UI supports localization gracefully.
 Must answer **Yes** before implementation begins.
 
 ### Content
-- [ ] `language` field added & validated on all translatable docs.
-- [ ] Strategy chosen for `siteSettings` (per-locale docs or localized fields) and implemented.
+- [ ] `language` field added & validated on all translatable docs (including `settings`).
+- [ ] `settings` localization strategy (per-locale docs vs single localized fields) implemented and documented.
 - [ ] Translation linkage established (plugin or custom reference array).
 - [ ] Image alt text fields localized across all image usages.
 - [ ] Pricing localization strategy (Option 1/2/3) explicitly chosen & documented.
