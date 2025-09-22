@@ -156,85 +156,76 @@ export default function CompareProducts({
         </Tabs>
       )}
       <div
-        className="[&>div]:overflow-visible"
-        style={{
-          // Provide number of product columns (excluding first feature label column)
-          // Used by width calc expressions in headers/cells
-          ["--compare-cols" as any]: String(normalized.headers.length || 1),
-        }}
+        className="overflow-x-auto rounded-lg border"
+        style={{ ["--compare-cols" as any]: String(normalized.headers.length || 1) }}
       >
-        <Table className="[&_td]:border [&_th]:border w-full">
-          <TableHeader>
-            <TableRow>
-              <TableHead className="sticky top-0 mb-24 w-40 bg-background p-5 text-base font-medium text-primary after:absolute after:right-0 after:-bottom-px after:left-0 after:h-px after:bg-border align-top">
-                {title}
-              </TableHead>
+        <table className="min-w-full text-sm">
+          <thead className="bg-muted/50 text-xs uppercase tracking-wide text-muted-foreground">
+            <tr>
+              <th scope="col" className="w-40 px-6 py-4 text-left align-top font-medium text-primary">
+                {title || "Attributes"}
+              </th>
               {normalized.headers.map((header, idx) => (
-                <TableHead
+                <th
                   key={idx}
+                  scope="col"
                   className={cn(
-                    "sticky top-0 mb-24 bg-background p-5 text-center text-base font-medium text-primary after:absolute after:right-0 after:-bottom-px after:left-0 after:h-px after:bg-border md:table-cell md:[&:nth-child(n+2)]:w-[calc((100%-10rem)/var(--compare-cols))]",
+                    "px-6 py-4 text-left font-medium text-primary md:table-cell",
                     header !== selectedTab ? "hidden" : ""
                   )}
                 >
                   {header}
-                </TableHead>
+                </th>
               ))}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
+            </tr>
+          </thead>
+          <tbody>
             {normalized.rows.map((rowLabel, rowIdx) => (
-              <TableRow key={rowIdx}>
-                <TableCell className="p-5 font-semibold whitespace-normal w-40 align-top">
+              <tr key={rowIdx} className="border-t">
+                <td className="w-40 px-6 py-5 md:py-6 align-top font-semibold whitespace-normal">
                   {rowLabel}
-                </TableCell>
+                </td>
                 {normalized.cols.map((c, colIdx) => {
-                  // Primary normalized value; fallback to legacy attributes array if present.
                   const legacy = columns?.[colIdx]?.attributes?.[rowIdx]?.value;
                   const v: CellValue = c.values[rowIdx] ?? legacy ?? null;
                   const isAction = v === "__actions__";
                   return (
-                    <TableCell
+                    <td
                       key={colIdx}
                       className={cn(
-                        "p-5 text-center whitespace-normal md:table-cell md:[&:nth-child(n+2)]:[width:calc((100%-10rem)/var(--compare-cols))]",
-                        normalized.headers[colIdx] !== selectedTab
-                          ? "hidden"
-                          : ""
+                        "px-6 py-5 md:py-6 text-left align-top whitespace-normal md:table-cell",
+                        normalized.headers[colIdx] !== selectedTab ? "hidden" : ""
                       )}
                     >
                       {!isAction && (
-                        <span className="text-muted-foreground">
+                        <span className="text-muted-foreground break-words">
                           {String(v ?? "—")}
                         </span>
                       )}
                       {isAction && (
                         <AddToInquiryButton
                           item={{
-                            id:
-                              String(
-                                columns?.[colIdx]?.overrides?.sku ??
-                                  columns?.[colIdx]?.product?.spec?.sku ??
-                                  columns?.[colIdx]?.product?._id ??
-                                  `col-${colIdx}`
-                              ),
+                            id: String(
+                              columns?.[colIdx]?.overrides?.sku ??
+                                columns?.[colIdx]?.product?.spec?.sku ??
+                                columns?.[colIdx]?.product?._id ??
+                                `col-${colIdx}`
+                            ),
                             name: columns?.[colIdx]?.product?.title ?? null,
-                            productId:
-                              columns?.[colIdx]?.product?._id ?? null,
-                            slug:
-                              columns?.[colIdx]?.product?.slug?.current ?? null,
+                            productId: columns?.[colIdx]?.product?._id ?? null,
+                            slug: columns?.[colIdx]?.product?.slug?.current ?? null,
                             imageUrl: null,
                           }}
                           className="w-full max-w-44 px-6 mx-auto"
                         />
                       )}
-                    </TableCell>
+                    </td>
                   );
                 })}
-              </TableRow>
+              </tr>
             ))}
-          </TableBody>
-        </Table>
+          </tbody>
+        </table>
       </div>
     </SectionContainer>
   );
