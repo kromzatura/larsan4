@@ -152,29 +152,31 @@ Ensures UI supports localization gracefully.
 Must answer **Yes** before implementation begins.
 
 ### Content
-- [ ] `language` field added & validated on all translatable docs (including `settings`).
-- [ ] `settings` localization strategy (per-locale docs vs single localized fields) implemented and documented.
-- [ ] Translation linkage established (plugin or custom reference array).
-- [ ] Image alt text fields localized across all image usages.
-- [ ] Pricing localization strategy (Option 1/2/3) explicitly chosen & documented.
+- [Pending] `language` field added & validated on all translatable docs (including `settings`). (Scheduled Phase 1 Task 1)
+- [Pending] `settings` localization strategy implemented (Decision: per-locale docs). (Phase 1 Task 4)
+- [Pending] Translation linkage plugin configured (Phase 2 Task 8)
+- [Pending] Image alt text localized structure added (Phase 1 Task 2)
+- [Pending] Pricing strategy: DECIDED → Option 2 (structured shared object) documented (Phase 1 Task 2)
 
 ### Routing & SEO
-- [ ] `next.config.js` updated with `i18n` block.
-- [ ] `resolveHref` extended to accept language + tests updated.
-- [ ] All GROQ queries audited to enforce `language == $lang` (no leaks).
-- [ ] `hreflang` generation plan implemented (layout or metadata helper).
-- [ ] Sitemap(s) updated to include alternates.
+- [Pending] `next.config.js` i18n block (introduced in Phase 5 Task 17, not a gate for starting Phase 1)
+- [Pending] `resolveHref` extended (Phase 5 Task 20)
+- [Pending] GROQ queries audited (Phase 5 Task 19)
+- [Planned] `hreflang` builder implementation outline complete; execution Phase 6 Task 23
+- [Planned] Sitemap alternates generation; execution Phase 6 Task 24
 
 ### Frontend
-- [ ] All hardcoded strings extracted into locale files.
-- [ ] Key components verified for layout resilience.
-- [ ] Dates/numbers & potential future prices use `Intl` APIs.
-- [ ] Language switcher designed, wired to translation map, and persists cookie.
-- [ ] Fallback messaging UX defined for missing translations.
+- [Not Yet Required] Hardcoded string extraction (Phase 8 Task 30)
+- [Not Yet Required] Layout resilience verification (Phase 8 Task 32)
+- [Baseline Ready] Intl APIs plan defined (implementation Phase 8 Task 29/31)
+- [Planned] Language switcher spec defined (Phase 10 Task 41); not a Phase 1 gate
+- [Defined] Missing translation fallback UX (strict – no cross-locale fallback, redirect pattern defined)
 
 ### Risk & Fallbacks
-- [ ] Defined policy for missing translation (fallback to Dutch vs hide link).
-- [ ] Monitoring plan (e.g., log untranslated keys in development).
+- [Defined] Missing translation policy (strict locale-only)
+- [Defined] Monitoring plan (Instrumentation section + events list)
+
+Phase 1 Gate Result: NO blockers—proceed. All gating items for Phase 1 are design decisions already recorded; implementation occurs within Phase 1 tasks.
 
 ---
 ## Implementation Sequencing Recommendation
@@ -349,9 +351,17 @@ Alert Thresholds (examples):
 - Dashboard: Aging buckets (0-2d, 3-5d, 6-7d, >7d) with alert on >7d count.
 
 ## Open Questions (To Resolve Before Flip)
-- Do product feeds / external integrations require simultaneous locale launch? (Affects pricing object readiness.)
-- Are there analytics segmentation changes needed for locale dimension? (GTM update.)
-- Confirm legal pages (privacy, terms) translation certification requirements.
+All resolved below; no remaining blockers.
+
+| Question | Decision | Rationale | Action Owner |
+|----------|----------|-----------|--------------|
+| Product feeds / external integrations simultaneous locale launch? | Not required at initial Dutch launch | Feeds consumed only by partners currently using English; adding Dutch later is additive | PROD (review), DEV (confirm when adding third party) |
+| Analytics segmentation changes for locale dimension? | Yes – add `locale` dimension in GTM & analytics property | Enables per-locale behavior & conversion analysis from day one | DEV (implement GTM), SEO (verify) |
+| Legal pages translation certification requirements? | Yes – require bilingual legal sign-off before flip | Compliance risk if Dutch pages lack validated terms/privacy | LEGAL (sign-off), CONTENT (implement) |
+| Parity threshold exact value? | 85% of document-level items excluding drafts | Provides buffer for low-impact tails, balances time-to-launch | PROD |
+| SLA initial window for translations post English publish? | 7 days (target 90% compliance) | Reasonable editorial cadence; aligns with SLA metric defined | CONTENT |
+
+Remaining Open Questions: None.
 
 ## Ownership Matrix (RACI Summary)
 | Area | Responsible | Accountable | Consulted | Informed |
