@@ -23,6 +23,37 @@ Ensures content is structured for efficient translation and long-term scalabilit
   Recommendation: Option 2 (structured shared object) unless differentiated pricing is already on roadmap (< 6 months), then Option 3.
 - **Validation:** Ensure uniqueness of slug per language (e.g., custom rule combining `language + slug.current`).
 
+#### 1.2.1 Translation Model Matrix
+Defines which content types use document-level translation (separate doc per locale) versus embedded (localized fields inside parent). Chosen per rubric: SEO surface, independent publish cadence, structural divergence risk, and editorial ergonomics.
+
+| Type | Purpose | SEO Surface? | Structural Divergence Risk | Chosen Model | Notes |
+|------|---------|--------------|----------------------------|--------------|-------|
+| page | Marketing / static routes | High | Medium–High | Document-level | Unique slug + metadata per locale |
+| post | Blog articles | High | Medium | Document-level | Essential for hreflang + canonicals |
+| product | Product detail | High | Medium | Document-level | Future pricing / compliance differences |
+| category (blog/post) | Taxonomy listing | Medium | Low | Document-level | Slug impacts URL & sitemap |
+| productCategory | Product taxonomy | Medium | Low | Document-level | Consistent with blog taxonomy |
+| settings | Global UI / defaults | Indirect | Low | Document-level (per locale) | One per locale via `language` field |
+| navigation root | Structural container | Low | Low | Embedded localized fields | Only label text varies |
+| navigation link item | Link label override | Low | Low | Embedded localized fields | Localize `label` object |
+| hero block | Section object | Indirect | Low | Embedded localized fields | Localize copy fields only |
+| feature block | Repeated feature list | Indirect | Low | Embedded localized fields | Keys stable, text varies |
+| pricing tier | In-page card | Indirect | Low | Embedded localized fields | Amount shared (Option 2) + localized label |
+| faq item | Q & A pairs | Indirect | Low | Embedded localized fields | Question / answer localized |
+| form definition | Field labels, messages | Indirect | Low | Embedded localized fields | Validation messages localized |
+| image alt | Accessibility text | Indirect | None | Embedded localized fields | `{ nl, en }` object |
+| CTA microcopy tokens | Buttons / small text | Indirect | None | Embedded localized fields | Managed via locale JSON |
+| structured data overrides | Per-page schema | Mirrors doc | Mirrors doc | Matches parent model | If override needed, keep per doc |
+
+Rubric Enforcement:
+- Document-level items MUST include `language` in schema + queries filtered by `$lang`.
+- Embedded localized fields MUST never appear with fallback content from another locale (strict policy).
+- Adding a new locale requires: (1) new `settings` doc, (2) backfill for all document-level types, (3) schema unchanged for embedded fields (add language key if object-based).
+
+Operational Guardrails:
+- Preflight script enumerates document-level types and asserts each has at least one doc per supported locale (except during phased rollout where gaps are tracked).
+- Dashboard panels: missing translation counts per document-level type; alt text completion per locale; pricing localization readiness.
+
 ### 1.3 Global Content Strategy
 - **Action:** Reuse and extend existing singleton document `settings` (do NOT introduce a parallel `siteSettings`) to become the authoritative localized global config.
 - **Planned Additions:** Navigation label overrides (if not already fully derived from structured nav docs), footer legal / utility text blocks, cookie banner strings, default SEO fallback fields (title, description), optional social meta defaults, structured data defaults, language switcher labels.
