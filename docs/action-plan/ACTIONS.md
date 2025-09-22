@@ -2,6 +2,8 @@
 
 Source Audit: See core strategy and rationale in [`../multi-language-migration-audit.md`](../multi-language-migration-audit.md) (sections: Implementation Sequencing, Risks & Mitigations, Cutover & Rollback Playbook, Instrumentation & Monitoring).
 
+> Current State Baseline: All existing content is English-only. No Dutch documents or localized alt/pricing structures exist yet. Initial migration sets `language: 'en'` across existing documents before any Dutch authoring begins.
+
 Status Key: ☐ Not Started | ▶ In Progress | ⏸ Blocked | ✔ Done
 (Track updates directly in this file via commits.)
 

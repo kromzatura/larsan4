@@ -7,6 +7,15 @@
 - Risks: Search for heading "Risks & Mitigations"
 - Cutover Playbook: Search for heading "Cutover & Rollback Playbook"
 
+**Current State (Baseline):**
+- All published content exists only in English.
+- Root URLs currently serve English pages (pre-flip condition; Dutch not yet created).
+- No Dutch (`nl`) documents exist; parity = 0%.
+- No `language` field present yet in schemas; queries do not filter by locale.
+- Image alt text present only in English context; no localized alt structure.
+- Pricing modeled as single shared values (pre-Option 2 migration).
+- This baseline informs migration scripts: initial backfill sets `language: 'en'` for existing docs before any Dutch content is authored.
+
 ---
 ## Phase 1: Content & CMS Architecture Audit (Sanity)
 Ensures content is structured for efficient translation and long-term scalability.
