@@ -13,7 +13,7 @@ export async function generateMetadata(props: { params: Promise<{ lang: string; 
   const { lang, slug } = await props.params;
   const page = await fetchSanityPageBySlug({ slug, lang });
   if (!page) notFound();
-  return generatePageMetadata({ page, slug, type: "page" });
+  return generatePageMetadata({ page, slug, type: "page", lang });
 }
 
 export default async function Page(props: {

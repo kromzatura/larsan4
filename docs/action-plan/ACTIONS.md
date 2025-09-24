@@ -18,9 +18,9 @@ Status Key: ☐ Not Started | ▶ In Progress | ⏸ Blocked | ✔ Done
 
 ## Phase 1 – Foundation (Schema & Settings)
 
-1. ☐ Prepare for official i18n plugin: list translatable document types (`page`, `post`, `product`, `productCategory`, `category`, `settings`) and locales (`en`, `nl`) (DEV)
+1. ✔ Prepare for official i18n plugin: list translatable document types (`page`, `post`, `product`, `productCategory`, `category`, `settings`) and locales (`en`, `nl`) (DEV)
 2. ☐ Implement pricing object (Option 2) & confirm image alt text approach aligns with document-level translations (DEV)
-3. ☐ Add slug uniqueness helper scoped per-locale (plugin-aware `isUniqueWithinLocale`) (DEV)
+3. ✔ Add slug uniqueness helper scoped per-locale (plugin-aware `isUniqueWithinLocale`) (DEV)
 4. ☐ Extend `settings` doc fields (global nav labels, footer, SEO fallbacks) as needed (DEV)
 5. ☐ Create editor dashboard panels scaffolding (missing translations, alt coverage) (DEV)
 6. ☐ Editorial review of new fields completeness (CON)
@@ -28,13 +28,13 @@ Status Key: ☐ Not Started | ▶ In Progress | ⏸ Blocked | ✔ Done
 ## Phase 2 – Backup & Plugin Install
 
 7. ☐ Snapshot / export current dataset (OPS)
-8. ☐ Install and configure official `@sanity/document-internationalization` plugin with locales (`en`, `nl`) and document types (DEV)
-9. ☐ Verify Translate action / language selector appears for configured types (CON)
+8. ✔ Install and configure official `@sanity/document-internationalization` plugin with locales (`en`, `nl`) and document types (DEV)
+9. ✔ Verify Translate action / language selector appears for configured types (CON)
 
 ## Phase 3 – Classification & Backfill
 
-10. ☐ Migration script: backfill plugin locale on existing docs (e.g., set `__i18n_lang: 'en'` and clear translation refs) (DEV)
-11. ☐ Add uniqueness guard to prevent duplicate `settings` per locale (DEV)
+10. ✔ Migration script: backfill plugin locale on existing docs (e.g., set `__i18n_lang: 'en'` and clear translation refs) (DEV) — completed manually by CON
+11. ✔ Add uniqueness guard to prevent duplicate `settings` per locale (DEV)
 12. ☐ Spot check random docs for persisted plugin locale value (CON)
 
 ## Phase 4 – Dutch Baseline Creation
@@ -46,17 +46,17 @@ Status Key: ☐ Not Started | ▶ In Progress | ⏸ Blocked | ✔ Done
 
 ## Phase 5 – Routing & Query Filtering
 
-17. ☐ Add temporary i18n config (do NOT flip default yet) (DEV)
-18. ☐ Introduce `[lang]` segment pages (DEV)
-19. ☐ Update all GROQ queries to filter by the plugin locale field (e.g., `__i18n_lang == $lang`) and select translation refs for hreflang (DEV)
+17. ✔ Add temporary i18n config (do NOT flip default yet) (DEV)
+18. ✔ Introduce `[lang]` segment pages (DEV)
+19. ▶ Update all GROQ queries to filter by the plugin locale field (e.g., `__i18n_lang == $lang`) and select translation refs for hreflang (DEV) — filtering done; translation-ref powered hreflang pending
 20. ☐ Extend `resolveHref` & unit tests for locale (DEV)
 21. ☐ Validate path resolution for sample pages (CON)
 
 ## Phase 6 – Metadata & SEO
 
-22. ☐ Implement locale-aware `generateMetadata` helper (DEV)
-23. ☐ Add hreflang builder using plugin translation references (DEV)
-24. ☐ Generate locale-aware sitemap(s) (DEV)
+22. ✔ Implement locale-aware `generateMetadata` helper (DEV)
+23. ▶ Add hreflang builder using plugin translation references (DEV) — basic alternates added; plugin refs pending
+24. ✔ Generate locale-aware sitemap(s) (DEV)
 25. ☐ Validate meta tags & hreflang on samples (SEO)
 
 ## Phase 7 – Content Localization Expansion

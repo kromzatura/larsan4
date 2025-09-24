@@ -21,6 +21,7 @@ export function generatePageMetadata({
   page,
   slug,
   type,
+  lang,
 }: {
   page:
     | PAGE_QUERYResult
@@ -30,8 +31,14 @@ export function generatePageMetadata({
     | ProductCategory;
   slug: string;
   type: "post" | "page" | "product" | "productCategory";
+  lang?: "en" | "nl" | (string & {});
 }) {
   const imgAsset = page?.meta?.image?.asset as SanityImageAsset | undefined;
+  const ogLocale = lang === "nl" ? "nl_NL" : "en_US";
+  const pathFor = (l: string) => {
+    const s = slug === "index" ? "" : `/${slug}`;
+    return `/${l}${s}`;
+  };
   return {
     title: page?.meta?.title,
     description: page?.meta?.description,
@@ -45,7 +52,7 @@ export function generatePageMetadata({
           height: imgAsset?.metadata?.dimensions?.height || 630,
         },
       ],
-      locale: "en_US",
+      locale: ogLocale,
       type: "website",
     },
     robots: !isProduction
@@ -53,8 +60,16 @@ export function generatePageMetadata({
       : page?.meta?.noindex
       ? "noindex"
       : "index, follow",
-    alternates: {
-      canonical: `/${slug === "index" ? "" : slug}`,
-    },
+    alternates: lang
+      ? {
+          canonical: pathFor(lang),
+          languages: {
+            en: pathFor("en"),
+            nl: pathFor("nl"),
+          },
+        }
+      : {
+          canonical: `/${slug === "index" ? "" : slug}`,
+        },
   };
 }

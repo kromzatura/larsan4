@@ -4,10 +4,17 @@ import { sanityFetch } from "@/sanity/lib/live";
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
 
-async function getPagesSitemap(): Promise<SitemapEntry[]> {
+const LANGUAGES = ["en", "nl"] as const;
+
+async function getPagesSitemap(lang: (typeof LANGUAGES)[number]): Promise<SitemapEntry[]> {
   const pagesQuery = groq`
-    *[_type == 'page' && defined(slug.current) && coalesce(meta.noindex, false) == false] | order(slug.current) {
-      'url': $baseUrl + select(slug.current == 'index' => '', '/' + slug.current),
+    *[
+      _type == 'page'
+      && language == $lang
+      && defined(slug.current)
+      && coalesce(meta.noindex, false) == false
+    ] | order(slug.current) {
+      'url': $baseUrl + '/' + $lang + select(slug.current == 'index' => '', '/' + slug.current),
       'lastModified': _updatedAt,
       'changeFrequency': 'daily',
       'priority': select(
@@ -21,6 +28,7 @@ async function getPagesSitemap(): Promise<SitemapEntry[]> {
     query: pagesQuery,
     params: {
       baseUrl: process.env.NEXT_PUBLIC_SITE_URL,
+      lang,
     },
     perspective: "published",
     stega: false,
@@ -29,9 +37,14 @@ async function getPagesSitemap(): Promise<SitemapEntry[]> {
   return data;
 }
 
-async function getPostsSitemap(): Promise<SitemapEntry[]> {
+async function getPostsSitemapEn(): Promise<SitemapEntry[]> {
   const postsQuery = groq`
-    *[_type == 'post' && defined(slug.current) && coalesce(meta.noindex, false) == false] | order(_updatedAt desc) {
+    *[
+      _type == 'post'
+      && language == 'en'
+      && defined(slug.current)
+      && coalesce(meta.noindex, false) == false
+    ] | order(_updatedAt desc) {
       'url': $baseUrl + '/blog/' + slug.current,
       'lastModified': _updatedAt,
       'changeFrequency': 'weekly',
@@ -52,67 +65,81 @@ async function getPostsSitemap(): Promise<SitemapEntry[]> {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [pages, posts, products, productCategories, blogCategories] =
-    await Promise.all([
-      getPagesSitemap(),
-      getPostsSitemap(),
-      (async (): Promise<SitemapEntry[]> => {
-        const { data } = await sanityFetch({
-          query: groq`*[_type == 'product' && defined(slug.current) && coalesce(meta.noindex, false) == false] {
-          'url': $baseUrl + '/products/' + slug.current,
-          'lastModified': _updatedAt,
-          'changeFrequency': 'weekly',
-          'priority': 0.7
-        }`,
-          params: { baseUrl: process.env.NEXT_PUBLIC_SITE_URL },
-          perspective: "published",
-          stega: false,
-        });
-        return data as SitemapEntry[];
-      })(),
-      (async (): Promise<SitemapEntry[]> => {
-        const { data } = await sanityFetch({
-          query: groq`*[_type == 'productCategory' && defined(slug.current) && coalesce(meta.noindex, false) == false] | order(orderRank) {
-          'url': $baseUrl + '/products/category/' + slug.current,
-          'lastModified': _updatedAt,
-          'changeFrequency': 'weekly',
-          'priority': 0.6
-        }`,
-          params: { baseUrl: process.env.NEXT_PUBLIC_SITE_URL },
-          perspective: "published",
-          stega: false,
-        });
-        return data as SitemapEntry[];
-      })(),
-      (async (): Promise<SitemapEntry[]> => {
-        const { data } = await sanityFetch({
-          query: groq`*[_type == 'category' && defined(slug) && coalesce(seo.noindex, false) == false] | order(orderRank) {
-          'url': $baseUrl + '/blog/category/' + slug.current,
-          'lastModified': _updatedAt,
-          'changeFrequency': 'weekly',
-          'priority': 0.6
-        }`,
-          params: { baseUrl: process.env.NEXT_PUBLIC_SITE_URL },
-          perspective: "published",
-          stega: false,
-        });
-        return data as SitemapEntry[];
-      })(),
-    ]);
+  const resultsPerLang = await Promise.all(
+    LANGUAGES.map(async (lang) => {
+      const [pages, posts, products, productCategories, blogCategories] =
+        await Promise.all([
+          getPagesSitemap(lang),
+          getPostsSitemapEn(),
+          (async (): Promise<SitemapEntry[]> => {
+            const { data } = await sanityFetch({
+              query: groq`*[
+                _type == 'product'
+                && language == 'en'
+                && defined(slug.current)
+                && coalesce(meta.noindex, false) == false
+              ] | order(_updatedAt desc) {
+                'url': $baseUrl + '/products/' + slug.current,
+                'lastModified': _updatedAt,
+                'changeFrequency': 'weekly',
+                'priority': 0.7
+              }`,
+              params: { baseUrl: process.env.NEXT_PUBLIC_SITE_URL },
+              perspective: "published",
+              stega: false,
+            });
+            return data as SitemapEntry[];
+          })(),
+          (async (): Promise<SitemapEntry[]> => {
+            const { data } = await sanityFetch({
+              query: groq`*[
+                _type == 'productCategory'
+                && language == 'en'
+                && defined(slug.current)
+                && coalesce(meta.noindex, false) == false
+              ] | order(orderRank) {
+                'url': $baseUrl + '/products/category/' + slug.current,
+                'lastModified': _updatedAt,
+                'changeFrequency': 'weekly',
+                'priority': 0.6
+              }`,
+              params: { baseUrl: process.env.NEXT_PUBLIC_SITE_URL },
+              perspective: "published",
+              stega: false,
+            });
+            return data as SitemapEntry[];
+          })(),
+          (async (): Promise<SitemapEntry[]> => {
+            const { data } = await sanityFetch({
+              query: groq`*[
+                _type == 'category'
+                && language == 'en'
+                && defined(slug.current)
+                && coalesce(seo.noindex, false) == false
+              ] | order(orderRank) {
+                'url': $baseUrl + '/blog/category/' + slug.current,
+                'lastModified': _updatedAt,
+                'changeFrequency': 'weekly',
+                'priority': 0.6
+              }`,
+              params: { baseUrl: process.env.NEXT_PUBLIC_SITE_URL },
+              perspective: "published",
+              stega: false,
+            });
+            return data as SitemapEntry[];
+          })(),
+        ]);
 
-  const blogIndex: SitemapEntry = {
-    url: `${process.env.NEXT_PUBLIC_SITE_URL}/blog`,
-    lastModified: new Date().toISOString(),
-    changeFrequency: "daily",
-    priority: 0.8,
-  };
+      const blogIndex: SitemapEntry = {
+        url: `${process.env.NEXT_PUBLIC_SITE_URL}/blog`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: "daily",
+        priority: 0.8,
+      };
 
-  return [
-    blogIndex,
-    ...pages,
-    ...posts,
-    ...products,
-    ...productCategories,
-    ...blogCategories,
-  ];
+      return [blogIndex, ...pages, ...posts, ...products, ...productCategories, ...blogCategories];
+    })
+  );
+
+  return resultsPerLang.flat();
 }
