@@ -49,13 +49,13 @@ Status Key: ☐ Not Started | ▶ In Progress | ⏸ Blocked | ✔ Done
 17. ✔ Add temporary i18n config (do NOT flip default yet) (DEV)
 18. ✔ Introduce `[lang]` segment pages (DEV)
 19. ▶ Update all GROQ queries to filter by the plugin locale field (e.g., `__i18n_lang == $lang`) and select translation refs for hreflang (DEV) — filtering done; translation-ref powered hreflang pending
-20. ☐ Extend `resolveHref` & unit tests for locale (DEV)
+20. ✔ Extend `resolveHref` & unit tests for locale (DEV)
 21. ☐ Validate path resolution for sample pages (CON)
 
 ## Phase 6 – Metadata & SEO
 
 22. ✔ Implement locale-aware `generateMetadata` helper (DEV)
-23. ▶ Add hreflang builder using plugin translation references (DEV) — pages now use translation refs; posts/products pending
+23. ▶ Add hreflang builder using plugin translation references (DEV) — pages now use translation refs; posts/products queries now expose refs (alternates remain pages-only)
 24. ✔ Generate locale-aware sitemap(s) (DEV)
 25. ☐ Validate meta tags & hreflang on samples (SEO)
 
