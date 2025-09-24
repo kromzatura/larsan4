@@ -7,6 +7,7 @@ import {
   ProductCategory,
 } from "@/sanity.types";
 import { getOgImageUrl } from "@/sanity/lib/fetch";
+import { buildAlternatesLanguages } from "@/lib/alternates";
 
 type SanityImageAsset = {
   _id?: string;
@@ -39,19 +40,8 @@ export function generatePageMetadata({
     const s = slug === "index" ? "" : `/${slug}`;
     return `/${l}${s}`;
   };
-  const pageI18n = (page as any)?.i18n as
-    | Array<{ language?: string; slug?: string }>
-    | undefined;
-  const i18nLanguages = Array.isArray(pageI18n)
-    ? pageI18n
-        .filter((t) => t?.language && t?.slug)
-        .reduce<Record<string, string>>((acc, t) => {
-          const l = t.language as string;
-          const s = t.slug === "index" ? "" : `/${t.slug}`;
-          acc[l] = `/${l}${s}`;
-          return acc;
-        }, {})
-    : undefined;
+  const pageI18n = (page as any)?.i18n as Array<{ language?: string; slug?: string }> | undefined;
+  const i18nLanguages = buildAlternatesLanguages(slug, pageI18n);
   return {
     title: page?.meta?.title,
     description: page?.meta?.description,
