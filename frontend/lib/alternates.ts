@@ -6,7 +6,8 @@ export function buildAlternatesLanguages(
   baseSlug: string,
   translations: I18nTranslation[] | undefined
 ): Record<string, string> | undefined {
-  if (!Array.isArray(translations) || translations.length === 0) return undefined;
+  if (!Array.isArray(translations) || translations.length === 0)
+    return undefined;
   return translations
     .filter((t) => t?.language && typeof t.slug === "string")
     .reduce<Record<string, string>>((acc, t) => {
