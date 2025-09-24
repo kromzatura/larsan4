@@ -18,9 +18,10 @@ export const navigationLinkQuery = groq`
 `;
 
 export const NAVIGATION_QUERY = groq`
-  *[_type == "navigation"]{
+  *[_type == "navigation" && language == coalesce($lang, "en")]|order(orderRank){
     _type,
     _key,
+    key,
     title,
     links[]{
       ${navigationLinkQuery},

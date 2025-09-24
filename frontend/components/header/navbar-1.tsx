@@ -44,6 +44,7 @@ type NavigationItem = (SanityLink | SanityLinkGroup | SanityLinkIcon) & {
 
 interface Navbar1Props {
   className?: string;
+  lang?: string;
 }
 
 const isLinkGroup = (
@@ -52,10 +53,10 @@ const isLinkGroup = (
   return item._type === "link-group";
 };
 
-export default async function Navbar1({ className }: Navbar1Props) {
-  const settings = await fetchSanitySettings();
-  const navigationItems = await getNavigationItems("header");
-  const actionItems = await getNavigationItems("header-action");
+export default async function Navbar1({ className, lang = "en" }: Navbar1Props) {
+  const settings = await fetchSanitySettings(lang);
+  const navigationItems = await getNavigationItems("header", lang);
+  const actionItems = await getNavigationItems("header-action", lang);
 
   const renderMenuItem = (item: NavigationItem) => {
     if (isLinkGroup(item)) {
@@ -142,7 +143,7 @@ export default async function Navbar1({ className }: Navbar1Props) {
         <nav className="hidden justify-between lg:flex items-center">
           <div className="flex items-center gap-6">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
+            <Link href={`/${lang}`} className="flex items-center gap-2">
               {settings?.logo ? (
                 <Image
                   src={urlFor(settings.logo).url()}
@@ -190,7 +191,7 @@ export default async function Navbar1({ className }: Navbar1Props) {
         <div className="block lg:hidden">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
+            <Link href={`/${lang}`} className="flex items-center gap-2">
               {settings?.logo ? (
                 <Image
                   src={urlFor(settings.logo).url()}

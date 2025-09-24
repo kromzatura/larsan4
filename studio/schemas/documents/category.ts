@@ -13,6 +13,7 @@ const category = defineType({
     { name: "seo", title: "SEO", icon: Search },
   ],
   fields: [
+    defineField({ name: "language", type: "string", readOnly: true, hidden: true }),
     defineField({
       name: "title",
       type: "string",
@@ -23,7 +24,14 @@ const category = defineType({
       name: "slug",
       type: "slug",
       group: "content",
-      options: { source: "title", maxLength: 96 },
+      options: {
+        source: "title",
+        maxLength: 96,
+        isUnique: async (slug, context) => {
+          const { isUniqueWithinLocale } = await import("../../lib/i18n");
+          return isUniqueWithinLocale(slug, context);
+        },
+      },
       validation: (Rule) => Rule.required().error("Slug is required"),
     }),
     defineField({

@@ -15,11 +15,13 @@ export default defineType({
     { name: "settings", title: "Settings", icon: Settings },
   ],
   fields: [
+    defineField({ name: "language", type: "string", readOnly: true, hidden: true }),
     defineField({
       name: "title",
       title: "Title",
       type: "string",
       group: "content",
+      options: { aiAssist: { translateAction: true } },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -27,7 +29,14 @@ export default defineType({
       title: "Slug",
       type: "slug",
       group: "settings",
-      options: { source: "title", maxLength: 96 },
+      options: {
+        source: "title",
+        maxLength: 96,
+        isUnique: async (slug, context) => {
+          const { isUniqueWithinLocale } = await import("../../lib/i18n");
+          return isUniqueWithinLocale(slug, context);
+        },
+      },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -43,7 +52,13 @@ export default defineType({
       name: "keyFeatures",
       title: "Key Features",
       type: "array",
-      of: [{ type: "string" }],
+      of: [
+        defineField({
+          name: "item",
+          type: "string",
+          options: { aiAssist: { translateAction: true } },
+        }) as any,
+      ],
       group: "content",
     }),
     defineField({
@@ -115,6 +130,7 @@ export default defineType({
       title: "Body",
       type: "block-content",
       group: "content",
+      options: { aiAssist: { translateAction: true } },
     }),
     defineField({
       name: "excerpt",
@@ -122,6 +138,7 @@ export default defineType({
       type: "text",
       group: "content",
       rows: 3,
+      options: { aiAssist: { translateAction: true } },
       description: "Short description shown in listings and SEO fallback.",
       validation: (Rule) => Rule.max(160).warning("Keep under 160 characters."),
     }),

@@ -18,11 +18,13 @@ export default defineType({
     },
   ],
   fields: [
+    defineField({ name: "language", type: "string", readOnly: true, hidden: true }),
     defineField({
       name: "tagline",
       type: "string",
       group: "content",
       description: "The tagline shown above the title (e.g. 'Reach Us')",
+      options: { aiAssist: { translateAction: true } },
       validation: (Rule) => Rule.required().error("Tagline is required"),
     }),
     defineField({
@@ -30,6 +32,7 @@ export default defineType({
       type: "string",
       group: "content",
       description: "The main title of the contact page",
+      options: { aiAssist: { translateAction: true } },
       validation: (Rule) => Rule.required().error("Title is required"),
     }),
     defineField({
@@ -37,6 +40,7 @@ export default defineType({
       type: "text",
       group: "content",
       description: "The description text below the title",
+      options: { aiAssist: { translateAction: true } },
       validation: (Rule) => Rule.required().error("Description is required"),
     }),
     defineField({
@@ -63,11 +67,13 @@ export default defineType({
             defineField({
               name: "title",
               type: "string",
+              options: { aiAssist: { translateAction: true } },
               validation: (Rule) => Rule.required(),
             }),
             defineField({
               name: "description",
               type: "text",
+              options: { aiAssist: { translateAction: true } },
             }),
             defineField({
               name: "link",

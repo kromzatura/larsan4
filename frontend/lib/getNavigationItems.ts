@@ -22,23 +22,29 @@ function isGroup(item: NavLink | NavGroup): item is NavGroup {
   return item._type === "link-group";
 }
 
-function applyResolvedHref<T extends NavLink | NavGroup>(item: T): T {
+function applyResolvedHref<T extends NavLink | NavGroup>(item: T, lang: string): T {
   if (isGroup(item)) {
-    const links = item.links?.map((l) => applyResolvedHref(l as any)) ?? [];
+    const links = item.links?.map((l) => applyResolvedHref(l as any, lang)) ?? [];
     return { ...(item as any), links } as T;
   }
   if (item.internalType && item.internalSlug) {
     const computed = resolveHref(item.internalType, item.internalSlug);
-    return { ...(item as any), href: computed ?? item.href ?? null } as T;
+    const href = computed ?? item.href ?? null;
+    const localized =
+      item.internalType === "page" && href
+        ? `/${lang}${href === "/" ? "" : href}`
+        : href;
+    return { ...(item as any), href: localized } as T;
   }
   return item;
 }
 
-export const getNavigationItems = async (title: string) => {
-  const navigation = await fetchSanityNavigation();
-  const group = navigation?.find(
-    (item) => slugify(item.title ?? "") === title
-  );
+export const getNavigationItems = async (keyOrTitle: string, lang: string = "en") => {
+  const navigation = await fetchSanityNavigation(lang);
+  const group = navigation?.find((item: any) => {
+    if (item.key) return item.key === keyOrTitle;
+    return slugify(item.title ?? "") === keyOrTitle;
+  });
   if (!group) return [];
-  return group.links?.map((l: any) => applyResolvedHref(l)) ?? [];
+  return group.links?.map((l: any) => applyResolvedHref(l, lang)) ?? [];
 };

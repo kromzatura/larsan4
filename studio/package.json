@@ -9,7 +9,11 @@
     "build": "sanity build",
     "deploy": "sanity deploy",
     "typegen": "rm -rf schema.json && sanity schema extract && sanity typegen generate",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "migrate:set-locale": "node ./lib/migrations/set-i18n-locale.js",
+    "migrate:check-slugs": "node ./lib/migrations/check-slug-collisions-per-locale.js",
+    "set-lang": "node ./scripts/set-i18n-locale.mjs",
+    "check-slugs": "node ./scripts/check-slug-collisions-per-locale.mjs"
   },
   "dependencies": {
     "@sanity/assist": "^5.0.0",
@@ -20,6 +24,7 @@
     "@sanity/preview-url-secret": "^2.1.14",
     "@sanity/ui": "^3.0.7",
     "@sanity/vision": "^4.5.0",
+    "@sanity/document-internationalization": "^4.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.525.0",

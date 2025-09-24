@@ -3,7 +3,7 @@ import { imageQuery } from "./shared/image";
 import { bodyQuery } from "./shared/body";
 import { metaQuery } from "./shared/meta";
 
-export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]{
+export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug && language == coalesce($lang, "en")][0]{
   _id,
     title,
     slug,
@@ -26,7 +26,7 @@ export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]{
     "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180 ),
 }`;
 
-export const POSTS_QUERY = groq`*[_type == "post" && defined(slug)] | order(coalesce(publishedAt, _createdAt) desc)[$offset...$end]{
+export const POSTS_QUERY = groq`*[_type == "post" && defined(slug) && language == coalesce($lang, "en")] | order(coalesce(publishedAt, _createdAt) desc)[$offset...$end]{
     _id,
     _createdAt,
     title,
@@ -49,7 +49,7 @@ export const POSTS_QUERY = groq`*[_type == "post" && defined(slug)] | order(coal
     },
 }`;
 
-export const POSTS_QUERY_AZ = groq`*[_type == "post" && defined(slug)] | order(title asc)[$offset...$end]{
+export const POSTS_QUERY_AZ = groq`*[_type == "post" && defined(slug) && language == coalesce($lang, "en")] | order(title asc)[$offset...$end]{
     _id,
     _createdAt,
     title,
@@ -72,7 +72,7 @@ export const POSTS_QUERY_AZ = groq`*[_type == "post" && defined(slug)] | order(t
     },
 }`;
 
-export const POSTS_QUERY_ZA = groq`*[_type == "post" && defined(slug)] | order(title desc)[$offset...$end]{
+export const POSTS_QUERY_ZA = groq`*[_type == "post" && defined(slug) && language == coalesce($lang, "en")] | order(title desc)[$offset...$end]{
     _id,
     _createdAt,
     title,
@@ -95,6 +95,6 @@ export const POSTS_QUERY_ZA = groq`*[_type == "post" && defined(slug)] | order(t
     },
 }`;
 
-export const POSTS_SLUGS_QUERY = groq`*[_type == "post" && defined(slug)]{slug}`;
+export const POSTS_SLUGS_QUERY = groq`*[_type == "post" && defined(slug) && language == coalesce($lang, "en")] {slug}`;
 
-export const POSTS_COUNT_QUERY = groq`count(*[_type == "post" && defined(slug)])`;
+export const POSTS_COUNT_QUERY = groq`count(*[_type == "post" && defined(slug) && language == coalesce($lang, "en")])`;

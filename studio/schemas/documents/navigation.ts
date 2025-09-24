@@ -8,6 +8,22 @@ export default defineType({
   type: "document",
   icon: Menu,
   fields: [
+    defineField({ name: "language", type: "string", readOnly: true, hidden: true }),
+    defineField({
+      name: "key",
+      title: "Key",
+      type: "string",
+      description: "Fixed identifier used by the frontend to select this navigation group",
+      options: {
+        list: [
+          { title: "Header", value: "header" },
+          { title: "Header Action", value: "header-action" },
+          { title: "Footer", value: "footer" },
+          { title: "Footer Bottom", value: "footer-bottom" },
+        ],
+        layout: "radio",
+      },
+    }),
     defineField({
       name: "title",
       type: "string",
@@ -23,10 +39,11 @@ export default defineType({
           // Extract the base ID without the draft prefix
           const baseId = id?.replace(/^drafts\./, "");
 
-          // Query that excludes both the current document and its draft version
-          const query = `count(*[_type == "navigation" && title == $title && !(_id in [$id, $baseId, "drafts." + $baseId])])`;
+          // Unique per-language: same title allowed across different languages
+          const query = `count(*[_type == "navigation" && title == $title && language == $lang && !(_id in [$id, $baseId, "drafts." + $baseId])])`;
           const result = await client.fetch(query, {
             title: value,
+            lang: (document as any)?.language ?? null,
             id,
             baseId,
           });

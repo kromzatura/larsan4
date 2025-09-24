@@ -9,12 +9,13 @@ import PortableTextRenderer from "@/components/portable-text-renderer";
 
 interface Footer2Props {
   className?: string;
+  lang?: string;
 }
 
-export default async function Footer2({ className }: Footer2Props) {
-  const settings = await fetchSanitySettings();
-  const footerNavItems = await getNavigationItems("footer");
-  const bottomNavItems = await getNavigationItems("footer-bottom");
+export default async function Footer2({ className, lang = "en" }: Footer2Props) {
+  const settings = await fetchSanitySettings(lang);
+  const footerNavItems = await getNavigationItems("footer", lang);
+  const bottomNavItems = await getNavigationItems("footer-bottom", lang);
 
   return (
     <section className={cn("py-32", className)}>
@@ -23,7 +24,7 @@ export default async function Footer2({ className }: Footer2Props) {
           <div className="grid grid-cols-2 gap-8 lg:grid-cols-6">
             <div className="col-span-2 mb-8 lg:mb-0">
               <Link
-                href="/"
+                href={`/${lang}`}
                 className="flex items-center gap-2 lg:justify-start"
               >
                 {settings?.logo ? (

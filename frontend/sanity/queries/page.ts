@@ -71,7 +71,7 @@ import { allProducts16Query } from "./products/all-products-16";
 import { productCategories16Query } from "./products/product-categories-16";
 
 export const PAGE_QUERY = groq`
-  *[_type == "page" && slug.current == $slug][0]{
+  *[_type == "page" && slug.current == $slug && language == coalesce($lang, "en")][0]{
     blocks[]{
       ${sectionHeaderQuery},
       ${hero12Query},
@@ -147,4 +147,4 @@ export const PAGE_QUERY = groq`
   }
 `;
 
-export const PAGES_SLUGS_QUERY = groq`*[_type == "page" && defined(slug)]{slug}`;
+export const PAGES_SLUGS_QUERY = groq`*[_type == "page" && defined(slug) && language == coalesce($lang, "en")]{slug}`;

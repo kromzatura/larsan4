@@ -8,7 +8,7 @@ import type { InquiryItem } from "@/lib/inquiry";
 import ContactInquiryWrapper from "@/components/inquiry/contact-inquiry-wrapper";
 
 export async function generateMetadata() {
-  const contact = await fetchSanityContact();
+  const contact = await fetchSanityContact("en");
 
   if (!contact) {
     notFound();
@@ -44,7 +44,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
   const inquiryItems = parseInquiryParam(resolvedSearchParams || {});
   // Note: inquiryItems length not currently used for conditional UI; retain only items list.
 
-  const contact = await fetchSanityContact();
+  const contact = await fetchSanityContact("en");
 
   if (!contact) {
     notFound();

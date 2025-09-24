@@ -23,11 +23,13 @@ export default defineType({
     },
   ],
   fields: [
+    defineField({ name: "language", type: "string", readOnly: true, hidden: true }),
     defineField({
       name: "title",
       title: "Title",
       type: "string",
       group: "content",
+      options: { aiAssist: { translateAction: true } },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -38,6 +40,10 @@ export default defineType({
       options: {
         source: "title",
         maxLength: 96,
+        isUnique: async (slug, context) => {
+          const { isUniqueWithinLocale } = await import("../../lib/i18n");
+          return isUniqueWithinLocale(slug, context);
+        },
       },
       validation: (Rule) => Rule.required(),
     }),
@@ -46,6 +52,7 @@ export default defineType({
       title: "Excerpt",
       type: "text",
       group: "content",
+      options: { aiAssist: { translateAction: true } },
       description: "Short summary shown in lists and metadata (≈ 160 chars)",
       validation: (Rule) =>
         Rule.max(160).warning("Keep excerpt concise (≤ 160 characters)"),
@@ -86,6 +93,7 @@ export default defineType({
       title: "Body",
       type: "block-content",
       group: "content",
+      options: { aiAssist: { translateAction: true } },
     }),
     meta,
   ],

@@ -3,7 +3,7 @@ import { imageQuery } from "./shared/image";
 import { bodyQuery } from "./shared/body";
 import { metaQuery } from "./shared/meta";
 
-export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug][0]{
+export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug && language == coalesce($lang, "en")][0]{
   _id,
   title,
   slug,
@@ -37,7 +37,7 @@ export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug]
   ${metaQuery}
 }`;
 
-export const PRODUCTS_QUERY = groq`*[_type == "product" && defined(slug)] | order(orderRank){
+export const PRODUCTS_QUERY = groq`*[_type == "product" && defined(slug) && language == coalesce($lang, "en")] | order(orderRank){
   _id,
   orderRank,
   _createdAt,
@@ -55,17 +55,17 @@ export const PRODUCTS_QUERY = groq`*[_type == "product" && defined(slug)] | orde
   categories[]->{ _id, title, slug }
 }`;
 
-export const PRODUCTS_SLUGS_QUERY = groq`*[_type == "product" && defined(slug)]{ slug }`;
+export const PRODUCTS_SLUGS_QUERY = groq`*[_type == "product" && defined(slug) && language == coalesce($lang, "en")] { slug }`;
 
-export const PRODUCTS_COUNT_QUERY = groq`count(*[_type == "product" && defined(slug)])`;
+export const PRODUCTS_COUNT_QUERY = groq`count(*[_type == "product" && defined(slug) && language == coalesce($lang, "en")])`;
 
-export const PRODUCT_CATEGORIES_QUERY = groq`*[_type == "productCategory" && defined(slug)] | order(orderRank){
+export const PRODUCT_CATEGORIES_QUERY = groq`*[_type == "productCategory" && defined(slug) && language == coalesce($lang, "en")] | order(orderRank){
   _id,
   title,
   slug
 }`;
 
-export const PRODUCT_CATEGORY_BY_SLUG_QUERY = groq`*[_type == "productCategory" && slug.current == $slug][0]{
+export const PRODUCT_CATEGORY_BY_SLUG_QUERY = groq`*[_type == "productCategory" && slug.current == $slug && language == coalesce($lang, "en")][0]{
   _id,
   _type,
   title,
@@ -74,7 +74,7 @@ export const PRODUCT_CATEGORY_BY_SLUG_QUERY = groq`*[_type == "productCategory" 
   ${metaQuery}
 }`;
 
-export const PRODUCTS_BY_CATEGORY_QUERY = groq`*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(orderRank){
+export const PRODUCTS_BY_CATEGORY_QUERY = groq`*[_type == "product" && language == coalesce($lang, "en") && references(*[_type == "productCategory" && language == coalesce($lang, "en") && slug.current == $slug]._id)] | order(orderRank){
   _id,
   orderRank,
   _createdAt,
@@ -93,7 +93,7 @@ export const PRODUCTS_BY_CATEGORY_QUERY = groq`*[_type == "product" && reference
 }`;
 
 // Explicit variants to avoid brittle string replacement when ordering
-export const PRODUCTS_BY_CATEGORY_QUERY_NEWEST = groq`*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(_createdAt desc){
+export const PRODUCTS_BY_CATEGORY_QUERY_NEWEST = groq`*[_type == "product" && language == coalesce($lang, "en") && references(*[_type == "productCategory" && language == coalesce($lang, "en") && slug.current == $slug]._id)] | order(_createdAt desc){
   _id,
   orderRank,
   _createdAt,
@@ -111,7 +111,7 @@ export const PRODUCTS_BY_CATEGORY_QUERY_NEWEST = groq`*[_type == "product" && re
   categories[]->{ _id, title, slug }
 }`;
 
-export const PRODUCTS_BY_CATEGORY_QUERY_AZ = groq`*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(title asc){
+export const PRODUCTS_BY_CATEGORY_QUERY_AZ = groq`*[_type == "product" && language == coalesce($lang, "en") && references(*[_type == "productCategory" && language == coalesce($lang, "en") && slug.current == $slug]._id)] | order(title asc){
   _id,
   orderRank,
   _createdAt,
@@ -129,7 +129,7 @@ export const PRODUCTS_BY_CATEGORY_QUERY_AZ = groq`*[_type == "product" && refere
   categories[]->{ _id, title, slug }
 }`;
 
-export const PRODUCTS_BY_CATEGORY_QUERY_ZA = groq`*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(title desc){
+export const PRODUCTS_BY_CATEGORY_QUERY_ZA = groq`*[_type == "product" && language == coalesce($lang, "en") && references(*[_type == "productCategory" && language == coalesce($lang, "en") && slug.current == $slug]._id)] | order(title desc){
   _id,
   orderRank,
   _createdAt,
@@ -147,4 +147,4 @@ export const PRODUCTS_BY_CATEGORY_QUERY_ZA = groq`*[_type == "product" && refere
   categories[]->{ _id, title, slug }
 }`;
 
-export const PRODUCTS_COUNT_BY_CATEGORY_QUERY = groq`count(*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)])`;
+export const PRODUCTS_COUNT_BY_CATEGORY_QUERY = groq`count(*[_type == "product" && language == coalesce($lang, "en") && references(*[_type == "productCategory" && language == coalesce($lang, "en") && slug.current == $slug]._id)])`;

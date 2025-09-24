@@ -8,6 +8,7 @@ export default defineType({
   type: "document",
   icon: FileClock,
   fields: [
+    defineField({ name: "language", type: "string", readOnly: true, hidden: true }),
     defineField({
       name: "title",
       title: "Title",
@@ -21,6 +22,10 @@ export default defineType({
       options: {
         source: "title",
         maxLength: 96,
+        isUnique: async (slug, context) => {
+          const { isUniqueWithinLocale } = await import("../../lib/i18n");
+          return isUniqueWithinLocale(slug, context);
+        },
       },
       validation: (Rule) => Rule.required(),
     }),

@@ -23,7 +23,13 @@ export default defineType({
     },
   ],
   fields: [
-    defineField({ name: "title", type: "string", group: "content" }),
+    defineField({ name: "language", type: "string", readOnly: true, hidden: true }),
+    defineField({
+      name: "title",
+      type: "string",
+      group: "content",
+      options: { aiAssist: { translateAction: true } },
+    }),
     defineField({
       name: "slug",
       title: "Slug",
@@ -32,6 +38,11 @@ export default defineType({
       options: {
         source: "title",
         maxLength: 96,
+        // @sanity/document-internationalization: allow same slug per-language
+        isUnique: async (slug, context) => {
+          const { isUniqueWithinLocale } = await import("../../lib/i18n");
+          return isUniqueWithinLocale(slug, context);
+        },
       },
       validation: (Rule) => Rule.required(),
     }),

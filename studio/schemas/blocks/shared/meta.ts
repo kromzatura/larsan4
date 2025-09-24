@@ -10,11 +10,13 @@ export default defineField({
       name: "title",
       type: "string",
       title: "Title",
+      options: { aiAssist: { translateAction: true } },
     }),
     defineField({
       name: "description",
       type: "text",
       title: "Description",
+      options: { aiAssist: { translateAction: true } },
     }),
     defineField({
       name: "noindex",
