@@ -2,7 +2,7 @@
 
 Source Audit: See core strategy and rationale in [`../multi-language-migration-audit.md`](../multi-language-migration-audit.md) (sections: Implementation Sequencing, Risks & Mitigations, Cutover & Rollback Playbook, Instrumentation & Monitoring).
 
-> Current State Baseline: All existing content is English-only. No Dutch documents or localized alt/pricing structures exist yet. Initial migration sets `language: 'en'` across existing documents before any Dutch authoring begins.
+> Current State Baseline: All existing content is English-only. No Dutch documents or localized alt/pricing structures exist yet. Initial migration will backfill the official plugin locale field (e.g., `__i18n_lang: 'en'`) across existing documents before any Dutch authoring begins.
 
 Status Key: ☐ Not Started | ▶ In Progress | ⏸ Blocked | ✔ Done
 (Track updates directly in this file via commits.)
@@ -16,22 +16,22 @@ Status Key: ☐ Not Started | ▶ In Progress | ⏸ Blocked | ✔ Done
 - PROD = Product / Project Lead
 
 ## Phase 1 – Foundation (Schema & Settings)
-1. ☐ Add `language` field to `page`, `post`, `product`, `category`, `settings` (DEV)
-2. ☐ Implement pricing object (Option 2) & alt text localization shape (DEV)
-3. ☐ Enforce composite uniqueness (language + slug) validation (DEV)
-4. ☐ Extend `settings` doc fields (global nav labels, footer, SEO fallbacks) (DEV)
+1. ☐ Prepare for official i18n plugin: list translatable document types (`page`, `post`, `product`, `productCategory`, `category`, `settings`) and locales (`en`, `nl`) (DEV)
+2. ☐ Implement pricing object (Option 2) & confirm image alt text approach aligns with document-level translations (DEV)
+3. ☐ Add slug uniqueness helper scoped per-locale (plugin-aware `isUniqueWithinLocale`) (DEV)
+4. ☐ Extend `settings` doc fields (global nav labels, footer, SEO fallbacks) as needed (DEV)
 5. ☐ Create editor dashboard panels scaffolding (missing translations, alt coverage) (DEV)
 6. ☐ Editorial review of new fields completeness (CON)
 
 ## Phase 2 – Backup & Plugin Install
 7. ☐ Snapshot / export current dataset (OPS)
-8. ☐ Install & configure translation linkage plugin (DEV)
-9. ☐ Verify language selector appears for document-level types (CON)
+8. ☐ Install and configure official `@sanity/document-internationalization` plugin with locales (`en`, `nl`) and document types (DEV)
+9. ☐ Verify Translate action / language selector appears for configured types (CON)
 
 ## Phase 3 – Classification & Backfill
-10. ☐ Migration script: patch all existing docs with `language: 'en'` (DEV)
-11. ☐ Add uniqueness guard to prevent duplicate `settings` per language (DEV)
-12. ☐ Spot check random doc set for persisted `language` value (CON)
+10. ☐ Migration script: backfill plugin locale on existing docs (e.g., set `__i18n_lang: 'en'` and clear translation refs) (DEV)
+11. ☐ Add uniqueness guard to prevent duplicate `settings` per locale (DEV)
+12. ☐ Spot check random docs for persisted plugin locale value (CON)
 
 ## Phase 4 – Dutch Baseline Creation
 13. ☐ Create Dutch versions for Home, About, Contact (CON)
@@ -42,13 +42,13 @@ Status Key: ☐ Not Started | ▶ In Progress | ⏸ Blocked | ✔ Done
 ## Phase 5 – Routing & Query Filtering
 17. ☐ Add temporary i18n config (do NOT flip default yet) (DEV)
 18. ☐ Introduce `[lang]` segment pages (DEV)
-19. ☐ Update all GROQ queries with `language == $lang` (DEV)
+19. ☐ Update all GROQ queries to filter by the plugin locale field (e.g., `__i18n_lang == $lang`) and select translation refs for hreflang (DEV)
 20. ☐ Extend `resolveHref` & unit tests for locale (DEV)
 21. ☐ Validate path resolution for sample pages (CON)
 
 ## Phase 6 – Metadata & SEO
 22. ☐ Implement locale-aware `generateMetadata` helper (DEV)
-23. ☐ Add hreflang builder (DEV)
+23. ☐ Add hreflang builder using plugin translation references (DEV)
 24. ☐ Generate locale-aware sitemap(s) (DEV)
 25. ☐ Validate meta tags & hreflang on samples (SEO)
 
@@ -96,8 +96,8 @@ Status Key: ☐ Not Started | ▶ In Progress | ⏸ Blocked | ✔ Done
 52. ☐ Evaluate third locale readiness signals (PROD)
 
 ## Migration Scripts (References)
-- `scripts/migrate/add-language.js` – sets `language: 'en'` for existing docs
-- `scripts/migrate/check-slug-collisions.js` – asserts uniqueness per language
+- `scripts/migrate/set-i18n-locale.js` – backfills plugin locale (e.g., `__i18n_lang: 'en'`) for existing docs
+- `scripts/migrate/check-slug-collisions-per-locale.js` – asserts slug uniqueness per locale (plugin-aware)
 - `scripts/reports/translation-coverage.js` – outputs JSON summary
 - `scripts/reports/alt-text-gaps.js` – lists images missing localized alt
 - `scripts/generate/redirect-map.js` – creates flip redirect mapping
