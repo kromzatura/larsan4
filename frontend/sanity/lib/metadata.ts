@@ -39,7 +39,9 @@ export function generatePageMetadata({
     const s = slug === "index" ? "" : `/${slug}`;
     return `/${l}${s}`;
   };
-  const pageI18n = (page as any)?.i18n as Array<{ language?: string; slug?: string }> | undefined;
+  const pageI18n = (page as any)?.i18n as
+    | Array<{ language?: string; slug?: string }>
+    | undefined;
   const i18nLanguages = Array.isArray(pageI18n)
     ? pageI18n
         .filter((t) => t?.language && t?.slug)
