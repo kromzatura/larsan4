@@ -55,7 +55,7 @@ Status Key: ☐ Not Started | ▶ In Progress | ⏸ Blocked | ✔ Done
 ## Phase 6 – Metadata & SEO
 
 22. ✔ Implement locale-aware `generateMetadata` helper (DEV)
-23. ▶ Add hreflang builder using plugin translation references (DEV) — basic alternates added; plugin refs pending
+23. ▶ Add hreflang builder using plugin translation references (DEV) — pages now use translation refs; posts/products pending
 24. ✔ Generate locale-aware sitemap(s) (DEV)
 25. ☐ Validate meta tags & hreflang on samples (SEO)
 

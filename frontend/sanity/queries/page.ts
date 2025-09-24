@@ -72,6 +72,14 @@ import { productCategories16Query } from "./products/product-categories-16";
 
 export const PAGE_QUERY = groq`
   *[_type == "page" && slug.current == $slug && language == coalesce($lang, "en")][0]{
+    // @sanity-typegen-ignore: extra fields for i18n hreflang
+    language,
+    slug,
+    // Translations from the i18n metadata doc (includes current doc)
+    "i18n": *[_type == "i18n.metadata" && references(^._id)][0].translations[]->{
+      "language": language,
+      "slug": slug.current
+    },
     blocks[]{
       ${sectionHeaderQuery},
       ${hero12Query},

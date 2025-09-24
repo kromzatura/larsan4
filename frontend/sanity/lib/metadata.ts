@@ -39,6 +39,17 @@ export function generatePageMetadata({
     const s = slug === "index" ? "" : `/${slug}`;
     return `/${l}${s}`;
   };
+  const pageI18n = (page as any)?.i18n as Array<{ language?: string; slug?: string }> | undefined;
+  const i18nLanguages = Array.isArray(pageI18n)
+    ? pageI18n
+        .filter((t) => t?.language && t?.slug)
+        .reduce<Record<string, string>>((acc, t) => {
+          const l = t.language as string;
+          const s = t.slug === "index" ? "" : `/${t.slug}`;
+          acc[l] = `/${l}${s}`;
+          return acc;
+        }, {})
+    : undefined;
   return {
     title: page?.meta?.title,
     description: page?.meta?.description,
@@ -63,10 +74,7 @@ export function generatePageMetadata({
     alternates: lang
       ? {
           canonical: pathFor(lang),
-          languages: {
-            en: pathFor("en"),
-            nl: pathFor("nl"),
-          },
+          languages: i18nLanguages,
         }
       : {
           canonical: `/${slug === "index" ? "" : slug}`,
