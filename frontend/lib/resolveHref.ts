@@ -41,3 +41,31 @@ export function resolveDocHref(doc: { _type?: string; slug?: { current?: string 
   else if (slugField && typeof slugField.current === "string") slugValue = slugField.current;
   return resolveHref(_type, slugValue);
 }
+
+// Locale-aware resolver that prefixes only localized routes
+// Today, only `page` routes are localized under `/{lang}`. Blog/products remain EN-only.
+export function resolveLocalizedHref(
+  docType: string | undefined,
+  slug: string | undefined,
+  lang?: string
+): string | null {
+  const base = resolveHref(docType, slug);
+  if (!base) return null;
+  if (docType === DOC_TYPES.PAGE && lang) {
+    return `/${lang}${base === "/" ? "" : base}`;
+  }
+  return base;
+}
+
+export function resolveDocHrefLocalized(
+  doc: { _type?: string; slug?: { current?: string } | string } | null | undefined,
+  lang?: string
+): string | null {
+  if (!doc) return null;
+  const { _type } = doc as { _type?: string };
+  let slugValue: string | undefined;
+  const slugField = (doc as any).slug;
+  if (typeof slugField === "string") slugValue = slugField;
+  else if (slugField && typeof slugField.current === "string") slugValue = slugField.current;
+  return resolveLocalizedHref(_type, slugValue, lang);
+}

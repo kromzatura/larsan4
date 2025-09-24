@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { resolveHref, resolveDocHref } from '@/lib/resolveHref';
+import { resolveHref, resolveDocHref, resolveLocalizedHref, resolveDocHrefLocalized } from '@/lib/resolveHref';
 import { DOC_TYPES, CATEGORY_DOC_TYPES } from '@/lib/docTypes';
 
 describe('resolveHref', () => {
@@ -66,5 +66,40 @@ describe('resolveDocHref', () => {
 
   it('returns null when slug missing and required', () => {
     expect(resolveDocHref({ _type: DOC_TYPES.POST })).toBeNull();
+  });
+});
+
+describe('resolveLocalizedHref', () => {
+  it('prefixes localized page routes with lang', () => {
+    expect(resolveLocalizedHref(DOC_TYPES.PAGE, 'index', 'nl')).toBe('/nl');
+    expect(resolveLocalizedHref(DOC_TYPES.PAGE, 'about', 'nl')).toBe('/nl/about');
+  });
+
+  it('does not prefix non-page routes', () => {
+    expect(resolveLocalizedHref(DOC_TYPES.POST, 'my-post', 'nl')).toBe('/blog/my-post');
+    expect(resolveLocalizedHref(DOC_TYPES.PRODUCT, 'widget', 'nl')).toBe('/products/widget');
+  });
+
+  it('returns null for missing base resolution', () => {
+    expect(resolveLocalizedHref(DOC_TYPES.POST, undefined, 'nl')).toBeNull();
+  });
+});
+
+describe('resolveDocHrefLocalized', () => {
+  it('handles null/undefined', () => {
+    expect(resolveDocHrefLocalized(null, 'en')).toBeNull();
+    expect(resolveDocHrefLocalized(undefined as any, 'en')).toBeNull();
+  });
+
+  it('handles object slug and applies lang for pages', () => {
+    expect(
+      resolveDocHrefLocalized({ _type: DOC_TYPES.PAGE, slug: { current: 'features' } }, 'nl')
+    ).toBe('/nl/features');
+  });
+
+  it('does not prefix when lang missing', () => {
+    expect(
+      resolveDocHrefLocalized({ _type: DOC_TYPES.PAGE, slug: { current: 'features' } })
+    ).toBe('/features');
   });
 });

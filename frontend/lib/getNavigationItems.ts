@@ -1,6 +1,6 @@
 import slugify from "./slugify";
 import { fetchSanityNavigation } from "@/sanity/lib/fetch";
-import { resolveHref } from "./resolveHref";
+import { resolveLocalizedHref } from "./resolveHref";
 
 type NavLink = {
   _key: string;
@@ -28,13 +28,11 @@ function applyResolvedHref<T extends NavLink | NavGroup>(item: T, lang: string):
     return { ...(item as any), links } as T;
   }
   if (item.internalType && item.internalSlug) {
-    const computed = resolveHref(item.internalType, item.internalSlug);
-    const href = computed ?? item.href ?? null;
-    const localized =
-      item.internalType === "page" && href
-        ? `/${lang}${href === "/" ? "" : href}`
-        : href;
-    return { ...(item as any), href: localized } as T;
+    const href =
+      resolveLocalizedHref(item.internalType, item.internalSlug, lang) ??
+      item.href ??
+      null;
+    return { ...(item as any), href } as T;
   }
   return item;
 }

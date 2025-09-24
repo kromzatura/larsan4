@@ -4,9 +4,16 @@ import { bodyQuery } from "./shared/body";
 import { metaQuery } from "./shared/meta";
 
 export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug && language == coalesce($lang, "en")][0]{
+  // @sanity-typegen-ignore: extra fields for i18n hreflang
   _id,
-    title,
-    slug,
+  language,
+  title,
+  slug,
+  // Translations from the i18n metadata doc (includes current doc)
+  "i18n": *[_type == "i18n.metadata" && references(^._id)][0].translations[]->{
+    "language": language,
+    "slug": slug.current
+  },
     image{
       ${imageQuery}
     },

@@ -4,9 +4,16 @@ import { bodyQuery } from "./shared/body";
 import { metaQuery } from "./shared/meta";
 
 export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug && language == coalesce($lang, "en")][0]{
+  // @sanity-typegen-ignore: extra fields for i18n hreflang
   _id,
+  language,
   title,
   slug,
+  // Translations from the i18n metadata doc (includes current doc)
+  "i18n": *[_type == "i18n.metadata" && references(^._id)][0].translations[]->{
+    "language": language,
+    "slug": slug.current
+  },
   specifications[]->{
     _id,
     name,
@@ -66,10 +73,17 @@ export const PRODUCT_CATEGORIES_QUERY = groq`*[_type == "productCategory" && def
 }`;
 
 export const PRODUCT_CATEGORY_BY_SLUG_QUERY = groq`*[_type == "productCategory" && slug.current == $slug && language == coalesce($lang, "en")][0]{
+  // @sanity-typegen-ignore: extra fields for i18n hreflang
   _id,
   _type,
+  language,
   title,
   slug,
+  // Translations from the i18n metadata doc (includes current doc)
+  "i18n": *[_type == "i18n.metadata" && references(^._id)][0].translations[]->{
+    "language": language,
+    "slug": slug.current
+  },
   description,
   ${metaQuery}
 }`;
