@@ -4,6 +4,8 @@
 
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
+import { documentInternationalization } from "@sanity/document-internationalization";
+import { assist } from "@sanity/assist";
 import { structureTool } from "sanity/structure";
 import { presentationTool } from "sanity/presentation";
 import { media } from "sanity-plugin-media";
@@ -52,6 +54,26 @@ export default defineConfig({
         : input,
   },
   plugins: [
+    // PHASE 1: Document-level translation plugin FIRST so Assist can augment it.
+    documentInternationalization({
+      // Supported locales (default English until flip strategy executed)
+      supportedLanguages: [
+        { id: "en", title: "English" },
+        { id: "nl", title: "Dutch" },
+      ],
+      schemaTypes: [
+        "page",
+        "post",
+        "product",
+        "productCategory",
+        "category",
+        "settings",
+        "navigation",
+      ],
+      // defaultLanguage may be inferred as first entry; adjust if plugin exposes explicit option.
+    }),
+    // AI Assist AFTER internationalization for potential bulk translate action exposure.
+    assist(),
     structureTool({ structure, defaultDocumentNode }),
     presentationTool({
       previewUrl: {
