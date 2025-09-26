@@ -4,7 +4,7 @@ Revision: 2025-09-26
 
 This plan has been UPDATED to reflect the adopted strategy:
 
-"We are using the official `@sanity/document-internationalization` plugin (document-level translation groups) plus a hidden, AI‑Assist excluded `language` field on all translatable document types. We enforce per-locale slug uniqueness and derive hreflang + canonical metadata from translation group metadata in the dataset. We have intentionally deferred a full UI string framework (e.g. `next-intl`) until after core localized content + SEO stability. AI Assist bulk 'Translate document' action is currently deprioritized (manual translation workflow acceptable)."
+"We are using the official `@sanity/document-internationalization` plugin (document-level translation groups) plus a hidden, AI‑Assist excluded `language` field on all translatable document types. We enforce per-locale slug uniqueness and derive hreflang + canonical metadata from translation group metadata in the dataset. We have intentionally deferred a full UI string framework (e.g. `next-intl`) until after core localized content + SEO stability. The AI Assist bulk 'Translate document' action REMAINS IN SCOPE and is an active objective (currently blocked: action not visible in Studio UI). Manual translation is a fallback, not the end state."
 
 Key Implemented Decisions:
 - Document-level i18n: `@sanity/document-internationalization` plugin loaded before Assist.
@@ -17,9 +17,11 @@ Key Implemented Decisions:
 - Manual translation linking validated (e.g. About / Over pair) generating hreflang alternates.
 
 Deferred / Out of Scope (current iteration):
-- Automated "Translate document" Assist action (feature not available / deprioritized).
 - Full UI string extraction + runtime dictionary (`next-intl`) — postponed until content parity & SEO baseline complete.
 - Redirect flip of default locale (Phase 9B) — contingent on parity metrics.
+
+Active Blocked Investigation:
+- AI Assist bulk "Translate document" action (blocked: plugin action not appearing; investigating plugin version, ordering, feature gating, and potential API constraints).
 
 Status Legend: ☐ Not Started | ▶ In Progress | ⏸ Blocked | ✔ Done
 
@@ -46,77 +48,81 @@ Status Key: ☐ Not Started | ▶ In Progress | ⏸ Blocked | ✔ Done
 5. ☐ Create editor dashboard panels (missing translations, alt coverage) (DEV)
 6. ☐ Editorial review of new fields completeness (CON)
 
-## Phase 2 – Backup & Plugin Install
+## Phase 2 – Backup, Plugin Install & AI Assist Enablement
 7. ☐ Snapshot / export current dataset (OPS)
 8. ✔ Install & configure `@sanity/document-internationalization` plugin (DEV)
 9. ✔ Verify translation group panel & language selector visible for targeted document types (CON)
+10. ▶ Expose bulk AI Assist "Translate document" action (DEV) (BLOCKED)
+11. ☐ Add field-level `translateAction` hints to high-value text fields (titles, descriptions, body) (DEV)
+12. ☐ Draft + register translation style/tone guideline prompt for Assist (CON)
+13. ☐ Pilot quality comparison: Assist vs manual on 3 documents (CON/SEO)
 
 ## Phase 3 – Classification & Backfill
-10. ✔ Migration script: patch all existing docs with `language: 'en'` (DEV)
-11. ✔ Guard: enforce single `settings` per language (slug + language uniqueness) (DEV)
-12. ▶ Spot check random doc set for persisted `language` value (CON)
+14. ✔ Migration script: patch all existing docs with `language: 'en'` (DEV)
+15. ✔ Guard: enforce single `settings` per language (slug + language uniqueness) (DEV)
+16. ▶ Spot check random doc set for persisted `language` value (CON)
 
 ## Phase 4 – Dutch Baseline Creation
-13. ▶ Create Dutch versions for Home, About, Contact (About/Over pair ✔, others pending) (CON)
-14. ☐ Localize top nav target pages (CON)
-15. ☐ Localize top product/category targets (CON)
-16. ☐ Dashboard reflects decreasing missing baseline count (DEV)
+17. ▶ Create Dutch versions for Home, About, Contact (About/Over pair ✔, others pending) (CON)
+18. ☐ Localize top nav target pages (CON)
+19. ☐ Localize top product/category targets (CON)
+20. ☐ Dashboard reflects decreasing missing baseline count (DEV)
 
 ## Phase 5 – Routing & Query Filtering
-17. ✔ Add i18n config & preserve current default locale (no flip) (DEV)
-18. ✔ Introduce `[lang]` segment pages (DEV)
-19. ✔ Update GROQ queries with `language == $lang` (DEV)
-20. ✔ Extend `resolveHref` & unit tests for locale (DEV)
-21. ✔ Validate path resolution for sample pages (About/Over) (CON)
+21. ✔ Add i18n config & preserve current default locale (no flip) (DEV)
+22. ✔ Introduce `[lang]` segment pages (DEV)
+23. ✔ Update GROQ queries with `language == $lang` (DEV)
+24. ✔ Extend `resolveHref` & unit tests for locale (DEV)
+25. ✔ Validate path resolution for sample pages (About/Over) (CON)
 
 ## Phase 6 – Metadata & SEO
-22. ✔ Implement locale-aware `generateMetadata` helper (DEV)
-23. ✔ Add hreflang builder (DEV)
-24. ✔ Generate locale-aware sitemap(s) (DEV)
-25. ✔ Validate meta tags & hreflang on samples (SEO)
+26. ✔ Implement locale-aware `generateMetadata` helper (DEV)
+27. ✔ Add hreflang builder (DEV)
+28. ✔ Generate locale-aware sitemap(s) (DEV)
+29. ✔ Validate meta tags & hreflang on samples (SEO)
 
 ## Phase 7 – Content Localization Expansion
-26. ☐ Translate medium-priority posts/products to reach 80% parity (CON)
-27. ☐ Structured data localized where both locales exist (DEV)
-28. ☐ Automated untranslated slugs report active (DEV)
+30. ☐ Translate medium-priority posts/products to reach 80% parity (CON)
+31. ☐ Structured data localized where both locales exist (DEV)
+32. ☐ Automated untranslated slugs report active (DEV)
 
 ## Phase 8 – UI Internationalization (Deferred)
-29. ⏸ Integrate `next-intl` (or alternative) (DEV) – deferred until content parity & SEO stabilization
-30. ⏸ Extract hardcoded strings to `locales/*.json` (DEV)
-31. ⏸ Implement `pickLocale` helper for embedded localized fields (DEV)
-32. ⏸ Validate UI strings layout resilience (ACC)
+33. ⏸ Integrate `next-intl` (or alternative) (DEV) – deferred until content parity & SEO stabilization
+34. ⏸ Extract hardcoded strings to `locales/*.json` (DEV)
+35. ⏸ Implement `pickLocale` helper for embedded localized fields (DEV)
+36. ⏸ Validate UI strings layout resilience (ACC)
 
 ## Phase 9 – Default Locale Flip Preparation
-33. ☐ Verify parity threshold achieved (dashboard) (PROD)
-34. ☐ Generate redirect map root → `/en/*` (DEV)
-35. ☐ Staging dry run of redirects (OPS)
-36. ☐ Final hreflang & sitemap validation pre-flip (SEO)
+37. ☐ Verify parity threshold achieved (dashboard) (PROD)
+38. ☐ Generate redirect map root → `/en/*` (DEV)
+39. ☐ Staging dry run of redirects (OPS)
+40. ☐ Final hreflang & sitemap validation pre-flip (SEO)
 
 ## Phase 9B – Cutover Execution
-37. ☐ Change `defaultLocale` to `nl` (DEV)
-38. ☐ Deploy redirect rules & purge CDN (OPS)
-39. ☐ Regenerate sitemaps (DEV)
-40. ☐ Post-deploy verification checklist (PROD)
+41. ☐ Change `defaultLocale` to `nl` (DEV)
+42. ☐ Deploy redirect rules & purge CDN (OPS)
+43. ☐ Regenerate sitemaps (DEV)
+44. ☐ Post-deploy verification checklist (PROD)
 
 ## Phase 10 – Language Switcher & UX Hardening
-41. ☐ Implement locale persistence cookie & notice UX (DEV)
-42. ☐ Add telemetry events (switch, missing redirect) (DEV)
-43. ☐ Validate switcher accuracy & a11y (ACC)
+45. ☐ Implement locale persistence cookie & notice UX (DEV)
+46. ☐ Add telemetry events (switch, missing redirect) (DEV)
+47. ☐ Validate switcher accuracy & a11y (ACC)
 
 ## Phase 11 – QA & Compliance
-44. ☐ Run audit scripts (query leakage, alt coverage, pricing) (DEV)
-45. ☐ Approve dashboards (translation coverage, alt warnings) (PROD)
-46. ☐ Confirm no 404 spikes / anomaly logs (OPS)
+48. ☐ Run audit scripts (query leakage, alt coverage, pricing) (DEV)
+49. ☐ Approve dashboards (translation coverage, alt warnings) (PROD)
+50. ☐ Confirm no 404 spikes / anomaly logs (OPS)
 
 ## Phase 12 – Monitoring Stabilization
-47. ☐ Set alert thresholds in monitoring platform (DEV)
-48. ☐ Review first 72h metrics & adjust (PROD)
-49. ☐ Document early lessons / backlog tasks (ALL)
+51. ☐ Set alert thresholds in monitoring platform (DEV)
+52. ☐ Review first 72h metrics & adjust (PROD)
+53. ☐ Document early lessons / backlog tasks (ALL)
 
 ## Phase 13 – Continuous Improvement
-50. ☐ Implement translation SLA dashboard (DEV)
-51. ☐ Track overdue translations aging buckets (CON)
-52. ☐ Evaluate third locale readiness signals (PROD)
+54. ☐ Implement translation SLA dashboard (DEV)
+55. ☐ Track overdue translations aging buckets (CON)
+56. ☐ Evaluate third locale readiness signals (PROD)
 
 ## Migration & Utility Scripts (References)
 - `scripts/migrate/add-language.js` – sets `language: 'en'` for existing docs (RUN)
