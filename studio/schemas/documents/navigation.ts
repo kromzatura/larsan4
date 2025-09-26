@@ -8,12 +8,19 @@ export default defineType({
   type: "document",
   icon: Menu,
   fields: [
-    defineField({ name: "language", type: "string", readOnly: true, hidden: true }),
+    defineField({
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+      options: { aiAssist: { exclude: true } },
+    }),
     defineField({
       name: "key",
       title: "Key",
       type: "string",
-      description: "Fixed identifier used by the frontend to select this navigation group",
+      description:
+        "Fixed identifier used by the frontend to select this navigation group",
       options: {
         list: [
           { title: "Header", value: "header" },

@@ -29,7 +29,7 @@ const singletonTypes = new Set(["settings", "contact", "banner"]);
 
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID || "your-project-id";
 const dataset = process.env.SANITY_STUDIO_DATASET || "production";
-const apiVersion = process.env.SANITY_STUDIO_API_VERSION || "2024-10-31";
+const apiVersion = process.env.SANITY_STUDIO_API_VERSION || "2025-02-14";
 
 const SANITY_STUDIO_PREVIEW_URL =
   process.env.SANITY_STUDIO_PREVIEW_URL || "http://localhost:3000";
@@ -69,7 +69,7 @@ export default defineConfig({
     visionTool({ defaultApiVersion: apiVersion }),
     codeInput(),
     media(),
-    assist(),
+    // Load i18n before Assist so Assist can add "Translate document"
     documentInternationalization({
       supportedLanguages: [
         { id: "en", title: "English" },
@@ -89,5 +89,6 @@ export default defineConfig({
       allowCreateMetaDoc: true,
       apiVersion,
     }),
+    assist(),
   ],
 });

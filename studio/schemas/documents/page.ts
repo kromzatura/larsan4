@@ -23,7 +23,13 @@ export default defineType({
     },
   ],
   fields: [
-    defineField({ name: "language", type: "string", readOnly: true, hidden: true }),
+    defineField({
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+      options: { aiAssist: { exclude: true } },
+    }),
     defineField({
       name: "title",
       type: "string",
@@ -43,6 +49,7 @@ export default defineType({
           const { isUniqueWithinLocale } = await import("../../lib/i18n");
           return isUniqueWithinLocale(slug, context);
         },
+        aiAssist: { exclude: true },
       },
       validation: (Rule) => Rule.required(),
     }),
@@ -244,6 +251,7 @@ export default defineType({
       },
     }),
     meta,
+    // Exclude order rank from Assist as it's a system field
     orderRankField({ type: "page" }),
   ],
 });

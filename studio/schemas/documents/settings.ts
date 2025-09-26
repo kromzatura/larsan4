@@ -7,7 +7,13 @@ export default defineType({
   type: "document",
   icon: Settings,
   fields: [
-    defineField({ name: "language", type: "string", readOnly: true, hidden: true }),
+    defineField({
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+      options: { aiAssist: { exclude: true } },
+    }),
     defineField({
       name: "logo",
       type: "image",

@@ -23,7 +23,13 @@ export default defineType({
     },
   ],
   fields: [
-    defineField({ name: "language", type: "string", readOnly: true, hidden: true }),
+    defineField({
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+      options: { aiAssist: { exclude: true } },
+    }),
     defineField({
       name: "title",
       title: "Title",
@@ -44,6 +50,7 @@ export default defineType({
           const { isUniqueWithinLocale } = await import("../../lib/i18n");
           return isUniqueWithinLocale(slug, context);
         },
+        aiAssist: { exclude: true },
       },
       validation: (Rule) => Rule.required(),
     }),
