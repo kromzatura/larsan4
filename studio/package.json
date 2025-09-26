@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@sanity/assist": "^5.0.0",
+    "@sanity/document-internationalization": "^1.0.0",
     "@sanity/code-input": "^6.0.1",
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^1.1.0",
