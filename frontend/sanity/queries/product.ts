@@ -2,6 +2,7 @@ import { groq } from "next-sanity";
 import { imageQuery } from "./shared/image";
 import { bodyQuery } from "./shared/body";
 import { metaQuery } from "./shared/meta";
+import { productPricingFragment } from "./fragments/pricing";
 
 export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug][0]{
   _id,
@@ -31,6 +32,7 @@ export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug]
     ...,
   },
   image{ ${imageQuery} },
+  pricing{ ${productPricingFragment} },
   body[]{ ${bodyQuery} },
   excerpt,
   categories[]->{ _id, title, slug },
@@ -52,6 +54,7 @@ export const PRODUCTS_QUERY = groq`*[_type == "product" && defined(slug)] | orde
   keyFeatures[],
   excerpt,
   image{ ${imageQuery} },
+  pricing{ currency, tiers[]{ _key, slug, monthly, yearly } },
   categories[]->{ _id, title, slug }
 }`;
 
@@ -89,6 +92,7 @@ export const PRODUCTS_BY_CATEGORY_QUERY = groq`*[_type == "product" && reference
   keyFeatures[],
   excerpt,
   image{ ${imageQuery} },
+  pricing{ currency, tiers[]{ _key, slug, monthly, yearly } },
   categories[]->{ _id, title, slug }
 }`;
 
@@ -108,6 +112,7 @@ export const PRODUCTS_BY_CATEGORY_QUERY_NEWEST = groq`*[_type == "product" && re
   keyFeatures[],
   excerpt,
   image{ ${imageQuery} },
+  pricing{ currency, tiers[]{ _key, slug, monthly, yearly } },
   categories[]->{ _id, title, slug }
 }`;
 
@@ -126,6 +131,7 @@ export const PRODUCTS_BY_CATEGORY_QUERY_AZ = groq`*[_type == "product" && refere
   keyFeatures[],
   excerpt,
   image{ ${imageQuery} },
+  pricing{ currency, tiers[]{ _key, slug, monthly, yearly } },
   categories[]->{ _id, title, slug }
 }`;
 

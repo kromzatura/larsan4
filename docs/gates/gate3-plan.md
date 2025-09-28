@@ -89,3 +89,9 @@ Impact Assessment:
 - Frontend unaffected (no code had shipped depending on `resolvedAlt`).
 - Documentation updated to reflect deferral.
 
+### Pricing Query Integration (2025-09-28)
+Product GROQ queries updated to project `pricing`:
+- Detail query (`PRODUCT_QUERY`) returns full pricing object via fragment (currency + all tiers with descriptions & features).
+- List / category queries return lightweight pricing summary (currency + tier slugs + monthly/yearly numbers) to minimize payload.
+No feature flag gating applied at query layer; frontend can safely null-check `pricing` until content adoption grows.
+
