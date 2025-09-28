@@ -132,6 +132,21 @@ export default defineType({
       of: [{ type: "reference", to: { type: "productCategory" } }],
       group: "settings",
     }),
+    defineField({
+      name: "pricing",
+      title: "Pricing (Beta)",
+      type: "productPricing",
+      group: "content",
+      description: "Structured pricing data. Leave empty until pricing normalization is enabled.",
+      hidden: () => !process.env.NEXT_PUBLIC_ENABLE_STRUCTURED_PRICING,
+      validation: (rule) => rule.custom((val) => {
+        // During Gate 3 this remains optional; future gates may enforce.
+        if (!process.env.NEXT_PUBLIC_ENABLE_STRUCTURED_PRICING && val) {
+          return 'Pricing disabled by feature flag.';
+        }
+        return true;
+      }),
+    }),
     meta,
     // Manual ordering support
     orderRankField({ type: "product" }),

@@ -34,6 +34,11 @@ const apiVersion = process.env.SANITY_STUDIO_API_VERSION || "2024-10-31";
 const SANITY_STUDIO_PREVIEW_URL =
   process.env.SANITY_STUDIO_PREVIEW_URL || "http://localhost:3000";
 
+// Feature Flags (Gate 3)
+export const ENABLE_STRUCTURED_PRICING = Boolean(
+  process.env.NEXT_PUBLIC_ENABLE_STRUCTURED_PRICING
+);
+
 export default defineConfig({
   title: "Sanityblocks",
   projectId,
