@@ -20,6 +20,7 @@ export type PricingTier = {
   description?: string;
   monthly?: number;
   yearly?: number;
+  priceRequirement?: string;
   features?: Array<string>;
 };
 
@@ -1863,6 +1864,7 @@ export type TranslationTest = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   title?: string;
   body?: string;
 };
@@ -1873,6 +1875,7 @@ export type Banner = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   title?: string;
   description?: string;
   link?: Link;
@@ -1884,6 +1887,7 @@ export type Team = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   name?: string;
   title?: string;
   description?: string;
@@ -1913,6 +1917,7 @@ export type Changelog = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   title?: string;
   slug?: Slug;
   version?: string;
@@ -1952,6 +1957,7 @@ export type Contact = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   tagline?: string;
   title?: string;
   description?: string;
@@ -1987,6 +1993,7 @@ export type Testimonial = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   name?: string;
   username?: string;
   company?: string;
@@ -2215,6 +2222,7 @@ export type Specification = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   name?: string;
   sku?: string;
   bestFor?: string;
@@ -2240,6 +2248,7 @@ export type Faq = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   title?: string;
   body?: BlockContent;
   orderRank?: string;
@@ -2251,6 +2260,7 @@ export type Navigation = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   title?: string;
   links?: Array<{
     _key: string;
@@ -2266,6 +2276,7 @@ export type Settings = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   logo?: {
     asset?: {
       _ref: string;
@@ -2292,6 +2303,7 @@ export type Category = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   title?: string;
   slug?: Slug;
   description?: string;
@@ -2322,6 +2334,7 @@ export type ProductCategory = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   title?: string;
   description?: string;
   slug?: Slug;
@@ -2351,6 +2364,7 @@ export type Page = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   title?: string;
   slug?: Slug;
   blocks?: Array<{
@@ -2560,6 +2574,7 @@ export type Product = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   title?: string;
   slug?: Slug;
   specifications?: Array<{
@@ -2676,6 +2691,7 @@ export type Post = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   title?: string;
   slug?: Slug;
   excerpt?: string;
@@ -2733,6 +2749,7 @@ export type Author = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   name?: string;
   title?: string;
   slug?: Slug;
@@ -5161,6 +5178,7 @@ export type PAGE_QUERYResult = {
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
+      language?: string;
       name?: string;
       username?: string;
       company?: string;
@@ -6578,6 +6596,7 @@ export type PAGE_QUERYResult = {
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
+      language?: string;
       name?: string;
       username?: string;
       company?: string;

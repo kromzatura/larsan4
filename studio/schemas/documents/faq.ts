@@ -9,6 +9,15 @@ export default defineType({
   icon: ListCollapse,
   fields: [
     defineField({
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+      description: "Explicit locale tag for querying.",
+      initialValue: () => "en",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "title",
       type: "string",
       validation: (Rule) => Rule.required(),

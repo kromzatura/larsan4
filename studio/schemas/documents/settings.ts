@@ -8,6 +8,15 @@ export default defineType({
   icon: Settings,
   fields: [
     defineField({
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+      description: "Explicit locale tag for settings localization.",
+      initialValue: () => "en",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "logo",
       type: "image",
       options: { hotspot: true },

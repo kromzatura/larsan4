@@ -19,6 +19,15 @@ export default defineType({
   ],
   fields: [
     defineField({
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+      description: "Explicit locale tag for contact page localization.",
+      initialValue: () => "en",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "tagline",
       type: "string",
       group: "content",

@@ -9,6 +9,15 @@ export default defineType({
   icon: Languages,
   fields: [
     defineField({
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+      description: "Explicit locale tag for translation test documents.",
+      initialValue: () => "en",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "title",
       type: "string",
       validation: (r) => r.required(),

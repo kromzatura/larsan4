@@ -9,6 +9,15 @@ export default defineType({
   icon: Menu,
   fields: [
     defineField({
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+      description: "Explicit locale tag for querying grouped navigations.",
+      initialValue: () => "en",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "title",
       type: "string",
       description: "Used to identify the navigation item in CMS",
