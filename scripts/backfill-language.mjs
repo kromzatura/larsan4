@@ -7,7 +7,12 @@
  *
  * Requires SANITY_STUDIO_PROJECT_ID, SANITY_STUDIO_DATASET, and a token with write access (SANITY_WRITE_TOKEN).
  */
-import 'dotenv/config';
+// Optional dotenv load: don't hard-fail if not installed in this workspace context.
+try {
+  await import('dotenv/config');
+} catch (e) {
+  // Silently continue; environment variables may already be present.
+}
 import { createClient } from '@sanity/client';
 
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID;
