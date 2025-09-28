@@ -14,8 +14,8 @@
     "migrate:check-slugs": "node ./lib/migrations/check-slug-collisions-per-locale.js",
     "set-lang": "node ./scripts/set-i18n-locale.mjs",
     "check-slugs": "node ./scripts/check-slug-collisions-per-locale.mjs",
-    "backfill:language:dry": "node ../scripts/backfill-language.mjs --dry",
-    "backfill:language": "node ../scripts/backfill-language.mjs"
+    "backfill:language:dry": "node ./scripts/backfill-language.mjs --dry",
+    "backfill:language": "node ./scripts/backfill-language.mjs"
   },
   "dependencies": {
     "@sanity/assist": "^5.0.0",
