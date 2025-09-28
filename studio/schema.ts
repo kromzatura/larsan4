@@ -123,8 +123,8 @@ import timeline6 from "./schemas/blocks/timelines/timeline6";
 // Products blocks
 import allProducts16 from "./schemas/blocks/products/all-products-16";
 import productCategories16 from "./schemas/blocks/products/product-categories-16";
-// Gate 3 localized objects
-import localizedAltText from "./schemas/objects/localized-alt-text";
+// Gate 3 localized objects (localizedAltText reverted; keep file for future reuse)
+// import localizedAltText from "./schemas/objects/localized-alt-text";
 import pricingTier from "./schemas/objects/pricing-tier";
 import productPricing from "./schemas/objects/product-pricing";
 
@@ -253,8 +253,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     // Products
     allProducts16,
     productCategories16,
-    // Gate 3 objects
-    localizedAltText,
+    // Gate 3 objects (alt text object deferred)
     pricingTier,
     productPricing,
   ],

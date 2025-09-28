@@ -30,3 +30,62 @@ Risks & Mitigations:
 
 Next Steps After Gate 3:
 Gate 4: Migrations executed & coverage reports (alt text completeness, pricing adoption %).
+
+---
+
+## Gate 3 Decision Log (2025-09-28)
+
+### Localized Alt Text Strategy
+Adopted a dual-field transitional approach in `image` schema:
+1. Retain legacy `alt` (string) for backward compatibility and existing frontend usage.
+2. Introduced `localizedAltText` object (fields: `en`, `nl`) to enable per-locale enrichment.
+
+Rationale:
+- Avoids immediate frontend breakage or mandatory migration.
+- Enables future coverage reporting (percent of images with both `en` + `nl`).
+- Reduces duplication cost when locale count grows beyond two.
+
+Transition Plan:
+- Gate 3: Both fields optional; guidance via descriptions & warnings only.
+- Gate 4: Coverage script + require `localizedAltText.en` for any new/updated image.
+- Gate 5: Deprecate legacy `alt` (remove from schema & migration sets `localizedAltText.en = alt` if still blank).
+
+Frontend Fallback Order (to implement during Gate 3 frontend pass):
+`localizedAltText[currentLocale] -> localizedAltText.en -> alt -> ''`
+
+### Pricing Feature Flag
+Structured pricing (`productPricing`) added behind environment variable `NEXT_PUBLIC_ENABLE_STRUCTURED_PRICING`.
+This allows enabling in staging, validating editor workflow & queries before enforcing adoption.
+
+### Coverage & Validation Scripts (Planned)
+- `scripts/check-alt-coverage.mjs`: Count images missing localized values per locale.
+- `scripts/check-pricing-adoption.mjs`: Ratio of products using new `pricing` object vs total products.
+
+### Sunset Conditions
+- Legacy `alt` removed only after >95% images have `localizedAltText.en` and >85% have `localizedAltText.nl` (targets adjustable in Gate 4 review).
+- Legacy pricing blocks deprecated after all active pricing pages resolve exclusively from `productPricing`.
+
+### Rollback (2025-09-28, Later Same Day)
+Decision: Reverted introduction of `localizedAltText` inside `image` schema.
+
+Reasoning:
+- Current project uses full document duplication per locale; alt text differs naturally per localized document.
+- Added object created redundancy without delivering audit value yet.
+- Simplifies editorial UI (one field) and removes premature abstraction.
+
+Deferred Trigger to Reintroduce:
+1. Locale count > 2 OR
+2. Need for intra-document locale alt auditing becomes explicit OR
+3. Move toward hybrid localization model (mix of doc- and field-level) OR
+4. Accessibility initiative requiring single-query multi-locale alt extraction.
+
+Rollback Actions Completed:
+- Removed `localizedAltText` field from `image` schema.
+- Simplified image GROQ fragment to legacy `alt` only.
+- Left object schema file in repository for potential future reuse (benign if registered but unused).
+
+Impact Assessment:
+- No data loss (no production content relied on new field yet).
+- Frontend unaffected (no code had shipped depending on `resolvedAlt`).
+- Documentation updated to reflect deferral.
+

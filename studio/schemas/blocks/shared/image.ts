@@ -1,4 +1,5 @@
 import { defineField } from "sanity";
+// Rolled back: keep single alt field per localized document.
 
 export default defineField({
   name: "image",
@@ -12,6 +13,8 @@ export default defineField({
       name: "alt",
       type: "string",
       title: "Alternative Text",
+      description: "Describe the image for screen readers (language handled per translated document).",
+      validation: (rule) => rule.max(140).warning('Keep alt concise (< 140 chars).'),
     },
   ],
 });
