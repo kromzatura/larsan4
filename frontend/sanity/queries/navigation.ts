@@ -9,8 +9,8 @@ export const navigationLinkQuery = groq`
   buttonVariant,
   target,
   isExternal,
-  // External href only retained if isExternal
-  "href": select(isExternal => href),
+  // Only expose href when marked external
+  "href": select(isExternal == true => href),
   "internalType": internalLink->_type,
   "internalSlug": internalLink->slug.current,
   iconVariant,
@@ -23,11 +23,9 @@ export const NAVIGATION_QUERY = groq`
     _key,
     title,
     links[]{
-      ${navigationLinkQuery},
-      _type == "link-group" => {
-        links[]{
-          ${navigationLinkQuery}
-        }
+      ${navigationLinkQuery}
+      , _type == "link-group" => {
+        links[]{ ${navigationLinkQuery} }
       }
     }
   }
