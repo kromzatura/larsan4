@@ -27,6 +27,13 @@ Then embed JSON here.
 
 Current (pre-translation) placeholder: Pending.
 
+### Rubric Evaluation
+After filling the table, create a JSON array matching rows (see `gate2-rubric-sample.json`). Then:
+```bash
+node scripts/evaluate-gate2-rubric.mjs gate2-rubric.json > gate2-rubric-results.json || echo "Rubric did not meet exit criteria"
+```
+Embed summary JSON below once available.
+
 ## Glossary (Optional)
 | EN | NL Preferred | Notes |
 |----|--------------|-------|

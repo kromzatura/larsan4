@@ -62,5 +62,22 @@ Interpretation: No plugin types are missing. Newly added `faq` and `specificatio
 ## Notes
 Environment here cannot display the browser UI; screenshots to be attached externally when run locally. This doc will be updated with textual confirmations.
 
+### Evidence Capture Instructions
+Name screenshots using pattern: `gate1-<doctype>-<locale>.png`.
+
+Suggested set:
+- `gate1-page-en.png` (shows translation panel + Assist button)
+- `gate1-product-en.png`
+- `gate1-faq-en.png`
+- `gate1-specification-en.png`
+- `gate1-page-nl.png` (optional if translation already created)
+
+Textual confirmation template (paste below each checklist item):
+```
+Doc: page (ID: <id>) – Translation panel visible (Locales: EN, NL). Assist actions rendered in toolbar.
+```
+
+If any doc type lacks translation UI: record console logs + plugin config excerpt.
+
 ## Next Actions
 Upon completion mark all above and proceed to Gate 2 plan (`gate2-plan.md`).

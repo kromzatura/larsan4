@@ -1,0 +1,6 @@
+[
+  {"doc":"hero-marketing","type":"page","accuracy":5,"terminology":4,"readability":4,"structure":5,"effortPercent":20},
+  {"doc":"feature-rich","type":"page","accuracy":4,"terminology":4,"readability":4,"structure":4,"effortPercent":25},
+  {"doc":"medium-post","type":"post","accuracy":5,"terminology":5,"readability":4,"structure":5,"effortPercent":15},
+  {"doc":"widget-alpha","type":"product","accuracy":4,"terminology":4,"readability":4,"structure":5,"effortPercent":10}
+]
