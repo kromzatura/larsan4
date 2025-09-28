@@ -397,7 +397,6 @@ export const POSTS_SLUGS_QUERY = groq`*[_type == "post" && defined(slug)]{slug}`
 
 ## Performance Optimization
 
-- ALWAYS use the Next.js `<Image>` component for all images. This provides automatic lazy loading, resizing, and format optimization.
 - USE `next/dynamic` to lazy-load large components or libraries that are not required for the initial page view (e.g., modals, heavy charting libraries).
 - PREFER Static Site Generation (SSG) for pages that can be pre-built. Use Server-Side Rendering (SSR) or Incremental Static Regeneration (ISR) for pages with highly dynamic content.
 - AVOID fetching data on the client side when it can be fetched on the server. This prevents request waterfalls and improves Largest Contentful Paint (LCP).
