@@ -69,6 +69,9 @@ export default defineConfig({
         "category",
         "settings",
         "navigation",
+        // Newly added to translation scope (content surfaces publicly & reused):
+        "faq",
+        "specification",
       ],
       // defaultLanguage may be inferred as first entry; adjust if plugin exposes explicit option.
     }),

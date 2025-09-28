@@ -1,0 +1,5 @@
+{"_type":"page","_id":"page.gate2.sample.hero","title":"Hero Marketing Page","slug":{"_type":"slug","current":"hero-marketing"},"blocks":[],"_createdAt":"2025-09-28T00:00:00Z"}
+{"_type":"page","_id":"page.gate2.sample.features","title":"Feature Rich Page","slug":{"_type":"slug","current":"feature-rich"},"blocks":[],"_createdAt":"2025-09-28T00:00:00Z"}
+{"_type":"post","_id":"post.gate2.sample.medium","title":"Medium Length Blog Post","slug":{"_type":"slug","current":"medium-post"},"body":[],"_createdAt":"2025-09-28T00:00:00Z"}
+{"_type":"product","_id":"product.gate2.sample.widget","title":"Widget Alpha","slug":{"_type":"slug","current":"widget-alpha"},"specs":[],"_createdAt":"2025-09-28T00:00:00Z"}
+{"_type":"specification","_id":"specification.gate2.sample.core","title":"Core Specification","slug":{"_type":"slug","current":"core-spec"},"description":"Baseline technical specification used across product & comparison tables.","_createdAt":"2025-09-28T00:00:00Z"}
