@@ -1,32 +1,27 @@
 import { groq } from "next-sanity";
 
-// Leaner navigation link fragment: expose internalType/internalSlug for runtime resolution
-// Keep external href if explicitly set
-export const navigationLinkQuery = groq`
-  _key,
-  _type,
-  title,
-  buttonVariant,
-  target,
-  isExternal,
-  // Only expose href when marked external
-  "href": select(isExternal == true => href),
-  "internalType": internalLink->_type,
-  "internalSlug": internalLink->slug.current,
-  iconVariant,
-  description
-`;
-
+// Simplified explicit navigation query (no fragments) to satisfy typegen.
+// If link groups are introduced later, either adjust schema or add a second query.
 export const NAVIGATION_QUERY = groq`
   *[_type == "navigation"]{
+    _id,
     _type,
-    _key,
     title,
     links[]{
-      ${navigationLinkQuery}
-      , _type == "link-group" => {
-        links[]{ ${navigationLinkQuery} }
-      }
+      _key,
+      _type,
+      title,
+      buttonVariant,
+      target,
+      isExternal,
+      "href": select(isExternal == true => href),
+      iconVariant,
+      description,
+      // Normalized internal link object (optional)
+      "internal": select(defined(internalLink) => {
+        "_type": internalLink->_type,
+        "slug": internalLink->slug.current
+      })
     }
   }
 `;
