@@ -73,38 +73,42 @@ export type ProductCategoryWithMeta = ProductCategory & {
 };
 
 export const fetchSanityNavigation =
-  async (): Promise<NAVIGATION_QUERYResult> => {
+  async ({ lang }: { lang: string }): Promise<NAVIGATION_QUERYResult> => {
     const { data } = await sanityFetch({
       query: NAVIGATION_QUERY,
+      params: { lang },
     });
 
     return data;
   };
 
-export const fetchSanityBanner = async (): Promise<BANNER_QUERYResult> => {
+export const fetchSanityBanner = async ({ lang }: { lang: string }): Promise<BANNER_QUERYResult> => {
   const { data } = await sanityFetch({
     query: BANNER_QUERY,
+    params: { lang },
   });
   return data;
 };
 
 export const fetchSanityPageBySlug = async ({
   slug,
+  lang,
 }: {
-  slug: string;
+  slug: string; lang: string;
 }): Promise<PAGE_QUERYResult> => {
   const { data } = await sanityFetch({
     query: PAGE_QUERY,
-    params: { slug },
+    params: { slug, lang },
   });
 
   return data;
 };
 
 export const fetchSanityPagesStaticParams =
-  async (): Promise<PAGES_SLUGS_QUERYResult> => {
+  async ({ lang }: { lang: string }): Promise<PAGES_SLUGS_QUERYResult> => {
     const { data } = await sanityFetch({
       query: PAGES_SLUGS_QUERY,
+      params: { lang },
       perspective: "published",
       stega: false,
     });
@@ -116,10 +120,11 @@ export const fetchSanityPosts = async ({
   page,
   limit,
   sort = "newest",
+  lang,
 }: {
   page?: number;
   limit: number;
-  sort?: "newest" | "az" | "za";
+  sort?: "newest" | "az" | "za"; lang: string;
 }): Promise<POSTS_QUERYResult> => {
   const offset = page && limit ? (page - 1) * limit : 0;
   const end = offset + limit;
@@ -131,7 +136,7 @@ export const fetchSanityPosts = async ({
       : POSTS_QUERY;
   const { data } = await sanityFetch({
     query,
-    params: { offset, end },
+    params: { offset, end, lang },
     perspective: "published",
     stega: false,
   });
@@ -158,15 +163,16 @@ export const fetchSanityTeam = async (): Promise<TEAM_QUERYResult> => {
 export const fetchSanityProducts = async ({
   page,
   limit,
+  lang,
 }: {
   page?: number;
-  limit: number;
+  limit: number; lang: string;
 }): Promise<PRODUCTS_LIST_QUERYResult> => {
   const offset = page && limit ? (page - 1) * limit : 0;
   const end = offset + limit;
   const { data } = await sanityFetch({
     query: PRODUCTS_LIST_QUERY,
-    params: { offset, end },
+    params: { offset, end, lang },
   });
   return data;
 };
@@ -176,11 +182,12 @@ export const fetchSanityProductsByCategory = async ({
   page,
   limit,
   sort = "newest",
+  lang,
 }: {
   slug: string;
   page?: number;
   limit: number;
-  sort?: "newest" | "az" | "za";
+  sort?: "newest" | "az" | "za"; lang: string;
 }): Promise<PRODUCTS_LIST_QUERYResult> => {
   const offset = page && limit ? (page - 1) * limit : 0;
   const end = offset + limit;
@@ -190,26 +197,28 @@ export const fetchSanityProductsByCategory = async ({
       : sort === "za"
       ? PRODUCTS_BY_CATEGORY_QUERY_ZA
       : PRODUCTS_BY_CATEGORY_QUERY_NEWEST;
-  const { data } = await sanityFetch({ query, params: { slug, offset, end } });
+  const { data } = await sanityFetch({ query, params: { slug, offset, end, lang } });
   return data;
 };
 
 export const fetchSanityProductBySlug = async ({
   slug,
+  lang,
 }: {
-  slug: string;
+  slug: string; lang: string;
 }): Promise<PRODUCT_QUERYResult> => {
   const { data } = await sanityFetch({
     query: PRODUCT_QUERY,
-    params: { slug },
+    params: { slug, lang },
   });
   return data;
 };
 
 export const fetchSanityProductSlugs =
-  async (): Promise<PRODUCTS_SLUGS_QUERYResult> => {
+  async ({ lang }: { lang: string }): Promise<PRODUCTS_SLUGS_QUERYResult> => {
     const { data } = await sanityFetch({
       query: PRODUCTS_SLUGS_QUERY,
+      params: { lang },
       perspective: "published",
       stega: false,
     });
@@ -217,17 +226,19 @@ export const fetchSanityProductSlugs =
   };
 
 export const fetchSanityProductCategories =
-  async (): Promise<PRODUCT_CATEGORIES_QUERYResult> => {
+  async ({ lang }: { lang: string }): Promise<PRODUCT_CATEGORIES_QUERYResult> => {
     const { data } = await sanityFetch({
       query: PRODUCT_CATEGORIES_QUERY,
+      params: { lang },
     });
     return data;
   };
 
 export const fetchSanityProductCategoriesStaticParams =
-  async (): Promise<PRODUCT_CATEGORIES_QUERYResult> => {
+  async ({ lang }: { lang: string }): Promise<PRODUCT_CATEGORIES_QUERYResult> => {
     const { data } = await sanityFetch({
       query: PRODUCT_CATEGORIES_QUERY,
+      params: { lang },
       perspective: "published",
       stega: false,
     });
@@ -236,19 +247,21 @@ export const fetchSanityProductCategoriesStaticParams =
 
 export const fetchSanityProductCategoryBySlug = async ({
   slug,
+  lang,
 }: {
-  slug: string;
+  slug: string; lang: string;
 }): Promise<ProductCategoryWithMeta> => {
   const { data } = await sanityFetch({
     query: PRODUCT_CATEGORY_BY_SLUG_QUERY,
-    params: { slug },
+    params: { slug, lang },
   });
   return data as ProductCategoryWithMeta;
 };
 
-export const fetchSanityProductsCount = async (): Promise<number> => {
+export const fetchSanityProductsCount = async ({ lang }: { lang: string }): Promise<number> => {
   const { data } = await sanityFetch({
     query: PRODUCTS_COUNT_QUERY,
+    params: { lang },
     perspective: "published",
     stega: false,
   });
@@ -257,29 +270,31 @@ export const fetchSanityProductsCount = async (): Promise<number> => {
 
 export const fetchSanityProductsCountByCategory = async ({
   slug,
+  lang,
 }: {
-  slug: string;
+  slug: string; lang: string;
 }): Promise<number> => {
   const { data } = await sanityFetch({
     query: PRODUCTS_COUNT_BY_CATEGORY_QUERY,
-    params: { slug },
+    params: { slug, lang },
     perspective: "published",
     stega: false,
   });
   return data;
 };
 
-export const fetchSanityPostsCount = async (): Promise<number> => {
+export const fetchSanityPostsCount = async ({ lang }: { lang: string }): Promise<number> => {
   const { data } = await sanityFetch({
     query: POSTS_COUNT_QUERY,
+    params: { lang },
     perspective: "published",
     stega: false,
   });
   return data;
 };
 
-export const fetchSanityBlogCategories = async () => {
-  const { data } = await sanityFetch({ query: BLOG_CATEGORIES_QUERY });
+export const fetchSanityBlogCategories = async ({ lang }: { lang: string }) => {
+  const { data } = await sanityFetch({ query: BLOG_CATEGORIES_QUERY, params: { lang } });
   return data as Array<{
     _id: string;
     title: string;
@@ -287,9 +302,10 @@ export const fetchSanityBlogCategories = async () => {
   }>;
 };
 
-export const fetchSanityBlogCategoriesStaticParams = async () => {
+export const fetchSanityBlogCategoriesStaticParams = async ({ lang }: { lang: string }) => {
   const { data } = await sanityFetch({
     query: BLOG_CATEGORIES_QUERY,
+    params: { lang },
     perspective: "published",
     stega: false,
   });
@@ -302,12 +318,13 @@ export const fetchSanityBlogCategoriesStaticParams = async () => {
 
 export const fetchSanityBlogCategoryBySlug = async ({
   slug,
+  lang,
 }: {
-  slug: string;
+  slug: string; lang: string;
 }) => {
   const { data } = await sanityFetch({
     query: BLOG_CATEGORY_BY_SLUG_QUERY,
-    params: { slug },
+    params: { slug, lang },
   });
   return data as {
     _id: string;
@@ -322,11 +339,12 @@ export const fetchSanityPostsByBlogCategory = async ({
   page,
   limit,
   sort = "newest",
+  lang,
 }: {
   slug: string;
   page?: number;
   limit: number;
-  sort?: "newest" | "az" | "za";
+  sort?: "newest" | "az" | "za"; lang: string;
 }) => {
   const offset = page && limit ? (page - 1) * limit : 0;
   const end = offset + limit;
@@ -338,7 +356,7 @@ export const fetchSanityPostsByBlogCategory = async ({
       : POSTS_BY_BLOG_CATEGORY_QUERY_NEWEST;
   const { data } = await sanityFetch({
     query,
-    params: { slug, offset, end },
+    params: { slug, offset, end, lang },
     perspective: "published",
     stega: false,
   });
@@ -347,12 +365,13 @@ export const fetchSanityPostsByBlogCategory = async ({
 
 export const fetchSanityPostsCountByBlogCategory = async ({
   slug,
+  lang,
 }: {
-  slug: string;
+  slug: string; lang: string;
 }) => {
   const { data } = await sanityFetch({
     query: POSTS_COUNT_BY_BLOG_CATEGORY_QUERY,
-    params: { slug },
+    params: { slug, lang },
     perspective: "published",
     stega: false,
   });
@@ -361,21 +380,23 @@ export const fetchSanityPostsCountByBlogCategory = async ({
 
 export const fetchSanityPostBySlug = async ({
   slug,
+  lang,
 }: {
-  slug: string;
+  slug: string; lang: string;
 }): Promise<POST_QUERYResult> => {
   const { data } = await sanityFetch({
     query: POST_QUERY,
-    params: { slug },
+    params: { slug, lang },
   });
 
   return data;
 };
 
 export const fetchSanityPostsStaticParams =
-  async (): Promise<POSTS_SLUGS_QUERYResult> => {
+  async ({ lang }: { lang: string }): Promise<POSTS_SLUGS_QUERYResult> => {
     const { data } = await sanityFetch({
       query: POSTS_SLUGS_QUERY,
+      params: { lang },
       perspective: "published",
       stega: false,
     });
@@ -383,17 +404,19 @@ export const fetchSanityPostsStaticParams =
     return data;
   };
 
-export const fetchSanitySettings = async (): Promise<SETTINGS_QUERYResult> => {
+export const fetchSanitySettings = async ({ lang }: { lang: string }): Promise<SETTINGS_QUERYResult> => {
   const { data } = await sanityFetch({
     query: SETTINGS_QUERY,
+    params: { lang },
   });
 
   return data;
 };
 
-export const fetchSanityContact = async (): Promise<CONTACT_QUERYResult> => {
+export const fetchSanityContact = async ({ lang }: { lang: string }): Promise<CONTACT_QUERYResult> => {
   const { data } = await sanityFetch({
     query: CONTACT_QUERY,
+    params: { lang },
   });
 
   return data;

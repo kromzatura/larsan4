@@ -48,18 +48,19 @@ for (const doc of records) {
 }
 
 const inferLocale = (doc) => {
-  if (doc._lang && typeof doc._lang === 'string') return doc._lang;
+  if (typeof doc.language === 'string' && doc.language) return { locale: doc.language, source: 'field:language' };
+  if (doc._lang && typeof doc._lang === 'string') return { locale: doc._lang, source: 'field:_lang' };
   const m = doc._id.match(/\.([a-z]{2})(?:$|[\-])/i);
-  if (m) return m[1];
-  return requiredLocales[0]; // default fallback
+  if (m) return { locale: m[1], source: 'id-suffix' };
+  return { locale: requiredLocales[0], source: 'default' };
 };
 
 const details = [];
 for (const [k, docs] of groups.entries()) {
   const perLocale = {};
   for (const d of docs) {
-    const loc = inferLocale(d);
-    (perLocale[loc] ||= []).push(d._id);
+    const { locale: loc, source } = inferLocale(d);
+    (perLocale[loc] ||= []).push({ id: d._id, source });
   }
   const presentLocales = Object.keys(perLocale);
   const missingLocales = requiredLocales.filter(l => !presentLocales.includes(l));
@@ -68,7 +69,8 @@ for (const [k, docs] of groups.entries()) {
     type: docs[0]._type,
     locales: presentLocales,
     missingLocales,
-    counts: Object.fromEntries(Object.entries(perLocale).map(([l, arr]) => [l, arr.length]))
+    counts: Object.fromEntries(Object.entries(perLocale).map(([l, arr]) => [l, arr.length])),
+    sources: Object.fromEntries(Object.entries(perLocale).map(([l, arr]) => [l, Array.from(new Set(arr.map(x => x.source)))])),
   });
 }
 

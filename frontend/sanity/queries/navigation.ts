@@ -3,7 +3,7 @@ import { groq } from "next-sanity";
 // Simplified explicit navigation query (no fragments) to satisfy typegen.
 // If link groups are introduced later, either adjust schema or add a second query.
 export const NAVIGATION_QUERY = groq`
-  *[_type == "navigation"]{
+  *[_type == "navigation" && language == $lang]{
     _id,
     _type,
     title,
