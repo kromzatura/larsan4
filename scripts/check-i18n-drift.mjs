@@ -22,7 +22,7 @@ if (!fs.existsSync(sanityConfigPath) || !fs.existsSync(documentsDir)) {
 const configSource = fs.readFileSync(sanityConfigPath, 'utf8');
 
 // Naive regex to capture schemaTypes array literal inside documentInternationalization({...})
-const schemaTypesMatch = configSource.match(/documentInternationalization\(\{[\s\S]*?schemaTypes:\s*\[([\s\S]*?)\]/);
+const schemaTypesMatch = configSource.match(/documentInternationalization\(\{[\s\S]*?schemaTypes:\s*\[([\s\S]*?)\][\s\S]*?\}\)/);
 if (!schemaTypesMatch) {
   console.error('[error] Could not find schemaTypes array in sanity.config.ts');
   process.exit(1);
@@ -30,20 +30,22 @@ if (!schemaTypesMatch) {
 
 const rawList = schemaTypesMatch[1]
   .split(/[,\n]/)
+  .map(l => l.replace(/\/\/.*$/, '')) // strip line comments
   .map(l => l.trim().replace(/['"`]/g, ''))
-  .filter(Boolean)
-  .filter(v => !v.startsWith('//'));
+  .filter(Boolean);
 const pluginTypes = Array.from(new Set(rawList));
+// Clean any malformed residual tokens caused by commented inline context
+const sanitizedPluginTypes = pluginTypes.filter(t => !/\s/.test(t) && !t.endsWith(')'));
 
 // Derive document types from filenames in documents directory (basename without extension)
 const documentTypes = fs.readdirSync(documentsDir)
   .filter(f => f.endsWith('.ts'))
   .map(f => f.replace(/\.ts$/, ''));
 
-const missing = pluginTypes.filter(t => !documentTypes.includes(t));
-const unmanaged = documentTypes.filter(dt => !pluginTypes.includes(dt));
+const missing = sanitizedPluginTypes.filter(t => !documentTypes.includes(t));
+const unmanaged = documentTypes.filter(dt => !sanitizedPluginTypes.includes(dt));
 
-const result = { pluginTypes, documentTypes, missing, unmanaged };
+const result = { pluginTypes: sanitizedPluginTypes, documentTypes, missing, unmanaged };
 console.log(JSON.stringify(result, null, 2));
 
 if ((missing.length || unmanaged.length) && process.argv.includes('--strict')) {

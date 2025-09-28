@@ -69,7 +69,7 @@ export default defineConfig({
         "category",
         "settings",
         "navigation",
-        // Newly added to translation scope (content surfaces publicly & reused):
+        // Newly included after Gate 2 planning (FAQ reused, specs structured)
         "faq",
         "specification",
       ],
