@@ -53,6 +53,22 @@ export default defineType({
 			group: 'amounts',
 			validation: (rule) => rule.min(0),
 		}),
+		// Cross-field validation: require at least one price (monthly or yearly)
+		defineField({
+			name: 'priceRequirement',
+			type: 'string',
+			readOnly: true,
+			hidden: true,
+			validation: (rule) =>
+				// custom() receives the field value, but we need parent => use rule.custom with context
+				rule.custom((_, context) => {
+					const parent = context?.parent as any;
+					if (parent?.monthly == null && parent?.yearly == null) {
+						return 'Provide monthly or yearly price (one required)';
+					}
+					return true;
+				}),
+		}),
 		defineField({
 			name: 'features',
 			type: 'array',

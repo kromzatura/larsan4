@@ -1,17 +1,25 @@
 #!/usr/bin/env node
 /**
- * Translation coverage checker (Gate 2 aid)
- * Assumptions:
- * - Internationalization implemented by creating parallel documents per locale (plugin-managed)
- * - Slugs are unique per locale; we infer pairing by slug+type
- * - This script queries dataset via environment variables ONLY if SANITY tokens present
- *   Otherwise it reads a local NDJSON file (if provided) for dry-run.
+ * Translation coverage checker v2 (Gate 4)
+ * Enhancements:
+ * - Explicit type filtering (--types product,post,page,faq,specification)
+ * - Per-type coverage breakdown
+ * - Counts missing locales per key
+ * - Versioned JSON output { version:2 }
+ * - More robust locale inference: `_id` suffix `.LOCALE` or `_lang` field
  */
 import fs from 'node:fs';
 import path from 'node:path';
 
 const args = process.argv.slice(2);
 const ndjsonArg = args.find(a => a.endsWith('.ndjson'));
+const typesArgIdx = args.findIndex(a => a === '--types');
+let filterTypes = null;
+if (typesArgIdx !== -1 && args[typesArgIdx + 1]) {
+  filterTypes = args[typesArgIdx + 1].split(',').map(s => s.trim()).filter(Boolean);
+}
+
+const requiredLocales = ['en', 'nl'];
 
 let records = [];
 if (ndjsonArg) {
@@ -26,34 +34,71 @@ if (ndjsonArg) {
   console.warn('[warn] No NDJSON provided; coverage cannot be computed offline.');
 }
 
-// Group by type+slug
-const key = r => `${r._type}::${r.slug?.current || r._id}`;
+if (filterTypes) {
+  records = records.filter(r => filterTypes.includes(r._type));
+}
+
+// Group by composite key
+const compositeKey = r => `${r._type}::${r.slug?.current || r._id}`;
 const groups = new Map();
-for (const r of records) {
-  const k = key(r);
+for (const doc of records) {
+  const k = compositeKey(doc);
   if (!groups.has(k)) groups.set(k, []);
-  groups.get(k).push(r);
+  groups.get(k).push(doc);
 }
 
-const summary = [];
+const inferLocale = (doc) => {
+  if (doc._lang && typeof doc._lang === 'string') return doc._lang;
+  const m = doc._id.match(/\.([a-z]{2})(?:$|[\-])/i);
+  if (m) return m[1];
+  return requiredLocales[0]; // default fallback
+};
+
+const details = [];
 for (const [k, docs] of groups.entries()) {
-  // naive locale inference: id suffix .<locale> or field language (not present yet) → fallback: treat all as EN
-  const localeBuckets = docs.reduce((acc, d) => {
-    const inferred = /\.nl$/.test(d._id) ? 'nl' : (/\.en$/.test(d._id) ? 'en' : 'en');
-    (acc[inferred] ||= []).push(d);
-    return acc;
-  }, {});
-  summary.push({ key: k, locales: Object.keys(localeBuckets), counts: Object.fromEntries(Object.entries(localeBuckets).map(([l,v]) => [l, v.length])) });
+  const perLocale = {};
+  for (const d of docs) {
+    const loc = inferLocale(d);
+    (perLocale[loc] ||= []).push(d._id);
+  }
+  const presentLocales = Object.keys(perLocale);
+  const missingLocales = requiredLocales.filter(l => !presentLocales.includes(l));
+  details.push({
+    key: k,
+    type: docs[0]._type,
+    locales: presentLocales,
+    missingLocales,
+    counts: Object.fromEntries(Object.entries(perLocale).map(([l, arr]) => [l, arr.length]))
+  });
 }
 
-const requiredLocales = ['en','nl'];
+// Aggregate
+const byType = {};
 let complete = 0;
-for (const row of summary) {
+for (const row of details) {
   const hasAll = requiredLocales.every(l => row.locales.includes(l));
   if (hasAll) complete++;
   row.complete = hasAll;
+  (byType[row.type] ||= { total: 0, complete: 0 }).total++;
+  if (hasAll) byType[row.type].complete++;
+}
+for (const t of Object.keys(byType)) {
+  const entry = byType[t];
+  entry.coveragePercent = entry.total ? +(entry.complete / entry.total * 100).toFixed(1) : 0;
 }
 
-const coverage = summary.length ? (complete / summary.length * 100).toFixed(1) : '0.0';
+const total = details.length;
+const coveragePercent = total ? +(complete / total * 100).toFixed(1) : 0;
 
-console.log(JSON.stringify({ total: summary.length, complete, coveragePercent: coverage, details: summary }, null, 2));
+const output = {
+  version: 2,
+  requiredLocales,
+  filteredTypes: filterTypes,
+  total,
+  complete,
+  coveragePercent,
+  perType: byType,
+  details,
+};
+
+console.log(JSON.stringify(output, null, 2));
