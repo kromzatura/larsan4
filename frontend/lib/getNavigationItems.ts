@@ -1,5 +1,5 @@
 import slugify from "./slugify";
-import { fetchSanityNavigation } from "@/sanity/lib/fetch";
+import { fetchSanityNavigationWithFallback } from "@/sanity/lib/fetch";
 import { resolveHref } from "./resolveHref";
 
 type NavLink = {
@@ -34,11 +34,18 @@ function applyResolvedHref<T extends NavLink | NavGroup>(item: T): T {
   return item;
 }
 
-export const getNavigationItems = async (title: string) => {
-  const navigation = await fetchSanityNavigation();
-  const group = navigation?.find(
-    (item) => slugify(item.title ?? "") === title
-  );
+export const getNavigationItems = async ({
+  title,
+  lang,
+  fallbackLang = "en",
+}: {
+  title: string;
+  lang: string;
+  fallbackLang?: string;
+}) => {
+  const navigation = await fetchSanityNavigationWithFallback({ lang, fallbackLang });
+  const group = navigation?.find((item) => slugify(item.title ?? "") === title);
   if (!group) return [];
+  // Apply resolution pass only for legacy structure; resolvedHref already provided for flat links.
   return group.links?.map((l: any) => applyResolvedHref(l)) ?? [];
 };

@@ -72,15 +72,28 @@ export type ProductCategoryWithMeta = ProductCategory & {
   } | null;
 };
 
-export const fetchSanityNavigation =
-  async ({ lang }: { lang: string }): Promise<NAVIGATION_QUERYResult> => {
-    const { data } = await sanityFetch({
-      query: NAVIGATION_QUERY,
-      params: { lang },
-    });
+export const fetchSanityNavigation = async ({ lang }: { lang: string }): Promise<NAVIGATION_QUERYResult> => {
+  const { data } = await sanityFetch({
+    query: NAVIGATION_QUERY,
+    params: { lang },
+  });
+  return data;
+};
 
-    return data;
-  };
+// Attempts to fetch navigation for requested lang, falls back to 'en' (or provided fallbackLang) if empty.
+export const fetchSanityNavigationWithFallback = async ({
+  lang,
+  fallbackLang = "en",
+}: {
+  lang: string;
+  fallbackLang?: string;
+}): Promise<NAVIGATION_QUERYResult> => {
+  const primary = await fetchSanityNavigation({ lang });
+  if (primary && primary.length > 0) return primary;
+  if (fallbackLang === lang) return primary; // Avoid duplicate fetch if same.
+  const fallback = await fetchSanityNavigation({ lang: fallbackLang });
+  return fallback;
+};
 
 export const fetchSanityBanner = async ({ lang }: { lang: string }): Promise<BANNER_QUERYResult> => {
   const { data } = await sanityFetch({
