@@ -1,4 +1,6 @@
 import { sanityFetch } from "@/sanity/lib/live";
+// Shared locales (monorepo root -> shared/locales.ts)
+import { DEFAULT_LOCALE } from "../../../shared/locales";
 import { NAVIGATION_QUERY } from "@/sanity/queries/navigation";
 import { BANNER_QUERY } from "@/sanity/queries/banner";
 import { PAGE_QUERY, PAGES_SLUGS_QUERY } from "@/sanity/queries/page";
@@ -117,6 +119,21 @@ export const fetchSanityPageBySlug = async ({
   return data;
 };
 
+export const fetchSanityPageBySlugWithFallback = async ({
+  slug,
+  lang,
+  fallbackLang = DEFAULT_LOCALE,
+}: {
+  slug: string;
+  lang: string;
+  fallbackLang?: string;
+}): Promise<PAGE_QUERYResult> => {
+  const primary = await fetchSanityPageBySlug({ slug, lang });
+  if (primary) return primary;
+  if (fallbackLang === lang) return primary;
+  return fetchSanityPageBySlug({ slug, lang: fallbackLang });
+};
+
 export const fetchSanityPagesStaticParams =
   async ({ lang }: { lang: string }): Promise<PAGES_SLUGS_QUERYResult> => {
     const { data } = await sanityFetch({
@@ -225,6 +242,21 @@ export const fetchSanityProductBySlug = async ({
     params: { slug, lang },
   });
   return data;
+};
+
+export const fetchSanityProductBySlugWithFallback = async ({
+  slug,
+  lang,
+  fallbackLang = DEFAULT_LOCALE,
+}: {
+  slug: string;
+  lang: string;
+  fallbackLang?: string;
+}): Promise<PRODUCT_QUERYResult> => {
+  const primary = await fetchSanityProductBySlug({ slug, lang });
+  if (primary) return primary;
+  if (fallbackLang === lang) return primary;
+  return fetchSanityProductBySlug({ slug, lang: fallbackLang });
 };
 
 export const fetchSanityProductSlugs =
@@ -403,6 +435,21 @@ export const fetchSanityPostBySlug = async ({
   });
 
   return data;
+};
+
+export const fetchSanityPostBySlugWithFallback = async ({
+  slug,
+  lang,
+  fallbackLang = DEFAULT_LOCALE,
+}: {
+  slug: string;
+  lang: string;
+  fallbackLang?: string;
+}): Promise<POST_QUERYResult> => {
+  const primary = await fetchSanityPostBySlug({ slug, lang });
+  if (primary) return primary;
+  if (fallbackLang === lang) return primary;
+  return fetchSanityPostBySlug({ slug, lang: fallbackLang });
 };
 
 export const fetchSanityPostsStaticParams =

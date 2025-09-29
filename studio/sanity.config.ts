@@ -15,6 +15,7 @@ import { resolve } from "./presentation/resolve";
 import { structure } from "./structure";
 import { defaultDocumentNode } from "./defaultDocumentNode";
 import { codeInput } from "@sanity/code-input";
+import { LOCALES, LOCALE_LABELS } from "../shared/locales";
 
 // Define the actions that should be available for singleton documents
 const singletonActions = new Set([
@@ -61,11 +62,8 @@ export default defineConfig({
   plugins: [
     // PHASE 1: Document-level translation plugin FIRST so Assist can augment it.
     documentInternationalization({
-      // Supported locales (default English until flip strategy executed)
-      supportedLanguages: [
-        { id: "en", title: "English" },
-        { id: "nl", title: "Dutch" },
-      ],
+      // Centralized supported locales
+      supportedLanguages: LOCALES.map(l => ({ id: l, title: LOCALE_LABELS[l] || l })),
       schemaTypes: [
         "page",
         "post",
