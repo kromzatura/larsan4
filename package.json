@@ -14,6 +14,8 @@
     "i18n:drift:strict": "node scripts/check-i18n-drift.mjs --strict",
     "i18n:coverage": "node scripts/check-translation-coverage.mjs i18n-gate2-sample-docs.ndjson"
     ,"gate2:rubric:eval": "node scripts/evaluate-gate2-rubric.mjs gate2-rubric-sample.json"
+    ,"backfill:language:dry": "cd studio && pnpm backfill:language:dry"
+    ,"backfill:language": "cd studio && pnpm backfill:language"
   },
   "homepage": "https://www.shadcnblocks.com/",
   "dependencies": {
