@@ -22,7 +22,8 @@
     ,"gate:content": "node scripts/gate-content-quality.mjs"
     ,"i18n:check:queries": "node scripts/check-query-language-filters.mjs"
     ,"pricing:verify": "node scripts/verify-pricing-normalization.mjs --json"
-    ,"i18n:check:orphan-locales": "node scripts/check-orphan-locales.mjs --json"
+  ,"i18n:check:orphan-locales": "node scripts/check-orphan-locales.mjs --json"
+  ,"assist:aggregate": "node scripts/assist/aggregate-eval.mjs"
   },
   "homepage": "https://www.shadcnblocks.com/",
   "dependencies": {

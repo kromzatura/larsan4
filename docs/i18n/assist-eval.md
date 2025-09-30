@@ -34,10 +34,20 @@ Overall Accept? <Yes/No>
 
 ## Aggregation
 After scoring 15 docs:
-- Compute average per metric.
-- Threshold Recommendation:
-  - Proceed if ALL averages >=3.8 and no metric <3.5.
-  - If any metric <3.5, refine glossary + retry sample.
+1. Place completed raw markdown files in `docs/i18n/assist-evidence/raw/`.
+2. Run aggregation script:
+```
+pnpm assist:aggregate --json > docs/i18n/assist-evidence/summaries/batch-1-summary.json
+```
+3. (Optional thresholds) Override defaults:
+```
+ASSIST_MIN_AVG=4.0 ASSIST_MIN_METRIC=3.7 pnpm assist:aggregate
+```
+4. Script exits non-zero (code 3) if decision == HOLD.
+
+Threshold Recommendation:
+- Proceed if ALL averages >=3.8 and no metric <3.5.
+- If any metric <3.5, refine glossary + retry sample.
 
 ## Glossary / Terminology Notes
 - Add emerging required canonical terms here (EN -> NL).
@@ -50,10 +60,17 @@ After scoring 15 docs:
 | Over-reliance on AI for nuanced legal text | High | Mandatory human review for legal pages |
 
 ## Decision
-- Date:
-- Evaluators:
-- Outcome: <GO / HOLD>
-- Follow-ups:
+Populate after running first aggregation:
+
+```
+Decision Batch: 1
+Date: <YYYY-MM-DD>
+Evaluators: <names>
+Summary Source: summaries/batch-1-summary.json
+Outcome: <GO|HOLD>
+Rationale: <brief justification>
+Follow-ups: <if any>
+```
 
 ## Follow-up Actions (if HOLD)
 | Issue | Action | Owner | Due |
