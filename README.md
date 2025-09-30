@@ -168,6 +168,7 @@ All environment variables and their descriptions:
 - `RESEND_API_KEY` - your RESEND api key for the contact form.
 - `RESEND_TO_EMAIL` - your email address to receive contact form submissions.
 - `RESEND_FROM_EMAIL` - your email address to send contact form submissions from.
+- `ENABLE_I18N_V2` - (Studio only) Feature flag gating the document-level translation plugin. Set to `true` to enable translation UI (language selector & translation actions). Set to `false` (or omit) to rollback UI instantly while preserving underlying `language` fields and localized queries.
 
 [react-url]: https://reactjs.org/
 [next-js-url]: https://nextjs.org/

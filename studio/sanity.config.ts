@@ -35,10 +35,15 @@ const apiVersion = process.env.SANITY_STUDIO_API_VERSION || "2024-10-31";
 const SANITY_STUDIO_PREVIEW_URL =
   process.env.SANITY_STUDIO_PREVIEW_URL || "http://localhost:3000";
 
-// Feature Flags (Gate 3)
+// Feature Flags (Gate 3 / Gate 1 remediation)
 export const ENABLE_STRUCTURED_PRICING = Boolean(
   process.env.NEXT_PUBLIC_ENABLE_STRUCTURED_PRICING
 );
+
+// Gate 1: Ability to instantly revert i18n v2 plugin without code removal
+// Setting ENABLE_I18N_V2=false (or omitting) removes the document-level translation UI while
+// preserving the language fields already on documents. This supports rollback during early gates.
+export const ENABLE_I18N_V2 = process.env.ENABLE_I18N_V2 === "true";
 
 export default defineConfig({
   title: "Sanityblocks",
@@ -60,25 +65,30 @@ export default defineConfig({
         : input,
   },
   plugins: [
-    // PHASE 1: Document-level translation plugin FIRST so Assist can augment it.
-    documentInternationalization({
-      // Centralized supported locales
-      supportedLanguages: LOCALES.map(l => ({ id: l, title: LOCALE_LABELS[l] || l })),
-      schemaTypes: [
-        "page",
-        "post",
-        "product",
-        "productCategory",
-        "category",
-        "settings",
-        "navigation",
-        // Newly included after Gate 2 planning (FAQ reused, specs structured)
-        "faq",
-        "specification",
-      ],
-      // defaultLanguage may be inferred as first entry; adjust if plugin exposes explicit option.
-    }),
-    // AI Assist AFTER internationalization for potential bulk translate action exposure.
+    // Conditionally include document-level translation plugin (Gate 1 feature flag)
+    // Must appear BEFORE assist() when enabled so Assist can enhance translation actions.
+    ...(ENABLE_I18N_V2
+      ? [
+          documentInternationalization({
+            supportedLanguages: LOCALES.map((l) => ({
+              id: l,
+              title: LOCALE_LABELS[l] || l,
+            })),
+            schemaTypes: [
+              "page",
+              "post",
+              "product",
+              "productCategory",
+              "category",
+              "settings",
+              "navigation",
+              "faq",
+              "specification",
+            ],
+          }),
+        ]
+      : []),
+    // Assist kept independent so rollback of i18n plugin does not remove AI authoring assistance.
     assist(),
     structureTool({ structure, defaultDocumentNode }),
     presentationTool({
