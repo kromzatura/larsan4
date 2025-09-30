@@ -232,4 +232,9 @@ Steps executed on pushes / PR into `i18n` branch:
 3. Pricing adoption gate (requires secrets: `SANITY_STUDIO_PROJECT_ID`, `SANITY_STUDIO_DATASET`, `SANITY_API_READ_TOKEN`)
 4. Composite summary (non-blocking) using `gate:content`
 
+### Additional Verification Scripts
+
+- `pnpm pricing:verify` – Fails if any product remains in legacy-only or mixed state (helps enforce completion of normalization).
+- `pnpm i18n:check:orphan-locales` – Fails if documents declare a `language` not included in supported `LOCALES`.
+
 Adjust thresholds incrementally as adoption improves (e.g., raise pricing `--min` from 50 -> 70 -> 85).

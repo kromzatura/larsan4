@@ -47,6 +47,22 @@ jobs:
         run: |
           node scripts/report-pricing-adoption.mjs --min 50 --json || exit 1
 
+      - name: Pricing normalization verification
+        env:
+          SANITY_STUDIO_PROJECT_ID: ${{ secrets.SANITY_STUDIO_PROJECT_ID }}
+          SANITY_STUDIO_DATASET: ${{ secrets.SANITY_STUDIO_DATASET }}
+          SANITY_API_READ_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
+        run: |
+          node scripts/verify-pricing-normalization.mjs --project $SANITY_STUDIO_PROJECT_ID --dataset $SANITY_STUDIO_DATASET --token $SANITY_API_READ_TOKEN --json || exit 1
+
+      - name: Orphan locale check
+        env:
+          SANITY_STUDIO_PROJECT_ID: ${{ secrets.SANITY_STUDIO_PROJECT_ID }}
+          SANITY_STUDIO_DATASET: ${{ secrets.SANITY_STUDIO_DATASET }}
+          SANITY_API_READ_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
+        run: |
+          node scripts/check-orphan-locales.mjs --project $SANITY_STUDIO_PROJECT_ID --dataset $SANITY_STUDIO_DATASET --token $SANITY_API_READ_TOKEN --json || exit 1
+
       - name: Composite gate summary (optional)
         if: always()
         env:
