@@ -279,6 +279,20 @@ export const fetchSanityProductCategories =
     return data;
   };
 
+// Fallback: if no categories returned for requested lang, try default locale
+export const fetchSanityProductCategoriesWithFallback = async ({
+  lang,
+  fallbackLang = DEFAULT_LOCALE,
+}: {
+  lang: string;
+  fallbackLang?: string;
+}): Promise<PRODUCT_CATEGORIES_QUERYResult> => {
+  const primary = await fetchSanityProductCategories({ lang });
+  if (primary && primary.length > 0) return primary;
+  if (fallbackLang === lang) return primary;
+  return fetchSanityProductCategories({ lang: fallbackLang });
+};
+
 export const fetchSanityProductCategoriesStaticParams =
   async ({ lang }: { lang: string }): Promise<PRODUCT_CATEGORIES_QUERYResult> => {
     const { data } = await sanityFetch({
@@ -301,6 +315,21 @@ export const fetchSanityProductCategoryBySlug = async ({
     params: { slug, lang },
   });
   return data as ProductCategoryWithMeta;
+};
+
+export const fetchSanityProductCategoryBySlugWithFallback = async ({
+  slug,
+  lang,
+  fallbackLang = DEFAULT_LOCALE,
+}: {
+  slug: string;
+  lang: string;
+  fallbackLang?: string;
+}): Promise<ProductCategoryWithMeta> => {
+  const primary = await fetchSanityProductCategoryBySlug({ slug, lang });
+  if (primary) return primary;
+  if (fallbackLang === lang) return primary;
+  return fetchSanityProductCategoryBySlug({ slug, lang: fallbackLang });
 };
 
 export const fetchSanityProductsCount = async ({ lang }: { lang: string }): Promise<number> => {
@@ -471,6 +500,19 @@ export const fetchSanitySettings = async ({ lang }: { lang: string }): Promise<S
   });
 
   return data;
+};
+
+export const fetchSanitySettingsWithFallback = async ({
+  lang,
+  fallbackLang = DEFAULT_LOCALE,
+}: {
+  lang: string;
+  fallbackLang?: string;
+}): Promise<SETTINGS_QUERYResult> => {
+  const primary = await fetchSanitySettings({ lang });
+  if (primary) return primary;
+  if (fallbackLang === lang) return primary;
+  return fetchSanitySettings({ lang: fallbackLang });
 };
 
 export const fetchSanityContact = async ({ lang }: { lang: string }): Promise<CONTACT_QUERYResult> => {

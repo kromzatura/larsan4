@@ -16,6 +16,11 @@
     ,"gate2:rubric:eval": "node scripts/evaluate-gate2-rubric.mjs gate2-rubric-sample.json"
     ,"backfill:language:dry": "cd studio && pnpm backfill:language:dry"
     ,"backfill:language": "cd studio && pnpm backfill:language"
+    ,"pricing:adoption": "node scripts/report-pricing-adoption.mjs --json"
+    ,"pricing:migrate:dry": "node scripts/migrate-pricing-dry-run.mjs --json --details"
+    ,"pricing:migrate:apply": "node scripts/migrate-pricing-apply.mjs --limit 10 --dry"
+    ,"gate:content": "node scripts/gate-content-quality.mjs"
+    ,"i18n:check:queries": "node scripts/check-query-language-filters.mjs"
   },
   "homepage": "https://www.shadcnblocks.com/",
   "dependencies": {

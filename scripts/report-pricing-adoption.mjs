@@ -39,6 +39,7 @@
  */
 
 import { createClient } from "@sanity/client";
+import { classifyProductRecord, accumulateClassification, adoptionResult } from './lib/pricing-utils.mjs';
 
 const args = process.argv.slice(2);
 const getArgVal = (flag) => {
@@ -89,77 +90,19 @@ if (minRaw !== undefined) {
 }
 
 // Fetch only required fields to reduce payload.
-const query = `*[_type == "product"]{ _id, pricingTiers[]{ _key }, monthlyPrice, yearlyPrice }`;
+// Support both legacy root-level pricingTiers and normalized pricing container so classification can see either.
+const query = `*[_type == "product"]{ _id, pricingTiers[]{ _key }, pricing{ tiers[]{ _key } }, monthlyPrice, yearlyPrice }`;
 
 const run = async () => {
   const products = await client.fetch(query);
-  const total = products.length;
-  let structuredCount = 0;
-  let legacyOnlyCount = 0;
-  let noPricingCount = 0;
-  let mixedCount = 0;
-
-  const structuredIds = [];
-  const legacyOnlyIds = [];
-  const mixedIds = [];
-  const noPricingIds = [];
-
-  for (const p of products) {
-    const hasStructured =
-      Array.isArray(p.pricingTiers) && p.pricingTiers.length > 0;
-    const hasLegacy = !!(p.monthlyPrice || p.yearlyPrice);
-
-    if (hasStructured && hasLegacy) {
-      mixedCount++;
-      structuredCount++; // still counts toward structured
-      mixedIds.push(p._id);
-    } else if (hasStructured) {
-      structuredCount++;
-      structuredIds.push(p._id);
-    } else if (hasLegacy) {
-      legacyOnlyCount++;
-      legacyOnlyIds.push(p._id);
-    } else {
-      noPricingCount++;
-      noPricingIds.push(p._id);
-    }
-  }
-
-  const structuredPercent = total
-    ? +((structuredCount / total) * 100).toFixed(1)
-    : 0;
-  const legacyOnlyPercent = total
-    ? +((legacyOnlyCount / total) * 100).toFixed(1)
-    : 0;
-  const noPricingPercent = total
-    ? +((noPricingCount / total) * 100).toFixed(1)
-    : 0;
-  const mixedPercent = total ? +((mixedCount / total) * 100).toFixed(1) : 0;
-
-  const result = {
-    version: 1,
-    totalProducts: total,
-    structuredCount,
-    legacyOnlyCount,
-    noPricingCount,
-    mixedCount,
-    structuredPercent,
-    legacyOnlyPercent,
-    noPricingPercent,
-    mixedPercent,
-    threshold: minThreshold,
-    pass: minThreshold == null ? null : structuredPercent >= minThreshold,
-    ...(wantDetails
-      ? {
-          ids: {
-            structured: structuredIds,
-            legacyOnly: legacyOnlyIds,
-            mixed: mixedIds,
-            none: noPricingIds,
-          },
-        }
-      : {}),
-  };
+  const { ids, counts, total, percentages } = accumulateClassification(products, classifyProductRecord);
+  const result = adoptionResult({
+    total,
+    counts,
+    percentages,
+    minThreshold,
+    ids: wantDetails ? ids : undefined,
+  });
 
   if (wantJson) {
     console.log(JSON.stringify(result, null, 2));
@@ -167,23 +110,11 @@ const run = async () => {
     console.log(
       "[pricing-adoption] project=" + projectId + " dataset=" + dataset
     );
-    console.log("[pricing-adoption] total=" + total);
-    console.log(
-      "[pricing-adoption] structured=" +
-        structuredCount +
-        ` (${structuredPercent}%)`
-    );
-    console.log(
-      "[pricing-adoption] legacyOnly=" +
-        legacyOnlyCount +
-        ` (${legacyOnlyPercent}%)`
-    );
-    console.log(
-      "[pricing-adoption] mixed=" + mixedCount + ` (${mixedPercent}%)`
-    );
-    console.log(
-      "[pricing-adoption] none=" + noPricingCount + ` (${noPricingPercent}%)`
-    );
+    console.log("[pricing-adoption] total=" + result.totalProducts);
+    console.log("[pricing-adoption] structured=" + result.structuredCount + ` (${result.structuredPercent}%)`);
+    console.log("[pricing-adoption] legacyOnly=" + result.legacyOnlyCount + ` (${result.legacyOnlyPercent}%)`);
+    console.log("[pricing-adoption] mixed=" + result.mixedCount + ` (${result.mixedPercent}%)`);
+    console.log("[pricing-adoption] none=" + result.noPricingCount + ` (${result.noPricingPercent}%)`);
     if (minThreshold != null) {
       console.log(
         "[pricing-adoption] threshold=" +

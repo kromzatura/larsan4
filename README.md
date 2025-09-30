@@ -182,3 +182,54 @@ All environment variables and their descriptions:
 [shadcn]: https://img.shields.io/badge/shadcn/ui-20232A?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBjbGFzcz0iaC02IHctNiI+PHJlY3Qgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiIGZpbGw9Im5vbmUiPjwvcmVjdD48bGluZSB4MT0iMjA4IiB5MT0iMTI4IiB4Mj0iMTI4IiB5Mj0iMjA4IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMzIiPjwvbGluZT48bGluZSB4MT0iMTkyIiB5MT0iNDAiIHgyPSI0MCIgeTI9IjE5MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjMyIj48L2xpbmU+PC9zdmc+&logoColor=ffffff
 [sanity]: https://img.shields.io/badge/Sanity-20232A?style=for-the-badge&logo=sanity&logoColor=F97316
 # larsan4
+
+## Pricing Normalization (Gate 4)
+
+Scripts supporting migration to structured pricing:
+
+- `pnpm pricing:adoption` – Outputs JSON adoption metrics (structured vs legacy vs mixed vs none). Add `--min 80` to enforce threshold in CI.
+- `pnpm pricing:migrate:dry` – Dry-run simulation that proposes `patch.set` operations. Includes `--details` by default in the alias for patch previews.
+ - `pnpm pricing:migrate:apply` – Write-capable apply script (defaults to `--dry` & `--limit 10`). Add `--yes` to actually persist changes; raise `--limit` gradually.
+
+Flags for migration script (pass after the alias if needed):
+
+```
+--require-empty-legacy   Exit 1 if any legacyOnly or mixed products remain
+--currency USD           Override default inferred currency (EUR)
+--json                   Force JSON-only output
+--details                Include proposed patches (already enabled in alias)
+```
+
+### Composite Content Quality Gate
+
+`pnpm gate:content` combines translation coverage (from an exported NDJSON) and pricing adoption thresholds.
+
+Examples:
+
+```bash
+# Require 90% translation coverage & 70% structured pricing
+pnpm gate:content --coverage-file i18n-gate2-sample-docs.ndjson --coverage-min 90 --project $SANITY_STUDIO_PROJECT_ID --dataset production --pricing-min 70 --token $SANITY_WRITE_TOKEN --json
+
+# Only run translation coverage (skip pricing)
+pnpm gate:content --coverage-file i18n-gate2-sample-docs.ndjson --coverage-min 85 --skip-pricing
+
+# Only run pricing adoption (live)
+pnpm gate:content --skip-coverage --project $SANITY_STUDIO_PROJECT_ID --dataset production --pricing-min 60
+```
+
+### Query Language Filter Check
+
+`pnpm i18n:check:queries` scans all GROQ query definitions under `frontend/sanity/queries` and fails if any lack a `language == $lang` predicate (unless annotated with `// i18n-ignore`). Use this before committing new queries.
+
+### GitHub Actions: Content Quality Workflow
+
+Workflow file: `.github/workflows/content-quality.yml`
+
+Steps executed on pushes / PR into `i18n` branch:
+
+1. Query language filter check
+2. Translation coverage (sample NDJSON if present) with `--min 80`
+3. Pricing adoption gate (requires secrets: `SANITY_STUDIO_PROJECT_ID`, `SANITY_STUDIO_DATASET`, `SANITY_API_READ_TOKEN`)
+4. Composite summary (non-blocking) using `gate:content`
+
+Adjust thresholds incrementally as adoption improves (e.g., raise pricing `--min` from 50 -> 70 -> 85).

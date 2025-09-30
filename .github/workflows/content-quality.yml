@@ -1,0 +1,57 @@
+name: Content Quality Gate
+
+on:
+  push:
+    branches: [ i18n ]
+  pull_request:
+    branches: [ i18n ]
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Query language filter check
+        run: pnpm i18n:check:queries
+
+      - name: Translation coverage (offline)
+        # Uses sample NDJSON; replace with exported dataset snapshot artifact if available
+        run: |
+          if [ -f i18n-gate2-sample-docs.ndjson ]; then \
+            node scripts/check-translation-coverage.mjs --min 80 i18n-gate2-sample-docs.ndjson; \
+          else \
+            echo "No coverage NDJSON present - skipping (create i18n-gate2-sample-docs.ndjson)"; \
+          fi
+
+      - name: Pricing adoption gate
+        env:
+          SANITY_STUDIO_PROJECT_ID: ${{ secrets.SANITY_STUDIO_PROJECT_ID }}
+          SANITY_STUDIO_DATASET: ${{ secrets.SANITY_STUDIO_DATASET }}
+          SANITY_API_READ_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
+        run: |
+          node scripts/report-pricing-adoption.mjs --min 50 --json || exit 1
+
+      - name: Composite gate summary (optional)
+        if: always()
+        env:
+          SANITY_STUDIO_PROJECT_ID: ${{ secrets.SANITY_STUDIO_PROJECT_ID }}
+          SANITY_STUDIO_DATASET: ${{ secrets.SANITY_STUDIO_DATASET }}
+          SANITY_API_READ_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
+        run: |
+          node scripts/gate-content-quality.mjs --skip-coverage --project $SANITY_STUDIO_PROJECT_ID --dataset $SANITY_STUDIO_DATASET --pricing-min 50 --json || true
