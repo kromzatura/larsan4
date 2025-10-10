@@ -9,7 +9,11 @@ import {
 } from "@/sanity/lib/fetch";
 import { chipClass } from "@/components/ui/chip";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
-import { FALLBACK_LOCALE, SUPPORTED_LOCALES, type SupportedLocale } from "@/lib/i18n/config";
+import {
+  FALLBACK_LOCALE,
+  SUPPORTED_LOCALES,
+  type SupportedLocale,
+} from "@/lib/i18n/config";
 
 type BlogSort = "newest" | "az" | "za";
 interface BlogCategorySearchParams {
@@ -27,7 +31,9 @@ const POSTS_PER_PAGE = 6;
 export async function generateStaticParams() {
   const categoriesByLocale = await Promise.all(
     SUPPORTED_LOCALES.map(async (locale) => {
-      const cats = await fetchSanityBlogCategoriesStaticParams({ lang: locale });
+      const cats = await fetchSanityBlogCategoriesStaticParams({
+        lang: locale,
+      });
       return cats
         .filter((c) => c.slug?.current)
         .map((c) =>
@@ -63,8 +69,12 @@ export async function generateMetadata(props: {
   const sp = props.searchParams ? await props.searchParams : undefined;
   const pageNum = Math.max(1, Number(sp?.page || 1));
   const rawSort = sp?.sort;
-  const sort: BlogSort = rawSort === "az" || rawSort === "za" ? rawSort : "newest";
-  const cat = await fetchSanityBlogCategoryBySlug({ slug: params.slug, lang: locale });
+  const sort: BlogSort =
+    rawSort === "az" || rawSort === "za" ? rawSort : "newest";
+  const cat = await fetchSanityBlogCategoryBySlug({
+    slug: params.slug,
+    lang: locale,
+  });
   if (!cat) notFound();
   const basePath = buildLocalizedPath(locale, `/blog/category/${params.slug}`);
   // Category documents are not full page documents; cast for metadata helper which accepts broader page-like shapes.
@@ -98,7 +108,8 @@ export default async function BlogCategoryPage(props: {
   const sp = props.searchParams ? await props.searchParams : undefined;
   const page = Math.max(1, Number(sp?.page || 1));
   const rawSort = sp?.sort;
-  const sort: BlogSort = rawSort === "az" || rawSort === "za" ? rawSort : "newest";
+  const sort: BlogSort =
+    rawSort === "az" || rawSort === "za" ? rawSort : "newest";
 
   const [cat, posts, totalCount] = await Promise.all([
     fetchSanityBlogCategoryBySlug({ slug: params.slug, lang: locale }),
