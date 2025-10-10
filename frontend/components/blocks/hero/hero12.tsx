@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { cn } from "@/lib/utils";
+import { resolveLinkHref } from "@/lib/resolveHref";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import PortableTextRenderer from "@/components/portable-text-renderer";
@@ -60,12 +61,16 @@ const Hero12 = ({
             </div>
             {links && links.length > 0 && (
               <div className="mt-6 flex justify-center gap-3">
-                {links.map((link) => (
+                {links.map((link) => {
+                  const href = resolveLinkHref(link);
+                  const target = link?.isExternal && link?.target ? "_blank" : undefined;
+                  const rel = target ? "noopener noreferrer" : undefined;
+                  return (
                   <Link
                     key={link._key}
-                    href={link.href || "#"}
-                    target={link.target ? "_blank" : undefined}
-                    rel={link.target ? "noopener" : undefined}
+                    href={href || "#"}
+                    target={target}
+                    rel={rel}
                     className={cn(
                       buttonVariants({
                         variant: link.buttonVariant || "default",
@@ -81,7 +86,8 @@ const Hero12 = ({
                       />
                     </div>
                   </Link>
-                ))}
+                  );
+                })}
               </div>
             )}
             {techLogos && techLogos.length > 0 && (
@@ -92,16 +98,20 @@ const Hero12 = ({
                   </p>
                 )}
                 <div className="flex flex-wrap items-center justify-center gap-4">
-                  {techLogos.map((logo) => (
+                  {techLogos.map((logo) => {
+                    const logoLink = resolveLinkHref(logo.link ?? undefined);
+                    const target = logo.link?.isExternal && logo.link?.target ? "_blank" : undefined;
+                    const rel = target ? "noopener noreferrer" : undefined;
+                    return (
                     <Link
                       key={logo._key}
-                      href={logo.link?.href || "#"}
+                      href={logoLink || "#"}
                       className={cn(
                         buttonVariants({ variant: "outline" }),
                         "group flex aspect-square h-12 items-center justify-center p-0"
                       )}
-                      target={logo.link?.target ? "_blank" : undefined}
-                      rel={logo.link?.target ? "noopener" : undefined}
+                      target={target}
+                      rel={rel}
                     >
                       {logo?.image && logo?.image?.asset?._id && (
                         <Image
@@ -114,7 +124,8 @@ const Hero12 = ({
                         />
                       )}
                     </Link>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             )}

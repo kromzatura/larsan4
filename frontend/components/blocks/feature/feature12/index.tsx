@@ -20,21 +20,28 @@ type Feature12 = Extract<Block, { _type: "feature-12" }>;
 
 export default function Feature12({ padding, tagline, columns }: Feature12) {
   const [api, setApi] = useState<CarouselApi>();
-  const [progress, setProgress] = useState(
-    Math.floor(100 / (columns?.length || 0))
+  const columnsLength = columns?.length ?? 0;
+  const [progress, setProgress] = useState(() =>
+    columnsLength > 0 ? Math.floor(100 / columnsLength) : 0
   );
+  const totalSlidesLabel =
+    columnsLength > 0
+      ? columnsLength < 10
+        ? `0${columnsLength}`
+        : String(columnsLength)
+      : "00";
 
   useEffect(() => {
     if (!api) {
       return;
     }
     api.on("scroll", ({ scrollProgress }) => {
+      const minProgress = columnsLength > 0 ? 1 / columnsLength : 0;
       setProgress(
-        Math.max(1 / (columns?.length || 0), Math.min(1, scrollProgress())) *
-          100
+        Math.max(minProgress, Math.min(1, scrollProgress())) * 100
       );
     });
-  }, [api]);
+  }, [api, columnsLength]);
 
   return (
     <SectionContainer padding={padding}>
@@ -47,9 +54,7 @@ export default function Feature12({ padding, tagline, columns }: Feature12) {
                 <span>01</span>
                 <Progress value={progress} className="h-[2px] w-52" />
                 <span>
-                  {columns?.length && columns.length < 10
-                    ? `0${columns.length}`
-                    : columns?.length}
+                  {totalSlidesLabel}
                 </span>
               </div>
               <CarouselPrevious className="static translate-y-0" />

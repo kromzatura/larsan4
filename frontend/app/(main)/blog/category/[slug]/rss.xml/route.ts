@@ -21,9 +21,9 @@ function escape(str: string) {
 
 export async function GET(
   _req: Request,
-  { params }: { params: Promise<{ slug: string }> }
+  { params }: { params: { slug: string } }
 ) {
-  const { slug } = await params;
+  const { slug } = params;
   const [cat, settings] = await Promise.all([
     fetchSanityBlogCategoryBySlug({ slug }),
     fetchSanitySettings(),
@@ -39,10 +39,12 @@ export async function GET(
   const selfUrl = `${SITE_URL}/blog/category/${slug}/rss.xml`;
   const lastBuildDate = new Date().toUTCString();
   const siteName = settings?.siteName || "Blog";
-  const language = getLanguageFromSettings(
-    (settings as unknown) as { language?: string; siteLanguage?: string; locale?: string }
-  );
-    const logo = settings?.logo;
+  const language = getLanguageFromSettings(settings as {
+    language?: string;
+    siteLanguage?: string;
+    locale?: string;
+  });
+  const logo = settings?.logo;
   const logoUrl: string | null = logo?.asset?.url || null;
   const dim = logo?.asset?.metadata?.dimensions;
   const rawW = typeof dim?.width === "number" ? dim.width : undefined;
@@ -52,21 +54,18 @@ export async function GET(
   const height =
     rawW && rawH && width ? Math.round((rawH / rawW) * width) : rawH;
 
-  const items = ((posts as FeedPost[]) || []).map((p) => {
+  const items = (Array.isArray(posts) ? (posts as FeedPost[]) : []).map((p) => {
     const url = `${SITE_URL}/blog/${p.slug?.current ?? ""}`;
     const title = escape(p.title ?? "Untitled");
     const rawDate = p.publishedAt || p._createdAt;
     const pubDate = rawDate ? new Date(rawDate).toUTCString() : "";
     const categories = Array.isArray(p.categories)
       ? p.categories
-          .map((c) => c?.title)
-          .filter(Boolean)
-          .map((t) => (t ? `<category>${escape(t)}</category>` : ""))
+          .flatMap((c) => (c?.title ? [c.title] : []))
+          .map((t) => `<category>${escape(t)}</category>`)
           .join("")
       : "";
-      const html = ptBlocksToHtml(
-        (p.body as any[] | null | undefined) as any
-      );
+    const html = ptBlocksToHtml(Array.isArray(p.body) ? (p.body as unknown[]) : null);
     const creator = p.author?.name
       ? `<dc:creator>${escape(p.author.name)}</dc:creator>`
       : "";
@@ -100,14 +99,12 @@ export async function GET(
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/">
     <channel>
-      <title>${escape(siteName)} — ${escape(
-    cat.title ?? "Blog Category"
-  )}</title>
+      <title>${escape(siteName)} — ${escape(cat.title ?? "Blog Category")}</title>
       <link>${SITE_URL}/blog/category/${slug}</link>
       <description>${escape(cat.description ?? "")}</description>
       <atom:link href="${selfUrl}" rel="self" type="application/rss+xml" />
-      <lastBuildDate>${lastBuildDate}</lastBuildDate>
-  <language>${language}</language>
+    <lastBuildDate>${lastBuildDate}</lastBuildDate>
+    <language>${language}</language>
       <generator>Next.js + Sanity</generator>
       <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
       <ttl>60</ttl>

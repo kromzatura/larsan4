@@ -6,6 +6,7 @@ import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { Circle } from "lucide-react";
 import Icon from "@/components/icon";
+import { resolveLinkHref } from "@/lib/resolveHref";
 
 import { PAGE_QUERYResult } from "@/sanity.types";
 
@@ -79,27 +80,33 @@ export default function SectionHeader({
                 "flex flex-row flex-wrap items-center gap-4"
               )}
             >
-              {links.map((link) => (
-                <Link
-                  key={link._key}
-                  href={link.href || "#"}
-                  target={link.target ? "_blank" : undefined}
-                  rel={link.target ? "noopener" : undefined}
-                  className={cn(
-                    buttonVariants({
-                      variant: link.buttonVariant || "default",
-                    })
-                  )}
-                >
-                  <div className="flex items-center gap-2">
-                    {link.title}
-                    <Icon
-                      iconVariant={link.iconVariant || "none"}
-                      strokeWidth={1.5}
-                    />
-                  </div>
-                </Link>
-              ))}
+              {links.map((link) => {
+                const href = resolveLinkHref(link);
+                const target = link?.isExternal && link?.target ? "_blank" : undefined;
+                const rel = target ? "noopener noreferrer" : undefined;
+
+                return (
+                  <Link
+                    key={link._key}
+                    href={href || "#"}
+                    target={target}
+                    rel={rel}
+                    className={cn(
+                      buttonVariants({
+                        variant: link.buttonVariant || "default",
+                      })
+                    )}
+                  >
+                    <div className="flex items-center gap-2">
+                      {link.title}
+                      <Icon
+                        iconVariant={link.iconVariant || "none"}
+                        strokeWidth={1.5}
+                      />
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           )}
           {links && links.length > 0 && (
@@ -109,18 +116,15 @@ export default function SectionHeader({
                 "flex flex-wrap items-center gap-3 md:flex-row"
               )}
             >
-              {links.map((link, index) => (
-                <Fragment key={link._key}>
-                  {link.description && (
-                    <p key={link._key} className="text-sm">
-                      {link.description}
-                    </p>
-                  )}
-                  {index < links.length - 1 && link.description && (
-                    <Circle className="h-1 w-1" />
-                  )}
-                </Fragment>
-              ))}
+              {links
+                .map((link) => link.description)
+                .filter((value): value is string => Boolean(value))
+                .map((description, index, arr) => (
+                  <Fragment key={`${description}-${index}`}>
+                    <p className="text-sm">{description}</p>
+                    {index < arr.length - 1 && <Circle className="h-1 w-1" />}
+                  </Fragment>
+                ))}
             </div>
           )}
         </div>

@@ -2,7 +2,9 @@ import slugify from "./slugify";
 import { fetchSanityNavigation } from "@/sanity/lib/fetch";
 import { resolveHref } from "./resolveHref";
 
-type NavLink = {
+import type { ButtonVariant } from "@/sanity.types";
+
+export type NavLink = {
   _key: string;
   _type: string;
   title?: string;
@@ -10,27 +12,31 @@ type NavLink = {
   internalType?: string;
   internalSlug?: string;
   target?: boolean;
-  buttonVariant?: string;
+  buttonVariant?: ButtonVariant | null;
 };
 
-interface NavGroup extends NavLink {
+export interface NavGroup extends NavLink {
   _type: "link-group";
-  links?: (NavLink | NavGroup)[];
+  links?: NavigationItem[];
 }
 
-function isGroup(item: NavLink | NavGroup): item is NavGroup {
+export type NavigationItem = NavLink | NavGroup;
+
+function isGroup(item: NavigationItem): item is NavGroup {
   return item._type === "link-group";
 }
 
-function applyResolvedHref<T extends NavLink | NavGroup>(item: T): T {
+function applyResolvedHref(item: NavigationItem): NavigationItem {
   if (isGroup(item)) {
-    const links = item.links?.map((l) => applyResolvedHref(l as any)) ?? [];
-    return { ...(item as any), links } as T;
+    const links = item.links?.map((link) => applyResolvedHref(link)) ?? [];
+    return { ...item, links } as NavGroup;
   }
-  if (item.internalType && item.internalSlug) {
-    const computed = resolveHref(item.internalType, item.internalSlug);
-    return { ...(item as any), href: computed ?? item.href ?? null } as T;
+
+  if (item.internalType) {
+    const computed = resolveHref(item.internalType, item.internalSlug ?? undefined);
+    return { ...item, href: computed ?? item.href ?? null } as NavLink;
   }
+
   return item;
 }
 
@@ -40,5 +46,6 @@ export const getNavigationItems = async (title: string) => {
     (item) => slugify(item.title ?? "") === title
   );
   if (!group) return [];
-  return group.links?.map((l: any) => applyResolvedHref(l)) ?? [];
+  const links = group.links as NavigationItem[] | undefined;
+  return links?.map((link) => applyResolvedHref(link)) ?? [];
 };

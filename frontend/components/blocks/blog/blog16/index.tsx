@@ -56,9 +56,7 @@ export default function Blog16({ padding, posts }: Blog16) {
                     {post.categories &&
                       post.categories.length > 0 &&
                       post.categories.map((category) => {
-                        const slug = (category as any)?.slug?.current as
-                          | string
-                          | undefined;
+                        const slug = category.slug?.current ?? undefined;
                         return (
                           <Link
                             key={category._id}

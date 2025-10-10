@@ -4,13 +4,18 @@ import { notFound } from "next/navigation";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import type { ResolvingMetadata } from "next";
 
+type ProductSearchParams = {
+  page?: string;
+  category?: string;
+};
+
 export const revalidate = 60;
 
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams?: Promise<{ page?: string; category?: string }>;
-}): Promise<ResolvingMetadata | Record<string, any>> { // fallback loose type union to avoid any casts
+  searchParams?: Promise<ProductSearchParams>;
+}): Promise<ResolvingMetadata | Record<string, unknown>> {
   const page = await fetchSanityPageBySlug({ slug: "products" });
   if (!page) return {};
   const sp = searchParams ? await searchParams : undefined;
@@ -33,14 +38,15 @@ export async function generateMetadata({
 }
 
 export default async function ProductsPage(props: {
-  searchParams: Promise<{ page?: string; category?: string }>;
+  searchParams: Promise<ProductSearchParams>;
 }) {
   const page = await fetchSanityPageBySlug({ slug: "products" });
   if (!page) {
     notFound();
   }
 
-  const pageParams = Promise.resolve((await props.searchParams) || {});
+  const resolvedSearchParams = await props.searchParams;
+  const pageParams = Promise.resolve(resolvedSearchParams || {});
 
   return <Blocks blocks={page?.blocks ?? []} searchParams={pageParams} />;
 }

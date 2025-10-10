@@ -1,17 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
 import SectionContainer from "@/components/ui/section-container";
 import { SectionPadding } from "@/sanity.types";
 import { cn } from "@/lib/utils";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AddToInquiryButton from "@/components/inquiry/add-to-inquiry-button";
 
@@ -138,9 +130,13 @@ export default function CompareProducts({
     (normalized.headers && normalized.headers[0]) || "0"
   );
 
+  const cssVars = {
+    "--compare-cols": String(normalized.headers.length || 1),
+  };
+
   return (
     <SectionContainer padding={padding}>
-  {columns && columns.length > 0 && (
+      {columns && columns.length > 0 && (
         <Tabs
           defaultValue={(normalized.headers && normalized.headers[0]) || "0"}
           onValueChange={setSelectedTab}
@@ -157,7 +153,7 @@ export default function CompareProducts({
       )}
       <div
         className="overflow-x-auto rounded-lg border"
-        style={{ ["--compare-cols" as any]: String(normalized.headers.length || 1) }}
+  style={cssVars as CSSProperties}
       >
         <table className="min-w-full text-sm">
           <thead className="bg-muted/50 text-xs uppercase tracking-wide text-muted-foreground">

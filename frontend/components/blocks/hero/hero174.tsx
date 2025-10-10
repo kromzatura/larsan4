@@ -8,6 +8,7 @@ import PortableTextRenderer from "@/components/portable-text-renderer";
 import Icon from "@/components/icon";
 import { ArrowDown } from "lucide-react";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import { resolveLinkHref } from "@/lib/resolveHref";
 
 type Hero174Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -49,28 +50,34 @@ const Hero174 = ({
             )}
             {links && links.length > 0 && (
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                {links.map((link) => (
-                  <Link
-                    key={link._key}
-                    href={link.href || "#"}
-                    target={link.target ? "_blank" : undefined}
-                    rel={link.target ? "noopener" : undefined}
-                    className={cn(
-                      buttonVariants({
-                        variant: link.buttonVariant || "default",
-                      }),
-                      "h-fit w-fit rounded-sm px-6 py-3.5 text-sm font-semibold tracking-wider text-nowrap"
-                    )}
-                  >
-                    <div className="flex items-center gap-2">
-                      {link.title}
-                      <Icon
-                        iconVariant={link.iconVariant || "none"}
-                        strokeWidth={1.5}
-                      />
-                    </div>
-                  </Link>
-                ))}
+                {links.map((link) => {
+                  const href = resolveLinkHref(link);
+                  const target = link?.isExternal && link?.target ? "_blank" : undefined;
+                  const rel = target ? "noopener noreferrer" : undefined;
+
+                  return (
+                    <Link
+                      key={link._key}
+                      href={href || "#"}
+                      target={target}
+                      rel={rel}
+                      className={cn(
+                        buttonVariants({
+                          variant: link.buttonVariant || "default",
+                        }),
+                        "h-fit w-fit rounded-sm px-6 py-3.5 text-sm font-semibold tracking-wider text-nowrap"
+                      )}
+                    >
+                      <div className="flex items-center gap-2">
+                        {link.title}
+                        <Icon
+                          iconVariant={link.iconVariant || "none"}
+                          strokeWidth={1.5}
+                        />
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
             )}
           </div>

@@ -1,6 +1,7 @@
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { Link as LinkType } from "@/sanity.types";
+import { resolveLinkHref } from "@/lib/resolveHref";
 
 export function LinkButton({
   className,
@@ -15,6 +16,30 @@ export function LinkButton({
   size?: "default" | "sm" | "lg" | "icon";
   asDiv?: boolean;
 }) {
+  const resolvedHref = resolveLinkHref(link as LinkType & {
+    internalType?: string | null;
+    internalSlug?: string | null;
+    href?: string | null;
+  });
+
+  const label = link?.title ?? "";
+  const target = link?.isExternal && link?.target ? "_blank" : undefined;
+  const rel = target ? "noopener noreferrer" : undefined;
+
+  if (!resolvedHref) {
+    return (
+      <Button
+        variant={link?.buttonVariant}
+        className={className}
+        size={size}
+        disabled
+        aria-disabled="true"
+      >
+        {label}
+      </Button>
+    );
+  }
+
   return (
     <Button
       asChild
@@ -23,15 +48,12 @@ export function LinkButton({
       size={size}
     >
       {asDiv ? (
-        <div>{link.title}</div>
+        <Link href={resolvedHref} title={title} target={target} rel={rel}>
+          <div>{label}</div>
+        </Link>
       ) : (
-        <Link
-          href={link.href || "#"}
-          title={title}
-          target={link.target ? "_blank" : undefined}
-          rel={link.target ? "noopener" : undefined}
-        >
-          {link.title}
+        <Link href={resolvedHref} title={title} target={target} rel={rel}>
+          {label}
         </Link>
       )}
     </Button>

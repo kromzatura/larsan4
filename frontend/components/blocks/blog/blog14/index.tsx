@@ -34,9 +34,7 @@ export default function Blog14({ padding, posts, title, gridColumns }: Blog14) {
             {posts[0].categories && posts[0].categories.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {posts[0].categories.map((category) => {
-                  const slug = (category as any)?.slug?.current as
-                    | string
-                    | undefined;
+                  const slug = category.slug?.current ?? undefined;
                   return (
                     <Link
                       key={category._id}
@@ -107,9 +105,7 @@ export default function Blog14({ padding, posts, title, gridColumns }: Blog14) {
                 {post.categories && post.categories.length > 0 && (
                   <div className="flex flex-wrap gap-2">
                     {post.categories.map((category) => {
-                      const slug = (category as any)?.slug?.current as
-                        | string
-                        | undefined;
+                      const slug = category.slug?.current ?? undefined;
                       return (
                         <Link
                           key={category._id}

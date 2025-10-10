@@ -1,16 +1,22 @@
 "use client";
 
 import { X } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { BannerUIProps } from "./index";
 
 export default function Banner5({ data, isVisible, onClose }: BannerUIProps) {
   const { title, description, link } = data;
 
   if (!isVisible) return null;
+
+  const href = resolveLinkHref(link);
+  const buttonLabel = link?.title ?? "View";
+  const buttonVariant = link?.buttonVariant ?? "default";
+  const target = link?.isExternal && link?.target ? "_blank" : undefined;
+  const rel = target ? "noopener noreferrer" : undefined;
 
   return (
     <section className="animate-fade-up fixed left-0 right-0 top-19 z-50 mx-auto max-w-2xl">
@@ -34,21 +40,28 @@ export default function Banner5({ data, isVisible, onClose }: BannerUIProps) {
             </div>
 
             <div className="flex items-center gap-2">
-              {link?.href && (
+              {href && (
                 <Link
-                  href={link.href || "#"}
-                  target={link.target ? "_blank" : undefined}
-                  rel={link.target ? "noopener" : undefined}
+                  href={href}
+                  target={target}
+                  rel={rel}
                   className={cn(
-                    buttonVariants({
-                      variant: link.buttonVariant || "default",
-                      size: "sm",
-                    }),
+                    buttonVariants({ variant: buttonVariant, size: "sm" }),
                     "w-full md:w-auto"
                   )}
                 >
-                  {link.title}
+                  {buttonLabel}
                 </Link>
+              )}
+              {!href && link?.title && (
+                <Button
+                  variant={buttonVariant}
+                  size="sm"
+                  disabled
+                  className="w-full md:w-auto"
+                >
+                  {link.title}
+                </Button>
               )}
               <Button
                 variant="ghost"

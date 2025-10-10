@@ -12,9 +12,9 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export async function GET(
   _req: Request,
-  { params }: { params: Promise<{ slug: string }> }
+  { params }: { params: { slug: string } }
 ) {
-  const { slug } = await params;
+  const { slug } = params;
   const [cat, { data: posts }, settings] = await Promise.all([
     fetchSanityBlogCategoryBySlug({ slug }),
     sanityFetch({
@@ -28,20 +28,23 @@ export async function GET(
   if (!cat) return new NextResponse("Not Found", { status: 404 });
 
   const siteName = settings?.siteName || "Blog";
-  const language = getLanguageFromSettings(
-    (settings as unknown) as { language?: string; siteLanguage?: string; locale?: string }
-  );
+  const language = getLanguageFromSettings(settings as {
+    language?: string;
+    siteLanguage?: string;
+    locale?: string;
+  });
   const feed = {
     version: "https://jsonfeed.org/version/1.1",
     title: `${siteName} — ${cat.title || "Blog Category"}`,
     home_page_url: `${SITE_URL}/blog/category/${slug}`,
     feed_url: `${SITE_URL}/blog/category/${slug}/feed.json`,
     language,
-    items: ((posts as FeedPost[]) || []).map((p) => {
+    items: (Array.isArray(posts) ? (posts as FeedPost[]) : []).map((p) => {
       const url = `${SITE_URL}/blog/${p.slug?.current ?? ""}`;
-      const content_html = ptBlocksToHtml(
-        (p.body as any[] | null | undefined) as any
-      ) || p.excerpt || "";
+      const content_html =
+        ptBlocksToHtml(Array.isArray(p.body) ? (p.body as unknown[]) : null) ||
+        p.excerpt ||
+        "";
       return {
         id: url,
         url,
@@ -51,7 +54,7 @@ export async function GET(
         authors: p.author?.name ? [{ name: p.author.name }] : undefined,
         image: p.image?.asset?.url || undefined,
         tags: Array.isArray(p.categories)
-          ? p.categories.map((c) => c?.title).filter(Boolean)
+          ? p.categories.flatMap((c) => (c?.title ? [c.title] : []))
           : undefined,
       };
     }),

@@ -132,10 +132,7 @@ export default async function Navbar1({ className }: Navbar1Props) {
 
   return (
     <header
-      className={cn(
-        "sticky top-0 z-50 w-full py-4 bg-background",
-        className
-      )}
+      className={cn("sticky top-0 z-50 w-full py-4 bg-background", className)}
     >
       <div className="container">
         {/* Desktop Menu */}

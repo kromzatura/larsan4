@@ -6,7 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
 import Script from "next/script";
 import {
   contactFormSchema,
@@ -43,11 +50,11 @@ export function ContactForm({
     reset: (id?: number) => void;
     execute: (id?: number) => void;
   };
-  const getGrecaptcha = (): Grecaptcha | null => {
+  const getGrecaptcha = useCallback((): Grecaptcha | null => {
     if (typeof window === "undefined") return null;
-    const g = (window as unknown as { grecaptcha?: Grecaptcha }).grecaptcha;
-    return g ?? null;
-  };
+    const globalWindow = window as typeof window & { grecaptcha?: Grecaptcha };
+    return globalWindow.grecaptcha ?? null;
+  }, []);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -64,14 +71,15 @@ export function ContactForm({
     if (!siteKey) return;
     const tryInit = () => {
       const grecaptcha = getGrecaptcha();
-      if (!grecaptcha || !captchaRef.current || widgetIdRef.current !== null) {
+      const container = captchaRef.current;
+      if (!grecaptcha || !container || widgetIdRef.current !== null) {
         return;
       }
       try {
         grecaptcha.ready(() => {
           if (widgetIdRef.current !== null) return;
           // captchaRef.current is guaranteed non-null due to guard above
-          widgetIdRef.current = grecaptcha.render(captchaRef.current as HTMLDivElement, {
+          widgetIdRef.current = grecaptcha.render(container, {
             sitekey: siteKey,
             size: "invisible",
             callback: (token: string) => {
@@ -84,7 +92,7 @@ export function ContactForm({
     tryInit();
     const id = window.setInterval(tryInit, 500);
     return () => window.clearInterval(id);
-  }, [siteKey]);
+  }, [getGrecaptcha, siteKey]);
 
   async function handleAction(formData: FormData) {
     form.clearErrors();
@@ -136,7 +144,7 @@ export function ContactForm({
           const fieldValue = currentValues[fieldKey];
           try {
             contactFormSchema.shape[fieldKey].parse(fieldValue);
-          } catch (_e) {
+          } catch {
             form.setError(fieldKey, {
               type: "server",
               message,

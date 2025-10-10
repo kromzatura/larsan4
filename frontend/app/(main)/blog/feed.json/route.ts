@@ -19,20 +19,23 @@ export async function GET() {
   ]);
   const siteName = settings?.siteName || "Blog";
   // Narrow settings shape for language helper without widening generated type
-  const language = getLanguageFromSettings(
-    (settings as unknown) as { language?: string; siteLanguage?: string; locale?: string }
-  );
+  const language = getLanguageFromSettings(settings as {
+    language?: string;
+    siteLanguage?: string;
+    locale?: string;
+  });
   const feed = {
     version: "https://jsonfeed.org/version/1.1",
     title: `${siteName} — Blog`,
     home_page_url: `${SITE_URL}/blog`,
     feed_url: `${SITE_URL}/blog/feed.json`,
     language,
-    items: ((posts as FeedPost[]) || []).map((p) => {
+    items: (Array.isArray(posts) ? (posts as FeedPost[]) : []).map((p) => {
       const url = `${SITE_URL}/blog/${p.slug?.current ?? ""}`;
-      const content_html = ptBlocksToHtml(
-        (p.body as any[] | null | undefined) as any
-      ) || p.excerpt || "";
+      const content_html =
+        ptBlocksToHtml(Array.isArray(p.body) ? (p.body as unknown[]) : null) ||
+        p.excerpt ||
+        "";
       return {
         id: url,
         url,
@@ -42,7 +45,7 @@ export async function GET() {
         authors: p.author?.name ? [{ name: p.author.name }] : undefined,
         image: p.image?.asset?.url || undefined,
         tags: Array.isArray(p.categories)
-          ? p.categories.map((c) => c?.title).filter(Boolean)
+          ? p.categories.flatMap((c) => (c?.title ? [c.title] : []))
           : undefined,
       };
     }),

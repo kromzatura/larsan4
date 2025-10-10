@@ -1,5 +1,10 @@
 import { fetchSanitySettings } from "@/sanity/lib/fetch";
-import { getNavigationItems } from "@/lib/getNavigationItems";
+import {
+  getNavigationItems,
+  type NavigationItem,
+  type NavGroup,
+  type NavLink,
+} from "@/lib/getNavigationItems";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,6 +20,11 @@ export default async function Footer2({ className }: Footer2Props) {
   const settings = await fetchSanitySettings();
   const footerNavItems = await getNavigationItems("footer");
   const bottomNavItems = await getNavigationItems("footer-bottom");
+
+  const isNavGroup = (item: NavigationItem): item is NavGroup =>
+    item._type === "link-group";
+  const isNavLink = (item: NavigationItem): item is NavLink =>
+    item._type !== "link-group";
 
   return (
     <section className={cn("py-32", className)}>
@@ -55,13 +65,13 @@ export default async function Footer2({ className }: Footer2Props) {
               </Link>
               <p className="mt-4 font-bold">{settings?.description}</p>
             </div>
-            {footerNavItems?.map((section: any) => {
-              if (section._type !== "link-group") return null;
+            {footerNavItems?.map((section) => {
+              if (!isNavGroup(section)) return null;
               return (
                 <div key={section._key}>
                   <h3 className="text-base mb-4 font-bold">{section.title}</h3>
                   <ul className="space-y-4 text-muted-foreground">
-                    {section.links?.map((link: any) => {
+                    {section.links?.filter(isNavLink).map((link) => {
                       return (
                         <li key={link._key}>
                           <Link
@@ -96,7 +106,7 @@ export default async function Footer2({ className }: Footer2Props) {
               )}
             </div>
             <ul className="flex gap-4">
-              {bottomNavItems?.map((link: any) => {
+              {bottomNavItems?.filter(isNavLink).map((link) => {
                 if (link._type !== "link") return null;
                 return (
                   <li key={link._key}>

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { ImageResponse } from "next/og";
 import {
   fetchSanityPostBySlug,
@@ -68,7 +69,6 @@ export async function GET(request: Request) {
           {/* Logo */}
           {settings?.logo && settings.logo.asset?.url && (
             // Using raw <img> intentionally inside OG generation for next/og (no layout/optimization pipeline here)
-            // eslint-disable-next-line @next/next/no-img-element
             <img
               src={settings.logo.asset.url}
               alt={settings.logo.alt || ""}
@@ -182,7 +182,8 @@ export async function GET(request: Request) {
         ],
       }
     );
-  } catch (_err) {
-    return new Response(`Failed to generate image`, { status: 500 });
+  } catch (error) {
+    console.error("Failed to generate OG image", error);
+    return new Response("Failed to generate image", { status: 500 });
   }
 }

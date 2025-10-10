@@ -2,6 +2,7 @@ import { groq } from "next-sanity";
 
 // Leaner navigation link fragment: expose internalType/internalSlug for runtime resolution
 // Keep external href if explicitly set
+// @sanity-typegen-ignore
 export const navigationLinkQuery = groq`
   _key,
   _type,
@@ -9,8 +10,7 @@ export const navigationLinkQuery = groq`
   buttonVariant,
   target,
   isExternal,
-  // External href only retained if isExternal
-  "href": select(isExternal => href),
+  "href": select(isExternal => href, null),
   "internalType": internalLink->_type,
   "internalSlug": internalLink->slug.current,
   iconVariant,

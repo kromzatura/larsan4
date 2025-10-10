@@ -30,9 +30,11 @@ export async function GET() {
   const lastBuildDate = new Date().toUTCString();
   const siteName = settings?.siteName || "Blog";
   const siteDesc = settings?.description || "Latest posts";
-  const language = getLanguageFromSettings(
-    (settings as unknown) as { language?: string; siteLanguage?: string; locale?: string }
-  );
+  const language = getLanguageFromSettings(settings as {
+    language?: string;
+    siteLanguage?: string;
+    locale?: string;
+  });
   const logo = settings?.logo;
   const logoUrl: string | null = logo?.asset?.url || null;
   const dim = logo?.asset?.metadata?.dimensions;
@@ -43,21 +45,18 @@ export async function GET() {
   const height =
     rawW && rawH && width ? Math.round((rawH / rawW) * width) : rawH;
 
-  const items = ((posts as FeedPost[]) || []).map((p) => {
+  const items = (Array.isArray(posts) ? (posts as FeedPost[]) : []).map((p) => {
     const url = `${SITE_URL}/blog/${p.slug?.current ?? ""}`;
     const title = escape(p.title ?? "Untitled");
     const rawDate = p.publishedAt || p._createdAt;
     const pubDate = rawDate ? new Date(rawDate).toUTCString() : "";
     const categories = Array.isArray(p.categories)
       ? p.categories
-          .map((c) => c?.title)
-          .filter(Boolean)
-          .map((t) => (t ? `<category>${escape(t)}</category>` : ""))
+          .flatMap((c) => (c?.title ? [c.title] : []))
+          .map((t) => `<category>${escape(t)}</category>`)
           .join("")
       : "";
-  const html = ptBlocksToHtml(
-    (p.body as any[] | null | undefined) as any
-  );
+    const html = ptBlocksToHtml(Array.isArray(p.body) ? (p.body as unknown[]) : null);
     const creator = p.author?.name
       ? `<dc:creator>${escape(p.author.name)}</dc:creator>`
       : "";

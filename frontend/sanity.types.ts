@@ -29,13 +29,13 @@ export type Timeline6 = {
   title?: {
     title1?: string;
     title2?: string;
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
     color?: "red" | "redLight" | "amber" | "amberLight" | "green" | "greenLight" | "blue" | "blueLight" | "indigo" | "indigoLight" | "purple" | "purpleLight" | "cyan" | "cyanLight" | "orange" | "orangeLight";
     title3?: string;
   };
   description?: string;
   columns?: Array<{
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
     title?: string;
     description?: string;
     _type: "column";
@@ -49,13 +49,13 @@ export type Timeline5 = {
   title?: {
     title1?: string;
     title2?: string;
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
     color?: "red" | "redLight" | "amber" | "amberLight" | "green" | "greenLight" | "blue" | "blueLight" | "indigo" | "indigoLight" | "purple" | "purpleLight" | "cyan" | "cyanLight" | "orange" | "orangeLight";
     title3?: string;
   };
   description?: string;
   columns?: Array<{
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
     title?: string;
     description?: string;
     _type: "column";
@@ -69,14 +69,14 @@ export type Timeline4 = {
   tag?: {
     text?: string;
     type?: "title" | "badge";
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
   };
   title?: string;
   description?: string;
   columns?: Array<{
     title?: string;
     description?: string;
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
     image?: {
       asset?: {
         _ref: string;
@@ -155,7 +155,7 @@ export type Gallery9 = {
       alt?: string;
       _type: "image";
     };
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
     title?: string;
     description?: string;
     _type: "column";
@@ -781,7 +781,7 @@ export type Blog4 = {
 
 export type Feature202Card = {
   _type: "feature-202-card";
-  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
   title?: string;
   description?: string;
   image?: {
@@ -837,7 +837,7 @@ export type Feature157 = {
 export type Feature117Card = {
   _type: "feature-117-card";
   tag?: {
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
     text?: string;
   };
   title?: string;
@@ -906,7 +906,7 @@ export type Feature66 = {
 
 export type Feature15Card = {
   _type: "feature-15-card";
-  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
   title?: string;
   description?: string;
 };
@@ -922,7 +922,7 @@ export type Feature15 = {
 
 export type Feature12Card = {
   _type: "feature-12-card";
-  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
   title?: string;
   description?: string;
 };
@@ -938,7 +938,7 @@ export type Feature12 = {
 
 export type Feature3Card = {
   _type: "feature-3-card";
-  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
   title?: string;
   description?: string;
   image?: {
@@ -984,7 +984,7 @@ export type FeatureImage = {
 export type FeatureContent = {
   _type: "feature-content";
   padding?: SectionPadding;
-  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
   tag?: {
     text?: string;
     type?: "title" | "badge";
@@ -1323,7 +1323,7 @@ export type Hero160 = {
     _type: "image";
   };
   tag?: {
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
     title?: string;
   };
   title?: string;
@@ -1543,7 +1543,7 @@ export type Hero57 = {
     _key: string;
   } & LinkIcon>;
   tags?: Array<{
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
     title?: string;
     _type: "tag";
     _key: string;
@@ -1571,7 +1571,7 @@ export type Hero25 = {
     _key: string;
   } & LinkIcon>;
   tags?: Array<{
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
     title?: string;
     _type: "tag";
     _key: string;
@@ -1581,7 +1581,7 @@ export type Hero25 = {
 export type Hero13 = {
   _type: "hero-13";
   tag?: {
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
     title?: string;
   };
   title?: string;
@@ -2294,7 +2294,7 @@ export type Page = {
 
 export type LinkIcon = {
   _type: "link-icon";
-  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
   isExternal?: boolean;
   internalLink?: {
     _ref: string;
@@ -2310,12 +2310,22 @@ export type LinkIcon = {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "category";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "product";
   } | {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "productCategory";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "contact";
   };
   title?: string;
   description?: string;
@@ -2404,6 +2414,11 @@ export type Link = {
     _type: "reference";
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "post";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "category";
   } | {
     _ref: string;
     _type: "reference";
@@ -2647,7 +2662,7 @@ export type AllSanitySchemaTypes = ProductCategories16 | AllProducts16 | Timelin
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../frontend/sanity/queries/banner.ts
 // Variable: BANNER_QUERY
-// Query: *[_type == "banner"]{    _type,    _key,    title,    description,    link{          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    ),    }  }
+// Query: *[_type == "banner"]{    _type,    _key,    title,    description,    link{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),    }  }
 export type BANNER_QUERYResult = Array<{
   _type: "banner";
   _key: null;
@@ -2658,6 +2673,11 @@ export type BANNER_QUERYResult = Array<{
     _type: "link";
     isExternal?: boolean;
     internalLink?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "category";
+    } | {
       _ref: string;
       _type: "reference";
       _weak?: boolean;
@@ -2684,9 +2704,11 @@ export type BANNER_QUERYResult = Array<{
       [internalGroqTypeReferenceTo]?: "productCategory";
     };
     title?: string;
-    href: string | "/" | "/contact" | null;
+    href: string | null;
     target?: boolean;
     buttonVariant?: ButtonVariant;
+    internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+    internalSlug: string | null;
   } | null;
 }>;
 
@@ -2804,7 +2826,7 @@ export type POSTS_COUNT_BY_BLOG_CATEGORY_QUERYResult = number;
 
 // Source: ../frontend/sanity/queries/changelog.ts
 // Variable: CHANGELOGS_QUERY
-// Query: *[_type == "changelog" && defined(slug)] | order(date desc){    _id,    title,    slug,    version,    date,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    author->{      name,      title,      image {          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      }    },    categories[]->{      _id,      title,      color    },}
+// Query: *[_type == "changelog" && defined(slug)] | order(date desc){    _id,    title,    slug,    version,    date,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    author->{      name,      title,      image {          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      }    },    categories[]->{      _id,      title,      color    },}
 export type CHANGELOGS_QUERYResult = Array<{
   _id: string;
   title: string | null;
@@ -2839,10 +2861,12 @@ export type CHANGELOGS_QUERYResult = Array<{
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
       };
-      href: string | "/" | null;
+      href: string | null;
       target?: boolean;
       _type: "link";
       _key: string;
+      internalType: "page" | "post" | null;
+      internalSlug: string | null;
     }> | null;
     level?: number;
     _type: "block";
@@ -2932,7 +2956,7 @@ export type CHANGELOGS_QUERYResult = Array<{
 
 // Source: ../frontend/sanity/queries/contact.ts
 // Variable: CONTACT_QUERY
-// Query: *[_type == "contact"][0]{  tagline,  title,  description,  contactMethods[]{    icon,    title,    description,    link {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },    meta{    title,    description,    noindex,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },}
+// Query: *[_type == "contact"][0]{  tagline,  title,  description,  contactMethods[]{    icon,    title,    description,    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    meta{    title,    description,    noindex,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },}
 export type CONTACT_QUERYResult = {
   tagline: string | null;
   title: string | null;
@@ -2946,6 +2970,11 @@ export type CONTACT_QUERYResult = {
       _type: "link";
       isExternal?: boolean;
       internalLink?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
@@ -2972,9 +3001,11 @@ export type CONTACT_QUERYResult = {
         [internalGroqTypeReferenceTo]?: "productCategory";
       };
       title?: string;
-      href: string | "/" | "/contact" | null;
+      href: string | null;
       target?: boolean;
       buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
     } | null;
   }> | null;
   meta: {
@@ -3004,7 +3035,7 @@ export type CONTACT_QUERYResult = {
 
 // Source: ../frontend/sanity/queries/feed.ts
 // Variable: FEED_POSTS_QUERY_NEWEST
-// Query: *[_type == "post" && defined(slug)] | order(coalesce(publishedAt, _createdAt) desc)[0...$limit]{  _id,  _createdAt,  publishedAt,  title,  slug,  excerpt,  author->{ name },  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  body[]{      ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }  },  categories[]->{ title }}
+// Query: *[_type == "post" && defined(slug)] | order(coalesce(publishedAt, _createdAt) desc)[0...$limit]{  _id,  _createdAt,  publishedAt,  title,  slug,  excerpt,  author->{ name },  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  body[]{      ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }  },  categories[]->{ title }}
 export type FEED_POSTS_QUERY_NEWESTResult = Array<{
   _id: string;
   _createdAt: string;
@@ -3062,10 +3093,12 @@ export type FEED_POSTS_QUERY_NEWESTResult = Array<{
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
       };
-      href: string | "/" | null;
+      href: string | null;
       target?: boolean;
       _type: "link";
       _key: string;
+      internalType: "page" | "post" | null;
+      internalSlug: string | null;
     }> | null;
     level?: number;
     _type: "block";
@@ -3109,7 +3142,7 @@ export type FEED_POSTS_QUERY_NEWESTResult = Array<{
   }> | null;
 }>;
 // Variable: FEED_POSTS_BY_CATEGORY_QUERY_NEWEST
-// Query: *[  _type == "post" && references(*[_type == "category" && slug.current == $slug]._id)] | order(coalesce(publishedAt, _createdAt) desc)[0...$limit]{  _id,  _createdAt,  publishedAt,  title,  slug,  excerpt,  author->{ name },  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  body[]{      ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }  },  categories[]->{ title }}
+// Query: *[  _type == "post" && references(*[_type == "category" && slug.current == $slug]._id)] | order(coalesce(publishedAt, _createdAt) desc)[0...$limit]{  _id,  _createdAt,  publishedAt,  title,  slug,  excerpt,  author->{ name },  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  body[]{      ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }  },  categories[]->{ title }}
 export type FEED_POSTS_BY_CATEGORY_QUERY_NEWESTResult = Array<{
   _id: string;
   _createdAt: string;
@@ -3167,10 +3200,12 @@ export type FEED_POSTS_BY_CATEGORY_QUERY_NEWESTResult = Array<{
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
       };
-      href: string | "/" | null;
+      href: string | null;
       target?: boolean;
       _type: "link";
       _key: string;
+      internalType: "page" | "post" | null;
+      internalSlug: string | null;
     }> | null;
     level?: number;
     _type: "block";
@@ -3216,7 +3251,7 @@ export type FEED_POSTS_BY_CATEGORY_QUERY_NEWESTResult = Array<{
 
 // Source: ../frontend/sanity/queries/navigation.ts
 // Variable: NAVIGATION_QUERY
-// Query: *[_type == "navigation"]{    _type,    _key,    title,    links[]{          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    ),      _type == "link-group" => {        links[]{              _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )        }      }    }  }
+// Query: *[_type == "navigation"]{    _type,    _key,    title,    links[]{        _key,  _type,  title,  buttonVariant,  target,  isExternal,  "href": select(isExternal => href, null),  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  iconVariant,  description,      _type == "link-group" => {        links[]{            _key,  _type,  title,  buttonVariant,  target,  isExternal,  "href": select(isExternal => href, null),  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  iconVariant,  description        }      }    }  }
 export type NAVIGATION_QUERYResult = Array<{
   _type: "navigation";
   _key: null;
@@ -3224,80 +3259,46 @@ export type NAVIGATION_QUERYResult = Array<{
   links: Array<{
     _key: string;
     _type: "link-group";
-    title?: string;
+    title: string | null;
+    buttonVariant: null;
+    target: null;
+    isExternal: null;
+    href: null;
+    internalType: null;
+    internalSlug: null;
+    iconVariant: null;
+    description: null;
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
-      isExternal?: boolean;
-      internalLink?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "page";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "post";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "product";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "productCategory";
-      };
-      title?: string;
-      description?: string;
-      href: string | "/" | null;
-      target?: boolean;
-      buttonVariant?: ButtonVariant;
+      title: string | null;
+      buttonVariant: ButtonVariant | null;
+      target: boolean | null;
+      isExternal: boolean | null;
+      href: string | null;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      description: string | null;
     }> | null;
-    href: null;
   } | {
     _key: string;
     _type: "link";
-    isExternal?: boolean;
-    internalLink?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "contact";
-    } | {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "page";
-    } | {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "post";
-    } | {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "product";
-    } | {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "productCategory";
-    };
-    title?: string;
-    href: string | "/" | "/contact" | null;
-    target?: boolean;
-    buttonVariant?: ButtonVariant;
+    title: string | null;
+    buttonVariant: ButtonVariant | null;
+    target: boolean | null;
+    isExternal: boolean | null;
+    href: string | null;
+    internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+    internalSlug: string | null;
+    iconVariant: null;
+    description: null;
   }> | null;
 }>;
 
 // Source: ../frontend/sanity/queries/page.ts
 // Variable: PAGE_QUERY
-// Query: *[_type == "page" && slug.current == $slug][0]{    blocks[]{        _type == "section-header" => {    _type,    _key,    padding,    sectionWidth,    stackAlign,    direction,    tag,    title,    description,    links[]{          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    },  },        _type == "hero-12" => {    _type,    _key,    backgroundImage{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    tagLine,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    links[]{          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    },    techLogos[]{      _key,      title,      link,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      }    }  },        _type == "hero-13" => {    _type,    _key,    tag,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    links[]{          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    },  },        _type == "hero-25" => {    _type,    _key,    tagLine,    title,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    links[]{          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    },    tags  },        _type == "hero-57" => {    _type,    _key,    title,    body,    links[]{          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    },    tags  },        _type == "hero-85" => {    _type,    _key,    tag{      title,      description    },    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    links[]{          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    },  },        _type == "hero-160" => {    _type,    _key,    backgroundImage{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    tag,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    links[]{          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    },    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },        _type == "hero-174" => {    _type,    _key,    backgroundImage{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    links[]{          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    },    tag  },        _type == "faq-1" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }      },    },  },        _type == "faq-5" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }      },    },  },        _type == "faq-8" => {    _type,    _key,    padding,    sections[]{      _type,      _key,      title,      faqs[]->{        _id,        title,        body[]{            ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }        }      }    }  },        _type == "faq-9" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }      },    },  },        _type == "faq-14" => {    _type,    _key,    padding,    title,    description,    sections[]{      _type,      _key,      title,      faqs[]->{        _id,        title,        body[]{            ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }        }      }    }  },        _type == "logos-1" => {    _type,    _key,    padding,    title,    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },        _type == "logos-2" => {    _type,    _key,    padding,    title,    description,    links[]{          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    },    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },        _type == "logos-4" => {    _type,    _key,    padding,    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },        _type == "logos-9" => {    _type,    _key,    padding,    title,    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    testimonials[]->{      ...,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    }  },        _type == "feature-1" => {    _type,    _key,    padding,    columns[]{        _type == "feature-content" => {    _type,    _key,    padding,    iconVariant,    tag,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    links[]{          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    },  },        _type == "feature-image" => {    _type,    _key,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },    },  },        _type == "feature-3" => {    _type,    _key,    padding,    columns[]{        _type == "feature-3-card" => {    _type,    _key,    iconVariant,    title,    description,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },    },  },        _type == "feature-12" => {    _type,    _key,    padding,    tagline,    columns[]{        _type == "feature-12-card" => {    _type,    _key,    iconVariant,    title,    description,  },    },  },        _type == "feature-15" => {    _type,    _key,    padding,    gridColumns,    columns[]{        _type == "feature-15-card" => {    _type,    _key,    iconVariant,    title,    description,  },    },  },        _type == "feature-66" => {    _type,    _key,    padding,    columns[]{        _type == "feature-66-card" => {    _type,    _key,    logo{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },    },  },        _type == "feature-117" => {    _type,    _key,    padding,    columns[]{        _type == "feature-117-card" => {    _type,    _key,    tag,    title,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },    },  },        _type == "feature-157" => {    _type,    _key,    padding,    columns[]{        _type == "feature-157-card" => {    _type,    _key,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },    },  },        _type == "feature-202" => {    _type,    _key,    padding,    columns[]{        _type == "feature-202-card" => {    _type,    _key,    iconVariant,    title,    description,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },    },  },        _type == "blog-4" => {    _type,    _key,    padding,    gridColumns,    posts[]->{      _id,      _createdAt,      title,      slug,      excerpt,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      categories[]->{        _id,        title,        slug,      },      author->{        _id,        name,        image{            ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }        }      }    },  },        _type == "all-posts-4" => {    _type,    _key,    padding  },        _type == "blog-7" => {    _type,    _key,    padding,    gridColumns,    posts[]->{      _id,      _createdAt,      title,      slug,      excerpt,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    },  },        _type == "all-posts-7" => {    _type,    _key,    padding  },        _type == "blog-13" => {    _type,    _key,    padding,    gridColumns,    posts[]->{      _id,      _createdAt,      title,      slug,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      categories[]->{        _id,        title,        slug,      },    },  },        _type == "all-posts-13" => {    _type,    _key,    padding  },        _type == "blog-14" => {    _type,    _key,    padding,    gridColumns,    title,    posts[]->{      _id,      _createdAt,      title,      slug,      excerpt,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      categories[]->{        _id,        title,        slug,      },      author->{        _id,        name,        image{            ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }        }      }    },  },        _type == "all-posts-14" => {    _type,    _key,    padding  },        _type == "blog-16" => {    _type,    _key,    padding,    posts[]->{      _id,      _createdAt,      title,      slug,      categories[]->{        _id,        title,        slug,      },      author->{        _id,        name,        title,        image{            ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }        }      }    },  },        _type == "all-posts-16" => {    _type,    _key,    padding  },        _type == "changelog-1" => {    _type,    _key,    padding  },        _type == "changelog-2" => {    _type,    _key,    padding  },        _type == "changelog-3" => {    _type,    _key,    padding  },        _type == "changelog-5" => {    _type,    _key,    padding,    title,    secondaryTitle,    links[]{          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    },  },        _type == "pricing-1" => {    _type,    _key,    padding,    columns[]{      _key,      featured,      title,      description,      price{        value,        note,      },      link{            _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    ),      },      listTitle,      list,    },  },        _type == "pricing-2" => {    _type,    _key,    padding,    columns[]{      _key,      title,      description,      price{        monthly,        yearly,      },      link{            _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    ),      },      listTitle,      list,    },  },        _type == "pricing-7" => {    _type,    _key,    padding,    badge,    columns[]{      _key,      title,      description,      price{        monthly,        yearly,      },      link{            _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    ),      },      listTitle,      list,    },  },        _type == "pricing-9" => {    _type,    _key,    padding,    columns[]{      _key,      featured,      title,      description,      price{        monthly,        yearly,      },      link{            _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    ),      },    },    sections[]{      _key,      title,      features[]{        _key,        name,        tiers,        tooltip,      },    },  },        _type == "pricing-16" => {    _type,    _key,    padding,    title,    tag,    columns[]{      _key,      featured,      title,      description,      price{        value,        discount,      },      link{            _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    ),      },      listTitle,      list,    },  },        _type == "team-1" => {    _type,    _key,    padding  },        _type == "team-2" => {    _type,    _key,    padding  },        _type == "team-3" => {    _type,    _key,    padding  },        _type == "team-4" => {    _type,    _key,    padding  },        _type == "team-5" => {    _type,    _key,    padding  },        _type == "team-6" => {    _type,    _key,    padding  },        _type == "team-8" => {    _type,    _key,    padding  },        _type == "compare-1" => {    _type,    _key,    padding,    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    columns[]{      _key,      label,      primary,      secondary,      hasIcon,    },  },        _type == "compare-2" => {    _type,    _key,    padding,    columns[]{      _key,      featured,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      title,      list,    },  },        _type == "compare-4" => {    _type,    _key,    padding,    title,    titles,    columns[]{      _key,      title,      primary,      secondary    },    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    links[]{          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    },  },        _type == "compare-5" => {    _type,    _key,    padding,    columns[]{      _key,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      title,      description,      link {            _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )      },    },  },        _type == "compare-6" => {    _type,    _key,    padding,    title,    rows,    columns[]{      _key,      name,      attributes[]{        _key,        value,        status,      },    },  },    _type == "compare-products" => {    _type,    _key,    padding,    title,    productFields,    columns[]{      _key,      product->{        _id,        title,        "slug": slug.current,        // First specification projected under 'spec'        "spec": specifications[0]->{          sku,          bestFor,          pungency,          bindingCapacity,          fatContent        }      },      overrides{        sku,        bestFor,        pungency,        bindingCapacity,        fatContent      },    },  },        _type == "gallery-1" => {    _type,    _key,    padding,    columns[]{      _key,      title,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      logo{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      link{            _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    ),      },      categories[]->{        _id,        title,        color      },    },  },        _type == "gallery-3" => {    _type,    _key,    padding,    title,    columns[]{      _key,      title,      description,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      link{            _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    ),      },      categories[]->{        _id,        title,        color      },    },  },        _type == "gallery-4" => {    _type,    _key,    padding,    title,    description,    columns[]{      _key,      title,      description,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      link{            _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    ),      },      categories[]->{        _id,        title,        color      },    },  },        _type == "gallery-8" => {    _type,    _key,    padding,    link{          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    ),    },    columns[]{      _key,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      link{            _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    ),      },      categories[]->{        _id,        title,        color      },    },  },        _type == "gallery-9" => {    _type,    _key,    padding,    columns[]{      _key,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      title,      description,      iconVariant,    },  },        _type == "gallery-10" => {    _type,    _key,    padding,    title,    description,    testimonials[]->{      ...,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    }  },        _type == "timeline-3" => {    _type,    _key,    padding,    title,    description,    links[]{          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    ),    },    columns[]{      _key,      title,      description,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    },  },        _type == "timeline-4" => {    _type,    _key,    padding,    tag,    title,    description,    columns[]{      _key,      title,      description,      iconVariant,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    },  },        _type == "timeline-5" => {    _type,    _key,    padding,    title,    description,    columns[]{      _key,      iconVariant,      title,      description,    },  },        _type == "timeline-6" => {    _type,    _key,    padding,    title,    description,    columns[]{      _key,      iconVariant,      title,      description,    },  },        _type == "product-categories-16" => {    _type,    _key,    padding  },        _type == "all-products-16" => {    _type,    _key,    padding  },    },      meta{    title,    description,    noindex,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },  }
+// Query: *[_type == "page" && slug.current == $slug][0]{    blocks[]{        _type == "section-header" => {    _type,    _key,    padding,    sectionWidth,    stackAlign,    direction,    tag,    title,    description,    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "hero-12" => {    _type,    _key,    backgroundImage{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    tagLine,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },    techLogos[]{      _key,      title,      link,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      }    }  },        _type == "hero-13" => {    _type,    _key,    tag,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "hero-25" => {    _type,    _key,    tagLine,    title,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },    tags  },        _type == "hero-57" => {    _type,    _key,    title,    body,    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },    tags  },        _type == "hero-85" => {    _type,    _key,    tag{      title,      description    },    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "hero-160" => {    _type,    _key,    backgroundImage{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    tag,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },        _type == "hero-174" => {    _type,    _key,    backgroundImage{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },    tag  },        _type == "faq-1" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }      },    },  },        _type == "faq-5" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }      },    },  },        _type == "faq-8" => {    _type,    _key,    padding,    sections[]{      _type,      _key,      title,      faqs[]->{        _id,        title,        body[]{            ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }        }      }    }  },        _type == "faq-9" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }      },    },  },        _type == "faq-14" => {    _type,    _key,    padding,    title,    description,    sections[]{      _type,      _key,      title,      faqs[]->{        _id,        title,        body[]{            ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }        }      }    }  },        _type == "logos-1" => {    _type,    _key,    padding,    title,    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },        _type == "logos-2" => {    _type,    _key,    padding,    title,    description,    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },        _type == "logos-4" => {    _type,    _key,    padding,    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },        _type == "logos-9" => {    _type,    _key,    padding,    title,    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    testimonials[]->{      ...,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    }  },        _type == "feature-1" => {    _type,    _key,    padding,    columns[]{        _type == "feature-content" => {    _type,    _key,    padding,    iconVariant,    tag,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "feature-image" => {    _type,    _key,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },    },  },        _type == "feature-3" => {    _type,    _key,    padding,    columns[]{        _type == "feature-3-card" => {    _type,    _key,    iconVariant,    title,    description,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },    },  },        _type == "feature-12" => {    _type,    _key,    padding,    tagline,    columns[]{        _type == "feature-12-card" => {    _type,    _key,    iconVariant,    title,    description,  },    },  },        _type == "feature-15" => {    _type,    _key,    padding,    gridColumns,    columns[]{        _type == "feature-15-card" => {    _type,    _key,    iconVariant,    title,    description,  },    },  },        _type == "feature-66" => {    _type,    _key,    padding,    columns[]{        _type == "feature-66-card" => {    _type,    _key,    logo{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "feature-117" => {    _type,    _key,    padding,    columns[]{        _type == "feature-117-card" => {    _type,    _key,    tag,    title,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "feature-157" => {    _type,    _key,    padding,    columns[]{        _type == "feature-157-card" => {    _type,    _key,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "feature-202" => {    _type,    _key,    padding,    columns[]{        _type == "feature-202-card" => {    _type,    _key,    iconVariant,    title,    description,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "blog-4" => {    _type,    _key,    padding,    gridColumns,    posts[]->{      _id,      _createdAt,      title,      slug,      excerpt,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      categories[]->{        _id,        title,        slug,      },      author->{        _id,        name,        image{            ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }        }      }    },  },        _type == "all-posts-4" => {    _type,    _key,    padding  },        _type == "blog-7" => {    _type,    _key,    padding,    gridColumns,    posts[]->{      _id,      _createdAt,      title,      slug,      excerpt,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    },  },        _type == "all-posts-7" => {    _type,    _key,    padding  },        _type == "blog-13" => {    _type,    _key,    padding,    gridColumns,    posts[]->{      _id,      _createdAt,      title,      slug,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      categories[]->{        _id,        title,        slug,      },    },  },        _type == "all-posts-13" => {    _type,    _key,    padding  },        _type == "blog-14" => {    _type,    _key,    padding,    gridColumns,    title,    posts[]->{      _id,      _createdAt,      title,      slug,      excerpt,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      categories[]->{        _id,        title,        slug,      },      author->{        _id,        name,        image{            ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }        }      }    },  },        _type == "all-posts-14" => {    _type,    _key,    padding  },        _type == "blog-16" => {    _type,    _key,    padding,    posts[]->{      _id,      _createdAt,      title,      slug,      categories[]->{        _id,        title,        slug,      },      author->{        _id,        name,        title,        image{            ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }        }      }    },  },        _type == "all-posts-16" => {    _type,    _key,    padding  },        _type == "changelog-1" => {    _type,    _key,    padding  },        _type == "changelog-2" => {    _type,    _key,    padding  },        _type == "changelog-3" => {    _type,    _key,    padding  },        _type == "changelog-5" => {    _type,    _key,    padding,    title,    secondaryTitle,    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "pricing-1" => {    _type,    _key,    padding,    columns[]{      _key,      featured,      title,      description,      price{        value,        note,      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      listTitle,      list,    },  },        _type == "pricing-2" => {    _type,    _key,    padding,    columns[]{      _key,      title,      description,      price{        monthly,        yearly,      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      listTitle,      list,    },  },        _type == "pricing-7" => {    _type,    _key,    padding,    badge,    columns[]{      _key,      title,      description,      price{        monthly,        yearly,      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      listTitle,      list,    },  },        _type == "pricing-9" => {    _type,    _key,    padding,    columns[]{      _key,      featured,      title,      description,      price{        monthly,        yearly,      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },    },    sections[]{      _key,      title,      features[]{        _key,        name,        tiers,        tooltip,      },    },  },        _type == "pricing-16" => {    _type,    _key,    padding,    title,    tag,    columns[]{      _key,      featured,      title,      description,      price{        value,        discount,      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      listTitle,      list,    },  },        _type == "team-1" => {    _type,    _key,    padding  },        _type == "team-2" => {    _type,    _key,    padding  },        _type == "team-3" => {    _type,    _key,    padding  },        _type == "team-4" => {    _type,    _key,    padding  },        _type == "team-5" => {    _type,    _key,    padding  },        _type == "team-6" => {    _type,    _key,    padding  },        _type == "team-8" => {    _type,    _key,    padding  },        _type == "compare-1" => {    _type,    _key,    padding,    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    columns[]{      _key,      label,      primary,      secondary,      hasIcon,    },  },        _type == "compare-2" => {    _type,    _key,    padding,    columns[]{      _key,      featured,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      title,      list,    },  },        _type == "compare-4" => {    _type,    _key,    padding,    title,    titles,    columns[]{      _key,      title,      primary,      secondary    },    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "compare-5" => {    _type,    _key,    padding,    columns[]{      _key,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      title,      description,      link {          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)      },    },  },        _type == "compare-6" => {    _type,    _key,    padding,    title,    rows,    columns[]{      _key,      name,      attributes[]{        _key,        value,        status,      },    },  },    _type == "compare-products" => {    _type,    _key,    padding,    title,    productFields,    columns[]{      _key,      product->{        _id,        title,        "slug": slug.current,        // First specification projected under 'spec'        "spec": specifications[0]->{          sku,          bestFor,          pungency,          bindingCapacity,          fatContent        }      },      overrides{        sku,        bestFor,        pungency,        bindingCapacity,        fatContent      },    },  },        _type == "gallery-1" => {    _type,    _key,    padding,    columns[]{      _key,      title,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      logo{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      categories[]->{        _id,        title,        color      },    },  },        _type == "gallery-3" => {    _type,    _key,    padding,    title,    columns[]{      _key,      title,      description,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      categories[]->{        _id,        title,        color      },    },  },        _type == "gallery-4" => {    _type,    _key,    padding,    title,    description,    columns[]{      _key,      title,      description,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      categories[]->{        _id,        title,        color      },    },  },        _type == "gallery-8" => {    _type,    _key,    padding,    link{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),    },    columns[]{      _key,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      categories[]->{        _id,        title,        color      },    },  },        _type == "gallery-9" => {    _type,    _key,    padding,    columns[]{      _key,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      title,      description,      iconVariant,    },  },        _type == "gallery-10" => {    _type,    _key,    padding,    title,    description,    testimonials[]->{      ...,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    }  },        _type == "timeline-3" => {    _type,    _key,    padding,    title,    description,    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),    },    columns[]{      _key,      title,      description,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    },  },        _type == "timeline-4" => {    _type,    _key,    padding,    tag,    title,    description,    columns[]{      _key,      title,      description,      iconVariant,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    },  },        _type == "timeline-5" => {    _type,    _key,    padding,    title,    description,    columns[]{      _key,      iconVariant,      title,      description,    },  },        _type == "timeline-6" => {    _type,    _key,    padding,    title,    description,    columns[]{      _key,      iconVariant,      title,      description,    },  },        _type == "product-categories-16" => {    _type,    _key,    padding  },        _type == "all-products-16" => {    _type,    _key,    padding  },    },      meta{    title,    description,    noindex,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },  }
 export type PAGE_QUERYResult = {
   blocks: Array<{
     _type: "all-posts-13";
@@ -3573,6 +3574,11 @@ export type PAGE_QUERYResult = {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "contact";
       } | {
         _ref: string;
@@ -3596,9 +3602,11 @@ export type PAGE_QUERYResult = {
         [internalGroqTypeReferenceTo]?: "productCategory";
       };
       title?: string;
-      href: string | "/" | "/contact" | null;
+      href: string | null;
       target?: boolean;
       buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
     }> | null;
   } | {
     _type: "compare-1";
@@ -3716,10 +3724,12 @@ export type PAGE_QUERYResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "post";
         };
-        href: string | "/" | null;
+        href: string | null;
         target?: boolean;
         _type: "link";
         _key: string;
+        internalType: "page" | "post" | null;
+        internalSlug: string | null;
       }> | null;
       level?: number;
       _type: "block";
@@ -3761,9 +3771,19 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contact";
+      } | {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
@@ -3786,9 +3806,11 @@ export type PAGE_QUERYResult = {
       };
       title?: string;
       description?: string;
-      href: string | "/" | null;
+      href: string | null;
       target?: boolean;
       buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
     }> | null;
   } | {
     _type: "compare-5";
@@ -3825,6 +3847,11 @@ export type PAGE_QUERYResult = {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "contact";
         } | {
           _ref: string;
@@ -3848,9 +3875,11 @@ export type PAGE_QUERYResult = {
           [internalGroqTypeReferenceTo]?: "productCategory";
         };
         title?: string;
-        href: string | "/" | "/contact" | null;
+        href: string | null;
         target?: boolean;
         buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
       } | null;
     }> | null;
   } | {
@@ -3931,10 +3960,12 @@ export type PAGE_QUERYResult = {
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "post";
           };
-          href: string | "/" | null;
+          href: string | null;
           target?: boolean;
           _type: "link";
           _key: string;
+          internalType: "page" | "post" | null;
+          internalSlug: string | null;
         }> | null;
         level?: number;
         _type: "block";
@@ -4020,10 +4051,12 @@ export type PAGE_QUERYResult = {
               _weak?: boolean;
               [internalGroqTypeReferenceTo]?: "post";
             };
-            href: string | "/" | null;
+            href: string | null;
             target?: boolean;
             _type: "link";
             _key: string;
+            internalType: "page" | "post" | null;
+            internalSlug: string | null;
           }> | null;
           level?: number;
           _type: "block";
@@ -4099,10 +4132,12 @@ export type PAGE_QUERYResult = {
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "post";
           };
-          href: string | "/" | null;
+          href: string | null;
           target?: boolean;
           _type: "link";
           _key: string;
+          internalType: "page" | "post" | null;
+          internalSlug: string | null;
         }> | null;
         level?: number;
         _type: "block";
@@ -4181,10 +4216,12 @@ export type PAGE_QUERYResult = {
               _weak?: boolean;
               [internalGroqTypeReferenceTo]?: "post";
             };
-            href: string | "/" | null;
+            href: string | null;
             target?: boolean;
             _type: "link";
             _key: string;
+            internalType: "page" | "post" | null;
+            internalSlug: string | null;
           }> | null;
           level?: number;
           _type: "block";
@@ -4260,10 +4297,12 @@ export type PAGE_QUERYResult = {
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "post";
           };
-          href: string | "/" | null;
+          href: string | null;
           target?: boolean;
           _type: "link";
           _key: string;
+          internalType: "page" | "post" | null;
+          internalSlug: string | null;
         }> | null;
         level?: number;
         _type: "block";
@@ -4311,7 +4350,7 @@ export type PAGE_QUERYResult = {
       _type: "feature-content";
       _key: string;
       padding: SectionPadding | null;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       tag: {
         text?: string;
         type?: "badge" | "title";
@@ -4345,10 +4384,12 @@ export type PAGE_QUERYResult = {
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "post";
           };
-          href: string | "/" | null;
+          href: string | null;
           target?: boolean;
           _type: "link";
           _key: string;
+          internalType: "page" | "post" | null;
+          internalSlug: string | null;
         }> | null;
         level?: number;
         _type: "block";
@@ -4395,6 +4436,11 @@ export type PAGE_QUERYResult = {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "contact";
         } | {
           _ref: string;
@@ -4418,9 +4464,11 @@ export type PAGE_QUERYResult = {
           [internalGroqTypeReferenceTo]?: "productCategory";
         };
         title?: string;
-        href: string | "/" | "/contact" | null;
+        href: string | null;
         target?: boolean;
         buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
       }> | null;
     } | {
       _type: "feature-image";
@@ -4453,7 +4501,7 @@ export type PAGE_QUERYResult = {
       _type: "feature-117-card";
       _key: string;
       tag: {
-        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
         text?: string;
       } | null;
       title: string | null;
@@ -4484,6 +4532,11 @@ export type PAGE_QUERYResult = {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "contact";
         } | {
           _ref: string;
@@ -4507,9 +4560,11 @@ export type PAGE_QUERYResult = {
           [internalGroqTypeReferenceTo]?: "productCategory";
         };
         title?: string;
-        href: string | "/" | "/contact" | null;
+        href: string | null;
         target?: boolean;
         buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
       } | null;
     }> | null;
   } | {
@@ -4520,7 +4575,7 @@ export type PAGE_QUERYResult = {
     columns: Array<{
       _type: "feature-12-card";
       _key: string;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       title: string | null;
       description: string | null;
     }> | null;
@@ -4532,7 +4587,7 @@ export type PAGE_QUERYResult = {
     columns: Array<{
       _type: "feature-15-card";
       _key: string;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       title: string | null;
       description: string | null;
     }> | null;
@@ -4565,9 +4620,19 @@ export type PAGE_QUERYResult = {
       link: {
         _key: null;
         _type: "link-icon";
-        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
         isExternal?: boolean;
         internalLink?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "contact";
+        } | {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
@@ -4590,9 +4655,11 @@ export type PAGE_QUERYResult = {
         };
         title?: string;
         description?: string;
-        href: string | "/" | null;
+        href: string | null;
         target?: boolean;
         buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
       } | null;
     }> | null;
   } | {
@@ -4602,7 +4669,7 @@ export type PAGE_QUERYResult = {
     columns: Array<{
       _type: "feature-202-card";
       _key: string;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       title: string | null;
       description: string | null;
       image: {
@@ -4632,6 +4699,11 @@ export type PAGE_QUERYResult = {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "contact";
         } | {
           _ref: string;
@@ -4655,9 +4727,11 @@ export type PAGE_QUERYResult = {
           [internalGroqTypeReferenceTo]?: "productCategory";
         };
         title?: string;
-        href: string | "/" | "/contact" | null;
+        href: string | null;
         target?: boolean;
         buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
       } | null;
     }> | null;
   } | {
@@ -4667,7 +4741,7 @@ export type PAGE_QUERYResult = {
     columns: Array<{
       _type: "feature-3-card";
       _key: string;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       title: string | null;
       description: string | null;
       image: {
@@ -4743,6 +4817,11 @@ export type PAGE_QUERYResult = {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "contact";
         } | {
           _ref: string;
@@ -4766,9 +4845,11 @@ export type PAGE_QUERYResult = {
           [internalGroqTypeReferenceTo]?: "productCategory";
         };
         title?: string;
-        href: string | "/" | "/contact" | null;
+        href: string | null;
         target?: boolean;
         buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
       } | null;
     }> | null;
   } | {
@@ -4824,6 +4905,11 @@ export type PAGE_QUERYResult = {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "contact";
         } | {
           _ref: string;
@@ -4847,9 +4933,11 @@ export type PAGE_QUERYResult = {
           [internalGroqTypeReferenceTo]?: "productCategory";
         };
         title?: string;
-        href: string | "/" | "/contact" | null;
+        href: string | null;
         target?: boolean;
         buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
       } | null;
       categories: Array<{
         _id: string;
@@ -4927,9 +5015,19 @@ export type PAGE_QUERYResult = {
       link: {
         _key: null;
         _type: "link-icon";
-        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
         isExternal?: boolean;
         internalLink?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "contact";
+        } | {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
@@ -4952,9 +5050,11 @@ export type PAGE_QUERYResult = {
         };
         title?: string;
         description?: string;
-        href: string | "/" | null;
+        href: string | null;
         target?: boolean;
         buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
       } | null;
       categories: Array<{
         _id: string;
@@ -4994,9 +5094,19 @@ export type PAGE_QUERYResult = {
       link: {
         _key: null;
         _type: "link-icon";
-        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
         isExternal?: boolean;
         internalLink?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "contact";
+        } | {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
@@ -5019,9 +5129,11 @@ export type PAGE_QUERYResult = {
         };
         title?: string;
         description?: string;
-        href: string | "/" | null;
+        href: string | null;
         target?: boolean;
         buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
       } | null;
       categories: Array<{
         _id: string;
@@ -5038,6 +5150,11 @@ export type PAGE_QUERYResult = {
       _type: "link";
       isExternal?: boolean;
       internalLink?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
@@ -5064,9 +5181,11 @@ export type PAGE_QUERYResult = {
         [internalGroqTypeReferenceTo]?: "productCategory";
       };
       title?: string;
-      href: string | "/" | "/contact" | null;
+      href: string | null;
       target?: boolean;
       buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
     } | null;
     columns: Array<{
       _key: string;
@@ -5097,6 +5216,11 @@ export type PAGE_QUERYResult = {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "contact";
         } | {
           _ref: string;
@@ -5120,9 +5244,11 @@ export type PAGE_QUERYResult = {
           [internalGroqTypeReferenceTo]?: "productCategory";
         };
         title?: string;
-        href: string | "/" | "/contact" | null;
+        href: string | null;
         target?: boolean;
         buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
       } | null;
       categories: Array<{
         _id: string;
@@ -5157,7 +5283,7 @@ export type PAGE_QUERYResult = {
       } | null;
       title: string | null;
       description: string | null;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
     }> | null;
   } | {
     _type: "hero-12";
@@ -5211,10 +5337,12 @@ export type PAGE_QUERYResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "post";
         };
-        href: string | "/" | null;
+        href: string | null;
         target?: boolean;
         _type: "link";
         _key: string;
+        internalType: "page" | "post" | null;
+        internalSlug: string | null;
       }> | null;
       level?: number;
       _type: "block";
@@ -5275,9 +5403,19 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contact";
+      } | {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
@@ -5300,9 +5438,11 @@ export type PAGE_QUERYResult = {
       };
       title?: string;
       description?: string;
-      href: string | "/" | null;
+      href: string | null;
       target?: boolean;
       buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
     }> | null;
     techLogos: Array<{
       _key: string;
@@ -5332,7 +5472,7 @@ export type PAGE_QUERYResult = {
     _type: "hero-13";
     _key: string;
     tag: {
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       title?: string;
     } | null;
     title: string | null;
@@ -5364,10 +5504,12 @@ export type PAGE_QUERYResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "post";
         };
-        href: string | "/" | null;
+        href: string | null;
         target?: boolean;
         _type: "link";
         _key: string;
+        internalType: "page" | "post" | null;
+        internalSlug: string | null;
       }> | null;
       level?: number;
       _type: "block";
@@ -5409,9 +5551,19 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contact";
+      } | {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
@@ -5434,9 +5586,11 @@ export type PAGE_QUERYResult = {
       };
       title?: string;
       description?: string;
-      href: string | "/" | null;
+      href: string | null;
       target?: boolean;
       buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
     }> | null;
   } | {
     _type: "hero-160";
@@ -5461,7 +5615,7 @@ export type PAGE_QUERYResult = {
       _type: "image";
     } | null;
     tag: {
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       title?: string;
     } | null;
     title: string | null;
@@ -5493,10 +5647,12 @@ export type PAGE_QUERYResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "post";
         };
-        href: string | "/" | null;
+        href: string | null;
         target?: boolean;
         _type: "link";
         _key: string;
+        internalType: "page" | "post" | null;
+        internalSlug: string | null;
       }> | null;
       level?: number;
       _type: "block";
@@ -5538,9 +5694,19 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contact";
+      } | {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
@@ -5563,9 +5729,11 @@ export type PAGE_QUERYResult = {
       };
       title?: string;
       description?: string;
-      href: string | "/" | null;
+      href: string | null;
       target?: boolean;
       buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
     }> | null;
     image: {
       asset: {
@@ -5637,10 +5805,12 @@ export type PAGE_QUERYResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "post";
         };
-        href: string | "/" | null;
+        href: string | null;
         target?: boolean;
         _type: "link";
         _key: string;
+        internalType: "page" | "post" | null;
+        internalSlug: string | null;
       }> | null;
       level?: number;
       _type: "block";
@@ -5682,9 +5852,19 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contact";
+      } | {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
@@ -5707,9 +5887,11 @@ export type PAGE_QUERYResult = {
       };
       title?: string;
       description?: string;
-      href: string | "/" | null;
+      href: string | null;
       target?: boolean;
       buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
     }> | null;
     tag: {
       title?: string;
@@ -5742,9 +5924,19 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contact";
+      } | {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
@@ -5767,12 +5959,14 @@ export type PAGE_QUERYResult = {
       };
       title?: string;
       description?: string;
-      href: string | "/" | null;
+      href: string | null;
       target?: boolean;
       buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
     }> | null;
     tags: Array<{
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       title?: string;
       _type: "tag";
       _key: string;
@@ -5839,9 +6033,19 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contact";
+      } | {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
@@ -5864,12 +6068,14 @@ export type PAGE_QUERYResult = {
       };
       title?: string;
       description?: string;
-      href: string | "/" | null;
+      href: string | null;
       target?: boolean;
       buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
     }> | null;
     tags: Array<{
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       title?: string;
       _type: "tag";
       _key: string;
@@ -5910,10 +6116,12 @@ export type PAGE_QUERYResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "post";
         };
-        href: string | "/" | null;
+        href: string | null;
         target?: boolean;
         _type: "link";
         _key: string;
+        internalType: "page" | "post" | null;
+        internalSlug: string | null;
       }> | null;
       level?: number;
       _type: "block";
@@ -5975,9 +6183,19 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contact";
+      } | {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
@@ -6000,9 +6218,11 @@ export type PAGE_QUERYResult = {
       };
       title?: string;
       description?: string;
-      href: string | "/" | null;
+      href: string | null;
       target?: boolean;
       buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
     }> | null;
   } | {
     _type: "logos-1";
@@ -6038,9 +6258,19 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contact";
+      } | {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
@@ -6063,9 +6293,11 @@ export type PAGE_QUERYResult = {
       };
       title?: string;
       description?: string;
-      href: string | "/" | null;
+      href: string | null;
       target?: boolean;
       buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
     }> | null;
     images: Array<{
       asset: {
@@ -6190,6 +6422,11 @@ export type PAGE_QUERYResult = {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "contact";
         } | {
           _ref: string;
@@ -6213,9 +6450,11 @@ export type PAGE_QUERYResult = {
           [internalGroqTypeReferenceTo]?: "productCategory";
         };
         title?: string;
-        href: string | "/" | "/contact" | null;
+        href: string | null;
         target?: boolean;
         buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
       } | null;
       listTitle: string | null;
       list: Array<string> | null;
@@ -6246,6 +6485,11 @@ export type PAGE_QUERYResult = {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "contact";
         } | {
           _ref: string;
@@ -6269,9 +6513,11 @@ export type PAGE_QUERYResult = {
           [internalGroqTypeReferenceTo]?: "productCategory";
         };
         title?: string;
-        href: string | "/" | "/contact" | null;
+        href: string | null;
         target?: boolean;
         buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
       } | null;
       listTitle: string | null;
       list: Array<string> | null;
@@ -6291,9 +6537,19 @@ export type PAGE_QUERYResult = {
       link: {
         _key: null;
         _type: "link-icon";
-        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
         isExternal?: boolean;
         internalLink?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "contact";
+        } | {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
@@ -6316,9 +6572,11 @@ export type PAGE_QUERYResult = {
         };
         title?: string;
         description?: string;
-        href: string | "/" | null;
+        href: string | null;
         target?: boolean;
         buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
       } | null;
       listTitle: string | null;
       list: Array<string> | null;
@@ -6344,56 +6602,14 @@ export type PAGE_QUERYResult = {
       link: {
         _key: null;
         _type: "link-icon";
-        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
         isExternal?: boolean;
         internalLink?: {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "page";
+          [internalGroqTypeReferenceTo]?: "category";
         } | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "post";
-        } | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "product";
-        } | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "productCategory";
-        };
-        title?: string;
-        description?: string;
-        href: string | "/" | null;
-        target?: boolean;
-        buttonVariant?: ButtonVariant;
-      } | null;
-      listTitle: string | null;
-      list: Array<string> | null;
-    }> | null;
-  } | {
-    _type: "pricing-9";
-    _key: string;
-    padding: SectionPadding | null;
-    columns: Array<{
-      _key: string;
-      featured: null;
-      title: "free" | "premium" | "pro" | null;
-      description: string | null;
-      price: {
-        monthly: number | null;
-        yearly: number | null;
-      } | null;
-      link: {
-        _key: null;
-        _type: "link";
-        isExternal?: boolean;
-        internalLink?: {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
@@ -6420,9 +6636,70 @@ export type PAGE_QUERYResult = {
           [internalGroqTypeReferenceTo]?: "productCategory";
         };
         title?: string;
-        href: string | "/" | "/contact" | null;
+        description?: string;
+        href: string | null;
         target?: boolean;
         buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
+      } | null;
+      listTitle: string | null;
+      list: Array<string> | null;
+    }> | null;
+  } | {
+    _type: "pricing-9";
+    _key: string;
+    padding: SectionPadding | null;
+    columns: Array<{
+      _key: string;
+      featured: null;
+      title: "free" | "premium" | "pro" | null;
+      description: string | null;
+      price: {
+        monthly: number | null;
+        yearly: number | null;
+      } | null;
+      link: {
+        _key: null;
+        _type: "link";
+        isExternal?: boolean;
+        internalLink?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "contact";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "page";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
+        };
+        title?: string;
+        href: string | null;
+        target?: boolean;
+        buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
       } | null;
     }> | null;
     sections: Array<{
@@ -6464,9 +6741,19 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contact";
+      } | {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
@@ -6489,9 +6776,11 @@ export type PAGE_QUERYResult = {
       };
       title?: string;
       description?: string;
-      href: string | "/" | null;
+      href: string | null;
       target?: boolean;
       buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
     }> | null;
   } | {
     _type: "team-1";
@@ -6530,9 +6819,19 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contact";
+      } | {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
@@ -6555,9 +6854,11 @@ export type PAGE_QUERYResult = {
       };
       title?: string;
       description?: string;
-      href: string | "/" | null;
+      href: string | null;
       target?: boolean;
       buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
     }> | null;
     columns: Array<{
       _key: string;
@@ -6590,7 +6891,7 @@ export type PAGE_QUERYResult = {
     tag: {
       text?: string;
       type?: "badge" | "title";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
     } | null;
     title: string | null;
     description: string | null;
@@ -6598,7 +6899,7 @@ export type PAGE_QUERYResult = {
       _key: string;
       title: string | null;
       description: string | null;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       image: {
         asset: {
           _id: string;
@@ -6626,14 +6927,14 @@ export type PAGE_QUERYResult = {
     title: {
       title1?: string;
       title2?: string;
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       color?: "amber" | "amberLight" | "blue" | "blueLight" | "cyan" | "cyanLight" | "green" | "greenLight" | "indigo" | "indigoLight" | "orange" | "orangeLight" | "purple" | "purpleLight" | "red" | "redLight";
       title3?: string;
     } | null;
     description: string | null;
     columns: Array<{
       _key: string;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       title: string | null;
       description: string | null;
     }> | null;
@@ -6644,14 +6945,14 @@ export type PAGE_QUERYResult = {
     title: {
       title1?: string;
       title2?: string;
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       color?: "amber" | "amberLight" | "blue" | "blueLight" | "cyan" | "cyanLight" | "green" | "greenLight" | "indigo" | "indigoLight" | "orange" | "orangeLight" | "purple" | "purpleLight" | "red" | "redLight";
       title3?: string;
     } | null;
     description: string | null;
     columns: Array<{
       _key: string;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       title: string | null;
       description: string | null;
     }> | null;
@@ -6688,7 +6989,7 @@ export type PAGES_SLUGS_QUERYResult = Array<{
 
 // Source: ../frontend/sanity/queries/post.ts
 // Variable: POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{  _id,    title,    slug,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    author->{      name,      image {          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      }    },    publishedAt,    _createdAt,    _updatedAt,      meta{    title,    description,    noindex,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },    "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180 ),}
+// Query: *[_type == "post" && slug.current == $slug][0]{  _id,    title,    slug,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    author->{      name,      image {          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      }    },    publishedAt,    _createdAt,    _updatedAt,      meta{    title,    description,    noindex,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },    "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180 ),}
 export type POST_QUERYResult = {
   _id: string;
   title: string | null;
@@ -6740,10 +7041,12 @@ export type POST_QUERYResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
       };
-      href: string | "/" | null;
+      href: string | null;
       target?: boolean;
       _type: "link";
       _key: string;
+      internalType: "page" | "post" | null;
+      internalSlug: string | null;
     }> | null;
     level?: number;
     _type: "block";
@@ -7011,7 +7314,7 @@ export type POSTS_COUNT_QUERYResult = number;
 
 // Source: ../frontend/sanity/queries/product.ts
 // Variable: PRODUCT_QUERY
-// Query: *[_type == "product" && slug.current == $slug][0]{  _id,  title,  slug,  specifications[]->{    _id,    name,    sku,    bestFor,    pungency,    bindingCapacity,    fatContent,    purity,    moisture,    hsCode,    minOrder,    origin,    botanicalName,    shelfLife,    allergenInfo,    productAttributes,    certification,  },  keyFeatures[],  packagingOptions[]{    ...,  },  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  body[]{   ...,  markDefs[]{    ...,    _type == "link" => {          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  } },  excerpt,  categories[]->{ _id, title, slug },    meta{    title,    description,    noindex,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  }}
+// Query: *[_type == "product" && slug.current == $slug][0]{  _id,  title,  slug,  specifications[]->{    _id,    name,    sku,    bestFor,    pungency,    bindingCapacity,    fatContent,    purity,    moisture,    hsCode,    minOrder,    origin,    botanicalName,    shelfLife,    allergenInfo,    productAttributes,    certification,  },  keyFeatures[],  packagingOptions[]{    ...,  },  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  body[]{   ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  } },  excerpt,  categories[]->{ _id, title, slug },    meta{    title,    description,    noindex,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  }}
 export type PRODUCT_QUERYResult = {
   _id: string;
   title: string | null;
@@ -7092,10 +7395,12 @@ export type PRODUCT_QUERYResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
       };
-      href: string | "/" | null;
+      href: string | null;
       target?: boolean;
       _type: "link";
       _key: string;
+      internalType: "page" | "post" | null;
+      internalSlug: string | null;
     }> | null;
     level?: number;
     _type: "block";
@@ -7453,7 +7758,7 @@ export type SETTINGS_QUERYResult = {
 
 // Source: ../frontend/sanity/queries/team.ts
 // Variable: TEAM_QUERY
-// Query: *[_type == "team" && defined(slug)] | order(orderRank) {    _id,    name,    title,    description,    slug,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    links[]{          _key,    ...,    "href": select(      isExternal => href,      @.internalLink->slug.current == "index" => "/",      @.internalLink->_type == "post" => "/blog/" + @.internalLink->slug.current,      @.internalLink->_type == "blogCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "postCategory" => "/blog/category/" + @.internalLink->slug.current,      @.internalLink->_type == "product" => "/products/" + @.internalLink->slug.current,      @.internalLink->_type == "productCategory" => "/products/category/" + @.internalLink->slug.current,      @.internalLink->_type == "contact" => "/contact",      "/" + @.internalLink->slug.current    )    },}
+// Query: *[_type == "team" && defined(slug)] | order(orderRank) {    _id,    name,    title,    description,    slug,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },}
 export type TEAM_QUERYResult = Array<{
   _id: string;
   name: string | null;
@@ -7482,9 +7787,19 @@ export type TEAM_QUERYResult = Array<{
   links: Array<{
     _key: string;
     _type: "link-icon";
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
     isExternal?: boolean;
     internalLink?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "category";
+    } | {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "contact";
+    } | {
       _ref: string;
       _type: "reference";
       _weak?: boolean;
@@ -7507,9 +7822,11 @@ export type TEAM_QUERYResult = Array<{
     };
     title?: string;
     description?: string;
-    href: string | "/" | null;
+    href: string | null;
     target?: boolean;
     buttonVariant?: ButtonVariant;
+    internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+    internalSlug: string | null;
   }> | null;
 }>;
 
@@ -7517,27 +7834,27 @@ export type TEAM_QUERYResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "\n  *[_type == \"banner\"]{\n    _type,\n    _key,\n    title,\n    description,\n    link{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n,\n    }\n  }\n": BANNER_QUERYResult;
+    "\n  *[_type == \"banner\"]{\n    _type,\n    _key,\n    title,\n    description,\n    link{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n    }\n  }\n": BANNER_QUERYResult;
     "*[_type == \"category\" && defined(slug)] | order(orderRank){\n  _id,\n  title,\n  slug\n}": BLOG_CATEGORIES_QUERYResult;
     "*[_type == \"category\" && slug.current == $slug][0]{\n  _id,\n  _type,\n  title,\n  slug,\n  description,\n  \"meta\": {\n    \"title\": coalesce(seo.title, title),\n    \"description\": seo.metaDescription,\n    \"noindex\": coalesce(seo.noindex, false),\n    \"image\": seo.image{ asset->{ _id, url, mimeType, metadata{ lqip, dimensions{ width, height } } } }\n  }\n}": BLOG_CATEGORY_BY_SLUG_QUERYResult;
     "*[\n  _type == \"post\" && references(*[_type == \"category\" && slug.current == $slug]._id)\n] | order(coalesce(publishedAt, _createdAt) desc)[$offset...$end]{\n  _id,\n  _createdAt,\n  title,\n  slug,\n  excerpt,\n  author->{\n    name,\n    title,\n    image{ asset->{ _id, url } }\n  },\n  categories[]->{ _id, title, slug },\n}": POSTS_BY_BLOG_CATEGORY_QUERY_NEWESTResult;
     "*[\n  _type == \"post\" && references(*[_type == \"category\" && slug.current == $slug]._id)\n] | order(title asc)[$offset...$end]{\n  _id,\n  _createdAt,\n  title,\n  slug,\n  excerpt,\n  author->{\n    name,\n    title,\n    image{ asset->{ _id, url } }\n  },\n  categories[]->{ _id, title, slug },\n}": POSTS_BY_BLOG_CATEGORY_QUERY_AZResult;
     "*[\n  _type == \"post\" && references(*[_type == \"category\" && slug.current == $slug]._id)\n] | order(title desc)[$offset...$end]{\n  _id,\n  _createdAt,\n  title,\n  slug,\n  excerpt,\n  author->{\n    name,\n    title,\n    image{ asset->{ _id, url } }\n  },\n  categories[]->{ _id, title, slug },\n}": POSTS_BY_BLOG_CATEGORY_QUERY_ZAResult;
     "count(*[\n  _type == \"post\" && references(*[_type == \"category\" && slug.current == $slug]._id)\n])": POSTS_COUNT_BY_BLOG_CATEGORY_QUERYResult;
-    "*[_type == \"changelog\" && defined(slug)] | order(date desc){\n    _id,\n    title,\n    slug,\n    version,\n    date,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    author->{\n      name,\n      title,\n      image {\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    },\n    categories[]->{\n      _id,\n      title,\n      color\n    },\n}": CHANGELOGS_QUERYResult;
-    "*[_type == \"contact\"][0]{\n  tagline,\n  title,\n  description,\n  contactMethods[]{\n    icon,\n    title,\n    description,\n    link {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n}": CONTACT_QUERYResult;
-    "*[_type == \"post\" && defined(slug)] | order(coalesce(publishedAt, _createdAt) desc)[0...$limit]{\n  _id,\n  _createdAt,\n  publishedAt,\n  title,\n  slug,\n  excerpt,\n  author->{ name },\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  body[]{\n    \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n  },\n  categories[]->{ title }\n}": FEED_POSTS_QUERY_NEWESTResult;
-    "*[\n  _type == \"post\" && references(*[_type == \"category\" && slug.current == $slug]._id)\n] | order(coalesce(publishedAt, _createdAt) desc)[0...$limit]{\n  _id,\n  _createdAt,\n  publishedAt,\n  title,\n  slug,\n  excerpt,\n  author->{ name },\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  body[]{\n    \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n  },\n  categories[]->{ title }\n}": FEED_POSTS_BY_CATEGORY_QUERY_NEWESTResult;
-    "\n  *[_type == \"navigation\"]{\n    _type,\n    _key,\n    title,\n    links[]{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n,\n      _type == \"link-group\" => {\n        links[]{\n          \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n        }\n      }\n    }\n  }\n": NAVIGATION_QUERYResult;
-    "\n  *[_type == \"page\" && slug.current == $slug][0]{\n    blocks[]{\n      \n  _type == \"section-header\" => {\n    _type,\n    _key,\n    padding,\n    sectionWidth,\n    stackAlign,\n    direction,\n    tag,\n    title,\n    description,\n    links[]{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    },\n  }\n,\n      \n  _type == \"hero-12\" => {\n    _type,\n    _key,\n    backgroundImage{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    tagLine,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    links[]{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    },\n    techLogos[]{\n      _key,\n      title,\n      link,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n      \n  _type == \"hero-13\" => {\n    _type,\n    _key,\n    tag,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    links[]{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    },\n  }\n,\n      \n  _type == \"hero-25\" => {\n    _type,\n    _key,\n    tagLine,\n    title,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    links[]{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    },\n    tags\n  }\n,\n      \n  _type == \"hero-57\" => {\n    _type,\n    _key,\n    title,\n    body,\n    links[]{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    },\n    tags\n  }\n,\n      \n  _type == \"hero-85\" => {\n    _type,\n    _key,\n    tag{\n      title,\n      description\n    },\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    links[]{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    },\n  }\n,\n      \n  _type == \"hero-160\" => {\n    _type,\n    _key,\n    backgroundImage{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    tag,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    links[]{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n      \n  _type == \"hero-174\" => {\n    _type,\n    _key,\n    backgroundImage{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    links[]{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    },\n    tag\n  }\n,\n      \n  _type == \"faq-1\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-5\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-8\" => {\n    _type,\n    _key,\n    padding,\n    sections[]{\n      _type,\n      _key,\n      title,\n      faqs[]->{\n        _id,\n        title,\n        body[]{\n          \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n        }\n      }\n    }\n  }\n,\n      \n  _type == \"faq-9\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-14\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    sections[]{\n      _type,\n      _key,\n      title,\n      faqs[]->{\n        _id,\n        title,\n        body[]{\n          \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n        }\n      }\n    }\n  }\n,\n      \n  _type == \"logos-1\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n      \n  _type == \"logos-2\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    links[]{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    },\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n      \n  _type == \"logos-4\" => {\n    _type,\n    _key,\n    padding,\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n      \n  _type == \"logos-9\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    testimonials[]->{\n      ...,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    }\n  }\n,\n      \n  _type == \"feature-1\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-content\" => {\n    _type,\n    _key,\n    padding,\n    iconVariant,\n    tag,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    links[]{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    },\n  }\n,\n      \n  _type == \"feature-image\" => {\n    _type,\n    _key,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-3\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-3-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-12\" => {\n    _type,\n    _key,\n    padding,\n    tagline,\n    columns[]{\n      \n  _type == \"feature-12-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-15\" => {\n    _type,\n    _key,\n    padding,\n    gridColumns,\n    columns[]{\n      \n  _type == \"feature-15-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-66\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-66-card\" => {\n    _type,\n    _key,\n    logo{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-117\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-117-card\" => {\n    _type,\n    _key,\n    tag,\n    title,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-157\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-157-card\" => {\n    _type,\n    _key,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-202\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-202-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"blog-4\" => {\n    _type,\n    _key,\n    padding,\n    gridColumns,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      excerpt,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      categories[]->{\n        _id,\n        title,\n        slug,\n      },\n      author->{\n        _id,\n        name,\n        image{\n          \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n        }\n      }\n    },\n  }\n,\n      \n  _type == \"all-posts-4\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"blog-7\" => {\n    _type,\n    _key,\n    padding,\n    gridColumns,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      excerpt,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"all-posts-7\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"blog-13\" => {\n    _type,\n    _key,\n    padding,\n    gridColumns,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      categories[]->{\n        _id,\n        title,\n        slug,\n      },\n    },\n  }\n,\n      \n  _type == \"all-posts-13\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"blog-14\" => {\n    _type,\n    _key,\n    padding,\n    gridColumns,\n    title,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      excerpt,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      categories[]->{\n        _id,\n        title,\n        slug,\n      },\n      author->{\n        _id,\n        name,\n        image{\n          \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n        }\n      }\n    },\n  }\n,\n      \n  _type == \"all-posts-14\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"blog-16\" => {\n    _type,\n    _key,\n    padding,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      categories[]->{\n        _id,\n        title,\n        slug,\n      },\n      author->{\n        _id,\n        name,\n        title,\n        image{\n          \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n        }\n      }\n    },\n  }\n,\n      \n  _type == \"all-posts-16\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"changelog-1\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"changelog-2\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"changelog-3\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"changelog-5\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    secondaryTitle,\n    links[]{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    },\n  }\n,\n      \n  _type == \"pricing-1\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      featured,\n      title,\n      description,\n      price{\n        value,\n        note,\n      },\n      link{\n        \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n,\n      },\n      listTitle,\n      list,\n    },\n  }\n,\n      \n  _type == \"pricing-2\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      title,\n      description,\n      price{\n        monthly,\n        yearly,\n      },\n      link{\n        \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n,\n      },\n      listTitle,\n      list,\n    },\n  }\n,\n      \n  _type == \"pricing-7\" => {\n    _type,\n    _key,\n    padding,\n    badge,\n    columns[]{\n      _key,\n      title,\n      description,\n      price{\n        monthly,\n        yearly,\n      },\n      link{\n        \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n,\n      },\n      listTitle,\n      list,\n    },\n  }\n,\n      \n  _type == \"pricing-9\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      featured,\n      title,\n      description,\n      price{\n        monthly,\n        yearly,\n      },\n      link{\n        \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n,\n      },\n    },\n    sections[]{\n      _key,\n      title,\n      features[]{\n        _key,\n        name,\n        tiers,\n        tooltip,\n      },\n    },\n  }\n,\n      \n  _type == \"pricing-16\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    tag,\n    columns[]{\n      _key,\n      featured,\n      title,\n      description,\n      price{\n        value,\n        discount,\n      },\n      link{\n        \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n,\n      },\n      listTitle,\n      list,\n    },\n  }\n,\n      \n  _type == \"team-1\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-2\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-3\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-4\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-5\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-6\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-8\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"compare-1\" => {\n    _type,\n    _key,\n    padding,\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    columns[]{\n      _key,\n      label,\n      primary,\n      secondary,\n      hasIcon,\n    },\n  }\n,\n      \n  _type == \"compare-2\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      featured,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      title,\n      list,\n    },\n  }\n,\n      \n  _type == \"compare-4\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    titles,\n    columns[]{\n      _key,\n      title,\n      primary,\n      secondary\n    },\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    links[]{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    },\n  }\n,\n      \n  _type == \"compare-5\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      title,\n      description,\n      link {\n        \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n      },\n    },\n  }\n,\n      \n  _type == \"compare-6\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    rows,\n    columns[]{\n      _key,\n      name,\n      attributes[]{\n        _key,\n        value,\n        status,\n      },\n    },\n  }\n,\n  \n  _type == \"compare-products\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    productFields,\n    columns[]{\n      _key,\n      product->{\n        _id,\n        title,\n        \"slug\": slug.current,\n        // First specification projected under 'spec'\n        \"spec\": specifications[0]->{\n          sku,\n          bestFor,\n          pungency,\n          bindingCapacity,\n          fatContent\n        }\n      },\n      overrides{\n        sku,\n        bestFor,\n        pungency,\n        bindingCapacity,\n        fatContent\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-1\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      title,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      logo{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      link{\n        \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n,\n      },\n      categories[]->{\n        _id,\n        title,\n        color\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-3\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    columns[]{\n      _key,\n      title,\n      description,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      link{\n        \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n,\n      },\n      categories[]->{\n        _id,\n        title,\n        color\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-4\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    columns[]{\n      _key,\n      title,\n      description,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      link{\n        \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n,\n      },\n      categories[]->{\n        _id,\n        title,\n        color\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-8\" => {\n    _type,\n    _key,\n    padding,\n    link{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n,\n    },\n    columns[]{\n      _key,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      link{\n        \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n,\n      },\n      categories[]->{\n        _id,\n        title,\n        color\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-9\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      title,\n      description,\n      iconVariant,\n    },\n  }\n,\n      \n  _type == \"gallery-10\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    testimonials[]->{\n      ...,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    }\n  }\n,\n      \n  _type == \"timeline-3\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    links[]{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n,\n    },\n    columns[]{\n      _key,\n      title,\n      description,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"timeline-4\" => {\n    _type,\n    _key,\n    padding,\n    tag,\n    title,\n    description,\n    columns[]{\n      _key,\n      title,\n      description,\n      iconVariant,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"timeline-5\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    columns[]{\n      _key,\n      iconVariant,\n      title,\n      description,\n    },\n  }\n,\n      \n  _type == \"timeline-6\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    columns[]{\n      _key,\n      iconVariant,\n      title,\n      description,\n    },\n  }\n,\n      \n  _type == \"product-categories-16\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"all-products-16\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n    },\n    \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n  }\n": PAGE_QUERYResult;
+    "*[_type == \"changelog\" && defined(slug)] | order(date desc){\n    _id,\n    title,\n    slug,\n    version,\n    date,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    author->{\n      name,\n      title,\n      image {\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    },\n    categories[]->{\n      _id,\n      title,\n      color\n    },\n}": CHANGELOGS_QUERYResult;
+    "*[_type == \"contact\"][0]{\n  tagline,\n  title,\n  description,\n  contactMethods[]{\n    icon,\n    title,\n    description,\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n}": CONTACT_QUERYResult;
+    "*[_type == \"post\" && defined(slug)] | order(coalesce(publishedAt, _createdAt) desc)[0...$limit]{\n  _id,\n  _createdAt,\n  publishedAt,\n  title,\n  slug,\n  excerpt,\n  author->{ name },\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  body[]{\n    \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n  },\n  categories[]->{ title }\n}": FEED_POSTS_QUERY_NEWESTResult;
+    "*[\n  _type == \"post\" && references(*[_type == \"category\" && slug.current == $slug]._id)\n] | order(coalesce(publishedAt, _createdAt) desc)[0...$limit]{\n  _id,\n  _createdAt,\n  publishedAt,\n  title,\n  slug,\n  excerpt,\n  author->{ name },\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  body[]{\n    \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n  },\n  categories[]->{ title }\n}": FEED_POSTS_BY_CATEGORY_QUERY_NEWESTResult;
+    "\n  *[_type == \"navigation\"]{\n    _type,\n    _key,\n    title,\n    links[]{\n      \n  _key,\n  _type,\n  title,\n  buttonVariant,\n  target,\n  isExternal,\n  \"href\": select(isExternal => href, null),\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  iconVariant,\n  description\n,\n      _type == \"link-group\" => {\n        links[]{\n          \n  _key,\n  _type,\n  title,\n  buttonVariant,\n  target,\n  isExternal,\n  \"href\": select(isExternal => href, null),\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  iconVariant,\n  description\n\n        }\n      }\n    }\n  }\n": NAVIGATION_QUERYResult;
+    "\n  *[_type == \"page\" && slug.current == $slug][0]{\n    blocks[]{\n      \n  _type == \"section-header\" => {\n    _type,\n    _key,\n    padding,\n    sectionWidth,\n    stackAlign,\n    direction,\n    tag,\n    title,\n    description,\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"hero-12\" => {\n    _type,\n    _key,\n    backgroundImage{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    tagLine,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n    techLogos[]{\n      _key,\n      title,\n      link,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n      \n  _type == \"hero-13\" => {\n    _type,\n    _key,\n    tag,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"hero-25\" => {\n    _type,\n    _key,\n    tagLine,\n    title,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n    tags\n  }\n,\n      \n  _type == \"hero-57\" => {\n    _type,\n    _key,\n    title,\n    body,\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n    tags\n  }\n,\n      \n  _type == \"hero-85\" => {\n    _type,\n    _key,\n    tag{\n      title,\n      description\n    },\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"hero-160\" => {\n    _type,\n    _key,\n    backgroundImage{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    tag,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n      \n  _type == \"hero-174\" => {\n    _type,\n    _key,\n    backgroundImage{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n    tag\n  }\n,\n      \n  _type == \"faq-1\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-5\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-8\" => {\n    _type,\n    _key,\n    padding,\n    sections[]{\n      _type,\n      _key,\n      title,\n      faqs[]->{\n        _id,\n        title,\n        body[]{\n          \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n        }\n      }\n    }\n  }\n,\n      \n  _type == \"faq-9\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-14\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    sections[]{\n      _type,\n      _key,\n      title,\n      faqs[]->{\n        _id,\n        title,\n        body[]{\n          \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n        }\n      }\n    }\n  }\n,\n      \n  _type == \"logos-1\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n      \n  _type == \"logos-2\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n      \n  _type == \"logos-4\" => {\n    _type,\n    _key,\n    padding,\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n      \n  _type == \"logos-9\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    testimonials[]->{\n      ...,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    }\n  }\n,\n      \n  _type == \"feature-1\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-content\" => {\n    _type,\n    _key,\n    padding,\n    iconVariant,\n    tag,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"feature-image\" => {\n    _type,\n    _key,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-3\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-3-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-12\" => {\n    _type,\n    _key,\n    padding,\n    tagline,\n    columns[]{\n      \n  _type == \"feature-12-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-15\" => {\n    _type,\n    _key,\n    padding,\n    gridColumns,\n    columns[]{\n      \n  _type == \"feature-15-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-66\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-66-card\" => {\n    _type,\n    _key,\n    logo{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-117\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-117-card\" => {\n    _type,\n    _key,\n    tag,\n    title,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-157\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-157-card\" => {\n    _type,\n    _key,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-202\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-202-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"blog-4\" => {\n    _type,\n    _key,\n    padding,\n    gridColumns,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      excerpt,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      categories[]->{\n        _id,\n        title,\n        slug,\n      },\n      author->{\n        _id,\n        name,\n        image{\n          \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n        }\n      }\n    },\n  }\n,\n      \n  _type == \"all-posts-4\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"blog-7\" => {\n    _type,\n    _key,\n    padding,\n    gridColumns,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      excerpt,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"all-posts-7\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"blog-13\" => {\n    _type,\n    _key,\n    padding,\n    gridColumns,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      categories[]->{\n        _id,\n        title,\n        slug,\n      },\n    },\n  }\n,\n      \n  _type == \"all-posts-13\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"blog-14\" => {\n    _type,\n    _key,\n    padding,\n    gridColumns,\n    title,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      excerpt,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      categories[]->{\n        _id,\n        title,\n        slug,\n      },\n      author->{\n        _id,\n        name,\n        image{\n          \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n        }\n      }\n    },\n  }\n,\n      \n  _type == \"all-posts-14\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"blog-16\" => {\n    _type,\n    _key,\n    padding,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      categories[]->{\n        _id,\n        title,\n        slug,\n      },\n      author->{\n        _id,\n        name,\n        title,\n        image{\n          \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n        }\n      }\n    },\n  }\n,\n      \n  _type == \"all-posts-16\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"changelog-1\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"changelog-2\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"changelog-3\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"changelog-5\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    secondaryTitle,\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"pricing-1\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      featured,\n      title,\n      description,\n      price{\n        value,\n        note,\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      listTitle,\n      list,\n    },\n  }\n,\n      \n  _type == \"pricing-2\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      title,\n      description,\n      price{\n        monthly,\n        yearly,\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      listTitle,\n      list,\n    },\n  }\n,\n      \n  _type == \"pricing-7\" => {\n    _type,\n    _key,\n    padding,\n    badge,\n    columns[]{\n      _key,\n      title,\n      description,\n      price{\n        monthly,\n        yearly,\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      listTitle,\n      list,\n    },\n  }\n,\n      \n  _type == \"pricing-9\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      featured,\n      title,\n      description,\n      price{\n        monthly,\n        yearly,\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n    },\n    sections[]{\n      _key,\n      title,\n      features[]{\n        _key,\n        name,\n        tiers,\n        tooltip,\n      },\n    },\n  }\n,\n      \n  _type == \"pricing-16\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    tag,\n    columns[]{\n      _key,\n      featured,\n      title,\n      description,\n      price{\n        value,\n        discount,\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      listTitle,\n      list,\n    },\n  }\n,\n      \n  _type == \"team-1\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-2\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-3\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-4\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-5\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-6\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-8\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"compare-1\" => {\n    _type,\n    _key,\n    padding,\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    columns[]{\n      _key,\n      label,\n      primary,\n      secondary,\n      hasIcon,\n    },\n  }\n,\n      \n  _type == \"compare-2\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      featured,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      title,\n      list,\n    },\n  }\n,\n      \n  _type == \"compare-4\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    titles,\n    columns[]{\n      _key,\n      title,\n      primary,\n      secondary\n    },\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"compare-5\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      title,\n      description,\n      link {\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n      },\n    },\n  }\n,\n      \n  _type == \"compare-6\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    rows,\n    columns[]{\n      _key,\n      name,\n      attributes[]{\n        _key,\n        value,\n        status,\n      },\n    },\n  }\n,\n  \n  _type == \"compare-products\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    productFields,\n    columns[]{\n      _key,\n      product->{\n        _id,\n        title,\n        \"slug\": slug.current,\n        // First specification projected under 'spec'\n        \"spec\": specifications[0]->{\n          sku,\n          bestFor,\n          pungency,\n          bindingCapacity,\n          fatContent\n        }\n      },\n      overrides{\n        sku,\n        bestFor,\n        pungency,\n        bindingCapacity,\n        fatContent\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-1\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      title,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      logo{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      categories[]->{\n        _id,\n        title,\n        color\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-3\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    columns[]{\n      _key,\n      title,\n      description,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      categories[]->{\n        _id,\n        title,\n        color\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-4\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    columns[]{\n      _key,\n      title,\n      description,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      categories[]->{\n        _id,\n        title,\n        color\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-8\" => {\n    _type,\n    _key,\n    padding,\n    link{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n    },\n    columns[]{\n      _key,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      categories[]->{\n        _id,\n        title,\n        color\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-9\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      title,\n      description,\n      iconVariant,\n    },\n  }\n,\n      \n  _type == \"gallery-10\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    testimonials[]->{\n      ...,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    }\n  }\n,\n      \n  _type == \"timeline-3\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n    },\n    columns[]{\n      _key,\n      title,\n      description,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"timeline-4\" => {\n    _type,\n    _key,\n    padding,\n    tag,\n    title,\n    description,\n    columns[]{\n      _key,\n      title,\n      description,\n      iconVariant,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"timeline-5\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    columns[]{\n      _key,\n      iconVariant,\n      title,\n      description,\n    },\n  }\n,\n      \n  _type == \"timeline-6\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    columns[]{\n      _key,\n      iconVariant,\n      title,\n      description,\n    },\n  }\n,\n      \n  _type == \"product-categories-16\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"all-products-16\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n    },\n    \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n  }\n": PAGE_QUERYResult;
     "*[_type == \"page\" && defined(slug)]{slug}": PAGES_SLUGS_QUERYResult;
-    "*[_type == \"post\" && slug.current == $slug][0]{\n  _id,\n    title,\n    slug,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    author->{\n      name,\n      image {\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    },\n    publishedAt,\n    _createdAt,\n    _updatedAt,\n    \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n    \"estimatedReadingTime\": round(length(pt::text(body)) / 5 / 180 ),\n}": POST_QUERYResult;
+    "*[_type == \"post\" && slug.current == $slug][0]{\n  _id,\n    title,\n    slug,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    author->{\n      name,\n      image {\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    },\n    publishedAt,\n    _createdAt,\n    _updatedAt,\n    \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n    \"estimatedReadingTime\": round(length(pt::text(body)) / 5 / 180 ),\n}": POST_QUERYResult;
     "*[_type == \"post\" && defined(slug)] | order(coalesce(publishedAt, _createdAt) desc)[$offset...$end]{\n    _id,\n    _createdAt,\n    title,\n    slug,\n    excerpt,\n    author->{\n      name,\n      title,\n      image {\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    categories[]->{\n      _id,\n      title,\n      slug,\n    },\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && defined(slug)] | order(title asc)[$offset...$end]{\n    _id,\n    _createdAt,\n    title,\n    slug,\n    excerpt,\n    author->{\n      name,\n      title,\n      image {\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    categories[]->{\n      _id,\n      title,\n      slug,\n    },\n}": POSTS_QUERY_AZResult;
     "*[_type == \"post\" && defined(slug)] | order(title desc)[$offset...$end]{\n    _id,\n    _createdAt,\n    title,\n    slug,\n    excerpt,\n    author->{\n      name,\n      title,\n      image {\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    categories[]->{\n      _id,\n      title,\n      slug,\n    },\n}": POSTS_QUERY_ZAResult;
     "*[_type == \"post\" && defined(slug)]{slug}": POSTS_SLUGS_QUERYResult;
     "count(*[_type == \"post\" && defined(slug)])": POSTS_COUNT_QUERYResult;
-    "*[_type == \"product\" && slug.current == $slug][0]{\n  _id,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    name,\n    sku,\n    bestFor,\n    pungency,\n    bindingCapacity,\n    fatContent,\n    purity,\n    moisture,\n    hsCode,\n    minOrder,\n    origin,\n    botanicalName,\n    shelfLife,\n    allergenInfo,\n    productAttributes,\n    certification,\n  },\n  keyFeatures[],\n  packagingOptions[]{\n    ...,\n  },\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  body[]{ \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n },\n  excerpt,\n  categories[]->{ _id, title, slug },\n  \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n\n}": PRODUCT_QUERYResult;
+    "*[_type == \"product\" && slug.current == $slug][0]{\n  _id,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    name,\n    sku,\n    bestFor,\n    pungency,\n    bindingCapacity,\n    fatContent,\n    purity,\n    moisture,\n    hsCode,\n    minOrder,\n    origin,\n    botanicalName,\n    shelfLife,\n    allergenInfo,\n    productAttributes,\n    certification,\n  },\n  keyFeatures[],\n  packagingOptions[]{\n    ...,\n  },\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  body[]{ \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n },\n  excerpt,\n  categories[]->{ _id, title, slug },\n  \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n\n}": PRODUCT_QUERYResult;
     "*[_type == \"product\" && defined(slug)] | order(orderRank){\n  _id,\n  orderRank,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    sku,\n    purity,\n    productAttributes,\n  },\n  keyFeatures[],\n  excerpt,\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  categories[]->{ _id, title, slug }\n}": PRODUCTS_QUERYResult;
     "*[_type == \"product\" && defined(slug)]{ slug }": PRODUCTS_SLUGS_QUERYResult;
     "count(*[_type == \"product\" && defined(slug)])": PRODUCTS_COUNT_QUERYResult;
@@ -7549,6 +7866,6 @@ declare module "@sanity/client" {
     "*[_type == \"product\" && references(*[_type == \"productCategory\" && slug.current == $slug]._id)] | order(title desc){\n  _id,\n  orderRank,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    sku,\n    purity,\n    productAttributes,\n  },\n  keyFeatures[],\n  excerpt,\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  categories[]->{ _id, title, slug }\n}": PRODUCTS_BY_CATEGORY_QUERY_ZAResult;
     "count(*[_type == \"product\" && references(*[_type == \"productCategory\" && slug.current == $slug]._id)])": PRODUCTS_COUNT_BY_CATEGORY_QUERYResult;
     "*[_type == \"settings\"][0]{\n  _type,\n  siteName,\n  logo{\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  description,\n  copyright\n}": SETTINGS_QUERYResult;
-    "*[_type == \"team\" && defined(slug)] | order(orderRank) {\n    _id,\n    name,\n    title,\n    description,\n    slug,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    links[]{\n      \n    _key,\n    ...,\n    \"href\": select(\n      isExternal => href,\n      @.internalLink->slug.current == \"index\" => \"/\",\n      @.internalLink->_type == \"post\" => \"/blog/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"blogCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"postCategory\" => \"/blog/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"product\" => \"/products/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"productCategory\" => \"/products/category/\" + @.internalLink->slug.current,\n      @.internalLink->_type == \"contact\" => \"/contact\",\n      \"/\" + @.internalLink->slug.current\n    )\n\n    },\n}": TEAM_QUERYResult;
+    "*[_type == \"team\" && defined(slug)] | order(orderRank) {\n    _id,\n    name,\n    title,\n    description,\n    slug,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n}": TEAM_QUERYResult;
   }
 }

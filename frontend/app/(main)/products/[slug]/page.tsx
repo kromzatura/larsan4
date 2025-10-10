@@ -68,9 +68,11 @@ export default async function ProductPage(props: {
   const product = await fetchSanityProductBySlug({ slug: params.slug });
   if (!product) notFound();
 
-  const spec: ProductSpecification | undefined = Array.isArray((product as ProductDocument | any)?.specifications)
-    ? (product as ProductDocument).specifications![0]
-    : undefined;
+  const productDoc = product as ProductDocument;
+  const specifications = Array.isArray(productDoc.specifications)
+    ? (productDoc.specifications as ProductSpecification[])
+    : null;
+  const spec = specifications?.[0];
 
   const links = [
     { label: "Products", href: "/products" },

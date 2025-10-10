@@ -9,7 +9,7 @@ interface PortableTextSpan {
 
 interface PortableTextBlockBase {
   _key?: string;
-  _type?: string;
+  _type: string;
   children?: PortableTextSpan[];
   markDefs?: Array<{ _key?: string; _type?: string; href?: string }>;
   style?: string;
@@ -49,8 +49,9 @@ interface LinkMarkDef {
   href?: string;
 }
 
-export function ptBlocksToHtml(blocks: AnyBlock[] | null | undefined): string {
+export function ptBlocksToHtml(blocks: unknown[] | null | undefined): string {
   if (!Array.isArray(blocks) || blocks.length === 0) return "";
+  const typedBlocks = blocks as AnyBlock[];
   const components: PortableTextComponents = {
     block: {
       h1: ({ children }) => `<h1>${children}</h1>`,
@@ -61,7 +62,8 @@ export function ptBlocksToHtml(blocks: AnyBlock[] | null | undefined): string {
       blockquote: ({ children }) => `<blockquote>${children}</blockquote>`,
     },
     list: ({ children, value }) => {
-      const type = (value as PortableTextBlockBase | undefined)?.listItem === "number" ? "number" : (value as any)?.list || "bullet"; // fallback
+      const blockValue = value as PortableTextBlockBase | undefined;
+      const type = blockValue?.listItem === "number" ? "number" : (blockValue as { list?: string } | undefined)?.list || "bullet"; // fallback
       if (type === "number") return `<ol>${children}</ol>`;
       return `<ul>${children}</ul>`;
     },
@@ -88,7 +90,7 @@ export function ptBlocksToHtml(blocks: AnyBlock[] | null | undefined): string {
       },
       alert: (opts) => {
         const v = (opts as { value: AlertBlock }).value;
-        const children = (opts as any)?.children as string | undefined;
+        const children = (opts as { children?: string }).children;
         const title = v?.title ? `<strong>${escapeHtml(v.title)}</strong> ` : "";
         const desc = v?.description ? escapeHtml(v.description) : "";
         return `<div class=\"alert\">${title}${desc}${children ?? ""}</div>`;
@@ -103,7 +105,7 @@ export function ptBlocksToHtml(blocks: AnyBlock[] | null | undefined): string {
       },
     },
   };
-  return toHTML(blocks as any, { components });
+  return toHTML(typedBlocks as Parameters<typeof toHTML>[0], { components });
 }
 
 export function getLanguageFromSettings(settings: { language?: string; siteLanguage?: string; locale?: string } | null | undefined): string {
