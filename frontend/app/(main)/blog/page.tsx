@@ -183,7 +183,10 @@ export default async function BlogIndex(
         {items.length === 0 ? (
           <div className="rounded-md border p-6 text-sm text-muted-foreground">
             No posts found. Try adjusting your sort, or{" "}
-            <Link href="/" className="underline underline-offset-2">
+            <Link
+              href={buildLocalizedPath(locale, "/")}
+              className="underline underline-offset-2"
+            >
               go back home
             </Link>
             .
@@ -195,6 +198,7 @@ export default async function BlogIndex(
             pageCount={totalPages}
             baseUrl={basePath}
             baseSearchParams={sort && sort !== "newest" ? `sort=${sort}` : ""}
+            locale={locale}
           />
         )}
       </div>

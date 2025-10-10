@@ -223,6 +223,7 @@ export default async function BlogCategoryPage(props: {
             baseUrl={baseUrl}
             baseSearchParams={baseSearchParams}
             activeCategorySlug={params.slug}
+            locale={locale}
           />
         )}
       </div>
