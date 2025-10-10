@@ -7,11 +7,15 @@ import Link from "next/link";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import Icon from "@/components/icon";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Hero12Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "hero-12" }
->;
+> & {
+  locale?: SupportedLocale;
+};
 
 const Hero12 = ({
   backgroundImage,
@@ -21,6 +25,7 @@ const Hero12 = ({
   image,
   links,
   techLogos,
+  locale = FALLBACK_LOCALE,
 }: Hero12Props) => {
   return (
     <section className="relative overflow-hidden py-32">
@@ -62,7 +67,7 @@ const Hero12 = ({
             {links && links.length > 0 && (
               <div className="mt-6 flex justify-center gap-3">
                 {links.map((link) => {
-                  const href = resolveLinkHref(link);
+                  const href = resolveLinkHref(link, locale);
                   const target = link?.isExternal && link?.target ? "_blank" : undefined;
                   const rel = target ? "noopener noreferrer" : undefined;
                   return (
@@ -99,7 +104,7 @@ const Hero12 = ({
                 )}
                 <div className="flex flex-wrap items-center justify-center gap-4">
                   {techLogos.map((logo) => {
-                    const logoLink = resolveLinkHref(logo.link ?? undefined);
+                    const logoLink = resolveLinkHref(logo.link ?? undefined, locale);
                     const target = logo.link?.isExternal && logo.link?.target ? "_blank" : undefined;
                     const rel = target ? "noopener noreferrer" : undefined;
                     return (

@@ -40,6 +40,13 @@ export default defineType({
       of: [{ type: "link" }, { type: "link-group" }],
     }),
     orderRankField({ type: "navigation" }),
+    defineField({
+      // should match 'languageField' plugin configuration setting, if customized
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+    }),
   ],
 
   preview: {

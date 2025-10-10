@@ -60,7 +60,7 @@ export default function CompareProducts({
   title,
   productFields,
   columns,
-}: CompareProductsBlockProps) {
+}: CompareProductsBlockProps & { locale?: import("@/lib/i18n/config").SupportedLocale }) {
   const normalized: NormalizedColumns = useMemo(() => {
     if (!columns || columns.length === 0)
       return { headers: [], rows: [], cols: [] };

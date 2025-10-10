@@ -7,10 +7,19 @@ import PostDate from "@/components/post-date";
 import Link from "next/link";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { Calendar, ChevronRight } from "lucide-react";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Blog14 = Extract<Block, { _type: "blog-14" }>;
 
-export default function Blog14({ padding, posts, title, gridColumns }: Blog14) {
+export default function Blog14({
+  padding,
+  posts,
+  title,
+  gridColumns,
+  locale = FALLBACK_LOCALE,
+}: Blog14 & { locale?: SupportedLocale }) {
   return (
     <SectionContainer padding={padding}>
       {posts && posts?.length > 0 && (
@@ -35,11 +44,11 @@ export default function Blog14({ padding, posts, title, gridColumns }: Blog14) {
               <div className="flex flex-wrap gap-2">
                 {posts[0].categories.map((category) => {
                   const slug = category.slug?.current ?? undefined;
+                  const href = slug
+                    ? buildLocalizedPath(locale, `/blog/category/${slug}`)
+                    : buildLocalizedPath(locale, "/blog");
                   return (
-                    <Link
-                      key={category._id}
-                      href={slug ? `/blog/category/${slug}` : `/blog`}
-                    >
+                    <Link key={category._id} href={href}>
                       <Badge variant="secondary">{category.title}</Badge>
                     </Link>
                   );
@@ -62,7 +71,10 @@ export default function Blog14({ padding, posts, title, gridColumns }: Blog14) {
                 <PostDate date={posts[0]._createdAt} />
               </span>
               <Link
-                href={`/blog/${posts[0].slug?.current}`}
+                href={buildLocalizedPath(
+                  locale,
+                  `/blog/${posts[0].slug?.current || ""}`
+                )}
                 className="flex items-center gap-1"
               >
                 Read more
@@ -106,11 +118,11 @@ export default function Blog14({ padding, posts, title, gridColumns }: Blog14) {
                   <div className="flex flex-wrap gap-2">
                     {post.categories.map((category) => {
                       const slug = category.slug?.current ?? undefined;
+                      const href = slug
+                        ? buildLocalizedPath(locale, `/blog/category/${slug}`)
+                        : buildLocalizedPath(locale, "/blog");
                       return (
-                        <Link
-                          key={category._id}
-                          href={slug ? `/blog/category/${slug}` : `/blog`}
-                        >
+                        <Link key={category._id} href={href}>
                           <Badge variant="secondary">{category.title}</Badge>
                         </Link>
                       );
@@ -133,7 +145,10 @@ export default function Blog14({ padding, posts, title, gridColumns }: Blog14) {
                     <PostDate date={post._createdAt} />
                   </span>
                   <Link
-                    href={`/blog/${post.slug?.current}`}
+                    href={buildLocalizedPath(
+                      locale,
+                      `/blog/${post.slug?.current || ""}`
+                    )}
                     className="flex items-center gap-1"
                   >
                     Read more

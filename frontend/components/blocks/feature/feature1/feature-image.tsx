@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import type { SupportedLocale } from "@/lib/i18n/config";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Feature1 = Extract<Block, { _type: "feature-1" }>;
@@ -9,7 +10,9 @@ type FeatureImage = Extract<
   { _type: "feature-image" }
 >;
 
-export default function FeatureImage({ image }: FeatureImage) {
+export default function FeatureImage({
+  image,
+}: FeatureImage & { locale?: SupportedLocale }) {
   return image && image.asset?._id ? (
     <Image
       src={urlFor(image).url()}

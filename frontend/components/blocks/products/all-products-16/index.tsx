@@ -12,6 +12,9 @@ import ProductsTable, {
   ProductsTableItem,
 } from "@/components/products/products-table";
 import { fetchSanityProductCategoryBySlug } from "@/sanity/lib/fetch";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type AllProducts16Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -21,11 +24,13 @@ type AllProducts16Props = Extract<
 export default async function AllProducts16({
   padding,
   searchParams,
+  locale = FALLBACK_LOCALE,
 }: AllProducts16Props & {
   searchParams?: Promise<{
     page?: string;
     category?: string;
   }>;
+  locale?: SupportedLocale;
 }) {
   const PAGE_SIZE = 12;
   const params = searchParams ? await searchParams : undefined;
@@ -55,7 +60,7 @@ export default async function AllProducts16({
 
   const totalPages = Math.max(1, Math.ceil((total || 0) / PAGE_SIZE));
 
-  const baseUrl = "/products";
+  const baseUrl = buildLocalizedPath(locale, "/products");
   const baseSearchParams = new URLSearchParams();
   if (activeCategory) baseSearchParams.set("category", activeCategory);
 
@@ -80,9 +85,10 @@ export default async function AllProducts16({
             _id: c?._id || undefined,
             title: c?.title || null,
             slug: c?.slug?.current || null,
+            href: `${baseUrl}?category=${c?.slug?.current || ""}`,
           }))
         : null,
-      href: `/products/${p.slug?.current || ""}`,
+      href: buildLocalizedPath(locale, `/products/${p.slug?.current || ""}`),
     };
   });
 
@@ -104,7 +110,7 @@ export default async function AllProducts16({
                     : "No products found in this category."}
                 </p>
                 <p className="mt-2">
-                  <Link className="underline" href="/products">
+                  <Link className="underline" href={baseUrl}>
                     Clear filter
                   </Link>
                 </p>

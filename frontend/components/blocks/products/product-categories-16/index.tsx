@@ -3,6 +3,9 @@ import SectionContainer from "@/components/ui/section-container";
 import { Badge } from "@/components/ui/badge";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { fetchSanityProductCategories } from "@/sanity/lib/fetch";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type CategoriesBlockProps = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -12,8 +15,10 @@ type CategoriesBlockProps = Extract<
 export default async function ProductCategories16({
   padding,
   searchParams,
+  locale = FALLBACK_LOCALE,
 }: CategoriesBlockProps & {
   searchParams?: Promise<{ category?: string }>;
+  locale?: SupportedLocale;
 }) {
   const cats = await fetchSanityProductCategories();
   const params = searchParams ? await searchParams : undefined;
@@ -22,6 +27,7 @@ export default async function ProductCategories16({
     cats.map((c) => (c.slug?.current ? String(c.slug.current) : ""))
   );
   const hasValidActive = !!(active && slugs.has(active));
+  const productsBasePath = buildLocalizedPath(locale, "/products");
   return (
     <SectionContainer padding={padding}>
       <div className="rounded-lg border p-4">
@@ -29,7 +35,7 @@ export default async function ProductCategories16({
           <span>Filter</span>
           <span>Category:</span>
           <Link
-            href={`/products`}
+            href={productsBasePath}
             className="rounded outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <Badge
@@ -44,7 +50,7 @@ export default async function ProductCategories16({
           {cats.map((c) => (
             <Link
               key={c._id}
-              href={`/products?category=${c.slug?.current || ""}`}
+              href={`${productsBasePath}?category=${c.slug?.current || ""}`}
               className="rounded outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <Badge

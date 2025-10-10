@@ -11,6 +11,7 @@ import {
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import type { SupportedLocale } from "@/lib/i18n/config";
 
 interface PlusSignsProps extends SVGProps<SVGSVGElement> {
   className?: string;
@@ -67,7 +68,7 @@ export default function FAQ14({
   title,
   description,
   sections,
-}: FAQProps) {
+}: FAQProps & { locale?: SupportedLocale }) {
   const titleSize = title?.size || "default";
   const titleWeight = title?.weight || "bold";
   const Element = title?.element || "h2";

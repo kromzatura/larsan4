@@ -41,6 +41,14 @@ export default defineType({
       },
       description: "The color of the card. Used for gallery 10 testimonials.",
     }),
+    defineField({
+      // should match 'languageField' plugin configuration setting, if customized
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+    }),
+
     orderRankField({ type: "testimonial" }),
   ],
 

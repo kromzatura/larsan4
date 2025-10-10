@@ -1,4 +1,6 @@
 import { PAGE_QUERYResult } from "@/sanity.types";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import SectionHeader from "@/components/blocks/section-header";
 import Hero12 from "@/components/blocks/hero/hero12";
 import Hero13 from "@/components/blocks/hero/hero13";
@@ -71,8 +73,15 @@ import ProductCategories16 from "@/components/blocks/products/product-categories
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 
+type BlockComponentProps<K extends Block["_type"]> = Extract<
+  Block,
+  { _type: K }
+> & {
+  locale?: SupportedLocale;
+};
+
 type ComponentMap = {
-  [K in Block["_type"]]: React.ComponentType<Extract<Block, { _type: K }>>;
+  [K in Block["_type"]]: React.ComponentType<BlockComponentProps<K>>;
 };
 
 const componentMap: ComponentMap = {
@@ -134,7 +143,7 @@ const componentMap: ComponentMap = {
   "compare-6": Compare6,
   // compare-products: productFields arrives from GROQ as string[]; component narrows internally.
   "compare-products": CompareProducts as React.ComponentType<
-    Omit<Extract<Block, { _type: "compare-products" }>, "productFields"> & {
+    Omit<BlockComponentProps<"compare-products">, "productFields"> & {
       productFields: string[] | null;
     }
   >,
@@ -154,14 +163,17 @@ const componentMap: ComponentMap = {
 
 export default function Blocks({
   blocks,
+  locale,
   searchParams,
 }: {
   blocks: Block[];
+  locale?: SupportedLocale;
   searchParams?: Promise<{
     page?: string;
     category?: string;
   }>;
 }) {
+  const activeLocale = locale ?? FALLBACK_LOCALE;
   return (
     <>
       {blocks?.map((block) => {
@@ -178,8 +190,10 @@ export default function Blocks({
           block._type === "product-categories-16";
 
         if (needsSearchParams && block._type === "all-products-16") {
-          const C = componentMap["all-products-16"] as React.ComponentType<
-            Extract<Block, { _type: "all-products-16" }> & {
+          const C = componentMap[
+            "all-products-16"
+          ] as React.ComponentType<
+            BlockComponentProps<"all-products-16"> & {
               searchParams?: Promise<{ page?: string; category?: string }>;
             }
           >;
@@ -187,13 +201,16 @@ export default function Blocks({
             <C
               {...(block as Extract<Block, { _type: "all-products-16" }>)}
               searchParams={searchParams}
+              locale={activeLocale}
               key={block._key}
             />
           );
         }
         if (needsSearchParams && block._type === "product-categories-16") {
-          const C = componentMap["product-categories-16"] as React.ComponentType<
-            Extract<Block, { _type: "product-categories-16" }> & {
+          const C = componentMap[
+            "product-categories-16"
+          ] as React.ComponentType<
+            BlockComponentProps<"product-categories-16"> & {
               searchParams?: Promise<{ category?: string }>;
             }
           >;
@@ -201,15 +218,22 @@ export default function Blocks({
             <C
               {...(block as Extract<Block, { _type: "product-categories-16" }>)}
               searchParams={searchParams}
+              locale={activeLocale}
               key={block._key}
             />
           );
         }
 
-        const C = componentMap[block._type] as React.ComponentType<
-          Extract<Block, { _type: typeof block._type }>
-        >;
-        return <C {...(block as Extract<Block, { _type: typeof block._type }>)} key={block._key} />;
+        const C = componentMap[
+          block._type
+        ] as React.ComponentType<BlockComponentProps<typeof block._type>>;
+        return (
+          <C
+            {...(block as Extract<Block, { _type: typeof block._type }>)}
+            locale={activeLocale}
+            key={block._key}
+          />
+        );
       })}
     </>
   );

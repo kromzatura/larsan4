@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import Icon from "@/components/icon";
+import type { SupportedLocale } from "@/lib/i18n/config";
 
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -18,7 +19,11 @@ import { Progress } from "@/components/ui/progress";
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Feature12 = Extract<Block, { _type: "feature-12" }>;
 
-export default function Feature12({ padding, tagline, columns }: Feature12) {
+export default function Feature12({
+  padding,
+  tagline,
+  columns,
+}: Feature12 & { locale?: SupportedLocale }) {
   const [api, setApi] = useState<CarouselApi>();
   const columnsLength = columns?.length ?? 0;
   const [progress, setProgress] = useState(() =>

@@ -21,6 +21,7 @@ export type ProductsTableItem = {
     _id?: string | null;
     title?: string | null;
     slug?: string | null;
+    href?: string | null;
   }> | null;
   href: string;
 };
@@ -120,7 +121,7 @@ export default function ProductsTable({
                       item.categories?.map((c) => (
                         <Link
                           key={(c && c._id) || `${item._id}-${c?.slug}`}
-                          href={`/products?category=${c?.slug || ""}`}
+                          href={c?.href || `/products?category=${c?.slug || ""}`}
                           className="rounded outline-none focus-visible:ring-2 focus-visible:ring-ring"
                         >
                           <Badge

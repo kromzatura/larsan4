@@ -112,6 +112,13 @@ export default defineType({
       group: "content",
     }),
     orderRankField({ type: "specification" }),
+    defineField({
+      // should match 'languageField' plugin configuration setting, if customized
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+    }),
   ],
   preview: {
     select: { title: "name", sku: "sku" },

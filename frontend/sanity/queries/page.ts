@@ -71,7 +71,15 @@ import { allProducts16Query } from "./products/all-products-16";
 import { productCategories16Query } from "./products/product-categories-16";
 
 export const PAGE_QUERY = groq`
-  *[_type == "page" && slug.current == $slug][0]{
+  *[
+    _type == "page" &&
+    slug.current == $slug &&
+    (!defined(language) || language in [$lang, $fallbackLang])
+  ]
+  | order(language == $lang desc, _updatedAt desc)[0]{
+    _id,
+    _type,
+    language,
     blocks[]{
       ${sectionHeaderQuery},
       ${hero12Query},
@@ -128,8 +136,8 @@ export const PAGE_QUERY = groq`
       ${compare2Query},
       ${compare4Query},
       ${compare5Query},
-      ${compare6Query},
-  ${compareProductsQuery},
+    ${compare6Query},
+    ${compareProductsQuery},
       ${gallery1Query},
       ${gallery3Query},
       ${gallery4Query},
@@ -147,4 +155,13 @@ export const PAGE_QUERY = groq`
   }
 `;
 
-export const PAGES_SLUGS_QUERY = groq`*[_type == "page" && defined(slug)]{slug}`;
+export const PAGES_SLUGS_QUERY = groq`
+  *[
+    _type == "page" &&
+    defined(slug) &&
+    (!defined(language) || language in [$lang, $fallbackLang])
+  ]{
+    slug,
+    language,
+  }
+`;

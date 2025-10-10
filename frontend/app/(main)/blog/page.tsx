@@ -8,6 +8,7 @@ import {
 } from "@/sanity/lib/fetch";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { chipClass } from "@/components/ui/chip";
+import { buildLocalizedPath, normalizeLocale } from "@/lib/i18n/routing";
 
 type BlogSort = "newest" | "az" | "za";
 interface BlogSearchParams {
@@ -26,14 +27,18 @@ interface MetadataWithAlternates {
 
 const POSTS_PER_PAGE = 6;
 
-export async function generateMetadata(
-  props: { searchParams?: Promise<BlogSearchParams> }
-) {
+export async function generateMetadata(props: {
+  params?: Promise<{ lang?: string }>;
+  searchParams?: Promise<BlogSearchParams>;
+}) {
+  const params = props.params ? await props.params : undefined;
+  const locale = normalizeLocale(params?.lang);
   const sp = props.searchParams ? await props.searchParams : undefined;
   const pageNum = Math.max(1, Number(sp?.page || 1));
   const rawSort = sp?.sort;
   const sort: BlogSort = rawSort === "az" || rawSort === "za" ? rawSort : "newest";
-  const pageDoc = await fetchSanityPageBySlug({ slug: "blog" });
+  const pageDoc = await fetchSanityPageBySlug({ slug: "blog", lang: locale });
+  const basePath = buildLocalizedPath(locale, "/blog");
   const base = generatePageMetadata({
     page: pageDoc,
     slug: "blog",
@@ -45,8 +50,8 @@ export async function generateMetadata(
       ...(base.alternates || {}),
       types: {
         ...(base.alternates?.types || {}),
-        "application/rss+xml": "/blog/rss.xml",
-        "application/feed+json": "/blog/feed.json",
+        "application/rss+xml": `${basePath}/rss.xml`,
+        "application/feed+json": `${basePath}/feed.json`,
       },
     },
   };
@@ -54,23 +59,26 @@ export async function generateMetadata(
     return {
       ...withRss,
       robots: "noindex",
-      alternates: { canonical: "/blog" },
+      alternates: { canonical: basePath },
     } as MetadataWithAlternates;
   }
   return withRss;
 }
 
 export default async function BlogIndex(props: {
+  params?: { lang?: string };
   searchParams?: Promise<BlogSearchParams>;
-}) {
+} = {}) {
+  const locale = normalizeLocale(props.params?.lang);
   const sp = props.searchParams ? await props.searchParams : undefined;
   const page = Math.max(1, Number(sp?.page || 1));
   const rawSort = sp?.sort;
   const sort: BlogSort = rawSort === "az" || rawSort === "za" ? rawSort : "newest";
+  const basePath = buildLocalizedPath(locale, "/blog");
 
   const [posts, totalCount] = await Promise.all([
-    fetchSanityPosts({ page, limit: POSTS_PER_PAGE, sort }),
-    fetchSanityPostsCount(),
+    fetchSanityPosts({ page, limit: POSTS_PER_PAGE, sort, lang: locale }),
+    fetchSanityPostsCount({ lang: locale }),
   ]);
   const totalPages = Math.max(1, Math.ceil((totalCount || 0) / POSTS_PER_PAGE));
   if (page > totalPages) notFound();
@@ -104,13 +112,13 @@ export default async function BlogIndex(props: {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: `${SITE_URL}/`,
+        item: `${SITE_URL}${buildLocalizedPath(locale, "/")}`,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Blog",
-        item: `${SITE_URL}/blog`,
+        item: `${SITE_URL}${basePath}`,
       },
     ],
   } as const;
@@ -124,7 +132,7 @@ export default async function BlogIndex(props: {
       <h1 className="text-3xl font-semibold md:text-5xl">Blog</h1>
       <div className="mt-5 flex flex-wrap gap-2">
         <Link
-          href="/blog/rss.xml"
+          href={`${basePath}/rss.xml`}
           prefetch
           aria-label="Subscribe to the blog RSS feed"
           className="inline-flex items-center rounded-md border px-3 py-1.5 text-sm text-muted-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background"
@@ -132,7 +140,7 @@ export default async function BlogIndex(props: {
           Subscribe (RSS)
         </Link>
         <Link
-          href="/blog/feed.json"
+          href={`${basePath}/feed.json`}
           prefetch
           aria-label="Subscribe to the blog JSON feed"
           className="inline-flex items-center rounded-md border px-3 py-1.5 text-sm text-muted-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background"
@@ -140,7 +148,7 @@ export default async function BlogIndex(props: {
           Subscribe (JSON)
         </Link>
         <Link
-          href={`/blog`}
+          href={basePath}
           prefetch
           aria-label="Sort by newest"
           aria-current={sort === "newest" ? "page" : undefined}
@@ -149,7 +157,7 @@ export default async function BlogIndex(props: {
           Newest
         </Link>
         <Link
-          href={`/blog?sort=az`}
+          href={`${basePath}?sort=az`}
           prefetch
           aria-label="Sort by title A to Z"
           aria-current={sort === "az" ? "page" : undefined}
@@ -158,7 +166,7 @@ export default async function BlogIndex(props: {
           A–Z
         </Link>
         <Link
-          href={`/blog?sort=za`}
+          href={`${basePath}?sort=za`}
           prefetch
           aria-label="Sort by title Z to A"
           aria-current={sort === "za" ? "page" : undefined}
@@ -181,7 +189,7 @@ export default async function BlogIndex(props: {
             items={items}
             page={page}
             pageCount={totalPages}
-            baseUrl="/blog"
+            baseUrl={basePath}
             baseSearchParams={sort && sort !== "newest" ? `sort=${sort}` : ""}
           />
         )}

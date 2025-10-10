@@ -15,7 +15,6 @@ import { resolve } from "./presentation/resolve";
 import { structure } from "./structure";
 import { defaultDocumentNode } from "./defaultDocumentNode";
 import { codeInput } from "@sanity/code-input";
-import contact from "./schemas/documents/contact";
 
 // Define the actions that should be available for singleton documents
 const singletonActions = new Set([
@@ -76,7 +75,22 @@ export default defineConfig({
         { id: "en", title: "English" },
         { id: "nl", title: "Dutch" },
       ],
-      schemaTypes: ["settings", "contact"],
+      schemaTypes: [
+        "settings",
+        "contact",
+        "post",
+        "category",
+        "banner",
+        "changelog",
+        "faq",
+        "page",
+        "product",
+        "productCategory",
+        "specification",
+  "navigation",
+  "author",
+  "team",
+      ],
       apiVersion: "2025-02-19",
     }),
     assist({

@@ -8,6 +8,9 @@ import Link from "next/link";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { fetchSanityPosts, fetchSanityPostsCount } from "@/sanity/lib/fetch";
 import Pagination from "@/components/pagination";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type AllPosts14Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -17,10 +20,12 @@ type AllPosts14Props = Extract<
 export default async function AllPosts14({
   padding,
   searchParams,
+  locale = FALLBACK_LOCALE,
 }: AllPosts14Props & {
   searchParams?: Promise<{
     page?: string;
   }>;
+  locale?: SupportedLocale;
 }) {
   const POSTS_PER_PAGE = 6;
 
@@ -32,16 +37,19 @@ export default async function AllPosts14({
     fetchSanityPosts({
       page: currentPage,
       limit: POSTS_PER_PAGE,
+      lang: locale,
     }),
-    fetchSanityPostsCount(),
+    fetchSanityPostsCount({ lang: locale }),
   ]);
 
   const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
 
+  const baseBlogPath = buildLocalizedPath(locale, "/blog");
+
   const createPageUrl = (pageNum: number) => {
     const params = new URLSearchParams();
     if (pageNum > 1) params.set("page", pageNum.toString());
-    return `/blog${params.toString() ? `?${params.toString()}` : ""}`;
+    return `${baseBlogPath}${params.toString() ? `?${params.toString()}` : ""}`;
   };
 
   return (
@@ -69,11 +77,11 @@ export default async function AllPosts14({
                 <div className="flex flex-wrap gap-2">
                   {post.categories.map((category) => {
                     const slug = category.slug?.current ?? undefined;
+                    const href = slug
+                      ? buildLocalizedPath(locale, `/blog/category/${slug}`)
+                      : baseBlogPath;
                     return (
-                      <Link
-                        key={category._id}
-                        href={slug ? `/blog/category/${slug}` : `/blog`}
-                      >
+                      <Link key={category._id} href={href}>
                         <Badge variant="secondary">{category.title}</Badge>
                       </Link>
                     );
@@ -96,7 +104,10 @@ export default async function AllPosts14({
                   <PostDate date={post._createdAt} />
                 </span>
                 <Link
-                  href={`/blog/${post.slug?.current}`}
+                  href={buildLocalizedPath(
+                    locale,
+                    `/blog/${post.slug?.current || ""}`
+                  )}
                   className="flex items-center gap-1"
                 >
                   Read more

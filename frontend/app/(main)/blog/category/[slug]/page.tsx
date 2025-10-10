@@ -8,6 +8,8 @@ import {
   fetchSanityPostsCountByBlogCategory,
 } from "@/sanity/lib/fetch";
 import { chipClass } from "@/components/ui/chip";
+import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
+import { FALLBACK_LOCALE, SUPPORTED_LOCALES, type SupportedLocale } from "@/lib/i18n/config";
 
 type BlogSort = "newest" | "az" | "za";
 interface BlogCategorySearchParams {
@@ -23,36 +25,61 @@ interface MetadataWithAlternates {
 const POSTS_PER_PAGE = 6;
 
 export async function generateStaticParams() {
-  const cats = await fetchSanityBlogCategoriesStaticParams();
-  return cats
-    .filter((c) => c.slug?.current)
-    .map((c) => ({ slug: c.slug.current }));
+  const categoriesByLocale = await Promise.all(
+    SUPPORTED_LOCALES.map(async (locale) => {
+      const cats = await fetchSanityBlogCategoriesStaticParams({ lang: locale });
+      return cats
+        .filter((c) => c.slug?.current)
+        .map((c) =>
+          locale === FALLBACK_LOCALE
+            ? { slug: c.slug.current }
+            : { slug: c.slug.current, lang: locale }
+        );
+    })
+  );
+
+  const seen = new Set<string>();
+  const params: Array<{ slug?: string; lang?: SupportedLocale }> = [];
+
+  for (const entries of categoriesByLocale) {
+    for (const entry of entries) {
+      if (!entry.slug) continue;
+      const key = `${entry.slug}:${entry.lang ?? FALLBACK_LOCALE}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      params.push(entry);
+    }
+  }
+
+  return params;
 }
 
 export async function generateMetadata(props: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; lang?: string }>;
   searchParams?: Promise<BlogCategorySearchParams>;
 }) {
   const params = await props.params;
+  const locale = normalizeLocale(params.lang);
   const sp = props.searchParams ? await props.searchParams : undefined;
   const pageNum = Math.max(1, Number(sp?.page || 1));
   const rawSort = sp?.sort;
   const sort: BlogSort = rawSort === "az" || rawSort === "za" ? rawSort : "newest";
-  const cat = await fetchSanityBlogCategoryBySlug({ slug: params.slug });
+  const cat = await fetchSanityBlogCategoryBySlug({ slug: params.slug, lang: locale });
   if (!cat) notFound();
+  const basePath = buildLocalizedPath(locale, `/blog/category/${params.slug}`);
   // Category documents are not full page documents; cast for metadata helper which accepts broader page-like shapes.
   const base: MetadataWithAlternates = {
     title: cat.title || undefined,
     description: cat.description || undefined,
-    alternates: { canonical: `/blog/category/${params.slug}` },
+    alternates: { canonical: basePath },
   };
   const withFeeds: MetadataWithAlternates = {
     ...base,
     alternates: {
       ...(base.alternates || {}),
       types: {
-        "application/rss+xml": `/blog/category/${params.slug}/rss.xml`,
-        "application/feed+json": `/blog/category/${params.slug}/feed.json`,
+        "application/rss+xml": `${basePath}/rss.xml`,
+        "application/feed+json": `${basePath}/feed.json`,
       },
     },
   };
@@ -63,24 +90,26 @@ export async function generateMetadata(props: {
 }
 
 export default async function BlogCategoryPage(props: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; lang?: string }>;
   searchParams?: Promise<BlogCategorySearchParams>;
 }) {
   const params = await props.params;
+  const locale = normalizeLocale(params.lang);
   const sp = props.searchParams ? await props.searchParams : undefined;
   const page = Math.max(1, Number(sp?.page || 1));
   const rawSort = sp?.sort;
   const sort: BlogSort = rawSort === "az" || rawSort === "za" ? rawSort : "newest";
 
   const [cat, posts, totalCount] = await Promise.all([
-    fetchSanityBlogCategoryBySlug({ slug: params.slug }),
+    fetchSanityBlogCategoryBySlug({ slug: params.slug, lang: locale }),
     fetchSanityPostsByBlogCategory({
       slug: params.slug,
       page,
       limit: POSTS_PER_PAGE,
       sort,
+      lang: locale,
     }),
-    fetchSanityPostsCountByBlogCategory({ slug: params.slug }),
+    fetchSanityPostsCountByBlogCategory({ slug: params.slug, lang: locale }),
   ]);
   if (!cat) notFound();
   const totalPages = Math.max(1, Math.ceil((totalCount || 0) / POSTS_PER_PAGE));
@@ -106,19 +135,25 @@ export default async function BlogCategoryPage(props: {
       : null,
   }));
 
-  const baseUrl = `/blog/category/${params.slug}`;
+  const baseUrl = buildLocalizedPath(locale, `/blog/category/${params.slug}`);
+  const blogPath = buildLocalizedPath(locale, "/blog");
   const baseSearchParams = sort && sort !== "newest" ? `sort=${sort}` : "";
   const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: `${SITE_URL}${buildLocalizedPath(locale, "/")}`,
+      },
       {
         "@type": "ListItem",
         position: 2,
         name: "Blog",
-        item: `${SITE_URL}/blog`,
+        item: `${SITE_URL}${blogPath}`,
       },
       {
         "@type": "ListItem",
@@ -190,7 +225,7 @@ export default async function BlogCategoryPage(props: {
         {items.length === 0 ? (
           <div className="rounded-md border p-6 text-sm text-muted-foreground">
             No posts in this category yet. See{" "}
-            <Link href="/blog" className="underline underline-offset-2">
+            <Link href={blogPath} className="underline underline-offset-2">
               all posts
             </Link>
             .

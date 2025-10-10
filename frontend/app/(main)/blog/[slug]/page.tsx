@@ -12,6 +12,8 @@ import PostDate from "@/components/post-date";
 import { Separator } from "@/components/ui/separator";
 import { Clock, Facebook, Twitter, Linkedin } from "lucide-react";
 import { POST_QUERYResult } from "@/sanity.types";
+import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
+import { FALLBACK_LOCALE, SUPPORTED_LOCALES, type SupportedLocale } from "@/lib/i18n/config";
 
 type BreadcrumbLink = {
   label: string;
@@ -67,18 +69,41 @@ function extractHeadings(blocks: BlockContent): Heading[] {
 }
 
 export async function generateStaticParams() {
-  const posts = await fetchSanityPostsStaticParams();
+  const postsByLocale = await Promise.all(
+    SUPPORTED_LOCALES.map(async (locale) => {
+      const posts = await fetchSanityPostsStaticParams({ lang: locale });
+      return posts
+        .filter((post) => Boolean(post.slug?.current))
+        .map((post) =>
+          locale === FALLBACK_LOCALE
+            ? { slug: post.slug?.current }
+            : { slug: post.slug?.current, lang: locale }
+        );
+    })
+  );
 
-  return posts.map((post) => ({
-    slug: post.slug?.current,
-  }));
+  const seen = new Set<string>();
+  const params: Array<{ slug?: string; lang?: SupportedLocale }> = [];
+
+  for (const entries of postsByLocale) {
+    for (const entry of entries) {
+      if (!entry.slug) continue;
+      const key = `${entry.slug}:${entry.lang ?? FALLBACK_LOCALE}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      params.push(entry);
+    }
+  }
+
+  return params;
 }
 
 export async function generateMetadata(props: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; lang?: string }>;
 }) {
   const params = await props.params;
-  const post = await fetchSanityPostBySlug({ slug: params.slug });
+  const locale = normalizeLocale(params.lang);
+  const post = await fetchSanityPostBySlug({ slug: params.slug, lang: locale });
 
   if (!post) {
     notFound();
@@ -92,20 +117,22 @@ export async function generateMetadata(props: {
 }
 
 export default async function PostPage(props: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; lang?: string }>;
 }) {
   const params = await props.params;
-  const post = await fetchSanityPostBySlug(params);
+  const locale = normalizeLocale(params.lang);
+  const post = await fetchSanityPostBySlug({ slug: params.slug, lang: locale });
 
   if (!post) {
     notFound();
   }
 
+  const blogPath = buildLocalizedPath(locale, "/blog");
   const links: BreadcrumbLink[] = post
     ? [
         {
           label: "Blog",
-          href: "/blog",
+          href: blogPath,
         },
         {
           label: post.title as string,
@@ -116,6 +143,7 @@ export default async function PostPage(props: {
 
   const headings = extractHeadings(post.body);
   const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const postPath = buildLocalizedPath(locale, `/blog/${post.slug?.current ?? ""}`);
   const articleLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -128,25 +156,30 @@ export default async function PostPage(props: {
     dateModified: post._updatedAt || undefined,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${SITE_URL}/blog/${post.slug?.current ?? ""}`,
+      "@id": `${SITE_URL}${postPath}`,
     },
   } as const;
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: `${SITE_URL}${buildLocalizedPath(locale, "/")}`,
+      },
       {
         "@type": "ListItem",
         position: 2,
         name: "Blog",
-        item: `${SITE_URL}/blog`,
+        item: `${SITE_URL}${blogPath}`,
       },
       {
         "@type": "ListItem",
         position: 3,
         name: post.title || "Post",
-        item: `${SITE_URL}/blog/${post.slug?.current ?? ""}`,
+        item: `${SITE_URL}${postPath}`,
       },
     ],
   } as const;

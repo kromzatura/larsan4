@@ -7,13 +7,17 @@ import Link from "next/link";
 import { Circle } from "lucide-react";
 import Icon from "@/components/icon";
 import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 import { PAGE_QUERYResult } from "@/sanity.types";
 
 type SectionHeaderProps = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "section-header" }
->;
+> & {
+  locale?: SupportedLocale;
+};
 
 export default function SectionHeader({
   padding,
@@ -24,6 +28,7 @@ export default function SectionHeader({
   title,
   description,
   links,
+  locale = FALLBACK_LOCALE,
 }: SectionHeaderProps) {
   const isNarrow = sectionWidth === "narrow";
   const titleSize = title?.size || "default";
@@ -81,7 +86,7 @@ export default function SectionHeader({
               )}
             >
               {links.map((link) => {
-                const href = resolveLinkHref(link);
+                const href = resolveLinkHref(link, locale);
                 const target = link?.isExternal && link?.target ? "_blank" : undefined;
                 const rel = target ? "noopener noreferrer" : undefined;
 

@@ -2,6 +2,8 @@ import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import FeatureContent from "./feature-content";
 import FeatureImage from "./feature-image";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Feature1 = Extract<Block, { _type: "feature-1" }>;
@@ -9,27 +11,39 @@ type FeatureColumn = NonNullable<NonNullable<Feature1["columns"]>[number]>;
 
 const componentMap: {
   [K in FeatureColumn["_type"]]: React.ComponentType<
-    Extract<FeatureColumn, { _type: K }>
+    Extract<FeatureColumn, { _type: K }> & {
+      locale?: SupportedLocale;
+    }
   >;
 } = {
   "feature-content": FeatureContent,
   "feature-image": FeatureImage,
 };
 
-export default function Feature1({ padding, columns }: Feature1) {
+export default function Feature1({
+  padding,
+  columns,
+  locale = FALLBACK_LOCALE,
+}: Feature1 & { locale?: SupportedLocale }) {
   return (
     <SectionContainer padding={padding}>
       {columns && columns?.length > 0 && (
         <div className="grid items-center gap-8 lg:gap-16 lg:grid-cols-2">
           {columns?.map((column) => {
-            const Component = componentMap[column._type] as React.ComponentType<typeof column>;
+            const Component = componentMap[
+              column._type
+            ] as React.ComponentType<
+              Extract<FeatureColumn, { _type: typeof column._type }> & {
+                locale?: SupportedLocale;
+              }
+            >;
             if (!Component) {
               console.warn(
                 `No component implemented for column type: ${column._type}`
               );
               return <div data-type={column._type} key={column._key} />;
             }
-            return <Component {...column} key={column._key} />;
+            return <Component {...column} locale={locale} key={column._key} />;
           })}
         </div>
       )}

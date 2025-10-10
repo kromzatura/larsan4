@@ -6,6 +6,7 @@ import {
   fetchSanitySettings,
 } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 async function getTtfFont(
   family: string,
@@ -39,8 +40,8 @@ export async function GET(request: Request) {
       return new Response("Missing slug parameter", { status: 400 });
     }
 
-    const post = await fetchSanityPostBySlug({ slug });
-    const page = await fetchSanityPageBySlug({ slug });
+  const post = await fetchSanityPostBySlug({ slug, lang: FALLBACK_LOCALE });
+  const page = await fetchSanityPageBySlug({ slug, lang: FALLBACK_LOCALE });
     const settings = await fetchSanitySettings();
 
     if (!post && !page) {

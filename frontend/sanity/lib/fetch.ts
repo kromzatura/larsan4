@@ -54,6 +54,16 @@ import {
   POSTS_BY_BLOG_CATEGORY_QUERY_ZA,
   POSTS_COUNT_BY_BLOG_CATEGORY_QUERY,
 } from "@/sanity/queries/blogCategory";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE, getFallbackLocale } from "@/lib/i18n/config";
+
+function resolveLocaleParams(lang?: SupportedLocale) {
+  const resolvedLang = lang ?? FALLBACK_LOCALE;
+  return {
+    lang: resolvedLang,
+    fallbackLang: getFallbackLocale(resolvedLang),
+  };
+}
 
 export type ProductCategoryWithMeta = ProductCategory & {
   description?: string | null;
@@ -90,36 +100,48 @@ export const fetchSanityBanner = async (): Promise<BANNER_QUERYResult> => {
 
 export const fetchSanityPageBySlug = async ({
   slug,
+  lang,
 }: {
   slug: string;
+  lang?: SupportedLocale;
 }): Promise<PAGE_QUERYResult> => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
   const { data } = await sanityFetch({
     query: PAGE_QUERY,
-    params: { slug },
+    params: { slug, lang: queryLang, fallbackLang },
+    perspective: "published",
+    stega: false,
   });
 
   return data;
 };
 
-export const fetchSanityPagesStaticParams =
-  async (): Promise<PAGES_SLUGS_QUERYResult> => {
-    const { data } = await sanityFetch({
-      query: PAGES_SLUGS_QUERY,
-      perspective: "published",
-      stega: false,
-    });
+export const fetchSanityPagesStaticParams = async ({
+  lang,
+}: {
+  lang?: SupportedLocale;
+} = {}): Promise<PAGES_SLUGS_QUERYResult> => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
+  const { data } = await sanityFetch({
+    query: PAGES_SLUGS_QUERY,
+    params: { lang: queryLang, fallbackLang },
+    perspective: "published",
+    stega: false,
+  });
 
-    return data;
-  };
+  return data;
+};
 
 export const fetchSanityPosts = async ({
   page,
   limit,
   sort = "newest",
+  lang,
 }: {
   page?: number;
   limit: number;
   sort?: "newest" | "az" | "za";
+  lang?: SupportedLocale;
 }): Promise<POSTS_QUERYResult> => {
   const offset = page && limit ? (page - 1) * limit : 0;
   const end = offset + limit;
@@ -129,9 +151,10 @@ export const fetchSanityPosts = async ({
       : sort === "za"
       ? POSTS_QUERY_ZA
       : POSTS_QUERY;
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
   const { data } = await sanityFetch({
     query,
-    params: { offset, end },
+    params: { offset, end, lang: queryLang, fallbackLang },
     perspective: "published",
     stega: false,
   });
@@ -269,27 +292,30 @@ export const fetchSanityProductsCountByCategory = async ({
   return data;
 };
 
-export const fetchSanityPostsCount = async (): Promise<number> => {
+export const fetchSanityPostsCount = async ({
+  lang,
+}: {
+  lang?: SupportedLocale;
+} = {}): Promise<number> => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
   const { data } = await sanityFetch({
     query: POSTS_COUNT_QUERY,
+    params: { lang: queryLang, fallbackLang },
     perspective: "published",
     stega: false,
   });
   return data;
 };
 
-export const fetchSanityBlogCategories = async () => {
-  const { data } = await sanityFetch({ query: BLOG_CATEGORIES_QUERY });
-  return data as Array<{
-    _id: string;
-    title: string;
-    slug: { current: string };
-  }>;
-};
-
-export const fetchSanityBlogCategoriesStaticParams = async () => {
+export const fetchSanityBlogCategories = async ({
+  lang,
+}: {
+  lang?: SupportedLocale;
+} = {}) => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
   const { data } = await sanityFetch({
     query: BLOG_CATEGORIES_QUERY,
+    params: { lang: queryLang, fallbackLang },
     perspective: "published",
     stega: false,
   });
@@ -297,23 +323,50 @@ export const fetchSanityBlogCategoriesStaticParams = async () => {
     _id: string;
     title: string;
     slug: { current: string };
+    language?: string;
+  }>;
+};
+
+export const fetchSanityBlogCategoriesStaticParams = async ({
+  lang,
+}: {
+  lang?: SupportedLocale;
+} = {}) => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
+  const { data } = await sanityFetch({
+    query: BLOG_CATEGORIES_QUERY,
+    params: { lang: queryLang, fallbackLang },
+    perspective: "published",
+    stega: false,
+  });
+  return data as Array<{
+    _id: string;
+    title: string;
+    slug: { current: string };
+    language?: string;
   }>;
 };
 
 export const fetchSanityBlogCategoryBySlug = async ({
   slug,
+  lang,
 }: {
   slug: string;
+  lang?: SupportedLocale;
 }) => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
   const { data } = await sanityFetch({
     query: BLOG_CATEGORY_BY_SLUG_QUERY,
-    params: { slug },
+    params: { slug, lang: queryLang, fallbackLang },
+    perspective: "published",
+    stega: false,
   });
   return data as {
     _id: string;
     title?: string | null;
     slug?: { current?: string } | null;
     description?: string | null;
+    language?: string | null;
   } | null;
 };
 
@@ -322,11 +375,13 @@ export const fetchSanityPostsByBlogCategory = async ({
   page,
   limit,
   sort = "newest",
+  lang,
 }: {
   slug: string;
   page?: number;
   limit: number;
   sort?: "newest" | "az" | "za";
+  lang?: SupportedLocale;
 }) => {
   const offset = page && limit ? (page - 1) * limit : 0;
   const end = offset + limit;
@@ -336,9 +391,10 @@ export const fetchSanityPostsByBlogCategory = async ({
       : sort === "za"
       ? POSTS_BY_BLOG_CATEGORY_QUERY_ZA
       : POSTS_BY_BLOG_CATEGORY_QUERY_NEWEST;
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
   const { data } = await sanityFetch({
     query,
-    params: { slug, offset, end },
+    params: { slug, offset, end, lang: queryLang, fallbackLang },
     perspective: "published",
     stega: false,
   });
@@ -347,12 +403,15 @@ export const fetchSanityPostsByBlogCategory = async ({
 
 export const fetchSanityPostsCountByBlogCategory = async ({
   slug,
+  lang,
 }: {
   slug: string;
+  lang?: SupportedLocale;
 }) => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
   const { data } = await sanityFetch({
     query: POSTS_COUNT_BY_BLOG_CATEGORY_QUERY,
-    params: { slug },
+    params: { slug, lang: queryLang, fallbackLang },
     perspective: "published",
     stega: false,
   });
@@ -361,27 +420,37 @@ export const fetchSanityPostsCountByBlogCategory = async ({
 
 export const fetchSanityPostBySlug = async ({
   slug,
+  lang,
 }: {
   slug: string;
+  lang?: SupportedLocale;
 }): Promise<POST_QUERYResult> => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
   const { data } = await sanityFetch({
     query: POST_QUERY,
-    params: { slug },
+    params: { slug, lang: queryLang, fallbackLang },
+    perspective: "published",
+    stega: false,
   });
 
   return data;
 };
 
-export const fetchSanityPostsStaticParams =
-  async (): Promise<POSTS_SLUGS_QUERYResult> => {
-    const { data } = await sanityFetch({
-      query: POSTS_SLUGS_QUERY,
-      perspective: "published",
-      stega: false,
-    });
+export const fetchSanityPostsStaticParams = async ({
+  lang,
+}: {
+  lang?: SupportedLocale;
+} = {}): Promise<POSTS_SLUGS_QUERYResult> => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
+  const { data } = await sanityFetch({
+    query: POSTS_SLUGS_QUERY,
+    params: { lang: queryLang, fallbackLang },
+    perspective: "published",
+    stega: false,
+  });
 
-    return data;
-  };
+  return data;
+};
 
 export const fetchSanitySettings = async (): Promise<SETTINGS_QUERYResult> => {
   const { data } = await sanityFetch({
