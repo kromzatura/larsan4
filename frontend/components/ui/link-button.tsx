@@ -20,11 +20,14 @@ export function LinkButton({
   asDiv?: boolean;
   locale?: SupportedLocale;
 }) {
-  const resolvedHref = resolveLinkHref(link as LinkType & {
-    internalType?: string | null;
-    internalSlug?: string | null;
-    href?: string | null;
-  }, locale);
+  const resolvedHref = resolveLinkHref(
+    link as LinkType & {
+      internalType?: string | null;
+      internalSlug?: string | null;
+      href?: string | null;
+    },
+    locale
+  );
 
   const label = link?.title ?? "";
   const target = link?.isExternal && link?.target ? "_blank" : undefined;

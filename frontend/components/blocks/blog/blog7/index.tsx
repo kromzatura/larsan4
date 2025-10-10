@@ -39,41 +39,43 @@ export default function Blog7({
               ? buildLocalizedPath(locale, `/blog/${postSlug}`)
               : buildLocalizedPath(locale, "/blog");
             return (
-            <Card
-              key={post._id}
-              className="grid grid-rows-[auto_auto_1fr_auto] pt-0 overflow-hidden"
-            >
-              <div className="aspect-[16/9] w-full">
-                {post.image && post.image.asset?._id && (
-                  <Image
-                    src={urlFor(post.image).url()}
-                    alt={post.image.alt || ""}
-                    placeholder={
-                      post.image?.asset?.metadata?.lqip ? "blur" : undefined
-                    }
-                    blurDataURL={post.image?.asset?.metadata?.lqip || ""}
-                    className="h-full w-full object-cover object-center"
-                    sizes="(min-width: 1024px) 33vw, 100vw"
-                    width={post.image.asset?.metadata?.dimensions?.width || 700}
-                    height={
-                      post.image.asset?.metadata?.dimensions?.height || 400
-                    }
-                    quality={100}
-                  />
+              <Card
+                key={post._id}
+                className="grid grid-rows-[auto_auto_1fr_auto] pt-0 overflow-hidden"
+              >
+                <div className="aspect-[16/9] w-full">
+                  {post.image && post.image.asset?._id && (
+                    <Image
+                      src={urlFor(post.image).url()}
+                      alt={post.image.alt || ""}
+                      placeholder={
+                        post.image?.asset?.metadata?.lqip ? "blur" : undefined
+                      }
+                      blurDataURL={post.image?.asset?.metadata?.lqip || ""}
+                      className="h-full w-full object-cover object-center"
+                      sizes="(min-width: 1024px) 33vw, 100vw"
+                      width={
+                        post.image.asset?.metadata?.dimensions?.width || 700
+                      }
+                      height={
+                        post.image.asset?.metadata?.dimensions?.height || 400
+                      }
+                      quality={100}
+                    />
+                  )}
+                </div>
+                <CardHeader>
+                  <h3 className="text-lg font-semibold hover:underline md:text-xl">
+                    <Link key={post._id} href={postHref}>
+                      {post.title}
+                    </Link>
+                  </h3>
+                </CardHeader>
+                {post.excerpt && (
+                  <CardContent>
+                    <p className="text-muted-foreground">{post.excerpt}</p>
+                  </CardContent>
                 )}
-              </div>
-              <CardHeader>
-                <h3 className="text-lg font-semibold hover:underline md:text-xl">
-                  <Link key={post._id} href={postHref}>
-                    {post.title}
-                  </Link>
-                </h3>
-              </CardHeader>
-              {post.excerpt && (
-                <CardContent>
-                  <p className="text-muted-foreground">{post.excerpt}</p>
-                </CardContent>
-              )}
                 <CardFooter>
                   <Link
                     key={post._id}
@@ -84,7 +86,7 @@ export default function Blog7({
                     <ArrowRight className="ml-2 size-4" />
                   </Link>
                 </CardFooter>
-            </Card>
+              </Card>
             );
           })}
         </div>

@@ -72,12 +72,14 @@ export default function Blog16({
                         return (
                           <Link
                             key={category._id}
-                            href={slug
-                              ? buildLocalizedPath(
-                                  locale,
-                                  `/blog/category/${slug}`
-                                )
-                              : buildLocalizedPath(locale, "/blog")}
+                            href={
+                              slug
+                                ? buildLocalizedPath(
+                                    locale,
+                                    `/blog/category/${slug}`
+                                  )
+                                : buildLocalizedPath(locale, "/blog")
+                            }
                             className="flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors hover:bg-muted"
                           >
                             {category.title}

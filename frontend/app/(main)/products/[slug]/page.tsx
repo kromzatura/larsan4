@@ -13,7 +13,10 @@ import {
   fetchSanityProductBySlug,
   fetchSanityProductSlugs,
 } from "@/sanity/lib/fetch";
-import type { ProductDocument, ProductSpecification } from "@/lib/types/content";
+import type {
+  ProductDocument,
+  ProductSpecification,
+} from "@/lib/types/content";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { urlFor } from "@/sanity/lib/image";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";

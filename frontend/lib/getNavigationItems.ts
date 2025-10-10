@@ -33,7 +33,8 @@ function applyResolvedHref(
   locale: SupportedLocale
 ): NavigationItem {
   if (isGroup(item)) {
-    const links = item.links?.map((link) => applyResolvedHref(link, locale)) ?? [];
+    const links =
+      item.links?.map((link) => applyResolvedHref(link, locale)) ?? [];
     return { ...item, links } as NavGroup;
   }
 
@@ -54,9 +55,7 @@ export const getNavigationItems = async (
   locale: SupportedLocale = FALLBACK_LOCALE
 ) => {
   const navigation = await fetchSanityNavigation({ lang: locale });
-  const group = navigation?.find(
-    (item) => slugify(item.title ?? "") === title
-  );
+  const group = navigation?.find((item) => slugify(item.title ?? "") === title);
   if (!group) return [];
   const links = group.links as NavigationItem[] | undefined;
   return links?.map((link) => applyResolvedHref(link, locale)) ?? [];

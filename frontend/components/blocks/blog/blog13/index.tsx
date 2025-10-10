@@ -55,10 +55,7 @@ export default function Blog13({
                     {post.categories.map((category) => {
                       const slug = category.slug?.current ?? undefined;
                       const categoryHref = slug
-                        ? buildLocalizedPath(
-                            locale,
-                            `/blog/category/${slug}`
-                          )
+                        ? buildLocalizedPath(locale, `/blog/category/${slug}`)
                         : buildLocalizedPath(locale, "/blog");
                       return (
                         <Link

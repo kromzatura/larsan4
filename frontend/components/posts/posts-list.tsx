@@ -90,9 +90,7 @@ export default function PostsList({
             </span>
             <h3 className="text-2xl font-bold hover:underline lg:text-3xl">
               {post.title && (
-                <Link
-                  href={buildLocalizedPath(locale, `/blog/${post.slug}`)}
-                >
+                <Link href={buildLocalizedPath(locale, `/blog/${post.slug}`)}>
                   {post.title}
                 </Link>
               )}
