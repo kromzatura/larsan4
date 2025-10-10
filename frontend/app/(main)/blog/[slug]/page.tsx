@@ -13,11 +13,7 @@ import { Separator } from "@/components/ui/separator";
 import { Clock, Facebook, Twitter, Linkedin } from "lucide-react";
 import { POST_QUERYResult } from "@/sanity.types";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
-import {
-  FALLBACK_LOCALE,
-  SUPPORTED_LOCALES,
-  type SupportedLocale,
-} from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type BreadcrumbLink = {
   label: string;
@@ -73,33 +69,11 @@ function extractHeadings(blocks: BlockContent): Heading[] {
 }
 
 export async function generateStaticParams() {
-  const postsByLocale = await Promise.all(
-    SUPPORTED_LOCALES.map(async (locale) => {
-      const posts = await fetchSanityPostsStaticParams({ lang: locale });
-      return posts
-        .filter((post) => Boolean(post.slug?.current))
-        .map((post) =>
-          locale === FALLBACK_LOCALE
-            ? { slug: post.slug?.current }
-            : { slug: post.slug?.current, lang: locale }
-        );
-    })
-  );
+  const posts = await fetchSanityPostsStaticParams({ lang: FALLBACK_LOCALE });
 
-  const seen = new Set<string>();
-  const params: Array<{ slug?: string; lang?: SupportedLocale }> = [];
-
-  for (const entries of postsByLocale) {
-    for (const entry of entries) {
-      if (!entry.slug) continue;
-      const key = `${entry.slug}:${entry.lang ?? FALLBACK_LOCALE}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      params.push(entry);
-    }
-  }
-
-  return params;
+  return posts
+    .filter((post) => Boolean(post.slug?.current))
+    .map((post) => ({ slug: post.slug?.current }));
 }
 
 export async function generateMetadata(props: {

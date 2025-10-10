@@ -84,14 +84,21 @@ export type ProductCategoryWithMeta = ProductCategory & {
   } | null;
 };
 
-export const fetchSanityNavigation =
-  async (): Promise<NAVIGATION_QUERYResult> => {
-    const { data } = await sanityFetch({
-      query: NAVIGATION_QUERY,
-    });
+export const fetchSanityNavigation = async ({
+  lang,
+}: {
+  lang?: SupportedLocale;
+} = {}): Promise<NAVIGATION_QUERYResult> => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
+  const { data } = await sanityFetch({
+    query: NAVIGATION_QUERY,
+    params: { lang: queryLang, fallbackLang },
+    perspective: "published",
+    stega: false,
+  });
 
-    return data;
-  };
+  return data;
+};
 
 export const fetchSanityBanner = async (): Promise<BANNER_QUERYResult> => {
   const { data } = await sanityFetch({
@@ -183,15 +190,20 @@ export const fetchSanityTeam = async (): Promise<TEAM_QUERYResult> => {
 export const fetchSanityProducts = async ({
   page,
   limit,
+  lang,
 }: {
   page?: number;
   limit: number;
+  lang?: SupportedLocale;
 }): Promise<PRODUCTS_LIST_QUERYResult> => {
   const offset = page && limit ? (page - 1) * limit : 0;
   const end = offset + limit;
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
   const { data } = await sanityFetch({
     query: PRODUCTS_LIST_QUERY,
-    params: { offset, end },
+    params: { offset, end, lang: queryLang, fallbackLang },
+    perspective: "published",
+    stega: false,
   });
   return data;
 };
@@ -201,11 +213,13 @@ export const fetchSanityProductsByCategory = async ({
   page,
   limit,
   sort = "newest",
+  lang,
 }: {
   slug: string;
   page?: number;
   limit: number;
   sort?: "newest" | "az" | "za";
+  lang?: SupportedLocale;
 }): Promise<PRODUCTS_LIST_QUERYResult> => {
   const offset = page && limit ? (page - 1) * limit : 0;
   const end = offset + limit;
@@ -215,65 +229,104 @@ export const fetchSanityProductsByCategory = async ({
       : sort === "za"
       ? PRODUCTS_BY_CATEGORY_QUERY_ZA
       : PRODUCTS_BY_CATEGORY_QUERY_NEWEST;
-  const { data } = await sanityFetch({ query, params: { slug, offset, end } });
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
+  const { data } = await sanityFetch({
+    query,
+    params: { slug, offset, end, lang: queryLang, fallbackLang },
+    perspective: "published",
+    stega: false,
+  });
   return data;
 };
 
 export const fetchSanityProductBySlug = async ({
   slug,
+  lang,
 }: {
   slug: string;
+  lang?: SupportedLocale;
 }): Promise<PRODUCT_QUERYResult> => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
   const { data } = await sanityFetch({
     query: PRODUCT_QUERY,
-    params: { slug },
+    params: { slug, lang: queryLang, fallbackLang },
+    perspective: "published",
+    stega: false,
   });
   return data;
 };
 
-export const fetchSanityProductSlugs =
-  async (): Promise<PRODUCTS_SLUGS_QUERYResult> => {
-    const { data } = await sanityFetch({
-      query: PRODUCTS_SLUGS_QUERY,
-      perspective: "published",
-      stega: false,
-    });
-    return data;
-  };
+export const fetchSanityProductSlugs = async ({
+  lang,
+}: {
+  lang?: SupportedLocale;
+} = {}): Promise<PRODUCTS_SLUGS_QUERYResult> => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
+  const { data } = await sanityFetch({
+    query: PRODUCTS_SLUGS_QUERY,
+    params: { lang: queryLang, fallbackLang },
+    perspective: "published",
+    stega: false,
+  });
+  return data;
+};
 
-export const fetchSanityProductCategories =
-  async (): Promise<PRODUCT_CATEGORIES_QUERYResult> => {
-    const { data } = await sanityFetch({
-      query: PRODUCT_CATEGORIES_QUERY,
-    });
-    return data;
-  };
+export const fetchSanityProductCategories = async ({
+  lang,
+}: {
+  lang?: SupportedLocale;
+} = {}): Promise<PRODUCT_CATEGORIES_QUERYResult> => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
+  const { data } = await sanityFetch({
+    query: PRODUCT_CATEGORIES_QUERY,
+    params: { lang: queryLang, fallbackLang },
+    perspective: "published",
+    stega: false,
+  });
+  return data;
+};
 
-export const fetchSanityProductCategoriesStaticParams =
-  async (): Promise<PRODUCT_CATEGORIES_QUERYResult> => {
-    const { data } = await sanityFetch({
-      query: PRODUCT_CATEGORIES_QUERY,
-      perspective: "published",
-      stega: false,
-    });
-    return data;
-  };
+export const fetchSanityProductCategoriesStaticParams = async ({
+  lang,
+}: {
+  lang?: SupportedLocale;
+} = {}): Promise<PRODUCT_CATEGORIES_QUERYResult> => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
+  const { data } = await sanityFetch({
+    query: PRODUCT_CATEGORIES_QUERY,
+    params: { lang: queryLang, fallbackLang },
+    perspective: "published",
+    stega: false,
+  });
+  return data;
+};
 
 export const fetchSanityProductCategoryBySlug = async ({
   slug,
+  lang,
 }: {
   slug: string;
+  lang?: SupportedLocale;
 }): Promise<ProductCategoryWithMeta> => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
   const { data } = await sanityFetch({
     query: PRODUCT_CATEGORY_BY_SLUG_QUERY,
-    params: { slug },
+    params: { slug, lang: queryLang, fallbackLang },
+    perspective: "published",
+    stega: false,
   });
   return data as ProductCategoryWithMeta;
 };
 
-export const fetchSanityProductsCount = async (): Promise<number> => {
+export const fetchSanityProductsCount = async ({
+  lang,
+}: {
+  lang?: SupportedLocale;
+} = {}): Promise<number> => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
   const { data } = await sanityFetch({
     query: PRODUCTS_COUNT_QUERY,
+    params: { lang: queryLang, fallbackLang },
     perspective: "published",
     stega: false,
   });
@@ -282,12 +335,15 @@ export const fetchSanityProductsCount = async (): Promise<number> => {
 
 export const fetchSanityProductsCountByCategory = async ({
   slug,
+  lang,
 }: {
   slug: string;
+  lang?: SupportedLocale;
 }): Promise<number> => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
   const { data } = await sanityFetch({
     query: PRODUCTS_COUNT_BY_CATEGORY_QUERY,
-    params: { slug },
+    params: { slug, lang: queryLang, fallbackLang },
     perspective: "published",
     stega: false,
   });
@@ -454,9 +510,17 @@ export const fetchSanityPostsStaticParams = async ({
   return data;
 };
 
-export const fetchSanitySettings = async (): Promise<SETTINGS_QUERYResult> => {
+export const fetchSanitySettings = async ({
+  lang,
+}: {
+  lang?: SupportedLocale;
+} = {}): Promise<SETTINGS_QUERYResult> => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
   const { data } = await sanityFetch({
     query: SETTINGS_QUERY,
+    params: { lang: queryLang, fallbackLang },
+    perspective: "published",
+    stega: false,
   });
 
   return data;

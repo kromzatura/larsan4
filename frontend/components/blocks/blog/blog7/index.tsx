@@ -11,11 +11,19 @@ import { urlFor } from "@/sanity/lib/image";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Blog7 = Extract<Block, { _type: "blog-7" }>;
 
-export default function Blog7({ padding, posts, gridColumns }: Blog7) {
+export default function Blog7({
+  padding,
+  posts,
+  gridColumns,
+  locale = FALLBACK_LOCALE,
+}: Blog7 & { locale?: SupportedLocale }) {
   return (
     <SectionContainer padding={padding}>
       {posts && posts?.length > 0 && (
@@ -25,7 +33,12 @@ export default function Blog7({ padding, posts, gridColumns }: Blog7) {
             `lg:${gridColumns}`
           )}
         >
-          {posts.map((post) => (
+          {posts.map((post) => {
+            const postSlug = post.slug?.current ?? "";
+            const postHref = postSlug
+              ? buildLocalizedPath(locale, `/blog/${postSlug}`)
+              : buildLocalizedPath(locale, "/blog");
+            return (
             <Card
               key={post._id}
               className="grid grid-rows-[auto_auto_1fr_auto] pt-0 overflow-hidden"
@@ -51,7 +64,7 @@ export default function Blog7({ padding, posts, gridColumns }: Blog7) {
               </div>
               <CardHeader>
                 <h3 className="text-lg font-semibold hover:underline md:text-xl">
-                  <Link key={post._id} href={`/blog/${post.slug?.current}`}>
+                  <Link key={post._id} href={postHref}>
                     {post.title}
                   </Link>
                 </h3>
@@ -61,18 +74,19 @@ export default function Blog7({ padding, posts, gridColumns }: Blog7) {
                   <p className="text-muted-foreground">{post.excerpt}</p>
                 </CardContent>
               )}
-              <CardFooter>
-                <Link
-                  key={post._id}
-                  href={`/blog/${post.slug?.current}`}
-                  className="flex items-center text-foreground hover:underline"
-                >
-                  Read more
-                  <ArrowRight className="ml-2 size-4" />
-                </Link>
-              </CardFooter>
+                <CardFooter>
+                  <Link
+                    key={post._id}
+                    href={postHref}
+                    className="flex items-center text-foreground hover:underline"
+                  >
+                    Read more
+                    <ArrowRight className="ml-2 size-4" />
+                  </Link>
+                </CardFooter>
             </Card>
-          ))}
+            );
+          })}
         </div>
       )}
     </SectionContainer>

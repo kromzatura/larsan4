@@ -16,6 +16,8 @@ import {
 import type { ProductDocument, ProductSpecification } from "@/lib/types/content";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { urlFor } from "@/sanity/lib/image";
+import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type SpecPair = { label: string; value?: string | number | null };
 
@@ -42,17 +44,21 @@ function SpecTable({ title, rows }: { title: string; rows: SpecPair[] }) {
 }
 
 export async function generateStaticParams() {
-  const slugs = await fetchSanityProductSlugs();
+  const slugs = await fetchSanityProductSlugs({ lang: FALLBACK_LOCALE });
   return slugs
     .filter((s) => s.slug?.current)
     .map((s) => ({ slug: s.slug!.current! }));
 }
 
 export async function generateMetadata(props: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; lang?: string }>;
 }) {
   const params = await props.params;
-  const product = await fetchSanityProductBySlug({ slug: params.slug });
+  const locale = normalizeLocale(params.lang);
+  const product = await fetchSanityProductBySlug({
+    slug: params.slug,
+    lang: locale,
+  });
   if (!product) notFound();
   return generatePageMetadata({
     page: product,
@@ -62,10 +68,14 @@ export async function generateMetadata(props: {
 }
 
 export default async function ProductPage(props: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; lang?: string }>;
 }) {
   const params = await props.params;
-  const product = await fetchSanityProductBySlug({ slug: params.slug });
+  const locale = normalizeLocale(params.lang);
+  const product = await fetchSanityProductBySlug({
+    slug: params.slug,
+    lang: locale,
+  });
   if (!product) notFound();
 
   const productDoc = product as ProductDocument;
@@ -74,8 +84,9 @@ export default async function ProductPage(props: {
     : null;
   const spec = specifications?.[0];
 
+  const productsPath = buildLocalizedPath(locale, "/products");
   const links = [
-    { label: "Products", href: "/products" },
+    { label: "Products", href: productsPath },
     { label: product.title ?? "Product", href: "#" },
   ];
 
@@ -108,9 +119,12 @@ export default async function ProductPage(props: {
     { label: "Certification", value: spec?.certification },
   ];
 
-  const shareUrl = `${
-    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
-  }/products/${product.slug?.current}`;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const sharePath = buildLocalizedPath(
+    locale,
+    `/products/${product.slug?.current ?? ""}`
+  );
+  const shareUrl = `${siteUrl}${sharePath}`;
 
   return (
     <section className="container py-16 xl:py-20">
@@ -226,7 +240,10 @@ export default async function ProductPage(props: {
                     {product.categories.map((c) => (
                       <Link
                         key={c?._id}
-                        href={`/products/category/${c?.slug?.current || ""}`}
+                        href={buildLocalizedPath(
+                          locale,
+                          `/products/category/${c?.slug?.current || ""}`
+                        )}
                       >
                         <Badge
                           variant="outline"

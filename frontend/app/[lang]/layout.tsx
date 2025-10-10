@@ -15,7 +15,7 @@ export default function LangLayout({ children, params }: LangLayoutProps) {
 
   return (
     <LocaleProvider locale={locale}>
-      <MainLayout>{children}</MainLayout>
+      <MainLayout locale={locale}>{children}</MainLayout>
     </LocaleProvider>
   );
 }

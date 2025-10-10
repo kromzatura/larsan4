@@ -7,11 +7,19 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import PostDate from "@/components/post-date";
 import Link from "next/link";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Blog13 = Extract<Block, { _type: "blog-13" }>;
 
-export default function Blog13({ padding, posts, gridColumns }: Blog13) {
+export default function Blog13({
+  padding,
+  posts,
+  gridColumns,
+  locale = FALLBACK_LOCALE,
+}: Blog13 & { locale?: SupportedLocale }) {
   return (
     <SectionContainer padding={padding}>
       {posts && posts?.length > 0 && (
@@ -46,10 +54,16 @@ export default function Blog13({ padding, posts, gridColumns }: Blog13) {
                   <div className="absolute top-4 right-4 flex flex-wrap gap-2">
                     {post.categories.map((category) => {
                       const slug = category.slug?.current ?? undefined;
+                      const categoryHref = slug
+                        ? buildLocalizedPath(
+                            locale,
+                            `/blog/category/${slug}`
+                          )
+                        : buildLocalizedPath(locale, "/blog");
                       return (
                         <Link
                           key={category._id}
-                          href={slug ? `/blog/category/${slug}` : `/blog`}
+                          href={categoryHref}
                           className="focus:outline-none"
                         >
                           <Badge
@@ -74,7 +88,10 @@ export default function Blog13({ padding, posts, gridColumns }: Blog13) {
                     <PostDate date={post._createdAt} />
                   </span>
                   <Link
-                    href={`/blog/${post.slug?.current}`}
+                    href={buildLocalizedPath(
+                      locale,
+                      `/blog/${post.slug?.current ?? ""}`
+                    )}
                     className="flex items-center gap-1"
                   >
                     Read more

@@ -12,6 +12,9 @@ import type {
 } from "@/sanity.types";
 import { cn } from "@/lib/utils";
 import { DialogClose } from "@radix-ui/react-dialog";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
 
 import {
   Accordion,
@@ -44,6 +47,7 @@ type NavigationItem = (SanityLink | SanityLinkGroup | SanityLinkIcon) & {
 
 interface Navbar1Props {
   className?: string;
+  locale?: SupportedLocale;
 }
 
 const isLinkGroup = (
@@ -52,10 +56,13 @@ const isLinkGroup = (
   return item._type === "link-group";
 };
 
-export default async function Navbar1({ className }: Navbar1Props) {
-  const settings = await fetchSanitySettings();
-  const navigationItems = await getNavigationItems("header");
-  const actionItems = await getNavigationItems("header-action");
+export default async function Navbar1({
+  className,
+  locale = FALLBACK_LOCALE,
+}: Navbar1Props) {
+  const settings = await fetchSanitySettings({ lang: locale });
+  const navigationItems = await getNavigationItems("header", locale);
+  const actionItems = await getNavigationItems("header-action", locale);
 
   const renderMenuItem = (item: NavigationItem) => {
     if (isLinkGroup(item)) {
@@ -139,7 +146,10 @@ export default async function Navbar1({ className }: Navbar1Props) {
         <nav className="hidden justify-between lg:flex items-center">
           <div className="flex items-center gap-6">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
+            <Link
+              href={buildLocalizedPath(locale, "/")}
+              className="flex items-center gap-2"
+            >
               {settings?.logo ? (
                 <Image
                   src={urlFor(settings.logo).url()}
@@ -177,7 +187,12 @@ export default async function Navbar1({ className }: Navbar1Props) {
           </div>
           <div className="flex gap-2">
             {actionItems?.map((item) => (
-              <LinkButton key={item._key} size="sm" link={item as SanityLink} />
+              <LinkButton
+                key={item._key}
+                size="sm"
+                link={item as SanityLink}
+                locale={locale}
+              />
             ))}
             <InquiryBadge />
           </div>
@@ -187,7 +202,10 @@ export default async function Navbar1({ className }: Navbar1Props) {
         <div className="block lg:hidden">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
+            <Link
+              href={buildLocalizedPath(locale, "/")}
+              className="flex items-center gap-2"
+            >
               {settings?.logo ? (
                 <Image
                   src={urlFor(settings.logo).url()}
@@ -266,7 +284,11 @@ export default async function Navbar1({ className }: Navbar1Props) {
                   </Accordion>
                   <div className="flex flex-col gap-3">
                     {actionItems?.map((item) => (
-                      <LinkButton key={item._key} link={item as SanityLink} />
+                      <LinkButton
+                        key={item._key}
+                        link={item as SanityLink}
+                        locale={locale}
+                      />
                     ))}
                     <InquiryBadge className="w-full justify-center" />
                   </div>

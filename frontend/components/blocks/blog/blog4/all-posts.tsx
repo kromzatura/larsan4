@@ -8,6 +8,9 @@ import { PAGE_QUERYResult } from "@/sanity.types";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { fetchSanityPosts, fetchSanityPostsCount } from "@/sanity/lib/fetch";
 import Pagination from "@/components/pagination";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type AllPosts4Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -17,10 +20,12 @@ type AllPosts4Props = Extract<
 export default async function AllPosts4({
   padding,
   searchParams,
+  locale = FALLBACK_LOCALE,
 }: AllPosts4Props & {
   searchParams?: Promise<{
     page?: string;
   }>;
+  locale?: SupportedLocale;
 }) {
   const POSTS_PER_PAGE = 6;
 
@@ -32,28 +37,36 @@ export default async function AllPosts4({
     fetchSanityPosts({
       page: currentPage,
       limit: POSTS_PER_PAGE,
+      lang: locale,
     }),
-    fetchSanityPostsCount(),
+    fetchSanityPostsCount({ lang: locale }),
   ]);
 
   const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
 
+  const baseBlogPath = buildLocalizedPath(locale, "/blog");
+
   const createPageUrl = (pageNum: number) => {
     const params = new URLSearchParams();
     if (pageNum > 1) params.set("page", pageNum.toString());
-    return `/blog${params.toString() ? `?${params.toString()}` : ""}`;
+    return `${baseBlogPath}${params.toString() ? `?${params.toString()}` : ""}`;
   };
 
   return (
     <SectionContainer padding={padding}>
       {posts && posts?.length > 0 && (
         <div className="grid gap-x-4 gap-y-8 md:grid-cols-2 lg:gap-x-6 lg:gap-y-12 xl:grid-cols-3">
-          {posts.map((post) => (
-            <Link
-              key={post._id}
-              href={`/blog/${post.slug?.current}`}
-              className="group flex flex-col"
-            >
+          {posts.map((post) => {
+            const postSlug = post.slug?.current ?? "";
+            const postHref = postSlug
+              ? buildLocalizedPath(locale, `/blog/${postSlug}`)
+              : baseBlogPath;
+            return (
+              <Link
+                key={post._id}
+                href={postHref}
+                className="group flex flex-col"
+              >
               <div className="mb-4 flex overflow-clip rounded-xl md:mb-5">
                 <div className="transition duration-300 group-hover:scale-105">
                   {post.image && post.image.asset?._id && (
@@ -85,7 +98,12 @@ export default async function AllPosts4({
                     return (
                       <Link
                         key={category._id}
-                        href={slug ? `/blog/category/${slug}` : `/blog`}
+                        href={slug
+                          ? buildLocalizedPath(
+                              locale,
+                              `/blog/category/${slug}`
+                            )
+                          : baseBlogPath}
                       >
                         <Badge>{category.title}</Badge>
                       </Link>
@@ -119,8 +137,9 @@ export default async function AllPosts4({
                   </span>
                 </div>
               </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </div>
       )}
       <Pagination

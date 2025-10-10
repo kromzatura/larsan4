@@ -9,11 +9,7 @@ import {
 } from "@/sanity/lib/fetch";
 import { chipClass } from "@/components/ui/chip";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
-import {
-  FALLBACK_LOCALE,
-  SUPPORTED_LOCALES,
-  type SupportedLocale,
-} from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type BlogSort = "newest" | "az" | "za";
 interface BlogCategorySearchParams {
@@ -29,35 +25,13 @@ interface MetadataWithAlternates {
 const POSTS_PER_PAGE = 6;
 
 export async function generateStaticParams() {
-  const categoriesByLocale = await Promise.all(
-    SUPPORTED_LOCALES.map(async (locale) => {
-      const cats = await fetchSanityBlogCategoriesStaticParams({
-        lang: locale,
-      });
-      return cats
-        .filter((c) => c.slug?.current)
-        .map((c) =>
-          locale === FALLBACK_LOCALE
-            ? { slug: c.slug.current }
-            : { slug: c.slug.current, lang: locale }
-        );
-    })
-  );
+  const cats = await fetchSanityBlogCategoriesStaticParams({
+    lang: FALLBACK_LOCALE,
+  });
 
-  const seen = new Set<string>();
-  const params: Array<{ slug?: string; lang?: SupportedLocale }> = [];
-
-  for (const entries of categoriesByLocale) {
-    for (const entry of entries) {
-      if (!entry.slug) continue;
-      const key = `${entry.slug}:${entry.lang ?? FALLBACK_LOCALE}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      params.push(entry);
-    }
-  }
-
-  return params;
+  return cats
+    .filter((c) => c.slug?.current)
+    .map((c) => ({ slug: c.slug.current }));
 }
 
 export async function generateMetadata(props: {

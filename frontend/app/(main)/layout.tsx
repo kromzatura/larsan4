@@ -9,17 +9,21 @@ import { draftMode } from "next/headers";
 import { SanityLive } from "@/sanity/lib/live";
 import { Toaster } from "@/components/ui/sonner";
 import { InquiryProvider } from "@/components/inquiry/InquiryContext";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 export default async function MainLayout({
   children,
+  locale = FALLBACK_LOCALE,
 }: {
   children: React.ReactNode;
+  locale?: SupportedLocale;
 }) {
   const banner = await fetchSanityBanner();
 
   return (
     <InquiryProvider>
-      <Navbar1 />
+      <Navbar1 locale={locale} />
       {banner && banner.length > 0 && (
         <Banner data={banner[0]} component={Banner5} bannerId="banner5" />
       )}
@@ -32,7 +36,7 @@ export default async function MainLayout({
           <VisualEditing />
         </>
       )}
-      <Footer2 />
+      <Footer2 locale={locale} />
     </InquiryProvider>
   );
 }

@@ -20,7 +20,7 @@ export default async function ProductCategories16({
   searchParams?: Promise<{ category?: string }>;
   locale?: SupportedLocale;
 }) {
-  const cats = await fetchSanityProductCategories();
+  const cats = await fetchSanityProductCategories({ lang: locale });
   const params = searchParams ? await searchParams : undefined;
   const active = params?.category;
   const slugs = new Set(

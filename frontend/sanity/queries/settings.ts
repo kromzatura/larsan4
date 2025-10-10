@@ -1,12 +1,19 @@
 import { groq } from "next-sanity";
 import { imageQuery } from "./shared/image";
 
-export const SETTINGS_QUERY = groq`*[_type == "settings"][0]{
-  _type,
-  siteName,
-  logo{
-    ${imageQuery}
-  },
-  description,
-  copyright
-}`;
+export const SETTINGS_QUERY = groq`
+  *[
+    _type == "settings" &&
+    (!defined(language) || language in [$lang, $fallbackLang])
+  ]
+  | order(language == $lang desc, _updatedAt desc)[0]{
+    _type,
+    language,
+    siteName,
+    logo{
+      ${imageQuery}
+    },
+    description,
+    copyright
+  }
+`;

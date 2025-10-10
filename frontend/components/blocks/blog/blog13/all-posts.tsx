@@ -8,6 +8,9 @@ import Link from "next/link";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { fetchSanityPosts, fetchSanityPostsCount } from "@/sanity/lib/fetch";
 import Pagination from "@/components/pagination";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type AllPosts13Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -17,10 +20,12 @@ type AllPosts13Props = Extract<
 export default async function AllPosts13({
   padding,
   searchParams,
+  locale = FALLBACK_LOCALE,
 }: AllPosts13Props & {
   searchParams?: Promise<{
     page?: string;
   }>;
+  locale?: SupportedLocale;
 }) {
   const POSTS_PER_PAGE = 6;
 
@@ -32,24 +37,32 @@ export default async function AllPosts13({
     fetchSanityPosts({
       page: currentPage,
       limit: POSTS_PER_PAGE,
+      lang: locale,
     }),
-    fetchSanityPostsCount(),
+    fetchSanityPostsCount({ lang: locale }),
   ]);
 
   const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
 
+  const baseBlogPath = buildLocalizedPath(locale, "/blog");
+
   const createPageUrl = (pageNum: number) => {
     const params = new URLSearchParams();
     if (pageNum > 1) params.set("page", pageNum.toString());
-    return `/blog${params.toString() ? `?${params.toString()}` : ""}`;
+    return `${baseBlogPath}${params.toString() ? `?${params.toString()}` : ""}`;
   };
 
   return (
     <SectionContainer padding={padding}>
       {posts && posts?.length > 0 && (
         <div className="mx-auto grid gap-6 lg:grid-cols-3">
-          {posts.map((post) => (
-            <div key={post._id} className="flex flex-col">
+          {posts.map((post) => {
+            const postSlug = post.slug?.current ?? "";
+            const postHref = postSlug
+              ? buildLocalizedPath(locale, `/blog/${postSlug}`)
+              : baseBlogPath;
+            return (
+              <div key={post._id} className="flex flex-col">
               <div className="relative">
                 {post.image && post.image.asset?._id && (
                   <Image
@@ -73,7 +86,10 @@ export default async function AllPosts13({
                     {post.categories.map((category) => (
                       <Link
                         key={category._id}
-                        href={`/blog/category/${category.slug?.current}`}
+                        href={buildLocalizedPath(
+                          locale,
+                          `/blog/category/${category.slug?.current ?? ""}`
+                        )}
                         className="focus:outline-none"
                       >
                         <Badge
@@ -97,7 +113,7 @@ export default async function AllPosts13({
                     <PostDate date={post._createdAt} />
                   </span>
                   <Link
-                    href={`/blog/${post.slug?.current}`}
+                    href={postHref}
                     className="flex items-center gap-1"
                   >
                     Read more
@@ -105,8 +121,9 @@ export default async function AllPosts13({
                   </Link>
                 </div>
               </div>
-            </div>
-          ))}
+              </div>
+            );
+          })}
         </div>
       )}
       <Pagination

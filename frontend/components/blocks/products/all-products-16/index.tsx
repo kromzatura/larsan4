@@ -44,17 +44,28 @@ export default async function AllProducts16({
             slug: activeCategory,
             page: currentPage,
             limit: PAGE_SIZE,
+            lang: locale,
           }),
-          fetchSanityProductsCountByCategory({ slug: activeCategory }),
+          fetchSanityProductsCountByCategory({
+            slug: activeCategory,
+            lang: locale,
+          }),
         ]
       : [
-          fetchSanityProducts({ page: currentPage, limit: PAGE_SIZE }),
-          fetchSanityProductsCount(),
+          fetchSanityProducts({
+            page: currentPage,
+            limit: PAGE_SIZE,
+            lang: locale,
+          }),
+          fetchSanityProductsCount({ lang: locale }),
         ]
   );
 
   const categoryDoc = activeCategory
-    ? await fetchSanityProductCategoryBySlug({ slug: activeCategory })
+    ? await fetchSanityProductCategoryBySlug({
+        slug: activeCategory,
+        lang: locale,
+      })
     : null;
   const isInvalidCategory = Boolean(activeCategory && !categoryDoc);
 
@@ -119,6 +130,7 @@ export default async function AllProducts16({
             )}
           </div>
         }
+        locale={locale}
       />
     </SectionContainer>
   );

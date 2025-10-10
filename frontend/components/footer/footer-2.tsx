@@ -11,15 +11,22 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import PortableTextRenderer from "@/components/portable-text-renderer";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
 
 interface Footer2Props {
   className?: string;
+  locale?: SupportedLocale;
 }
 
-export default async function Footer2({ className }: Footer2Props) {
-  const settings = await fetchSanitySettings();
-  const footerNavItems = await getNavigationItems("footer");
-  const bottomNavItems = await getNavigationItems("footer-bottom");
+export default async function Footer2({
+  className,
+  locale = FALLBACK_LOCALE,
+}: Footer2Props) {
+  const settings = await fetchSanitySettings({ lang: locale });
+  const footerNavItems = await getNavigationItems("footer", locale);
+  const bottomNavItems = await getNavigationItems("footer-bottom", locale);
 
   const isNavGroup = (item: NavigationItem): item is NavGroup =>
     item._type === "link-group";
@@ -33,7 +40,7 @@ export default async function Footer2({ className }: Footer2Props) {
           <div className="grid grid-cols-2 gap-8 lg:grid-cols-6">
             <div className="col-span-2 mb-8 lg:mb-0">
               <Link
-                href="/"
+                href={buildLocalizedPath(locale, "/")}
                 className="flex items-center gap-2 lg:justify-start"
               >
                 {settings?.logo ? (

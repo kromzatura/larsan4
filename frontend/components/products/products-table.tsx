@@ -7,6 +7,9 @@ import ClickableRow from "@/components/blocks/products/all-products-16/clickable
 import Pagination from "@/components/pagination";
 import AddToInquiryButton from "@/components/inquiry/add-to-inquiry-button";
 import { Badge } from "@/components/ui/badge";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 export type ProductsTableItem = {
   _id: string;
@@ -34,6 +37,7 @@ export type ProductsTableProps = {
   baseSearchParams?: string;
   emptyState?: React.ReactNode;
   className?: string;
+  locale?: SupportedLocale;
 };
 
 export default function ProductsTable({
@@ -44,6 +48,7 @@ export default function ProductsTable({
   baseSearchParams,
   emptyState,
   className,
+  locale = FALLBACK_LOCALE,
 }: ProductsTableProps) {
   const hasItems = items && items.length > 0;
 
@@ -122,7 +127,11 @@ export default function ProductsTable({
                         <Link
                           key={(c && c._id) || `${item._id}-${c?.slug}`}
                           href={
-                            c?.href || `/products?category=${c?.slug || ""}`
+                            c?.href ||
+                            buildLocalizedPath(
+                              locale,
+                              `/products?category=${c?.slug || ""}`
+                            )
                           }
                           className="rounded outline-none focus-visible:ring-2 focus-visible:ring-ring"
                         >

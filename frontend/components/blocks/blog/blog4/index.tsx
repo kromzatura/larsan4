@@ -7,11 +7,19 @@ import PostDate from "@/components/post-date";
 import Link from "next/link";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Blog4 = Extract<Block, { _type: "blog-4" }>;
 
-export default function Blog4({ padding, posts, gridColumns }: Blog4) {
+export default function Blog4({
+  padding,
+  posts,
+  gridColumns,
+  locale = FALLBACK_LOCALE,
+}: Blog4 & { locale?: SupportedLocale }) {
   return (
     <SectionContainer padding={padding}>
       {posts && posts?.length > 0 && (
@@ -21,12 +29,18 @@ export default function Blog4({ padding, posts, gridColumns }: Blog4) {
             `xl:${gridColumns}`
           )}
         >
-          {posts.map((post) => (
-            <Link
-              key={post._id}
-              href={`/blog/${post.slug?.current}`}
-              className="group flex flex-col"
-            >
+          {posts.map((post) => {
+            const postSlug = post.slug?.current ?? "";
+            const postHref = buildLocalizedPath(
+              locale,
+              `/blog/${postSlug}`
+            );
+            return (
+              <Link
+                key={post._id}
+                href={postSlug ? postHref : buildLocalizedPath(locale, "/blog")}
+                className="group flex flex-col"
+              >
               <div className="mb-4 flex overflow-clip rounded-xl md:mb-5">
                 <div className="transition duration-300 group-hover:scale-105">
                   {post.image && post.image.asset?._id && (
@@ -58,7 +72,12 @@ export default function Blog4({ padding, posts, gridColumns }: Blog4) {
                     return (
                       <Link
                         key={category._id}
-                        href={slug ? `/blog/category/${slug}` : `/blog`}
+                        href={slug
+                          ? buildLocalizedPath(
+                              locale,
+                              `/blog/category/${slug}`
+                            )
+                          : buildLocalizedPath(locale, "/blog")}
                       >
                         <Badge>{category.title}</Badge>
                       </Link>
@@ -92,8 +111,9 @@ export default function Blog4({ padding, posts, gridColumns }: Blog4) {
                   </span>
                 </div>
               </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </div>
       )}
     </SectionContainer>

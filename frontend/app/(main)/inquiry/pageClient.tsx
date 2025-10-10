@@ -13,6 +13,8 @@ import {
   type InquiryItem,
 } from "@/lib/inquiry";
 import { Trash2, X, Send, ArrowLeft } from "lucide-react";
+import { useLocale } from "@/lib/i18n/locale-context";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
 
 function encodeInquiry(items: InquiryItem[]): string {
   try {
@@ -35,6 +37,7 @@ function encodeInquiry(items: InquiryItem[]): string {
 export default function InquiryPageClient() {
   const { items } = useInquiry();
   const [localItems, setLocalItems] = useState<InquiryItem[]>(items);
+  const locale = useLocale();
 
   useEffect(() => {
     // Sync initial items (in case context lag)
@@ -75,7 +78,7 @@ export default function InquiryPageClient() {
             No items in your inquiry list yet.
           </p>
           <Link
-            href="/products"
+            href={buildLocalizedPath(locale, "/products")}
             className={cn(buttonVariants({ variant: "default" }))}
           >
             Browse Products
@@ -119,7 +122,7 @@ export default function InquiryPageClient() {
 
           <div className="flex flex-col sm:flex-row gap-4 pt-2">
             <Link
-              href="/products"
+              href={buildLocalizedPath(locale, "/products")}
               className={cn(
                 buttonVariants({ variant: "outline" }),
                 "flex-1 inline-flex items-center justify-center"
@@ -128,7 +131,9 @@ export default function InquiryPageClient() {
               <ArrowLeft className="mr-2 h-4 w-4" /> Continue Shopping
             </Link>
             <Link
-              href={`/contact${inquiryParam ? `?inquiry=${inquiryParam}` : ""}`}
+              href={`${buildLocalizedPath(locale, "/contact")}${
+                inquiryParam ? `?inquiry=${inquiryParam}` : ""
+              }`}
               className={cn(
                 buttonVariants({ variant: "default" }),
                 "flex-1 inline-flex items-center justify-center"

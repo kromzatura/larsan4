@@ -12,24 +12,32 @@ import ProductsTable, {
   ProductsTableItem,
 } from "@/components/products/products-table";
 import { urlFor } from "@/sanity/lib/image";
+import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 const PAGE_SIZE = 12;
 
 export async function generateStaticParams() {
-  const cats = await fetchSanityProductCategoriesStaticParams();
+  const cats = await fetchSanityProductCategoriesStaticParams({
+    lang: FALLBACK_LOCALE,
+  });
   return cats
     .filter((c) => c.slug?.current)
     .map((c) => ({ slug: c.slug!.current! }));
 }
 
 export async function generateMetadata(props: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; lang?: string }>;
   searchParams: Promise<{ page?: string }>;
 }) {
   const params = await props.params;
   const searchParams = await props.searchParams;
+  const locale = normalizeLocale(params.lang);
   const pageNum = Math.max(1, Number(searchParams?.page || 1));
-  const cat = await fetchSanityProductCategoryBySlug({ slug: params.slug });
+  const cat = await fetchSanityProductCategoryBySlug({
+    slug: params.slug,
+    lang: locale,
+  });
   if (!cat) notFound();
   const base = await generatePageMetadata({
     page: cat,
@@ -45,7 +53,10 @@ export async function generateMetadata(props: {
             follow: false,
           },
           alternates: {
-            canonical: `/products/category/${params.slug}`,
+            canonical: buildLocalizedPath(
+              locale,
+              `/products/category/${params.slug}`
+            ),
           },
         }
       : {}),
@@ -53,35 +64,41 @@ export async function generateMetadata(props: {
 }
 
 export default async function CategoryPage(props: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; lang?: string }>;
   searchParams: Promise<{ page?: string; sort?: "newest" | "az" | "za" }>;
 }) {
   const params = await props.params;
   const searchParams = await props.searchParams;
+  const locale = normalizeLocale(params.lang);
   const page = Math.max(1, Number(searchParams?.page || 1));
   const sort = (searchParams?.sort as "newest" | "az" | "za") || "newest";
 
   const [cat, products, totalCount] = await Promise.all([
-    fetchSanityProductCategoryBySlug({ slug: params.slug }),
+    fetchSanityProductCategoryBySlug({ slug: params.slug, lang: locale }),
     fetchSanityProductsByCategory({
       slug: params.slug,
       page,
       limit: PAGE_SIZE,
       sort,
+      lang: locale,
     }),
-    fetchSanityProductsCountByCategory({ slug: params.slug }),
+    fetchSanityProductsCountByCategory({ slug: params.slug, lang: locale }),
   ]);
   if (!cat) notFound();
   const totalPages = Math.max(1, Math.ceil((totalCount || 0) / PAGE_SIZE));
-  const baseUrl = `/products/category/${params.slug}`;
+  const baseUrl = buildLocalizedPath(
+    locale,
+    `/products/category/${params.slug}`
+  );
   const baseSearchParams = new URLSearchParams();
   if (sort) baseSearchParams.set("sort", sort);
 
+  const productsPath = buildLocalizedPath(locale, "/products");
   const links = [
-    { label: "Products", href: "/products" },
+    { label: "Products", href: productsPath },
     {
       label: cat.title ?? "Category",
-      href: `/products/category/${params.slug}`,
+      href: baseUrl,
     },
   ];
 
@@ -100,7 +117,7 @@ export default async function CategoryPage(props: {
         <div className="ml-auto flex items-center gap-2 text-sm">
           <span className="text-muted-foreground">Sort</span>
           <Link
-            href={`/products/category/${params.slug}?sort=newest`}
+            href={`${baseUrl}?sort=newest`}
             className={`rounded-md border px-2 py-1 ${
               sort === "newest" ? "bg-muted" : "hover:bg-muted"
             }`}
@@ -108,7 +125,7 @@ export default async function CategoryPage(props: {
             Newest
           </Link>
           <Link
-            href={`/products/category/${params.slug}?sort=az`}
+            href={`${baseUrl}?sort=az`}
             className={`rounded-md border px-2 py-1 ${
               sort === "az" ? "bg-muted" : "hover:bg-muted"
             }`}
@@ -116,7 +133,7 @@ export default async function CategoryPage(props: {
             A–Z
           </Link>
           <Link
-            href={`/products/category/${params.slug}?sort=za`}
+            href={`${baseUrl}?sort=za`}
             className={`rounded-md border px-2 py-1 ${
               sort === "za" ? "bg-muted" : "hover:bg-muted"
             }`}
@@ -150,9 +167,16 @@ export default async function CategoryPage(props: {
                     _id: c?._id || undefined,
                     title: c?.title || null,
                     slug: c?.slug?.current || null,
+                    href: buildLocalizedPath(
+                      locale,
+                      `/products?category=${c?.slug?.current || ""}`
+                    ),
                   }))
                 : null,
-              href: `/products/${p.slug?.current || ""}`,
+              href: buildLocalizedPath(
+                locale,
+                `/products/${p.slug?.current || ""}`
+              ),
             };
           })}
           page={page}
@@ -164,6 +188,7 @@ export default async function CategoryPage(props: {
               No products in this category yet.
             </div>
           }
+          locale={locale}
         />
       </div>
     </section>

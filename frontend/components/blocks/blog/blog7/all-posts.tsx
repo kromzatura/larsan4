@@ -12,6 +12,9 @@ import Link from "next/link";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { fetchSanityPosts, fetchSanityPostsCount } from "@/sanity/lib/fetch";
 import Pagination from "@/components/pagination";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type AllPosts7Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -21,10 +24,12 @@ type AllPosts7Props = Extract<
 export default async function AllPosts7({
   padding,
   searchParams,
+  locale = FALLBACK_LOCALE,
 }: AllPosts7Props & {
   searchParams?: Promise<{
     page?: string;
   }>;
+  locale?: SupportedLocale;
 }) {
   const POSTS_PER_PAGE = 6;
 
@@ -36,27 +41,35 @@ export default async function AllPosts7({
     fetchSanityPosts({
       page: currentPage,
       limit: POSTS_PER_PAGE,
+      lang: locale,
     }),
-    fetchSanityPostsCount(),
+    fetchSanityPostsCount({ lang: locale }),
   ]);
 
   const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
 
+  const baseBlogPath = buildLocalizedPath(locale, "/blog");
+
   const createPageUrl = (pageNum: number) => {
     const params = new URLSearchParams();
     if (pageNum > 1) params.set("page", pageNum.toString());
-    return `/blog${params.toString() ? `?${params.toString()}` : ""}`;
+    return `${baseBlogPath}${params.toString() ? `?${params.toString()}` : ""}`;
   };
 
   return (
     <SectionContainer padding={padding}>
       {posts && posts?.length > 0 && (
         <div className="grid gap-6 md:grid-cols-2 lg:gap-8 lg:grid-cols-3">
-          {posts.map((post) => (
-            <Card
-              key={post._id}
-              className="grid grid-rows-[auto_auto_1fr_auto] pt-0 overflow-hidden"
-            >
+          {posts.map((post) => {
+            const postSlug = post.slug?.current ?? "";
+            const postHref = postSlug
+              ? buildLocalizedPath(locale, `/blog/${postSlug}`)
+              : baseBlogPath;
+            return (
+              <Card
+                key={post._id}
+                className="grid grid-rows-[auto_auto_1fr_auto] pt-0 overflow-hidden"
+              >
               <div className="aspect-[16/9] w-full">
                 {post.image && post.image.asset?._id && (
                   <Image
@@ -78,7 +91,7 @@ export default async function AllPosts7({
               </div>
               <CardHeader>
                 <h3 className="text-lg font-semibold hover:underline md:text-xl">
-                  <Link key={post._id} href={`/blog/${post.slug?.current}`}>
+                  <Link key={post._id} href={postHref}>
                     {post.title}
                   </Link>
                 </h3>
@@ -91,7 +104,7 @@ export default async function AllPosts7({
               <CardFooter>
                 <Link
                   key={post._id}
-                  href={`/blog/${post.slug?.current}`}
+                  href={postHref}
                   className="flex items-center text-foreground hover:underline"
                 >
                   Read more
@@ -99,7 +112,8 @@ export default async function AllPosts7({
                 </Link>
               </CardFooter>
             </Card>
-          ))}
+            );
+          })}
         </div>
       )}
       <Pagination

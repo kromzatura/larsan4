@@ -2,6 +2,9 @@ import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { fetchSanityPosts, fetchSanityPostsCount } from "@/sanity/lib/fetch";
 import PostsList, { PostsListItem } from "@/components/posts/posts-list";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type AllPosts16Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -11,10 +14,12 @@ type AllPosts16Props = Extract<
 export default async function AllPosts16({
   padding,
   searchParams,
+  locale = FALLBACK_LOCALE,
 }: AllPosts16Props & {
   searchParams?: Promise<{
     page?: string;
   }>;
+  locale?: SupportedLocale;
 }) {
   const POSTS_PER_PAGE = 6;
 
@@ -26,8 +31,9 @@ export default async function AllPosts16({
     fetchSanityPosts({
       page: currentPage,
       limit: POSTS_PER_PAGE,
+      lang: locale,
     }),
-    fetchSanityPostsCount(),
+    fetchSanityPostsCount({ lang: locale }),
   ]);
 
   const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
@@ -47,9 +53,12 @@ export default async function AllPosts16({
       ? p.categories.map((c) => ({
           _id: c?._id || undefined,
           title: c?.title || null,
+          slug: c?.slug || null,
         }))
       : null,
   }));
+
+  const baseUrl = buildLocalizedPath(locale, "/blog");
 
   return (
     <SectionContainer padding={padding}>
@@ -57,7 +66,8 @@ export default async function AllPosts16({
         items={items}
         page={currentPage}
         pageCount={totalPages}
-        baseUrl="/blog"
+        baseUrl={baseUrl}
+        locale={locale}
       />
     </SectionContainer>
   );
