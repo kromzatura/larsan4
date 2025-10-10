@@ -76,7 +76,9 @@ export type ProductCategoryWithMeta = ProductCategory & {
         _id?: string;
         url?: string;
         mimeType?: string;
-        metadata?: { dimensions?: { width?: number; height?: number } | null } | null;
+        metadata?: {
+          dimensions?: { width?: number; height?: number } | null;
+        } | null;
       } | null;
     } | null;
   } | null;

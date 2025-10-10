@@ -1,1 +1,5 @@
-export { default, generateMetadata, revalidate } from "../../(main)/products/page";
+export {
+  default,
+  generateMetadata,
+  revalidate,
+} from "../../(main)/products/page";

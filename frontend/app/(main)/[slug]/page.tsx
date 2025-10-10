@@ -6,7 +6,11 @@ import {
 import { notFound } from "next/navigation";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { normalizeLocale } from "@/lib/i18n/routing";
-import { FALLBACK_LOCALE, SUPPORTED_LOCALES, type SupportedLocale } from "@/lib/i18n/config";
+import {
+  FALLBACK_LOCALE,
+  SUPPORTED_LOCALES,
+  type SupportedLocale,
+} from "@/lib/i18n/config";
 
 export async function generateStaticParams() {
   const pagesByLocale = await Promise.all(

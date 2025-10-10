@@ -50,11 +50,11 @@ These weaknesses map directly to the Phase 1–3 tasks below; tackling them earl
 - [x] **Build i18n helper modules**
   - ✅ `frontend/lib/i18n/routing.ts` + `locale-context.tsx` provide locale parsing, builders, and context; config already in place.
   - ✅ `resolveHref` upgraded to accept locale-aware paths via `buildLocalizedPath`.
-- [x] **Database & schema groundwork** *(manual Studio task — completed in Studio repo)*
+- [x] **Database & schema groundwork** _(manual Studio task — completed in Studio repo)_
   - Enabled document i18n for `settings`, `navigation`, `page`, `post`, `product`, and the current taxonomy set. Confirm if nested associations need follow-up once taxonomy inventory is finalized.
   - Added hidden `language` fields plus translation status validations on every schema; linting and Studio compile now pass.
   - **Status:** Complete pending verification checklist; open question filed to double-check whether any downstream taxonomies still require localization.
-- [~] **Fixtures & preview data** *(deferred — continue using live English content for now)*
+- [~] **Fixtures & preview data** _(deferred — continue using live English content for now)_
   - Decision logged: existing production documents remain the baseline; create an NDJSON snapshot only if automated tests demand it later.
 
 ## Phase 2 — Content & Component Refactor (Weeks 4-6)

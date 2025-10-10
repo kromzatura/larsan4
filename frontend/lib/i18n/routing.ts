@@ -3,28 +3,36 @@ import { FALLBACK_LOCALE, SUPPORTED_LOCALES, SupportedLocale } from "./config";
 export const LOCALE_COOKIE_NAME = "next-lang";
 export const LOCALE_COOKIE_MAX_AGE = 30 * 24 * 60 * 60; // 30 days in seconds
 
-export function isSupportedLocale(locale: string | null | undefined): locale is SupportedLocale {
+export function isSupportedLocale(
+  locale: string | null | undefined
+): locale is SupportedLocale {
   if (!locale) {
     return false;
   }
   return (SUPPORTED_LOCALES as readonly string[]).includes(locale);
 }
 
-export function normalizeLocale(locale: string | null | undefined): SupportedLocale {
+export function normalizeLocale(
+  locale: string | null | undefined
+): SupportedLocale {
   if (isSupportedLocale(locale)) {
     return locale;
   }
   return FALLBACK_LOCALE;
 }
 
-export function parseLocaleCookie(value: string | null | undefined): SupportedLocale | null {
+export function parseLocaleCookie(
+  value: string | null | undefined
+): SupportedLocale | null {
   if (isSupportedLocale(value)) {
     return value;
   }
   return null;
 }
 
-export function getLocaleFromAcceptLanguage(header: string | null | undefined): SupportedLocale | null {
+export function getLocaleFromAcceptLanguage(
+  header: string | null | undefined
+): SupportedLocale | null {
   if (!header) {
     return null;
   }
@@ -70,7 +78,10 @@ export function resolveRequestedLocale({
   return FALLBACK_LOCALE;
 }
 
-export function buildLocalizedPath(locale: SupportedLocale, path: string): string {
+export function buildLocalizedPath(
+  locale: SupportedLocale,
+  path: string
+): string {
   const cleanedPath = path.startsWith("/") ? path : `/${path}`;
   if (locale === FALLBACK_LOCALE) {
     return cleanedPath;
@@ -79,7 +90,10 @@ export function buildLocalizedPath(locale: SupportedLocale, path: string): strin
   return `/${locale}${suffix}`.replace(/\/+/, "/");
 }
 
-export function stripLocalePrefix(urlPath: string): { locale: SupportedLocale; path: string } {
+export function stripLocalePrefix(urlPath: string): {
+  locale: SupportedLocale;
+  path: string;
+} {
   const segments = urlPath.replace(/^\/+/, "").split("/");
   const maybeLocale = segments[0];
   if (isSupportedLocale(maybeLocale as SupportedLocale)) {

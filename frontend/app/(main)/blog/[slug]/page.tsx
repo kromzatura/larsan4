@@ -13,7 +13,11 @@ import { Separator } from "@/components/ui/separator";
 import { Clock, Facebook, Twitter, Linkedin } from "lucide-react";
 import { POST_QUERYResult } from "@/sanity.types";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
-import { FALLBACK_LOCALE, SUPPORTED_LOCALES, type SupportedLocale } from "@/lib/i18n/config";
+import {
+  FALLBACK_LOCALE,
+  SUPPORTED_LOCALES,
+  type SupportedLocale,
+} from "@/lib/i18n/config";
 
 type BreadcrumbLink = {
   label: string;
@@ -143,7 +147,10 @@ export default async function PostPage(props: {
 
   const headings = extractHeadings(post.body);
   const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-  const postPath = buildLocalizedPath(locale, `/blog/${post.slug?.current ?? ""}`);
+  const postPath = buildLocalizedPath(
+    locale,
+    `/blog/${post.slug?.current ?? ""}`
+  );
   const articleLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -152,7 +159,7 @@ export default async function PostPage(props: {
       ? { "@type": "Person", name: post.author.name }
       : undefined,
     image: post.image?.asset?.url ? [post.image.asset.url] : undefined,
-  datePublished: post.publishedAt || post._createdAt || undefined,
+    datePublished: post.publishedAt || post._createdAt || undefined,
     dateModified: post._updatedAt || undefined,
     mainEntityOfPage: {
       "@type": "WebPage",

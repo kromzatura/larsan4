@@ -6,8 +6,8 @@
 
 ## Priority Order
 
-| Code | Document | Why it leads |
-| --- | --- | --- |
+| Code      | Document                                                                                                                                                      | Why it leads                                                                                  |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | **ML-02** | [Multilingual Foundation Upgrade Plan](./multi-language-foundation-plan.md)<br/>↳ Action plan: [ML-02 execution checklist](./action-plan/ML-02-foundation.md) | Defines the active scope for unlocking locale-aware routing, schemas, queries, and workflows. |
 
 > _Legacy planning artifacts now live under [`docs/legacy/`](./legacy/) and can be referenced on demand._

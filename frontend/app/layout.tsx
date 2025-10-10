@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-  <html lang={DEFAULT_LOCALE} suppressHydrationWarning>
+    <html lang={DEFAULT_LOCALE} suppressHydrationWarning>
       <link rel="icon" href="/favicon.ico" />
       <body
         className={cn(

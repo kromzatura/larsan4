@@ -87,7 +87,8 @@ export default function SectionHeader({
             >
               {links.map((link) => {
                 const href = resolveLinkHref(link, locale);
-                const target = link?.isExternal && link?.target ? "_blank" : undefined;
+                const target =
+                  link?.isExternal && link?.target ? "_blank" : undefined;
                 const rel = target ? "noopener noreferrer" : undefined;
 
                 return (

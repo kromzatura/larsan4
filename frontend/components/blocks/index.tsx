@@ -190,9 +190,7 @@ export default function Blocks({
           block._type === "product-categories-16";
 
         if (needsSearchParams && block._type === "all-products-16") {
-          const C = componentMap[
-            "all-products-16"
-          ] as React.ComponentType<
+          const C = componentMap["all-products-16"] as React.ComponentType<
             BlockComponentProps<"all-products-16"> & {
               searchParams?: Promise<{ page?: string; category?: string }>;
             }
@@ -224,9 +222,9 @@ export default function Blocks({
           );
         }
 
-        const C = componentMap[
-          block._type
-        ] as React.ComponentType<BlockComponentProps<typeof block._type>>;
+        const C = componentMap[block._type] as React.ComponentType<
+          BlockComponentProps<typeof block._type>
+        >;
         return (
           <C
             {...(block as Extract<Block, { _type: typeof block._type }>)}

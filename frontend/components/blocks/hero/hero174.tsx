@@ -57,7 +57,8 @@ const Hero174 = ({
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 {links.map((link) => {
                   const href = resolveLinkHref(link, locale);
-                  const target = link?.isExternal && link?.target ? "_blank" : undefined;
+                  const target =
+                    link?.isExternal && link?.target ? "_blank" : undefined;
                   const rel = target ? "noopener noreferrer" : undefined;
 
                   return (

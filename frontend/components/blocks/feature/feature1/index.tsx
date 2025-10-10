@@ -30,9 +30,7 @@ export default function Feature1({
       {columns && columns?.length > 0 && (
         <div className="grid items-center gap-8 lg:gap-16 lg:grid-cols-2">
           {columns?.map((column) => {
-            const Component = componentMap[
-              column._type
-            ] as React.ComponentType<
+            const Component = componentMap[column._type] as React.ComponentType<
               Extract<FeatureColumn, { _type: typeof column._type }> & {
                 locale?: SupportedLocale;
               }

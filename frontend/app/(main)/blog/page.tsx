@@ -36,7 +36,8 @@ export async function generateMetadata(props: {
   const sp = props.searchParams ? await props.searchParams : undefined;
   const pageNum = Math.max(1, Number(sp?.page || 1));
   const rawSort = sp?.sort;
-  const sort: BlogSort = rawSort === "az" || rawSort === "za" ? rawSort : "newest";
+  const sort: BlogSort =
+    rawSort === "az" || rawSort === "za" ? rawSort : "newest";
   const pageDoc = await fetchSanityPageBySlug({ slug: "blog", lang: locale });
   const basePath = buildLocalizedPath(locale, "/blog");
   const base = generatePageMetadata({
@@ -65,15 +66,18 @@ export async function generateMetadata(props: {
   return withRss;
 }
 
-export default async function BlogIndex(props: {
-  params?: { lang?: string };
-  searchParams?: Promise<BlogSearchParams>;
-} = {}) {
+export default async function BlogIndex(
+  props: {
+    params?: { lang?: string };
+    searchParams?: Promise<BlogSearchParams>;
+  } = {}
+) {
   const locale = normalizeLocale(props.params?.lang);
   const sp = props.searchParams ? await props.searchParams : undefined;
   const page = Math.max(1, Number(sp?.page || 1));
   const rawSort = sp?.sort;
-  const sort: BlogSort = rawSort === "az" || rawSort === "za" ? rawSort : "newest";
+  const sort: BlogSort =
+    rawSort === "az" || rawSort === "za" ? rawSort : "newest";
   const basePath = buildLocalizedPath(locale, "/blog");
 
   const [posts, totalCount] = await Promise.all([
@@ -179,9 +183,9 @@ export default async function BlogIndex(props: {
         {items.length === 0 ? (
           <div className="rounded-md border p-6 text-sm text-muted-foreground">
             No posts found. Try adjusting your sort, or{" "}
-               <Link href="/" className="underline underline-offset-2">
+            <Link href="/" className="underline underline-offset-2">
               go back home
-               </Link>
+            </Link>
             .
           </div>
         ) : (

@@ -64,7 +64,6 @@ export default async function AllProducts16({
   const baseSearchParams = new URLSearchParams();
   if (activeCategory) baseSearchParams.set("category", activeCategory);
 
-
   const items: ProductsTableItem[] = (products || []).map((p) => {
     const spec = Array.isArray(p.specifications)
       ? p.specifications[0]

@@ -68,29 +68,30 @@ const Hero12 = ({
               <div className="mt-6 flex justify-center gap-3">
                 {links.map((link) => {
                   const href = resolveLinkHref(link, locale);
-                  const target = link?.isExternal && link?.target ? "_blank" : undefined;
+                  const target =
+                    link?.isExternal && link?.target ? "_blank" : undefined;
                   const rel = target ? "noopener noreferrer" : undefined;
                   return (
-                  <Link
-                    key={link._key}
-                    href={href || "#"}
-                    target={target}
-                    rel={rel}
-                    className={cn(
-                      buttonVariants({
-                        variant: link.buttonVariant || "default",
-                      }),
-                      "shadow-sm transition-shadow hover:shadow group"
-                    )}
-                  >
-                    <div className="flex items-center gap-2">
-                      {link.title}
-                      <Icon
-                        iconVariant={link.iconVariant || "none"}
-                        className="ml-2 h-4 transition-transform group-hover:translate-x-0.5"
-                      />
-                    </div>
-                  </Link>
+                    <Link
+                      key={link._key}
+                      href={href || "#"}
+                      target={target}
+                      rel={rel}
+                      className={cn(
+                        buttonVariants({
+                          variant: link.buttonVariant || "default",
+                        }),
+                        "shadow-sm transition-shadow hover:shadow group"
+                      )}
+                    >
+                      <div className="flex items-center gap-2">
+                        {link.title}
+                        <Icon
+                          iconVariant={link.iconVariant || "none"}
+                          className="ml-2 h-4 transition-transform group-hover:translate-x-0.5"
+                        />
+                      </div>
+                    </Link>
                   );
                 })}
               </div>
@@ -104,31 +105,37 @@ const Hero12 = ({
                 )}
                 <div className="flex flex-wrap items-center justify-center gap-4">
                   {techLogos.map((logo) => {
-                    const logoLink = resolveLinkHref(logo.link ?? undefined, locale);
-                    const target = logo.link?.isExternal && logo.link?.target ? "_blank" : undefined;
+                    const logoLink = resolveLinkHref(
+                      logo.link ?? undefined,
+                      locale
+                    );
+                    const target =
+                      logo.link?.isExternal && logo.link?.target
+                        ? "_blank"
+                        : undefined;
                     const rel = target ? "noopener noreferrer" : undefined;
                     return (
-                    <Link
-                      key={logo._key}
-                      href={logoLink || "#"}
-                      className={cn(
-                        buttonVariants({ variant: "outline" }),
-                        "group flex aspect-square h-12 items-center justify-center p-0"
-                      )}
-                      target={target}
-                      rel={rel}
-                    >
-                      {logo?.image && logo?.image?.asset?._id && (
-                        <Image
-                          src={urlFor(logo?.image).url()}
-                          alt={logo.image?.alt || ""}
-                          width={24}
-                          height={24}
-                          className="h-6 saturate-0 transition-all group-hover:saturate-100"
-                          quality={100}
-                        />
-                      )}
-                    </Link>
+                      <Link
+                        key={logo._key}
+                        href={logoLink || "#"}
+                        className={cn(
+                          buttonVariants({ variant: "outline" }),
+                          "group flex aspect-square h-12 items-center justify-center p-0"
+                        )}
+                        target={target}
+                        rel={rel}
+                      >
+                        {logo?.image && logo?.image?.asset?._id && (
+                          <Image
+                            src={urlFor(logo?.image).url()}
+                            alt={logo.image?.alt || ""}
+                            width={24}
+                            height={24}
+                            className="h-6 saturate-0 transition-all group-hover:saturate-100"
+                            quality={100}
+                          />
+                        )}
+                      </Link>
                     );
                   })}
                 </div>

@@ -1,1 +1,5 @@
-export { default, generateMetadata, generateStaticParams } from "../../../../(main)/products/category/[slug]/page";
+export {
+  default,
+  generateMetadata,
+  generateStaticParams,
+} from "../../../../(main)/products/category/[slug]/page";

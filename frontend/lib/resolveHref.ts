@@ -5,7 +5,10 @@ import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import { buildLocalizedPath } from "@/lib/i18n/routing";
 
-function withLocale(path: string | null, locale: SupportedLocale): string | null {
+function withLocale(
+  path: string | null,
+  locale: SupportedLocale
+): string | null {
   if (!path) return null;
   return buildLocalizedPath(locale, path);
 }
@@ -35,19 +38,26 @@ export function resolveHref(
     case DOC_TYPES.CONTACT:
       return withLocale("/contact", locale);
     default:
-      if (CATEGORY_DOC_TYPES.includes(docType as (typeof CATEGORY_DOC_TYPES)[number])) {
+      if (
+        CATEGORY_DOC_TYPES.includes(
+          docType as (typeof CATEGORY_DOC_TYPES)[number]
+        )
+      ) {
         if (!s) return null;
         return withLocale(`/blog/category/${s}`, locale);
       }
       return null;
-}
+  }
 }
 
 // Narrow helper for items already containing `_type` + `slug` shape
-type DocWithSlug = {
-  _type?: string;
-  slug?: { current?: string } | string;
-} | null | undefined;
+type DocWithSlug =
+  | {
+      _type?: string;
+      slug?: { current?: string } | string;
+    }
+  | null
+  | undefined;
 
 export function resolveDocHref(
   doc: DocWithSlug,
@@ -58,7 +68,8 @@ export function resolveDocHref(
   let slugValue: string | undefined;
   const slugField = doc.slug;
   if (typeof slugField === "string") slugValue = slugField;
-  else if (slugField && typeof slugField.current === "string") slugValue = slugField.current;
+  else if (slugField && typeof slugField.current === "string")
+    slugValue = slugField.current;
   return resolveHref(_type, slugValue, locale);
 }
 
@@ -78,7 +89,11 @@ export function resolveLinkHref(
     return link.href ?? null;
   }
   if (link.internalType) {
-    const computed = resolveHref(link.internalType, link.internalSlug ?? undefined, locale);
+    const computed = resolveHref(
+      link.internalType,
+      link.internalSlug ?? undefined,
+      locale
+    );
     if (computed) return computed;
   }
   return link.href ?? null;

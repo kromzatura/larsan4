@@ -60,7 +60,9 @@ export default function CompareProducts({
   title,
   productFields,
   columns,
-}: CompareProductsBlockProps & { locale?: import("@/lib/i18n/config").SupportedLocale }) {
+}: CompareProductsBlockProps & {
+  locale?: import("@/lib/i18n/config").SupportedLocale;
+}) {
   const normalized: NormalizedColumns = useMemo(() => {
     if (!columns || columns.length === 0)
       return { headers: [], rows: [], cols: [] };
@@ -106,9 +108,7 @@ export default function CompareProducts({
           break;
         case "sku":
           rowLabels.push("SKU");
-          valueGetters.push(
-            (c) => c?.overrides?.sku ?? c?.product?.spec?.sku
-          );
+          valueGetters.push((c) => c?.overrides?.sku ?? c?.product?.spec?.sku);
           break;
         case "actions":
           rowLabels.push("Actions");
@@ -153,12 +153,15 @@ export default function CompareProducts({
       )}
       <div
         className="overflow-x-auto rounded-lg border"
-  style={cssVars as CSSProperties}
+        style={cssVars as CSSProperties}
       >
         <table className="min-w-full text-sm">
           <thead className="bg-muted/50 text-xs uppercase tracking-wide text-muted-foreground">
             <tr>
-              <th scope="col" className="w-40 px-6 py-4 text-left align-top font-medium text-primary">
+              <th
+                scope="col"
+                className="w-40 px-6 py-4 text-left align-top font-medium text-primary"
+              >
                 {title || "Attributes"}
               </th>
               {normalized.headers.map((header, idx) => (
@@ -190,7 +193,9 @@ export default function CompareProducts({
                       key={colIdx}
                       className={cn(
                         "px-6 py-5 md:py-6 text-left align-top whitespace-normal md:table-cell",
-                        normalized.headers[colIdx] !== selectedTab ? "hidden" : ""
+                        normalized.headers[colIdx] !== selectedTab
+                          ? "hidden"
+                          : ""
                       )}
                     >
                       {!isAction && (
@@ -209,7 +214,8 @@ export default function CompareProducts({
                             ),
                             name: columns?.[colIdx]?.product?.title ?? null,
                             productId: columns?.[colIdx]?.product?._id ?? null,
-                            slug: columns?.[colIdx]?.product?.slug?.current ?? null,
+                            slug:
+                              columns?.[colIdx]?.product?.slug?.current ?? null,
                             imageUrl: null,
                           }}
                           className="w-full max-w-44 px-6 mx-auto"

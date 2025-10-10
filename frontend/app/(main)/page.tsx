@@ -6,7 +6,10 @@ import { normalizeLocale } from "@/lib/i18n/routing";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 export async function generateMetadata() {
-  const page = await fetchSanityPageBySlug({ slug: "index", lang: FALLBACK_LOCALE });
+  const page = await fetchSanityPageBySlug({
+    slug: "index",
+    lang: FALLBACK_LOCALE,
+  });
 
   return generatePageMetadata({ page, slug: "index", type: "page" });
 }

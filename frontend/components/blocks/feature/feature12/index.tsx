@@ -42,9 +42,7 @@ export default function Feature12({
     }
     api.on("scroll", ({ scrollProgress }) => {
       const minProgress = columnsLength > 0 ? 1 / columnsLength : 0;
-      setProgress(
-        Math.max(minProgress, Math.min(1, scrollProgress())) * 100
-      );
+      setProgress(Math.max(minProgress, Math.min(1, scrollProgress())) * 100);
     });
   }, [api, columnsLength]);
 
@@ -58,9 +56,7 @@ export default function Feature12({
               <div className="mr-2 hidden items-center gap-3 text-xs text-muted-foreground md:flex">
                 <span>01</span>
                 <Progress value={progress} className="h-[2px] w-52" />
-                <span>
-                  {totalSlidesLabel}
-                </span>
+                <span>{totalSlidesLabel}</span>
               </div>
               <CarouselPrevious className="static translate-y-0" />
               <CarouselNext className="static translate-y-0" />

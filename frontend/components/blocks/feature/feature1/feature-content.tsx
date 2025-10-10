@@ -64,7 +64,8 @@ export default function FeatureContent({
           <div className="mt-8 flex w-full flex-col justify-center gap-2 sm:flex-row lg:justify-start">
             {links.map((link, index) => {
               const href = resolveLinkHref(link, locale) || "#";
-              const target = link?.isExternal && link?.target ? "_blank" : undefined;
+              const target =
+                link?.isExternal && link?.target ? "_blank" : undefined;
               const rel = target ? "noopener noreferrer" : undefined;
               return (
                 <Link

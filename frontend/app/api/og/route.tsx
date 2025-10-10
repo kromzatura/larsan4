@@ -40,8 +40,8 @@ export async function GET(request: Request) {
       return new Response("Missing slug parameter", { status: 400 });
     }
 
-  const post = await fetchSanityPostBySlug({ slug, lang: FALLBACK_LOCALE });
-  const page = await fetchSanityPageBySlug({ slug, lang: FALLBACK_LOCALE });
+    const post = await fetchSanityPostBySlug({ slug, lang: FALLBACK_LOCALE });
+    const page = await fetchSanityPageBySlug({ slug, lang: FALLBACK_LOCALE });
     const settings = await fetchSanitySettings();
 
     if (!post && !page) {
