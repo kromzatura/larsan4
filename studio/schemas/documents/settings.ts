@@ -49,6 +49,13 @@ export default defineType({
       type: "block-content",
       description: "The copyright text to display in the footer",
     }),
+    defineField({
+      // should match 'languageField' plugin configuration setting, if customized
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+    }),
   ],
   preview: {
     select: {

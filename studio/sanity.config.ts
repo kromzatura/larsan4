@@ -7,12 +7,15 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { presentationTool } from "sanity/presentation";
 import { media } from "sanity-plugin-media";
+import { documentInternationalization } from "@sanity/document-internationalization";
+import { assist } from "@sanity/assist";
 
 import { schema } from "./schema";
 import { resolve } from "./presentation/resolve";
 import { structure } from "./structure";
 import { defaultDocumentNode } from "./defaultDocumentNode";
 import { codeInput } from "@sanity/code-input";
+import contact from "./schemas/documents/contact";
 
 // Define the actions that should be available for singleton documents
 const singletonActions = new Set([
@@ -67,5 +70,25 @@ export default defineConfig({
     visionTool({ defaultApiVersion: apiVersion }),
     codeInput(),
     media(),
+    documentInternationalization({
+      // Required configuration
+      supportedLanguages: [
+        { id: "en", title: "English" },
+        { id: "nl", title: "Dutch" },
+      ],
+      schemaTypes: ["settings", "contact"],
+      apiVersion: "2025-02-19",
+    }),
+    assist({
+      // Showing default values
+      assist: {
+        localeSettings: () => Intl.DateTimeFormat().resolvedOptions(),
+        maxPathDepth: 4,
+        temperature: 0.3,
+      },
+      translate: {
+        /* see sections about document and field translation */
+      },
+    }),
   ],
 });
