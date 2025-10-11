@@ -5,13 +5,16 @@ import Image from "next/image";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import { buttonVariants } from "@/components/ui/button";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Compare5Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "compare-5" }
->;
+> & { locale?: SupportedLocale };
 
-export default function Compare5({ padding, columns }: Compare5Props) {
+export default function Compare5({ padding, columns, locale = FALLBACK_LOCALE }: Compare5Props) {
   return (
     <SectionContainer padding={padding}>
       {columns && columns?.length > 0 && (
@@ -51,18 +54,25 @@ export default function Compare5({ padding, columns }: Compare5Props) {
                     </p>
                   )}
                   {column.link?.title && (
-                    <Link
-                      href={column.link?.href || "#"}
-                      target={column.link?.target ? "_blank" : undefined}
-                      rel={column.link?.target ? "noopener" : undefined}
-                      className={cn(
-                        buttonVariants({
-                          variant: column.link.buttonVariant || "default",
-                        })
-                      )}
-                    >
-                      {column.link?.title}
-                    </Link>
+                    (() => {
+                      const href = resolveLinkHref(column.link, locale) || "#";
+                      const target = column.link?.isExternal && column.link?.target ? "_blank" : undefined;
+                      const rel = target ? "noopener noreferrer" : undefined;
+                      return (
+                        <Link
+                          href={href}
+                          target={target}
+                          rel={rel}
+                          className={cn(
+                            buttonVariants({
+                              variant: column.link.buttonVariant || "default",
+                            })
+                          )}
+                        >
+                          {column.link?.title}
+                        </Link>
+                      );
+                    })()
                   )}
                 </div>
               </div>

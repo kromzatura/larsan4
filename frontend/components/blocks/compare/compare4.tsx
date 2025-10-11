@@ -5,11 +5,14 @@ import Icon from "@/components/icon";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Compare4Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "compare-4" }
->;
+> & { locale?: SupportedLocale };
 
 export default function Compare4({
   padding,
@@ -18,6 +21,7 @@ export default function Compare4({
   columns,
   body,
   links,
+  locale = FALLBACK_LOCALE,
 }: Compare4Props) {
   return (
     <SectionContainer
@@ -116,27 +120,32 @@ export default function Compare4({
           )}
           {links && links.length > 0 && (
             <div className="flex justify-end">
-              {links.map((link) => (
-                <Link
-                  key={link._key}
-                  href={link.href || "#"}
-                  target={link.target ? "_blank" : undefined}
-                  rel={link.target ? "noopener" : undefined}
-                  className={cn(
-                    buttonVariants({
-                      variant: link.buttonVariant || "default",
-                    }),
-                    "rounded-full px-8 transition-transform hover:scale-105"
-                  )}
-                >
-                  {link.title}
-                  <Icon
-                    iconVariant={link.iconVariant || "none"}
-                    strokeWidth={1.5}
-                    className="ml-2 h-4 w-4"
-                  />
-                </Link>
-              ))}
+              {links.map((link) => {
+                const href = resolveLinkHref(link, locale) || "#";
+                const target = link?.isExternal && link?.target ? "_blank" : undefined;
+                const rel = target ? "noopener noreferrer" : undefined;
+                return (
+                  <Link
+                    key={link._key}
+                    href={href}
+                    target={target}
+                    rel={rel}
+                    className={cn(
+                      buttonVariants({
+                        variant: link.buttonVariant || "default",
+                      }),
+                      "rounded-full px-8 transition-transform hover:scale-105"
+                    )}
+                  >
+                    {link.title}
+                    <Icon
+                      iconVariant={link.iconVariant || "none"}
+                      strokeWidth={1.5}
+                      className="ml-2 h-4 w-4"
+                    />
+                  </Link>
+                );
+              })}
             </div>
           )}
         </div>

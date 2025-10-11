@@ -10,11 +10,14 @@ import { Badge } from "@/components/ui/badge";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Fragment } from "react";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Hero160Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "hero-160" }
->;
+> & { locale?: SupportedLocale };
 
 const Hero160 = ({
   tag,
@@ -23,6 +26,7 @@ const Hero160 = ({
   body,
   links,
   image,
+  locale = FALLBACK_LOCALE,
 }: Hero160Props) => {
   return (
     <section className="relative overflow-hidden bg-foreground py-12 md:py-28">
@@ -66,27 +70,32 @@ const Hero160 = ({
           )}
           {links && links.length > 0 && (
             <div className="mt-4 flex flex-col items-center gap-4 md:flex-row">
-              {links.map((link) => (
-                <Link
-                  key={link._key}
-                  href={link.href || "#"}
-                  target={link.target ? "_blank" : undefined}
-                  rel={link.target ? "noopener" : undefined}
-                  className={cn(
-                    buttonVariants({
-                      variant: link.buttonVariant || "default",
-                    })
-                  )}
-                >
-                  <div className="flex items-center gap-2">
-                    {link.title}
-                    <Icon
-                      iconVariant={link.iconVariant || "none"}
-                      strokeWidth={1.5}
-                    />
-                  </div>
-                </Link>
-              ))}
+              {links.map((link) => {
+                const href = resolveLinkHref(link, locale) || "#";
+                const target = link?.isExternal && link?.target ? "_blank" : undefined;
+                const rel = target ? "noopener noreferrer" : undefined;
+                return (
+                  <Link
+                    key={link._key}
+                    href={href}
+                    target={target}
+                    rel={rel}
+                    className={cn(
+                      buttonVariants({
+                        variant: link.buttonVariant || "default",
+                      })
+                    )}
+                  >
+                    <div className="flex items-center gap-2">
+                      {link.title}
+                      <Icon
+                        iconVariant={link.iconVariant || "none"}
+                        strokeWidth={1.5}
+                      />
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           )}
           {links && links.length > 0 && (

@@ -6,11 +6,14 @@ import { urlFor } from "@/sanity/lib/image";
 import Icon from "@/components/icon";
 import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Timeline3Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "timeline-3" }
->;
+> & { locale?: SupportedLocale };
 
 export default function Timeline3({
   padding,
@@ -18,6 +21,7 @@ export default function Timeline3({
   description,
   links,
   columns,
+  locale = FALLBACK_LOCALE,
 }: Timeline3Props) {
   return (
     <SectionContainer padding={padding}>
@@ -35,28 +39,33 @@ export default function Timeline3({
           )}
           {links && links.length > 0 && (
             <div className="mt-8 flex flex-col gap-4 lg:flex-row">
-              {links.map((link) => (
-                <Link
-                  key={link._key}
-                  href={link.href || "#"}
-                  target={link.target ? "_blank" : undefined}
-                  rel={link.target ? "noopener" : undefined}
-                  className={cn(
-                    buttonVariants({
-                      variant: link.buttonVariant || "default",
-                      size: "lg",
-                    })
-                  )}
-                >
-                  <div className="flex items-center gap-2">
-                    {link.title}
-                    <Icon
-                      iconVariant={link.iconVariant || "none"}
-                      className="ml-2 h-4 transition-transform group-hover:translate-x-0.5"
-                    />
-                  </div>
-                </Link>
-              ))}
+              {links.map((link) => {
+                const href = resolveLinkHref(link, locale) || "#";
+                const target = link?.isExternal && link?.target ? "_blank" : undefined;
+                const rel = target ? "noopener noreferrer" : undefined;
+                return (
+                  <Link
+                    key={link._key}
+                    href={href}
+                    target={target}
+                    rel={rel}
+                    className={cn(
+                      buttonVariants({
+                        variant: link.buttonVariant || "default",
+                        size: "lg",
+                      })
+                    )}
+                  >
+                    <div className="flex items-center gap-2">
+                      {link.title}
+                      <Icon
+                        iconVariant={link.iconVariant || "none"}
+                        className="ml-2 h-4 transition-transform group-hover:translate-x-0.5"
+                      />
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           )}
         </div>
