@@ -6,7 +6,11 @@ import type { SupportedLocale } from "@/lib/i18n/config";
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Feature157 = Extract<Block, { _type: "feature-157" }>;
 
-export default function Feature157({ padding, columns, locale }: Feature157 & { locale?: SupportedLocale }) {
+export default function Feature157({
+  padding,
+  columns,
+  locale,
+}: Feature157 & { locale?: SupportedLocale }) {
   return (
     <SectionContainer padding={padding}>
       {columns && columns?.length > 0 && (

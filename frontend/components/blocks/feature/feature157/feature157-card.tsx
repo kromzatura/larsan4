@@ -15,7 +15,11 @@ type Feature157Card = Extract<
   { _type: "feature-157-card" }
 >;
 
-export default function Feature157Card({ image, link, locale = FALLBACK_LOCALE }: Feature157Card & { locale?: SupportedLocale }) {
+export default function Feature157Card({
+  image,
+  link,
+  locale = FALLBACK_LOCALE,
+}: Feature157Card & { locale?: SupportedLocale }) {
   return (
     <Link
       href={resolveLinkHref(link, locale) || ""}
