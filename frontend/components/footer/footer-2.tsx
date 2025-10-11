@@ -14,6 +14,7 @@ import PortableTextRenderer from "@/components/portable-text-renderer";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import { buildLocalizedPath } from "@/lib/i18n/routing";
+import { resolveLinkHref } from "@/lib/resolveHref";
 
 interface Footer2Props {
   className?: string;
@@ -64,11 +65,7 @@ export default async function Footer2({
                     }
                     quality={100}
                   />
-                ) : (
-                  <span className="text-lg font-semibold tracking-tighter">
-                    {settings?.siteName || "Logo"}
-                  </span>
-                )}
+                ) : null}
               </Link>
               <p className="mt-4 font-bold">{settings?.description}</p>
             </div>
@@ -82,7 +79,7 @@ export default async function Footer2({
                       return (
                         <li key={link._key}>
                           <Link
-                            href={link.href || "#"}
+                            href={resolveLinkHref(link, locale) || "#"}
                             target={link.target ? "_blank" : undefined}
                             className={cn(
                               link.buttonVariant === "ghost"
@@ -118,7 +115,7 @@ export default async function Footer2({
                 return (
                   <li key={link._key}>
                     <Link
-                      href={link.href || "#"}
+                      href={resolveLinkHref(link, locale) || "#"}
                       target={link.target ? "_blank" : undefined}
                       className={cn(
                         link.buttonVariant === "ghost"

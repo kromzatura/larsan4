@@ -61,14 +61,16 @@ These weaknesses map directly to the Phase 1–3 tasks below; tackling them earl
 
 - [ ] **Blocks & components**
   - [x] Update `Blocks` renderer to accept `lang` and pass it to child components (locale now forwarded to `section-header`, `hero-12`, `hero-174`; remaining blocks to audit for language-aware links).
-  - Extract shared UI copy into locale dictionaries or Sanity fields (start with navigation/header/footer/inquiry).
-  - Introduce centralized Next props types (non-Promise) and migrate all pages/layouts to use them, removing async/await for params/searchParams resolution.
+  - [x] Extract shared UI copy into locale dictionaries or Sanity fields (started with inquiry badge label). Introduced lightweight UI dictionaries at `frontend/lib/i18n/dictionaries` (EN + NL), to expand incrementally.
+  - [x] Adopted Facade boundary: pages/layouts accept Promise-based props (framework contract), while Blocks and block components use canonical, non-Promise props. The async/await logic is isolated at the page/layout boundary. This keeps DX clean without shims/overrides and stabilizes the component API.
 - [ ] **Query layer upgrade**
   - [x] Parameterize GROQ fragments with `$lang` starting with `page`, `post`, and blog category queries (fallback-aware lookup, language field exposure).
   - [x] Update `sanity/lib/fetch.ts` helpers and blog/page routes to accept `{ lang }` and forward fallback locales.
 - [ ] **Navigation & inquiry flow**
-  - Refactor header/footer/navigation components to build locale-prefixed URLs.
-  - Ensure inquiry/cart flows store both locale-specific copy and stable identifiers.
+  - [x] Refactor header/footer/navigation components to build locale-prefixed URLs using `resolveLinkHref` + `buildLocalizedPath`.
+  - [x] Remove hardcoded English fallback text ("Logo"). The UI relies entirely on CMS content for logo/site name across locales.
+  - [x] Localize `InquiryBadge` label and link; pass `locale` from the navbar. The badge now reads from the new UI dictionaries and links to the locale-aware `/inquiry` path.
+  - [~] Ensure inquiry/cart flows store both locale-specific copy and stable identifiers (copy localized; identifiers unchanged).
 
 ## Phase 3 — Tooling & Automation (Week 7)
 
@@ -103,3 +105,19 @@ These weaknesses map directly to the Phase 1–3 tasks below; tackling them earl
 - Routing, fetch, and metadata helpers accept `lang` consistently.
 - Test suites and CI gates catch missing translations or routing regressions.
 - Stakeholders sign off on moving to ML-03 once tasks above are complete.
+
+---
+
+## Progress Update — Phase B Completed (2025-10-11)
+
+- Pattern: Implemented the Facade/Adapter boundary. Pages and layouts accept Promise-shaped props (as provided by Next’s build workers), await them once at the boundary, and pass canonical, non-Promise data into the component layer. No ESLint overrides or type shims required.
+- Navigation: Header and footer now resolve all links via `resolveLinkHref(item, locale)` and `buildLocalizedPath`, ensuring locale-prefixed URLs even for manually entered relative links in Sanity.
+- Copy sources: Introduced minimal UI dictionaries (`frontend/lib/i18n/dictionaries`) for shared microcopy (initially Inquiry). All other nav/footer labels remain CMS-driven via `getNavigationItems` and localized Sanity documents.
+- Hardcoded fallbacks removed: Eliminated the English-only "Logo" fallback; UI defers to CMS for localized site names/logos.
+- Inquiry: `InquiryBadge` now accepts a `locale` prop, uses dictionaries for the label, and links to the locale-aware `/inquiry` path.
+- Quality gates: Build PASS, Typecheck/Lint PASS, Tests PASS (13/13) after the refactor.
+
+Next steps:
+- Add a locale switcher in the header using `SUPPORTED_LOCALES`, `LOCALE_LABELS`, and route mirroring where possible.
+- Expand dictionaries for common microcopy (e.g., "Menu", "Search", footer legal items if not modeled in CMS).
+- Write unit tests for `resolveLinkHref` locale behavior and metadata builders; evaluate Playwright smoke tests for `[lang]` routes.

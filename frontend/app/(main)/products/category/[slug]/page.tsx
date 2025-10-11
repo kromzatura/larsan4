@@ -28,10 +28,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(
-  props: AsyncPageProps<
-    { slug: string; lang?: string },
-    { page?: string }
-  >
+  props: AsyncPageProps<{ slug: string; lang?: string }, { page?: string }>
 ) {
   const params = (await props.params)!;
   const searchParams = (await props.searchParams) || {};

@@ -15,6 +15,7 @@ import { DialogClose } from "@radix-ui/react-dialog";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import { buildLocalizedPath } from "@/lib/i18n/routing";
+import { resolveLinkHref } from "@/lib/resolveHref";
 
 import {
   Accordion,
@@ -40,6 +41,8 @@ import {
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import InquiryBadge from "@/components/inquiry/inquiry-badge";
+import LocaleSwitcher from "@/components/header/locale-switcher";
+import { Suspense } from "react";
 
 type NavigationItem = (SanityLink | SanityLinkGroup | SanityLinkIcon) & {
   _key: string;
@@ -72,7 +75,7 @@ export default async function Navbar1({
           <NavigationMenuContent className="bg-popover text-popover-foreground min-w-[320px]">
             {item.links?.map((subItem) => (
               <NavigationMenuLink asChild key={subItem._key}>
-                <SubMenuLink item={subItem} />
+                <SubMenuLink item={subItem} locale={locale} />
               </NavigationMenuLink>
             ))}
           </NavigationMenuContent>
@@ -91,7 +94,7 @@ export default async function Navbar1({
               : buttonVariants({ variant: item.buttonVariant, size: "default" })
           )}
         >
-          <Link href={item.href || "#"}>{item.title}</Link>
+          <Link href={resolveLinkHref(item, locale) || "#"}>{item.title}</Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
     );
@@ -112,7 +115,7 @@ export default async function Navbar1({
             <div className="flex flex-col gap-4">
               {item.links?.map((subItem) => (
                 <DialogClose asChild key={subItem._key}>
-                  <SubMenuLink item={subItem} />
+                  <SubMenuLink item={subItem} locale={locale} />
                 </DialogClose>
               ))}
             </div>
@@ -124,7 +127,7 @@ export default async function Navbar1({
     return (
       <Link
         key={item._key}
-        href={item.href || "#"}
+        href={resolveLinkHref(item, locale) || "#"}
         target={item.target ? "_blank" : undefined}
         className={cn(
           item.buttonVariant === "ghost"
@@ -169,11 +172,7 @@ export default async function Navbar1({
                   blurDataURL={settings.logo.asset?.metadata?.lqip || undefined}
                   quality={100}
                 />
-              ) : (
-                <span className="text-lg font-semibold tracking-tighter">
-                  {settings?.siteName || "Logo"}
-                </span>
-              )}
+              ) : null}
             </Link>
             <div className="flex items-center">
               <NavigationMenu>
@@ -185,7 +184,7 @@ export default async function Navbar1({
               </NavigationMenu>
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2">
             {actionItems?.map((item) => (
               <LinkButton
                 key={item._key}
@@ -194,7 +193,10 @@ export default async function Navbar1({
                 locale={locale}
               />
             ))}
-            <InquiryBadge />
+            <InquiryBadge locale={locale} />
+            <Suspense fallback={null}>
+              <LocaleSwitcher locale={locale} className="ml-2" />
+            </Suspense>
           </div>
         </nav>
 
@@ -225,11 +227,7 @@ export default async function Navbar1({
                   blurDataURL={settings.logo.asset?.metadata?.lqip || undefined}
                   quality={100}
                 />
-              ) : (
-                <span className="text-lg font-semibold tracking-tighter">
-                  {settings?.siteName || "Logo"}
-                </span>
-              )}
+              ) : null}
             </Link>
             <Sheet>
               <SheetTrigger asChild>
@@ -240,7 +238,10 @@ export default async function Navbar1({
               <SheetContent className="overflow-y-auto">
                 <SheetHeader>
                   <SheetTitle>
-                    <Link href="/" className="flex items-center gap-2">
+                    <Link
+                      href={buildLocalizedPath(locale, "/")}
+                      className="flex items-center gap-2"
+                    >
                       {settings?.logo ? (
                         <Image
                           src={urlFor(settings.logo).url()}
@@ -264,11 +265,7 @@ export default async function Navbar1({
                           }
                           quality={100}
                         />
-                      ) : (
-                        <span className="text-lg font-semibold tracking-tighter">
-                          {settings?.siteName || "Logo"}
-                        </span>
-                      )}
+                      ) : null}
                     </Link>
                   </SheetTitle>
                 </SheetHeader>
@@ -290,7 +287,10 @@ export default async function Navbar1({
                         locale={locale}
                       />
                     ))}
-                    <InquiryBadge className="w-full justify-center" />
+                    <InquiryBadge className="w-full justify-center" locale={locale} />
+                    <Suspense fallback={null}>
+                      <LocaleSwitcher locale={locale} variant="menu" />
+                    </Suspense>
                   </div>
                 </div>
               </SheetContent>
@@ -302,10 +302,16 @@ export default async function Navbar1({
   );
 }
 
-const SubMenuLink = ({ item }: { item: SanityLink | SanityLinkIcon }) => {
+const SubMenuLink = ({
+  item,
+  locale = FALLBACK_LOCALE,
+}: {
+  item: SanityLink | SanityLinkIcon;
+  locale?: SupportedLocale;
+}) => {
   return (
     <Link
-      href={item.href || "#"}
+      href={resolveLinkHref(item, locale) || "#"}
       className="flex w-full flex-row gap-4 rounded-md p-3 text-sm font-medium no-underline transition-colors hover:bg-accent hover:text-accent-foreground"
       target={item.target ? "_blank" : undefined}
     >

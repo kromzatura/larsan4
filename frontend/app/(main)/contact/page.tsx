@@ -22,7 +22,9 @@ export async function generateMetadata() {
   });
 }
 
-function parseInquiryParam(searchParams: { [key: string]: string | string[] | undefined }): InquiryItem[] {
+function parseInquiryParam(searchParams: {
+  [key: string]: string | string[] | undefined;
+}): InquiryItem[] {
   const raw = searchParams["inquiry"]; // may be string or array
   const encoded = Array.isArray(raw) ? raw[0] : raw;
   if (!encoded) return [];
@@ -32,7 +34,10 @@ function parseInquiryParam(searchParams: { [key: string]: string | string[] | un
     if (Array.isArray(parsed)) {
       return parsed
         .filter((x) => x && typeof x.id === "string")
-        .map((x) => ({ id: x.id as string, name: typeof x.name === "string" ? x.name : null }));
+        .map((x) => ({
+          id: x.id as string,
+          name: typeof x.name === "string" ? x.name : null,
+        }));
     }
   } catch {
     return [];
