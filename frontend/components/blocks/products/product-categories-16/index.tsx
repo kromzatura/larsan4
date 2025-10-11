@@ -17,11 +17,11 @@ export default async function ProductCategories16({
   searchParams,
   locale = FALLBACK_LOCALE,
 }: CategoriesBlockProps & {
-  searchParams?: Promise<{ category?: string }>;
+  searchParams?: { category?: string };
   locale?: SupportedLocale;
 }) {
   const cats = await fetchSanityProductCategories({ lang: locale });
-  const params = searchParams ? await searchParams : undefined;
+  const params = searchParams;
   const active = params?.category;
   const slugs = new Set(
     cats.map((c) => (c.slug?.current ? String(c.slug.current) : ""))

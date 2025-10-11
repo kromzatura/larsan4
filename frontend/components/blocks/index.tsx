@@ -168,10 +168,10 @@ export default function Blocks({
 }: {
   blocks: Block[];
   locale?: SupportedLocale;
-  searchParams?: Promise<{
+  searchParams?: {
     page?: string;
     category?: string;
-  }>;
+  };
 }) {
   const activeLocale = locale ?? FALLBACK_LOCALE;
   return (
@@ -187,12 +187,17 @@ export default function Blocks({
 
         const needsSearchParams =
           block._type === "all-products-16" ||
-          block._type === "product-categories-16";
+          block._type === "product-categories-16" ||
+          block._type === "all-posts-16" ||
+          block._type === "all-posts-14" ||
+          block._type === "all-posts-13" ||
+          block._type === "all-posts-7" ||
+          block._type === "all-posts-4";
 
         if (needsSearchParams && block._type === "all-products-16") {
           const C = componentMap["all-products-16"] as React.ComponentType<
             BlockComponentProps<"all-products-16"> & {
-              searchParams?: Promise<{ page?: string; category?: string }>;
+              searchParams?: { page?: string; category?: string };
             }
           >;
           return (
@@ -209,12 +214,88 @@ export default function Blocks({
             "product-categories-16"
           ] as React.ComponentType<
             BlockComponentProps<"product-categories-16"> & {
-              searchParams?: Promise<{ category?: string }>;
+              searchParams?: { category?: string };
             }
           >;
           return (
             <C
               {...(block as Extract<Block, { _type: "product-categories-16" }>)}
+              searchParams={searchParams}
+              locale={activeLocale}
+              key={block._key}
+            />
+          );
+        }
+
+        if (needsSearchParams && block._type === "all-posts-16") {
+          const C = componentMap["all-posts-16"] as React.ComponentType<
+            BlockComponentProps<"all-posts-16"> & {
+              searchParams?: { page?: string };
+            }
+          >;
+          return (
+            <C
+              {...(block as Extract<Block, { _type: "all-posts-16" }>)}
+              searchParams={searchParams}
+              locale={activeLocale}
+              key={block._key}
+            />
+          );
+        }
+        if (needsSearchParams && block._type === "all-posts-14") {
+          const C = componentMap["all-posts-14"] as React.ComponentType<
+            BlockComponentProps<"all-posts-14"> & {
+              searchParams?: { page?: string };
+            }
+          >;
+          return (
+            <C
+              {...(block as Extract<Block, { _type: "all-posts-14" }>)}
+              searchParams={searchParams}
+              locale={activeLocale}
+              key={block._key}
+            />
+          );
+        }
+        if (needsSearchParams && block._type === "all-posts-13") {
+          const C = componentMap["all-posts-13"] as React.ComponentType<
+            BlockComponentProps<"all-posts-13"> & {
+              searchParams?: { page?: string };
+            }
+          >;
+          return (
+            <C
+              {...(block as Extract<Block, { _type: "all-posts-13" }>)}
+              searchParams={searchParams}
+              locale={activeLocale}
+              key={block._key}
+            />
+          );
+        }
+        if (needsSearchParams && block._type === "all-posts-7") {
+          const C = componentMap["all-posts-7"] as React.ComponentType<
+            BlockComponentProps<"all-posts-7"> & {
+              searchParams?: { page?: string };
+            }
+          >;
+          return (
+            <C
+              {...(block as Extract<Block, { _type: "all-posts-7" }>)}
+              searchParams={searchParams}
+              locale={activeLocale}
+              key={block._key}
+            />
+          );
+        }
+        if (needsSearchParams && block._type === "all-posts-4") {
+          const C = componentMap["all-posts-4"] as React.ComponentType<
+            BlockComponentProps<"all-posts-4"> & {
+              searchParams?: { page?: string };
+            }
+          >;
+          return (
+            <C
+              {...(block as Extract<Block, { _type: "all-posts-4" }>)}
               searchParams={searchParams}
               locale={activeLocale}
               key={block._key}

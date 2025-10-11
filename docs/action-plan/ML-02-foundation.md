@@ -62,6 +62,7 @@ These weaknesses map directly to the Phase 1–3 tasks below; tackling them earl
 - [ ] **Blocks & components**
   - [x] Update `Blocks` renderer to accept `lang` and pass it to child components (locale now forwarded to `section-header`, `hero-12`, `hero-174`; remaining blocks to audit for language-aware links).
   - Extract shared UI copy into locale dictionaries or Sanity fields (start with navigation/header/footer/inquiry).
+  - Introduce centralized Next props types (non-Promise) and migrate all pages/layouts to use them, removing async/await for params/searchParams resolution.
 - [ ] **Query layer upgrade**
   - [x] Parameterize GROQ fragments with `$lang` starting with `page`, `post`, and blog category queries (fallback-aware lookup, language field exposure).
   - [x] Update `sanity/lib/fetch.ts` helpers and blog/page routes to accept `{ lang }` and forward fallback locales.
@@ -73,6 +74,7 @@ These weaknesses map directly to the Phase 1–3 tasks below; tackling them earl
 
 - [ ] **Testing matrix**
   - Add unit tests covering routing helpers, metadata builders, and share URL utilities.
+  - Run `vitest` on each refactor PR to confirm no regressions, and add tests for new shared Next props types usage where appropriate.
   - Introduce Playwright smoke tests for `/[lang]/` routes using the English baseline data.
 - [ ] **CI enforcement**
   - Configure pipeline to run lint/typecheck/tests with locale fixtures.

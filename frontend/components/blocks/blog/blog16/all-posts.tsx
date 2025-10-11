@@ -16,16 +16,13 @@ export default async function AllPosts16({
   searchParams,
   locale = FALLBACK_LOCALE,
 }: AllPosts16Props & {
-  searchParams?: Promise<{
+  searchParams?: {
     page?: string;
-  }>;
+  };
   locale?: SupportedLocale;
 }) {
   const POSTS_PER_PAGE = 6;
-
-  const currentPage = searchParams
-    ? parseInt((await searchParams).page || "1")
-    : 1;
+  const currentPage = searchParams?.page ? parseInt(searchParams.page) : 1;
 
   const [posts, totalPosts] = await Promise.all([
     fetchSanityPosts({

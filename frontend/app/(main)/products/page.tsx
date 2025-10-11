@@ -4,16 +4,12 @@ import { notFound } from "next/navigation";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import type { Metadata } from "next";
 import { buildLocalizedPath, normalizeLocale } from "@/lib/i18n/routing";
-
-type ProductsPageProps = {
-  params?: Promise<{ lang?: string }>;
-  searchParams?: Promise<{ page?: string; category?: string }>;
-};
+import type { LangAsyncPageProps } from "@/lib/types/next";
 
 export const revalidate = 60;
 
 export async function generateMetadata(
-  props: ProductsPageProps
+  props: LangAsyncPageProps
 ): Promise<Metadata | Record<string, unknown>> {
   const resolvedParams = props.params ? await props.params : undefined;
   const locale = normalizeLocale(resolvedParams?.lang);
@@ -38,7 +34,7 @@ export async function generateMetadata(
   return base;
 }
 
-export default async function ProductsPage(props: ProductsPageProps) {
+export default async function ProductsPage(props: LangAsyncPageProps) {
   const resolvedParams = props.params ? await props.params : undefined;
   const locale = normalizeLocale(resolvedParams?.lang);
   const page = await fetchSanityPageBySlug({ slug: "products", lang: locale });
@@ -46,14 +42,12 @@ export default async function ProductsPage(props: ProductsPageProps) {
     notFound();
   }
 
-  const pageParams = Promise.resolve(
-    (props.searchParams ? await props.searchParams : undefined) || {}
-  );
-
   return (
     <Blocks
       blocks={page?.blocks ?? []}
-      searchParams={pageParams}
+      searchParams={
+        (props.searchParams ? await props.searchParams : undefined) || {}
+      }
       locale={locale}
     />
   );

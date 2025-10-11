@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { normalizeLocale, isSupportedLocale } from "@/lib/i18n/routing";
 import { FALLBACK_LOCALE, SUPPORTED_LOCALES } from "@/lib/i18n/config";
+import type { AsyncPageProps, SearchParams } from "@/lib/types/next";
 
 const EXCLUDED_PAGE_SLUGS = new Set(["index", "home", ""]);
 
@@ -22,10 +23,10 @@ export async function generateStaticParams() {
   );
 }
 
-export async function generateMetadata(props: {
-  params: Promise<{ lang?: string; slug: string }>;
-}) {
-  const params = await props.params;
+export async function generateMetadata(
+  props: AsyncPageProps<{ lang?: string; slug: string }, SearchParams>
+) {
+  const params = (await props.params)!;
   const locale = normalizeLocale(params.lang);
   const page = await fetchSanityPageBySlug({ slug: params.slug, lang: locale });
 
@@ -36,13 +37,10 @@ export async function generateMetadata(props: {
   return generatePageMetadata({ page, slug: params.slug, type: "page" });
 }
 
-export default async function Page(props: {
-  params: Promise<{ lang?: string; slug: string }>;
-  searchParams: Promise<{
-    page?: string;
-  }>;
-}) {
-  const params = await props.params;
+export default async function Page(
+  props: AsyncPageProps<{ lang?: string; slug: string }, SearchParams>
+) {
+  const params = (await props.params)!;
   const locale = normalizeLocale(params.lang);
 
   if (!isSupportedLocale(locale)) {
@@ -55,12 +53,14 @@ export default async function Page(props: {
     notFound();
   }
 
-  const pageParams = Promise.resolve((await props.searchParams) || {});
+  const pageParams = Promise.resolve(
+    ((await props.searchParams) as { page?: string } | undefined) || {}
+  );
 
   return (
     <Blocks
       blocks={page?.blocks ?? []}
-      searchParams={pageParams}
+      searchParams={await pageParams}
       locale={locale}
     />
   );

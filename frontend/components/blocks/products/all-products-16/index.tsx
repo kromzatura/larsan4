@@ -26,14 +26,14 @@ export default async function AllProducts16({
   searchParams,
   locale = FALLBACK_LOCALE,
 }: AllProducts16Props & {
-  searchParams?: Promise<{
+  searchParams?: {
     page?: string;
     category?: string;
-  }>;
+  };
   locale?: SupportedLocale;
 }) {
   const PAGE_SIZE = 12;
-  const params = searchParams ? await searchParams : undefined;
+  const params = searchParams;
   const currentPage = params?.page ? Math.max(1, parseInt(params.page)) : 1;
   const activeCategory = params?.category || undefined;
 

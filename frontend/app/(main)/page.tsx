@@ -3,12 +3,9 @@ import { fetchSanityPageBySlug } from "@/sanity/lib/fetch";
 import { generatePageMetadata as generatePageMetadataUtil } from "@/sanity/lib/metadata";
 import MissingSanityPage from "@/components/ui/missing-sanity-page";
 import { normalizeLocale } from "@/lib/i18n/routing";
-// import { FALLBACK_LOCALE } from "@/lib/i18n/config";
-// No PageProps type in our Next version; accept optional params directly.
+import type { LangAsyncPageProps } from "@/lib/types/next";
 
-export async function generateMetadata(props: {
-  params?: Promise<{ lang?: string }>;
-}) {
+export async function generateMetadata(props: LangAsyncPageProps) {
   const resolved = props.params ? await props.params : undefined;
   const locale = normalizeLocale(resolved?.lang);
   const page = await fetchSanityPageBySlug({ slug: "index", lang: locale });
@@ -18,9 +15,7 @@ export async function generateMetadata(props: {
   return generatePageMetadataUtil({ page, slug: "index", type: "page" });
 }
 
-type IndexPageProps = { params?: Promise<{ lang?: string }> };
-
-export default async function IndexPage(props: IndexPageProps) {
+export default async function IndexPage(props: LangAsyncPageProps) {
   const resolved = props.params ? await props.params : undefined;
   const locale = normalizeLocale(resolved?.lang);
   const page = await fetchSanityPageBySlug({ slug: "index", lang: locale });

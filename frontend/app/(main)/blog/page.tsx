@@ -9,12 +9,9 @@ import {
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { chipClass } from "@/components/ui/chip";
 import { buildLocalizedPath, normalizeLocale } from "@/lib/i18n/routing";
+import type { LangAsyncPageProps } from "@/lib/types/next";
 
 type BlogSort = "newest" | "az" | "za";
-interface BlogSearchParams {
-  page?: string;
-  sort?: BlogSort | string; // raw string from URL, will be narrowed
-}
 
 interface MetadataWithAlternates {
   alternates?: {
@@ -27,13 +24,12 @@ interface MetadataWithAlternates {
 
 const POSTS_PER_PAGE = 6;
 
-export async function generateMetadata(props: {
-  params?: Promise<{ lang?: string }>;
-  searchParams?: Promise<BlogSearchParams>;
-}) {
+export async function generateMetadata(props: LangAsyncPageProps) {
   const params = props.params ? await props.params : undefined;
   const locale = normalizeLocale(params?.lang);
-  const sp = props.searchParams ? await props.searchParams : undefined;
+  const sp = (props.searchParams ? await props.searchParams : undefined) as
+    | { page?: string; sort?: string }
+    | undefined;
   const pageNum = Math.max(1, Number(sp?.page || 1));
   const rawSort = sp?.sort;
   const sort: BlogSort =
@@ -66,15 +62,12 @@ export async function generateMetadata(props: {
   return withRss;
 }
 
-type BlogIndexProps = {
-  params?: Promise<{ lang?: string }>;
-  searchParams?: Promise<BlogSearchParams>;
-};
-
-export default async function BlogIndex(props: BlogIndexProps) {
+export default async function BlogIndex(props: LangAsyncPageProps) {
   const resolvedParams = props.params ? await props.params : undefined;
   const locale = normalizeLocale(resolvedParams?.lang);
-  const sp = props.searchParams ? await props.searchParams : undefined;
+  const sp = (props.searchParams ? await props.searchParams : undefined) as
+    | { page?: string; sort?: string }
+    | undefined;
   const page = Math.max(1, Number(sp?.page || 1));
   const rawSort = sp?.sort;
   const sort: BlogSort =

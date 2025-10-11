@@ -1,12 +1,9 @@
-import type { ReactNode } from "react";
 import MainLayout from "../(main)/layout";
 import { LocaleProvider } from "@/lib/i18n/locale-context";
 import { normalizeLocale } from "@/lib/i18n/routing";
+import type { LangAsyncLayoutProps } from "@/lib/types/next";
 
-type LangLayoutProps = {
-  children: ReactNode;
-  params?: Promise<{ lang?: string }>;
-};
+type LangLayoutProps = LangAsyncLayoutProps;
 
 export default async function LangLayout({
   children,

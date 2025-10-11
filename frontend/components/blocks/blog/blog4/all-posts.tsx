@@ -22,15 +22,14 @@ export default async function AllPosts4({
   searchParams,
   locale = FALLBACK_LOCALE,
 }: AllPosts4Props & {
-  searchParams?: Promise<{
+  searchParams?: {
     page?: string;
-  }>;
+  };
   locale?: SupportedLocale;
 }) {
   const POSTS_PER_PAGE = 6;
-
-  const currentPage = searchParams
-    ? parseInt((await searchParams).page || "1")
+  const currentPage = searchParams?.page
+    ? parseInt(searchParams.page || "1")
     : 1;
 
   const [posts, totalPosts] = await Promise.all([

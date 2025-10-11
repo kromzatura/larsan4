@@ -10,6 +10,7 @@ import {
 import { chipClass } from "@/components/ui/chip";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import type { AsyncPageProps, SearchParams } from "@/lib/types/next";
 
 type BlogSort = "newest" | "az" | "za";
 interface BlogCategorySearchParams {
@@ -34,13 +35,14 @@ export async function generateStaticParams() {
     .map((c) => ({ slug: c.slug.current }));
 }
 
-export async function generateMetadata(props: {
-  params: Promise<{ slug: string; lang?: string }>;
-  searchParams?: Promise<BlogCategorySearchParams>;
-}) {
-  const params = await props.params;
+export async function generateMetadata(
+  props: AsyncPageProps<{ slug: string; lang?: string }, SearchParams>
+) {
+  const params = (await props.params)!;
   const locale = normalizeLocale(params.lang);
-  const sp = props.searchParams ? await props.searchParams : undefined;
+  const sp = (props.searchParams ? await props.searchParams : undefined) as
+    | BlogCategorySearchParams
+    | undefined;
   const pageNum = Math.max(1, Number(sp?.page || 1));
   const rawSort = sp?.sort;
   const sort: BlogSort =
@@ -73,13 +75,14 @@ export async function generateMetadata(props: {
   return withFeeds;
 }
 
-export default async function BlogCategoryPage(props: {
-  params: Promise<{ slug: string; lang?: string }>;
-  searchParams?: Promise<BlogCategorySearchParams>;
-}) {
-  const params = await props.params;
+export default async function BlogCategoryPage(
+  props: AsyncPageProps<{ slug: string; lang?: string }, SearchParams>
+) {
+  const params = (await props.params)!;
   const locale = normalizeLocale(params.lang);
-  const sp = props.searchParams ? await props.searchParams : undefined;
+  const sp = (props.searchParams ? await props.searchParams : undefined) as
+    | BlogCategorySearchParams
+    | undefined;
   const page = Math.max(1, Number(sp?.page || 1));
   const rawSort = sp?.sort;
   const sort: BlogSort =
