@@ -38,7 +38,8 @@ const Logos2 = ({
               <div className="mt-6 flex gap-3">
                 {links.map((link) => {
                   const href = resolveLinkHref(link, locale) || "#";
-                  const target = link?.isExternal && link?.target ? "_blank" : undefined;
+                  const target =
+                    link?.isExternal && link?.target ? "_blank" : undefined;
                   const rel = target ? "noopener noreferrer" : undefined;
                   return (
                     <Link

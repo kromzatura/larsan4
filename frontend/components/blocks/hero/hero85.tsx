@@ -25,7 +25,14 @@ type Hero85Props = Extract<
   { _type: "hero-85" }
 > & { locale?: SupportedLocale };
 
-const Hero85 = ({ tag, title, body, images, links, locale = FALLBACK_LOCALE }: Hero85Props) => {
+const Hero85 = ({
+  tag,
+  title,
+  body,
+  images,
+  links,
+  locale = FALLBACK_LOCALE,
+}: Hero85Props) => {
   return (
     <section className="py-20">
       <div className="container">
@@ -49,7 +56,8 @@ const Hero85 = ({ tag, title, body, images, links, locale = FALLBACK_LOCALE }: H
               <div className="mt-10 flex flex-col gap-2 sm:flex-row">
                 {links.map((link) => {
                   const href = resolveLinkHref(link, locale) || "#";
-                  const target = link?.isExternal && link?.target ? "_blank" : undefined;
+                  const target =
+                    link?.isExternal && link?.target ? "_blank" : undefined;
                   const rel = target ? "noopener noreferrer" : undefined;
                   return (
                     <Link
