@@ -13,7 +13,11 @@ type Pricing1Props = Extract<
   { _type: "pricing-1" }
 > & { locale?: SupportedLocale };
 
-export default function Pricing1({ padding, columns, locale = FALLBACK_LOCALE }: Pricing1Props) {
+export default function Pricing1({
+  padding,
+  columns,
+  locale = FALLBACK_LOCALE,
+}: Pricing1Props) {
   return (
     <SectionContainer padding={padding}>
       {columns && columns?.length > 0 && (

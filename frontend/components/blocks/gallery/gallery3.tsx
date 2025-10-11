@@ -28,7 +28,12 @@ type Gallery3Props = Extract<
   { _type: "gallery-3" }
 > & { locale?: SupportedLocale };
 
-export default function Gallery3({ title, padding, columns, locale = FALLBACK_LOCALE }: Gallery3Props) {
+export default function Gallery3({
+  title,
+  padding,
+  columns,
+  locale = FALLBACK_LOCALE,
+}: Gallery3Props) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);

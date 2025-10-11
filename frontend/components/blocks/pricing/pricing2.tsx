@@ -37,7 +37,11 @@ const calculateAnnualPrice = (price: number | null | undefined): string => {
   return `$${price * 12}`;
 };
 
-export default function Pricing2({ padding, columns, locale = FALLBACK_LOCALE }: Pricing2Props) {
+export default function Pricing2({
+  padding,
+  columns,
+  locale = FALLBACK_LOCALE,
+}: Pricing2Props) {
   const [isYearly, setIsYearly] = useState(false);
 
   return (

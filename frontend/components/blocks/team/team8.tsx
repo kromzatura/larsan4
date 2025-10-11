@@ -24,7 +24,10 @@ type Team8Props = Extract<
   { _type: "team-8" }
 > & { locale?: SupportedLocale };
 
-export default async function Team8({ padding, locale = FALLBACK_LOCALE }: Team8Props) {
+export default async function Team8({
+  padding,
+  locale = FALLBACK_LOCALE,
+}: Team8Props) {
   const team = await fetchSanityTeam();
 
   return (

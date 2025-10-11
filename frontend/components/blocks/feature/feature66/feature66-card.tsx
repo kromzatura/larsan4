@@ -14,7 +14,12 @@ type Feature66Card = Extract<
   { _type: "feature-66-card" }
 >;
 
-export default function Feature66Card({ logo, image, link, locale = FALLBACK_LOCALE }: Feature66Card & { locale?: SupportedLocale }) {
+export default function Feature66Card({
+  logo,
+  image,
+  link,
+  locale = FALLBACK_LOCALE,
+}: Feature66Card & { locale?: SupportedLocale }) {
   return (
     <Link
       href={resolveLinkHref(link, locale) || ""}

@@ -18,7 +18,11 @@ type Gallery1Props = Extract<
   { _type: "gallery-1" }
 > & { locale?: SupportedLocale };
 
-export default function Gallery1({ padding, columns, locale = FALLBACK_LOCALE }: Gallery1Props) {
+export default function Gallery1({
+  padding,
+  columns,
+  locale = FALLBACK_LOCALE,
+}: Gallery1Props) {
   const [selection, setSelection] = useState(columns?.[0]._key);
   return (
     <SectionContainer padding={padding}>

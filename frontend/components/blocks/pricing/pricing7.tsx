@@ -21,7 +21,12 @@ type Pricing7Props = Extract<
   { _type: "pricing-7" }
 > & { locale?: SupportedLocale };
 
-export default function Pricing7({ padding, badge, columns, locale = FALLBACK_LOCALE }: Pricing7Props) {
+export default function Pricing7({
+  padding,
+  badge,
+  columns,
+  locale = FALLBACK_LOCALE,
+}: Pricing7Props) {
   const [isAnnually, setIsAnnually] = useState(false);
 
   return (
