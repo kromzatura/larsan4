@@ -12,7 +12,10 @@ export type LayoutProps<P extends Params = Params> = {
   params: P;
 };
 
-export type PageProps<P extends Params = Params, S extends SearchParams = SearchParams> = {
+export type PageProps<
+  P extends Params = Params,
+  S extends SearchParams = SearchParams
+> = {
   params: P;
   searchParams: S;
 };
@@ -23,15 +26,22 @@ export type AsyncLayoutProps<P extends Params = Params> = {
   params?: Promise<P>;
 };
 
-export type AsyncPageProps<P extends Params = Params, S extends SearchParams = SearchParams> = {
+export type AsyncPageProps<
+  P extends Params = Params,
+  S extends SearchParams = SearchParams
+> = {
   params?: Promise<P>;
   searchParams?: Promise<S>;
 };
 
 // Narrow helpers for common cases
 export type LangParams = { lang?: string };
-export type LangPageProps<S extends SearchParams = SearchParams> = PageProps<LangParams, S>;
+export type LangPageProps<S extends SearchParams = SearchParams> = PageProps<
+  LangParams,
+  S
+>;
 export type LangLayoutProps = LayoutProps<LangParams>;
 
-export type LangAsyncPageProps<S extends SearchParams = SearchParams> = AsyncPageProps<LangParams, S>;
+export type LangAsyncPageProps<S extends SearchParams = SearchParams> =
+  AsyncPageProps<LangParams, S>;
 export type LangAsyncLayoutProps = AsyncLayoutProps<LangParams>;
