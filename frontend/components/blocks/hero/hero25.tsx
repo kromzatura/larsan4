@@ -5,13 +5,16 @@ import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import Icon from "@/components/icon";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Hero25Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "hero-25" }
->;
+> & { locale?: SupportedLocale };
 
-const Hero25 = ({ tagLine, title, image, links, tags }: Hero25Props) => {
+const Hero25 = ({ tagLine, title, image, links, tags, locale = FALLBACK_LOCALE }: Hero25Props) => {
   return (
     <section className="py-20 md:py-28">
       <div className="container">
@@ -37,27 +40,32 @@ const Hero25 = ({ tagLine, title, image, links, tags }: Hero25Props) => {
           )}
           {links && (
             <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-              {links.map((link) => (
-                <Link
-                  key={link._key}
-                  href={link.href || "#"}
-                  target={link.target ? "_blank" : undefined}
-                  rel={link.target ? "noopener" : undefined}
-                  className={cn(
-                    buttonVariants({
-                      variant: link.buttonVariant || "default",
-                      size: "lg",
-                    }),
-                    "px-8 py-6 text-base font-medium"
-                  )}
-                >
-                  {link.title}
-                  <Icon
-                    iconVariant={link.iconVariant || "none"}
-                    strokeWidth={1.5}
-                  />
-                </Link>
-              ))}
+              {links.map((link) => {
+                const href = resolveLinkHref(link, locale) || "#";
+                const target = link?.isExternal && link?.target ? "_blank" : undefined;
+                const rel = target ? "noopener noreferrer" : undefined;
+                return (
+                  <Link
+                    key={link._key}
+                    href={href}
+                    target={target}
+                    rel={rel}
+                    className={cn(
+                      buttonVariants({
+                        variant: link.buttonVariant || "default",
+                        size: "lg",
+                      }),
+                      "px-8 py-6 text-base font-medium"
+                    )}
+                  >
+                    {link.title}
+                    <Icon
+                      iconVariant={link.iconVariant || "none"}
+                      strokeWidth={1.5}
+                    />
+                  </Link>
+                );
+              })}
             </div>
           )}
           {tags && (
