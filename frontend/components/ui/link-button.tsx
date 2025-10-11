@@ -10,21 +10,31 @@ export function LinkButton({
   link,
   title,
   size = "lg",
-  asDiv = false,
   locale = FALLBACK_LOCALE,
 }: {
   className?: string;
   link: LinkType;
   title?: string;
   size?: "default" | "sm" | "lg" | "icon";
-  asDiv?: boolean;
   locale?: SupportedLocale;
 }) {
+  // Build a minimal Link-like object for href resolution without unsafe casts.
+  const maybe = link as unknown as Record<string, unknown>;
+  const internalType =
+    typeof maybe["internalType"] === "string"
+      ? (maybe["internalType"] as string)
+      : undefined;
+  const internalSlug =
+    typeof maybe["internalSlug"] === "string"
+      ? (maybe["internalSlug"] as string)
+      : undefined;
+
   const resolvedHref = resolveLinkHref(
-    link as LinkType & {
-      internalType?: string | null;
-      internalSlug?: string | null;
-      href?: string | null;
+    {
+      isExternal: link?.isExternal ?? undefined,
+      href: link?.href ?? undefined,
+      internalType,
+      internalSlug,
     },
     locale
   );
@@ -54,15 +64,9 @@ export function LinkButton({
       className={className}
       size={size}
     >
-      {asDiv ? (
-        <Link href={resolvedHref} title={title} target={target} rel={rel}>
-          <div>{label}</div>
-        </Link>
-      ) : (
-        <Link href={resolvedHref} title={title} target={target} rel={rel}>
-          {label}
-        </Link>
-      )}
+      <Link href={resolvedHref} title={title} target={target} rel={rel}>
+        {label}
+      </Link>
     </Button>
   );
 }

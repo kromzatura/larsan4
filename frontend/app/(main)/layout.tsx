@@ -25,7 +25,12 @@ export default async function MainLayout({
     <InquiryProvider>
       <Navbar1 locale={locale} />
       {banner && banner.length > 0 && (
-        <Banner data={banner[0]} component={Banner5} bannerId="banner5" />
+        <Banner
+          data={banner[0]}
+          component={Banner5}
+          bannerId="banner5"
+          locale={locale}
+        />
       )}
       <main>{children}</main>
       <Toaster position="top-right" />
