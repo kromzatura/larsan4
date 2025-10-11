@@ -7,7 +7,12 @@ import { resolveLinkHref } from "@/lib/resolveHref";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { BannerUIProps } from "./index";
 
-export default function Banner5({ data, isVisible, onClose, locale }: BannerUIProps) {
+export default function Banner5({
+  data,
+  isVisible,
+  onClose,
+  locale,
+}: BannerUIProps) {
   const { title, description, link } = data;
 
   if (!isVisible) return null;
