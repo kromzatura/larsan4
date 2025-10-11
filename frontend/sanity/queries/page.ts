@@ -76,7 +76,7 @@ export const PAGE_QUERY = groq`
     slug.current == $slug &&
     (!defined(language) || language in [$lang, $fallbackLang])
   ]
-  | order(language == $lang desc, _updatedAt desc)[0]{
+  | order((language == $lang) desc, _updatedAt desc)[0]{
     _id,
     _type,
     language,

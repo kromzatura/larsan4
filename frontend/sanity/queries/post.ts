@@ -9,7 +9,7 @@ export const POST_QUERY = groq`
     slug.current == $slug &&
     (!defined(language) || language in [$lang, $fallbackLang])
   ]
-  | order(language == $lang desc, _updatedAt desc)[0]{
+  | order((language == $lang) desc, _updatedAt desc)[0]{
     _id,
     language,
     title,
@@ -40,7 +40,7 @@ export const POSTS_QUERY = groq`
     defined(slug) &&
     (!defined(language) || language in [$lang, $fallbackLang])
   ]
-  | order(language == $lang desc, coalesce(publishedAt, _createdAt) desc)[$offset...$end]{
+  | order((language == $lang) desc, coalesce(publishedAt, _createdAt) desc)[$offset...$end]{
     _id,
     language,
     _createdAt,
@@ -71,7 +71,7 @@ export const POSTS_QUERY_AZ = groq`
     defined(slug) &&
     (!defined(language) || language in [$lang, $fallbackLang])
   ]
-  | order(language == $lang desc, title asc)[$offset...$end]{
+  | order((language == $lang) desc, title asc)[$offset...$end]{
     _id,
     language,
     _createdAt,
@@ -102,7 +102,7 @@ export const POSTS_QUERY_ZA = groq`
     defined(slug) &&
     (!defined(language) || language in [$lang, $fallbackLang])
   ]
-  | order(language == $lang desc, title desc)[$offset...$end]{
+  | order((language == $lang) desc, title desc)[$offset...$end]{
     _id,
     language,
     _createdAt,

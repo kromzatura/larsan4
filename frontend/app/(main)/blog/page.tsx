@@ -66,13 +66,14 @@ export async function generateMetadata(props: {
   return withRss;
 }
 
-export default async function BlogIndex(
-  props: {
-    params?: { lang?: string };
-    searchParams?: Promise<BlogSearchParams>;
-  } = {}
-) {
-  const locale = normalizeLocale(props.params?.lang);
+type BlogIndexProps = {
+  params?: Promise<{ lang?: string }>;
+  searchParams?: Promise<BlogSearchParams>;
+};
+
+export default async function BlogIndex(props: BlogIndexProps) {
+  const resolvedParams = props.params ? await props.params : undefined;
+  const locale = normalizeLocale(resolvedParams?.lang);
   const sp = props.searchParams ? await props.searchParams : undefined;
   const page = Math.max(1, Number(sp?.page || 1));
   const rawSort = sp?.sort;

@@ -3,15 +3,14 @@ import MainLayout from "../(main)/layout";
 import { LocaleProvider } from "@/lib/i18n/locale-context";
 import { normalizeLocale } from "@/lib/i18n/routing";
 
-interface LangLayoutProps {
+type LangLayoutProps = {
   children: ReactNode;
-  params: {
-    lang: string;
-  };
-}
+  params?: Promise<{ lang?: string }>;
+};
 
-export default function LangLayout({ children, params }: LangLayoutProps) {
-  const locale = normalizeLocale(params.lang);
+export default async function LangLayout({ children, params }: LangLayoutProps) {
+  const resolved = params ? await params : undefined;
+  const locale = normalizeLocale(resolved?.lang);
 
   return (
     <LocaleProvider locale={locale}>

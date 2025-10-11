@@ -82,7 +82,7 @@ export const PRODUCT_QUERY = groq`
     slug.current == $slug &&
     (!defined(language) || language in [$lang, $fallbackLang])
   ]
-  | order(language == $lang desc, _updatedAt desc)[0]{
+  | order((language == $lang) desc, _updatedAt desc)[0]{
     ${productProjection}
   }
 `;
@@ -93,7 +93,7 @@ export const PRODUCTS_QUERY = groq`
     defined(slug) &&
     (!defined(language) || language in [$lang, $fallbackLang])
   ]
-  | order(language == $lang desc, orderRank)[$offset...$end]{
+  | order((language == $lang) desc, orderRank)[$offset...$end]{
     ${productListProjection}
   }
 `;
@@ -123,7 +123,7 @@ export const PRODUCT_CATEGORIES_QUERY = groq`
     defined(slug) &&
     (!defined(language) || language in [$lang, $fallbackLang])
   ]
-  | order(language == $lang desc, orderRank){
+  | order((language == $lang) desc, orderRank){
     _id,
     title,
     slug,
@@ -137,7 +137,7 @@ export const PRODUCT_CATEGORY_BY_SLUG_QUERY = groq`
     slug.current == $slug &&
     (!defined(language) || language in [$lang, $fallbackLang])
   ]
-  | order(language == $lang desc, _updatedAt desc)[0]{
+  | order((language == $lang) desc, _updatedAt desc)[0]{
     _id,
     _type,
     language,
@@ -157,7 +157,7 @@ const productsByCategoryFilter = groq`
 
 export const PRODUCTS_BY_CATEGORY_QUERY = groq`
   *[${productsByCategoryFilter}]
-  | order(language == $lang desc, orderRank)[$offset...$end]{
+  | order((language == $lang) desc, orderRank)[$offset...$end]{
     ${productListProjection}
   }
 `;
@@ -165,21 +165,21 @@ export const PRODUCTS_BY_CATEGORY_QUERY = groq`
 // Explicit variants to avoid brittle string replacement when ordering
 export const PRODUCTS_BY_CATEGORY_QUERY_NEWEST = groq`
   *[${productsByCategoryFilter}]
-  | order(language == $lang desc, _createdAt desc)[$offset...$end]{
+  | order((language == $lang) desc, _createdAt desc)[$offset...$end]{
     ${productListProjection}
   }
 `;
 
 export const PRODUCTS_BY_CATEGORY_QUERY_AZ = groq`
   *[${productsByCategoryFilter}]
-  | order(language == $lang desc, title asc)[$offset...$end]{
+  | order((language == $lang) desc, title asc)[$offset...$end]{
     ${productListProjection}
   }
 `;
 
 export const PRODUCTS_BY_CATEGORY_QUERY_ZA = groq`
   *[${productsByCategoryFilter}]
-  | order(language == $lang desc, title desc)[$offset...$end]{
+  | order((language == $lang) desc, title desc)[$offset...$end]{
     ${productListProjection}
   }
 `;

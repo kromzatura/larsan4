@@ -2,27 +2,24 @@ import Blocks from "@/components/blocks";
 import { fetchSanityPageBySlug } from "@/sanity/lib/fetch";
 import { notFound } from "next/navigation";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
-import type { ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import { buildLocalizedPath, normalizeLocale } from "@/lib/i18n/routing";
 
-type ProductSearchParams = {
-  page?: string;
-  category?: string;
+type ProductsPageProps = {
+  params?: Promise<{ lang?: string }>;
+  searchParams?: Promise<{ page?: string; category?: string }>;
 };
 
 export const revalidate = 60;
 
-export async function generateMetadata({
-  params,
-  searchParams,
-}: {
-  params?: { lang?: string };
-  searchParams?: Promise<ProductSearchParams>;
-}): Promise<ResolvingMetadata | Record<string, unknown>> {
-  const locale = normalizeLocale(params?.lang);
+export async function generateMetadata(
+  props: ProductsPageProps
+): Promise<Metadata | Record<string, unknown>> {
+  const resolvedParams = props.params ? await props.params : undefined;
+  const locale = normalizeLocale(resolvedParams?.lang);
   const page = await fetchSanityPageBySlug({ slug: "products", lang: locale });
   if (!page) return {};
-  const sp = searchParams ? await searchParams : undefined;
+  const sp = props.searchParams ? await props.searchParams : undefined;
   const pageNum = sp?.page ? Number(sp.page) : 1;
   const category = sp?.category || "";
   const base = generatePageMetadata({ page, slug: "products", type: "page" });
@@ -41,18 +38,17 @@ export async function generateMetadata({
   return base;
 }
 
-export default async function ProductsPage(props: {
-  params?: { lang?: string };
-  searchParams: Promise<ProductSearchParams>;
-}) {
-  const locale = normalizeLocale(props.params?.lang);
+export default async function ProductsPage(props: ProductsPageProps) {
+  const resolvedParams = props.params ? await props.params : undefined;
+  const locale = normalizeLocale(resolvedParams?.lang);
   const page = await fetchSanityPageBySlug({ slug: "products", lang: locale });
   if (!page) {
     notFound();
   }
 
-  const resolvedSearchParams = await props.searchParams;
-  const pageParams = Promise.resolve(resolvedSearchParams || {});
+  const pageParams = Promise.resolve(
+    (props.searchParams ? await props.searchParams : undefined) || {}
+  );
 
   return (
     <Blocks

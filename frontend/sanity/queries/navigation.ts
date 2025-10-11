@@ -22,7 +22,7 @@ export const NAVIGATION_QUERY = groq`
     _type == "navigation" &&
     (!defined(language) || language in [$lang, $fallbackLang])
   ]
-  | order(language == $lang desc, orderRank){
+  | order((language == $lang) desc, (language == $fallbackLang) desc, orderRank asc){
     _type,
     _key,
     title,

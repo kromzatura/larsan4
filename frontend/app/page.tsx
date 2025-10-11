@@ -16,6 +16,8 @@ export default async function RootRedirect() {
   });
 
   const target = buildLocalizedPath(requestedLocale, "/");
+  const normalizedTarget =
+    target === "/" ? `/${requestedLocale}` : target === "//" ? "/" : target;
 
-  redirect(target === "//" ? "/" : target);
+  redirect(normalizedTarget);
 }

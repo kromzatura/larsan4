@@ -12,9 +12,9 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export async function GET(
   _req: Request,
-  { params }: { params: { slug: string } }
+  context: { params: Promise<{ slug: string }> }
 ) {
-  const { slug } = params;
+  const { slug } = await context.params;
   const [cat, { data: posts }, settings] = await Promise.all([
     fetchSanityBlogCategoryBySlug({ slug }),
     sanityFetch({

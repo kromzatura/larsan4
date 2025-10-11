@@ -1,25 +1,28 @@
 import Blocks from "@/components/blocks";
 import { fetchSanityPageBySlug } from "@/sanity/lib/fetch";
-import { generatePageMetadata } from "@/sanity/lib/metadata";
+import { generatePageMetadata as generatePageMetadataUtil } from "@/sanity/lib/metadata";
 import MissingSanityPage from "@/components/ui/missing-sanity-page";
 import { normalizeLocale } from "@/lib/i18n/routing";
-import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+// import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+// No PageProps type in our Next version; accept optional params directly.
 
-export async function generateMetadata() {
-  const page = await fetchSanityPageBySlug({
-    slug: "index",
-    lang: FALLBACK_LOCALE,
-  });
-
-  return generatePageMetadata({ page, slug: "index", type: "page" });
+export async function generateMetadata(props: {
+  params?: Promise<{ lang?: string }>;
+}) {
+  const resolved = props.params ? await props.params : undefined;
+  const locale = normalizeLocale(resolved?.lang);
+  const page = await fetchSanityPageBySlug({ slug: "index", lang: locale });
+  if (!page) {
+    return { title: "Content not available in this language" };
+  }
+  return generatePageMetadataUtil({ page, slug: "index", type: "page" });
 }
 
-export default async function IndexPage({
-  params,
-}: {
-  params?: { lang?: string };
-} = {}) {
-  const locale = normalizeLocale(params?.lang);
+type IndexPageProps = { params?: Promise<{ lang?: string }> };
+
+export default async function IndexPage(props: IndexPageProps) {
+  const resolved = props.params ? await props.params : undefined;
+  const locale = normalizeLocale(resolved?.lang);
   const page = await fetchSanityPageBySlug({ slug: "index", lang: locale });
 
   if (!page) {

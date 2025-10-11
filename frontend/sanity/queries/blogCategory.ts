@@ -19,7 +19,7 @@ export const BLOG_CATEGORY_BY_SLUG_QUERY = groq`
     slug.current == $slug &&
     (!defined(language) || language in [$lang, $fallbackLang])
   ]
-  | order(language == $lang desc, _updatedAt desc)[0]{
+  | order((language == $lang) desc, _updatedAt desc)[0]{
     _id,
     _type,
     title,
@@ -41,7 +41,7 @@ export const POSTS_BY_BLOG_CATEGORY_QUERY_NEWEST = groq`
   *[
     ${postsByCategoryFilter}
   ]
-  | order(language == $lang desc, coalesce(publishedAt, _createdAt) desc)[$offset...$end]{
+  | order((language == $lang) desc, coalesce(publishedAt, _createdAt) desc)[$offset...$end]{
     _id,
     language,
     _createdAt,
@@ -61,7 +61,7 @@ export const POSTS_BY_BLOG_CATEGORY_QUERY_AZ = groq`
   *[
     ${postsByCategoryFilter}
   ]
-  | order(language == $lang desc, title asc)[$offset...$end]{
+  | order((language == $lang) desc, title asc)[$offset...$end]{
     _id,
     language,
     _createdAt,
@@ -81,7 +81,7 @@ export const POSTS_BY_BLOG_CATEGORY_QUERY_ZA = groq`
   *[
     ${postsByCategoryFilter}
   ]
-  | order(language == $lang desc, title desc)[$offset...$end]{
+  | order((language == $lang) desc, title desc)[$offset...$end]{
     _id,
     language,
     _createdAt,
