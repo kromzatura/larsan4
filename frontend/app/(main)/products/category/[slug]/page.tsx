@@ -14,6 +14,7 @@ import ProductsTable, {
 import { urlFor } from "@/sanity/lib/image";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import type { AsyncPageProps } from "@/lib/types/next";
 
 const PAGE_SIZE = 12;
 
@@ -26,12 +27,14 @@ export async function generateStaticParams() {
     .map((c) => ({ slug: c.slug!.current! }));
 }
 
-export async function generateMetadata(props: {
-  params: Promise<{ slug: string; lang?: string }>;
-  searchParams: Promise<{ page?: string }>;
-}) {
-  const params = await props.params;
-  const searchParams = await props.searchParams;
+export async function generateMetadata(
+  props: AsyncPageProps<
+    { slug: string; lang?: string },
+    { page?: string }
+  >
+) {
+  const params = (await props.params)!;
+  const searchParams = (await props.searchParams) || {};
   const locale = normalizeLocale(params.lang);
   const pageNum = Math.max(1, Number(searchParams?.page || 1));
   const cat = await fetchSanityProductCategoryBySlug({
@@ -63,12 +66,14 @@ export async function generateMetadata(props: {
   };
 }
 
-export default async function CategoryPage(props: {
-  params: Promise<{ slug: string; lang?: string }>;
-  searchParams: Promise<{ page?: string; sort?: "newest" | "az" | "za" }>;
-}) {
-  const params = await props.params;
-  const searchParams = await props.searchParams;
+export default async function CategoryPage(
+  props: AsyncPageProps<
+    { slug: string; lang?: string },
+    { page?: string; sort?: "newest" | "az" | "za" }
+  >
+) {
+  const params = (await props.params)!;
+  const searchParams = (await props.searchParams) || {};
   const locale = normalizeLocale(params.lang);
   const page = Math.max(1, Number(searchParams?.page || 1));
   const sort = (searchParams?.sort as "newest" | "az" | "za") || "newest";

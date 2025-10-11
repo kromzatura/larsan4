@@ -21,6 +21,7 @@ import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { urlFor } from "@/sanity/lib/image";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import type { AsyncPageProps } from "@/lib/types/next";
 
 type SpecPair = { label: string; value?: string | number | null };
 
@@ -53,10 +54,10 @@ export async function generateStaticParams() {
     .map((s) => ({ slug: s.slug!.current! }));
 }
 
-export async function generateMetadata(props: {
-  params: Promise<{ slug: string; lang?: string }>;
-}) {
-  const params = await props.params;
+export async function generateMetadata(
+  props: AsyncPageProps<{ slug: string; lang?: string }>
+) {
+  const params = (await props.params)!;
   const locale = normalizeLocale(params.lang);
   const product = await fetchSanityProductBySlug({
     slug: params.slug,
@@ -70,10 +71,10 @@ export async function generateMetadata(props: {
   });
 }
 
-export default async function ProductPage(props: {
-  params: Promise<{ slug: string; lang?: string }>;
-}) {
-  const params = await props.params;
+export default async function ProductPage(
+  props: AsyncPageProps<{ slug: string; lang?: string }>
+) {
+  const params = (await props.params)!;
   const locale = normalizeLocale(params.lang);
   const product = await fetchSanityProductBySlug({
     slug: params.slug,

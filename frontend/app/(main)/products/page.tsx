@@ -15,7 +15,9 @@ export async function generateMetadata(
   const locale = normalizeLocale(resolvedParams?.lang);
   const page = await fetchSanityPageBySlug({ slug: "products", lang: locale });
   if (!page) return {};
-  const sp = props.searchParams ? await props.searchParams : undefined;
+  const sp = (props.searchParams ? await props.searchParams : undefined) as
+    | { page?: string; category?: string }
+    | undefined;
   const pageNum = sp?.page ? Number(sp.page) : 1;
   const category = sp?.category || "";
   const base = generatePageMetadata({ page, slug: "products", type: "page" });
@@ -46,7 +48,9 @@ export default async function ProductsPage(props: LangAsyncPageProps) {
     <Blocks
       blocks={page?.blocks ?? []}
       searchParams={
-        (props.searchParams ? await props.searchParams : undefined) || {}
+        ((await props.searchParams) as
+          | { page?: string; category?: string }
+          | undefined) || {}
       }
       locale={locale}
     />

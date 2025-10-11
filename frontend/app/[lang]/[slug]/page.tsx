@@ -53,14 +53,12 @@ export default async function Page(
     notFound();
   }
 
-  const pageParams = Promise.resolve(
-    ((await props.searchParams) as { page?: string } | undefined) || {}
-  );
-
   return (
     <Blocks
       blocks={page?.blocks ?? []}
-      searchParams={await pageParams}
+      searchParams={
+        ((await props.searchParams) as { page?: string } | undefined) || {}
+      }
       locale={locale}
     />
   );

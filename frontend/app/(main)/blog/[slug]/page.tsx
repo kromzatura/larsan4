@@ -14,6 +14,7 @@ import { Clock, Facebook, Twitter, Linkedin } from "lucide-react";
 import { POST_QUERYResult } from "@/sanity.types";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import type { AsyncPageProps } from "@/lib/types/next";
 
 type BreadcrumbLink = {
   label: string;
@@ -76,10 +77,10 @@ export async function generateStaticParams() {
     .map((post) => ({ slug: post.slug?.current }));
 }
 
-export async function generateMetadata(props: {
-  params: Promise<{ slug: string; lang?: string }>;
-}) {
-  const params = await props.params;
+export async function generateMetadata(
+  props: AsyncPageProps<{ slug: string; lang?: string }>
+) {
+  const params = (await props.params)!;
   const locale = normalizeLocale(params.lang);
   const post = await fetchSanityPostBySlug({ slug: params.slug, lang: locale });
 
@@ -94,10 +95,10 @@ export async function generateMetadata(props: {
   });
 }
 
-export default async function PostPage(props: {
-  params: Promise<{ slug: string; lang?: string }>;
-}) {
-  const params = await props.params;
+export default async function PostPage(
+  props: AsyncPageProps<{ slug: string; lang?: string }>
+) {
+  const params = (await props.params)!;
   const locale = normalizeLocale(params.lang);
   const post = await fetchSanityPostBySlug({ slug: params.slug, lang: locale });
 

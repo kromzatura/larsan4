@@ -6,6 +6,7 @@ import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { Link as LinkType } from "@/sanity.types";
 import type { InquiryItem } from "@/lib/inquiry";
 import ContactInquiryWrapper from "@/components/inquiry/contact-inquiry-wrapper";
+import type { AsyncPageProps, SearchParams } from "@/lib/types/next";
 
 export async function generateMetadata() {
   const contact = await fetchSanityContact();
@@ -39,8 +40,10 @@ function parseInquiryParam(searchParams: { [key: string]: string | string[] | un
   return [];
 }
 
-export default async function ContactPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
-  const resolvedSearchParams = await searchParams;
+export default async function ContactPage(
+  props: AsyncPageProps<Record<string, string | string[]>, SearchParams>
+) {
+  const resolvedSearchParams = (await props.searchParams) || {};
   const inquiryItems = parseInquiryParam(resolvedSearchParams || {});
   // Note: inquiryItems length not currently used for conditional UI; retain only items list.
 
