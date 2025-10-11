@@ -24,15 +24,21 @@ export default async function MainLayoutShell({
   } catch {}
   const lang = normalizeLocale(locale);
   // Fetch everything needed for the shell in parallel
-  const [banner, settings, headerNav, headerAction, footerNav, footerBottomNav] =
-    await Promise.all([
-      fetchSanityBanner(),
-      fetchSanitySettings({ lang }),
-      getNavigationItems("header", lang),
-      getNavigationItems("header-action", lang),
-      getNavigationItems("footer", lang),
-      getNavigationItems("footer-bottom", lang),
-    ]);
+  const [
+    banner,
+    settings,
+    headerNav,
+    headerAction,
+    footerNav,
+    footerBottomNav,
+  ] = await Promise.all([
+    fetchSanityBanner(),
+    fetchSanitySettings({ lang }),
+    getNavigationItems("header", lang),
+    getNavigationItems("header-action", lang),
+    getNavigationItems("footer", lang),
+    getNavigationItems("footer-bottom", lang),
+  ]);
   const { isEnabled: isDraftModeEnabled } = await draftMode();
 
   return (

@@ -177,7 +177,7 @@ export default async function PostPage(
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
       <article>
-  <Breadcrumbs links={links} locale={locale} />
+        <Breadcrumbs links={links} locale={locale} />
 
         {post.title && (
           <h1 className="mt-7 mb-6 max-w-3xl text-3xl font-semibold md:text-5xl">

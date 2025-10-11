@@ -31,7 +31,6 @@ export default function Footer2({
   footerNavItems,
   bottomNavItems,
 }: Footer2Props) {
-
   const isNavGroup = (item: NavigationItem): item is NavGroup =>
     item._type === "link-group";
   const isNavLink = (item: NavigationItem): item is NavLink =>
