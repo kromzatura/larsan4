@@ -9,42 +9,43 @@ import { draftMode } from "next/headers";
 import { SanityLive } from "@/sanity/lib/live";
 import { Toaster } from "@/components/ui/sonner";
 import { InquiryProvider } from "@/components/inquiry/InquiryContext";
-import { FALLBACK_LOCALE } from "@/lib/i18n/config";
-// import LocaleBridge from "./LocaleBridge"; // Commented out as it's no longer needed
+import LocaleBridge from "./LocaleBridge";
 
 export default async function MainLayoutShell({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // Consume locale from context (provided by app/[lang]/layout)
-  // Server components cannot use useContext directly; read from a client shim.
-  // We'll infer locale on the server via a prop from a small client bridge.
-  const locale = FALLBACK_LOCALE;
   const banner = await fetchSanityBanner();
   const { isEnabled: isDraft } = await draftMode();
 
   return (
     <InquiryProvider>
-      <Navbar1 locale={locale} />
-      {banner && banner.length > 0 && (
-        <Banner
-          data={banner[0]}
-          component={Banner5}
-          bannerId="banner5"
-          locale={locale}
-        />
-      )}
-      <main>{children}</main>
-      <Toaster position="top-right" />
-      <SanityLive />
-      {isDraft && (
-        <>
-          <DisableDraftMode />
-          <VisualEditing />
-        </>
-      )}
-      <Footer2 locale={locale} />
+      <LocaleBridge>
+        {(locale) => (
+          <>
+            <Navbar1 locale={locale} />
+            {banner && banner.length > 0 && (
+              <Banner
+                data={banner[0]}
+                component={Banner5}
+                bannerId="banner5"
+                locale={locale}
+              />
+            )}
+            <main>{children}</main>
+            <Toaster position="top-right" />
+            <SanityLive />
+            {isDraft && (
+              <>
+                <DisableDraftMode />
+                <VisualEditing />
+              </>
+            )}
+            <Footer2 locale={locale} />
+          </>
+        )}
+      </LocaleBridge>
     </InquiryProvider>
   );
 }
