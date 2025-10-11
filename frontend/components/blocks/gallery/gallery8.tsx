@@ -27,7 +27,12 @@ type Gallery8Props = Extract<
   { _type: "gallery-8" }
 > & { locale?: SupportedLocale };
 
-export default function Gallery8({ padding, link, columns, locale = FALLBACK_LOCALE }: Gallery8Props) {
+export default function Gallery8({
+  padding,
+  link,
+  columns,
+  locale = FALLBACK_LOCALE,
+}: Gallery8Props) {
   return (
     <SectionContainer padding={padding} className="overflow-hidden">
       {columns && columns.length > 0 && (

@@ -41,7 +41,8 @@ export default function Timeline3({
             <div className="mt-8 flex flex-col gap-4 lg:flex-row">
               {links.map((link) => {
                 const href = resolveLinkHref(link, locale) || "#";
-                const target = link?.isExternal && link?.target ? "_blank" : undefined;
+                const target =
+                  link?.isExternal && link?.target ? "_blank" : undefined;
                 const rel = target ? "noopener noreferrer" : undefined;
                 return (
                   <Link

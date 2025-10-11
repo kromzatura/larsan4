@@ -122,7 +122,8 @@ export default function Compare4({
             <div className="flex justify-end">
               {links.map((link) => {
                 const href = resolveLinkHref(link, locale) || "#";
-                const target = link?.isExternal && link?.target ? "_blank" : undefined;
+                const target =
+                  link?.isExternal && link?.target ? "_blank" : undefined;
                 const rel = target ? "noopener noreferrer" : undefined;
                 return (
                   <Link

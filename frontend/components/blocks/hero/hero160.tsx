@@ -72,7 +72,8 @@ const Hero160 = ({
             <div className="mt-4 flex flex-col items-center gap-4 md:flex-row">
               {links.map((link) => {
                 const href = resolveLinkHref(link, locale) || "#";
-                const target = link?.isExternal && link?.target ? "_blank" : undefined;
+                const target =
+                  link?.isExternal && link?.target ? "_blank" : undefined;
                 const rel = target ? "noopener noreferrer" : undefined;
                 return (
                   <Link

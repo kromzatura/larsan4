@@ -14,7 +14,11 @@ type Compare5Props = Extract<
   { _type: "compare-5" }
 > & { locale?: SupportedLocale };
 
-export default function Compare5({ padding, columns, locale = FALLBACK_LOCALE }: Compare5Props) {
+export default function Compare5({
+  padding,
+  columns,
+  locale = FALLBACK_LOCALE,
+}: Compare5Props) {
   return (
     <SectionContainer padding={padding}>
       {columns && columns?.length > 0 && (
@@ -53,10 +57,13 @@ export default function Compare5({ padding, columns, locale = FALLBACK_LOCALE }:
                       {column.description}
                     </p>
                   )}
-                  {column.link?.title && (
+                  {column.link?.title &&
                     (() => {
                       const href = resolveLinkHref(column.link, locale) || "#";
-                      const target = column.link?.isExternal && column.link?.target ? "_blank" : undefined;
+                      const target =
+                        column.link?.isExternal && column.link?.target
+                          ? "_blank"
+                          : undefined;
                       const rel = target ? "noopener noreferrer" : undefined;
                       return (
                         <Link
@@ -72,8 +79,7 @@ export default function Compare5({ padding, columns, locale = FALLBACK_LOCALE }:
                           {column.link?.title}
                         </Link>
                       );
-                    })()
-                  )}
+                    })()}
                 </div>
               </div>
             </div>
