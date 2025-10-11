@@ -39,11 +39,13 @@ export async function GET(
   const selfUrl = `${SITE_URL}/blog/category/${slug}/rss.xml`;
   const lastBuildDate = new Date().toUTCString();
   const siteName = settings?.siteName || "Blog";
-  const language = getLanguageFromSettings(settings as {
-    language?: string;
-    siteLanguage?: string;
-    locale?: string;
-  });
+  const language = getLanguageFromSettings(
+    settings as {
+      language?: string;
+      siteLanguage?: string;
+      locale?: string;
+    }
+  );
   const logo = settings?.logo;
   const logoUrl: string | null = logo?.asset?.url || null;
   const dim = logo?.asset?.metadata?.dimensions;
@@ -65,7 +67,9 @@ export async function GET(
           .map((t) => `<category>${escape(t)}</category>`)
           .join("")
       : "";
-    const html = ptBlocksToHtml(Array.isArray(p.body) ? (p.body as unknown[]) : null);
+    const html = ptBlocksToHtml(
+      Array.isArray(p.body) ? (p.body as unknown[]) : null
+    );
     const creator = p.author?.name
       ? `<dc:creator>${escape(p.author.name)}</dc:creator>`
       : "";
@@ -99,7 +103,9 @@ export async function GET(
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/">
     <channel>
-      <title>${escape(siteName)} — ${escape(cat.title ?? "Blog Category")}</title>
+      <title>${escape(siteName)} — ${escape(
+    cat.title ?? "Blog Category"
+  )}</title>
       <link>${SITE_URL}/blog/category/${slug}</link>
       <description>${escape(cat.description ?? "")}</description>
       <atom:link href="${selfUrl}" rel="self" type="application/rss+xml" />

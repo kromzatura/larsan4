@@ -8,7 +8,10 @@ type LangLayoutProps = {
   params?: Promise<{ lang?: string }>;
 };
 
-export default async function LangLayout({ children, params }: LangLayoutProps) {
+export default async function LangLayout({
+  children,
+  params,
+}: LangLayoutProps) {
   const resolved = params ? await params : undefined;
   const locale = normalizeLocale(resolved?.lang);
 

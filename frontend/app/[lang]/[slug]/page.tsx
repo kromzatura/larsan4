@@ -6,10 +6,7 @@ import {
 import { notFound } from "next/navigation";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { normalizeLocale, isSupportedLocale } from "@/lib/i18n/routing";
-import {
-  FALLBACK_LOCALE,
-  SUPPORTED_LOCALES,
-} from "@/lib/i18n/config";
+import { FALLBACK_LOCALE, SUPPORTED_LOCALES } from "@/lib/i18n/config";
 
 const EXCLUDED_PAGE_SLUGS = new Set(["index", "home", ""]);
 

@@ -28,11 +28,13 @@ export async function GET(
   if (!cat) return new NextResponse("Not Found", { status: 404 });
 
   const siteName = settings?.siteName || "Blog";
-  const language = getLanguageFromSettings(settings as {
-    language?: string;
-    siteLanguage?: string;
-    locale?: string;
-  });
+  const language = getLanguageFromSettings(
+    settings as {
+      language?: string;
+      siteLanguage?: string;
+      locale?: string;
+    }
+  );
   const feed = {
     version: "https://jsonfeed.org/version/1.1",
     title: `${siteName} — ${cat.title || "Blog Category"}`,
