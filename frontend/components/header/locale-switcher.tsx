@@ -2,8 +2,17 @@
 
 import { useCallback, useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { LOCALE_COOKIE_MAX_AGE, LOCALE_COOKIE_NAME, buildLocalizedPath, stripLocalePrefix } from "@/lib/i18n/routing";
-import { LOCALE_LABELS, SUPPORTED_LOCALES, type SupportedLocale } from "@/lib/i18n/config";
+import {
+  LOCALE_COOKIE_MAX_AGE,
+  LOCALE_COOKIE_NAME,
+  buildLocalizedPath,
+  stripLocalePrefix,
+} from "@/lib/i18n/routing";
+import {
+  LOCALE_LABELS,
+  SUPPORTED_LOCALES,
+  type SupportedLocale,
+} from "@/lib/i18n/config";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -12,7 +21,11 @@ type Props = {
   variant?: "inline" | "menu";
 };
 
-export default function LocaleSwitcher({ locale, className, variant = "inline" }: Props) {
+export default function LocaleSwitcher({
+  locale,
+  className,
+  variant = "inline",
+}: Props) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -50,7 +63,7 @@ export default function LocaleSwitcher({ locale, className, variant = "inline" }
           value={locale}
           onChange={(e) => onSelect(e.target.value as SupportedLocale)}
           aria-label="Select language"
-       >
+        >
           {SUPPORTED_LOCALES.map((l) => (
             <option key={l} value={l}>
               {LOCALE_LABELS[l]}
@@ -71,7 +84,9 @@ export default function LocaleSwitcher({ locale, className, variant = "inline" }
           onClick={() => onSelect(l)}
           className={cn(
             "rounded-md px-2 py-1 text-xs font-medium transition-colors",
-            l === locale ? "bg-primary text-primary-foreground" : "hover:bg-accent"
+            l === locale
+              ? "bg-primary text-primary-foreground"
+              : "hover:bg-accent"
           )}
           aria-current={l === locale ? "true" : undefined}
           aria-label={`Switch language to ${LOCALE_LABELS[l]}`}

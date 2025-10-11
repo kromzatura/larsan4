@@ -287,7 +287,10 @@ export default async function Navbar1({
                         locale={locale}
                       />
                     ))}
-                    <InquiryBadge className="w-full justify-center" locale={locale} />
+                    <InquiryBadge
+                      className="w-full justify-center"
+                      locale={locale}
+                    />
                     <Suspense fallback={null}>
                       <LocaleSwitcher locale={locale} variant="menu" />
                     </Suspense>

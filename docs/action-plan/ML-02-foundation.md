@@ -118,6 +118,7 @@ These weaknesses map directly to the Phase 1–3 tasks below; tackling them earl
 - Quality gates: Build PASS, Typecheck/Lint PASS, Tests PASS (13/13) after the refactor.
 
 Next steps:
+
 - Add a locale switcher in the header using `SUPPORTED_LOCALES`, `LOCALE_LABELS`, and route mirroring where possible.
 - Expand dictionaries for common microcopy (e.g., "Menu", "Search", footer legal items if not modeled in CMS).
 - Write unit tests for `resolveLinkHref` locale behavior and metadata builders; evaluate Playwright smoke tests for `[lang]` routes.

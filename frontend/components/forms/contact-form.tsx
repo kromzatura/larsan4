@@ -49,7 +49,11 @@ export function ContactForm({
     ready: (cb: () => void) => void;
     render: (
       container: HTMLElement,
-      params: { sitekey: string; size: "invisible"; callback: (token: string) => void }
+      params: {
+        sitekey: string;
+        size: "invisible";
+        callback: (token: string) => void;
+      }
     ) => number;
     reset: (id?: number) => void;
     execute: (id?: number) => void;
@@ -105,11 +109,7 @@ export function ContactForm({
       const durationMs = Math.max(0, Date.now() - mountTime);
       formData.set("durationMs", String(durationMs));
 
-      if (
-        siteKey &&
-        typeof window !== "undefined" &&
-        getGrecaptcha()
-      ) {
+      if (siteKey && typeof window !== "undefined" && getGrecaptcha()) {
         const grecaptcha = getGrecaptcha();
         if (!siteKey || !grecaptcha) {
           setFormState({ error: dict.contact.form.captchaNotReady });

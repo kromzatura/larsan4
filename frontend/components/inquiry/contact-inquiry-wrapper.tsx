@@ -45,7 +45,10 @@ export default function ContactInquiryWrapper({
                   <p className="font-medium break-all">
                     {item.slug ? (
                       <a
-                        href={buildLocalizedPath(locale, `/products/${item.slug || ""}`)}
+                        href={buildLocalizedPath(
+                          locale,
+                          `/products/${item.slug || ""}`
+                        )}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:underline"

@@ -16,12 +16,23 @@ interface Props {
   locale?: SupportedLocale;
 }
 
-export default function InquiryBadge({ className = "", size = "sm", locale = FALLBACK_LOCALE }: Props) {
+export default function InquiryBadge({
+  className = "",
+  size = "sm",
+  locale = FALLBACK_LOCALE,
+}: Props) {
   const { count } = useInquiry();
   const dict = getDictionary(locale);
   const href = buildLocalizedPath(locale, "/inquiry");
   return (
-    <Link href={href} className={cn(buttonVariants({ variant: "outline", size }), "relative", className)}>
+    <Link
+      href={href}
+      className={cn(
+        buttonVariants({ variant: "outline", size }),
+        "relative",
+        className
+      )}
+    >
       <List className="mr-2 h-4 w-4" />
       {dict.inquiry.label}
       {count > 0 && (
