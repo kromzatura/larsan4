@@ -9,13 +9,16 @@ import { urlFor } from "@/sanity/lib/image";
 import { Badge } from "@/components/ui/badge";
 import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Gallery1Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "gallery-1" }
->;
+> & { locale?: SupportedLocale };
 
-export default function Gallery1({ padding, columns }: Gallery1Props) {
+export default function Gallery1({ padding, columns, locale = FALLBACK_LOCALE }: Gallery1Props) {
   const [selection, setSelection] = useState(columns?.[0]._key);
   return (
     <SectionContainer padding={padding}>
@@ -31,7 +34,7 @@ export default function Gallery1({ padding, columns }: Gallery1Props) {
               }}
             >
               <Link
-                href={column.link?.href || "#"}
+                href={resolveLinkHref(column.link, locale) || "#"}
                 target={column.link?.target ? "_blank" : undefined}
                 rel={column.link?.target ? "noopener" : undefined}
                 className="relative block h-full w-full overflow-hidden rounded-xl bg-primary text-primary-foreground"

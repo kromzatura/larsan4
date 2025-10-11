@@ -12,36 +12,11 @@ import { InquiryProvider } from "@/components/inquiry/InquiryContext";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
-export default async function MainLayout({
+// Default export must conform to Next.js layout typing: only accepts { children }
+export default function GroupLayout({
   children,
-  locale = FALLBACK_LOCALE,
 }: {
   children: React.ReactNode;
-  locale?: SupportedLocale;
 }) {
-  const banner = await fetchSanityBanner();
-
-  return (
-    <InquiryProvider>
-      <Navbar1 locale={locale} />
-      {banner && banner.length > 0 && (
-        <Banner
-          data={banner[0]}
-          component={Banner5}
-          bannerId="banner5"
-          locale={locale}
-        />
-      )}
-      <main>{children}</main>
-      <Toaster position="top-right" />
-      <SanityLive />
-      {(await draftMode()).isEnabled && (
-        <>
-          <DisableDraftMode />
-          <VisualEditing />
-        </>
-      )}
-      <Footer2 locale={locale} />
-    </InquiryProvider>
-  );
+  return <>{children}</>;
 }

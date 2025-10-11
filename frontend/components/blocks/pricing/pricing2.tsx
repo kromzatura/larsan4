@@ -18,11 +18,14 @@ import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { CircleCheck } from "lucide-react";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Pricing2Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "pricing-2" }
->;
+> & { locale?: SupportedLocale };
 
 const formatPrice = (price: number | null | undefined): string => {
   if (!price) return "$0";
@@ -34,7 +37,7 @@ const calculateAnnualPrice = (price: number | null | undefined): string => {
   return `$${price * 12}`;
 };
 
-export default function Pricing2({ padding, columns }: Pricing2Props) {
+export default function Pricing2({ padding, columns, locale = FALLBACK_LOCALE }: Pricing2Props) {
   const [isYearly, setIsYearly] = useState(false);
 
   return (
@@ -99,7 +102,7 @@ export default function Pricing2({ padding, columns }: Pricing2Props) {
                   <CardFooter className="mt-auto">
                     {column.link?.title && (
                       <Link
-                        href={column.link?.href || "#"}
+                        href={resolveLinkHref(column.link, locale) || "#"}
                         target={column.link?.target ? "_blank" : undefined}
                         rel={column.link?.target ? "noopener" : undefined}
                         className={cn(

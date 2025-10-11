@@ -13,6 +13,9 @@ import { urlFor } from "@/sanity/lib/image";
 import PostDate from "@/components/post-date";
 import { PAGE_QUERYResult, CHANGELOGS_QUERYResult } from "@/sanity.types";
 import PortableTextRenderer from "@/components/portable-text-renderer";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Changelogs5Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -24,8 +27,10 @@ export default function Changelog5({
   secondaryTitle,
   links,
   changelogs,
+  locale = FALLBACK_LOCALE,
 }: Pick<Changelogs5Props, "title" | "secondaryTitle" | "links"> & {
   changelogs: CHANGELOGS_QUERYResult;
+  locale?: SupportedLocale;
 }) {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement>>({});
@@ -92,7 +97,7 @@ export default function Changelog5({
                   {links.map((link) => (
                     <Link
                       key={link._key}
-                      href={link.href || "#"}
+                      href={resolveLinkHref(link, locale) || "#"}
                       target={link.target ? "_blank" : undefined}
                       rel={link.target ? "noopener" : undefined}
                       className={cn(

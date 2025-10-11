@@ -62,7 +62,7 @@ export default function Gallery8({
               ))}
               {link?.title && (
                 <Link
-                  href={link?.href || "#"}
+                  href={resolveLinkHref(link, locale) || "#"}
                   target={link?.target ? "_blank" : undefined}
                   rel={link?.target ? "noopener" : undefined}
                   className="group flex items-center gap-2 font-semibold"
