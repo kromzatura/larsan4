@@ -106,7 +106,7 @@ export default async function CategoryPage(
 
   return (
     <section className="container py-16 xl:py-20">
-      <Breadcrumbs links={links} />
+  <Breadcrumbs links={links} locale={locale} />
       <div className="mt-7 flex items-end justify-between gap-4">
         <div>
           <h1 className="text-3xl font-semibold md:text-5xl">{cat.title}</h1>

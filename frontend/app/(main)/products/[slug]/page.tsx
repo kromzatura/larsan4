@@ -133,7 +133,7 @@ export default async function ProductPage(
   return (
     <section className="container py-16 xl:py-20">
       <article>
-        <Breadcrumbs links={links} />
+  <Breadcrumbs links={links} locale={locale} />
 
         {product.title && (
           <h1 className="mt-7 text-3xl font-semibold md:text-5xl">

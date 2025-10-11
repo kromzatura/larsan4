@@ -1,4 +1,4 @@
-// Group layout wrapper – keeps the (main) segment simple and compliant with Next
+import MainLayoutShell from "./MainLayoutShell";
 
 // Default export must conform to Next.js layout typing: only accepts { children }
 export default function GroupLayout({
@@ -6,5 +6,5 @@ export default function GroupLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return <MainLayoutShell>{children}</MainLayoutShell>;
 }

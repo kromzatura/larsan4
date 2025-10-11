@@ -1,9 +1,8 @@
-import { fetchSanitySettings } from "@/sanity/lib/fetch";
-import {
-  getNavigationItems,
-  type NavigationItem,
-  type NavGroup,
-  type NavLink,
+"use client";
+import type {
+  NavigationItem,
+  NavGroup,
+  NavLink,
 } from "@/lib/getNavigationItems";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
@@ -15,19 +14,23 @@ import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import { buildLocalizedPath } from "@/lib/i18n/routing";
 import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SETTINGS_QUERYResult } from "@/sanity.types";
 
 interface Footer2Props {
   className?: string;
   locale?: SupportedLocale;
+  settings: SETTINGS_QUERYResult;
+  footerNavItems: NavigationItem[];
+  bottomNavItems: NavigationItem[];
 }
 
-export default async function Footer2({
+export default function Footer2({
   className,
   locale = FALLBACK_LOCALE,
+  settings,
+  footerNavItems,
+  bottomNavItems,
 }: Footer2Props) {
-  const settings = await fetchSanitySettings({ lang: locale });
-  const footerNavItems = await getNavigationItems("footer", locale);
-  const bottomNavItems = await getNavigationItems("footer-bottom", locale);
 
   const isNavGroup = (item: NavigationItem): item is NavGroup =>
     item._type === "link-group";

@@ -1,5 +1,5 @@
-import { getNavigationItems } from "@/lib/getNavigationItems";
-import { fetchSanitySettings } from "@/sanity/lib/fetch";
+"use client";
+import type { NavigationItem as NavItemType } from "@/lib/getNavigationItems";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
@@ -43,6 +43,7 @@ import { Menu } from "lucide-react";
 import InquiryBadge from "@/components/inquiry/inquiry-badge";
 import LocaleSwitcher from "@/components/header/locale-switcher";
 import { Suspense } from "react";
+import type { SETTINGS_QUERYResult } from "@/sanity.types";
 
 type NavigationItem = (SanityLink | SanityLinkGroup | SanityLinkIcon) & {
   _key: string;
@@ -51,6 +52,9 @@ type NavigationItem = (SanityLink | SanityLinkGroup | SanityLinkIcon) & {
 interface Navbar1Props {
   className?: string;
   locale?: SupportedLocale;
+  settings: SETTINGS_QUERYResult;
+  navigationItems: NavItemType[];
+  actionItems: NavItemType[];
 }
 
 const isLinkGroup = (
@@ -59,13 +63,14 @@ const isLinkGroup = (
   return item._type === "link-group";
 };
 
-export default async function Navbar1({
+export default function Navbar1({
   className,
   locale = FALLBACK_LOCALE,
+  settings,
+  navigationItems,
+  actionItems,
 }: Navbar1Props) {
-  const settings = await fetchSanitySettings({ lang: locale });
-  const navigationItems = await getNavigationItems("header", locale);
-  const actionItems = await getNavigationItems("header-action", locale);
+  // All data is provided by the server shell for performance and correctness
 
   const renderMenuItem = (item: NavigationItem) => {
     if (isLinkGroup(item)) {
