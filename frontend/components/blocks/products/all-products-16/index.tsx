@@ -33,7 +33,7 @@ export default async function AllProducts16({
   };
   locale?: SupportedLocale;
 }) {
-  const dictionary = getDictionary(locale);
+  const dictionary = await getDictionary(locale);
   const PAGE_SIZE = 12;
   const params = searchParams;
   const currentPage = params?.page ? Math.max(1, parseInt(params.page)) : 1;

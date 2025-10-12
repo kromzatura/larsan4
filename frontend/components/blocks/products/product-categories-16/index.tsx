@@ -21,7 +21,7 @@ export default async function ProductCategories16({
   searchParams?: { category?: string };
   locale?: SupportedLocale;
 }) {
-  const dictionary = getDictionary(locale);
+  const dictionary = await getDictionary(locale);
   const cats = await fetchSanityProductCategories({ lang: locale });
   const params = searchParams;
   const active = params?.category;
