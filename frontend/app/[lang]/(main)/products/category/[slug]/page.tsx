@@ -74,7 +74,7 @@ export default async function CategoryPage(
   const params = (await props.params)!;
   const searchParams = (await props.searchParams) || {};
   const locale = normalizeLocale(params.lang);
-  const dictionary = getDictionary(locale);
+  const dictionary = await getDictionary(locale);
   const page = Math.max(1, Number(searchParams?.page || 1));
   const sort = (searchParams?.sort as "newest" | "az" | "za") || "newest";
 
