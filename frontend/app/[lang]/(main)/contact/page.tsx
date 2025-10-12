@@ -7,16 +7,12 @@ import { normalizeLocale } from "@/lib/i18n/routing";
 import { Link as LinkType } from "@/sanity.types";
 import type { InquiryItem } from "@/lib/inquiry";
 import ContactInquiryWrapper from "@/components/inquiry/contact-inquiry-wrapper";
-import type {
-  AsyncPageProps,
-  SearchParams,
-  LangAsyncPageProps,
-} from "@/lib/types/next";
+import type { LangAsyncPageProps } from "@/lib/types/next";
 
 export async function generateMetadata(props: LangAsyncPageProps) {
   const resolved = props.params ? await props.params : undefined;
   const locale = normalizeLocale(resolved?.lang);
-  const contact = await fetchSanityContact();
+  const contact = await fetchSanityContact({ lang: locale });
 
   if (!contact) {
     notFound();
@@ -53,14 +49,16 @@ function parseInquiryParam(searchParams: {
   return [];
 }
 
-export default async function ContactPage(
-  props: AsyncPageProps<Record<string, string | string[]>, SearchParams>
-) {
+export default async function ContactPage(props: LangAsyncPageProps) {
+  // Resolve locale from params to avoid i18n split-brain
+  const resolvedParams = props.params ? await props.params : undefined;
+  const locale = normalizeLocale(resolvedParams?.lang);
+
   const resolvedSearchParams = (await props.searchParams) || {};
   const inquiryItems = parseInquiryParam(resolvedSearchParams || {});
-  // Note: inquiryItems length not currently used for conditional UI; retain only items list.
 
-  const contact = await fetchSanityContact();
+  // Fetch localized content
+  const contact = await fetchSanityContact({ lang: locale });
 
   if (!contact) {
     notFound();
@@ -116,6 +114,7 @@ export default async function ContactPage(
                   <LinkButton
                     size="sm"
                     link={method.link as LinkType}
+                    locale={locale}
                     className={
                       method.link.buttonVariant === "link"
                         ? "font-semibold text-base p-0"
@@ -127,7 +126,7 @@ export default async function ContactPage(
             ))}
           </div>
           <div className="mx-auto flex w-full flex-col gap-6 rounded-lg bg-muted p-10 lg:max-w-[29rem]">
-            <ContactInquiryWrapper initialInquiryItems={inquiryItems} />
+            <ContactInquiryWrapper initialInquiryItems={inquiryItems} locale={locale} />
           </div>
         </div>
       </div>

@@ -526,9 +526,17 @@ export const fetchSanitySettings = async ({
   return data;
 };
 
-export const fetchSanityContact = async (): Promise<CONTACT_QUERYResult> => {
+export const fetchSanityContact = async ({
+  lang,
+}: {
+  lang?: SupportedLocale;
+} = {}): Promise<CONTACT_QUERYResult> => {
+  const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
   const { data } = await sanityFetch({
     query: CONTACT_QUERY,
+    params: { lang: queryLang, fallbackLang },
+    perspective: "published",
+    stega: false,
   });
 
   return data;

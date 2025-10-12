@@ -11,12 +11,16 @@ import {
   Hr,
   Tailwind,
 } from "@react-email/components";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { buildAbsoluteUrl } from "@/lib/url";
 
 interface ContactFormEmailProps {
   firstName: string;
   lastName: string;
   email: string;
   message: string;
+  locale?: SupportedLocale;
   inquiryItems?: {
     id: string;
     name?: string | null;
@@ -32,12 +36,14 @@ const ContactFormEmail = ({
   email,
   message,
   inquiryItems,
+  locale = "en",
 }: ContactFormEmailProps) => {
+  const dict = getDictionary(locale);
   return (
     <Html>
       <Head />
       <Preview>
-        New contact form submission from {firstName} {lastName}
+        {dict.contact.email.preview} — {firstName} {lastName}
       </Preview>
       <Tailwind
         config={{
@@ -56,7 +62,7 @@ const ContactFormEmail = ({
               {/* Header */}
               <Section className="bg-white p-[32px] text-center">
                 <Heading className="text-primary text-[24px] font-bold m-0">
-                  New Contact Form Submission
+                  {dict.contact.email.headingSubmission}
                 </Heading>
               </Section>
               <Hr className="my-0" />
@@ -66,7 +72,7 @@ const ContactFormEmail = ({
                 {/* Name Block */}
                 <Section className="bg-white pl-[16px]">
                   <Text className="text-[16px] font-bold text-primary m-0">
-                    Name
+                    {dict.contact.email.labelName}
                   </Text>
                 </Section>
                 <Hr className="my-0" />
@@ -80,7 +86,7 @@ const ContactFormEmail = ({
                 {/* Email Block */}
                 <Section className="bg-white pl-[16px]">
                   <Text className="text-[16px] font-bold text-primary m-0">
-                    Email Address
+                    {dict.contact.email.labelEmail}
                   </Text>
                 </Section>
                 <Hr className="my-0" />
@@ -92,7 +98,7 @@ const ContactFormEmail = ({
                 {/* Message Block */}
                 <Section className="bg-white pl-[16px]">
                   <Text className="text-[16px] font-bold text-primary m-0">
-                    Message
+                    {dict.contact.email.labelMessage}
                   </Text>
                 </Section>
                 <Hr className="my-0" />
@@ -102,7 +108,7 @@ const ContactFormEmail = ({
                     {/* Inquiry Items */}
                     <Section className="bg-white pl-[16px]">
                       <Text className="text-[16px] font-bold text-primary m-0">
-                        Inquiry Items ({inquiryItems.length})
+                        {dict.contact.inquiry.itemsLabel} ({inquiryItems.length})
                       </Text>
                     </Section>
                     <Hr className="my-0" />
@@ -110,10 +116,7 @@ const ContactFormEmail = ({
                       {inquiryItems.map((item, idx) => {
                         const title = item.name || item.id;
                         const link = item.slug
-                          ? `${
-                              process.env.NEXT_PUBLIC_SITE_URL ||
-                              "http://localhost:3000"
-                            }/products/${item.slug}`
+                          ? buildAbsoluteUrl(locale, `/products/${item.slug}`)
                           : null;
                         return (
                           <Section key={item.id + idx} className="mb-[8px]">
@@ -161,7 +164,7 @@ const ContactFormEmail = ({
 
                 <Section className="text-center bg-gray-50">
                   <Text className="text-[14px] text-gray-500 m-0">
-                    This is an automated email sent from your contact form.
+                    {dict.contact.email.footerAutomated}
                   </Text>
                 </Section>
               </Section>

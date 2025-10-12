@@ -8,15 +8,19 @@ import { clearInquiry } from "@/lib/inquiry";
 import { useLocale } from "@/lib/i18n/locale-context";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { buildLocalizedPath } from "@/lib/i18n/routing";
+import type { SupportedLocale } from "@/lib/i18n/config";
 
 interface ContactInquiryWrapperProps {
   initialInquiryItems: InquiryItem[]; // parsed on server for hydration correctness
+  locale?: SupportedLocale; // optional explicit locale override
 }
 
 export default function ContactInquiryWrapper({
   initialInquiryItems,
+  locale: localeProp,
 }: ContactInquiryWrapperProps) {
-  const locale = useLocale();
+  const localeFromContext = useLocale();
+  const locale = localeProp ?? localeFromContext;
   const dict = getDictionary(locale);
   const [items] = useState<InquiryItem[]>(initialInquiryItems);
   const hasItems = items.length > 0;
@@ -26,6 +30,7 @@ export default function ContactInquiryWrapper({
 
   return (
     <ContactForm
+      locale={locale}
       onSubmit={submitContactForm}
       onSuccess={() => {
         if (hasItems) clearInquiry();

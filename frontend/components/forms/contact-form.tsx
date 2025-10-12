@@ -22,19 +22,23 @@ import {
   type ContactFormValues,
 } from "@/lib/schemas/contact-form";
 import { type ContactFormState } from "@/app/actions/contact-form";
+import type { SupportedLocale } from "@/lib/i18n/config";
 
 interface ContactFormProps {
   onSubmit: (formData: FormData) => Promise<ContactFormState>;
   children?: React.ReactNode;
   onSuccess?: () => void; // optional callback when submission succeeds
+  locale?: SupportedLocale; // optional explicit locale override when provider isn't present
 }
 
 export function ContactForm({
   onSubmit,
   children,
   onSuccess,
+  locale: localeProp,
 }: ContactFormProps) {
-  const locale = useLocale();
+  const localeFromContext = useLocale();
+  const locale = localeProp ?? localeFromContext;
   const dict = getDictionary(locale);
   const [isPending, startTransition] = useTransition();
   const [formState, setFormState] = useState<ContactFormState>({});
@@ -160,6 +164,8 @@ export function ContactForm({
   return (
     <Form {...form}>
       <form action={handleAction} className="space-y-6">
+        {/* Ensure server action receives the active locale */}
+        <input type="hidden" name="locale" value={locale} />
         {siteKey && (
           <Script
             src="https://www.google.com/recaptcha/api.js"

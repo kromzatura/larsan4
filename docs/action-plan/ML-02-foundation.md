@@ -151,3 +151,15 @@ Open follow-ups:
 - Global HTML `<html lang>` and metadata helpers still need full i18n integration (locale-aware `openGraph.locale`, canonical/hreflang, etc.).
 - Centralize share URL utilities and make them locale-aware.
 - Add e2e smoke tests for `[lang]` routes and CI enforcement of translation coverage.
+
+## Progress Update — Phase C.1 Completed (2025-10-12)
+
+- Contact page i18n leak fixed end-to-end:
+  - `ContactPage` resolves `locale` from params and passes it to `ContactInquiryWrapper`.
+  - `ContactInquiryWrapper` accepts an optional `locale` prop and forwards it to `ContactForm`; falls back to `useLocale()` when not provided.
+  - `ContactForm` accepts an optional `locale` prop and includes a hidden `locale` field so the server action receives the same locale.
+- Server action and email template i18n:
+  - Server action reads `locale` from `FormData`, loads the UI dictionary, and localizes validation/response strings.
+  - `emails/contact-form.tsx` uses dictionary labels for preview, heading, field labels, inquiry section title, and footer.
+  - Inquiry item links in emails now use `buildAbsoluteUrl(locale, path)`, ensuring locale-prefixed absolute URLs.
+- Quality gates: Build PASS, Typecheck PASS, Tests PASS (24/24) after these changes.

@@ -5,6 +5,12 @@ import { contactFormSchema } from "@/lib/schemas/contact-form";
 import ContactFormEmail from "@/emails/contact-form";
 import { render } from "@react-email/render";
 import { z } from "zod";
+import {
+  DEFAULT_LOCALE,
+  SUPPORTED_LOCALES,
+  type SupportedLocale,
+} from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -18,6 +24,15 @@ export async function submitContactForm(
   formData: FormData
 ): Promise<ContactFormState> {
   try {
+    // Determine locale from form (fallback-safe)
+    const rawLocale = formData.get("locale");
+    const locale: SupportedLocale = SUPPORTED_LOCALES.includes(
+      rawLocale as SupportedLocale
+    )
+      ? (rawLocale as SupportedLocale)
+      : DEFAULT_LOCALE;
+    const dict = getDictionary(locale);
+
     // Basic bot checks: honeypot and minimum time on form
     const honeypot = formData.get("website");
     const durationMsRaw = formData.get("durationMs");
@@ -30,7 +45,7 @@ export async function submitContactForm(
     ) {
       return {
         success: false,
-        error: "Captcha verification failed. Please try again.",
+        error: dict.contact.form.captchaFailed,
       };
     }
 
@@ -40,7 +55,7 @@ export async function submitContactForm(
       if (!token || typeof token !== "string") {
         return {
           success: false,
-          error: "Captcha verification failed. Please try again.",
+          error: dict.contact.form.captchaFailed,
         };
       }
       const verifyRes = await fetch(
@@ -68,7 +83,7 @@ export async function submitContactForm(
       if (!verifyJson.success) {
         return {
           success: false,
-          error: "Captcha verification failed. Please try again.",
+          error: dict.contact.form.captchaFailed,
         };
       }
     }
@@ -129,18 +144,24 @@ export async function submitContactForm(
     const { firstName, lastName, email, message } = validatedData;
 
     const html = await render(
-      ContactFormEmail({ firstName, lastName, email, message, inquiryItems })
+      ContactFormEmail({
+        firstName,
+        lastName,
+        email,
+        message,
+        inquiryItems,
+        locale,
+      })
     );
     // (Dev preview removed for simplicity)
 
     await resend.emails.send({
       from: `Website Contact Form <${process.env.NEXT_RESEND_FROM_EMAIL}>`,
       to: process.env.NEXT_RESEND_TO_EMAIL,
-      subject: `New Contact${
+      subject:
         inquiryItems && inquiryItems.length
-          ? ` (+${inquiryItems.length} inquiry)`
-          : ""
-      } from ${firstName} ${lastName}`,
+          ? `${dict.contact.email.headingSubmission} — ${firstName} ${lastName} (+${inquiryItems.length})`
+          : `${dict.contact.email.headingSubmission} — ${firstName} ${lastName}`,
       html,
       replyTo: email,
     });
@@ -169,7 +190,7 @@ export async function submitContactForm(
 
     return {
       success: false,
-      error: "An unexpected error occurred",
+      error: getDictionary(DEFAULT_LOCALE).contact.form.captchaFailed,
     };
   }
 }

@@ -113,10 +113,19 @@ export type UIDictionary = {
       success: string;
       captchaNotReady: string;
       captchaFailed: string;
+      unexpectedError: string;
     };
     inquiry: {
       itemsLabel: string;
       sku: string;
+    };
+    email: {
+      headingSubmission: string;
+      preview: string;
+      labelName: string;
+      labelEmail: string;
+      labelMessage: string;
+      footerAutomated: string;
     };
   };
   notFound: {

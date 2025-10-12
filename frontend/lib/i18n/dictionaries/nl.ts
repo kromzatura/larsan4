@@ -109,10 +109,19 @@ export default {
       success: "Bericht succesvol verzonden",
       captchaNotReady: "Captcha nog niet klaar. Probeer het opnieuw.",
       captchaFailed: "Captcha-verificatie mislukt. Probeer het opnieuw.",
+      unexpectedError: "Er is iets misgegaan. Probeer het opnieuw.",
     },
     inquiry: {
       itemsLabel: "Aanvraagitems",
       sku: "SKU",
+    },
+    email: {
+      headingSubmission: "Nieuwe contactformulier-inzending",
+      preview: "Nieuwe inzending contactformulier",
+      labelName: "Naam",
+      labelEmail: "E-mailadres",
+      labelMessage: "Bericht",
+      footerAutomated: "Dit is een geautomatiseerde e-mail verzonden vanaf uw contactformulier.",
     },
   },
   notFound: {

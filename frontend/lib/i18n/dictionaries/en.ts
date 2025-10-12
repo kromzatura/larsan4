@@ -109,10 +109,19 @@ export default {
       success: "Message transmitted successfully",
       captchaNotReady: "Captcha not ready. Please try again.",
       captchaFailed: "Captcha verification failed. Please try again.",
+      unexpectedError: "Something went wrong. Please try again.",
     },
     inquiry: {
       itemsLabel: "Inquiry Items",
       sku: "SKU",
+    },
+    email: {
+      headingSubmission: "New Contact Form Submission",
+      preview: "New contact form submission",
+      labelName: "Name",
+      labelEmail: "Email Address",
+      labelMessage: "Message",
+      footerAutomated: "This is an automated email sent from your contact form.",
     },
   },
   notFound: {
