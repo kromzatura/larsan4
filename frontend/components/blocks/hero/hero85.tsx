@@ -49,7 +49,7 @@ const Hero85 = ({
             )}
             {body && (
               <div className="mx-auto text-muted-foreground lg:text-lg">
-                <PortableTextRenderer value={body} />
+                <PortableTextRenderer value={body} locale={locale} />
               </div>
             )}
             {links && (

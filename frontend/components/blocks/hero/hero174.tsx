@@ -50,7 +50,7 @@ const Hero174 = ({
             )}
             {body && (
               <div className="text-center text-lg text-balance text-white md:text-2xl">
-                <PortableTextRenderer value={body} />
+                <PortableTextRenderer value={body} locale={locale} />
               </div>
             )}
             {links && links.length > 0 && (

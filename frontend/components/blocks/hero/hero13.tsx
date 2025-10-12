@@ -42,7 +42,7 @@ const Hero13 = ({
         )}
         {body && (
           <div className="max-w-2xl text-muted-foreground md:text-[2vw] lg:text-xl">
-            <PortableTextRenderer value={body} />
+            <PortableTextRenderer value={body} locale={locale} />
           </div>
         )}
         {links && links.length > 0 && (

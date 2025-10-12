@@ -9,13 +9,18 @@ import { fetchSanityChangelogs } from "@/sanity/lib/fetch";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { Separator } from "@/components/ui/separator";
 import { ColorName, getColor } from "@/lib/color";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Changelogs3Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "changelog-3" }
 >;
 
-export default async function Changelog3({ padding }: Changelogs3Props) {
+export default async function Changelog3({
+  padding,
+  locale = FALLBACK_LOCALE,
+}: Changelogs3Props & { locale?: SupportedLocale }) {
   const changelogs = await fetchSanityChangelogs();
 
   return (
@@ -59,7 +64,7 @@ export default async function Changelog3({ padding }: Changelogs3Props) {
                       {changelog.title}
                     </h2>
                     {changelog.body && (
-                      <PortableTextRenderer value={changelog.body} />
+                      <PortableTextRenderer value={changelog.body} locale={locale} />
                     )}
                     {changelog.image && changelog.image.asset?._id && (
                       <Image

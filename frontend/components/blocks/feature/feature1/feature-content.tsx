@@ -57,7 +57,7 @@ export default function FeatureContent({
           )}
         {body && (
           <div className="max-w-xl text-muted-foreground lg:text-lg">
-            <PortableTextRenderer value={body} />
+            <PortableTextRenderer value={body} locale={locale} />
           </div>
         )}
         {links && links.length > 0 && (

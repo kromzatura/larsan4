@@ -65,7 +65,7 @@ const Hero160 = ({
           )}
           {body && (
             <div className="w-full max-w-[51.875rem] text-center text-xl text-white/60">
-              <PortableTextRenderer value={body} />
+              <PortableTextRenderer value={body} locale={locale} />
             </div>
           )}
           {links && links.length > 0 && (

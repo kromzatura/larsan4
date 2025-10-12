@@ -115,7 +115,7 @@ export default function Compare4({
         <div className="col-span-4 md:col-span-8 lg:col-span-10 lg:col-start-2">
           {body && (
             <div className="text-xs text-muted-foreground md:text-sm">
-              <PortableTextRenderer value={body} />
+              <PortableTextRenderer value={body} locale={locale} />
             </div>
           )}
           {links && links.length > 0 && (

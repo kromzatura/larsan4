@@ -22,6 +22,7 @@ import { urlFor } from "@/sanity/lib/image";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import type { AsyncPageProps } from "@/lib/types/next";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
 type SpecPair = { label: string; value?: string | number | null };
 
@@ -59,6 +60,7 @@ export async function generateMetadata(
 ) {
   const params = (await props.params)!;
   const locale = normalizeLocale(params.lang);
+  const dictionary = await getDictionary(locale);
   const product = await fetchSanityProductBySlug({
     slug: params.slug,
     lang: locale,
@@ -76,6 +78,7 @@ export default async function ProductPage(
 ) {
   const params = (await props.params)!;
   const locale = normalizeLocale(params.lang);
+  const dictionary = await getDictionary(locale);
   const product = await fetchSanityProductBySlug({
     slug: params.slug,
     lang: locale,
@@ -90,24 +93,24 @@ export default async function ProductPage(
 
   const productsPath = buildLocalizedPath(locale, "/products");
   const links = [
-    { label: "Products", href: productsPath },
-    { label: product.title ?? "Product", href: "#" },
+    { label: dictionary.productPage.breadcrumbs.products, href: productsPath },
+    { label: product.title ?? dictionary.productPage.breadcrumbs.products, href: "#" },
   ];
 
   const atAGlance: SpecPair[] = [
-    { label: "SKU", value: spec?.sku },
-    { label: "HS Code", value: spec?.hsCode },
-    { label: "Min. order", value: spec?.minOrder },
-    { label: "Origin", value: spec?.origin },
-    { label: "Botanical name", value: spec?.botanicalName },
-    { label: "Best for", value: spec?.bestFor },
+    { label: dictionary.productPage.specLabels.sku, value: spec?.sku },
+    { label: dictionary.productPage.specLabels.hsCode, value: spec?.hsCode },
+    { label: dictionary.productPage.specLabels.minOrder, value: spec?.minOrder },
+    { label: dictionary.productPage.specLabels.origin, value: spec?.origin },
+    { label: dictionary.productPage.specLabels.botanicalName, value: spec?.botanicalName },
+    { label: dictionary.productPage.specLabels.bestFor, value: spec?.bestFor },
   ];
 
   const quality: SpecPair[] = [
-    { label: "Pungency", value: spec?.pungency },
-    { label: "Binding capacity", value: spec?.bindingCapacity },
+    { label: dictionary.productPage.specLabels.pungency, value: spec?.pungency },
+    { label: dictionary.productPage.specLabels.bindingCapacity, value: spec?.bindingCapacity },
     {
-      label: "Fat content",
+      label: dictionary.productPage.specLabels.fatContent,
       value:
         typeof spec?.fatContent === "number"
           ? `${spec.fatContent}%`
@@ -116,11 +119,11 @@ export default async function ProductPage(
   ];
 
   const other: SpecPair[] = [
-    { label: "Moisture", value: spec?.moisture },
-    { label: "Shelf life", value: spec?.shelfLife },
-    { label: "Allergen info", value: spec?.allergenInfo },
-    { label: "Attributes", value: spec?.productAttributes },
-    { label: "Certification", value: spec?.certification },
+    { label: dictionary.productPage.specLabels.moisture, value: spec?.moisture },
+    { label: dictionary.productPage.specLabels.shelfLife, value: spec?.shelfLife },
+    { label: dictionary.productPage.specLabels.allergenInfo, value: spec?.allergenInfo },
+    { label: dictionary.productPage.specLabels.attributes, value: spec?.productAttributes },
+    { label: dictionary.productPage.specLabels.certification, value: spec?.certification },
   ];
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
@@ -170,7 +173,7 @@ export default async function ProductPage(
             {/* Body content for desktop */}
             {product.body && (
               <div className="prose dark:prose-invert hidden lg:block">
-                <PortableTextRenderer value={product.body} />
+                <PortableTextRenderer value={product.body} locale={locale} />
               </div>
             )}
           </div>
@@ -182,7 +185,7 @@ export default async function ProductPage(
               product.keyFeatures.length > 0 && (
                 <div className="rounded-lg border p-4">
                   <p className="mb-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                    Key features
+                    {dictionary.productPage.sections.keyFeatures}
                   </p>
                   <ul className="flex flex-col gap-2 text-sm">
                     {product.keyFeatures.map((f, idx) => (
@@ -195,16 +198,16 @@ export default async function ProductPage(
                 </div>
               )}
 
-            <SpecTable title="At a glance" rows={atAGlance} />
-            <SpecTable title="Quality" rows={quality} />
-            <SpecTable title="Other" rows={other} />
+            <SpecTable title={dictionary.productPage.sections.atAGlance} rows={atAGlance} />
+            <SpecTable title={dictionary.productPage.sections.quality} rows={quality} />
+            <SpecTable title={dictionary.productPage.sections.other} rows={other} />
 
             {/* Packaging */}
             {Array.isArray(product.packagingOptions) &&
               product.packagingOptions.length > 0 && (
                 <div className="rounded-lg border p-4">
                   <p className="mb-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                    Packaging
+                    {dictionary.productPage.sections.packaging}
                   </p>
                   <ul className="space-y-2 text-sm">
                     {product.packagingOptions.map((p, i) => {
@@ -238,7 +241,7 @@ export default async function ProductPage(
               product.categories.length > 0 && (
                 <div className="rounded-lg border p-4">
                   <p className="mb-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                    Categories
+                    {dictionary.productPage.sections.categories}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {product.categories.map((c) => (
@@ -263,7 +266,7 @@ export default async function ProductPage(
 
             {/* Share */}
             <div className="flex items-center justify-between rounded-lg border p-4">
-              <p className="text-sm font-medium">Share this product</p>
+              <p className="text-sm font-medium">{dictionary.productPage.share.title}</p>
               <ul className="flex gap-2">
                 <li>
                   <a
@@ -272,7 +275,7 @@ export default async function ProductPage(
                     )}`}
                     target="_blank"
                     rel="noopener"
-                    title="Share on Facebook"
+                    title={dictionary.productPage.share.facebook}
                     className="inline-flex rounded-full border p-2 transition-colors hover:bg-muted"
                   >
                     <Facebook className="h-4 w-4" />
@@ -285,7 +288,7 @@ export default async function ProductPage(
                     )}`}
                     target="_blank"
                     rel="noopener"
-                    title="Share on X (Twitter)"
+                    title={dictionary.productPage.share.twitter}
                     className="inline-flex rounded-full border p-2 transition-colors hover:bg-muted"
                   >
                     <Twitter className="h-4 w-4" />
@@ -298,7 +301,7 @@ export default async function ProductPage(
                     )}`}
                     target="_blank"
                     rel="noopener"
-                    title="Share on LinkedIn"
+                    title={dictionary.productPage.share.linkedin}
                     className="inline-flex rounded-full border p-2 transition-colors hover:bg-muted"
                   >
                     <Linkedin className="h-4 w-4" />
@@ -321,7 +324,7 @@ export default async function ProductPage(
               />
             ) : (
               <Button size="lg" className="w-full" aria-disabled>
-                Add to Inquiry
+                {dictionary.productPage.actions.addToInquiry}
               </Button>
             )}
           </div>

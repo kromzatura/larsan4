@@ -6,13 +6,18 @@ import PostDate from "@/components/post-date";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { fetchSanityChangelogs } from "@/sanity/lib/fetch";
 import PortableTextRenderer from "@/components/portable-text-renderer";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Changelogs1Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "changelog-1" }
 >;
 
-export default async function Changelog1({ padding }: Changelogs1Props) {
+export default async function Changelog1({
+  padding,
+  locale = FALLBACK_LOCALE,
+}: Changelogs1Props & { locale?: SupportedLocale }) {
   const changelogs = await fetchSanityChangelogs();
 
   return (
@@ -44,7 +49,7 @@ export default async function Changelog1({ padding }: Changelogs1Props) {
                 )}
                 {changelog.body && (
                   <div className="text-sm text-muted-foreground md:text-base">
-                    <PortableTextRenderer value={changelog.body} />
+                    <PortableTextRenderer value={changelog.body} locale={locale} />
                   </div>
                 )}
                 {changelog.image && changelog.image.asset?._id && (

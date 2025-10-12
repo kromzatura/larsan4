@@ -6,6 +6,9 @@ import { Highlight, themes } from "prism-react-renderer";
 import { CopyButton } from "@/components/ui/copy-button";
 import { Lightbulb } from "lucide-react";
 import { ReactNode } from "react";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
@@ -22,7 +25,7 @@ const getTextFromChildren = (children: ReactNode): string => {
   return "";
 };
 
-const portableTextComponents: PortableTextProps["components"] = {
+const makePortableTextComponents = (locale: SupportedLocale): PortableTextProps["components"] => ({
   types: {
     image: ({ value }) => {
       const { url, metadata } = value.asset;
@@ -148,11 +151,22 @@ const portableTextComponents: PortableTextProps["components"] = {
   },
   marks: {
     link: ({ value, children }) => {
+      const href = resolveLinkHref(
+        {
+          isExternal: value?.isExternal ?? undefined,
+          href: value?.href ?? undefined,
+          internalType: value?.internalType ?? undefined,
+          internalSlug: value?.internalSlug ?? undefined,
+        },
+        locale
+      );
+      const target = value?.isExternal && value?.target ? "_blank" : undefined;
+      const rel = target ? "noopener noreferrer" : undefined;
       return (
         <Link
-          href={value?.href}
-          target={value.target ? "_blank" : undefined}
-          rel={value.target ? "noopener" : undefined}
+          href={href || "#"}
+          target={target}
+          rel={rel}
           className="underline"
         >
           {children}
@@ -172,14 +186,18 @@ const portableTextComponents: PortableTextProps["components"] = {
     bullet: ({ children }) => <li className="mb-2">{children}</li>,
     number: ({ children }) => <li className="mb-2">{children}</li>,
   },
-};
+});
 
 const PortableTextRenderer = ({
   value,
+  locale = FALLBACK_LOCALE,
 }: {
   value: PortableTextProps["value"];
+  locale?: SupportedLocale;
 }) => {
-  return <PortableText value={value} components={portableTextComponents} />;
+  return (
+    <PortableText value={value} components={makePortableTextComponents(locale)} />
+  );
 };
 
 export default PortableTextRenderer;

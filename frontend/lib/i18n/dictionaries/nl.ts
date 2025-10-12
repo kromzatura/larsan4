@@ -2,6 +2,66 @@ export default {
   inquiry: {
     label: "Aanvraag",
   },
+  postPage: {
+    breadcrumbs: {
+      home: "Home",
+      blog: "Blog",
+      post: "Bericht",
+    },
+    authorLine: {
+      on: "op",
+    },
+    readingTime: {
+      unit: "min. leestijd",
+    },
+    toc: {
+      title: "Op deze pagina",
+    },
+    share: {
+      title: "Deel dit artikel",
+      facebook: "Deel op Facebook",
+      twitter: "Deel op X (Twitter)",
+      linkedin: "Deel op LinkedIn",
+    },
+  },
+  productPage: {
+    breadcrumbs: {
+      products: "Producten",
+    },
+    sections: {
+      keyFeatures: "Belangrijkste kenmerken",
+      atAGlance: "In één oogopslag",
+      quality: "Kwaliteit",
+      other: "Overig",
+      packaging: "Verpakking",
+      categories: "Categorieën",
+    },
+    share: {
+      title: "Deel dit product",
+      facebook: "Deel op Facebook",
+      twitter: "Deel op X (Twitter)",
+      linkedin: "Deel op LinkedIn",
+    },
+    actions: {
+      addToInquiry: "Toevoegen aan aanvraag",
+    },
+    specLabels: {
+      sku: "SKU",
+      hsCode: "HS-code",
+      minOrder: "Min. bestelling",
+      origin: "Herkomst",
+      botanicalName: "Botanische naam",
+      bestFor: "Beste voor",
+      pungency: "Scherpte",
+      bindingCapacity: "Bindvermogen",
+      fatContent: "Vetgehalte",
+      moisture: "Vocht",
+      shelfLife: "Houdbaarheid",
+      allergenInfo: "Allergeeninformatie",
+      attributes: "Eigenschappen",
+      certification: "Certificering",
+    },
+  },
   contact: {
     form: {
       firstNameLabel: "Voornaam",

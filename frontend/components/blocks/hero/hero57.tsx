@@ -66,7 +66,7 @@ const Hero57 = ({
         </h1>
         {body && (
           <div className="mx-auto mb-10 max-w-screen-md text-center font-medium text-muted-foreground md:text-xl">
-            <PortableTextRenderer value={body} />
+            <PortableTextRenderer value={body} locale={locale} />
           </div>
         )}
         {links && links.length > 0 && (

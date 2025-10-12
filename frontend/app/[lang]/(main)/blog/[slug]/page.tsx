@@ -15,6 +15,7 @@ import { POST_QUERYResult } from "@/sanity.types";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import type { AsyncPageProps } from "@/lib/types/next";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
 type BreadcrumbLink = {
   label: string;
@@ -100,6 +101,7 @@ export default async function PostPage(
 ) {
   const params = (await props.params)!;
   const locale = normalizeLocale(params.lang);
+  const dictionary = await getDictionary(locale);
   const post = await fetchSanityPostBySlug({ slug: params.slug, lang: locale });
 
   if (!post) {
@@ -110,7 +112,7 @@ export default async function PostPage(
   const links: BreadcrumbLink[] = post
     ? [
         {
-          label: "Blog",
+          label: dictionary.postPage.breadcrumbs.blog,
           href: blogPath,
         },
         {
@@ -126,6 +128,7 @@ export default async function PostPage(
     locale,
     `/blog/${post.slug?.current ?? ""}`
   );
+  const shareUrl = `${SITE_URL}${postPath}`;
   const articleLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -148,19 +151,19 @@ export default async function PostPage(
       {
         "@type": "ListItem",
         position: 1,
-        name: "Home",
+        name: dictionary.postPage.breadcrumbs.home,
         item: `${SITE_URL}${buildLocalizedPath(locale, "/")}`,
       },
       {
         "@type": "ListItem",
         position: 2,
-        name: "Blog",
+        name: dictionary.postPage.breadcrumbs.blog,
         item: `${SITE_URL}${blogPath}`,
       },
       {
         "@type": "ListItem",
         position: 3,
-        name: post.title || "Post",
+        name: post.title || dictionary.postPage.breadcrumbs.post,
         item: `${SITE_URL}${postPath}`,
       },
     ],
@@ -196,23 +199,23 @@ export default async function PostPage(
               <span className="font-medium">{post.author?.name}</span>
             )}
             <span className="ml-1 flex items-center gap-1 text-muted-foreground">
-              <span>on</span> <PostDate date={post._createdAt} />
+                <span>{dictionary.postPage.authorLine.on}</span> <PostDate date={post._createdAt} />
             </span>
           </span>
 
           <span className="flex items-center gap-1 text-muted-foreground">
             <Clock className="h-4 w-4" />
-            {post.estimatedReadingTime} min. read
+              {post.estimatedReadingTime} {dictionary.postPage.readingTime.unit}
           </span>
         </div>
         <Separator className="mt-8 mb-16" />
         {post.body && (
           <div className="grid grid-cols-12 gap-6 lg:grid">
             <div className="col-span-12 lg:col-span-8">
-              <PortableTextRenderer value={post.body} />
+              <PortableTextRenderer value={post.body} locale={locale} />
             </div>
             <div className="sticky top-18 col-span-3 col-start-10 hidden h-fit lg:block">
-              <span className="text-lg font-medium">On this page</span>
+                <span className="text-lg font-medium">{dictionary.postPage.toc.title}</span>
               <nav className="mt-4 text-sm">
                 <ul className="space-y-2">
                   {headings.map((heading) => (
@@ -232,14 +235,14 @@ export default async function PostPage(
               </nav>
               <Separator className="my-6" />
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="text-sm font-medium">Share this article</p>
+                <p className="text-sm font-medium">{dictionary.postPage.share.title}</p>
                 <ul className="flex gap-2">
                   <li>
                     <a
-                      href={`https://www.facebook.com/sharer/sharer.php?u=${process.env.NEXT_PUBLIC_SITE_URL}/blog/${post.slug?.current}`}
+                      href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
                       target="_blank"
                       rel="noopener"
-                      title="Share on Facebook"
+                      title={dictionary.postPage.share.facebook}
                       className="inline-flex rounded-full border p-2 transition-colors hover:bg-muted"
                     >
                       <Facebook className="h-4 w-4" />
@@ -247,10 +250,10 @@ export default async function PostPage(
                   </li>
                   <li>
                     <a
-                      href={`https://x.com/intent/tweet?url=${process.env.NEXT_PUBLIC_SITE_URL}/blog/${post.slug?.current}`}
+                      href={`https://x.com/intent/tweet?url=${encodeURIComponent(shareUrl)}`}
                       target="_blank"
                       rel="noopener"
-                      title="Share on X (Twitter)"
+                      title={dictionary.postPage.share.twitter}
                       className="inline-flex rounded-full border p-2 transition-colors hover:bg-muted"
                     >
                       <Twitter className="h-4 w-4" />
@@ -258,10 +261,10 @@ export default async function PostPage(
                   </li>
                   <li>
                     <a
-                      href={`https://www.linkedin.com/shareArticle?mini=true&url=${process.env.NEXT_PUBLIC_SITE_URL}/blog/${post.slug?.current}`}
+                      href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(shareUrl)}`}
                       target="_blank"
                       rel="noopener"
-                      title="Share on LinkedIn"
+                      title={dictionary.postPage.share.linkedin}
                       className="inline-flex rounded-full border p-2 transition-colors hover:bg-muted"
                     >
                       <Linkedin className="h-4 w-4" />

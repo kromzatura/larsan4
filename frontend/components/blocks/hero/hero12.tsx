@@ -60,7 +60,7 @@ const Hero12 = ({
               </h1>
               {body && (
                 <div className="mx-auto max-w-3xl text-muted-foreground lg:text-xl">
-                  <PortableTextRenderer value={body} />
+                  <PortableTextRenderer value={body} locale={locale} />
                 </div>
               )}
             </div>
