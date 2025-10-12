@@ -6,10 +6,10 @@
  * - Flags duplicates that resolve to the same URL path
  */
 
-import fs from 'node:fs';
-import path from 'node:path';
+import fs from "node:fs";
+import path from "node:path";
 
-const APP_DIR = path.resolve(process.cwd(), 'app');
+const APP_DIR = path.resolve(process.cwd(), "app");
 
 /** Normalize a file path within app/ into a route path */
 function normalizeRoute(filePath) {
@@ -17,13 +17,20 @@ function normalizeRoute(filePath) {
   const rel = path.relative(APP_DIR, filePath);
   const segments = rel.split(path.sep).filter(Boolean);
   const cleaned = segments
-    .filter((seg) => !(seg.startsWith('(') && seg.endsWith(')')))
-    .filter((seg) => seg !== 'route.ts' && seg !== 'page.tsx' && seg !== 'page.ts' && seg !== 'route.js' && seg !== 'page.js');
+    .filter((seg) => !(seg.startsWith("(") && seg.endsWith(")")))
+    .filter(
+      (seg) =>
+        seg !== "route.ts" &&
+        seg !== "page.tsx" &&
+        seg !== "page.ts" &&
+        seg !== "route.js" &&
+        seg !== "page.js"
+    );
 
   // Map segments: [lang] stays as [lang]; files in folders like feed.json/route.ts should produce '/[lang]/blog/feed.json'
-  const route = '/' + cleaned.join('/');
+  const route = "/" + cleaned.join("/");
   // Ensure leading slash and collapse double slashes
-  return route.replace(/\/+/, '/');
+  return route.replace(/\/+/, "/");
 }
 
 function* walk(dir) {
@@ -61,14 +68,21 @@ function main() {
   }
 
   if (duplicates.length > 0) {
-    console.error(`Duplicate routes detected (normalized by removing route-groups):`);
+    console.error(
+      `Duplicate routes detected (normalized by removing route-groups):`
+    );
     for (const d of duplicates) {
-      console.error(`  ${d.route}\n    - ${path.relative(APP_DIR, d.files[0])}\n    - ${path.relative(APP_DIR, d.files[1])}`);
+      console.error(
+        `  ${d.route}\n    - ${path.relative(
+          APP_DIR,
+          d.files[0]
+        )}\n    - ${path.relative(APP_DIR, d.files[1])}`
+      );
     }
     process.exit(1);
   }
 
-  console.log('No duplicate routes detected.');
+  console.log("No duplicate routes detected.");
 }
 
 main();

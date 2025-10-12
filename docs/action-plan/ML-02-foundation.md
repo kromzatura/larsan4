@@ -90,6 +90,7 @@ These weaknesses map directly to the Phase 1–3 tasks below; tackling them earl
   - Add translation coverage lint (e.g., ensure every message key exists in the active locale file).
   - Add a duplicate route health check in CI: run `pnpm --filter ./frontend run check:routes` to fail builds if normalized App Router paths collide (route groups ignored).
 - [ ] **QA checklist**
+
   - Draft a release checklist for verifying locale behavior pre-merge (routing, metadata, navigation, inquiry).
 
 - [x] **Sitemap & SEO hardening**

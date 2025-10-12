@@ -10,7 +10,7 @@
     "email": "email dev",
     "typegen": "npx sanity schema extract && npx sanity typegen generate",
     "typecheck": "tsc --noEmit",
-  "contrast": "ts-node ./scripts/contrast-check.ts",
+    "contrast": "ts-node ./scripts/contrast-check.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "check:routes": "node ./scripts/check-duplicate-routes.mjs"
