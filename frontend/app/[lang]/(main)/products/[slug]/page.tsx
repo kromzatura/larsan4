@@ -23,6 +23,7 @@ import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import type { AsyncPageProps } from "@/lib/types/next";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { buildAbsoluteUrl } from "@/lib/url";
 
 type SpecPair = { label: string; value?: string | number | null };
 
@@ -156,12 +157,8 @@ export default async function ProductPage(
     },
   ];
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-  const sharePath = buildLocalizedPath(
-    locale,
-    `/products/${product.slug?.current ?? ""}`
-  );
-  const shareUrl = `${siteUrl}${sharePath}`;
+  const productPath = `/products/${product.slug?.current ?? ""}`;
+  const shareUrl = buildAbsoluteUrl(locale, productPath);
 
   return (
     <section className="container py-16 xl:py-20">

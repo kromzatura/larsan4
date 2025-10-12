@@ -16,6 +16,7 @@ import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import type { AsyncPageProps } from "@/lib/types/next";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { buildAbsoluteUrl } from "@/lib/url";
 
 type BreadcrumbLink = {
   label: string;
@@ -124,11 +125,8 @@ export default async function PostPage(
 
   const headings = extractHeadings(post.body);
   const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-  const postPath = buildLocalizedPath(
-    locale,
-    `/blog/${post.slug?.current ?? ""}`
-  );
-  const shareUrl = `${SITE_URL}${postPath}`;
+  const postPath = `/blog/${post.slug?.current ?? ""}`;
+  const shareUrl = buildAbsoluteUrl(locale, postPath);
   const articleLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -164,7 +162,7 @@ export default async function PostPage(
         "@type": "ListItem",
         position: 3,
         name: post.title || dictionary.postPage.breadcrumbs.post,
-        item: `${SITE_URL}${postPath}`,
+        item: `${SITE_URL}${buildLocalizedPath(locale, postPath)}`,
       },
     ],
   } as const;
