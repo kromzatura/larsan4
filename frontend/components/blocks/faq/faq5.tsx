@@ -28,7 +28,10 @@ export default function FAQ5({
                   <h3 className="font-medium text-base">{faq.title}</h3>
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  <PortableTextRenderer value={faq.body || []} locale={locale} />
+                  <PortableTextRenderer
+                    value={faq.body || []}
+                    locale={locale}
+                  />
                 </div>
               </div>
             </div>

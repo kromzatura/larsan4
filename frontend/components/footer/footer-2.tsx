@@ -107,7 +107,10 @@ export default function Footer2({
               <span>&copy; {new Date().getFullYear()}</span>
               {settings?.copyright && (
                 <span className="[&>p]:!m-0">
-                  <PortableTextRenderer value={settings.copyright} locale={locale} />
+                  <PortableTextRenderer
+                    value={settings.copyright}
+                    locale={locale}
+                  />
                 </span>
               )}
             </div>

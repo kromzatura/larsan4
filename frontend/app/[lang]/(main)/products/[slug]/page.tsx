@@ -94,21 +94,36 @@ export default async function ProductPage(
   const productsPath = buildLocalizedPath(locale, "/products");
   const links = [
     { label: dictionary.productPage.breadcrumbs.products, href: productsPath },
-    { label: product.title ?? dictionary.productPage.breadcrumbs.products, href: "#" },
+    {
+      label: product.title ?? dictionary.productPage.breadcrumbs.products,
+      href: "#",
+    },
   ];
 
   const atAGlance: SpecPair[] = [
     { label: dictionary.productPage.specLabels.sku, value: spec?.sku },
     { label: dictionary.productPage.specLabels.hsCode, value: spec?.hsCode },
-    { label: dictionary.productPage.specLabels.minOrder, value: spec?.minOrder },
+    {
+      label: dictionary.productPage.specLabels.minOrder,
+      value: spec?.minOrder,
+    },
     { label: dictionary.productPage.specLabels.origin, value: spec?.origin },
-    { label: dictionary.productPage.specLabels.botanicalName, value: spec?.botanicalName },
+    {
+      label: dictionary.productPage.specLabels.botanicalName,
+      value: spec?.botanicalName,
+    },
     { label: dictionary.productPage.specLabels.bestFor, value: spec?.bestFor },
   ];
 
   const quality: SpecPair[] = [
-    { label: dictionary.productPage.specLabels.pungency, value: spec?.pungency },
-    { label: dictionary.productPage.specLabels.bindingCapacity, value: spec?.bindingCapacity },
+    {
+      label: dictionary.productPage.specLabels.pungency,
+      value: spec?.pungency,
+    },
+    {
+      label: dictionary.productPage.specLabels.bindingCapacity,
+      value: spec?.bindingCapacity,
+    },
     {
       label: dictionary.productPage.specLabels.fatContent,
       value:
@@ -119,11 +134,26 @@ export default async function ProductPage(
   ];
 
   const other: SpecPair[] = [
-    { label: dictionary.productPage.specLabels.moisture, value: spec?.moisture },
-    { label: dictionary.productPage.specLabels.shelfLife, value: spec?.shelfLife },
-    { label: dictionary.productPage.specLabels.allergenInfo, value: spec?.allergenInfo },
-    { label: dictionary.productPage.specLabels.attributes, value: spec?.productAttributes },
-    { label: dictionary.productPage.specLabels.certification, value: spec?.certification },
+    {
+      label: dictionary.productPage.specLabels.moisture,
+      value: spec?.moisture,
+    },
+    {
+      label: dictionary.productPage.specLabels.shelfLife,
+      value: spec?.shelfLife,
+    },
+    {
+      label: dictionary.productPage.specLabels.allergenInfo,
+      value: spec?.allergenInfo,
+    },
+    {
+      label: dictionary.productPage.specLabels.attributes,
+      value: spec?.productAttributes,
+    },
+    {
+      label: dictionary.productPage.specLabels.certification,
+      value: spec?.certification,
+    },
   ];
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
@@ -198,9 +228,18 @@ export default async function ProductPage(
                 </div>
               )}
 
-            <SpecTable title={dictionary.productPage.sections.atAGlance} rows={atAGlance} />
-            <SpecTable title={dictionary.productPage.sections.quality} rows={quality} />
-            <SpecTable title={dictionary.productPage.sections.other} rows={other} />
+            <SpecTable
+              title={dictionary.productPage.sections.atAGlance}
+              rows={atAGlance}
+            />
+            <SpecTable
+              title={dictionary.productPage.sections.quality}
+              rows={quality}
+            />
+            <SpecTable
+              title={dictionary.productPage.sections.other}
+              rows={other}
+            />
 
             {/* Packaging */}
             {Array.isArray(product.packagingOptions) &&
@@ -266,7 +305,9 @@ export default async function ProductPage(
 
             {/* Share */}
             <div className="flex items-center justify-between rounded-lg border p-4">
-              <p className="text-sm font-medium">{dictionary.productPage.share.title}</p>
+              <p className="text-sm font-medium">
+                {dictionary.productPage.share.title}
+              </p>
               <ul className="flex gap-2">
                 <li>
                   <a

@@ -199,13 +199,14 @@ export default async function PostPage(
               <span className="font-medium">{post.author?.name}</span>
             )}
             <span className="ml-1 flex items-center gap-1 text-muted-foreground">
-                <span>{dictionary.postPage.authorLine.on}</span> <PostDate date={post._createdAt} />
+              <span>{dictionary.postPage.authorLine.on}</span>{" "}
+              <PostDate date={post._createdAt} />
             </span>
           </span>
 
           <span className="flex items-center gap-1 text-muted-foreground">
             <Clock className="h-4 w-4" />
-              {post.estimatedReadingTime} {dictionary.postPage.readingTime.unit}
+            {post.estimatedReadingTime} {dictionary.postPage.readingTime.unit}
           </span>
         </div>
         <Separator className="mt-8 mb-16" />
@@ -215,7 +216,9 @@ export default async function PostPage(
               <PortableTextRenderer value={post.body} locale={locale} />
             </div>
             <div className="sticky top-18 col-span-3 col-start-10 hidden h-fit lg:block">
-                <span className="text-lg font-medium">{dictionary.postPage.toc.title}</span>
+              <span className="text-lg font-medium">
+                {dictionary.postPage.toc.title}
+              </span>
               <nav className="mt-4 text-sm">
                 <ul className="space-y-2">
                   {headings.map((heading) => (
@@ -235,11 +238,15 @@ export default async function PostPage(
               </nav>
               <Separator className="my-6" />
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="text-sm font-medium">{dictionary.postPage.share.title}</p>
+                <p className="text-sm font-medium">
+                  {dictionary.postPage.share.title}
+                </p>
                 <ul className="flex gap-2">
                   <li>
                     <a
-                      href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
+                      href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                        shareUrl
+                      )}`}
                       target="_blank"
                       rel="noopener"
                       title={dictionary.postPage.share.facebook}
@@ -250,7 +257,9 @@ export default async function PostPage(
                   </li>
                   <li>
                     <a
-                      href={`https://x.com/intent/tweet?url=${encodeURIComponent(shareUrl)}`}
+                      href={`https://x.com/intent/tweet?url=${encodeURIComponent(
+                        shareUrl
+                      )}`}
                       target="_blank"
                       rel="noopener"
                       title={dictionary.postPage.share.twitter}
@@ -261,7 +270,9 @@ export default async function PostPage(
                   </li>
                   <li>
                     <a
-                      href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(shareUrl)}`}
+                      href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
+                        shareUrl
+                      )}`}
                       target="_blank"
                       rel="noopener"
                       title={dictionary.postPage.share.linkedin}

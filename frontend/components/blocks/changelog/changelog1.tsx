@@ -49,7 +49,10 @@ export default async function Changelog1({
                 )}
                 {changelog.body && (
                   <div className="text-sm text-muted-foreground md:text-base">
-                    <PortableTextRenderer value={changelog.body} locale={locale} />
+                    <PortableTextRenderer
+                      value={changelog.body}
+                      locale={locale}
+                    />
                   </div>
                 )}
                 {changelog.image && changelog.image.asset?._id && (

@@ -25,7 +25,9 @@ const getTextFromChildren = (children: ReactNode): string => {
   return "";
 };
 
-const makePortableTextComponents = (locale: SupportedLocale): PortableTextProps["components"] => ({
+const makePortableTextComponents = (
+  locale: SupportedLocale
+): PortableTextProps["components"] => ({
   types: {
     image: ({ value }) => {
       const { url, metadata } = value.asset;
@@ -196,7 +198,10 @@ const PortableTextRenderer = ({
   locale?: SupportedLocale;
 }) => {
   return (
-    <PortableText value={value} components={makePortableTextComponents(locale)} />
+    <PortableText
+      value={value}
+      components={makePortableTextComponents(locale)}
+    />
   );
 };
 

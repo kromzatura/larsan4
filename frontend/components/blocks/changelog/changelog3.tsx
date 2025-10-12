@@ -64,7 +64,10 @@ export default async function Changelog3({
                       {changelog.title}
                     </h2>
                     {changelog.body && (
-                      <PortableTextRenderer value={changelog.body} locale={locale} />
+                      <PortableTextRenderer
+                        value={changelog.body}
+                        locale={locale}
+                      />
                     )}
                     {changelog.image && changelog.image.asset?._id && (
                       <Image

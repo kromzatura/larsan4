@@ -124,7 +124,10 @@ export default function FAQ14({
                           {faq.title}
                         </AccordionTrigger>
                         <AccordionContent className="text-base font-medium text-muted-foreground">
-                          <PortableTextRenderer value={faq.body || []} locale={locale} />
+                          <PortableTextRenderer
+                            value={faq.body || []}
+                            locale={locale}
+                          />
                         </AccordionContent>
                       </AccordionItem>
                     ))}

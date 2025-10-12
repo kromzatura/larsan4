@@ -57,7 +57,10 @@ export default async function Changelog2({
               )}
               {changelog.body && (
                 <div className="text-primary/80">
-                  <PortableTextRenderer value={changelog.body} locale={locale} />
+                  <PortableTextRenderer
+                    value={changelog.body}
+                    locale={locale}
+                  />
                 </div>
               )}
             </div>

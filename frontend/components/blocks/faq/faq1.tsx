@@ -31,7 +31,10 @@ export default function FAQ1({
                   {faq.title}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground">
-                  <PortableTextRenderer value={faq.body || []} locale={locale} />
+                  <PortableTextRenderer
+                    value={faq.body || []}
+                    locale={locale}
+                  />
                 </AccordionContent>
               </AccordionItem>
             ))}

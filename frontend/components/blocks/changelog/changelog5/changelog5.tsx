@@ -197,7 +197,10 @@ export default function Changelog5({
                     <h3 className="mt-2 mb-6 text-3xl">{changelog.title}</h3>
                   )}
                   {changelog.body && (
-                    <PortableTextRenderer value={changelog.body} locale={locale} />
+                    <PortableTextRenderer
+                      value={changelog.body}
+                      locale={locale}
+                    />
                   )}
                   <div className="mt-6 flex items-end justify-between border-b border-border pb-4">
                     <div className="flex items-center gap-4">
