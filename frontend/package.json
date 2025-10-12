@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
   "contrast": "ts-node ./scripts/contrast-check.ts",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "check:routes": "node ./scripts/check-duplicate-routes.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
