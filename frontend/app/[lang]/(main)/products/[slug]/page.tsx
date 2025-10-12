@@ -61,7 +61,6 @@ export async function generateMetadata(
 ) {
   const params = (await props.params)!;
   const locale = normalizeLocale(params.lang);
-  const dictionary = await getDictionary(locale);
   const product = await fetchSanityProductBySlug({
     slug: params.slug,
     lang: locale,
@@ -71,6 +70,7 @@ export async function generateMetadata(
     page: product,
     slug: `products/${params.slug}`,
     type: "product",
+    locale,
   });
 }
 

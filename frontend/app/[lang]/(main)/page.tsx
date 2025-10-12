@@ -12,7 +12,7 @@ export async function generateMetadata(props: LangAsyncPageProps) {
   if (!page) {
     return { title: "Content not available in this language" };
   }
-  return generatePageMetadataUtil({ page, slug: "index", type: "page" });
+  return generatePageMetadataUtil({ page, slug: "index", type: "page", locale });
 }
 
 export default async function IndexPage(props: LangAsyncPageProps) {

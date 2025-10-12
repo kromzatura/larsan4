@@ -43,6 +43,7 @@ export async function generateMetadata(
     page: cat,
     slug: `products/category/${params.slug}`,
     type: "productCategory",
+    locale,
   });
   return {
     ...base,

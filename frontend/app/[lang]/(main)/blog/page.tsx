@@ -40,6 +40,7 @@ export async function generateMetadata(props: LangAsyncPageProps) {
     page: pageDoc,
     slug: "blog",
     type: "page",
+    locale,
   }) as MetadataWithAlternates;
   const withRss: MetadataWithAlternates = {
     ...base,

@@ -13,3 +13,9 @@ export function buildAbsoluteUrl(
   const localizedPath = buildLocalizedPath(locale, path);
   return `${baseUrl}${localizedPath}`;
 }
+
+/**
+ * Builds the canonical URL for a given page, which is always the full,
+ * absolute, and localized URL. Semantic alias for SEO contexts.
+ */
+export const buildCanonicalUrl = buildAbsoluteUrl;

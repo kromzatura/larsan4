@@ -94,6 +94,7 @@ export async function generateMetadata(
     page: post,
     slug: `blog/${params.slug}`,
     type: "post",
+    locale,
   });
 }
 
@@ -139,7 +140,7 @@ export default async function PostPage(
     dateModified: post._updatedAt || undefined,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${SITE_URL}${postPath}`,
+      "@id": shareUrl,
     },
   } as const;
   const breadcrumbLd = {
@@ -162,7 +163,7 @@ export default async function PostPage(
         "@type": "ListItem",
         position: 3,
         name: post.title || dictionary.postPage.breadcrumbs.post,
-        item: `${SITE_URL}${buildLocalizedPath(locale, postPath)}`,
+        item: shareUrl,
       },
     ],
   } as const;

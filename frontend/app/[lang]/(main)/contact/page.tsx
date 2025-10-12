@@ -3,12 +3,15 @@ import { LinkButton } from "@/components/ui/link-button";
 import { fetchSanityContact } from "@/sanity/lib/fetch";
 import { notFound } from "next/navigation";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
+import { normalizeLocale } from "@/lib/i18n/routing";
 import { Link as LinkType } from "@/sanity.types";
 import type { InquiryItem } from "@/lib/inquiry";
 import ContactInquiryWrapper from "@/components/inquiry/contact-inquiry-wrapper";
-import type { AsyncPageProps, SearchParams } from "@/lib/types/next";
+import type { AsyncPageProps, SearchParams, LangAsyncPageProps } from "@/lib/types/next";
 
-export async function generateMetadata() {
+export async function generateMetadata(props: LangAsyncPageProps) {
+  const resolved = props.params ? await props.params : undefined;
+  const locale = normalizeLocale(resolved?.lang);
   const contact = await fetchSanityContact();
 
   if (!contact) {
@@ -19,6 +22,7 @@ export async function generateMetadata() {
     page: contact,
     slug: "contact",
     type: "page",
+    locale,
   });
 }
 
