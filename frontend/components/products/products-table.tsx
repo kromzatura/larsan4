@@ -30,6 +30,16 @@ export type ProductsTableItem = {
 };
 
 export type ProductsTableProps = {
+  labels: {
+    headerProduct: string;
+    headerCategory: string;
+    headerKeyFeatures: string;
+    headerAttributes: string;
+    headerAction: string;
+    labelSku: string;
+    labelPurity: string;
+    emptyState: string;
+  };
   items: ProductsTableItem[];
   page: number;
   pageCount: number;
@@ -41,6 +51,7 @@ export type ProductsTableProps = {
 };
 
 export default function ProductsTable({
+  labels,
   items,
   page,
   pageCount,
@@ -56,7 +67,7 @@ export default function ProductsTable({
     return (
       <div className={cn("w-full", className)}>
         {emptyState ?? (
-          <p className="text-sm text-muted-foreground">No products found.</p>
+          <p className="text-sm text-muted-foreground">{labels.emptyState}</p>
         )}
       </div>
     );
@@ -69,19 +80,19 @@ export default function ProductsTable({
           <thead className="bg-muted/50 text-left text-xs uppercase tracking-wide text-muted-foreground">
             <tr>
               <th scope="col" className="px-6 py-4">
-                Products
+                {labels.headerProduct}
               </th>
               <th scope="col" className="px-6 py-4">
-                Category
+                {labels.headerCategory}
               </th>
               <th scope="col" className="px-6 py-4">
-                Key features
+                {labels.headerKeyFeatures}
               </th>
               <th scope="col" className="px-6 py-4">
-                Product attributes
+                {labels.headerAttributes}
               </th>
               <th scope="col" className="px-6 py-4 text-center">
-                Action
+                {labels.headerAction}
               </th>
             </tr>
           </thead>
@@ -114,7 +125,7 @@ export default function ProductsTable({
                       </Link>
                       {item.sku && (
                         <span className="text-xs text-muted-foreground truncate block whitespace-nowrap">
-                          SKU: {item.sku}
+                          {labels.labelSku}: {item.sku}
                         </span>
                       )}
                     </div>
@@ -130,7 +141,7 @@ export default function ProductsTable({
                             c?.href ||
                             buildLocalizedPath(
                               locale,
-                              `/products?category=${c?.slug || ""}`
+                              `/products/category/${c?.slug || ""}`
                             )
                           }
                           className="rounded outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -159,7 +170,7 @@ export default function ProductsTable({
                       <Badge variant="outline">{item.productAttributes}</Badge>
                     )}
                     {item.purity && (
-                      <Badge variant="outline">Purity: {item.purity}</Badge>
+                      <Badge variant="outline">{labels.labelPurity}: {item.purity}</Badge>
                     )}
                   </div>
                 </td>

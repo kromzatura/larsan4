@@ -6,6 +6,38 @@ export type UIDictionary = {
   inquiry: {
     label: string;
   };
+  products: {
+    table: {
+      headerProduct: string;
+      headerCategory: string;
+      headerKeyFeatures: string;
+      headerAttributes: string;
+      headerAction: string;
+      labelSku: string;
+      labelPurity: string;
+      emptyState: string;
+    };
+    categoryFilter: {
+      labelFilter: string;
+      labelCategory: string;
+      labelAny: string;
+    };
+    categoryPage: {
+      breadcrumbProducts: string;
+      breadcrumbCategory: string;
+      labelSort: string;
+      sortNewest: string;
+      sortAZ: string;
+      sortZA: string;
+      emptyState: string;
+    };
+    listingBlock: {
+      emptyStateCategoryNotFound: string;
+      emptyStateNoProductsInCategory: string;
+      actionClearFilter: string;
+      emptyStateGeneral: string;
+    };
+  };
   postPage: {
     breadcrumbs: {
       home: string;

@@ -15,6 +15,7 @@ import { urlFor } from "@/sanity/lib/image";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import type { AsyncPageProps } from "@/lib/types/next";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
 const PAGE_SIZE = 12;
 
@@ -51,7 +52,7 @@ export async function generateMetadata(
       ? {
           robots: {
             index: false,
-            follow: false,
+            follow: true,
           },
           alternates: {
             canonical: buildLocalizedPath(
@@ -73,6 +74,7 @@ export default async function CategoryPage(
   const params = (await props.params)!;
   const searchParams = (await props.searchParams) || {};
   const locale = normalizeLocale(params.lang);
+  const dictionary = getDictionary(locale);
   const page = Math.max(1, Number(searchParams?.page || 1));
   const sort = (searchParams?.sort as "newest" | "az" | "za") || "newest";
 
@@ -98,9 +100,9 @@ export default async function CategoryPage(
 
   const productsPath = buildLocalizedPath(locale, "/products");
   const links = [
-    { label: "Products", href: productsPath },
+    { label: dictionary.products.categoryPage.breadcrumbProducts, href: productsPath },
     {
-      label: cat.title ?? "Category",
+      label: cat.title ?? dictionary.products.categoryPage.breadcrumbCategory,
       href: baseUrl,
     },
   ];
@@ -118,14 +120,14 @@ export default async function CategoryPage(
           )}
         </div>
         <div className="ml-auto flex items-center gap-2 text-sm">
-          <span className="text-muted-foreground">Sort</span>
+          <span className="text-muted-foreground">{dictionary.products.categoryPage.labelSort}</span>
           <Link
             href={`${baseUrl}?sort=newest`}
             className={`rounded-md border px-2 py-1 ${
               sort === "newest" ? "bg-muted" : "hover:bg-muted"
             }`}
           >
-            Newest
+            {dictionary.products.categoryPage.sortNewest}
           </Link>
           <Link
             href={`${baseUrl}?sort=az`}
@@ -133,7 +135,7 @@ export default async function CategoryPage(
               sort === "az" ? "bg-muted" : "hover:bg-muted"
             }`}
           >
-            A–Z
+            {dictionary.products.categoryPage.sortAZ}
           </Link>
           <Link
             href={`${baseUrl}?sort=za`}
@@ -141,13 +143,23 @@ export default async function CategoryPage(
               sort === "za" ? "bg-muted" : "hover:bg-muted"
             }`}
           >
-            Z–A
+            {dictionary.products.categoryPage.sortZA}
           </Link>
         </div>
       </div>
 
       <div className="mt-10">
         <ProductsTable
+          labels={{
+            headerProduct: dictionary.products.table.headerProduct,
+            headerCategory: dictionary.products.table.headerCategory,
+            headerKeyFeatures: dictionary.products.table.headerKeyFeatures,
+            headerAttributes: dictionary.products.table.headerAttributes,
+            headerAction: dictionary.products.table.headerAction,
+            labelSku: dictionary.products.table.labelSku,
+            labelPurity: dictionary.products.table.labelPurity,
+            emptyState: dictionary.products.table.emptyState,
+          }}
           items={(products || []).map<ProductsTableItem>((p) => {
             const spec = Array.isArray(p.specifications)
               ? p.specifications[0]
@@ -172,7 +184,7 @@ export default async function CategoryPage(
                     slug: c?.slug?.current || null,
                     href: buildLocalizedPath(
                       locale,
-                      `/products?category=${c?.slug?.current || ""}`
+                      `/products/category/${c?.slug?.current || ""}`
                     ),
                   }))
                 : null,
@@ -188,7 +200,7 @@ export default async function CategoryPage(
           baseSearchParams={baseSearchParams.toString()}
           emptyState={
             <div className="rounded-lg border p-8 text-center text-muted-foreground">
-              No products in this category yet.
+              {dictionary.products.categoryPage.emptyState}
             </div>
           }
           locale={locale}

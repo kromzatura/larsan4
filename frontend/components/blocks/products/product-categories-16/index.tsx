@@ -6,6 +6,7 @@ import { fetchSanityProductCategories } from "@/sanity/lib/fetch";
 import { buildLocalizedPath } from "@/lib/i18n/routing";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
 type CategoriesBlockProps = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -20,6 +21,7 @@ export default async function ProductCategories16({
   searchParams?: { category?: string };
   locale?: SupportedLocale;
 }) {
+  const dictionary = getDictionary(locale);
   const cats = await fetchSanityProductCategories({ lang: locale });
   const params = searchParams;
   const active = params?.category;
@@ -32,8 +34,8 @@ export default async function ProductCategories16({
     <SectionContainer padding={padding}>
       <div className="rounded-lg border p-4">
         <div className="flex items-center gap-3 text-xs uppercase tracking-wide text-muted-foreground">
-          <span>Filter</span>
-          <span>Category:</span>
+          <span>{dictionary.products.categoryFilter.labelFilter}</span>
+          <span>{dictionary.products.categoryFilter.labelCategory}</span>
           <Link
             href={productsBasePath}
             className="rounded outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -42,7 +44,7 @@ export default async function ProductCategories16({
               variant={hasValidActive ? "outline" : "secondary"}
               className="px-3 py-1 text-sm transition-colors hover:bg-secondary/80"
             >
-              Any
+              {dictionary.products.categoryFilter.labelAny}
             </Badge>
           </Link>
         </div>
@@ -50,7 +52,10 @@ export default async function ProductCategories16({
           {cats.map((c) => (
             <Link
               key={c._id}
-              href={`${productsBasePath}?category=${c.slug?.current || ""}`}
+              href={buildLocalizedPath(
+                locale,
+                `/products/category/${c.slug?.current || ""}`
+              )}
               className="rounded outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <Badge

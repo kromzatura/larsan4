@@ -2,6 +2,38 @@ export default {
   inquiry: {
     label: "Aanvraag",
   },
+  products: {
+    table: {
+      headerProduct: "Producten",
+      headerCategory: "Categorie",
+      headerKeyFeatures: "Belangrijkste kenmerken",
+      headerAttributes: "Producteigenschappen",
+      headerAction: "Actie",
+      labelSku: "SKU",
+      labelPurity: "Zuiverheid",
+      emptyState: "Geen producten gevonden.",
+    },
+    categoryFilter: {
+      labelFilter: "Filter",
+      labelCategory: "Categorie:",
+      labelAny: "Alle",
+    },
+    categoryPage: {
+      breadcrumbProducts: "Producten",
+      breadcrumbCategory: "Categorie",
+      labelSort: "Sorteren",
+      sortNewest: "Nieuwste",
+      sortAZ: "A–Z",
+      sortZA: "Z–A",
+      emptyState: "Nog geen producten in deze categorie.",
+    },
+    listingBlock: {
+      emptyStateCategoryNotFound: "Categorie niet gevonden.",
+      emptyStateNoProductsInCategory: "Geen producten gevonden in deze categorie.",
+      actionClearFilter: "Filter wissen",
+      emptyStateGeneral: "Geen producten gevonden.",
+    },
+  },
   postPage: {
     breadcrumbs: {
       home: "Home",

@@ -15,6 +15,7 @@ import { fetchSanityProductCategoryBySlug } from "@/sanity/lib/fetch";
 import { buildLocalizedPath } from "@/lib/i18n/routing";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
 type AllProducts16Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -32,6 +33,7 @@ export default async function AllProducts16({
   };
   locale?: SupportedLocale;
 }) {
+  const dictionary = getDictionary(locale);
   const PAGE_SIZE = 12;
   const params = searchParams;
   const currentPage = params?.page ? Math.max(1, parseInt(params.page)) : 1;
@@ -95,7 +97,10 @@ export default async function AllProducts16({
             _id: c?._id || undefined,
             title: c?.title || null,
             slug: c?.slug?.current || null,
-            href: `${baseUrl}?category=${c?.slug?.current || ""}`,
+            href: buildLocalizedPath(
+              locale,
+              `/products/category/${c?.slug?.current || ""}`
+            ),
           }))
         : null,
       href: buildLocalizedPath(locale, `/products/${p.slug?.current || ""}`),
@@ -105,6 +110,16 @@ export default async function AllProducts16({
   return (
     <SectionContainer padding={padding}>
       <ProductsTable
+        labels={{
+          headerProduct: dictionary.products.table.headerProduct,
+          headerCategory: dictionary.products.table.headerCategory,
+          headerKeyFeatures: dictionary.products.table.headerKeyFeatures,
+          headerAttributes: dictionary.products.table.headerAttributes,
+          headerAction: dictionary.products.table.headerAction,
+          labelSku: dictionary.products.table.labelSku,
+          labelPurity: dictionary.products.table.labelPurity,
+          emptyState: dictionary.products.table.emptyState,
+        }}
         items={items}
         page={currentPage}
         pageCount={totalPages}
@@ -116,17 +131,17 @@ export default async function AllProducts16({
               <>
                 <p>
                   {isInvalidCategory
-                    ? "Category not found."
-                    : "No products found in this category."}
+                    ? dictionary.products.listingBlock.emptyStateCategoryNotFound
+                    : dictionary.products.listingBlock.emptyStateNoProductsInCategory}
                 </p>
                 <p className="mt-2">
                   <Link className="underline" href={baseUrl}>
-                    Clear filter
+                    {dictionary.products.listingBlock.actionClearFilter}
                   </Link>
                 </p>
               </>
             ) : (
-              <p>No products found.</p>
+              <p>{dictionary.products.listingBlock.emptyStateGeneral}</p>
             )}
           </div>
         }
