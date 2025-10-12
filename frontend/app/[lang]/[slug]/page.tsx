@@ -8,6 +8,14 @@ import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { normalizeLocale, isSupportedLocale } from "@/lib/i18n/routing";
 import { FALLBACK_LOCALE, SUPPORTED_LOCALES } from "@/lib/i18n/config";
 import type { AsyncPageProps, SearchParams } from "@/lib/types/next";
+import type { PAGE_QUERYResult } from "@/sanity.types";
+
+// Strong local type: ensure title and blocks are present for typed rendering
+type PageBlocks = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>;
+type PageData = Omit<NonNullable<PAGE_QUERYResult>, "title" | "blocks"> & {
+  title: string;
+  blocks: PageBlocks;
+};
 
 const EXCLUDED_PAGE_SLUGS = new Set(["index", "home", ""]);
 
@@ -28,10 +36,14 @@ export async function generateMetadata(
 ) {
   const params = (await props.params)!;
   const locale = normalizeLocale(params.lang);
-  const page = await fetchSanityPageBySlug({ slug: params.slug, lang: locale });
+  const page = (await fetchSanityPageBySlug({
+    slug: params.slug,
+    lang: locale,
+  })) as PageData | null;
 
-  if (!page) {
-    notFound();
+  // For metadata, prefer returning {} so Next can flow to the page's 404 guard
+  if (!page || !page.title || !page.blocks || page.blocks.length === 0) {
+    return {};
   }
 
   return generatePageMetadata({ page, slug: params.slug, type: "page" });
@@ -47,16 +59,19 @@ export default async function Page(
     notFound();
   }
 
-  const page = await fetchSanityPageBySlug({ slug: params.slug, lang: locale });
+  const page = (await fetchSanityPageBySlug({
+    slug: params.slug,
+    lang: locale,
+  })) as PageData | null;
 
-  if (!page) {
+  if (!page || !page.title || !page.blocks || page.blocks.length === 0) {
     notFound();
   }
 
   return (
     <>
       <Blocks
-        blocks={page?.blocks ?? []}
+        blocks={page.blocks}
         searchParams={
           ((await props.searchParams) as { page?: string } | undefined) || {}
         }

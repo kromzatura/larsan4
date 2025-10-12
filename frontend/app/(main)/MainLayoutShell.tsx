@@ -1,44 +1,32 @@
-import { fetchSanityBanner, fetchSanitySettings } from "@/sanity/lib/fetch";
-import { getNavigationItems } from "@/lib/getNavigationItems";
+import { fetchSanityBanner } from "@/sanity/lib/fetch";
 import { DisableDraftMode } from "@/components/disable-draft-mode";
 import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
 import { SanityLive } from "@/sanity/lib/live";
 import { MainLayoutClientShell } from "./MainLayoutClientShell";
-import { normalizeLocale } from "@/lib/i18n/routing";
-import { headers } from "next/headers";
+import type { SETTINGS_QUERYResult } from "@/sanity.types";
+import type { NavigationItem } from "@/lib/getNavigationItems";
+import type { SupportedLocale } from "@/lib/i18n/config";
 
 export default async function MainLayoutShell({
   children,
+  settings,
+  headerNav,
+  headerAction,
+  footerNav,
+  footerBottomNav,
+  lang,
 }: {
   children: React.ReactNode;
+  settings: SETTINGS_QUERYResult;
+  headerNav: NavigationItem[];
+  headerAction: NavigationItem[];
+  footerNav: NavigationItem[];
+  footerBottomNav: NavigationItem[];
+  lang?: SupportedLocale;
 }) {
-  const hdrs = await headers();
-  const paramsHeader = hdrs.get("x-nextjs-params");
-  let locale: string | undefined;
-  try {
-    if (paramsHeader) {
-      const parsed = JSON.parse(paramsHeader);
-      locale = parsed?.lang;
-    }
-  } catch {}
-  const lang = normalizeLocale(locale);
-  // Fetch everything needed for the shell in parallel
-  const [
-    banner,
-    settings,
-    headerNav,
-    headerAction,
-    footerNav,
-    footerBottomNav,
-  ] = await Promise.all([
-    fetchSanityBanner(),
-    fetchSanitySettings({ lang }),
-    getNavigationItems("header", lang),
-    getNavigationItems("header-action", lang),
-    getNavigationItems("footer", lang),
-    getNavigationItems("footer-bottom", lang),
-  ]);
+  // Always fetch banner (not locale-dependent in our setup)
+  const banner = await fetchSanityBanner();
   const { isEnabled: isDraftModeEnabled } = await draftMode();
 
   return (

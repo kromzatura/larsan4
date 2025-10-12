@@ -74,12 +74,15 @@ export const PAGE_QUERY = groq`
   *[
     _type == "page" &&
     slug.current == $slug &&
-    (!defined(language) || language in [$lang, $fallbackLang])
+    (!defined(language) || language in [$lang, $fallbackLang]) &&
+    defined(blocks[]) &&
+    defined(title)
   ]
   | order((language == $lang) desc, _updatedAt desc)[0]{
     _id,
     _type,
     language,
+    title,
     blocks[]{
       ${sectionHeaderQuery},
       ${hero12Query},
