@@ -1,4 +1,4 @@
-// Route group layout: props are provided by app/[lang]/layout.tsx, so this is a simple pass-through.
+// moved under app/[lang]/(main)/layout.tsx
 export default function GroupLayout({
   children,
 }: {

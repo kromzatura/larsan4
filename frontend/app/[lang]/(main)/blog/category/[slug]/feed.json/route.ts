@@ -24,19 +24,30 @@ export async function GET(
     fetchSanitySettings(),
   ]);
   const siteName = settings?.siteName || "Blog";
-  const language = getLanguageFromSettings(settings as {
-    language?: string;
-    siteLanguage?: string;
-    locale?: string;
-  });
+  const language = getLanguageFromSettings(
+    settings as {
+      language?: string;
+      siteLanguage?: string;
+      locale?: string;
+    }
+  );
   const feed = {
     version: "https://jsonfeed.org/version/1.1",
     title: `${siteName} — ${slug} — Blog`,
-    home_page_url: `${SITE_URL}${buildLocalizedPath(locale, `/blog/category/${slug}`)}`,
-    feed_url: `${SITE_URL}${buildLocalizedPath(locale, `/blog/category/${slug}/feed.json`)}`,
+    home_page_url: `${SITE_URL}${buildLocalizedPath(
+      locale,
+      `/blog/category/${slug}`
+    )}`,
+    feed_url: `${SITE_URL}${buildLocalizedPath(
+      locale,
+      `/blog/category/${slug}/feed.json`
+    )}`,
     language,
     items: (Array.isArray(posts) ? (posts as FeedPost[]) : []).map((p) => {
-      const url = `${SITE_URL}${buildLocalizedPath(locale, `/blog/${p.slug?.current ?? ""}`)}`;
+      const url = `${SITE_URL}${buildLocalizedPath(
+        locale,
+        `/blog/${p.slug?.current ?? ""}`
+      )}`;
       const content_html =
         ptBlocksToHtml(Array.isArray(p.body) ? (p.body as unknown[]) : null) ||
         p.excerpt ||

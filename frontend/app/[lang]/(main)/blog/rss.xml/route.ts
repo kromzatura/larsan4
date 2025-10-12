@@ -17,7 +17,10 @@ function escape(str: string) {
     .replace(/'/g, "&apos;");
 }
 
-export async function GET(_req: Request, context: { params: Promise<{ lang?: string }> }) {
+export async function GET(
+  _req: Request,
+  context: { params: Promise<{ lang?: string }> }
+) {
   const params = await context.params;
   const locale = normalizeLocale(params?.lang);
   const [{ data: posts }, settings] = await Promise.all([
@@ -33,11 +36,13 @@ export async function GET(_req: Request, context: { params: Promise<{ lang?: str
   const lastBuildDate = new Date().toUTCString();
   const siteName = settings?.siteName || "Blog";
   const siteDesc = settings?.description || "Latest posts";
-  const language = getLanguageFromSettings(settings as {
-    language?: string;
-    siteLanguage?: string;
-    locale?: string;
-  });
+  const language = getLanguageFromSettings(
+    settings as {
+      language?: string;
+      siteLanguage?: string;
+      locale?: string;
+    }
+  );
   const logo = settings?.logo;
   const logoUrl: string | null = logo?.asset?.url || null;
   const dim = logo?.asset?.metadata?.dimensions;
@@ -49,7 +54,10 @@ export async function GET(_req: Request, context: { params: Promise<{ lang?: str
     rawW && rawH && width ? Math.round((rawH / rawW) * width) : rawH;
 
   const items = (Array.isArray(posts) ? (posts as FeedPost[]) : []).map((p) => {
-    const url = `${SITE_URL}${buildLocalizedPath(locale, `/blog/${p.slug?.current ?? ""}`)}`;
+    const url = `${SITE_URL}${buildLocalizedPath(
+      locale,
+      `/blog/${p.slug?.current ?? ""}`
+    )}`;
     const title = escape(p.title ?? "Untitled");
     const rawDate = p.publishedAt || p._createdAt;
     const pubDate = rawDate ? new Date(rawDate).toUTCString() : "";
@@ -59,7 +67,9 @@ export async function GET(_req: Request, context: { params: Promise<{ lang?: str
           .map((t) => `<category>${escape(t)}</category>`)
           .join("")
       : "";
-    const html = ptBlocksToHtml(Array.isArray(p.body) ? (p.body as unknown[]) : null);
+    const html = ptBlocksToHtml(
+      Array.isArray(p.body) ? (p.body as unknown[]) : null
+    );
     const creator = p.author?.name
       ? `<dc:creator>${escape(p.author.name)}</dc:creator>`
       : "";

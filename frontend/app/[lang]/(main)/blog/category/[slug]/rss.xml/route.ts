@@ -32,18 +32,26 @@ export async function GET(
     }),
     fetchSanitySettings(),
   ]);
-  const selfUrl = `${SITE_URL}${buildLocalizedPath(locale, `/blog/category/${slug}/rss.xml`)}`;
+  const selfUrl = `${SITE_URL}${buildLocalizedPath(
+    locale,
+    `/blog/category/${slug}/rss.xml`
+  )}`;
   const lastBuildDate = new Date().toUTCString();
   const siteName = settings?.siteName || "Blog";
   const siteDesc = settings?.description || "Latest posts";
-  const language = getLanguageFromSettings(settings as {
-    language?: string;
-    siteLanguage?: string;
-    locale?: string;
-  });
+  const language = getLanguageFromSettings(
+    settings as {
+      language?: string;
+      siteLanguage?: string;
+      locale?: string;
+    }
+  );
 
   const items = (Array.isArray(posts) ? (posts as FeedPost[]) : []).map((p) => {
-    const url = `${SITE_URL}${buildLocalizedPath(locale, `/blog/${p.slug?.current ?? ""}`)}`;
+    const url = `${SITE_URL}${buildLocalizedPath(
+      locale,
+      `/blog/${p.slug?.current ?? ""}`
+    )}`;
     const title = escape(p.title ?? "Untitled");
     const rawDate = p.publishedAt || p._createdAt;
     const pubDate = rawDate ? new Date(rawDate).toUTCString() : "";
@@ -53,7 +61,9 @@ export async function GET(
           .map((t) => `<category>${escape(t)}</category>`)
           .join("")
       : "";
-    const html = ptBlocksToHtml(Array.isArray(p.body) ? (p.body as unknown[]) : null);
+    const html = ptBlocksToHtml(
+      Array.isArray(p.body) ? (p.body as unknown[]) : null
+    );
     const creator = p.author?.name
       ? `<dc:creator>${escape(p.author.name)}</dc:creator>`
       : "";
@@ -77,7 +87,10 @@ export async function GET(
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
   <title>${escape(siteName)} — Blog Category: ${escape(slug)}</title>
-  <link>${SITE_URL}${buildLocalizedPath(locale, `/blog/category/${slug}`)}</link>
+  <link>${SITE_URL}${buildLocalizedPath(
+    locale,
+    `/blog/category/${slug}`
+  )}</link>
       <description>${escape(siteDesc)}</description>
       <atom:link href="${selfUrl}" rel="self" type="application/rss+xml" />
       <lastBuildDate>${lastBuildDate}</lastBuildDate>

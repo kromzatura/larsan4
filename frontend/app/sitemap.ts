@@ -1,7 +1,11 @@
 import { MetadataRoute } from "next";
 import { groq } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
-import { SUPPORTED_LOCALES, SupportedLocale, DEFAULT_LOCALE } from "@/lib/i18n/config";
+import {
+  SUPPORTED_LOCALES,
+  SupportedLocale,
+  DEFAULT_LOCALE,
+} from "@/lib/i18n/config";
 import { buildLocalizedPath, isSupportedLocale } from "@/lib/i18n/routing";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
@@ -102,14 +106,19 @@ function docsToEntries(
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [pageSlugs, postSlugs, productSlugs, productCategorySlugs, blogCategorySlugs] =
-    await Promise.all([
-      getPageSlugs(),
-      getPostSlugs(),
-      getProductSlugs(),
-      getProductCategorySlugs(),
-      getBlogCategorySlugs(),
-    ]);
+  const [
+    pageSlugs,
+    postSlugs,
+    productSlugs,
+    productCategorySlugs,
+    blogCategorySlugs,
+  ] = await Promise.all([
+    getPageSlugs(),
+    getPostSlugs(),
+    getProductSlugs(),
+    getProductCategorySlugs(),
+    getBlogCategorySlugs(),
+  ]);
 
   // Static routes present regardless of Sanity docs
   // Only include static routes that have no corresponding Sanity document
@@ -131,8 +140,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     0.7
   );
 
-  const postEntries = docsToEntries(postSlugs, (slug) => `/blog/${slug}`, "weekly", 0.6);
-  const productEntries = docsToEntries(productSlugs, (slug) => `/products/${slug}`, "weekly", 0.6);
+  const postEntries = docsToEntries(
+    postSlugs,
+    (slug) => `/blog/${slug}`,
+    "weekly",
+    0.6
+  );
+  const productEntries = docsToEntries(
+    productSlugs,
+    (slug) => `/products/${slug}`,
+    "weekly",
+    0.6
+  );
   const blogCategoryEntries = docsToEntries(
     blogCategorySlugs,
     (slug) => `/blog/category/${slug}`,
