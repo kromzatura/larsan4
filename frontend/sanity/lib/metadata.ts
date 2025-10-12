@@ -50,8 +50,7 @@ export function generatePageMetadata({
     return { index: true, follow: true } as const;
   })();
 
-  const canonicalPath =
-    slug === "index" ? "/" : type === "page" ? `/${slug}` : `/${type}/${slug}`;
+  const canonicalPath = slug === "index" ? "/" : `/${slug}`;
   const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
 
   const languageAlternates = SUPPORTED_LOCALES.reduce((acc, lang) => {
