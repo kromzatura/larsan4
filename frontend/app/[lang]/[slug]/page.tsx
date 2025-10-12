@@ -54,12 +54,14 @@ export default async function Page(
   }
 
   return (
-    <Blocks
-      blocks={page?.blocks ?? []}
-      searchParams={
-        ((await props.searchParams) as { page?: string } | undefined) || {}
-      }
-      locale={locale}
-    />
+    <>
+      <Blocks
+        blocks={page?.blocks ?? []}
+        searchParams={
+          ((await props.searchParams) as { page?: string } | undefined) || {}
+        }
+        locale={locale}
+      />
+    </>
   );
 }
