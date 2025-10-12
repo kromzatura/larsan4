@@ -46,7 +46,12 @@ export async function generateMetadata(
     return {};
   }
 
-  return generatePageMetadata({ page, slug: params.slug, type: "page", locale });
+  return generatePageMetadata({
+    page,
+    slug: params.slug,
+    type: "page",
+    locale,
+  });
 }
 
 export default async function Page(

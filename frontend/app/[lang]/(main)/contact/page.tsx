@@ -7,7 +7,11 @@ import { normalizeLocale } from "@/lib/i18n/routing";
 import { Link as LinkType } from "@/sanity.types";
 import type { InquiryItem } from "@/lib/inquiry";
 import ContactInquiryWrapper from "@/components/inquiry/contact-inquiry-wrapper";
-import type { AsyncPageProps, SearchParams, LangAsyncPageProps } from "@/lib/types/next";
+import type {
+  AsyncPageProps,
+  SearchParams,
+  LangAsyncPageProps,
+} from "@/lib/types/next";
 
 export async function generateMetadata(props: LangAsyncPageProps) {
   const resolved = props.params ? await props.params : undefined;

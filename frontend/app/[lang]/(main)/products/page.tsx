@@ -20,7 +20,12 @@ export async function generateMetadata(
     | undefined;
   const pageNum = sp?.page ? Number(sp.page) : 1;
   const category = sp?.category || "";
-  const base = generatePageMetadata({ page, slug: "products", type: "page", locale });
+  const base = generatePageMetadata({
+    page,
+    slug: "products",
+    type: "page",
+    locale,
+  });
   if (pageNum && pageNum > 1) {
     const isFilteredCategory = Boolean(category);
     return {
