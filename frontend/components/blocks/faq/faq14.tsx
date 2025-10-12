@@ -11,6 +11,8 @@ import {
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 interface PlusSignsProps extends SVGProps<SVGSVGElement> {
   className?: string;
@@ -67,7 +69,8 @@ export default function FAQ14({
   title,
   description,
   sections,
-}: FAQProps) {
+  locale = FALLBACK_LOCALE,
+}: FAQProps & { locale?: SupportedLocale }) {
   const titleSize = title?.size || "default";
   const titleWeight = title?.weight || "bold";
   const Element = title?.element || "h2";
@@ -121,7 +124,10 @@ export default function FAQ14({
                           {faq.title}
                         </AccordionTrigger>
                         <AccordionContent className="text-base font-medium text-muted-foreground">
-                          <PortableTextRenderer value={faq.body || []} />
+                          <PortableTextRenderer
+                            value={faq.body || []}
+                            locale={locale}
+                          />
                         </AccordionContent>
                       </AccordionItem>
                     ))}

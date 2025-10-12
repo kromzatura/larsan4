@@ -19,13 +19,21 @@ import Icon from "@/components/icon";
 import { Badge } from "@/components/ui/badge";
 import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Gallery3Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "gallery-3" }
->;
+> & { locale?: SupportedLocale };
 
-export default function Gallery3({ title, padding, columns }: Gallery3Props) {
+export default function Gallery3({
+  title,
+  padding,
+  columns,
+  locale = FALLBACK_LOCALE,
+}: Gallery3Props) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
@@ -99,7 +107,7 @@ export default function Gallery3({ title, padding, columns }: Gallery3Props) {
                   className="max-w-[320px] pl-[20px] lg:max-w-[360px]"
                 >
                   <Link
-                    href={item.link?.href || "#"}
+                    href={resolveLinkHref(item.link, locale) || "#"}
                     target={item.link?.target ? "_blank" : undefined}
                     rel={item.link?.target ? "noopener" : undefined}
                     className="group flex flex-col justify-between rounded-xl bg-muted p-6"

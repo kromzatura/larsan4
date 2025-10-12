@@ -7,13 +7,19 @@ import Image from "next/image";
 import Link from "next/link";
 import Icon from "@/components/icon";
 import { buttonVariants } from "@/components/ui/button";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Team6Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "team-6" }
->;
+> & { locale?: SupportedLocale };
 
-export default async function Team6({ padding }: Team6Props) {
+export default async function Team6({
+  padding,
+  locale = FALLBACK_LOCALE,
+}: Team6Props) {
   const team = await fetchSanityTeam();
 
   return (
@@ -58,7 +64,7 @@ export default async function Team6({ padding }: Team6Props) {
                     {member.links.map((link) => (
                       <Link
                         key={link._key}
-                        href={link.href || "#"}
+                        href={resolveLinkHref(link, locale) || "#"}
                         target={link.target ? "_blank" : undefined}
                         rel={link.target ? "noopener" : undefined}
                         className={cn(

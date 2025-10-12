@@ -54,6 +54,13 @@ export default defineType({
       type: "array",
       of: [{ type: "reference", to: { type: "category" } }],
     }),
+    defineField({
+      // should match 'languageField' plugin configuration setting, if customized
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+    }),
   ],
 
   preview: {

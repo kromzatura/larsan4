@@ -5,6 +5,9 @@ import { ContactForm } from "@/components/forms/contact-form";
 import { submitContactForm } from "@/app/actions/contact-form";
 import type { InquiryItem } from "@/lib/inquiry";
 import { clearInquiry } from "@/lib/inquiry";
+import { useLocale } from "@/lib/i18n/locale-context";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
 
 interface ContactInquiryWrapperProps {
   initialInquiryItems: InquiryItem[]; // parsed on server for hydration correctness
@@ -13,6 +16,8 @@ interface ContactInquiryWrapperProps {
 export default function ContactInquiryWrapper({
   initialInquiryItems,
 }: ContactInquiryWrapperProps) {
+  const locale = useLocale();
+  const dict = getDictionary(locale);
   const [items] = useState<InquiryItem[]>(initialInquiryItems);
   const hasItems = items.length > 0;
 
@@ -31,7 +36,7 @@ export default function ContactInquiryWrapper({
           <div className="space-y-3">
             <div>
               <p className="text-sm font-medium">
-                Inquiry Items ({items.length})
+                {dict.contact.inquiry.itemsLabel} ({items.length})
               </p>
             </div>
             <ul className="max-h-48 overflow-auto divide-y rounded border bg-background">
@@ -40,7 +45,10 @@ export default function ContactInquiryWrapper({
                   <p className="font-medium break-all">
                     {item.slug ? (
                       <a
-                        href={`/products/${item.slug}`}
+                        href={buildLocalizedPath(
+                          locale,
+                          `/products/${item.slug || ""}`
+                        )}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:underline"
@@ -52,7 +60,7 @@ export default function ContactInquiryWrapper({
                     )}
                   </p>
                   <p className="mt-0.5 text-xs text-muted-foreground break-all">
-                    SKU: {item.id}
+                    {dict.contact.inquiry.sku}: {item.id}
                   </p>
                 </li>
               ))}

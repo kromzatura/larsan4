@@ -4,13 +4,20 @@ import { PAGE_QUERYResult } from "@/sanity.types";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { Check } from "lucide-react";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Pricing1Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "pricing-1" }
->;
+> & { locale?: SupportedLocale };
 
-export default function Pricing1({ padding, columns }: Pricing1Props) {
+export default function Pricing1({
+  padding,
+  columns,
+  locale = FALLBACK_LOCALE,
+}: Pricing1Props) {
   return (
     <SectionContainer padding={padding}>
       {columns && columns?.length > 0 && (
@@ -73,7 +80,7 @@ export default function Pricing1({ padding, columns }: Pricing1Props) {
                     {column.link?.title && (
                       <div className="mt-auto px-8 pb-8">
                         <Link
-                          href={column.link?.href || "#"}
+                          href={resolveLinkHref(column.link, locale) || "#"}
                           target={column.link?.target ? "_blank" : undefined}
                           rel={column.link?.target ? "noopener" : undefined}
                           className={cn(

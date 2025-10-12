@@ -3,8 +3,15 @@ import { imageQuery } from "./shared/image";
 import { bodyQuery } from "./shared/body";
 import { metaQuery } from "./shared/meta";
 
-export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]{
-  _id,
+export const POST_QUERY = groq`
+  *[
+    _type == "post" &&
+    slug.current == $slug &&
+    (!defined(language) || language in [$lang, $fallbackLang])
+  ]
+  | order((language == $lang) desc, _updatedAt desc)[0]{
+    _id,
+    language,
     title,
     slug,
     image{
@@ -24,10 +31,18 @@ export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]{
     _updatedAt,
     ${metaQuery},
     "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180 ),
-}`;
+  }
+`;
 
-export const POSTS_QUERY = groq`*[_type == "post" && defined(slug)] | order(coalesce(publishedAt, _createdAt) desc)[$offset...$end]{
+export const POSTS_QUERY = groq`
+  *[
+    _type == "post" &&
+    defined(slug) &&
+    (!defined(language) || language in [$lang, $fallbackLang])
+  ]
+  | order((language == $lang) desc, coalesce(publishedAt, _createdAt) desc)[$offset...$end]{
     _id,
+    language,
     _createdAt,
     title,
     slug,
@@ -47,10 +62,18 @@ export const POSTS_QUERY = groq`*[_type == "post" && defined(slug)] | order(coal
       title,
       slug,
     },
-}`;
+  }
+`;
 
-export const POSTS_QUERY_AZ = groq`*[_type == "post" && defined(slug)] | order(title asc)[$offset...$end]{
+export const POSTS_QUERY_AZ = groq`
+  *[
+    _type == "post" &&
+    defined(slug) &&
+    (!defined(language) || language in [$lang, $fallbackLang])
+  ]
+  | order((language == $lang) desc, title asc)[$offset...$end]{
     _id,
+    language,
     _createdAt,
     title,
     slug,
@@ -70,10 +93,18 @@ export const POSTS_QUERY_AZ = groq`*[_type == "post" && defined(slug)] | order(t
       title,
       slug,
     },
-}`;
+  }
+`;
 
-export const POSTS_QUERY_ZA = groq`*[_type == "post" && defined(slug)] | order(title desc)[$offset...$end]{
+export const POSTS_QUERY_ZA = groq`
+  *[
+    _type == "post" &&
+    defined(slug) &&
+    (!defined(language) || language in [$lang, $fallbackLang])
+  ]
+  | order((language == $lang) desc, title desc)[$offset...$end]{
     _id,
+    language,
     _createdAt,
     title,
     slug,
@@ -93,8 +124,24 @@ export const POSTS_QUERY_ZA = groq`*[_type == "post" && defined(slug)] | order(t
       title,
       slug,
     },
-}`;
+  }
+`;
 
-export const POSTS_SLUGS_QUERY = groq`*[_type == "post" && defined(slug)]{slug}`;
+export const POSTS_SLUGS_QUERY = groq`
+  *[
+    _type == "post" &&
+    defined(slug) &&
+    (!defined(language) || language in [$lang, $fallbackLang])
+  ]{
+    slug,
+    language,
+  }
+`;
 
-export const POSTS_COUNT_QUERY = groq`count(*[_type == "post" && defined(slug)])`;
+export const POSTS_COUNT_QUERY = groq`
+  count(*[
+    _type == "post" &&
+    defined(slug) &&
+    (!defined(language) || language in [$lang, $fallbackLang])
+  ])
+`;

@@ -8,6 +8,9 @@ import {
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { Home } from "lucide-react";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type BreadcrumbLinkType = {
   label: string;
@@ -37,15 +40,18 @@ const BreadcrumbCustomItem = ({
 
 export default function Breadcrumbs({
   links,
+  locale = FALLBACK_LOCALE,
 }: {
   links: BreadcrumbLinkType[];
+  locale?: SupportedLocale;
 }) {
+  const homeHref = buildLocalizedPath(locale, "/");
   return (
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
-            <Link href="/" title="Home">
+            <Link href={homeHref} title="Home">
               <Home className="h-4 w-4" />
             </Link>
           </BreadcrumbLink>

@@ -1,9 +1,8 @@
-import { fetchSanitySettings } from "@/sanity/lib/fetch";
-import {
-  getNavigationItems,
-  type NavigationItem,
-  type NavGroup,
-  type NavLink,
+"use client";
+import type {
+  NavigationItem,
+  NavGroup,
+  NavLink,
 } from "@/lib/getNavigationItems";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
@@ -11,16 +10,27 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import PortableTextRenderer from "@/components/portable-text-renderer";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SETTINGS_QUERYResult } from "@/sanity.types";
 
 interface Footer2Props {
   className?: string;
+  locale?: SupportedLocale;
+  settings: SETTINGS_QUERYResult;
+  footerNavItems: NavigationItem[];
+  bottomNavItems: NavigationItem[];
 }
 
-export default async function Footer2({ className }: Footer2Props) {
-  const settings = await fetchSanitySettings();
-  const footerNavItems = await getNavigationItems("footer");
-  const bottomNavItems = await getNavigationItems("footer-bottom");
-
+export default function Footer2({
+  className,
+  locale = FALLBACK_LOCALE,
+  settings,
+  footerNavItems,
+  bottomNavItems,
+}: Footer2Props) {
   const isNavGroup = (item: NavigationItem): item is NavGroup =>
     item._type === "link-group";
   const isNavLink = (item: NavigationItem): item is NavLink =>
@@ -33,7 +43,7 @@ export default async function Footer2({ className }: Footer2Props) {
           <div className="grid grid-cols-2 gap-8 lg:grid-cols-6">
             <div className="col-span-2 mb-8 lg:mb-0">
               <Link
-                href="/"
+                href={buildLocalizedPath(locale, "/")}
                 className="flex items-center gap-2 lg:justify-start"
               >
                 {settings?.logo ? (
@@ -57,11 +67,7 @@ export default async function Footer2({ className }: Footer2Props) {
                     }
                     quality={100}
                   />
-                ) : (
-                  <span className="text-lg font-semibold tracking-tighter">
-                    {settings?.siteName || "Logo"}
-                  </span>
-                )}
+                ) : null}
               </Link>
               <p className="mt-4 font-bold">{settings?.description}</p>
             </div>
@@ -75,7 +81,7 @@ export default async function Footer2({ className }: Footer2Props) {
                       return (
                         <li key={link._key}>
                           <Link
-                            href={link.href || "#"}
+                            href={resolveLinkHref(link, locale) || "#"}
                             target={link.target ? "_blank" : undefined}
                             className={cn(
                               link.buttonVariant === "ghost"
@@ -101,7 +107,10 @@ export default async function Footer2({ className }: Footer2Props) {
               <span>&copy; {new Date().getFullYear()}</span>
               {settings?.copyright && (
                 <span className="[&>p]:!m-0">
-                  <PortableTextRenderer value={settings.copyright} />
+                  <PortableTextRenderer
+                    value={settings.copyright}
+                    locale={locale}
+                  />
                 </span>
               )}
             </div>
@@ -111,7 +120,7 @@ export default async function Footer2({ className }: Footer2Props) {
                 return (
                   <li key={link._key}>
                     <Link
-                      href={link.href || "#"}
+                      href={resolveLinkHref(link, locale) || "#"}
                       target={link.target ? "_blank" : undefined}
                       className={cn(
                         link.buttonVariant === "ghost"

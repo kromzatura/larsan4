@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import Icon from "@/components/icon";
+import type { SupportedLocale } from "@/lib/i18n/config";
 
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -18,7 +19,11 @@ import { Progress } from "@/components/ui/progress";
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Feature12 = Extract<Block, { _type: "feature-12" }>;
 
-export default function Feature12({ padding, tagline, columns }: Feature12) {
+export default function Feature12({
+  padding,
+  tagline,
+  columns,
+}: Feature12 & { locale?: SupportedLocale }) {
   const [api, setApi] = useState<CarouselApi>();
   const columnsLength = columns?.length ?? 0;
   const [progress, setProgress] = useState(() =>
@@ -37,9 +42,7 @@ export default function Feature12({ padding, tagline, columns }: Feature12) {
     }
     api.on("scroll", ({ scrollProgress }) => {
       const minProgress = columnsLength > 0 ? 1 / columnsLength : 0;
-      setProgress(
-        Math.max(minProgress, Math.min(1, scrollProgress())) * 100
-      );
+      setProgress(Math.max(minProgress, Math.min(1, scrollProgress())) * 100);
     });
   }, [api, columnsLength]);
 
@@ -53,9 +56,7 @@ export default function Feature12({ padding, tagline, columns }: Feature12) {
               <div className="mr-2 hidden items-center gap-3 text-xs text-muted-foreground md:flex">
                 <span>01</span>
                 <Progress value={progress} className="h-[2px] w-52" />
-                <span>
-                  {totalSlidesLabel}
-                </span>
+                <span>{totalSlidesLabel}</span>
               </div>
               <CarouselPrevious className="static translate-y-0" />
               <CarouselNext className="static translate-y-0" />

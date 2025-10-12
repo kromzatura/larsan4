@@ -5,6 +5,9 @@ import { PAGE_QUERYResult } from "@/sanity.types";
 import Icon from "@/components/icon";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Feature117 = Extract<Block, { _type: "feature-117" }>;
@@ -15,6 +18,7 @@ type Feature117Card = Extract<
 
 interface Feature117CardProps extends Feature117Card {
   index: number;
+  locale?: SupportedLocale;
 }
 
 export default function Feature117Card({
@@ -23,10 +27,13 @@ export default function Feature117Card({
   image,
   link,
   index,
+  locale = FALLBACK_LOCALE,
 }: Feature117CardProps) {
   return (
     <Link
-      href={link?.href || ""}
+      href={resolveLinkHref(link, locale) || ""}
+      target={link?.target ? "_blank" : undefined}
+      rel={link?.target ? "noopener" : undefined}
       className="group relative overflow-hidden rounded-xl"
     >
       {image && image.asset?._id && (

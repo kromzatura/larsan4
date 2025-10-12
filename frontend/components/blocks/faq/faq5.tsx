@@ -1,13 +1,19 @@
 import SectionContainer from "@/components/ui/section-container";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type FAQProps = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "faq-5" }
 >;
 
-export default function FAQ5({ padding, faqs }: FAQProps) {
+export default function FAQ5({
+  padding,
+  faqs,
+  locale = FALLBACK_LOCALE,
+}: FAQProps & { locale?: SupportedLocale }) {
   return (
     <SectionContainer padding={padding}>
       {faqs && faqs?.length > 0 && (
@@ -22,7 +28,10 @@ export default function FAQ5({ padding, faqs }: FAQProps) {
                   <h3 className="font-medium text-base">{faq.title}</h3>
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  <PortableTextRenderer value={faq.body || []} />
+                  <PortableTextRenderer
+                    value={faq.body || []}
+                    locale={locale}
+                  />
                 </div>
               </div>
             </div>

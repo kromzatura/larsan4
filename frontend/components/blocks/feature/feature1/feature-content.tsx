@@ -6,6 +6,9 @@ import Tag from "@/components/ui/tag";
 import Icon from "@/components/icon";
 import { createElement } from "react";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Feature1 = Extract<Block, { _type: "feature-1" }>;
@@ -21,7 +24,8 @@ export default function FeatureContent({
   title,
   body,
   links,
-}: FeatureContent) {
+  locale = FALLBACK_LOCALE,
+}: FeatureContent & { locale?: SupportedLocale }) {
   return (
     <div
       className={cn(
@@ -53,27 +57,33 @@ export default function FeatureContent({
           )}
         {body && (
           <div className="max-w-xl text-muted-foreground lg:text-lg">
-            <PortableTextRenderer value={body} />
+            <PortableTextRenderer value={body} locale={locale} />
           </div>
         )}
         {links && links.length > 0 && (
           <div className="mt-8 flex w-full flex-col justify-center gap-2 sm:flex-row lg:justify-start">
-            {links.map((link, index) => (
-              <Link
-                key={link._key || index}
-                className={cn(
-                  buttonVariants({
-                    variant: link.buttonVariant || "default",
-                    size: "lg",
-                  })
-                )}
-                href={link.href || "#"}
-                target={link.target ? "_blank" : undefined}
-                rel={link.target ? "noopener" : undefined}
-              >
-                {link.title}
-              </Link>
-            ))}
+            {links.map((link, index) => {
+              const href = resolveLinkHref(link, locale) || "#";
+              const target =
+                link?.isExternal && link?.target ? "_blank" : undefined;
+              const rel = target ? "noopener noreferrer" : undefined;
+              return (
+                <Link
+                  key={link._key || index}
+                  className={cn(
+                    buttonVariants({
+                      variant: link.buttonVariant || "default",
+                      size: "lg",
+                    })
+                  )}
+                  href={href}
+                  target={target}
+                  rel={rel}
+                >
+                  {link.title}
+                </Link>
+              );
+            })}
           </div>
         )}
       </div>

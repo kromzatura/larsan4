@@ -3,6 +3,9 @@ import Link from "next/link";
 import Image from "next/image";
 import Icon from "@/components/icon";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Feature157 = Extract<Block, { _type: "feature-157" }>;
@@ -12,10 +15,16 @@ type Feature157Card = Extract<
   { _type: "feature-157-card" }
 >;
 
-export default function Feature157Card({ image, link }: Feature157Card) {
+export default function Feature157Card({
+  image,
+  link,
+  locale = FALLBACK_LOCALE,
+}: Feature157Card & { locale?: SupportedLocale }) {
   return (
     <Link
-      href={link?.href || ""}
+      href={resolveLinkHref(link, locale) || ""}
+      target={link?.target ? "_blank" : undefined}
+      rel={link?.target ? "noopener" : undefined}
       className="relative flex-auto basis-1 transition-opacity delay-150 duration-300 hover:opacity-80"
     >
       {image && image.asset?._id && (

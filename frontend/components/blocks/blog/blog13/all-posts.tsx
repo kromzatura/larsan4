@@ -8,6 +8,9 @@ import Link from "next/link";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { fetchSanityPosts, fetchSanityPostsCount } from "@/sanity/lib/fetch";
 import Pagination from "@/components/pagination";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type AllPosts13Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -17,96 +20,108 @@ type AllPosts13Props = Extract<
 export default async function AllPosts13({
   padding,
   searchParams,
+  locale = FALLBACK_LOCALE,
 }: AllPosts13Props & {
-  searchParams?: Promise<{
+  searchParams?: {
     page?: string;
-  }>;
+  };
+  locale?: SupportedLocale;
 }) {
   const POSTS_PER_PAGE = 6;
-
-  const currentPage = searchParams
-    ? parseInt((await searchParams).page || "1")
+  const currentPage = searchParams?.page
+    ? parseInt(searchParams.page || "1")
     : 1;
 
   const [posts, totalPosts] = await Promise.all([
     fetchSanityPosts({
       page: currentPage,
       limit: POSTS_PER_PAGE,
+      lang: locale,
     }),
-    fetchSanityPostsCount(),
+    fetchSanityPostsCount({ lang: locale }),
   ]);
 
   const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
 
+  const baseBlogPath = buildLocalizedPath(locale, "/blog");
+
   const createPageUrl = (pageNum: number) => {
     const params = new URLSearchParams();
     if (pageNum > 1) params.set("page", pageNum.toString());
-    return `/blog${params.toString() ? `?${params.toString()}` : ""}`;
+    return `${baseBlogPath}${params.toString() ? `?${params.toString()}` : ""}`;
   };
 
   return (
     <SectionContainer padding={padding}>
       {posts && posts?.length > 0 && (
         <div className="mx-auto grid gap-6 lg:grid-cols-3">
-          {posts.map((post) => (
-            <div key={post._id} className="flex flex-col">
-              <div className="relative">
-                {post.image && post.image.asset?._id && (
-                  <Image
-                    src={urlFor(post.image).url()}
-                    alt={post.image.alt || ""}
-                    placeholder={
-                      post.image?.asset?.metadata?.lqip ? "blur" : undefined
-                    }
-                    blurDataURL={post.image?.asset?.metadata?.lqip || ""}
-                    className="aspect-video w-full rounded-lg object-cover"
-                    sizes="(min-width: 1024px) 33vw, 100vw"
-                    width={post.image.asset?.metadata?.dimensions?.width || 700}
-                    height={
-                      post.image.asset?.metadata?.dimensions?.height || 400
-                    }
-                    quality={100}
-                  />
-                )}
-                {post.categories && post.categories.length > 0 && (
-                  <div className="absolute top-4 right-4 flex flex-wrap gap-2">
-                    {post.categories.map((category) => (
-                      <Link
-                        key={category._id}
-                        href={`/blog/category/${category.slug?.current}`}
-                        className="focus:outline-none"
-                      >
-                        <Badge
-                          variant="secondary"
-                          className="bg-background/70 px-3 py-1 text-sm backdrop-blur-sm hover:bg-background/90"
+          {posts.map((post) => {
+            const postSlug = post.slug?.current ?? "";
+            const postHref = postSlug
+              ? buildLocalizedPath(locale, `/blog/${postSlug}`)
+              : baseBlogPath;
+            return (
+              <div key={post._id} className="flex flex-col">
+                <div className="relative">
+                  {post.image && post.image.asset?._id && (
+                    <Image
+                      src={urlFor(post.image).url()}
+                      alt={post.image.alt || ""}
+                      placeholder={
+                        post.image?.asset?.metadata?.lqip ? "blur" : undefined
+                      }
+                      blurDataURL={post.image?.asset?.metadata?.lqip || ""}
+                      className="aspect-video w-full rounded-lg object-cover"
+                      sizes="(min-width: 1024px) 33vw, 100vw"
+                      width={
+                        post.image.asset?.metadata?.dimensions?.width || 700
+                      }
+                      height={
+                        post.image.asset?.metadata?.dimensions?.height || 400
+                      }
+                      quality={100}
+                    />
+                  )}
+                  {post.categories && post.categories.length > 0 && (
+                    <div className="absolute top-4 right-4 flex flex-wrap gap-2">
+                      {post.categories.map((category) => (
+                        <Link
+                          key={category._id}
+                          href={buildLocalizedPath(
+                            locale,
+                            `/blog/category/${category.slug?.current ?? ""}`
+                          )}
+                          className="focus:outline-none"
                         >
-                          {category.title}
-                        </Badge>
-                      </Link>
-                    ))}
+                          <Badge
+                            variant="secondary"
+                            className="bg-background/70 px-3 py-1 text-sm backdrop-blur-sm hover:bg-background/90"
+                          >
+                            {category.title}
+                          </Badge>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <div className="flex h-full flex-col justify-between p-4">
+                  {post.title && (
+                    <h2 className="mb-5 text-xl font-semibold">{post.title}</h2>
+                  )}
+                  <div className="flex justify-between gap-6 text-sm">
+                    <span className="flex items-center gap-1 text-muted-foreground">
+                      <Calendar className="h-4 w-4" />
+                      <PostDate date={post._createdAt} />
+                    </span>
+                    <Link href={postHref} className="flex items-center gap-1">
+                      Read more
+                      <ChevronRight className="h-full w-3" />
+                    </Link>
                   </div>
-                )}
-              </div>
-              <div className="flex h-full flex-col justify-between p-4">
-                {post.title && (
-                  <h2 className="mb-5 text-xl font-semibold">{post.title}</h2>
-                )}
-                <div className="flex justify-between gap-6 text-sm">
-                  <span className="flex items-center gap-1 text-muted-foreground">
-                    <Calendar className="h-4 w-4" />
-                    <PostDate date={post._createdAt} />
-                  </span>
-                  <Link
-                    href={`/blog/${post.slug?.current}`}
-                    className="flex items-center gap-1"
-                  >
-                    Read more
-                    <ChevronRight className="h-full w-3" />
-                  </Link>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
       <Pagination

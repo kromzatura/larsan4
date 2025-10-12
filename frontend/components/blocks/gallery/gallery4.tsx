@@ -19,17 +19,21 @@ import Icon from "@/components/icon";
 import { Badge } from "@/components/ui/badge";
 import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Gallery4Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "gallery-4" }
->;
+> & { locale?: SupportedLocale };
 
 export default function Gallery4({
   title,
   description,
   padding,
   columns,
+  locale = FALLBACK_LOCALE,
 }: Gallery4Props) {
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [canScrollPrev, setCanScrollPrev] = useState(false);
@@ -111,7 +115,7 @@ export default function Gallery4({
                   className="max-w-[320px] pl-[20px] lg:max-w-[360px]"
                 >
                   <Link
-                    href={item.link?.href || "#"}
+                    href={resolveLinkHref(item.link, locale) || "#"}
                     target={item.link?.target ? "_blank" : undefined}
                     rel={item.link?.target ? "noopener" : undefined}
                     className="group rounded-xl"

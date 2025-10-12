@@ -8,11 +8,18 @@ import { ArrowRight, ChevronRight } from "lucide-react";
 import PostDate from "@/components/post-date";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Blog16 = Extract<Block, { _type: "blog-16" }>;
 
-export default function Blog16({ padding, posts }: Blog16) {
+export default function Blog16({
+  padding,
+  posts,
+  locale = FALLBACK_LOCALE,
+}: Blog16 & { locale?: SupportedLocale }) {
   return (
     <SectionContainer padding={padding}>
       {posts && posts?.length > 0 && (
@@ -47,7 +54,12 @@ export default function Blog16({ padding, posts }: Blog16) {
                   </span>
                   <h3 className="text-2xl font-bold hover:underline lg:text-3xl">
                     {post.title && (
-                      <Link href={`/blog/${post.slug?.current}`}>
+                      <Link
+                        href={buildLocalizedPath(
+                          locale,
+                          `/blog/${post.slug?.current ?? ""}`
+                        )}
+                      >
                         {post.title}
                       </Link>
                     )}
@@ -60,7 +72,14 @@ export default function Blog16({ padding, posts }: Blog16) {
                         return (
                           <Link
                             key={category._id}
-                            href={slug ? `/blog/category/${slug}` : `/blog`}
+                            href={
+                              slug
+                                ? buildLocalizedPath(
+                                    locale,
+                                    `/blog/category/${slug}`
+                                  )
+                                : buildLocalizedPath(locale, "/blog")
+                            }
                             className="flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors hover:bg-muted"
                           >
                             {category.title}
@@ -71,7 +90,10 @@ export default function Blog16({ padding, posts }: Blog16) {
                   </div>
                 </div>
                 <Link
-                  href={`/blog/${post.slug?.current}`}
+                  href={buildLocalizedPath(
+                    locale,
+                    `/blog/${post.slug?.current ?? ""}`
+                  )}
                   className={cn(
                     "ml-auto hidden lg:flex",
                     buttonVariants({ variant: "outline", size: "icon" })

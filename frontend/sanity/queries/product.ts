@@ -3,8 +3,24 @@ import { imageQuery } from "./shared/image";
 import { bodyQuery } from "./shared/body";
 import { metaQuery } from "./shared/meta";
 
-export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug][0]{
+const productCategoryFilter = `
+  _type == "productCategory" &&
+  slug.current == $slug &&
+  (!defined(language) || language in [$lang, $fallbackLang])
+`;
+
+const productCategoryProjection = groq`
   _id,
+  title,
+  slug,
+  language
+`;
+
+const productProjection = groq`
+  _id,
+  language,
+  orderRank,
+  _createdAt,
   title,
   slug,
   specifications[]->{
@@ -24,21 +40,24 @@ export const PRODUCT_QUERY = groq`*[_type == "product" && slug.current == $slug]
     shelfLife,
     allergenInfo,
     productAttributes,
-    certification,
+    certification
   },
   keyFeatures[],
   packagingOptions[]{
-    ...,
+    ...
   },
   image{ ${imageQuery} },
   body[]{ ${bodyQuery} },
   excerpt,
-  categories[]->{ _id, title, slug },
+  categories[]->{
+    ${productCategoryProjection}
+  },
   ${metaQuery}
-}`;
+`;
 
-export const PRODUCTS_QUERY = groq`*[_type == "product" && defined(slug)] | order(orderRank){
+const productListProjection = groq`
   _id,
+  language,
   orderRank,
   _createdAt,
   title,
@@ -47,104 +66,124 @@ export const PRODUCTS_QUERY = groq`*[_type == "product" && defined(slug)] | orde
     _id,
     sku,
     purity,
-    productAttributes,
+    productAttributes
   },
   keyFeatures[],
   excerpt,
   image{ ${imageQuery} },
-  categories[]->{ _id, title, slug }
-}`;
+  categories[]->{
+    ${productCategoryProjection}
+  }
+`;
 
-export const PRODUCTS_SLUGS_QUERY = groq`*[_type == "product" && defined(slug)]{ slug }`;
+export const PRODUCT_QUERY = groq`
+  *[
+    _type == "product" &&
+    slug.current == $slug &&
+    (!defined(language) || language in [$lang, $fallbackLang])
+  ]
+  | order((language == $lang) desc, _updatedAt desc)[0]{
+    ${productProjection}
+  }
+`;
 
-export const PRODUCTS_COUNT_QUERY = groq`count(*[_type == "product" && defined(slug)])`;
+export const PRODUCTS_QUERY = groq`
+  *[
+    _type == "product" &&
+    defined(slug) &&
+    (!defined(language) || language in [$lang, $fallbackLang])
+  ]
+  | order((language == $lang) desc, orderRank)[$offset...$end]{
+    ${productListProjection}
+  }
+`;
 
-export const PRODUCT_CATEGORIES_QUERY = groq`*[_type == "productCategory" && defined(slug)] | order(orderRank){
-  _id,
-  title,
-  slug
-}`;
+export const PRODUCTS_SLUGS_QUERY = groq`
+  *[
+    _type == "product" &&
+    defined(slug) &&
+    (!defined(language) || language in [$lang, $fallbackLang])
+  ]{
+    slug,
+    language,
+  }
+`;
 
-export const PRODUCT_CATEGORY_BY_SLUG_QUERY = groq`*[_type == "productCategory" && slug.current == $slug][0]{
-  _id,
-  _type,
-  title,
-  slug,
-  description,
-  ${metaQuery}
-}`;
+export const PRODUCTS_COUNT_QUERY = groq`
+  count(*[
+    _type == "product" &&
+    defined(slug) &&
+    (!defined(language) || language in [$lang, $fallbackLang])
+  ])
+`;
 
-export const PRODUCTS_BY_CATEGORY_QUERY = groq`*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(orderRank){
-  _id,
-  orderRank,
-  _createdAt,
-  title,
-  slug,
-  specifications[]->{
+export const PRODUCT_CATEGORIES_QUERY = groq`
+  *[
+    _type == "productCategory" &&
+    defined(slug) &&
+    (!defined(language) || language in [$lang, $fallbackLang])
+  ]
+  | order((language == $lang) desc, orderRank){
     _id,
-    sku,
-    purity,
-    productAttributes,
-  },
-  keyFeatures[],
-  excerpt,
-  image{ ${imageQuery} },
-  categories[]->{ _id, title, slug }
-}`;
+    title,
+    slug,
+    language,
+  }
+`;
+
+export const PRODUCT_CATEGORY_BY_SLUG_QUERY = groq`
+  *[
+    _type == "productCategory" &&
+    slug.current == $slug &&
+    (!defined(language) || language in [$lang, $fallbackLang])
+  ]
+  | order((language == $lang) desc, _updatedAt desc)[0]{
+    _id,
+    _type,
+    language,
+    title,
+    slug,
+    description,
+    ${metaQuery}
+  }
+`;
+
+const productsByCategoryFilter = groq`
+  _type == "product" &&
+  defined(slug) &&
+  (!defined(language) || language in [$lang, $fallbackLang]) &&
+  references(*[${productCategoryFilter}]._id)
+`;
+
+export const PRODUCTS_BY_CATEGORY_QUERY = groq`
+  *[${productsByCategoryFilter}]
+  | order((language == $lang) desc, orderRank)[$offset...$end]{
+    ${productListProjection}
+  }
+`;
 
 // Explicit variants to avoid brittle string replacement when ordering
-export const PRODUCTS_BY_CATEGORY_QUERY_NEWEST = groq`*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(_createdAt desc){
-  _id,
-  orderRank,
-  _createdAt,
-  title,
-  slug,
-  specifications[]->{
-    _id,
-    sku,
-    purity,
-    productAttributes,
-  },
-  keyFeatures[],
-  excerpt,
-  image{ ${imageQuery} },
-  categories[]->{ _id, title, slug }
-}`;
+export const PRODUCTS_BY_CATEGORY_QUERY_NEWEST = groq`
+  *[${productsByCategoryFilter}]
+  | order((language == $lang) desc, _createdAt desc)[$offset...$end]{
+    ${productListProjection}
+  }
+`;
 
-export const PRODUCTS_BY_CATEGORY_QUERY_AZ = groq`*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(title asc){
-  _id,
-  orderRank,
-  _createdAt,
-  title,
-  slug,
-  specifications[]->{
-    _id,
-    sku,
-    purity,
-    productAttributes,
-  },
-  keyFeatures[],
-  excerpt,
-  image{ ${imageQuery} },
-  categories[]->{ _id, title, slug }
-}`;
+export const PRODUCTS_BY_CATEGORY_QUERY_AZ = groq`
+  *[${productsByCategoryFilter}]
+  | order((language == $lang) desc, title asc)[$offset...$end]{
+    ${productListProjection}
+  }
+`;
 
-export const PRODUCTS_BY_CATEGORY_QUERY_ZA = groq`*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)] | order(title desc){
-  _id,
-  orderRank,
-  _createdAt,
-  title,
-  slug,
-  specifications[]->{
-    _id,
-    sku,
-    purity,
-    productAttributes,
-  },
-  keyFeatures[],
-  excerpt,
-  image{ ${imageQuery} },
-  categories[]->{ _id, title, slug }
-}`;
+export const PRODUCTS_BY_CATEGORY_QUERY_ZA = groq`
+  *[${productsByCategoryFilter}]
+  | order((language == $lang) desc, title desc)[$offset...$end]{
+    ${productListProjection}
+  }
+`;
 
-export const PRODUCTS_COUNT_BY_CATEGORY_QUERY = groq`count(*[_type == "product" && references(*[_type == "productCategory" && slug.current == $slug]._id)])`;
+export const PRODUCTS_COUNT_BY_CATEGORY_QUERY = groq`
+  count(*[${productsByCategoryFilter}])
+`;

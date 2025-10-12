@@ -7,6 +7,8 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { presentationTool } from "sanity/presentation";
 import { media } from "sanity-plugin-media";
+import { documentInternationalization } from "@sanity/document-internationalization";
+import { assist } from "@sanity/assist";
 
 import { schema } from "./schema";
 import { resolve } from "./presentation/resolve";
@@ -67,5 +69,40 @@ export default defineConfig({
     visionTool({ defaultApiVersion: apiVersion }),
     codeInput(),
     media(),
+    documentInternationalization({
+      // Required configuration
+      supportedLanguages: [
+        { id: "en", title: "English" },
+        { id: "nl", title: "Dutch" },
+      ],
+      schemaTypes: [
+        "settings",
+        "contact",
+        "post",
+        "category",
+        "banner",
+        "changelog",
+        "faq",
+        "page",
+        "product",
+        "productCategory",
+        "specification",
+        "navigation",
+        "author",
+        "team",
+      ],
+      apiVersion: "2025-02-19",
+    }),
+    assist({
+      // Showing default values
+      assist: {
+        localeSettings: () => Intl.DateTimeFormat().resolvedOptions(),
+        maxPathDepth: 4,
+        temperature: 0.3,
+      },
+      translate: {
+        /* see sections about document and field translation */
+      },
+    }),
   ],
 });

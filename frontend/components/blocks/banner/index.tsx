@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { BANNER_QUERYResult } from "@/sanity.types";
+import type { SupportedLocale } from "@/lib/i18n/config";
 
 type BannerData = BANNER_QUERYResult[0];
 
@@ -9,12 +10,14 @@ interface BannerProps {
   data: BannerData;
   component: React.ComponentType<BannerUIProps>;
   bannerId?: string; // Optional ID for different banner types
+  locale?: SupportedLocale;
 }
 
 export interface BannerUIProps {
   data: BannerData;
   isVisible: boolean;
   onClose: () => void;
+  locale?: SupportedLocale;
 }
 
 // Create a content-based version identifier for the banner
@@ -40,6 +43,7 @@ export default function Banner({
   data,
   component: UIComponent,
   bannerId = "banner",
+  locale,
 }: BannerProps) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -95,6 +99,11 @@ export default function Banner({
   };
 
   return (
-    <UIComponent data={data} isVisible={isVisible} onClose={handleClose} />
+    <UIComponent
+      data={data}
+      isVisible={isVisible}
+      onClose={handleClose}
+      locale={locale}
+    />
   );
 }

@@ -4,6 +4,9 @@ import Image from "next/image";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import Icon from "@/components/icon";
 import { cn } from "@/lib/utils";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Feature202 = Extract<Block, { _type: "feature-202" }>;
@@ -14,6 +17,7 @@ type Feature202Card = Extract<
 
 interface Feature202CardProps extends Feature202Card {
   index: number;
+  locale?: SupportedLocale;
 }
 
 export default function Feature202Card({
@@ -23,10 +27,12 @@ export default function Feature202Card({
   image,
   link,
   index,
+  locale = FALLBACK_LOCALE,
 }: Feature202CardProps) {
+  const href = resolveLinkHref(link, locale) || "#";
   return (
     <Link
-      href={link?.href || ""}
+      href={href}
       className={cn(
         "group relative isolate h-80 overflow-hidden rounded-2xl border border-border transition-transform duration-300 hover:-translate-y-0.5",
         (index % 4 === 0 || index % 4 === 3) && "lg:col-span-2"

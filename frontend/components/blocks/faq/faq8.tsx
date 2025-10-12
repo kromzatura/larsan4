@@ -7,13 +7,19 @@ import {
 } from "@/components/ui/accordion";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type FAQProps = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "faq-8" }
 >;
 
-export default function FAQ8({ padding, sections }: FAQProps) {
+export default function FAQ8({
+  padding,
+  sections,
+  locale = FALLBACK_LOCALE,
+}: FAQProps & { locale?: SupportedLocale }) {
   return (
     <SectionContainer padding={padding}>
       {sections && sections?.length > 0 && (
@@ -31,7 +37,10 @@ export default function FAQ8({ padding, sections }: FAQProps) {
                       {faq.title}
                     </AccordionTrigger>
                     <AccordionContent>
-                      <PortableTextRenderer value={faq.body || []} />
+                      <PortableTextRenderer
+                        value={faq.body || []}
+                        locale={locale}
+                      />
                     </AccordionContent>
                   </AccordionItem>
                 ))}

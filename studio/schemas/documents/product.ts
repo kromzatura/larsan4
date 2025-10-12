@@ -132,6 +132,13 @@ export default defineType({
       of: [{ type: "reference", to: { type: "productCategory" } }],
       group: "settings",
     }),
+    defineField({
+      // should match 'languageField' plugin configuration setting, if customized
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+    }),
     meta,
     // Manual ordering support
     orderRankField({ type: "product" }),

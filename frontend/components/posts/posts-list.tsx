@@ -5,6 +5,9 @@ import { cn } from "@/lib/utils";
 import Pagination from "@/components/pagination";
 import PostDate from "@/components/post-date";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 export type PostsListItem = {
   _id: string;
@@ -32,6 +35,7 @@ export type PostsListProps = {
   baseSearchParams?: string;
   activeCategorySlug?: string;
   className?: string;
+  locale?: SupportedLocale;
 };
 
 export default function PostsList({
@@ -42,6 +46,7 @@ export default function PostsList({
   baseSearchParams,
   activeCategorySlug,
   className,
+  locale = FALLBACK_LOCALE,
 }: PostsListProps) {
   const createPageUrl = (pageNum: number) => {
     const qp = new URLSearchParams(baseSearchParams || "");
@@ -85,14 +90,19 @@ export default function PostsList({
             </span>
             <h3 className="text-2xl font-bold hover:underline lg:text-3xl">
               {post.title && (
-                <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                <Link href={buildLocalizedPath(locale, `/blog/${post.slug}`)}>
+                  {post.title}
+                </Link>
               )}
             </h3>
             {post.categories && post.categories.length > 0 && (
               <div className="mt-5 flex flex-wrap gap-2">
                 {post.categories.map((category) => {
                   const href = category.slug?.current
-                    ? `/blog/category/${category.slug.current}`
+                    ? buildLocalizedPath(
+                        locale,
+                        `/blog/category/${category.slug.current}`
+                      )
                     : undefined;
                   const key = category._id || `${post._id}-${category.title}`;
                   const isActive =
@@ -127,7 +137,7 @@ export default function PostsList({
             )}
           </div>
           <Link
-            href={`/blog/${post.slug}`}
+            href={buildLocalizedPath(locale, `/blog/${post.slug}`)}
             className="ml-auto hidden items-center gap-2 text-sm text-muted-foreground hover:text-foreground lg:flex"
           >
             Read more

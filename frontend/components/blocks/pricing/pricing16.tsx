@@ -12,17 +12,21 @@ import Link from "next/link";
 import Tag from "@/components/ui/tag";
 import { buttonVariants } from "@/components/ui/button";
 import { CheckCircle2, Zap } from "lucide-react";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Pricing16Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "pricing-16" }
->;
+> & { locale?: SupportedLocale };
 
 export default function Pricing16({
   title,
   tag,
   padding,
   columns,
+  locale = FALLBACK_LOCALE,
 }: Pricing16Props) {
   const [isMonthly, setIsMonthly] = useState(true);
 
@@ -132,7 +136,7 @@ export default function Pricing16({
                     </p>
                     {column.link?.title && (
                       <Link
-                        href={column.link?.href || "#"}
+                        href={resolveLinkHref(column.link, locale) || "#"}
                         target={column.link?.target ? "_blank" : undefined}
                         rel={column.link?.target ? "noopener" : undefined}
                         className={cn(

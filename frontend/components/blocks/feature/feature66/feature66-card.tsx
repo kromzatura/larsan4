@@ -2,6 +2,9 @@ import { urlFor } from "@/sanity/lib/image";
 import Link from "next/link";
 import Image from "next/image";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Feature66 = Extract<Block, { _type: "feature-66" }>;
@@ -11,9 +14,19 @@ type Feature66Card = Extract<
   { _type: "feature-66-card" }
 >;
 
-export default function Feature66Card({ logo, image, link }: Feature66Card) {
+export default function Feature66Card({
+  logo,
+  image,
+  link,
+  locale = FALLBACK_LOCALE,
+}: Feature66Card & { locale?: SupportedLocale }) {
   return (
-    <Link href={link?.href || ""} className="h-full">
+    <Link
+      href={resolveLinkHref(link, locale) || ""}
+      target={link?.target ? "_blank" : undefined}
+      rel={link?.target ? "noopener" : undefined}
+      className="h-full"
+    >
       <div className="group relative h-full min-h-[27rem] max-w-full overflow-hidden rounded-xl bg-red-100 md:aspect-[5/4] lg:aspect-[16/9]">
         {image && image.asset?._id && (
           <Image

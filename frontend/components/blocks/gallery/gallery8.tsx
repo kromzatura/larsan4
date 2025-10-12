@@ -18,13 +18,21 @@ import { urlFor } from "@/sanity/lib/image";
 import { cn } from "@/lib/utils";
 import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Gallery8Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "gallery-8" }
->;
+> & { locale?: SupportedLocale };
 
-export default function Gallery8({ padding, link, columns }: Gallery8Props) {
+export default function Gallery8({
+  padding,
+  link,
+  columns,
+  locale = FALLBACK_LOCALE,
+}: Gallery8Props) {
   return (
     <SectionContainer padding={padding} className="overflow-hidden">
       {columns && columns.length > 0 && (
@@ -40,7 +48,7 @@ export default function Gallery8({ padding, link, columns }: Gallery8Props) {
                       </div>
                     )}
                     <Link
-                      href={column.link?.href || "#"}
+                      href={resolveLinkHref(column.link, locale) || "#"}
                       target={column.link?.target ? "_blank" : undefined}
                       rel={column.link?.target ? "noopener" : undefined}
                       className="group flex items-center gap-2 font-semibold"
@@ -54,7 +62,7 @@ export default function Gallery8({ padding, link, columns }: Gallery8Props) {
               ))}
               {link?.title && (
                 <Link
-                  href={link?.href || "#"}
+                  href={resolveLinkHref(link, locale) || "#"}
                   target={link?.target ? "_blank" : undefined}
                   rel={link?.target ? "noopener" : undefined}
                   className="group flex items-center gap-2 font-semibold"
@@ -75,7 +83,7 @@ export default function Gallery8({ padding, link, columns }: Gallery8Props) {
                     key={column._key}
                   >
                     <Link
-                      href={column.link?.href || "#"}
+                      href={resolveLinkHref(column.link, locale) || "#"}
                       target={column.link?.target ? "_blank" : undefined}
                       rel={column.link?.target ? "noopener" : undefined}
                       className="block h-full"

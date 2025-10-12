@@ -9,11 +9,15 @@ import Icon from "@/components/icon";
 import { ArrowDown } from "lucide-react";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Hero174Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "hero-174" }
->;
+> & {
+  locale?: SupportedLocale;
+};
 
 const Hero174 = ({
   backgroundImage,
@@ -21,6 +25,7 @@ const Hero174 = ({
   body,
   links,
   tag,
+  locale = FALLBACK_LOCALE,
 }: Hero174Props) => {
   return (
     <section className="h-svh max-h-[1400px] min-h-[600px] w-full -mt-10 relative after:absolute after:inset-0 after:block after:size-full after:bg-zinc-950/50 after:content-['']">
@@ -45,14 +50,15 @@ const Hero174 = ({
             )}
             {body && (
               <div className="text-center text-lg text-balance text-white md:text-2xl">
-                <PortableTextRenderer value={body} />
+                <PortableTextRenderer value={body} locale={locale} />
               </div>
             )}
             {links && links.length > 0 && (
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 {links.map((link) => {
-                  const href = resolveLinkHref(link);
-                  const target = link?.isExternal && link?.target ? "_blank" : undefined;
+                  const href = resolveLinkHref(link, locale);
+                  const target =
+                    link?.isExternal && link?.target ? "_blank" : undefined;
                   const rel = target ? "noopener noreferrer" : undefined;
 
                   return (

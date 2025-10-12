@@ -15,11 +15,14 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { CheckIcon, Info, MinusIcon } from "lucide-react";
 import { Fragment, useState } from "react";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Pricing9Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "pricing-9" }
->;
+> & { locale?: SupportedLocale };
 
 type TierName = "free" | "pro" | "premium";
 
@@ -27,6 +30,7 @@ export default function Pricing9({
   padding,
   columns,
   sections,
+  locale = FALLBACK_LOCALE,
 }: Pricing9Props) {
   const [isAnnual, setIsAnnual] = useState(false);
   return (
@@ -69,7 +73,7 @@ export default function Pricing9({
               </CardHeader>
               {column.link?.title && (
                 <Link
-                  href={column.link?.href || "#"}
+                  href={resolveLinkHref(column.link, locale) || "#"}
                   target={column.link?.target ? "_blank" : undefined}
                   rel={column.link?.target ? "noopener" : undefined}
                   className={cn(
@@ -194,7 +198,7 @@ export default function Pricing9({
                       </div>
                       {column.link?.title && (
                         <Link
-                          href={column.link?.href || "#"}
+                          href={resolveLinkHref(column.link, locale) || "#"}
                           target={column.link?.target ? "_blank" : undefined}
                           rel={column.link?.target ? "noopener" : undefined}
                           className={cn(

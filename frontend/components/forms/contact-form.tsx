@@ -15,6 +15,8 @@ import {
   useTransition,
 } from "react";
 import Script from "next/script";
+import { useLocale } from "@/lib/i18n/locale-context";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 import {
   contactFormSchema,
   type ContactFormValues,
@@ -32,6 +34,8 @@ export function ContactForm({
   children,
   onSuccess,
 }: ContactFormProps) {
+  const locale = useLocale();
+  const dict = getDictionary(locale);
   const [isPending, startTransition] = useTransition();
   const [formState, setFormState] = useState<ContactFormState>({});
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
@@ -45,7 +49,11 @@ export function ContactForm({
     ready: (cb: () => void) => void;
     render: (
       container: HTMLElement,
-      params: { sitekey: string; size: "invisible"; callback: (token: string) => void }
+      params: {
+        sitekey: string;
+        size: "invisible";
+        callback: (token: string) => void;
+      }
     ) => number;
     reset: (id?: number) => void;
     execute: (id?: number) => void;
@@ -101,18 +109,14 @@ export function ContactForm({
       const durationMs = Math.max(0, Date.now() - mountTime);
       formData.set("durationMs", String(durationMs));
 
-      if (
-        siteKey &&
-        typeof window !== "undefined" &&
-        getGrecaptcha()
-      ) {
+      if (siteKey && typeof window !== "undefined" && getGrecaptcha()) {
         const grecaptcha = getGrecaptcha();
         if (!siteKey || !grecaptcha) {
-          setFormState({ error: "Captcha not ready. Please try again." });
+          setFormState({ error: dict.contact.form.captchaNotReady });
           return;
         }
         if (widgetIdRef.current == null) {
-          setFormState({ error: "Captcha not ready. Please try again." });
+          setFormState({ error: dict.contact.form.captchaNotReady });
           return;
         }
         const token = await new Promise<string>((resolve) => {
@@ -124,9 +128,7 @@ export function ContactForm({
           }
         });
         if (!token) {
-          setFormState({
-            error: "Captcha verification failed. Please try again.",
-          });
+          setFormState({ error: dict.contact.form.captchaFailed });
           return;
         }
         formData.set("g-recaptcha-response", token);
@@ -180,7 +182,7 @@ export function ContactForm({
         </div>
         {formState.success && (
           <div className="p-4 border border-green-500 bg-green-50 text-green-700 rounded-md">
-            Message transmitted successfully
+            {dict.contact.form.success}
           </div>
         )}
         {formState.error && (
@@ -191,13 +193,14 @@ export function ContactForm({
         <div className="grid gap-4 md:grid-cols-2">
           <div className="grid w-full items-center gap-1.5">
             <FormLabel htmlFor="firstName">
-              First Name<sup className="ml-0.5">*</sup>
+              {dict.contact.form.firstNameLabel}
+              <sup className="ml-0.5">*</sup>
             </FormLabel>
             <FormControl>
               <Input
                 type="text"
                 id="firstName"
-                placeholder="Your First Name"
+                placeholder={dict.contact.form.firstNamePlaceholder}
                 {...form.register("firstName")}
               />
             </FormControl>
@@ -209,13 +212,14 @@ export function ContactForm({
           </div>
           <div className="grid w-full items-center gap-1.5">
             <FormLabel htmlFor="lastName">
-              Last Name<sup className="ml-0.5">*</sup>
+              {dict.contact.form.lastNameLabel}
+              <sup className="ml-0.5">*</sup>
             </FormLabel>
             <FormControl>
               <Input
                 type="text"
                 id="lastName"
-                placeholder="Your Last Name"
+                placeholder={dict.contact.form.lastNamePlaceholder}
                 {...form.register("lastName")}
               />
             </FormControl>
@@ -228,13 +232,14 @@ export function ContactForm({
         </div>
         <div className="grid w-full items-center gap-1.5">
           <FormLabel htmlFor="email">
-            Email Address<sup className="ml-0.5">*</sup>
+            {dict.contact.form.emailLabel}
+            <sup className="ml-0.5">*</sup>
           </FormLabel>
           <FormControl>
             <Input
               type="email"
               id="email"
-              placeholder="Your Email"
+              placeholder={dict.contact.form.emailPlaceholder}
               {...form.register("email")}
             />
           </FormControl>
@@ -247,11 +252,12 @@ export function ContactForm({
 
         <div className="grid w-full gap-1.5">
           <FormLabel htmlFor="message">
-            Your Message<sup className="ml-0.5">*</sup>
+            {dict.contact.form.messageLabel}
+            <sup className="ml-0.5">*</sup>
           </FormLabel>
           <FormControl>
             <Textarea
-              placeholder="How can we help you?"
+              placeholder={dict.contact.form.messagePlaceholder}
               id="message"
               {...form.register("message")}
             />
@@ -268,7 +274,7 @@ export function ContactForm({
           </div>
         )}
         <Button className="w-full" type="submit" disabled={isPending}>
-          {isPending ? "Sending..." : "Submit"}
+          {isPending ? dict.contact.form.sending : dict.contact.form.submit}
         </Button>
       </form>
     </Form>

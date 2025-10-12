@@ -1,5 +1,5 @@
-import { getNavigationItems } from "@/lib/getNavigationItems";
-import { fetchSanitySettings } from "@/sanity/lib/fetch";
+"use client";
+import type { NavigationItem as NavItemType } from "@/lib/getNavigationItems";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,6 +12,10 @@ import type {
 } from "@/sanity.types";
 import { cn } from "@/lib/utils";
 import { DialogClose } from "@radix-ui/react-dialog";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { buildLocalizedPath } from "@/lib/i18n/routing";
+import { resolveLinkHref } from "@/lib/resolveHref";
 
 import {
   Accordion,
@@ -37,6 +41,9 @@ import {
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import InquiryBadge from "@/components/inquiry/inquiry-badge";
+import LocaleSwitcher from "@/components/header/locale-switcher";
+import { Suspense } from "react";
+import type { SETTINGS_QUERYResult } from "@/sanity.types";
 
 type NavigationItem = (SanityLink | SanityLinkGroup | SanityLinkIcon) & {
   _key: string;
@@ -44,6 +51,10 @@ type NavigationItem = (SanityLink | SanityLinkGroup | SanityLinkIcon) & {
 
 interface Navbar1Props {
   className?: string;
+  locale?: SupportedLocale;
+  settings: SETTINGS_QUERYResult;
+  navigationItems: NavItemType[];
+  actionItems: NavItemType[];
 }
 
 const isLinkGroup = (
@@ -52,10 +63,14 @@ const isLinkGroup = (
   return item._type === "link-group";
 };
 
-export default async function Navbar1({ className }: Navbar1Props) {
-  const settings = await fetchSanitySettings();
-  const navigationItems = await getNavigationItems("header");
-  const actionItems = await getNavigationItems("header-action");
+export default function Navbar1({
+  className,
+  locale = FALLBACK_LOCALE,
+  settings,
+  navigationItems,
+  actionItems,
+}: Navbar1Props) {
+  // All data is provided by the server shell for performance and correctness
 
   const renderMenuItem = (item: NavigationItem) => {
     if (isLinkGroup(item)) {
@@ -65,7 +80,7 @@ export default async function Navbar1({ className }: Navbar1Props) {
           <NavigationMenuContent className="bg-popover text-popover-foreground min-w-[320px]">
             {item.links?.map((subItem) => (
               <NavigationMenuLink asChild key={subItem._key}>
-                <SubMenuLink item={subItem} />
+                <SubMenuLink item={subItem} locale={locale} />
               </NavigationMenuLink>
             ))}
           </NavigationMenuContent>
@@ -84,7 +99,7 @@ export default async function Navbar1({ className }: Navbar1Props) {
               : buttonVariants({ variant: item.buttonVariant, size: "default" })
           )}
         >
-          <Link href={item.href || "#"}>{item.title}</Link>
+          <Link href={resolveLinkHref(item, locale) || "#"}>{item.title}</Link>
         </NavigationMenuLink>
       </NavigationMenuItem>
     );
@@ -105,7 +120,7 @@ export default async function Navbar1({ className }: Navbar1Props) {
             <div className="flex flex-col gap-4">
               {item.links?.map((subItem) => (
                 <DialogClose asChild key={subItem._key}>
-                  <SubMenuLink item={subItem} />
+                  <SubMenuLink item={subItem} locale={locale} />
                 </DialogClose>
               ))}
             </div>
@@ -117,7 +132,7 @@ export default async function Navbar1({ className }: Navbar1Props) {
     return (
       <Link
         key={item._key}
-        href={item.href || "#"}
+        href={resolveLinkHref(item, locale) || "#"}
         target={item.target ? "_blank" : undefined}
         className={cn(
           item.buttonVariant === "ghost"
@@ -139,7 +154,10 @@ export default async function Navbar1({ className }: Navbar1Props) {
         <nav className="hidden justify-between lg:flex items-center">
           <div className="flex items-center gap-6">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
+            <Link
+              href={buildLocalizedPath(locale, "/")}
+              className="flex items-center gap-2"
+            >
               {settings?.logo ? (
                 <Image
                   src={urlFor(settings.logo).url()}
@@ -159,11 +177,7 @@ export default async function Navbar1({ className }: Navbar1Props) {
                   blurDataURL={settings.logo.asset?.metadata?.lqip || undefined}
                   quality={100}
                 />
-              ) : (
-                <span className="text-lg font-semibold tracking-tighter">
-                  {settings?.siteName || "Logo"}
-                </span>
-              )}
+              ) : null}
             </Link>
             <div className="flex items-center">
               <NavigationMenu>
@@ -175,11 +189,19 @@ export default async function Navbar1({ className }: Navbar1Props) {
               </NavigationMenu>
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2">
             {actionItems?.map((item) => (
-              <LinkButton key={item._key} size="sm" link={item as SanityLink} />
+              <LinkButton
+                key={item._key}
+                size="sm"
+                link={item as SanityLink}
+                locale={locale}
+              />
             ))}
-            <InquiryBadge />
+            <InquiryBadge locale={locale} />
+            <Suspense fallback={null}>
+              <LocaleSwitcher locale={locale} className="ml-2" />
+            </Suspense>
           </div>
         </nav>
 
@@ -187,7 +209,10 @@ export default async function Navbar1({ className }: Navbar1Props) {
         <div className="block lg:hidden">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
+            <Link
+              href={buildLocalizedPath(locale, "/")}
+              className="flex items-center gap-2"
+            >
               {settings?.logo ? (
                 <Image
                   src={urlFor(settings.logo).url()}
@@ -207,11 +232,7 @@ export default async function Navbar1({ className }: Navbar1Props) {
                   blurDataURL={settings.logo.asset?.metadata?.lqip || undefined}
                   quality={100}
                 />
-              ) : (
-                <span className="text-lg font-semibold tracking-tighter">
-                  {settings?.siteName || "Logo"}
-                </span>
-              )}
+              ) : null}
             </Link>
             <Sheet>
               <SheetTrigger asChild>
@@ -222,7 +243,10 @@ export default async function Navbar1({ className }: Navbar1Props) {
               <SheetContent className="overflow-y-auto">
                 <SheetHeader>
                   <SheetTitle>
-                    <Link href="/" className="flex items-center gap-2">
+                    <Link
+                      href={buildLocalizedPath(locale, "/")}
+                      className="flex items-center gap-2"
+                    >
                       {settings?.logo ? (
                         <Image
                           src={urlFor(settings.logo).url()}
@@ -246,11 +270,7 @@ export default async function Navbar1({ className }: Navbar1Props) {
                           }
                           quality={100}
                         />
-                      ) : (
-                        <span className="text-lg font-semibold tracking-tighter">
-                          {settings?.siteName || "Logo"}
-                        </span>
-                      )}
+                      ) : null}
                     </Link>
                   </SheetTitle>
                 </SheetHeader>
@@ -266,9 +286,19 @@ export default async function Navbar1({ className }: Navbar1Props) {
                   </Accordion>
                   <div className="flex flex-col gap-3">
                     {actionItems?.map((item) => (
-                      <LinkButton key={item._key} link={item as SanityLink} />
+                      <LinkButton
+                        key={item._key}
+                        link={item as SanityLink}
+                        locale={locale}
+                      />
                     ))}
-                    <InquiryBadge className="w-full justify-center" />
+                    <InquiryBadge
+                      className="w-full justify-center"
+                      locale={locale}
+                    />
+                    <Suspense fallback={null}>
+                      <LocaleSwitcher locale={locale} variant="menu" />
+                    </Suspense>
                   </div>
                 </div>
               </SheetContent>
@@ -280,10 +310,16 @@ export default async function Navbar1({ className }: Navbar1Props) {
   );
 }
 
-const SubMenuLink = ({ item }: { item: SanityLink | SanityLinkIcon }) => {
+const SubMenuLink = ({
+  item,
+  locale = FALLBACK_LOCALE,
+}: {
+  item: SanityLink | SanityLinkIcon;
+  locale?: SupportedLocale;
+}) => {
   return (
     <Link
-      href={item.href || "#"}
+      href={resolveLinkHref(item, locale) || "#"}
       className="flex w-full flex-row gap-4 rounded-md p-3 text-sm font-medium no-underline transition-colors hover:bg-accent hover:text-accent-foreground"
       target={item.target ? "_blank" : undefined}
     >

@@ -2,6 +2,7 @@ import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import Feature15Card from "./feature15-card";
 import { cn } from "@/lib/utils";
+import type { SupportedLocale } from "@/lib/i18n/config";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Feature15 = Extract<Block, { _type: "feature-15" }>;
@@ -19,7 +20,7 @@ export default function Feature15({
   padding,
   columns,
   gridColumns,
-}: Feature15) {
+}: Feature15 & { locale?: SupportedLocale }) {
   return (
     <SectionContainer padding={padding}>
       {columns && columns?.length > 0 && (
@@ -31,7 +32,9 @@ export default function Feature15({
           )}
         >
           {columns?.map((column) => {
-            const Component = componentMap[column._type] as React.ComponentType<typeof column>;
+            const Component = componentMap[column._type] as React.ComponentType<
+              typeof column
+            >;
             if (!Component) {
               console.warn(
                 `No component implemented for column type: ${column._type}`

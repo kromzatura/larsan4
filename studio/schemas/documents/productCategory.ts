@@ -33,6 +33,13 @@ export default defineType({
       options: { source: "title", maxLength: 96 },
       validation: (Rule) => Rule.required().error("Slug is required"),
     }),
+    defineField({
+      // should match 'languageField' plugin configuration setting, if customized
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
+    }),
     meta,
     orderRankField({ type: "productCategory" }),
   ],

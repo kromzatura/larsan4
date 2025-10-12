@@ -5,13 +5,22 @@ import PortableTextRenderer from "@/components/portable-text-renderer";
 import Icon from "@/components/icon";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { Fragment } from "react";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Hero57Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "hero-57" }
->;
+> & { locale?: SupportedLocale };
 
-const Hero57 = ({ title, body, links, tags }: Hero57Props) => {
+const Hero57 = ({
+  title,
+  body,
+  links,
+  tags,
+  locale = FALLBACK_LOCALE,
+}: Hero57Props) => {
   return (
     <section className="py-32">
       <div className="relative container">
@@ -57,39 +66,45 @@ const Hero57 = ({ title, body, links, tags }: Hero57Props) => {
         </h1>
         {body && (
           <div className="mx-auto mb-10 max-w-screen-md text-center font-medium text-muted-foreground md:text-xl">
-            <PortableTextRenderer value={body} />
+            <PortableTextRenderer value={body} locale={locale} />
           </div>
         )}
         {links && links.length > 0 && (
           <div className="flex flex-col items-center justify-center gap-3 pt-3 pb-12">
-            {links.map((link) => (
-              <Fragment key={link._key}>
-                <Link
-                  key={link._key}
-                  href={link.href || "#"}
-                  target={link.target ? "_blank" : undefined}
-                  rel={link.target ? "noopener" : undefined}
-                  className={cn(
-                    buttonVariants({
-                      variant: link.buttonVariant || "default",
-                      size: "lg",
-                    }),
-                    "px-8 py-6 text-base font-medium"
+            {links.map((link) => {
+              const href = resolveLinkHref(link, locale) || "#";
+              const target =
+                link?.isExternal && link?.target ? "_blank" : undefined;
+              const rel = target ? "noopener noreferrer" : undefined;
+              return (
+                <Fragment key={link._key}>
+                  <Link
+                    key={link._key}
+                    href={href}
+                    target={target}
+                    rel={rel}
+                    className={cn(
+                      buttonVariants({
+                        variant: link.buttonVariant || "default",
+                        size: "lg",
+                      }),
+                      "px-8 py-6 text-base font-medium"
+                    )}
+                  >
+                    {link.title}
+                    <Icon
+                      iconVariant={link.iconVariant || "none"}
+                      strokeWidth={1.5}
+                    />
+                  </Link>
+                  {link.description && (
+                    <div className="text-sm text-muted-foreground md:text-balance">
+                      {link.description}
+                    </div>
                   )}
-                >
-                  {link.title}
-                  <Icon
-                    iconVariant={link.iconVariant || "none"}
-                    strokeWidth={1.5}
-                  />
-                </Link>
-                {link.description && (
-                  <div className="text-sm text-muted-foreground md:text-balance">
-                    {link.description}
-                  </div>
-                )}
-              </Fragment>
-            ))}
+                </Fragment>
+              );
+            })}
           </div>
         )}
       </div>

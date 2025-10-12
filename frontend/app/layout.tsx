@@ -2,6 +2,7 @@ import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
+import { DEFAULT_LOCALE } from "@/lib/i18n/config";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -15,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={DEFAULT_LOCALE} suppressHydrationWarning>
       <link rel="icon" href="/favicon.ico" />
       <body
         className={cn(

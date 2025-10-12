@@ -5,13 +5,22 @@ import PortableTextRenderer from "@/components/portable-text-renderer";
 import Icon from "@/components/icon";
 import { Badge } from "@/components/ui/badge";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import { resolveLinkHref } from "@/lib/resolveHref";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type Hero13Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "hero-13" }
->;
+> & { locale?: SupportedLocale };
 
-const Hero13 = ({ tag, title, body, links }: Hero13Props) => {
+const Hero13 = ({
+  tag,
+  title,
+  body,
+  links,
+  locale = FALLBACK_LOCALE,
+}: Hero13Props) => {
   return (
     <section className="py-32">
       <div className="container">
@@ -33,34 +42,40 @@ const Hero13 = ({ tag, title, body, links }: Hero13Props) => {
         )}
         {body && (
           <div className="max-w-2xl text-muted-foreground md:text-[2vw] lg:text-xl">
-            <PortableTextRenderer value={body} />
+            <PortableTextRenderer value={body} locale={locale} />
           </div>
         )}
         {links && links.length > 0 && (
           <div className="mt-6 flex flex-col gap-4 sm:flex-row lg:mt-10">
-            {links.map((link) => (
-              <Link
-                key={link._key}
-                href={link.href || ""}
-                target={link.target ? "_blank" : undefined}
-                rel={link.target ? "noopener " : undefined}
-                className={cn(
-                  buttonVariants({
-                    variant: link.buttonVariant || "default",
-                    size: "lg",
-                  }),
-                  "w-full md:w-auto group"
-                )}
-              >
-                <div className="flex items-center gap-2">
-                  {link.title}
-                  <Icon
-                    iconVariant={link.iconVariant || "none"}
-                    className="ml-2 h-4 transition-transform group-hover:translate-x-0.5"
-                  />
-                </div>
-              </Link>
-            ))}
+            {links.map((link) => {
+              const href = resolveLinkHref(link, locale) || "#";
+              const target =
+                link?.isExternal && link?.target ? "_blank" : undefined;
+              const rel = target ? "noopener noreferrer" : undefined;
+              return (
+                <Link
+                  key={link._key}
+                  href={href}
+                  target={target}
+                  rel={rel}
+                  className={cn(
+                    buttonVariants({
+                      variant: link.buttonVariant || "default",
+                      size: "lg",
+                    }),
+                    "w-full md:w-auto group"
+                  )}
+                >
+                  <div className="flex items-center gap-2">
+                    {link.title}
+                    <Icon
+                      iconVariant={link.iconVariant || "none"}
+                      className="ml-2 h-4 transition-transform group-hover:translate-x-0.5"
+                    />
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         )}
       </div>
