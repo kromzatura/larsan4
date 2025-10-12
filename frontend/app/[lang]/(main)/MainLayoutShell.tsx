@@ -6,7 +6,6 @@ import { SanityLive } from "@/sanity/lib/live";
 import { MainLayoutClientShell } from "./MainLayoutClientShell";
 import type { SETTINGS_QUERYResult } from "@/sanity.types";
 import type { NavigationItem } from "@/lib/getNavigationItems";
-import type { SupportedLocale } from "@/lib/i18n/config";
 
 export default async function MainLayoutShell({
   children,
@@ -15,7 +14,6 @@ export default async function MainLayoutShell({
   headerAction,
   footerNav,
   footerBottomNav,
-  lang,
 }: {
   children: React.ReactNode;
   settings: SETTINGS_QUERYResult;
@@ -23,7 +21,6 @@ export default async function MainLayoutShell({
   headerAction: NavigationItem[];
   footerNav: NavigationItem[];
   footerBottomNav: NavigationItem[];
-  lang?: SupportedLocale;
 }) {
   // Always fetch banner (not locale-dependent in our setup)
   const banner = await fetchSanityBanner();

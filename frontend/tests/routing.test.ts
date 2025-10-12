@@ -2,25 +2,22 @@ import { describe, it, expect } from "vitest";
 import { buildLocalizedPath, stripLocalePrefix } from "@/lib/i18n/routing";
 
 describe("buildLocalizedPath", () => {
-  it("prefixes non-default locale paths", () => {
+  it("prefixes all locale paths, including default", () => {
     expect(buildLocalizedPath("nl", "/products")).toBe("/nl/products");
     expect(buildLocalizedPath("nl", "products")).toBe("/nl/products");
-  });
-
-  it("does not prefix default locale paths", () => {
-    expect(buildLocalizedPath("en", "/products")).toBe("/products");
-    expect(buildLocalizedPath("en", "products")).toBe("/products");
+    expect(buildLocalizedPath("en", "/products")).toBe("/en/products");
+    expect(buildLocalizedPath("en", "products")).toBe("/en/products");
   });
 
   it("handles root path", () => {
     expect(buildLocalizedPath("nl", "/")).toBe("/nl");
-    expect(buildLocalizedPath("en", "/")).toBe("/");
+    expect(buildLocalizedPath("en", "/")).toBe("/en");
   });
 
   it("passes through query strings when present in input (discouraged usage)", () => {
     // Note: callers should append query strings AFTER building the localized path.
     expect(buildLocalizedPath("nl", "/products?x=1")).toBe("/nl/products?x=1");
-    expect(buildLocalizedPath("en", "/products?x=1")).toBe("/products?x=1");
+    expect(buildLocalizedPath("en", "/products?x=1")).toBe("/en/products?x=1");
   });
 });
 

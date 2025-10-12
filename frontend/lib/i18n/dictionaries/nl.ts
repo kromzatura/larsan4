@@ -23,4 +23,8 @@ export default {
       sku: "SKU",
     },
   },
+  notFound: {
+    title: "Pagina niet gevonden",
+    backToHome: "Terug naar de startpagina",
+  },
 } as const;

@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import { fetchSanitySettings } from "@/sanity/lib/fetch";
 import { sanityFetch } from "@/sanity/lib/live";
-import { FEED_POSTS_QUERY_NEWEST } from "@/sanity/queries/feed";
+import { FEED_POSTS_BY_CATEGORY_QUERY_NEWEST } from "@/sanity/queries/feed";
 import { ptBlocksToHtml, getLanguageFromSettings } from "@/sanity/lib/ptToHtml";
 import type { FeedPost } from "@/lib/types/content";
+import { buildLocalizedPath, normalizeLocale } from "@/lib/i18n/routing";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -16,17 +17,22 @@ function escape(str: string) {
     .replace(/'/g, "&apos;");
 }
 
-export async function GET() {
+export async function GET(
+  _req: Request,
+  context: { params: Promise<{ slug: string; lang?: string }> }
+) {
+  const { slug, lang } = await context.params;
+  const locale = normalizeLocale(lang);
   const [{ data: posts }, settings] = await Promise.all([
     sanityFetch({
-      query: FEED_POSTS_QUERY_NEWEST,
-      params: { limit: 50 },
+      query: FEED_POSTS_BY_CATEGORY_QUERY_NEWEST,
+      params: { limit: 50, slug },
       perspective: "published",
       stega: false,
     }),
     fetchSanitySettings(),
   ]);
-  const selfUrl = `${SITE_URL}/blog/rss.xml`;
+  const selfUrl = `${SITE_URL}${buildLocalizedPath(locale, `/blog/category/${slug}/rss.xml`)}`;
   const lastBuildDate = new Date().toUTCString();
   const siteName = settings?.siteName || "Blog";
   const siteDesc = settings?.description || "Latest posts";
@@ -35,18 +41,9 @@ export async function GET() {
     siteLanguage?: string;
     locale?: string;
   });
-  const logo = settings?.logo;
-  const logoUrl: string | null = logo?.asset?.url || null;
-  const dim = logo?.asset?.metadata?.dimensions;
-  const rawW = typeof dim?.width === "number" ? dim.width : undefined;
-  const rawH = typeof dim?.height === "number" ? dim.height : undefined;
-  const maxW = 144; // RSS 2.0 recommends max width 144
-  const width = rawW ? Math.min(rawW, maxW) : undefined;
-  const height =
-    rawW && rawH && width ? Math.round((rawH / rawW) * width) : rawH;
 
   const items = (Array.isArray(posts) ? (posts as FeedPost[]) : []).map((p) => {
-    const url = `${SITE_URL}/blog/${p.slug?.current ?? ""}`;
+    const url = `${SITE_URL}${buildLocalizedPath(locale, `/blog/${p.slug?.current ?? ""}`)}`;
     const title = escape(p.title ?? "Untitled");
     const rawDate = p.publishedAt || p._createdAt;
     const pubDate = rawDate ? new Date(rawDate).toUTCString() : "";
@@ -60,16 +57,6 @@ export async function GET() {
     const creator = p.author?.name
       ? `<dc:creator>${escape(p.author.name)}</dc:creator>`
       : "";
-    const img = p.image?.asset;
-    const imgUrl = img?.url ? escape(img.url) : null;
-    const imgType = img?.mimeType || null;
-    const w = img?.metadata?.dimensions?.width || null;
-    const h = img?.metadata?.dimensions?.height || null;
-    const media = imgUrl
-      ? `<media:content url="${imgUrl}"${imgType ? ` type="${imgType}"` : ""}${
-          w ? ` width="${w}"` : ""
-        }${h ? ` height="${h}"` : ""} />`
-      : "";
 
     return `
       <item>
@@ -82,16 +69,15 @@ export async function GET() {
         <content:encoded><![CDATA[${
           html || p.excerpt || ""
         }]]></content:encoded>
-        ${media}
         ${categories}
       </item>`;
   });
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/">
+  <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
-      <title>${escape(siteName)} — Blog</title>
-      <link>${SITE_URL}/blog</link>
+  <title>${escape(siteName)} — Blog Category: ${escape(slug)}</title>
+  <link>${SITE_URL}${buildLocalizedPath(locale, `/blog/category/${slug}`)}</link>
       <description>${escape(siteDesc)}</description>
       <atom:link href="${selfUrl}" rel="self" type="application/rss+xml" />
       <lastBuildDate>${lastBuildDate}</lastBuildDate>
@@ -99,15 +85,6 @@ export async function GET() {
       <generator>Next.js + Sanity</generator>
       <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
       <ttl>60</ttl>
-      ${
-        logoUrl
-          ? `<image><url>${logoUrl}</url><title>${escape(
-              siteName
-            )}</title><link>${SITE_URL}</link>${
-              width ? `<width>${width}</width>` : ""
-            }${height ? `<height>${height}</height>` : ""}</image>`
-          : ""
-      }
       ${items.join("")}
     </channel>
   </rss>`;

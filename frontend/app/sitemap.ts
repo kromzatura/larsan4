@@ -1,118 +1,157 @@
 import { MetadataRoute } from "next";
 import { groq } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
+import { SUPPORTED_LOCALES, SupportedLocale, DEFAULT_LOCALE } from "@/lib/i18n/config";
+import { buildLocalizedPath, isSupportedLocale } from "@/lib/i18n/routing";
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+type SanitySlugData = {
+  slug: string;
+  lastModified: string;
+  language?: string | null;
+};
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
 
-async function getPagesSitemap(): Promise<SitemapEntry[]> {
-  const pagesQuery = groq`
-    *[_type == 'page' && defined(slug.current) && coalesce(meta.noindex, false) == false] | order(slug.current) {
-      'url': $baseUrl + select(slug.current == 'index' => '', '/' + slug.current),
-      'lastModified': _updatedAt,
-      'changeFrequency': 'daily',
-      'priority': select(
-        slug.current == 'index' => 1,
-        0.5
-      )
-    }
-  `;
-
+// Fetchers: return slug, lastModified, and language when available
+async function getPageSlugs(): Promise<SanitySlugData[]> {
   const { data } = await sanityFetch({
-    query: pagesQuery,
-    params: {
-      baseUrl: process.env.NEXT_PUBLIC_SITE_URL,
-    },
+    query: groq`*[_type == 'page' && defined(slug.current) && coalesce(meta.noindex, false) == false]{
+      "slug": slug.current,
+      "lastModified": _updatedAt,
+      language
+    }`,
     perspective: "published",
     stega: false,
   });
-
-  return data;
+  return (data || []) as SanitySlugData[];
 }
 
-async function getPostsSitemap(): Promise<SitemapEntry[]> {
-  const postsQuery = groq`
-    *[_type == 'post' && defined(slug.current) && coalesce(meta.noindex, false) == false] | order(_updatedAt desc) {
-      'url': $baseUrl + '/blog/' + slug.current,
-      'lastModified': _updatedAt,
-      'changeFrequency': 'weekly',
-      'priority': 0.7
-    }
-  `;
-
+async function getPostSlugs(): Promise<SanitySlugData[]> {
   const { data } = await sanityFetch({
-    query: postsQuery,
-    params: {
-      baseUrl: process.env.NEXT_PUBLIC_SITE_URL,
-    },
+    query: groq`*[_type == 'post' && defined(slug.current) && coalesce(meta.noindex, false) == false]{
+      "slug": slug.current,
+      "lastModified": _updatedAt,
+      language
+    }`,
     perspective: "published",
     stega: false,
   });
+  return (data || []) as SanitySlugData[];
+}
 
-  return data;
+async function getProductSlugs(): Promise<SanitySlugData[]> {
+  const { data } = await sanityFetch({
+    query: groq`*[_type == 'product' && defined(slug.current) && coalesce(meta.noindex, false) == false]{
+      "slug": slug.current,
+      "lastModified": _updatedAt,
+      language
+    }`,
+    perspective: "published",
+    stega: false,
+  });
+  return (data || []) as SanitySlugData[];
+}
+
+async function getProductCategorySlugs(): Promise<SanitySlugData[]> {
+  const { data } = await sanityFetch({
+    query: groq`*[_type == 'productCategory' && defined(slug.current) && coalesce(meta.noindex, false) == false]{
+      "slug": slug.current,
+      "lastModified": _updatedAt,
+      language
+    }`,
+    perspective: "published",
+    stega: false,
+  });
+  return (data || []) as SanitySlugData[];
+}
+
+async function getBlogCategorySlugs(): Promise<SanitySlugData[]> {
+  const { data } = await sanityFetch({
+    query: groq`*[_type == 'category' && defined(slug.current) && coalesce(seo.noindex, false) == false]{
+      "slug": slug.current,
+      "lastModified": _updatedAt,
+      language
+    }`,
+    perspective: "published",
+    stega: false,
+  });
+  return (data || []) as SanitySlugData[];
+}
+
+// Convert docs to localized sitemap entries respecting document language
+function docsToEntries(
+  docs: SanitySlugData[],
+  buildPath: (slug: string) => string,
+  changeFrequency: SitemapEntry["changeFrequency"],
+  priority: number
+): SitemapEntry[] {
+  return docs.map((doc) => {
+    const locale: SupportedLocale = isSupportedLocale(doc.language)
+      ? (doc.language as SupportedLocale)
+      : DEFAULT_LOCALE;
+
+    return {
+      url: `${baseUrl}${buildLocalizedPath(locale, buildPath(doc.slug))}`,
+      lastModified: doc.lastModified,
+      changeFrequency,
+      priority,
+    };
+  });
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [pages, posts, products, productCategories, blogCategories] =
+  const [pageSlugs, postSlugs, productSlugs, productCategorySlugs, blogCategorySlugs] =
     await Promise.all([
-      getPagesSitemap(),
-      getPostsSitemap(),
-      (async (): Promise<SitemapEntry[]> => {
-        const { data } = await sanityFetch({
-          query: groq`*[_type == 'product' && defined(slug.current) && coalesce(meta.noindex, false) == false] {
-          'url': $baseUrl + '/products/' + slug.current,
-          'lastModified': _updatedAt,
-          'changeFrequency': 'weekly',
-          'priority': 0.7
-        }`,
-          params: { baseUrl: process.env.NEXT_PUBLIC_SITE_URL },
-          perspective: "published",
-          stega: false,
-        });
-        return data as SitemapEntry[];
-      })(),
-      (async (): Promise<SitemapEntry[]> => {
-        const { data } = await sanityFetch({
-          query: groq`*[_type == 'productCategory' && defined(slug.current) && coalesce(meta.noindex, false) == false] | order(orderRank) {
-          'url': $baseUrl + '/products/category/' + slug.current,
-          'lastModified': _updatedAt,
-          'changeFrequency': 'weekly',
-          'priority': 0.6
-        }`,
-          params: { baseUrl: process.env.NEXT_PUBLIC_SITE_URL },
-          perspective: "published",
-          stega: false,
-        });
-        return data as SitemapEntry[];
-      })(),
-      (async (): Promise<SitemapEntry[]> => {
-        const { data } = await sanityFetch({
-          query: groq`*[_type == 'category' && defined(slug) && coalesce(seo.noindex, false) == false] | order(orderRank) {
-          'url': $baseUrl + '/blog/category/' + slug.current,
-          'lastModified': _updatedAt,
-          'changeFrequency': 'weekly',
-          'priority': 0.6
-        }`,
-          params: { baseUrl: process.env.NEXT_PUBLIC_SITE_URL },
-          perspective: "published",
-          stega: false,
-        });
-        return data as SitemapEntry[];
-      })(),
+      getPageSlugs(),
+      getPostSlugs(),
+      getProductSlugs(),
+      getProductCategorySlugs(),
+      getBlogCategorySlugs(),
     ]);
 
-  const blogIndex: SitemapEntry = {
-    url: `${process.env.NEXT_PUBLIC_SITE_URL}/blog`,
-    lastModified: new Date().toISOString(),
-    changeFrequency: "daily",
-    priority: 0.8,
-  };
+  // Static routes present regardless of Sanity docs
+  // Only include static routes that have no corresponding Sanity document
+  const staticPaths = ["/blog", "/products", "/contact", "/inquiry"] as const;
+  const staticEntries: SitemapEntry[] = staticPaths.flatMap((path) =>
+    SUPPORTED_LOCALES.map((locale) => ({
+      url: `${baseUrl}${buildLocalizedPath(locale, path)}`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: "daily" as const,
+      priority: 0.8,
+    }))
+  );
+
+  // Pages: treat slug 'index' as root path
+  const pageEntries = docsToEntries(
+    pageSlugs,
+    (slug) => (slug === "index" ? "/" : `/${slug}`),
+    "daily",
+    0.7
+  );
+
+  const postEntries = docsToEntries(postSlugs, (slug) => `/blog/${slug}`, "weekly", 0.6);
+  const productEntries = docsToEntries(productSlugs, (slug) => `/products/${slug}`, "weekly", 0.6);
+  const blogCategoryEntries = docsToEntries(
+    blogCategorySlugs,
+    (slug) => `/blog/category/${slug}`,
+    "weekly",
+    0.5
+  );
+  const productCategoryEntries = docsToEntries(
+    productCategorySlugs,
+    (slug) => `/products/category/${slug}`,
+    "weekly",
+    0.5
+  );
 
   return [
-    blogIndex,
-    ...pages,
-    ...posts,
-    ...products,
-    ...productCategories,
-    ...blogCategories,
+    ...staticEntries,
+    ...pageEntries,
+    ...postEntries,
+    ...productEntries,
+    ...blogCategoryEntries,
+    ...productCategoryEntries,
   ];
 }

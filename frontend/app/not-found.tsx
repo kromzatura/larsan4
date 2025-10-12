@@ -1,11 +1,6 @@
 import Custom404 from "@/components/404";
-
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Page not found",
-};
+import { DEFAULT_LOCALE } from "@/lib/i18n/config";
 
 export default function NotFoundPage() {
-  return <Custom404 />;
+  return <Custom404 locale={DEFAULT_LOCALE} />;
 }

@@ -27,6 +27,10 @@ export type UIDictionary = {
       sku: string;
     };
   };
+  notFound: {
+    title: string;
+    backToHome: string;
+  };
 };
 
 const MAP: Record<SupportedLocale, UIDictionary> = {

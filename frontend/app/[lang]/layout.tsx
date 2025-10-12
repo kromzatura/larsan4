@@ -1,7 +1,7 @@
 import { LocaleProvider } from "@/lib/i18n/locale-context";
 import { normalizeLocale } from "@/lib/i18n/routing";
 import type { LangAsyncLayoutProps } from "@/lib/types/next";
-import MainLayoutShell from "../(main)/MainLayoutShell";
+import MainLayoutShell from "./(main)/MainLayoutShell";
 import { fetchSanitySettings } from "@/sanity/lib/fetch";
 import { getNavigationItems } from "@/lib/getNavigationItems";
 

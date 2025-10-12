@@ -7,42 +7,42 @@ describe('resolveHref', () => {
     expect(resolveHref(undefined, 'anything')).toBeNull();
   });
 
-  it('resolves root home variants', () => {
-    expect(resolveHref(DOC_TYPES.PAGE, undefined)).toBe('/');
-    expect(resolveHref(DOC_TYPES.PAGE, 'index')).toBe('/');
-    expect(resolveHref(DOC_TYPES.PAGE, 'home')).toBe('/');
+  it('resolves root home variants (default locale en)', () => {
+    expect(resolveHref(DOC_TYPES.PAGE, undefined)).toBe('/en');
+    expect(resolveHref(DOC_TYPES.PAGE, 'index')).toBe('/en');
+    expect(resolveHref(DOC_TYPES.PAGE, 'home')).toBe('/en');
   });
 
-  it('resolves generic pages', () => {
-    expect(resolveHref(DOC_TYPES.PAGE, 'about')).toBe('/about');
-    expect(resolveHref(DOC_TYPES.PAGE, '/nested/path')).toBe('/nested/path');
+  it('resolves generic pages (default locale en)', () => {
+    expect(resolveHref(DOC_TYPES.PAGE, 'about')).toBe('/en/about');
+    expect(resolveHref(DOC_TYPES.PAGE, '/nested/path')).toBe('/en/nested/path');
   });
 
-  it('resolves blog posts', () => {
-    expect(resolveHref(DOC_TYPES.POST, 'my-post')).toBe('/blog/my-post');
+  it('resolves blog posts (default locale en)', () => {
+    expect(resolveHref(DOC_TYPES.POST, 'my-post')).toBe('/en/blog/my-post');
     expect(resolveHref(DOC_TYPES.POST, undefined)).toBeNull();
   });
 
-  it('resolves product pages', () => {
-    expect(resolveHref(DOC_TYPES.PRODUCT, 'widget')).toBe('/products/widget');
+  it('resolves product pages (default locale en)', () => {
+    expect(resolveHref(DOC_TYPES.PRODUCT, 'widget')).toBe('/en/products/widget');
     expect(resolveHref(DOC_TYPES.PRODUCT, undefined)).toBeNull();
   });
 
-  it('resolves product categories', () => {
-    expect(resolveHref(DOC_TYPES.PRODUCT_CATEGORY, 'gadgets')).toBe('/products/category/gadgets');
+  it('resolves product categories (default locale en)', () => {
+    expect(resolveHref(DOC_TYPES.PRODUCT_CATEGORY, 'gadgets')).toBe('/en/products/category/gadgets');
     expect(resolveHref(DOC_TYPES.PRODUCT_CATEGORY, undefined)).toBeNull();
   });
 
-  it('resolves blog categories (all variants)', () => {
+  it('resolves blog categories (all variants, default locale en)', () => {
     for (const variant of CATEGORY_DOC_TYPES) {
-      expect(resolveHref(variant, 'news')).toBe('/blog/category/news');
+      expect(resolveHref(variant, 'news')).toBe('/en/blog/category/news');
       expect(resolveHref(variant, undefined)).toBeNull();
     }
   });
 
-  it('resolves contact page without slug', () => {
-    expect(resolveHref(DOC_TYPES.CONTACT, undefined)).toBe('/contact');
-    expect(resolveHref(DOC_TYPES.CONTACT, 'ignored')).toBe('/contact');
+  it('resolves contact page without slug (default locale en)', () => {
+    expect(resolveHref(DOC_TYPES.CONTACT, undefined)).toBe('/en/contact');
+    expect(resolveHref(DOC_TYPES.CONTACT, 'ignored')).toBe('/en/contact');
   });
 
   it('returns null for unknown doc types', () => {
@@ -56,12 +56,12 @@ describe('resolveDocHref', () => {
     expect(resolveDocHref(undefined)).toBeNull();
   });
 
-  it('handles string slug field', () => {
-    expect(resolveDocHref({ _type: DOC_TYPES.POST, slug: 'post-1' })).toBe('/blog/post-1');
+  it('handles string slug field (default locale en)', () => {
+    expect(resolveDocHref({ _type: DOC_TYPES.POST, slug: 'post-1' })).toBe('/en/blog/post-1');
   });
 
-  it('handles slug object field', () => {
-    expect(resolveDocHref({ _type: DOC_TYPES.PAGE, slug: { current: 'features' } })).toBe('/features');
+  it('handles slug object field (default locale en)', () => {
+    expect(resolveDocHref({ _type: DOC_TYPES.PAGE, slug: { current: 'features' } })).toBe('/en/features');
   });
 
   it('returns null when slug missing and required', () => {

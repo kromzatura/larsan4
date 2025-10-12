@@ -1,48 +1,42 @@
 import { NextResponse } from "next/server";
 import { sanityFetch } from "@/sanity/lib/live";
 import { FEED_POSTS_BY_CATEGORY_QUERY_NEWEST } from "@/sanity/queries/feed";
-import {
-  fetchSanityBlogCategoryBySlug,
-  fetchSanitySettings,
-} from "@/sanity/lib/fetch";
+import { fetchSanitySettings } from "@/sanity/lib/fetch";
 import { ptBlocksToHtml, getLanguageFromSettings } from "@/sanity/lib/ptToHtml";
 import type { FeedPost } from "@/lib/types/content";
+import { buildLocalizedPath, normalizeLocale } from "@/lib/i18n/routing";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export async function GET(
   _req: Request,
-  context: { params: Promise<{ slug: string }> }
+  context: { params: Promise<{ slug: string; lang?: string }> }
 ) {
-  const { slug } = await context.params;
-  const [cat, { data: posts }, settings] = await Promise.all([
-    fetchSanityBlogCategoryBySlug({ slug }),
+  const { slug, lang } = await context.params;
+  const locale = normalizeLocale(lang);
+  const [{ data: posts }, settings] = await Promise.all([
     sanityFetch({
       query: FEED_POSTS_BY_CATEGORY_QUERY_NEWEST,
-      params: { slug, limit: 50 },
+      params: { limit: 50, slug },
       perspective: "published",
       stega: false,
     }),
     fetchSanitySettings(),
   ]);
-  if (!cat) return new NextResponse("Not Found", { status: 404 });
-
   const siteName = settings?.siteName || "Blog";
-  const language = getLanguageFromSettings(
-    settings as {
-      language?: string;
-      siteLanguage?: string;
-      locale?: string;
-    }
-  );
+  const language = getLanguageFromSettings(settings as {
+    language?: string;
+    siteLanguage?: string;
+    locale?: string;
+  });
   const feed = {
     version: "https://jsonfeed.org/version/1.1",
-    title: `${siteName} — ${cat.title || "Blog Category"}`,
-    home_page_url: `${SITE_URL}/blog/category/${slug}`,
-    feed_url: `${SITE_URL}/blog/category/${slug}/feed.json`,
+    title: `${siteName} — ${slug} — Blog`,
+    home_page_url: `${SITE_URL}${buildLocalizedPath(locale, `/blog/category/${slug}`)}`,
+    feed_url: `${SITE_URL}${buildLocalizedPath(locale, `/blog/category/${slug}/feed.json`)}`,
     language,
     items: (Array.isArray(posts) ? (posts as FeedPost[]) : []).map((p) => {
-      const url = `${SITE_URL}/blog/${p.slug?.current ?? ""}`;
+      const url = `${SITE_URL}${buildLocalizedPath(locale, `/blog/${p.slug?.current ?? ""}`)}`;
       const content_html =
         ptBlocksToHtml(Array.isArray(p.body) ? (p.body as unknown[]) : null) ||
         p.excerpt ||

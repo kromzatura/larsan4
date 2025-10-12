@@ -83,9 +83,7 @@ export function buildLocalizedPath(
   path: string
 ): string {
   const cleanedPath = path.startsWith("/") ? path : `/${path}`;
-  if (locale === FALLBACK_LOCALE) {
-    return cleanedPath;
-  }
+  // Always prefix with locale, including the fallback locale, for consistency and SEO.
   const suffix = cleanedPath === "/" ? "" : cleanedPath;
   return `/${locale}${suffix}`.replace(/\/+/, "/");
 }

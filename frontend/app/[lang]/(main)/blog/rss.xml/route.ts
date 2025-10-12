@@ -1,12 +1,10 @@
 import { NextResponse } from "next/server";
-import {
-  fetchSanityBlogCategoryBySlug,
-  fetchSanitySettings,
-} from "@/sanity/lib/fetch";
+import { fetchSanitySettings } from "@/sanity/lib/fetch";
 import { sanityFetch } from "@/sanity/lib/live";
-import { FEED_POSTS_BY_CATEGORY_QUERY_NEWEST } from "@/sanity/queries/feed";
+import { FEED_POSTS_QUERY_NEWEST } from "@/sanity/queries/feed";
 import { ptBlocksToHtml, getLanguageFromSettings } from "@/sanity/lib/ptToHtml";
 import type { FeedPost } from "@/lib/types/content";
+import { buildLocalizedPath, normalizeLocale } from "@/lib/i18n/routing";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -19,45 +17,39 @@ function escape(str: string) {
     .replace(/'/g, "&apos;");
 }
 
-export async function GET(
-  _req: Request,
-  context: { params: Promise<{ slug: string }> }
-) {
-  const { slug } = await context.params;
-  const [cat, settings] = await Promise.all([
-    fetchSanityBlogCategoryBySlug({ slug }),
+export async function GET(_req: Request, context: { params: Promise<{ lang?: string }> }) {
+  const params = await context.params;
+  const locale = normalizeLocale(params?.lang);
+  const [{ data: posts }, settings] = await Promise.all([
+    sanityFetch({
+      query: FEED_POSTS_QUERY_NEWEST,
+      params: { limit: 50 },
+      perspective: "published",
+      stega: false,
+    }),
     fetchSanitySettings(),
   ]);
-  if (!cat) return new NextResponse("Not Found", { status: 404 });
-
-  const { data: posts } = await sanityFetch({
-    query: FEED_POSTS_BY_CATEGORY_QUERY_NEWEST,
-    params: { slug, limit: 50 },
-    perspective: "published",
-    stega: false,
-  });
-  const selfUrl = `${SITE_URL}/blog/category/${slug}/rss.xml`;
+  const selfUrl = `${SITE_URL}${buildLocalizedPath(locale, "/blog/rss.xml")}`;
   const lastBuildDate = new Date().toUTCString();
   const siteName = settings?.siteName || "Blog";
-  const language = getLanguageFromSettings(
-    settings as {
-      language?: string;
-      siteLanguage?: string;
-      locale?: string;
-    }
-  );
+  const siteDesc = settings?.description || "Latest posts";
+  const language = getLanguageFromSettings(settings as {
+    language?: string;
+    siteLanguage?: string;
+    locale?: string;
+  });
   const logo = settings?.logo;
   const logoUrl: string | null = logo?.asset?.url || null;
   const dim = logo?.asset?.metadata?.dimensions;
   const rawW = typeof dim?.width === "number" ? dim.width : undefined;
   const rawH = typeof dim?.height === "number" ? dim.height : undefined;
-  const maxW = 144;
+  const maxW = 144; // RSS 2.0 recommends max width 144
   const width = rawW ? Math.min(rawW, maxW) : undefined;
   const height =
     rawW && rawH && width ? Math.round((rawH / rawW) * width) : rawH;
 
   const items = (Array.isArray(posts) ? (posts as FeedPost[]) : []).map((p) => {
-    const url = `${SITE_URL}/blog/${p.slug?.current ?? ""}`;
+    const url = `${SITE_URL}${buildLocalizedPath(locale, `/blog/${p.slug?.current ?? ""}`)}`;
     const title = escape(p.title ?? "Untitled");
     const rawDate = p.publishedAt || p._createdAt;
     const pubDate = rawDate ? new Date(rawDate).toUTCString() : "";
@@ -67,9 +59,7 @@ export async function GET(
           .map((t) => `<category>${escape(t)}</category>`)
           .join("")
       : "";
-    const html = ptBlocksToHtml(
-      Array.isArray(p.body) ? (p.body as unknown[]) : null
-    );
+    const html = ptBlocksToHtml(Array.isArray(p.body) ? (p.body as unknown[]) : null);
     const creator = p.author?.name
       ? `<dc:creator>${escape(p.author.name)}</dc:creator>`
       : "";
@@ -103,18 +93,15 @@ export async function GET(
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/">
     <channel>
-      <title>${escape(siteName)} — ${escape(
-    cat.title ?? "Blog Category"
-  )}</title>
-      <link>${SITE_URL}/blog/category/${slug}</link>
-      <description>${escape(cat.description ?? "")}</description>
+      <title>${escape(siteName)} — Blog</title>
+      <link>${SITE_URL}/blog</link>
+      <description>${escape(siteDesc)}</description>
       <atom:link href="${selfUrl}" rel="self" type="application/rss+xml" />
-    <lastBuildDate>${lastBuildDate}</lastBuildDate>
-    <language>${language}</language>
+      <lastBuildDate>${lastBuildDate}</lastBuildDate>
+  <language>${language}</language>
       <generator>Next.js + Sanity</generator>
       <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
       <ttl>60</ttl>
-      <category>${escape(cat.title ?? "")}</category>
       ${
         logoUrl
           ? `<image><url>${logoUrl}</url><title>${escape(

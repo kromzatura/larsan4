@@ -23,4 +23,8 @@ export default {
       sku: "SKU",
     },
   },
+  notFound: {
+    title: "Page not found",
+    backToHome: "Back to Home page",
+  },
 } as const;
