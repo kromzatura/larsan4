@@ -47,6 +47,12 @@ These weaknesses map directly to the Phase 1–3 tasks below; tackling them earl
 - [x] **Scaffold `/app/[lang]/`**
   - ✅ `[lang]/layout.tsx` wraps the legacy `(main)` layout inside a locale provider.
   - ✅ `/app/page.tsx` now redirects using cookie → Accept-Language → fallback order.
+- [x] **Consolidate route implementations under `[lang]`**
+  - ✅ Migrated all pages under `frontend/app/[lang]/(main)` and deleted the root `frontend/app/(main)` tree.
+  - ✅ Removed redundant re-export routes under `frontend/app/[lang]` to eliminate parallel-route conflicts and ensure `LocaleProvider` is always active.
+- [x] **Always-prefixed URLs**
+  - ✅ `buildLocalizedPath` now prefixes the locale for every path (including default `en`); `/` redirects to `/en`.
+  - ✅ Updated unit tests to expect `/en/...` outputs and `/en` for root.
 - [x] **Build i18n helper modules**
   - ✅ `frontend/lib/i18n/routing.ts` + `locale-context.tsx` provide locale parsing, builders, and context; config already in place.
   - ✅ `resolveHref` upgraded to accept locale-aware paths via `buildLocalizedPath`.
@@ -63,6 +69,7 @@ These weaknesses map directly to the Phase 1–3 tasks below; tackling them earl
   - [x] Update `Blocks` renderer to accept `lang` and pass it to child components (locale now forwarded to `section-header`, `hero-12`, `hero-174`; remaining blocks to audit for language-aware links).
   - [x] Extract shared UI copy into locale dictionaries or Sanity fields (started with inquiry badge label). Introduced lightweight UI dictionaries at `frontend/lib/i18n/dictionaries` (EN + NL), to expand incrementally.
   - [x] Adopted Facade boundary: pages/layouts accept Promise-based props (framework contract), while Blocks and block components use canonical, non-Promise props. The async/await logic is isolated at the page/layout boundary. This keeps DX clean without shims/overrides and stabilizes the component API.
+  - [x] 404 UX localization: `frontend/components/404.tsx` now accepts `homeHref` and `locale` and reads localized copy from dictionaries; added `frontend/app/[lang]/not-found.tsx` to pass the active locale and a localized Home link; root `app/not-found.tsx` now passes `DEFAULT_LOCALE`.
 - [ ] **Query layer upgrade**
   - [x] Parameterize GROQ fragments with `$lang` starting with `page`, `post`, and blog category queries (fallback-aware lookup, language field exposure).
   - [x] Update `sanity/lib/fetch.ts` helpers and blog/page routes to accept `{ lang }` and forward fallback locales.
@@ -83,6 +90,12 @@ These weaknesses map directly to the Phase 1–3 tasks below; tackling them earl
   - Add translation coverage lint (e.g., ensure every message key exists in the active locale file).
 - [ ] **QA checklist**
   - Draft a release checklist for verifying locale behavior pre-merge (routing, metadata, navigation, inquiry).
+
+- [x] **Sitemap & SEO hardening**
+  - ✅ Refactored `frontend/app/sitemap.ts` to generate locale-prefixed URLs from `SUPPORTED_LOCALES` via `buildLocalizedPath`.
+  - ✅ Documents missing a `language` field now default to `DEFAULT_LOCALE` only (no phantom translations).
+  - ✅ Static paths restricted to routes without Sanity counterparts; homepage and pages rely on Sanity `lastModified`.
+  - ✅ GROQ filters respect `noindex`; build/lint/tests PASS.
 
 ## Phase 4 — Launch Prep (Week 8)
 
@@ -115,10 +128,24 @@ These weaknesses map directly to the Phase 1–3 tasks below; tackling them earl
 - Copy sources: Introduced minimal UI dictionaries (`frontend/lib/i18n/dictionaries`) for shared microcopy (initially Inquiry). All other nav/footer labels remain CMS-driven via `getNavigationItems` and localized Sanity documents.
 - Hardcoded fallbacks removed: Eliminated the English-only "Logo" fallback; UI defers to CMS for localized site names/logos.
 - Inquiry: `InquiryBadge` now accepts a `locale` prop, uses dictionaries for the label, and links to the locale-aware `/inquiry` path.
-- Quality gates: Build PASS, Typecheck/Lint PASS, Tests PASS (13/13) after the refactor.
+- Quality gates: Build PASS, Typecheck/Lint PASS, Tests PASS (20/20) after the refactor.
 
 Next steps:
 
 - Add a locale switcher in the header using `SUPPORTED_LOCALES`, `LOCALE_LABELS`, and route mirroring where possible.
 - Expand dictionaries for common microcopy (e.g., "Menu", "Search", footer legal items if not modeled in CMS).
 - Write unit tests for `resolveLinkHref` locale behavior and metadata builders; evaluate Playwright smoke tests for `[lang]` routes.
+
+## Progress Update — Phase C Completed (2025-10-12)
+
+- Routing consolidation: Deleted root `app/(main)` and redundant re-exports under `app/[lang]`; implementations now live under `app/[lang]/(main)` with `LocaleProvider` always active.
+- Always-prefixed URLs: `buildLocalizedPath` prefixes the default locale; tests updated for `/en` roots and paths.
+- Sitemap refactor: Single-source-of-truth URL generation via `buildLocalizedPath`; language-less docs default to `DEFAULT_LOCALE`; static paths trimmed; only prefixed URLs emitted; noindex respected.
+- 404 localization: Added `[lang]/not-found.tsx` and enhanced `components/404.tsx` to localize UI text via dictionaries and use explicit, localized Home links.
+- Quality gates: Build PASS, Typecheck/Lint PASS, Tests PASS (20/20).
+
+Open follow-ups:
+
+- Global HTML `<html lang>` and metadata helpers still need full i18n integration (locale-aware `openGraph.locale`, canonical/hreflang, etc.).
+- Centralize share URL utilities and make them locale-aware.
+- Add e2e smoke tests for `[lang]` routes and CI enforcement of translation coverage.
