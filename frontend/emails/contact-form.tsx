@@ -147,7 +147,7 @@ const ContactFormEmail = ({
                                 title
                               )}{" "}
                               <span style={{ color: "#6b7280" }}>
-                                (SKU: {item.id})
+                                ({dict.contact.inquiry.sku}: {item.id})
                               </span>
                             </Text>
                           </Section>
