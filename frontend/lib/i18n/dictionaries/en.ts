@@ -76,6 +76,11 @@ export default {
     },
     actions: {
       addToInquiry: "Add to Inquiry",
+      addedToInquiry: "Added to Inquiry",
+    },
+    toasts: {
+      added: "Added to inquiry",
+      already: "Already in inquiry",
     },
     specLabels: {
       sku: "SKU",

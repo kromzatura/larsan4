@@ -80,6 +80,11 @@ export type UIDictionary = {
     };
     actions: {
       addToInquiry: string;
+      addedToInquiry: string;
+    };
+    toasts: {
+      added: string;
+      already: string;
     };
     specLabels: {
       sku: string;

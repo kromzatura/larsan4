@@ -9,10 +9,14 @@ import {
   INQUIRY_UPDATED_EVENT,
   type InquiryItem,
 } from "@/lib/inquiry";
+import { useLocale } from "@/lib/i18n/locale-context";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
 export default function AddToInquiryButton({ item, className }: { item: InquiryItem; className?: string }) {
   const [added, setAdded] = useState<boolean>(false);
   const itemKey = useMemo(() => item.id, [item.id]);
+  const locale = useLocale();
+  const t = getDictionary(locale);
 
   useEffect(() => {
     setAdded(isInInquiry(itemKey));
@@ -30,13 +34,13 @@ export default function AddToInquiryButton({ item, className }: { item: InquiryI
         const res = addToInquiry(item);
         if (res.added) {
           setAdded(true);
-          toast.success("Added to inquiry", { description: item.name || item.id });
+          toast.success(t.productPage.toasts.added, { description: item.name || item.id });
         } else {
-          toast("Already in inquiry", { description: item.name || item.id });
+          toast(t.productPage.toasts.already, { description: item.name || item.id });
         }
       }}
     >
-      {added ? "Added to Inquiry ✓" : "Add to Inquiry"}
+      {added ? `${t.productPage.actions.addedToInquiry} ✓` : t.productPage.actions.addToInquiry}
     </Button>
   );
 }

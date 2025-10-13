@@ -76,6 +76,11 @@ export default {
     },
     actions: {
       addToInquiry: "Toevoegen aan aanvraag",
+      addedToInquiry: "Toegevoegd aan aanvraag",
+    },
+    toasts: {
+      added: "Toegevoegd aan aanvraag",
+      already: "Staat al in aanvraag",
     },
     specLabels: {
       sku: "SKU",
