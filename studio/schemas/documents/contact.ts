@@ -86,7 +86,9 @@ export default defineType({
                 Rule.custom((value, context) => {
                   const hasLink = (context?.parent as any)?.hasLink;
                   if (!hasLink) return true; // not required when toggle is off
-                  return value ? true : "Link is required when 'Has link?' is enabled";
+                  return value
+                    ? true
+                    : "Link is required when 'Has link?' is enabled";
                 }),
             }),
           ],
