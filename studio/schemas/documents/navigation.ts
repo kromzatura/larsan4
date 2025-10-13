@@ -19,16 +19,23 @@ export default defineType({
             apiVersion: process.env.SANITY_STUDIO_API_VERSION!,
           });
           const id = document?._id;
+          const language = (document as any)?.language;
 
           // Extract the base ID without the draft prefix
           const baseId = id?.replace(/^drafts\./, "");
 
           // Query that excludes both the current document and its draft version
-          const query = `count(*[_type == "navigation" && title == $title && !(_id in [$id, $baseId, "drafts." + $baseId])])`;
+          const query = `count(*[
+            _type == "navigation" &&
+            title == $title &&
+            language == $language &&
+            !(_id in [$id, $baseId, "drafts." + $baseId])
+          ])`;
           const result = await client.fetch(query, {
             title: value,
             id,
             baseId,
+            language,
           });
 
           return result === 0 ? true : "Navigation title must be unique";

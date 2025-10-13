@@ -38,6 +38,25 @@ export default defineType({
       options: {
         source: "title",
         maxLength: 96,
+        isUnique: async (slug, context) => {
+          const { document, getClient } = context;
+          const client = getClient({
+            apiVersion: process.env.SANITY_STUDIO_API_VERSION!,
+          });
+          const id = document?._id;
+          const baseId = id?.replace(/^drafts\./, "");
+          const language = (document as any)?.language;
+
+          const query = `count(*[
+            _type == "post" &&
+            slug.current == $slug &&
+            language == $language &&
+            !(_id in [$id, $baseId, "drafts." + $baseId])
+          ])`;
+          const params = { slug, language, id, baseId };
+          const result = await client.fetch(query, params);
+          return result === 0;
+        },
       },
       validation: (Rule) => Rule.required(),
     }),
