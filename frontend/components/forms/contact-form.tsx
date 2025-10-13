@@ -163,7 +163,11 @@ export function ContactForm({
 
   return (
     <Form {...form}>
-      <form action={handleAction} className="space-y-6">
+      <form
+        action={handleAction}
+        className="space-y-6"
+        suppressHydrationWarning
+      >
         {/* Ensure server action receives the active locale */}
         <input type="hidden" name="locale" value={locale} />
         {siteKey && (
@@ -184,6 +188,12 @@ export function ContactForm({
             name="website"
             autoComplete="off"
             tabIndex={-1}
+            spellCheck={false}
+            autoCorrect="off"
+            autoCapitalize="off"
+            data-ms-editor="false"
+            data-gramm="false"
+            suppressHydrationWarning
           />
         </div>
         {formState.success && (
@@ -266,6 +276,12 @@ export function ContactForm({
               placeholder={dict.contact.form.messagePlaceholder}
               id="message"
               {...form.register("message")}
+              spellCheck={false}
+              autoCorrect="off"
+              autoCapitalize="off"
+              data-ms-editor="false"
+              data-gramm="false"
+              suppressHydrationWarning
             />
           </FormControl>
           {form.formState.errors.message && (
