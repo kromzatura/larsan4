@@ -102,6 +102,7 @@ export default defineType({
               options: {
                 list: [
                   { title: "Paper bag", value: "Paper bag" },
+                  { title: "Papieren zak", value: "Papieren zak" },
                   { title: "Big Bag", value: "Big Bag" },
                 ],
               },
