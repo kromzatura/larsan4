@@ -147,7 +147,14 @@ export default function Navbar1({
 
   return (
     <header
-      className={cn("sticky top-0 z-50 w-full py-4 bg-background", className)}
+      className={cn(
+        "sticky top-0 z-50 w-full py-4",
+        // subtle glass effect and line for separation
+        "bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border/60",
+        className
+      )}
+      // crisp hairline highlight in light mode
+      style={{ boxShadow: "inset 0 1px 0 hsl(0 0% 100% / 0.15)" }}
     >
       <div className="container">
         {/* Desktop Menu */}

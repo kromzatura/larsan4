@@ -37,11 +37,18 @@ export default function Footer2({
     item._type !== "link-group";
 
   return (
-    <section className={cn("py-32", className)}>
+    <section
+      className={cn(
+        "relative py-32 border-t border-border/60 bg-[var(--surface-1)]",
+        // subtle gradient hairline at very top
+        "before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-border/80 before:to-transparent",
+        className
+      )}
+    >
       <div className="container">
         <footer>
-          <div className="grid grid-cols-2 gap-8 lg:grid-cols-6">
-            <div className="col-span-2 mb-8 lg:mb-0">
+          <div className="grid grid-cols-2 gap-8 lg:grid-cols-6 lg:divide-x lg:divide-border/40">
+            <div className="col-span-2 mb-8 lg:mb-0 px-0 lg:px-6">
               <Link
                 href={buildLocalizedPath(locale, "/")}
                 className="flex items-center gap-2 lg:justify-start"
@@ -74,7 +81,7 @@ export default function Footer2({
             {footerNavItems?.map((section) => {
               if (!isNavGroup(section)) return null;
               return (
-                <div key={section._key}>
+                <div key={section._key} className="px-0 lg:px-6">
                   <h3 className="text-base mb-4 font-bold">{section.title}</h3>
                   <ul className="space-y-4 text-muted-foreground">
                     {section.links?.filter(isNavLink).map((link) => {
