@@ -9,4 +9,5 @@ const dataset = process.env.SANITY_STUDIO_DATASET;
 
 export default defineCliConfig({
   api: { projectId, dataset },
+  deployment: { appId: "kg63d9a8zd81m6bdn98xj5lk" },
 });

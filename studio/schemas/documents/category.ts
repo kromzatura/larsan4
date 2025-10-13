@@ -79,14 +79,14 @@ const category = defineType({
           options: { hotspot: true },
           description: "Open Graph image for category pages",
         }),
-        defineField({
-          // should match 'languageField' plugin configuration setting, if customized
-          name: "language",
-          type: "string",
-          readOnly: true,
-          hidden: true,
-        }),
       ],
+    }),
+    defineField({
+      // should match 'languageField' plugin configuration setting, if customized
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: true,
     }),
     orderRankField({ type: "category" }),
   ],

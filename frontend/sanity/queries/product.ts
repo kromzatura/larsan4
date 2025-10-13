@@ -9,6 +9,7 @@ const productCategoryFilter = `
   (!defined(language) || language in [$lang, $fallbackLang])
 `;
 
+// @sanity-typegen-ignore
 const productCategoryProjection = groq`
   _id,
   title,
@@ -16,6 +17,7 @@ const productCategoryProjection = groq`
   language
 `;
 
+// @sanity-typegen-ignore
 const productProjection = groq`
   _id,
   language,
@@ -55,6 +57,7 @@ const productProjection = groq`
   ${metaQuery}
 `;
 
+// @sanity-typegen-ignore
 const productListProjection = groq`
   _id,
   language,
