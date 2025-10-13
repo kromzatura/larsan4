@@ -126,7 +126,8 @@ export default {
       labelName: "Name",
       labelEmail: "Email Address",
       labelMessage: "Message",
-      footerAutomated: "This is an automated email sent from your contact form.",
+      footerAutomated:
+        "This is an automated email sent from your contact form.",
     },
   },
   notFound: {

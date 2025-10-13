@@ -29,7 +29,8 @@ export default {
     },
     listingBlock: {
       emptyStateCategoryNotFound: "Categorie niet gevonden.",
-      emptyStateNoProductsInCategory: "Geen producten gevonden in deze categorie.",
+      emptyStateNoProductsInCategory:
+        "Geen producten gevonden in deze categorie.",
       actionClearFilter: "Filter wissen",
       emptyStateGeneral: "Geen producten gevonden.",
     },
@@ -126,7 +127,8 @@ export default {
       labelName: "Naam",
       labelEmail: "E-mailadres",
       labelMessage: "Bericht",
-      footerAutomated: "Dit is een geautomatiseerde e-mail verzonden vanaf uw contactformulier.",
+      footerAutomated:
+        "Dit is een geautomatiseerde e-mail verzonden vanaf uw contactformulier.",
     },
   },
   notFound: {
