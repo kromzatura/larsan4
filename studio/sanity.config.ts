@@ -22,6 +22,8 @@ const singletonActions = new Set([
   "discardChanges",
   "restore",
   "unpublish",
+  // Allow delete so accidental/legacy duplicates can be cleaned up
+  "delete",
 ]);
 
 // Define the singleton document types
