@@ -2294,6 +2294,7 @@ export type Contact = {
     icon?: "mail" | "messages" | "mapPin" | "phone";
     title?: string;
     description?: string;
+    hasLink?: boolean;
     link?: Link;
     _key: string;
   }>;

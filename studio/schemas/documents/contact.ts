@@ -69,9 +69,25 @@ export default defineType({
               name: "description",
               type: "text",
             }),
+            // Authoring toggle to avoid accidental link validation when adding address-only items
+            defineField({
+              name: "hasLink",
+              type: "boolean",
+              title: "Has link?",
+              initialValue: false,
+              description:
+                "Enable to add a button/link. Leave off for address-only items.",
+            }),
             defineField({
               name: "link",
               type: "link",
+              hidden: ({ parent }) => !parent?.hasLink,
+              validation: (Rule) =>
+                Rule.custom((value, context) => {
+                  const hasLink = (context?.parent as any)?.hasLink;
+                  if (!hasLink) return true; // not required when toggle is off
+                  return value ? true : "Link is required when 'Has link?' is enabled";
+                }),
             }),
           ],
         },
