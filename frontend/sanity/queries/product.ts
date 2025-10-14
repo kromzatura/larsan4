@@ -124,9 +124,9 @@ export const PRODUCT_CATEGORIES_QUERY = groq`
   *[
     _type == "productCategory" &&
     defined(slug) &&
-    (!defined(language) || language in [$lang, $fallbackLang])
+    language == $lang
   ]
-  | order((language == $lang) desc, orderRank){
+  | order(orderRank){
     _id,
     title,
     slug,

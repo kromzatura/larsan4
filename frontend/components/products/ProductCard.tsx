@@ -1,3 +1,4 @@
+// Deprecated: ProductCard was removed. This file is intentionally left blank.
 import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";

@@ -1,3 +1,4 @@
+// Deprecated: ProductGrid was removed. This file is intentionally left blank.
 "use client";
 
 import ProductCard from "@/components/products/ProductCard";
