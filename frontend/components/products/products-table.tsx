@@ -81,7 +81,7 @@ export default function ProductsTable({
     <div className={cn("w-full", className)}>
       <div className="overflow-x-auto rounded-lg border">
         <table className="min-w-full text-sm">
-          <thead className="bg-muted/50 text-left text-xs uppercase tracking-wide text-muted-foreground">
+          <thead className="text-left text-xs uppercase tracking-wide text-muted-foreground border-b">
             <tr>
               <th scope="col" className="px-6 py-4">
                 {labels.headerProduct}
@@ -105,9 +105,9 @@ export default function ProductsTable({
               <ClickableRow
                 href={item.href}
                 key={item._id}
-                className="group relative border-t transition-colors hover:bg-muted/40"
+                className="group relative border-t transition-colors hover:bg-muted/30"
               >
-                <td className="px-6 py-5 md:py-6 align-middle">
+                <td className="px-6 py-6 md:py-7 align-middle">
                   <div className="flex items-center gap-5">
                     {item.imageUrl ? (
                       <Link href={item.href} className="relative z-10 shrink-0">
@@ -116,9 +116,11 @@ export default function ProductsTable({
                           alt={item.title || "Product image"}
                           width={320}
                           height={213}
-                          className="h-16 w-24 rounded object-cover ring-1 ring-border"
+                          className="h-16 w-24 rounded object-cover ring-1 ring-border transition duration-200 ease-out group-hover:ring-primary/40 group-hover:shadow-sm group-hover:scale-[1.02]"
                           sizes="(min-width: 1024px) 240px, (min-width: 768px) 200px, 160px"
-                          placeholder={item.imageMeta?.lqip ? "blur" : undefined}
+                          placeholder={
+                            item.imageMeta?.lqip ? "blur" : undefined
+                          }
                           blurDataURL={item.imageMeta?.lqip || undefined}
                         />
                       </Link>
@@ -126,19 +128,19 @@ export default function ProductsTable({
                     <div className="flex flex-col gap-1">
                       <Link
                         href={item.href}
-                        className="font-semibold hover:underline line-clamp-2 break-words"
+                        className="font-semibold hover:underline line-clamp-2 break-words leading-tight"
                       >
                         {item.title}
                       </Link>
                       {item.sku && (
-                        <span className="text-xs text-muted-foreground truncate block whitespace-nowrap">
+                        <span className="text-xs text-muted-foreground truncate block whitespace-nowrap font-mono">
                           {labels.labelSku}: {item.sku}
                         </span>
                       )}
                     </div>
                   </div>
                 </td>
-                <td className="px-6 py-5 md:py-6 align-top">
+                <td className="px-6 py-6 md:py-7 align-top">
                   <div className="relative z-10 flex flex-wrap items-center gap-2">
                     {Array.isArray(item.categories) &&
                       item.categories?.map((c) => (
@@ -155,7 +157,7 @@ export default function ProductsTable({
                         >
                           <Badge
                             variant="secondary"
-                            className="transition-colors hover:bg-secondary/80"
+                            className="transition-colors hover:bg-secondary/80 rounded-full px-2.5 py-0.5 text-xs"
                           >
                             {c?.title}
                           </Badge>
@@ -163,7 +165,7 @@ export default function ProductsTable({
                       ))}
                   </div>
                 </td>
-                <td className="px-6 py-5 md:py-6 align-top">
+                <td className="px-6 py-6 md:py-7 align-top">
                   <ul className="list-disc pl-5 space-y-1.5 marker:text-muted-foreground">
                     {Array.isArray(item.features) &&
                       item.features
@@ -171,13 +173,23 @@ export default function ProductsTable({
                         .map((f, idx) => <li key={idx}>{f}</li>)}
                   </ul>
                 </td>
-                <td className="px-6 py-5 md:py-6 align-top">
+                <td className="px-6 py-6 md:py-7 align-top">
                   <div className="relative z-10 flex flex-wrap items-center gap-2">
                     {item.productAttributes && (
-                      <Badge variant="outline">{item.productAttributes}</Badge>
+                      <Badge
+                        variant="outline"
+                        className="rounded-full px-2.5 py-0.5 text-xs"
+                      >
+                        {item.productAttributes}
+                      </Badge>
                     )}
                     {item.purity && (
-                      <Badge variant="outline">{labels.labelPurity}: {item.purity}</Badge>
+                      <Badge
+                        variant="outline"
+                        className="rounded-full px-2.5 py-0.5 text-xs"
+                      >
+                        {labels.labelPurity}: {item.purity}
+                      </Badge>
                     )}
                   </div>
                 </td>
@@ -191,7 +203,7 @@ export default function ProductsTable({
                         slug: item.slug || null,
                         imageUrl: item.imageUrl || null,
                       }}
-                      className="w-full max-w-44 px-6 mx-auto"
+                      className="w-full max-w-44 px-6 mx-auto transition duration-150 ease-out group-hover:shadow-sm group-hover:-translate-y-0.5"
                     />
                   )}
                 </td>
@@ -212,7 +224,7 @@ export default function ProductsTable({
             const qs = qp.toString();
             return `${baseUrl}${qs ? `?${qs}` : ""}`;
           }}
-          className="mt-6"
+          className="mt-8"
         />
       )}
     </div>
