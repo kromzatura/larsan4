@@ -21,9 +21,10 @@ export default function Feature15({
   columns,
   gridColumns,
   contrastVariant,
+  locale,
 }: Feature15 & {
   locale?: SupportedLocale;
-  contrastVariant?: "default" | "high-contrast";
+  contrastVariant: "default" | "high-contrast" | null;
 }) {
   const invert = contrastVariant === "high-contrast";
   return (
