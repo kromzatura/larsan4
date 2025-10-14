@@ -152,7 +152,7 @@ export default function CompareProducts({
         </Tabs>
       )}
       <div
-        className="overflow-x-auto rounded-lg border"
+        className="overflow-x-auto rounded-lg border bg-card shadow-sm"
         style={cssVars as CSSProperties}
       >
         <table className="min-w-full text-sm">
@@ -160,7 +160,7 @@ export default function CompareProducts({
             <tr>
               <th
                 scope="col"
-                className="w-40 px-6 py-4 text-left align-top font-medium text-primary"
+                className="w-48 px-6 py-4 text-left align-top font-semibold text-primary"
               >
                 {title || "Attributes"}
               </th>
@@ -169,7 +169,7 @@ export default function CompareProducts({
                   key={idx}
                   scope="col"
                   className={cn(
-                    "px-6 py-4 text-left font-medium text-primary md:table-cell",
+                    "px-6 py-4 text-left font-semibold text-primary md:table-cell",
                     header !== selectedTab ? "hidden" : ""
                   )}
                 >
@@ -180,8 +180,14 @@ export default function CompareProducts({
           </thead>
           <tbody>
             {normalized.rows.map((rowLabel, rowIdx) => (
-              <tr key={rowIdx} className="border-t">
-                <td className="w-40 px-6 py-5 md:py-6 align-top font-semibold whitespace-normal">
+              <tr
+                key={rowIdx}
+                className={cn(
+                  "border-t",
+                  rowIdx % 2 === 0 ? "even:bg-muted/30" : undefined
+                )}
+              >
+                <td className="w-48 px-6 py-5 md:py-6 align-top font-medium text-muted-foreground/90 whitespace-normal">
                   {rowLabel}
                 </td>
                 {normalized.cols.map((c, colIdx) => {
@@ -199,7 +205,14 @@ export default function CompareProducts({
                       )}
                     >
                       {!isAction && (
-                        <span className="text-muted-foreground break-words">
+                        <span
+                          className={cn(
+                            "break-words",
+                            rowLabel === "SKU"
+                              ? "font-mono text-xs md:text-sm"
+                              : "text-muted-foreground"
+                          )}
+                        >
                           {String(v ?? "—")}
                         </span>
                       )}
@@ -218,7 +231,7 @@ export default function CompareProducts({
                               columns?.[colIdx]?.product?.slug?.current ?? null,
                             imageUrl: null,
                           }}
-                          className="w-full max-w-44 px-6 mx-auto"
+                          className="w-full max-w-40 mx-auto text-xs md:text-sm py-2 px-3"
                         />
                       )}
                     </td>

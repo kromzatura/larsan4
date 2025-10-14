@@ -75,7 +75,20 @@ export default function SectionHeader({
             />
           )}
           {title && title.text && (
-            <Element className={cn(titleSizeClasses, titleWeightClasses)}>
+            <Element
+              className={cn(
+                titleSizeClasses,
+                titleWeightClasses,
+                // Serif for main comparison page H1: detect phrase pattern
+                /find the right.*mustard flour/i.test(title.text)
+                  ? "font-serif"
+                  : undefined,
+                // Bracketed Box section headers get bottom border for datasheet hierarchy
+                /^\[Box\d+]/i.test(title.text)
+                  ? "border-b pb-4"
+                  : undefined
+              )}
+            >
               {title.text}
             </Element>
           )}
