@@ -146,7 +146,7 @@ export default defineType({
       group: "content",
       rows: 3,
       description: "Short description shown in listings and SEO fallback.",
-      validation: (Rule) => Rule.max(160).warning("Keep under 160 characters."),
+      validation: (Rule) => Rule.max(260).warning("Keep under 160 characters."),
     }),
     defineField({
       name: "categories",

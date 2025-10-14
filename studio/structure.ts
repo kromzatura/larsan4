@@ -16,28 +16,96 @@ export const structure = (S: any, context: any) =>
   S.list()
     .title("Content")
     .items([
-      // Products (manual ordering)
-      orderableDocumentListDeskItem({
-        type: "product",
-        title: "Products",
-        icon: ListCollapse,
-        S,
-        context,
-      }),
-      orderableDocumentListDeskItem({
-        type: "specification",
-        title: "Specifications",
-        icon: ListCollapse,
-        S,
-        context,
-      }),
-      orderableDocumentListDeskItem({
-        type: "productCategory",
-        title: "Product Categories",
-        icon: ListCollapse,
-        S,
-        context,
-      }),
+      // Products (manual ordering, split per language)
+      S.listItem()
+        .title("Products")
+        .icon(ListCollapse)
+        .child(
+          S.list()
+            .title("Products")
+            .items([
+              orderableDocumentListDeskItem({
+                type: "product",
+                title: "Products (EN)",
+                icon: ListCollapse,
+                S,
+                context,
+                id: "orderable-product-en",
+                filter: "language == $lang",
+                params: { lang: "en" },
+              }),
+              orderableDocumentListDeskItem({
+                type: "product",
+                title: "Products (NL)",
+                icon: ListCollapse,
+                S,
+                context,
+                id: "orderable-product-nl",
+                filter: "language == $lang",
+                params: { lang: "nl" },
+              }),
+            ])
+        ),
+      // Specifications (manual ordering, split per language)
+      S.listItem()
+        .title("Specifications")
+        .icon(ListCollapse)
+        .child(
+          S.list()
+            .title("Specifications")
+            .items([
+              orderableDocumentListDeskItem({
+                type: "specification",
+                title: "Specifications (EN)",
+                icon: ListCollapse,
+                S,
+                context,
+                id: "orderable-specification-en",
+                filter: "language == $lang",
+                params: { lang: "en" },
+              }),
+              orderableDocumentListDeskItem({
+                type: "specification",
+                title: "Specifications (NL)",
+                icon: ListCollapse,
+                S,
+                context,
+                id: "orderable-specification-nl",
+                filter: "language == $lang",
+                params: { lang: "nl" },
+              }),
+            ])
+        ),
+      // Product Categories (manual ordering, split per language)
+      S.listItem()
+        .title("Product Categories")
+        .icon(ListCollapse)
+        .child(
+          S.list()
+            .title("Product Categories")
+            .items([
+              orderableDocumentListDeskItem({
+                type: "productCategory",
+                title: "Categories (EN)",
+                icon: ListCollapse,
+                S,
+                context,
+                id: "orderable-productCategory-en",
+                filter: "language == $lang",
+                params: { lang: "en" },
+              }),
+              orderableDocumentListDeskItem({
+                type: "productCategory",
+                title: "Categories (NL)",
+                icon: ListCollapse,
+                S,
+                context,
+                id: "orderable-productCategory-nl",
+                filter: "language == $lang",
+                params: { lang: "nl" },
+              }),
+            ])
+        ),
       S.divider(),
       orderableDocumentListDeskItem({
         type: "page",
@@ -70,34 +138,126 @@ export const structure = (S: any, context: any) =>
             .title("Category")
             .defaultOrdering([{ field: "title", direction: "asc" }])
         ),
-      orderableDocumentListDeskItem({
-        type: "author",
-        title: "Authors",
-        icon: User,
-        S,
-        context,
-      }),
-      orderableDocumentListDeskItem({
-        type: "faq",
-        title: "FAQs",
-        icon: ListCollapse,
-        S,
-        context,
-      }),
-      orderableDocumentListDeskItem({
-        type: "testimonial",
-        title: "Testimonials",
-        icon: Quote,
-        S,
-        context,
-      }),
-      orderableDocumentListDeskItem({
-        type: "team",
-        title: "Team",
-        icon: Users,
-        S,
-        context,
-      }),
+      // Authors (manual ordering, split per language)
+      S.listItem()
+        .title("Authors")
+        .icon(User)
+        .child(
+          S.list()
+            .title("Authors")
+            .items([
+              orderableDocumentListDeskItem({
+                type: "author",
+                title: "Authors (EN)",
+                icon: User,
+                S,
+                context,
+                id: "orderable-author-en",
+                filter: "language == $lang",
+                params: { lang: "en" },
+              }),
+              orderableDocumentListDeskItem({
+                type: "author",
+                title: "Authors (NL)",
+                icon: User,
+                S,
+                context,
+                id: "orderable-author-nl",
+                filter: "language == $lang",
+                params: { lang: "nl" },
+              }),
+            ])
+        ),
+      // FAQs (manual ordering, split per language)
+      S.listItem()
+        .title("FAQs")
+        .icon(ListCollapse)
+        .child(
+          S.list()
+            .title("FAQs")
+            .items([
+              orderableDocumentListDeskItem({
+                type: "faq",
+                title: "FAQs (EN)",
+                icon: ListCollapse,
+                S,
+                context,
+                id: "orderable-faq-en",
+                filter: "language == $lang",
+                params: { lang: "en" },
+              }),
+              orderableDocumentListDeskItem({
+                type: "faq",
+                title: "FAQs (NL)",
+                icon: ListCollapse,
+                S,
+                context,
+                id: "orderable-faq-nl",
+                filter: "language == $lang",
+                params: { lang: "nl" },
+              }),
+            ])
+        ),
+      // Testimonials (manual ordering, split per language)
+      S.listItem()
+        .title("Testimonials")
+        .icon(Quote)
+        .child(
+          S.list()
+            .title("Testimonials")
+            .items([
+              orderableDocumentListDeskItem({
+                type: "testimonial",
+                title: "Testimonials (EN)",
+                icon: Quote,
+                S,
+                context,
+                id: "orderable-testimonial-en",
+                filter: "language == $lang",
+                params: { lang: "en" },
+              }),
+              orderableDocumentListDeskItem({
+                type: "testimonial",
+                title: "Testimonials (NL)",
+                icon: Quote,
+                S,
+                context,
+                id: "orderable-testimonial-nl",
+                filter: "language == $lang",
+                params: { lang: "nl" },
+              }),
+            ])
+        ),
+      // Team (manual ordering, split per language)
+      S.listItem()
+        .title("Team")
+        .icon(Users)
+        .child(
+          S.list()
+            .title("Team")
+            .items([
+              orderableDocumentListDeskItem({
+                type: "team",
+                title: "Team (EN)",
+                icon: Users,
+                S,
+                context,
+                id: "orderable-team-en",
+                filter: "language == $lang",
+                params: { lang: "en" },
+              }),
+              orderableDocumentListDeskItem({
+                type: "team",
+                title: "Team (NL)",
+                icon: Users,
+                S,
+                context,
+                id: "orderable-team-nl",
+                filter: "language == $lang",
+                params: { lang: "nl" },
+              }),
+            ])
+        ),
       S.divider(),
       S.listItem()
         .title("Banner")
@@ -117,13 +277,36 @@ export const structure = (S: any, context: any) =>
             .schemaType("contact")
             .documentId("contact")
         ),
-      orderableDocumentListDeskItem({
-        type: "navigation",
-        title: "Navigation",
-        icon: Menu,
-        S,
-        context,
-      }),
+      // Navigation (manual ordering, split per language)
+      S.listItem()
+        .title("Navigation")
+        .icon(Menu)
+        .child(
+          S.list()
+            .title("Navigation")
+            .items([
+              orderableDocumentListDeskItem({
+                type: "navigation",
+                title: "Navigation (EN)",
+                icon: Menu,
+                S,
+                context,
+                id: "orderable-navigation-en",
+                filter: "language == $lang",
+                params: { lang: "en" },
+              }),
+              orderableDocumentListDeskItem({
+                type: "navigation",
+                title: "Navigation (NL)",
+                icon: Menu,
+                S,
+                context,
+                id: "orderable-navigation-nl",
+                filter: "language == $lang",
+                params: { lang: "nl" },
+              }),
+            ])
+        ),
       S.listItem()
         .title("Settings")
         .icon(Settings)
