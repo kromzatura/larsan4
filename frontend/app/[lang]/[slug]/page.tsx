@@ -76,15 +76,14 @@ export default async function Page(
   // Comparison datasheet enhancement: wrap entire page content if slug indicates comparison page
   const isComparisonPage = /compare|comparison|mustard/i.test(params.slug);
   return (
-    <div
-      className={isComparisonPage ? "container py-12" : undefined}
-    >
+    <div className={isComparisonPage ? "container py-12" : undefined}>
       {isComparisonPage ? (
         <div className="mx-auto rounded-lg border bg-card p-8 md:p-10 shadow-sm">
           <Blocks
             blocks={page.blocks}
             searchParams={
-              ((await props.searchParams) as { page?: string } | undefined) || {}
+              ((await props.searchParams) as { page?: string } | undefined) ||
+              {}
             }
             locale={locale}
           />

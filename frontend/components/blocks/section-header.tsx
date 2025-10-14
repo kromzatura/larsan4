@@ -84,9 +84,7 @@ export default function SectionHeader({
                   ? "font-serif"
                   : undefined,
                 // Bracketed Box section headers get bottom border for datasheet hierarchy
-                /^\[Box\d+]/i.test(title.text)
-                  ? "border-b pb-4"
-                  : undefined
+                /^\[Box\d+]/i.test(title.text) ? "border-b pb-4" : undefined
               )}
             >
               {title.text}
