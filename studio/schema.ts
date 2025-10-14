@@ -15,6 +15,7 @@ import banner from "./schemas/documents/banner";
 import productCategory from "./schemas/documents/productCategory";
 import product from "./schemas/documents/product";
 import specification from "./schemas/documents/specification";
+import theme from "./schemas/documents/theme";
 
 // Schema UI shared objects
 import blockContent from "./schemas/blocks/shared/block-content";
@@ -141,6 +142,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     productCategory,
     product,
     specification,
+  theme,
     // shared objects
     blockContent,
     link,
