@@ -206,3 +206,29 @@ The project uses an editor-controlled theme model backed by Sanity, designed for
 Notes
 - This approach keeps Tailwind classes stable while allowing runtime design control via CSS variables.
 - For multilingual sites, the Theme can be localized per language when needed.
+
+## Block Styling Controls (Surface & Contrast)
+
+Two new schema-driven presentation controls allow editors to request elevated surfaces or high contrast treatments without relying on implicit heuristics:
+
+### Section Header: `surface`
+- Field: `surface` (string radio list) on the Section Header block.
+- When set (e.g. `surface-1`), the frontend wraps the header in a card-like container applying background + subtle border elevation.
+- Use for emphasizing headings within long scrolling pages or creating visual anchors above data sections.
+- Leave unset for inline / minimal contexts.
+
+### Feature 15: `contrastVariant`
+- Field: `contrastVariant` (string radio list) on the Feature 15 block.
+- Enables explicit high-contrast mode (e.g. `contrast-high`) instead of inferring from card count.
+- High contrast variant inverts internal card borders and strengthens text contrast for value/proposition pairings.
+- Use for brand or promise statements that must stand out from surrounding neutral surfaces.
+
+### Editor Guidance
+- Prefer enabling `surface` only when the block begins a new conceptual section or needs scannability separation.
+- Reserve `contrastVariant` high-contrast for blocks with strategic messaging (mission, value props, pricing differentiators) to avoid visual fatigue.
+- Avoid stacking multiple elevated surfaces directly; alternate neutral and elevated blocks for rhythm.
+
+### Implementation Notes
+- GROQ fragments for these blocks include the new fields; run `pnpm typegen` after modifying schema.
+- Components (`SectionHeader`, `Feature15`) map the fields directly to container classes—no title or count heuristics remain.
+- This reduces future regression risk and improves clarity for editors during content reviews.
