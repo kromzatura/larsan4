@@ -36,7 +36,12 @@ const Hero12 = ({
   const overlayClass = getOverlayClass(imageTreatment?.treatment);
   const gray = imageTreatment?.grayscale === "on";
   return (
-    <section className={cn("relative overflow-hidden py-32 overlay-base", overlayClass)}>
+    <section
+      className={cn(
+        "relative overflow-hidden py-32 overlay-base",
+        overlayClass
+      )}
+    >
       {backgroundImage && (
         <div className="absolute inset-x-0 top-0 flex h-full w-full items-center justify-center opacity-100">
           <Image
@@ -44,16 +49,13 @@ const Hero12 = ({
             alt={backgroundImage.alt || ""}
             width={1000}
             height={1000}
-            className={cn(
-              "h-full w-full object-cover",
-              gray && "grayscale"
-            )}
+            className={cn("h-full w-full object-cover", gray && "grayscale")}
           />
         </div>
       )}
       <div className="relative z-10 container">
-        <div className="mx-auto flex max-w-5xl flex-col items-center">
-          <div className="flex flex-col items-center gap-6 text-center">
+        <div className="mx-auto flex max-w-5xl flex-col items-start">
+          <div className="flex flex-col items-start gap-6 text-left">
             {image && (
               <div className="rounded-xl bg-background/30 p-4 shadow-sm backdrop-blur-sm">
                 <Image
@@ -66,11 +68,11 @@ const Hero12 = ({
               </div>
             )}
             <div>
-              <h1 className="mb-6 text-2xl font-bold tracking-tight text-pretty lg:text-5xl">
+              <h1 className="mb-6 text-2xl font-serif font-bold tracking-tight text-pretty lg:text-5xl">
                 {title}
               </h1>
               {body && (
-                <div className="mx-auto max-w-3xl text-muted-foreground lg:text-xl">
+                <div className="max-w-3xl text-muted-foreground lg:text-xl">
                   <PortableTextRenderer value={body} locale={locale} />
                 </div>
               )}

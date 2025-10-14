@@ -21,27 +21,32 @@ export default function Feature15({
   columns,
   gridColumns,
 }: Feature15 & { locale?: SupportedLocale }) {
+  const invert = Array.isArray(columns) && columns.length === 3;
   return (
-    <SectionContainer padding={padding}>
+    <SectionContainer
+      padding={padding}
+      className={cn(invert && "rounded-lg bg-primary text-primary-foreground")}
+    >
       {columns && columns?.length > 0 && (
         <div
           className={cn(
             "mx-auto mt-20 grid gap-6",
             gridColumns === "grid-cols-2" ? "max-w-5xl" : undefined,
-            `lg:${gridColumns}`
+            `lg:${gridColumns}`,
+            invert && "p-6 md:p-8"
           )}
         >
           {columns?.map((column) => {
-            const Component = componentMap[column._type] as React.ComponentType<
-              typeof column
-            >;
+            const Component = componentMap[
+              column._type
+            ] as React.ComponentType<any>;
             if (!Component) {
               console.warn(
                 `No component implemented for column type: ${column._type}`
               );
               return <div data-type={column._type} key={column._key} />;
             }
-            return <Component {...column} key={column._key} />;
+            return <Component {...column} invert={invert} key={column._key} />;
           })}
         </div>
       )}

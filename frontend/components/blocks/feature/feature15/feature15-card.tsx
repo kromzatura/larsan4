@@ -12,14 +12,20 @@ export default function Feature15Card({
   iconVariant,
   title,
   description,
-}: Feature15Card) {
+  invert,
+}: Feature15Card & { invert?: boolean }) {
   return (
-    <div className="flex flex-col justify-between rounded-lg bg-accent p-6 md:min-h-[300px] md:p-8">
-      <span className="mb-6 flex size-11 items-center justify-center rounded-full bg-background">
+    <div
+      className={
+        "flex flex-col justify-between rounded-lg bg-card border p-6 md:min-h-[300px] md:p-8 " +
+        (invert ? "border-primary-foreground/20" : "")
+      }
+    >
+      <span className="mb-6 flex size-11 items-center justify-center rounded-full bg-accent">
         <Icon iconVariant={iconVariant || "none"} strokeWidth={2} size={6} />
       </span>
       <div>
-        <h3 className="text-lg font-medium md:text-2xl">{title}</h3>
+        <h3 className="text-lg font-semibold md:text-2xl">{title}</h3>
         <p className="mt-2 text-muted-foreground">{description}</p>
       </div>
     </div>

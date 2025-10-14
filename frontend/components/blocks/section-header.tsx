@@ -48,8 +48,19 @@ export default function SectionHeader({
     bold: "font-bold",
   }[titleWeight];
 
+  const titleText = (title?.text || "").trim();
+  const surfaceWrapTitles = new Set([
+    "Our Founder's Commitment",
+    "Our Mission",
+    "Experience the LAR Group Quality Standard",
+  ]);
+  const surfaceWrap = surfaceWrapTitles.has(titleText);
+
   return (
-    <SectionContainer padding={padding}>
+    <SectionContainer
+      padding={padding}
+      className={cn(surfaceWrap && "rounded-lg bg-surface-1 p-8 md:p-10")}
+    >
       <div
         className={cn(
           stackAlign === "center" ? "max-w-4xl text-center mx-auto" : undefined,
