@@ -17,7 +17,10 @@ export type ProductsTableItem = {
   title: string | null;
   sku?: string | null;
   imageUrl?: string | null;
-  imageMeta?: { lqip?: string | null; dimensions?: { width?: number; height?: number } | null } | null;
+  imageMeta?: {
+    lqip?: string | null;
+    dimensions?: { width?: number | null; height?: number | null } | null;
+  } | null;
   features?: string[] | null;
   productAttributes?: string | null;
   purity?: string | number | null;
