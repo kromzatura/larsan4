@@ -87,8 +87,9 @@ export default async function AllProducts16({
       title: p.title || null,
       sku: spec?.sku || null,
       imageUrl: p.image?.asset?._id
-        ? urlFor(p.image).width(96).height(64).fit("crop").url()
+        ? urlFor(p.image).width(320).height(213).fit("crop").url()
         : undefined,
+      imageMeta: p.image?.asset?.metadata || null,
       features: Array.isArray(p.keyFeatures) ? p.keyFeatures.slice(0, 3) : null,
       productAttributes: spec?.productAttributes || null,
       purity: spec?.purity || null,

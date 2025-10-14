@@ -17,6 +17,7 @@ export type ProductsTableItem = {
   title: string | null;
   sku?: string | null;
   imageUrl?: string | null;
+  imageMeta?: { lqip?: string | null; dimensions?: { width?: number; height?: number } | null } | null;
   features?: string[] | null;
   productAttributes?: string | null;
   purity?: string | number | null;
@@ -110,9 +111,12 @@ export default function ProductsTable({
                         <Image
                           src={item.imageUrl}
                           alt={item.title || "Product image"}
-                          width={96}
-                          height={64}
+                          width={320}
+                          height={213}
                           className="h-16 w-24 rounded object-cover ring-1 ring-border"
+                          sizes="(min-width: 1024px) 240px, (min-width: 768px) 200px, 160px"
+                          placeholder={item.imageMeta?.lqip ? "blur" : undefined}
+                          blurDataURL={item.imageMeta?.lqip || undefined}
                         />
                       </Link>
                     ) : null}
