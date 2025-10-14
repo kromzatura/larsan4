@@ -15515,6 +15515,20 @@
             }
           },
           "optional": true
+        },
+        "isDatasheetTitle": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
+        "hasGroupDivider": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
         }
       }
     }

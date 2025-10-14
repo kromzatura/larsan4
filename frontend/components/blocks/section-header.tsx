@@ -29,8 +29,14 @@ export default function SectionHeader({
   description,
   links,
   surface,
+  isDatasheetTitle,
+  hasGroupDivider,
   locale = FALLBACK_LOCALE,
-}: SectionHeaderProps & { surface?: "default" | "surface-1" | null }) {
+}: SectionHeaderProps & {
+  surface?: "default" | "surface-1" | null;
+  isDatasheetTitle?: boolean | null;
+  hasGroupDivider?: boolean | null;
+}) {
   const isNarrow = sectionWidth === "narrow";
   const titleSize = title?.size || "default";
   const titleWeight = title?.weight || "bold";
@@ -79,12 +85,8 @@ export default function SectionHeader({
               className={cn(
                 titleSizeClasses,
                 titleWeightClasses,
-                // Serif for main comparison page H1: detect phrase pattern
-                /find the right.*mustard flour/i.test(title.text)
-                  ? "font-serif"
-                  : undefined,
-                // Bracketed Box section headers get bottom border for datasheet hierarchy
-                /^\[Box\d+]/i.test(title.text) ? "border-b pb-4" : undefined
+                isDatasheetTitle && "font-serif",
+                hasGroupDivider && "border-b pb-4"
               )}
             >
               {title.text}
