@@ -45,9 +45,7 @@ export function MainLayoutClientShell({
           locale={locale}
         />
       )}
-      <main className="flex-1">
-        {children}
-      </main>
+      <main className="flex-1">{children}</main>
       <Toaster position="top-right" />
       <Footer2
         locale={locale}

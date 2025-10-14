@@ -132,8 +132,10 @@ export default async function AllProducts16({
               <>
                 <p>
                   {isInvalidCategory
-                    ? dictionary.products.listingBlock.emptyStateCategoryNotFound
-                    : dictionary.products.listingBlock.emptyStateNoProductsInCategory}
+                    ? dictionary.products.listingBlock
+                        .emptyStateCategoryNotFound
+                    : dictionary.products.listingBlock
+                        .emptyStateNoProductsInCategory}
                 </p>
                 <p className="mt-2">
                   <Link className="underline" href={baseUrl}>
@@ -147,7 +149,7 @@ export default async function AllProducts16({
           </div>
         }
         locale={locale}
-      className="mb-12"
+        className="mb-12"
       />
     </SectionContainer>
   );
