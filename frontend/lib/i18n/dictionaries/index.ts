@@ -5,6 +5,11 @@ import nl from "./nl";
 export type UIDictionary = {
   inquiry: {
     label: string;
+    clearAll?: string;
+    empty?: string;
+    continue?: string;
+    send?: string;
+    browse?: string;
   };
   products: {
     table: {

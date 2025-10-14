@@ -14,6 +14,7 @@ import {
 } from "@/lib/inquiry";
 import { Trash2, X, Send, ArrowLeft } from "lucide-react";
 import { useLocale } from "@/lib/i18n/locale-context";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 import { buildLocalizedPath } from "@/lib/i18n/routing";
 
 function encodeInquiry(items: InquiryItem[]): string {
@@ -38,6 +39,7 @@ export default function InquiryPageClient() {
   const { items } = useInquiry();
   const [localItems, setLocalItems] = useState<InquiryItem[]>(items);
   const locale = useLocale();
+  const t = getDictionary(locale);
 
   useEffect(() => {
     // Sync initial items (in case context lag)
@@ -61,13 +63,13 @@ export default function InquiryPageClient() {
   return (
     <div className="container py-10 max-w-3xl">
       <div className="mb-8 flex items-center justify-between">
-  <h1 className="text-3xl font-serif font-semibold tracking-tight">Inquiry</h1>
+  <h1 className="text-3xl font-serif font-semibold tracking-tight">{t.inquiry?.label || "Inquiry"}</h1>
         {hasItems && (
           <button
             onClick={() => clearInquiry()}
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
-            <Trash2 className="mr-1 h-4 w-4" /> Clear all
+            <Trash2 className="mr-1 h-4 w-4" /> {t.inquiry?.clearAll ?? "Clear all"}
           </button>
         )}
       </div>
@@ -75,13 +77,13 @@ export default function InquiryPageClient() {
       {!hasItems && (
         <div className="rounded-md border p-10 text-center">
           <p className="mb-6 text-muted-foreground">
-            No items in your inquiry list yet.
+            {t.inquiry?.empty ?? "No items in your inquiry list yet."}
           </p>
           <Link
             href={buildLocalizedPath(locale, "/products")}
             className={cn(buttonVariants({ variant: "default" }))}
           >
-            Browse Products
+            {t.inquiry?.browse || "Browse Products"}
           </Link>
         </div>
       )}
@@ -128,7 +130,7 @@ export default function InquiryPageClient() {
                 "flex-1 inline-flex items-center justify-center"
               )}
             >
-              <ArrowLeft className="mr-2 h-4 w-4" /> Continue Shopping
+              <ArrowLeft className="mr-2 h-4 w-4" /> {t.inquiry?.continue ?? "Continue Shopping"}
             </Link>
             <Link
               href={`${buildLocalizedPath(locale, "/contact")}${
@@ -139,7 +141,7 @@ export default function InquiryPageClient() {
                 "flex-1 inline-flex items-center justify-center"
               )}
             >
-              <Send className="mr-2 h-4 w-4" /> Send Inquiry
+              <Send className="mr-2 h-4 w-4" /> {t.inquiry?.send ?? "Send Inquiry"}
             </Link>
           </div>
         </div>
