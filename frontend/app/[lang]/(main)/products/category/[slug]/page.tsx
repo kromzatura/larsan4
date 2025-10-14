@@ -16,6 +16,7 @@ import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import type { AsyncPageProps } from "@/lib/types/next";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { mapProductToProductsTableItem } from "@/sanity/lib/mappers";
 
 const PAGE_SIZE = 12;
 
@@ -100,7 +101,10 @@ export default async function CategoryPage(
 
   const productsPath = buildLocalizedPath(locale, "/products");
   const links = [
-    { label: dictionary.products.categoryPage.breadcrumbProducts, href: productsPath },
+    {
+      label: dictionary.products.categoryPage.breadcrumbProducts,
+      href: productsPath,
+    },
     {
       label: cat.title ?? dictionary.products.categoryPage.breadcrumbCategory,
       href: baseUrl,
@@ -112,7 +116,9 @@ export default async function CategoryPage(
       <Breadcrumbs links={links} locale={locale} />
       <div className="mt-7 flex items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-semibold md:text-5xl">{cat.title}</h1>
+          <h1 className="text-3xl font-serif font-semibold md:text-5xl">
+            {cat.title}
+          </h1>
           {cat.description && (
             <p className="mt-3 max-w-3xl text-muted-foreground">
               {cat.description}
@@ -120,7 +126,9 @@ export default async function CategoryPage(
           )}
         </div>
         <div className="ml-auto flex items-center gap-2 text-sm">
-          <span className="text-muted-foreground">{dictionary.products.categoryPage.labelSort}</span>
+          <span className="text-muted-foreground">
+            {dictionary.products.categoryPage.labelSort}
+          </span>
           <Link
             href={`${baseUrl}?sort=newest`}
             className={`rounded-md border px-2 py-1 ${
@@ -160,40 +168,9 @@ export default async function CategoryPage(
             labelPurity: dictionary.products.table.labelPurity,
             emptyState: dictionary.products.table.emptyState,
           }}
-          items={(products || []).map<ProductsTableItem>((p) => {
-            const spec = Array.isArray(p.specifications)
-              ? p.specifications[0]
-              : undefined;
-            return {
-              _id: p._id || "",
-              slug: p.slug?.current || "",
-              title: p.title || null,
-              sku: spec?.sku || null,
-              imageUrl: p.image?.asset?._id
-                ? urlFor(p.image).width(96).height(64).fit("crop").url()
-                : undefined,
-              features: Array.isArray(p.keyFeatures)
-                ? p.keyFeatures.slice(0, 3)
-                : null,
-              productAttributes: spec?.productAttributes || null,
-              purity: spec?.purity || null,
-              categories: Array.isArray(p.categories)
-                ? p.categories.map((c) => ({
-                    _id: c?._id || undefined,
-                    title: c?.title || null,
-                    slug: c?.slug?.current || null,
-                    href: buildLocalizedPath(
-                      locale,
-                      `/products/category/${c?.slug?.current || ""}`
-                    ),
-                  }))
-                : null,
-              href: buildLocalizedPath(
-                locale,
-                `/products/${p.slug?.current || ""}`
-              ),
-            };
-          })}
+          items={(products || []).map<ProductsTableItem>((p) =>
+            mapProductToProductsTableItem(p as any, locale)
+          )}
           page={page}
           pageCount={totalPages}
           baseUrl={baseUrl}
@@ -204,6 +181,7 @@ export default async function CategoryPage(
             </div>
           }
           locale={locale}
+          className="mb-12"
         />
       </div>
     </section>
