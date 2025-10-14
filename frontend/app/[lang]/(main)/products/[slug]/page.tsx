@@ -18,13 +18,13 @@ import type {
   ProductSpecification,
 } from "@/lib/types/content";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
-import { urlFor } from "@/sanity/lib/image";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import type { AsyncPageProps } from "@/lib/types/next";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { buildAbsoluteUrl } from "@/lib/url";
 import { fetchSanitySettings } from "@/sanity/lib/fetch";
+import { urlFor } from "@/sanity/lib/image";
 
 type SpecPair = { label: string; value?: string | number | null };
 
@@ -175,7 +175,20 @@ export default async function ProductPage(
   const productPath = `/products/${product.slug?.current ?? ""}`;
   const shareUrl = buildAbsoluteUrl(locale, productPath);
 
-  const jsonLd: Record<string, any> = {
+  interface ProductJsonLd {
+    "@context": string;
+    "@type": string;
+    "@id": string;
+    url: string;
+    name?: string;
+    description?: string;
+    sku?: string;
+    brand?: { "@type": string; name: string };
+    image?: string[];
+    category?: string[];
+  }
+
+  const jsonLd: ProductJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     "@id": shareUrl,
@@ -188,7 +201,9 @@ export default async function ProductPage(
       : undefined,
     image: product.image?.asset?.url ? [product.image.asset.url] : undefined,
     category: Array.isArray(product.categories)
-      ? product.categories.map((c) => c?.title).filter(Boolean)
+      ? product.categories
+          .map((c) => c?.title)
+          .filter((t): t is string => typeof t === "string" && t.length > 0)
       : undefined,
   };
 

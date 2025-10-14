@@ -3,17 +3,21 @@ import Icon from "@/components/icon";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Feature15 = Extract<Block, { _type: "feature-15" }>;
-type Feature15Card = Extract<
+type Feature15CardBase = Extract<
   NonNullable<Feature15["columns"]>[number],
   { _type: "feature-15-card" }
 >;
+
+export interface Feature15CardProps extends Feature15CardBase {
+  invert?: boolean;
+}
 
 export default function Feature15Card({
   iconVariant,
   title,
   description,
   invert,
-}: Feature15Card & { invert?: boolean }) {
+}: Feature15CardProps) {
   return (
     <div
       className={

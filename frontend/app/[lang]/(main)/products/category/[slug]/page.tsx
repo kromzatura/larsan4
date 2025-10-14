@@ -11,7 +11,6 @@ import {
 import ProductsTable, {
   ProductsTableItem,
 } from "@/components/products/products-table";
-import { urlFor } from "@/sanity/lib/image";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import type { AsyncPageProps } from "@/lib/types/next";
@@ -169,7 +168,7 @@ export default async function CategoryPage(
             emptyState: dictionary.products.table.emptyState,
           }}
           items={(products || []).map<ProductsTableItem>((p) =>
-            mapProductToProductsTableItem(p as any, locale)
+            mapProductToProductsTableItem(p, locale)
           )}
           page={page}
           pageCount={totalPages}

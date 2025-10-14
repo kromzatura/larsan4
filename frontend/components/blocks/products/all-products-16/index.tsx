@@ -7,7 +7,6 @@ import {
   fetchSanityProductsByCategory,
   fetchSanityProductsCountByCategory,
 } from "@/sanity/lib/fetch";
-import { urlFor } from "@/sanity/lib/image";
 import ProductsTable, {
   ProductsTableItem,
 } from "@/components/products/products-table";
@@ -79,7 +78,7 @@ export default async function AllProducts16({
   if (activeCategory) baseSearchParams.set("category", activeCategory);
 
   const items: ProductsTableItem[] = (products || []).map((p) =>
-    mapProductToProductsTableItem(p as any, locale)
+    mapProductToProductsTableItem(p, locale)
   );
 
   return (
