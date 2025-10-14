@@ -9,15 +9,21 @@ import Icon from "@/components/icon";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { getOverlayClass } from "@/lib/getOverlayClass";
 
 type Hero12Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "hero-12" }
 > & {
   locale?: SupportedLocale;
+  imageTreatment?: {
+    treatment?: "none" | "dark-30" | "dark-50" | "brand-gradient" | null;
+    grayscale?: "on" | "off" | null;
+  } | null;
 };
 
 const Hero12 = ({
+  imageTreatment,
   backgroundImage,
   tagLine,
   title,
@@ -27,8 +33,15 @@ const Hero12 = ({
   techLogos,
   locale = FALLBACK_LOCALE,
 }: Hero12Props) => {
+  const overlayClass = getOverlayClass(imageTreatment?.treatment);
+  const gray = imageTreatment?.grayscale === "on";
   return (
-    <section className="relative overflow-hidden py-32">
+    <section
+      className={cn(
+        "relative overflow-hidden py-32 overlay-base",
+        overlayClass
+      )}
+    >
       {backgroundImage && (
         <div className="absolute inset-x-0 top-0 flex h-full w-full items-center justify-center opacity-100">
           <Image
@@ -36,13 +49,13 @@ const Hero12 = ({
             alt={backgroundImage.alt || ""}
             width={1000}
             height={1000}
-            className="h-full w-full object-cover opacity-90 [mask-image:radial-gradient(75%_75%_at_center,white,transparent)]"
+            className={cn("h-full w-full object-cover", gray && "grayscale")}
           />
         </div>
       )}
       <div className="relative z-10 container">
-        <div className="mx-auto flex max-w-5xl flex-col items-center">
-          <div className="flex flex-col items-center gap-6 text-center">
+        <div className="mx-auto flex max-w-5xl flex-col items-start">
+          <div className="flex flex-col items-start gap-6 text-left">
             {image && (
               <div className="rounded-xl bg-background/30 p-4 shadow-sm backdrop-blur-sm">
                 <Image
@@ -55,11 +68,11 @@ const Hero12 = ({
               </div>
             )}
             <div>
-              <h1 className="mb-6 text-2xl font-bold tracking-tight text-pretty lg:text-5xl">
+              <h1 className="mb-6 text-2xl font-serif font-bold tracking-tight text-pretty lg:text-5xl">
                 {title}
               </h1>
               {body && (
-                <div className="mx-auto max-w-3xl text-muted-foreground lg:text-xl">
+                <div className="max-w-3xl text-muted-foreground lg:text-xl">
                   <PortableTextRenderer value={body} locale={locale} />
                 </div>
               )}

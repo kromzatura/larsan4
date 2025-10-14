@@ -28,8 +28,15 @@ export default function SectionHeader({
   title,
   description,
   links,
+  surface,
+  isDatasheetTitle,
+  hasGroupDivider,
   locale = FALLBACK_LOCALE,
-}: SectionHeaderProps) {
+}: SectionHeaderProps & {
+  surface?: "default" | "surface-1" | null;
+  isDatasheetTitle?: boolean | null;
+  hasGroupDivider?: boolean | null;
+}) {
   const isNarrow = sectionWidth === "narrow";
   const titleSize = title?.size || "default";
   const titleWeight = title?.weight || "bold";
@@ -48,8 +55,13 @@ export default function SectionHeader({
     bold: "font-bold",
   }[titleWeight];
 
+  const isSurface1 = surface === "surface-1";
+
   return (
-    <SectionContainer padding={padding}>
+    <SectionContainer
+      padding={padding}
+      className={cn(isSurface1 && "rounded-lg bg-surface-1 p-8 md:p-10")}
+    >
       <div
         className={cn(
           stackAlign === "center" ? "max-w-4xl text-center mx-auto" : undefined,
@@ -69,7 +81,14 @@ export default function SectionHeader({
             />
           )}
           {title && title.text && (
-            <Element className={cn(titleSizeClasses, titleWeightClasses)}>
+            <Element
+              className={cn(
+                titleSizeClasses,
+                titleWeightClasses,
+                isDatasheetTitle && "font-serif",
+                hasGroupDivider && "border-b pb-4"
+              )}
+            >
               {title.text}
             </Element>
           )}

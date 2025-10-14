@@ -15,6 +15,7 @@ import banner from "./schemas/documents/banner";
 import productCategory from "./schemas/documents/productCategory";
 import product from "./schemas/documents/product";
 import specification from "./schemas/documents/specification";
+import theme from "./schemas/documents/theme";
 
 // Schema UI shared objects
 import blockContent from "./schemas/blocks/shared/block-content";
@@ -23,6 +24,7 @@ import linkIcon from "./schemas/blocks/shared/link-icon";
 import linkGroup from "./schemas/blocks/shared/link-group";
 import { buttonVariant } from "./schemas/blocks/shared/button-variant";
 import sectionPadding from "./schemas/blocks/shared/section-padding";
+import imageTreatment from "./schemas/blocks/shared/image-treatment";
 // Schema UI objects
 import sectionHeader from "./schemas/blocks/section-header";
 import hero12 from "./schemas/blocks/hero/hero12";
@@ -141,6 +143,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     productCategory,
     product,
     specification,
+  theme,
     // shared objects
     blockContent,
     link,
@@ -148,6 +151,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     linkGroup,
     buttonVariant,
     sectionPadding,
+  imageTreatment,
     // blocks
     sectionHeader,
     hero12,

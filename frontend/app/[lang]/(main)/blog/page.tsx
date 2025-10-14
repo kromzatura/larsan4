@@ -128,7 +128,7 @@ export default async function BlogIndex(props: LangAsyncPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
-      <h1 className="text-3xl font-semibold md:text-5xl">Blog</h1>
+  <h1 className="text-3xl font-serif font-semibold md:text-5xl">Blog</h1>
       <div className="mt-5 flex flex-wrap gap-2">
         <Link
           href={`${basePath}/rss.xml`}

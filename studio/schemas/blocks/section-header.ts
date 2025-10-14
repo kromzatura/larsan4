@@ -18,6 +18,20 @@ export default defineType({
       type: "section-padding",
     }),
     defineField({
+      name: "surface",
+      type: "string",
+      title: "Surface",
+      description: "Choose a surface variant for this header",
+      options: {
+        list: [
+          { title: "Default", value: "default" },
+          { title: "Surface 1", value: "surface-1" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "default",
+    }),
+    defineField({
       name: "sectionWidth",
       type: "string",
       title: "Section Width",
@@ -111,6 +125,22 @@ export default defineType({
       type: "array",
       of: [{ type: "link-icon" }],
       validation: (Rule) => Rule.max(2),
+    }),
+    defineField({
+      name: "isDatasheetTitle",
+      type: "boolean",
+      title: "Display as Serif Datasheet Title",
+      description:
+        "Use for the main title of a comparison or datasheet-style page to apply serif styling and elevated visual weight.",
+      initialValue: false,
+    }),
+    defineField({
+      name: "hasGroupDivider",
+      type: "boolean",
+      title: "Display as Group Divider",
+      description:
+        "Adds a bottom border and padding for major section grouping (e.g., Box sections).",
+      initialValue: false,
     }),
   ],
   preview: {

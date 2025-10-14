@@ -8,6 +8,7 @@ export const hero12Query = groq`
   _type == "hero-12" => {
     _type,
     _key,
+    imageTreatment,
     backgroundImage{
       ${imageQuery}
     },

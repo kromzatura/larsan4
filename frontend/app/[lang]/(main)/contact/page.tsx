@@ -87,7 +87,7 @@ export default async function ContactPage(props: LangAsyncPageProps) {
             <span className="text-sm font-semibold">{contact.tagline}</span>
           )}
           {contact?.title && (
-            <h1 className="mt-1 mb-3 text-3xl font-semibold text-balance md:text-4xl">
+            <h1 className="mt-1 mb-3 text-3xl font-serif font-semibold text-balance md:text-4xl">
               {contact.title}
             </h1>
           )}
@@ -97,16 +97,25 @@ export default async function ContactPage(props: LangAsyncPageProps) {
             </p>
           )}
         </div>
-        <div className="grid gap-10 lg:grid-cols-2">
+        <div className="grid gap-12 lg:grid-cols-2">
           <div className="grid gap-10 sm:grid-cols-2">
             {contact?.contactMethods?.map((method, index) => (
-              <div key={index}>
-                {method.icon && getIcon(method.icon)}
+              <div
+                key={index}
+                className="flex flex-col rounded-lg border bg-card p-6 shadow-sm"
+              >
+                {method.icon && (
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    {getIcon(method.icon)}
+                  </div>
+                )}
                 {method.title && (
-                  <p className="mb-2 text-lg font-semibold">{method.title}</p>
+                  <p className="mb-2 text-base font-semibold tracking-tight">
+                    {method.title}
+                  </p>
                 )}
                 {method.description && (
-                  <p className="mb-3 text-muted-foreground">
+                  <p className="mb-4 text-sm text-muted-foreground leading-relaxed">
                     {method.description}
                   </p>
                 )}
@@ -117,7 +126,7 @@ export default async function ContactPage(props: LangAsyncPageProps) {
                     locale={locale}
                     className={
                       method.link.buttonVariant === "link"
-                        ? "font-semibold text-base p-0"
+                        ? "font-semibold text-sm p-0 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                         : ""
                     }
                   />
@@ -125,8 +134,14 @@ export default async function ContactPage(props: LangAsyncPageProps) {
               </div>
             ))}
           </div>
-          <div className="mx-auto flex w-full flex-col gap-6 rounded-lg bg-muted p-10 lg:max-w-[29rem]">
-            <ContactInquiryWrapper initialInquiryItems={inquiryItems} locale={locale} />
+          <div className="mx-auto flex w-full flex-col gap-6 rounded-lg border bg-card p-8 lg:max-w-[32rem] shadow-sm">
+            {/* ContactInquiryWrapper does not currently accept styling override props; we style via inherited classes inside ContactForm */}
+            <div className="space-y-6 [&_input]:w-full [&_input]:rounded-md [&_input]:border [&_input]:bg-background [&_input]:px-3 [&_input]:py-2 [&_input]:text-sm [&_input]:shadow-sm [&_input]:transition [&_input]:focus-visible:outline-none [&_input]:focus-visible:ring-2 [&_input]:focus-visible:ring-ring [&_textarea]:w-full [&_textarea]:rounded-md [&_textarea]:border [&_textarea]:bg-background [&_textarea]:px-3 [&_textarea]:py-2 [&_textarea]:text-sm [&_textarea]:shadow-sm [&_textarea]:transition [&_textarea]:focus-visible:outline-none [&_textarea]:focus-visible:ring-2 [&_textarea]:focus-visible:ring-ring [&_button[type=submit]]:w-full">
+              <ContactInquiryWrapper
+                initialInquiryItems={inquiryItems}
+                locale={locale}
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -90,54 +90,56 @@ export default function FAQ14({
 
   return (
     <SectionContainer padding={padding} className="relative overflow-hidden">
-      <div className="text-center">
-        {title && title.text && (
-          <Element className={cn(titleSizeClasses, titleWeightClasses)}>
-            {title.text}
-          </Element>
-        )}
-        {description && (
-          <p className="mt-4 text-2xl text-muted-foreground md:text-3xl">
-            {description}
-          </p>
+      <div className="mx-auto max-w-5xl rounded-lg bg-card border p-8 md:p-10">
+        <div className="text-center">
+          {title && title.text && (
+            <Element className={cn(titleSizeClasses, titleWeightClasses)}>
+              {title.text}
+            </Element>
+          )}
+          {description && (
+            <p className="mt-4 text-2xl text-muted-foreground md:text-3xl">
+              {description}
+            </p>
+          )}
+        </div>
+        {sections && sections?.length > 0 && (
+          <div className="mx-auto mt-8 max-w-2xl space-y-12 md:mt-12 lg:mt-20">
+            {sections.map((section) => (
+              <Card key={section.title} className="border-hidden bg-muted">
+                <CardHeader className="pb-0">
+                  <h3 className="border-b pb-4 font-mono text-sm font-medium tracking-widest text-accent-foreground uppercase">
+                    {section.title}
+                  </h3>
+                </CardHeader>
+                <CardContent>
+                  {section.faqs && section.faqs?.length > 0 && (
+                    <Accordion type="single" collapsible className="w-full">
+                      {section.faqs.map((faq) => (
+                        <AccordionItem
+                          key={faq._id}
+                          value={`item-${faq._id}`}
+                          className="border-b border-muted last:border-0"
+                        >
+                          <AccordionTrigger className="text-start text-base font-medium hover:no-underline">
+                            {faq.title}
+                          </AccordionTrigger>
+                          <AccordionContent className="text-base font-medium text-muted-foreground">
+                            <PortableTextRenderer
+                              value={faq.body || []}
+                              locale={locale}
+                            />
+                          </AccordionContent>
+                        </AccordionItem>
+                      ))}
+                    </Accordion>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         )}
       </div>
-      {sections && sections?.length > 0 && (
-        <div className="mx-auto mt-8 max-w-2xl space-y-12 md:mt-12 lg:mt-20">
-          {sections.map((section) => (
-            <Card key={section.title} className="border-hidden bg-muted">
-              <CardHeader className="pb-0">
-                <h3 className="border-b pb-4 font-mono text-sm font-medium tracking-widest text-accent-foreground uppercase">
-                  {section.title}
-                </h3>
-              </CardHeader>
-              <CardContent>
-                {section.faqs && section.faqs?.length > 0 && (
-                  <Accordion type="single" collapsible className="w-full">
-                    {section.faqs.map((faq) => (
-                      <AccordionItem
-                        key={faq._id}
-                        value={`item-${faq._id}`}
-                        className="border-b border-muted last:border-0"
-                      >
-                        <AccordionTrigger className="text-start text-base font-medium hover:no-underline">
-                          {faq.title}
-                        </AccordionTrigger>
-                        <AccordionContent className="text-base font-medium text-muted-foreground">
-                          <PortableTextRenderer
-                            value={faq.body || []}
-                            locale={locale}
-                          />
-                        </AccordionContent>
-                      </AccordionItem>
-                    ))}
-                  </Accordion>
-                )}
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      )}
       <div className="absolute -inset-40 z-[-1] [mask-image:radial-gradient(circle_at_center,black_0%,black_20%,transparent_75%)]">
         <PlusSigns className="h-full w-full text-foreground/[0.05]" />
       </div>

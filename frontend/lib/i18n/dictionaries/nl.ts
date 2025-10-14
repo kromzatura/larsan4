@@ -1,6 +1,11 @@
 export default {
   inquiry: {
     label: "Aanvraag",
+    clearAll: "Alles wissen",
+    empty: "Nog geen items in de aanvraaglijst.",
+    continue: "Verder winkelen",
+    send: "Aanvraag verzenden",
+    browse: "Producten bekijken",
   },
   products: {
     table: {
@@ -76,12 +81,12 @@ export default {
       linkedin: "Deel op LinkedIn",
     },
     actions: {
-      addToInquiry: "Toevoegen aan aanvraag",
-      addedToInquiry: "Toegevoegd aan aanvraag",
+      addToInquiry: "Toevoegen",
+      addedToInquiry: "Toegevoegd",
     },
     toasts: {
-      added: "Toegevoegd aan aanvraag",
-      already: "Staat al in aanvraag",
+      added: "Toegevoegd",
+      already: "Al toegevoegd",
     },
     specLabels: {
       sku: "SKU",

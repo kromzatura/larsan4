@@ -1,5 +1,25 @@
 # Fonts audit
 
+## Our work vs. boilerplate (executive summary)
+
+This project mixes pages/blocks we built with boilerplate blocks authored elsewhere. Here’s how our surfaces differ stylistically, with an emphasis on typography.
+
+- Our pages/blocks (Blog Category, Products index and category, Product detail, Compare Products, Product Categories 16, All Products 16)
+  - Font family: Inter everywhere (via `app/layout.tsx`). No serif usage; monospace only appears for actual code blocks.
+  - Styling: Data- and content-first. Tables, badges, bordered cards, subtle `text-xs uppercase tracking-wide text-muted-foreground` section labels. Predictable use of `font-medium`/`font-semibold`.
+  - Performance: No extra webfonts beyond Inter; stable, consistent payload.
+
+- Boilerplate blocks
+  - Introduce decorative “tech” accents with `font-mono` in specific places (see list below). Examples: overlay numerals, uppercase meta in monospace, code-like UI strips.
+  - Visual tone: Showcase/marketing flair vs. our utilitarian editorial/product focus.
+
+- Guardrails for consistency
+  - Reserve monospace for code/technical readouts only. Avoid using `font-mono` for metadata or labels on product/blog surfaces.
+  - Use the standard label pattern: `text-xs uppercase tracking-wide text-muted-foreground` for section headers.
+  - Keep H1/H2 sizing consistent (e.g., product H1 `text-3xl md:text-5xl`), preferring `font-medium`/`font-semibold` for emphasis.
+  - Prefer shared UI primitives (Badge, Separator, Button) over bespoke styles to maintain cohesion.
+
+
 This document summarizes the fonts configured and used across the frontend, highlights any exceptions, and quantifies the actual font payload emitted by the current production build.
 
 ## Families and sources
@@ -55,6 +75,11 @@ These correspond to the requested Inter subsets/weights and internal splits used
 
 All of the following surfaces inherit the global `font-sans` (Inter) from `app/layout.tsx`. None introduce an alternate family; they only vary weights/sizes via Tailwind utility classes. No additional webfont files are downloaded beyond Inter’s configured weights.
 
+- Home page (`frontend/app/[lang]/(main)/page.tsx`)
+  - Family: Inter (inherited)
+  - Renders dynamic blocks via `components/blocks`; by default these use Inter.
+  - Conditional monospace accents: if the page includes blocks like `faq5`, `faq14`, `changelog2`, `timeline5`, `gallery8`, or if `portable-text-renderer` renders a code block, those specific bits use `font-mono` for small UI accents. Otherwise, Inter only.
+
 - Blog category page (`frontend/app/[lang]/(main)/blog/category/[slug]/page.tsx`)
   - Family: Inter (inherited)
   - Typography: `h1` uses `font-semibold` (≈ 600); body copy defaults to regular; filter chips use standard UI styles.
@@ -67,8 +92,8 @@ All of the following surfaces inherit the global `font-sans` (Inter) from `app/l
 
 - Product page (`frontend/app/[lang]/(main)/products/[slug]/page.tsx`)
   - Family: Inter (inherited)
-  - Body content uses a `prose dark:prose-invert` wrapper for Portable Text, which in this codebase does not override `font-family` (stays sans). Headings often use `font-semibold`.
-  - No `font-mono` usage on this page; badges and spec tables use standard UI styles.
+  - Body content uses a `prose dark:prose-invert` wrapper for Portable Text, which does not override `font-family` (stays sans). Headings often use `font-semibold`.
+  - Conditional monospace accents: if a Portable Text `code` block appears, the code header strip within `portable-text-renderer.tsx` uses `font-mono` for the filename line; otherwise, it’s Inter only. Badges and spec tables use standard UI styles.
 
 - Inquiry page (`frontend/app/[lang]/(main)/inquiry/page.tsx` and `pageClient.tsx`)
   - Family: Inter (inherited)
@@ -90,4 +115,21 @@ All of the following surfaces inherit the global `font-sans` (Inter) from `app/l
 
 Notes on monospace usage elsewhere
 - The monospace family (`font-mono` → `--font-mono: JetBrains Mono, monospace`) is used sparingly in other blocks (e.g., some gallery/changelog/faq/timeline components and code-like UI in `portable-text-renderer.tsx`). None of the audited pages/blocks above apply `font-mono`.
+
+## Blocks using monospace (for editors)
+
+These components introduce small `font-mono` accents. Core headings and body copy remain Inter.
+
+- `frontend/components/portable-text-renderer.tsx`
+  - Code blocks: the top bar (filename/copy) uses monospace.
+- `frontend/components/blocks/faq/faq5.tsx`
+  - The small square/label marker in the list uses monospace.
+- `frontend/components/blocks/faq/faq14.tsx`
+  - Section subheading line uses uppercase tracking with monospace.
+- `frontend/components/blocks/changelog/changelog2.tsx`
+  - Line-level meta text beneath titles uses monospace.
+- `frontend/components/blocks/timelines/timeline5.tsx`
+  - Large overlay numbers use monospace for a technical aesthetic.
+- `frontend/components/blocks/gallery/gallery8.tsx`
+  - Small uppercase meta labels use monospace.
 

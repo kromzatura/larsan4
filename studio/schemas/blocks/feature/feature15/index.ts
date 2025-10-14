@@ -15,6 +15,20 @@ export default defineType({
       type: "section-padding",
     }),
     defineField({
+      name: "contrastVariant",
+      type: "string",
+      title: "Contrast Variant",
+      description: "Control background/foreground for this section",
+      options: {
+        list: [
+          { title: "Default", value: "default" },
+          { title: "High Contrast", value: "high-contrast" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "default",
+    }),
+    defineField({
       name: "gridColumns",
       type: "string",
       title: "Grid Columns",

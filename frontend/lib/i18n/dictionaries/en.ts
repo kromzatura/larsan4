@@ -1,6 +1,11 @@
 export default {
   inquiry: {
     label: "Inquiry",
+    clearAll: "Clear all",
+    empty: "No items in your inquiry list yet.",
+    continue: "Continue Shopping",
+    send: "Send Inquiry",
+    browse: "Browse Products",
   },
   products: {
     table: {

@@ -8,6 +8,12 @@ export default defineType({
   icon: LayoutTemplate,
   fields: [
     defineField({
+      name: "imageTreatment",
+      type: "image-treatment",
+      title: "Image Treatment",
+      description: "Overlay and filter options for background image",
+    }),
+    defineField({
       name: "backgroundImage",
       type: "image",
       description: "Background image",

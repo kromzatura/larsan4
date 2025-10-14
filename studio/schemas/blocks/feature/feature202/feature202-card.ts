@@ -12,6 +12,13 @@ export default defineType({
     "Feature card with icon, title, description and image background",
   fields: [
     defineField({
+      name: "imageTreatment",
+      type: "image-treatment",
+      title: "Image Treatment",
+      description: "Overlay and filter for the card background image",
+      initialValue: { treatment: "brand-gradient" },
+    }),
+    defineField({
       name: "iconVariant",
       type: "string",
       title: "Icon Variant",

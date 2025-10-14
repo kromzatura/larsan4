@@ -7,6 +7,7 @@ export const feature15Query = groq`
     _type,
     _key,
     padding,
+    contrastVariant,
     gridColumns,
     columns[]{
       ${feature15CardQuery},

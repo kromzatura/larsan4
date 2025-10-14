@@ -11,15 +11,21 @@ import { PAGE_QUERYResult } from "@/sanity.types";
 import { resolveLinkHref } from "@/lib/resolveHref";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { getOverlayClass } from "@/lib/getOverlayClass";
 
 type Hero174Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "hero-174" }
 > & {
   locale?: SupportedLocale;
+  imageTreatment?: {
+    treatment?: "none" | "dark-30" | "dark-50" | "brand-gradient" | null;
+    grayscale?: "on" | "off" | null;
+  } | null;
 };
 
 const Hero174 = ({
+  imageTreatment,
   backgroundImage,
   title,
   body,
@@ -27,8 +33,15 @@ const Hero174 = ({
   tag,
   locale = FALLBACK_LOCALE,
 }: Hero174Props) => {
+  const overlayClass = getOverlayClass(imageTreatment?.treatment);
+  const gray = imageTreatment?.grayscale === "on";
   return (
-    <section className="h-svh max-h-[1400px] min-h-[600px] w-full -mt-10 relative after:absolute after:inset-0 after:block after:size-full after:bg-zinc-950/50 after:content-['']">
+    <section
+      className={cn(
+        "h-svh max-h-[1400px] min-h-[600px] w-full -mt-10 relative overlay-base",
+        overlayClass
+      )}
+    >
       {backgroundImage && (
         <div className="absolute top-0 flex h-full w-full">
           <Image
@@ -36,7 +49,7 @@ const Hero174 = ({
             alt={backgroundImage.alt || ""}
             width={1000}
             height={1000}
-            className="h-full w-full object-cover"
+            className={cn("h-full w-full object-cover", gray && "grayscale")}
           />
         </div>
       )}

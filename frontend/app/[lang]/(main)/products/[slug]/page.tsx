@@ -24,24 +24,38 @@ import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import type { AsyncPageProps } from "@/lib/types/next";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { buildAbsoluteUrl } from "@/lib/url";
+import { fetchSanitySettings } from "@/sanity/lib/fetch";
 
 type SpecPair = { label: string; value?: string | number | null };
 
-function SpecTable({ title, rows }: { title: string; rows: SpecPair[] }) {
+function SpecTable({
+  title,
+  rows,
+  monoValueLabels = [],
+}: {
+  title: string;
+  rows: SpecPair[];
+  monoValueLabels?: string[];
+}) {
   const filtered = rows.filter(
     (r) => r.value !== undefined && r.value !== null && r.value !== ""
   );
   if (filtered.length === 0) return null;
   return (
-    <div className="rounded-lg border p-4">
-      <p className="mb-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-        {title}
-      </p>
-      <div className="grid grid-cols-2 gap-y-2 text-sm">
+    <div className="mb-6 rounded-lg border bg-card p-6">
+      <h2 className="mb-4 text-lg font-semibold text-foreground">{title}</h2>
+      <div className="grid grid-cols-2 gap-y-2">
         {filtered.map((r) => (
           <Fragment key={`${title}-${r.label}`}>
-            <div className="text-muted-foreground">{r.label}</div>
-            <div className="text-right font-medium">{r.value}</div>
+            <div className="text-sm font-medium text-muted-foreground">{r.label}</div>
+            <div
+              className={
+                "text-right text-sm text-foreground" +
+                (monoValueLabels.includes(r.label) ? " font-mono" : "")
+              }
+            >
+              {r.value}
+            </div>
           </Fragment>
         ))}
       </div>
@@ -85,6 +99,7 @@ export default async function ProductPage(
     lang: locale,
   });
   if (!product) notFound();
+  const settings = await fetchSanitySettings({ lang: locale });
 
   const productDoc = product as ProductDocument;
   const specifications = Array.isArray(productDoc.specifications)
@@ -160,20 +175,42 @@ export default async function ProductPage(
   const productPath = `/products/${product.slug?.current ?? ""}`;
   const shareUrl = buildAbsoluteUrl(locale, productPath);
 
+  const jsonLd: Record<string, any> = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": shareUrl,
+    url: shareUrl,
+    name: product.title || undefined,
+    description: product.meta?.description || product.excerpt || undefined,
+    sku: spec?.sku || undefined,
+    brand: settings?.siteName
+      ? { "@type": "Organization", name: settings.siteName }
+      : undefined,
+    image: product.image?.asset?.url ? [product.image.asset.url] : undefined,
+    category: Array.isArray(product.categories)
+      ? product.categories.map((c) => c?.title).filter(Boolean)
+      : undefined,
+  };
+
   return (
     <section className="container py-16 xl:py-20">
       <article>
+        <script
+          type="application/ld+json"
+          // JSON-LD improves SEO. Keep minimal fields since pricing/availability are not part of this B2B flow.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Breadcrumbs links={links} locale={locale} />
 
         {product.title && (
-          <h1 className="mt-7 text-3xl font-semibold md:text-5xl">
+          <h1 className="mt-7 font-serif text-4xl font-extrabold md:text-5xl lg:text-6xl">
             {product.title}
           </h1>
         )}
 
-        <div className="mt-12 grid grid-cols-12 gap-8">
+        <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
           {/* Left column */}
-          <div className="col-span-12 lg:col-span-6">
+          <div className="col-span-12 lg:col-span-8 mb-8">
             {product.image?.asset?._id && (
               <div className="mb-8">
                 <Image
@@ -185,7 +222,12 @@ export default async function ProductPage(
                   alt={product.image.alt || product.title || "Product image"}
                   width={1200}
                   height={800}
-                  className="aspect-video w-full rounded-lg object-cover"
+                  className="aspect-video w-full rounded-lg object-cover shadow-md"
+                  sizes="(min-width: 1024px) 66vw, 100vw"
+                  placeholder={product.image?.asset?.metadata?.lqip ? "blur" : undefined}
+                  blurDataURL={product.image?.asset?.metadata?.lqip || undefined}
+                  priority
+                  fetchPriority="high"
                 />
               </div>
             )}
@@ -206,21 +248,28 @@ export default async function ProductPage(
           </div>
 
           {/* Right column */}
-          <div className="col-span-12 h-fit lg:col-span-6 md:sticky md:top-20 space-y-5">
+          <div className="col-span-12 h-fit lg:col-span-4 md:sticky md:top-20 space-y-6">
             {/* Key features */}
             {Array.isArray(product.keyFeatures) &&
               product.keyFeatures.length > 0 && (
-                <div className="rounded-lg border p-4">
-                  <p className="mb-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <div className="mb-6 rounded-lg border bg-card p-6">
+                  <h2 className="mb-4 text-lg font-semibold text-foreground">
                     {dictionary.productPage.sections.keyFeatures}
-                  </p>
+                  </h2>
                   <ul className="flex flex-col gap-2 text-sm">
-                    {product.keyFeatures.map((f, idx) => (
-                      <li key={idx} className="flex items-start gap-3">
-                        <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-foreground/70" />
-                        <p className="leading-5">{f}</p>
-                      </li>
-                    ))}
+                    {product.keyFeatures.map((f, idx) => {
+                      const isBadge = /pesticide\s*-?free/i.test(f);
+                      return (
+                        <li key={idx} className="flex items-start gap-3">
+                          <span className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-foreground/70" />
+                          {isBadge ? (
+                            <Badge variant="secondary">{f}</Badge>
+                          ) : (
+                            <p className="leading-5">{f}</p>
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               )}
@@ -228,6 +277,10 @@ export default async function ProductPage(
             <SpecTable
               title={dictionary.productPage.sections.atAGlance}
               rows={atAGlance}
+              monoValueLabels={[
+                dictionary.productPage.specLabels.sku,
+                dictionary.productPage.specLabels.hsCode,
+              ]}
             />
             <SpecTable
               title={dictionary.productPage.sections.quality}
@@ -241,10 +294,10 @@ export default async function ProductPage(
             {/* Packaging */}
             {Array.isArray(product.packagingOptions) &&
               product.packagingOptions.length > 0 && (
-                <div className="rounded-lg border p-4">
-                  <p className="mb-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <div className="mb-6 rounded-lg border bg-card p-6">
+                  <h2 className="mb-4 text-lg font-semibold text-foreground">
                     {dictionary.productPage.sections.packaging}
-                  </p>
+                  </h2>
                   <ul className="space-y-2 text-sm">
                     {product.packagingOptions.map((p, i) => {
                       const left = [
@@ -257,7 +310,7 @@ export default async function ProductPage(
                       return (
                         <li
                           key={i}
-                          className="flex items-center justify-between rounded-md border px-3 py-2 bg-muted/30"
+                          className="flex items-center justify-between rounded-md border bg-muted/30 px-3 py-2"
                         >
                           <span className="truncate pr-4">{left}</span>
                           {right && (
@@ -275,10 +328,10 @@ export default async function ProductPage(
             {/* Categories */}
             {Array.isArray(product.categories) &&
               product.categories.length > 0 && (
-                <div className="rounded-lg border p-4">
-                  <p className="mb-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <div className="mb-6 rounded-lg border bg-card p-6">
+                  <h2 className="mb-4 text-lg font-semibold text-foreground">
                     {dictionary.productPage.sections.categories}
-                  </p>
+                  </h2>
                   <div className="flex flex-wrap gap-2">
                     {product.categories.map((c) => (
                       <Link
@@ -290,7 +343,7 @@ export default async function ProductPage(
                       >
                         <Badge
                           variant="outline"
-                          className="rounded-full px-3 py-1 bg-muted/50"
+                          className="rounded-full bg-muted/50 px-3 py-1"
                         >
                           {c?.title || ""}
                         </Badge>
@@ -301,7 +354,7 @@ export default async function ProductPage(
               )}
 
             {/* Share */}
-            <div className="flex items-center justify-between rounded-lg border p-4">
+            <div className="mb-6 flex items-center justify-between rounded-lg border bg-card p-6">
               <p className="text-sm font-medium">
                 {dictionary.productPage.share.title}
               </p>

@@ -158,7 +158,7 @@ export default async function BlogCategoryPage(
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
-      <h1 className="text-3xl font-semibold md:text-5xl">{cat.title}</h1>
+  <h1 className="text-3xl font-serif font-semibold md:text-5xl">{cat.title}</h1>
       {cat.description && (
         <p className="mt-3 max-w-3xl text-muted-foreground">
           {cat.description}

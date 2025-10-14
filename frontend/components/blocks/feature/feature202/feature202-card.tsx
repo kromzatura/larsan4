@@ -6,7 +6,9 @@ import Icon from "@/components/icon";
 import { cn } from "@/lib/utils";
 import { resolveLinkHref } from "@/lib/resolveHref";
 import type { SupportedLocale } from "@/lib/i18n/config";
+import type { ImageTreatment } from "@/sanity.types";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { getOverlayClass } from "@/lib/getOverlayClass";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Feature202 = Extract<Block, { _type: "feature-202" }>;
@@ -18,9 +20,11 @@ type Feature202Card = Extract<
 interface Feature202CardProps extends Feature202Card {
   index: number;
   locale?: SupportedLocale;
+  imageTreatment: ImageTreatment | null;
 }
 
 export default function Feature202Card({
+  imageTreatment,
   iconVariant,
   title,
   description,
@@ -30,22 +34,28 @@ export default function Feature202Card({
   locale = FALLBACK_LOCALE,
 }: Feature202CardProps) {
   const href = resolveLinkHref(link, locale) || "#";
+  const treatmentValue = imageTreatment?.treatment || undefined;
+  const overlayClass = getOverlayClass(treatmentValue);
+  const grayOn = imageTreatment?.grayscale === "on";
   return (
     <Link
       href={href}
       className={cn(
-        "group relative isolate h-80 overflow-hidden rounded-2xl border border-border transition-transform duration-300 hover:-translate-y-0.5",
+        "group relative isolate h-80 overflow-hidden rounded-2xl border border-border transition-transform duration-300 hover:-translate-y-0.5 overlay-base",
+        overlayClass,
         (index % 4 === 0 || index % 4 === 3) && "lg:col-span-2"
       )}
     >
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-primary to-transparent" />
       {image && image.asset?._id && (
         <Image
           src={urlFor(image).url()}
           alt={image.alt || ""}
           placeholder={image?.asset?.metadata?.lqip ? "blur" : undefined}
           blurDataURL={image?.asset?.metadata?.lqip || ""}
-          className="absolute inset-0 -z-20 size-full rounded-2xl object-cover grayscale-100 transition-all duration-300 group-hover:grayscale-50"
+          className={cn(
+            "absolute inset-0 -z-20 size-full rounded-2xl object-cover transition-all duration-300",
+            grayOn ? "grayscale group-hover:grayscale-50" : undefined
+          )}
           sizes="(min-width: 640px) 50vw, 100vw"
           width={image.asset?.metadata?.dimensions?.width || 800}
           height={image.asset?.metadata?.dimensions?.height || 800}
