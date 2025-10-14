@@ -7950,6 +7950,23 @@
           },
           "optional": true
         },
+        "contrastVariant": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "default"
+              },
+              {
+                "type": "string",
+                "value": "high-contrast"
+              }
+            ]
+          },
+          "optional": true
+        },
         "gridColumns": {
           "type": "objectAttribute",
           "value": {
@@ -15263,6 +15280,23 @@
           "value": {
             "type": "inline",
             "name": "section-padding"
+          },
+          "optional": true
+        },
+        "surface": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "default"
+              },
+              {
+                "type": "string",
+                "value": "surface-1"
+              }
+            ]
           },
           "optional": true
         },

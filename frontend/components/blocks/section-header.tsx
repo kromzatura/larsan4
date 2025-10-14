@@ -28,8 +28,9 @@ export default function SectionHeader({
   title,
   description,
   links,
+  surface,
   locale = FALLBACK_LOCALE,
-}: SectionHeaderProps) {
+}: SectionHeaderProps & { surface?: "default" | "surface-1" | null }) {
   const isNarrow = sectionWidth === "narrow";
   const titleSize = title?.size || "default";
   const titleWeight = title?.weight || "bold";
@@ -48,18 +49,12 @@ export default function SectionHeader({
     bold: "font-bold",
   }[titleWeight];
 
-  const titleText = (title?.text || "").trim();
-  const surfaceWrapTitles = new Set([
-    "Our Founder's Commitment",
-    "Our Mission",
-    "Experience the LAR Group Quality Standard",
-  ]);
-  const surfaceWrap = surfaceWrapTitles.has(titleText);
+  const isSurface1 = surface === "surface-1";
 
   return (
     <SectionContainer
       padding={padding}
-      className={cn(surfaceWrap && "rounded-lg bg-surface-1 p-8 md:p-10")}
+      className={cn(isSurface1 && "rounded-lg bg-surface-1 p-8 md:p-10")}
     >
       <div
         className={cn(

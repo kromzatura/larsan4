@@ -19,9 +19,9 @@ type Hero174Props = Extract<
 > & {
   locale?: SupportedLocale;
   imageTreatment?: {
-    treatment?: "none" | "dark-30" | "dark-50" | "brand-gradient";
-    grayscale?: "on" | "off";
-  };
+    treatment?: "none" | "dark-30" | "dark-50" | "brand-gradient" | null;
+    grayscale?: "on" | "off" | null;
+  } | null;
 };
 
 const Hero174 = ({
@@ -36,7 +36,12 @@ const Hero174 = ({
   const overlayClass = getOverlayClass(imageTreatment?.treatment);
   const gray = imageTreatment?.grayscale === "on";
   return (
-    <section className={cn("h-svh max-h-[1400px] min-h-[600px] w-full -mt-10 relative overlay-base", overlayClass)}>
+    <section
+      className={cn(
+        "h-svh max-h-[1400px] min-h-[600px] w-full -mt-10 relative overlay-base",
+        overlayClass
+      )}
+    >
       {backgroundImage && (
         <div className="absolute top-0 flex h-full w-full">
           <Image

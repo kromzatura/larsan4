@@ -18,6 +18,20 @@ export default defineType({
       type: "section-padding",
     }),
     defineField({
+      name: "surface",
+      type: "string",
+      title: "Surface",
+      description: "Choose a surface variant for this header",
+      options: {
+        list: [
+          { title: "Default", value: "default" },
+          { title: "Surface 1", value: "surface-1" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "default",
+    }),
+    defineField({
       name: "sectionWidth",
       type: "string",
       title: "Section Width",

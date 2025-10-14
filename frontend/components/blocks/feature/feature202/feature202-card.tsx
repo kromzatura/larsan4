@@ -6,6 +6,7 @@ import Icon from "@/components/icon";
 import { cn } from "@/lib/utils";
 import { resolveLinkHref } from "@/lib/resolveHref";
 import type { SupportedLocale } from "@/lib/i18n/config";
+import type { ImageTreatment } from "@/sanity.types";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import { getOverlayClass } from "@/lib/getOverlayClass";
 
@@ -19,10 +20,7 @@ type Feature202Card = Extract<
 interface Feature202CardProps extends Feature202Card {
   index: number;
   locale?: SupportedLocale;
-  imageTreatment?: {
-    treatment?: "none" | "dark-30" | "dark-50" | "brand-gradient";
-    grayscale?: "on" | "off";
-  };
+  imageTreatment: ImageTreatment | null;
 }
 
 export default function Feature202Card({
@@ -36,7 +34,8 @@ export default function Feature202Card({
   locale = FALLBACK_LOCALE,
 }: Feature202CardProps) {
   const href = resolveLinkHref(link, locale) || "#";
-  const overlayClass = getOverlayClass(imageTreatment?.treatment);
+  const treatmentValue = imageTreatment?.treatment || undefined;
+  const overlayClass = getOverlayClass(treatmentValue);
   const grayOn = imageTreatment?.grayscale === "on";
   return (
     <Link

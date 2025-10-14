@@ -17,9 +17,9 @@ type Hero12Props = Extract<
 > & {
   locale?: SupportedLocale;
   imageTreatment?: {
-    treatment?: "none" | "dark-30" | "dark-50" | "brand-gradient";
-    grayscale?: "on" | "off";
-  };
+    treatment?: "none" | "dark-30" | "dark-50" | "brand-gradient" | null;
+    grayscale?: "on" | "off" | null;
+  } | null;
 };
 
 const Hero12 = ({

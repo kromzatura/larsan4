@@ -20,8 +20,12 @@ export default function Feature15({
   padding,
   columns,
   gridColumns,
-}: Feature15 & { locale?: SupportedLocale }) {
-  const invert = Array.isArray(columns) && columns.length === 3;
+  contrastVariant,
+}: Feature15 & {
+  locale?: SupportedLocale;
+  contrastVariant?: "default" | "high-contrast";
+}) {
+  const invert = contrastVariant === "high-contrast";
   return (
     <SectionContainer
       padding={padding}
