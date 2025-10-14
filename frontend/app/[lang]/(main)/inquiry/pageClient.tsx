@@ -63,13 +63,16 @@ export default function InquiryPageClient() {
   return (
     <div className="container py-10 max-w-3xl">
       <div className="mb-8 flex items-center justify-between">
-  <h1 className="text-3xl font-serif font-semibold tracking-tight">{t.inquiry?.label || "Inquiry"}</h1>
+        <h1 className="text-3xl font-serif font-semibold tracking-tight">
+          {t.inquiry?.label || "Inquiry"}
+        </h1>
         {hasItems && (
           <button
             onClick={() => clearInquiry()}
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
-            <Trash2 className="mr-1 h-4 w-4" /> {t.inquiry?.clearAll ?? "Clear all"}
+            <Trash2 className="mr-1 h-4 w-4" />{" "}
+            {t.inquiry?.clearAll ?? "Clear all"}
           </button>
         )}
       </div>
@@ -130,7 +133,8 @@ export default function InquiryPageClient() {
                 "flex-1 inline-flex items-center justify-center"
               )}
             >
-              <ArrowLeft className="mr-2 h-4 w-4" /> {t.inquiry?.continue ?? "Continue Shopping"}
+              <ArrowLeft className="mr-2 h-4 w-4" />{" "}
+              {t.inquiry?.continue ?? "Continue Shopping"}
             </Link>
             <Link
               href={`${buildLocalizedPath(locale, "/contact")}${
@@ -141,7 +145,8 @@ export default function InquiryPageClient() {
                 "flex-1 inline-flex items-center justify-center"
               )}
             >
-              <Send className="mr-2 h-4 w-4" /> {t.inquiry?.send ?? "Send Inquiry"}
+              <Send className="mr-2 h-4 w-4" />{" "}
+              {t.inquiry?.send ?? "Send Inquiry"}
             </Link>
           </div>
         </div>
