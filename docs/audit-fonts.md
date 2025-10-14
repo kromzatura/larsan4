@@ -50,3 +50,44 @@ These correspond to the requested Inter subsets/weights and internal splits used
 - Inter configuration: `frontend/app/layout.tsx`
 - CSS variables: `frontend/app/globals.css`
 - Sonner toaster styling: `frontend/components/ui/sonner.tsx`
+
+## Page/block-specific notes (requested surfaces)
+
+All of the following surfaces inherit the global `font-sans` (Inter) from `app/layout.tsx`. None introduce an alternate family; they only vary weights/sizes via Tailwind utility classes. No additional webfont files are downloaded beyond Inter’s configured weights.
+
+- Blog category page (`frontend/app/[lang]/(main)/blog/category/[slug]/page.tsx`)
+  - Family: Inter (inherited)
+  - Typography: `h1` uses `font-semibold` (≈ 600); body copy defaults to regular; filter chips use standard UI styles.
+  - No `font-mono` or serif usage.
+
+- Product category page (`frontend/app/[lang]/(main)/products/category/[slug]/page.tsx`)
+  - Family: Inter (inherited)
+  - Uses `ProductsTable` for listing; table header uses `text-xs uppercase tracking-wide text-muted-foreground` with normal/smedium weights (`font-medium` for some cells), body rows use regular plus `font-semibold` for labels.
+  - No `font-mono` or serif usage.
+
+- Product page (`frontend/app/[lang]/(main)/products/[slug]/page.tsx`)
+  - Family: Inter (inherited)
+  - Body content uses a `prose dark:prose-invert` wrapper for Portable Text, which in this codebase does not override `font-family` (stays sans). Headings often use `font-semibold`.
+  - No `font-mono` usage on this page; badges and spec tables use standard UI styles.
+
+- Inquiry page (`frontend/app/[lang]/(main)/inquiry/page.tsx` and `pageClient.tsx`)
+  - Family: Inter (inherited)
+  - Titles `font-semibold`; buttons/links use shared UI components; no `font-mono`.
+
+- Compare products block (`frontend/components/blocks/compare/compare-products.tsx`)
+  - Family: Inter (inherited)
+  - Table header uses `text-xs uppercase tracking-wide` and `font-medium`; row labels `font-semibold`.
+  - No `font-mono` usage.
+
+- All products 16 block (`frontend/components/blocks/products/all-products-16/index.tsx` → `ProductsTable`)
+  - Family: Inter (inherited)
+  - Same table typography as the product category page (see above). No `font-mono`.
+
+- Product categories 16 block (`frontend/components/blocks/products/product-categories-16/index.tsx`)
+  - Family: Inter (inherited)
+  - Filter header uses small uppercase tracking-wide text; category chips are badges in the default UI font.
+  - No `font-mono`.
+
+Notes on monospace usage elsewhere
+- The monospace family (`font-mono` → `--font-mono: JetBrains Mono, monospace`) is used sparingly in other blocks (e.g., some gallery/changelog/faq/timeline components and code-like UI in `portable-text-renderer.tsx`). None of the audited pages/blocks above apply `font-mono`.
+
