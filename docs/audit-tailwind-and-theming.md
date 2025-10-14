@@ -38,6 +38,7 @@ Suggested fields (all strings default to valid color formats; keep palette small
 
 - Basics
   - name (string, required)
+  - slug (slug, generated from name; stable identifier for querying)
   - language (hidden string for per‑locale instances)
 - Palette
   - background, foreground, primary, primaryForeground
@@ -55,6 +56,7 @@ Suggested fields (all strings default to valid color formats; keep palette small
   - shadowScale (enum: none | subtle | default | strong)
 - Typography
   - fontSans (string), fontSerif (string), fontMono (string)
+  - Note: These fields set CSS font-family stacks only; font files should be loaded separately (e.g., via next/font in layout.tsx).
 
 Validation notes
 
@@ -65,6 +67,23 @@ Editorial UX
 
 - Group fields with icons (Palette, Surfaces, Shape & Shadow, Typography).
 - Add brief descriptions and WCAG guidance for foreground/background pairs.
+
+Implementation notes
+
+- Shadow scale mapping: Keep the enum in Sanity for simplicity and map it to your existing CSS shadow tokens in the frontend. Example:
+
+```ts
+// Map semantic choices from the Theme document to CSS shadow tokens
+export const shadowMappings = {
+  none: "0 0 #0000",
+  subtle: "var(--shadow-xs)",
+  default: "var(--shadow-md)",
+  strong: "var(--shadow-lg)",
+} as const;
+
+// Usage idea: set a CSS variable once and rely on Tailwind tokens
+// document.documentElement.style.setProperty('--shadow-current', shadowMappings[theme.shadowScale])
+```
 
 ## Frontend wiring (incremental, low‑risk)
 
@@ -103,3 +122,8 @@ Editorial UX
 - Editors can adjust palette and radius without code deploys.
 - No change to Tailwind build or classes; only CSS variable values differ.
 - Light/dark toggle continues to work; we may add dark palette fields later if needed.
+
+
+## Why this matters for our B2B goals
+
+Codifying the visual system as a Theme document turns brand decisions into durable, editor-managed data. The first locale-specific Theme we seed will encode the refined, professional palette, radius, and typography stacks we want to ship now. Six months later, marketing can adjust primary hues or radius to match new materials in seconds—no deploy required—while performance remains excellent because Tailwind classes stay static and only CSS variables change at runtime. This is the agility a modern B2B site needs to evolve without risking regressions or slowing delivery.

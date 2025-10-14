@@ -182,3 +182,27 @@ All environment variables and their descriptions:
 [shadcn]: https://img.shields.io/badge/shadcn/ui-20232A?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjU2IiBjbGFzcz0iaC02IHctNiI+PHJlY3Qgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiIGZpbGw9Im5vbmUiPjwvcmVjdD48bGluZSB4MT0iMjA4IiB5MT0iMTI4IiB4Mj0iMTI4IiB5Mj0iMjA4IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMzIiPjwvbGluZT48bGluZSB4MT0iMTkyIiB5MT0iNDAiIHgyPSI0MCIgeTI9IjE5MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjMyIj48L2xpbmU+PC9zdmc+&logoColor=ffffff
 [sanity]: https://img.shields.io/badge/Sanity-20232A?style=for-the-badge&logo=sanity&logoColor=F97316
 # larsan4
+
+## Theming System
+
+The project uses an editor-controlled theme model backed by Sanity, designed for consistency and maintainability.
+
+### Concept
+- Styling is controlled by a canonical Theme document in Sanity.
+- Defaults live in `frontend/app/globals.css` via CSS variables; the active Theme overrides them at runtime.
+
+### How it works
+- `frontend/app/[lang]/layout.tsx` fetches the active Theme and converts fields to CSS variables.
+- Those variables are injected via a `<style>` tag at render time and override the defaults in `globals.css`.
+- Components use normal Tailwind classes that resolve to these variables, keeping build-time CSS static.
+
+### How to use it
+- Change global styles (colors, radius, shadows, fonts): edit the Theme document in Studio.
+- Apply specific image styles: use overlay utilities and helpers.
+	- Utilities: `.overlay-base`, `.overlay-dark-30`, `.overlay-dark-50`, `.overlay-brand-gradient`.
+	- Helper: `frontend/lib/getOverlayClass.ts` maps schema `imageTreatment` to the correct utility.
+- Editors can set per-block `imageTreatment` in Studio where supported (e.g., Hero 174, Hero 12, Feature 202 Card).
+
+Notes
+- This approach keeps Tailwind classes stable while allowing runtime design control via CSS variables.
+- For multilingual sites, the Theme can be localized per language when needed.

@@ -104,7 +104,7 @@ const makePortableTextComponents = (
       const text = getTextFromChildren(children);
       const id = text.toLowerCase().replace(/[^a-z0-9]+/g, "-");
       return (
-        <h1 id={id} className="my-4 font-semibold scroll-mt-20">
+        <h1 id={id} className="my-4 font-serif font-semibold scroll-mt-20">
           {children}
         </h1>
       );
@@ -113,7 +113,7 @@ const makePortableTextComponents = (
       const text = getTextFromChildren(children);
       const id = text.toLowerCase().replace(/[^a-z0-9]+/g, "-");
       return (
-        <h2 id={id} className="my-4 font-semibold scroll-mt-20">
+        <h2 id={id} className="my-4 font-serif font-semibold scroll-mt-20">
           {children}
         </h2>
       );

@@ -112,7 +112,7 @@ export default async function CategoryPage(
       <Breadcrumbs links={links} locale={locale} />
       <div className="mt-7 flex items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-semibold md:text-5xl">{cat.title}</h1>
+          <h1 className="text-3xl font-serif font-semibold md:text-5xl">{cat.title}</h1>
           {cat.description && (
             <p className="mt-3 max-w-3xl text-muted-foreground">
               {cat.description}

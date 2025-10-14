@@ -12,6 +12,7 @@ export default defineType({
     { name: "shape", title: "Shape & Shadow", icon: Palette },
     { name: "typography", title: "Typography", icon: Palette },
     { name: "charts", title: "Charts", icon: Palette },
+    { name: "overlays", title: "Overlays", icon: Palette },
   ],
   fields: [
     defineField({
@@ -19,6 +20,13 @@ export default defineType({
       type: "string",
       description: "Display name of this theme",
       validation: (rule) => rule.required().error("Theme name is required"),
+      group: "palette",
+    }),
+    defineField({
+      name: "slug",
+      type: "slug",
+      description: "Stable identifier generated from the name",
+      options: { source: "name" },
       group: "palette",
     }),
     defineField({
@@ -66,6 +74,32 @@ export default defineType({
     defineField({ name: "chart3", type: "string", group: "charts" }),
     defineField({ name: "chart4", type: "string", group: "charts" }),
     defineField({ name: "chart5", type: "string", group: "charts" }),
+
+    // Overlays (for image treatments)
+    defineField({
+      name: "overlayDark30",
+      type: "string",
+      group: "overlays",
+      title: "Dark 30%",
+      description:
+        "CSS color for a 30% dark overlay. Example: color-mix(in oklch, black 30%, transparent)",
+    }),
+    defineField({
+      name: "overlayDark50",
+      type: "string",
+      group: "overlays",
+      title: "Dark 50%",
+      description:
+        "CSS color for a 50% dark overlay. Example: color-mix(in oklch, black 50%, transparent)",
+    }),
+    defineField({
+      name: "overlayBrandGradientFrom",
+      type: "string",
+      group: "overlays",
+      title: "Brand Gradient From",
+      description:
+        "Start color for brand gradient overlays. Often matches primary (e.g., var(--color-primary) or its literal value).",
+    }),
 
     // Shape & Shadow
     defineField({

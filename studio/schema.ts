@@ -24,6 +24,7 @@ import linkIcon from "./schemas/blocks/shared/link-icon";
 import linkGroup from "./schemas/blocks/shared/link-group";
 import { buttonVariant } from "./schemas/blocks/shared/button-variant";
 import sectionPadding from "./schemas/blocks/shared/section-padding";
+import imageTreatment from "./schemas/blocks/shared/image-treatment";
 // Schema UI objects
 import sectionHeader from "./schemas/blocks/section-header";
 import hero12 from "./schemas/blocks/hero/hero12";
@@ -150,6 +151,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     linkGroup,
     buttonVariant,
     sectionPadding,
+  imageTreatment,
     // blocks
     sectionHeader,
     hero12,

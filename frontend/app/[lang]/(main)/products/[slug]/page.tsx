@@ -166,7 +166,7 @@ export default async function ProductPage(
         <Breadcrumbs links={links} locale={locale} />
 
         {product.title && (
-          <h1 className="mt-7 text-3xl font-semibold md:text-5xl">
+          <h1 className="mt-7 text-3xl font-serif font-semibold md:text-5xl">
             {product.title}
           </h1>
         )}
@@ -186,6 +186,11 @@ export default async function ProductPage(
                   width={1200}
                   height={800}
                   className="aspect-video w-full rounded-lg object-cover"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  placeholder={product.image?.asset?.metadata?.lqip ? "blur" : undefined}
+                  blurDataURL={product.image?.asset?.metadata?.lqip || undefined}
+                  priority
+                  fetchPriority="high"
                 />
               </div>
             )}

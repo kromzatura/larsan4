@@ -9,6 +9,7 @@ import {
   PhoneCall,
   Users,
   Info,
+  Palette,
 } from "lucide-react";
 import { defaultDocumentNode } from "./defaultDocumentNode";
 
@@ -16,6 +17,16 @@ export const structure = (S: any, context: any) =>
   S.list()
     .title("Content")
     .items([
+      // Pinned site-wide Theme (singleton-like entry)
+      S.listItem()
+        .title("Site Theme")
+        .icon(Palette)
+        .child(
+          S.editor()
+            .id("site-theme")
+            .schemaType("theme")
+            .documentId("theme.default")
+        ),
       // Products (manual ordering, split per language)
       S.listItem()
         .title("Products")

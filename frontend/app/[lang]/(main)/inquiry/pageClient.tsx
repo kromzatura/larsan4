@@ -61,7 +61,7 @@ export default function InquiryPageClient() {
   return (
     <div className="container py-10 max-w-3xl">
       <div className="mb-8 flex items-center justify-between">
-        <h1 className="text-3xl font-semibold tracking-tight">Inquiry</h1>
+  <h1 className="text-3xl font-serif font-semibold tracking-tight">Inquiry</h1>
         {hasItems && (
           <button
             onClick={() => clearInquiry()}

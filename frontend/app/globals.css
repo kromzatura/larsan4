@@ -239,6 +239,34 @@
   }
 }
 
+/*
+  Overlay utilities
+  ------------------
+  These utilities render a pseudo-element overlay and are powered by Theme CSS
+  variables injected at runtime from Sanity (see frontend/sanity/lib/theme.ts).
+  - .overlay-base sets up the relative container and ::after layer
+  - .overlay-dark-30 / .overlay-dark-50 use --overlay-dark-30/50
+  - .overlay-brand-gradient uses --overlay-brand-gradient-from
+*/
+.overlay-base {
+  position: relative;
+}
+.overlay-base::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.overlay-dark-30::after {
+  background: var(--overlay-dark-30, color-mix(in oklch, black 30%, transparent));
+}
+.overlay-dark-50::after {
+  background: var(--overlay-dark-50, color-mix(in oklch, black 50%, transparent));
+}
+.overlay-brand-gradient::after {
+  background-image: linear-gradient(to top, var(--overlay-brand-gradient-from, var(--color-primary)), transparent);
+}
+
 /* Shared focus utility: standardized ring + outline contract */
 @utility ui-focus {
   @apply focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 outline-ring/50 focus-visible:outline-offset-0;

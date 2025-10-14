@@ -7,6 +7,7 @@ export const feature202CardQuery = groq`
   _type == "feature-202-card" => {
     _type,
     _key,
+    imageTreatment,
     iconVariant,
     title,
     description,

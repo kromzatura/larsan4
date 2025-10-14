@@ -87,7 +87,7 @@ export default async function ContactPage(props: LangAsyncPageProps) {
             <span className="text-sm font-semibold">{contact.tagline}</span>
           )}
           {contact?.title && (
-            <h1 className="mt-1 mb-3 text-3xl font-semibold text-balance md:text-4xl">
+            <h1 className="mt-1 mb-3 text-3xl font-serif font-semibold text-balance md:text-4xl">
               {contact.title}
             </h1>
           )}

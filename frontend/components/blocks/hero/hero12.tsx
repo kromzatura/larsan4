@@ -9,15 +9,21 @@ import Icon from "@/components/icon";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { getOverlayClass } from "@/lib/getOverlayClass";
 
 type Hero12Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
   { _type: "hero-12" }
 > & {
   locale?: SupportedLocale;
+  imageTreatment?: {
+    treatment?: "none" | "dark-30" | "dark-50" | "brand-gradient";
+    grayscale?: "on" | "off";
+  };
 };
 
 const Hero12 = ({
+  imageTreatment,
   backgroundImage,
   tagLine,
   title,
@@ -27,8 +33,10 @@ const Hero12 = ({
   techLogos,
   locale = FALLBACK_LOCALE,
 }: Hero12Props) => {
+  const overlayClass = getOverlayClass(imageTreatment?.treatment);
+  const gray = imageTreatment?.grayscale === "on";
   return (
-    <section className="relative overflow-hidden py-32">
+    <section className={cn("relative overflow-hidden py-32 overlay-base", overlayClass)}>
       {backgroundImage && (
         <div className="absolute inset-x-0 top-0 flex h-full w-full items-center justify-center opacity-100">
           <Image
@@ -36,7 +44,10 @@ const Hero12 = ({
             alt={backgroundImage.alt || ""}
             width={1000}
             height={1000}
-            className="h-full w-full object-cover opacity-90 [mask-image:radial-gradient(75%_75%_at_center,white,transparent)]"
+            className={cn(
+              "h-full w-full object-cover",
+              gray && "grayscale"
+            )}
           />
         </div>
       )}
