@@ -147,6 +147,7 @@ export default async function AllProducts16({
           </div>
         }
         locale={locale}
+      className="mb-12"
       />
     </SectionContainer>
   );
