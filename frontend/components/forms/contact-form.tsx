@@ -43,6 +43,7 @@ export function ContactForm({
   const [isPending, startTransition] = useTransition();
   const [formState, setFormState] = useState<ContactFormState>({});
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+  const requireCaptcha = process.env.NEXT_PUBLIC_RECAPTCHA_REQUIRED === "true";
   const captchaRef = useRef<HTMLDivElement | null>(null);
   const widgetIdRef = useRef<number | null>(null);
   const resolveTokenRef = useRef<((token: string) => void) | null>(null);
@@ -106,6 +107,56 @@ export function ContactForm({
     return () => window.clearInterval(id);
   }, [getGrecaptcha, siteKey]);
 
+  // Unified token retrieval that supports v2 invisible (widget) and v3 fallback
+  async function getRecaptchaToken(): Promise<string> {
+    const grecaptcha = getGrecaptcha();
+    if (!siteKey || !grecaptcha) return "";
+    // Try v2 invisible via widget if available
+    if (widgetIdRef.current != null) {
+      try {
+        const token = await new Promise<string>((resolve) => {
+          // Timeout as a safety valve
+          const timeout = window.setTimeout(() => resolve(""), 8000);
+          resolveTokenRef.current = (t: string) => {
+            window.clearTimeout(timeout);
+            resolve(t);
+          };
+          try {
+            const execResult = grecaptcha.execute(
+              widgetIdRef.current ?? undefined
+            );
+            Promise.resolve(execResult).catch(() => {
+              // swallow; resolve via callback
+            });
+          } catch {
+            window.clearTimeout(timeout);
+            resolve("");
+          }
+        });
+        resolveTokenRef.current = null;
+        if (token) return token;
+      } catch {
+        // fall through to v3
+      }
+    }
+    // Fallback: try v3 style execute
+    try {
+      const anyG = grecaptcha as unknown as {
+        execute: (
+          siteKey: string,
+          params?: { action?: string }
+        ) => Promise<string> | string;
+        ready: (cb: () => void) => void;
+      };
+      await new Promise<void>((r) => anyG.ready(() => r()));
+      const maybePromise = anyG.execute(siteKey, { action: "contact" });
+      const token = await Promise.resolve(maybePromise).catch(() => "");
+      return typeof token === "string" ? token : "";
+    } catch {
+      return "";
+    }
+  }
+
   async function handleAction(formData: FormData) {
     form.clearErrors();
     startTransition(async () => {
@@ -113,50 +164,53 @@ export function ContactForm({
       const durationMs = Math.max(0, Date.now() - mountTime);
       formData.set("durationMs", String(durationMs));
 
-      if (siteKey && typeof window !== "undefined" && getGrecaptcha()) {
+      if (
+        requireCaptcha &&
+        siteKey &&
+        typeof window !== "undefined" &&
+        getGrecaptcha()
+      ) {
         const grecaptcha = getGrecaptcha();
         if (!siteKey || !grecaptcha) {
           setFormState({ error: dict.contact.form.captchaNotReady });
           return;
         }
-        if (widgetIdRef.current == null) {
-          setFormState({ error: dict.contact.form.captchaNotReady });
-          return;
-        }
-        const token = await new Promise<string>((resolve) => {
-          resolveTokenRef.current = resolve;
-          try {
-            grecaptcha.execute(widgetIdRef.current ?? undefined);
-          } catch {
-            resolve("");
-          }
-        });
+        const token = await getRecaptchaToken();
         if (!token) {
           setFormState({ error: dict.contact.form.captchaFailed });
           return;
         }
         formData.set("g-recaptcha-response", token);
       }
-      const result = await onSubmit(formData);
-      setFormState(result);
+      try {
+        const result = await onSubmit(formData);
+        setFormState(result);
 
-      if (result.success) {
-        form.reset();
-        onSuccess?.();
-      } else if (result.errors) {
-        const currentValues = form.getValues();
-        Object.entries(result.errors).forEach(([key, message]) => {
-          const fieldKey = key as keyof ContactFormValues;
-          const fieldValue = currentValues[fieldKey];
-          try {
-            contactFormSchema.shape[fieldKey].parse(fieldValue);
-          } catch {
-            form.setError(fieldKey, {
-              type: "server",
-              message,
-            });
-          }
-        });
+        if (result.success) {
+          form.reset();
+          onSuccess?.();
+        } else if (result.errors) {
+          const currentValues = form.getValues();
+          Object.entries(result.errors).forEach(([key, message]) => {
+            const fieldKey = key as keyof ContactFormValues;
+            const fieldValue = currentValues[fieldKey];
+            try {
+              contactFormSchema.shape[fieldKey].parse(fieldValue);
+            } catch {
+              form.setError(fieldKey, {
+                type: "server",
+                message,
+              });
+            }
+          });
+        }
+      } catch (e) {
+        const message =
+          e instanceof Error && e.message
+            ? e.message
+            : dict.contact.form.unexpectedError;
+        console.error("Contact form submission failed:", e);
+        setFormState({ success: false, error: message });
       }
     });
   }
@@ -172,7 +226,7 @@ export function ContactForm({
         <input type="hidden" name="locale" value={locale} />
         {siteKey && (
           <Script
-            src="https://www.google.com/recaptcha/api.js"
+            src="https://www.google.com/recaptcha/api.js?render=explicit"
             async
             defer
             strategy="afterInteractive"

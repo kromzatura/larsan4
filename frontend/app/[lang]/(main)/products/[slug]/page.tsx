@@ -48,7 +48,9 @@ function SpecTable({
       <div className="grid grid-cols-2 gap-y-2">
         {filtered.map((r) => (
           <Fragment key={`${title}-${r.label}`}>
-            <div className="text-sm font-medium text-muted-foreground">{r.label}</div>
+            <div className="text-sm font-medium text-muted-foreground">
+              {r.label}
+            </div>
             <div
               className={
                 "text-right text-sm text-foreground" +
@@ -240,8 +242,12 @@ export default async function ProductPage(
                   height={800}
                   className="aspect-video w-full rounded-lg object-cover shadow-md"
                   sizes="(min-width: 1024px) 66vw, 100vw"
-                  placeholder={product.image?.asset?.metadata?.lqip ? "blur" : undefined}
-                  blurDataURL={product.image?.asset?.metadata?.lqip || undefined}
+                  placeholder={
+                    product.image?.asset?.metadata?.lqip ? "blur" : undefined
+                  }
+                  blurDataURL={
+                    product.image?.asset?.metadata?.lqip || undefined
+                  }
                   priority
                   fetchPriority="high"
                 />
@@ -280,7 +286,10 @@ export default async function ProductPage(
                         if (kf && typeof kf === "object") {
                           const anyKf = kf as any;
                           const text =
-                            anyKf.featureText || anyKf.text || anyKf.title || "";
+                            anyKf.featureText ||
+                            anyKf.text ||
+                            anyKf.title ||
+                            "";
                           return typeof text === "string" ? text.trim() : "";
                         }
                         return "";

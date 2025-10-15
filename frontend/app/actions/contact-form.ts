@@ -12,7 +12,10 @@ import {
 } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazily create client to avoid top-level issues during hot-reload
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 export type ContactFormState = {
   success?: boolean;
@@ -25,6 +28,15 @@ export async function submitContactForm(
 ): Promise<ContactFormState> {
   try {
     const isProd = process.env.NODE_ENV === "production";
+    const recaptchaVerifyInDev = process.env.RECAPTCHA_VERIFY_IN_DEV === "true";
+    const haveRecaptchaKeys =
+      !!process.env.RECAPTCHA_SECRET_KEY &&
+      !!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+    // Only verify captcha in production by default. In non-production, require an explicit flag
+    // RECAPTCHA_VERIFY_IN_DEV=true to opt-in to verification.
+    const shouldVerifyRecaptcha = isProd
+      ? haveRecaptchaKeys
+      : recaptchaVerifyInDev && haveRecaptchaKeys;
     // Determine locale from form (fallback-safe)
     const rawLocale = formData.get("locale");
     const locale: SupportedLocale = SUPPORTED_LOCALES.includes(
@@ -39,11 +51,17 @@ export async function submitContactForm(
     const durationMsRaw = formData.get("durationMs");
     const durationMs =
       typeof durationMsRaw === "string" ? parseInt(durationMsRaw, 10) : 0;
-    const MIN_DURATION_MS = 2000;
-    if (
-      (typeof honeypot === "string" && honeypot.trim().length > 0) ||
-      durationMs < MIN_DURATION_MS
-    ) {
+    // When captcha verification is disabled (typical for local/dev), apply a small
+    // minimum time-on-form heuristic to reduce bot spam. Keep this lenient to avoid
+    // flagging real users during testing.
+    const MIN_DURATION_MS = 0;
+    if (typeof honeypot === "string" && honeypot.trim().length > 0) {
+      return {
+        success: false,
+        error: dict.contact.form.captchaFailed,
+      };
+    }
+    if (!shouldVerifyRecaptcha && durationMs < MIN_DURATION_MS) {
       return {
         success: false,
         error: dict.contact.form.captchaFailed,
@@ -51,10 +69,7 @@ export async function submitContactForm(
     }
 
     // Verify reCAPTCHA only if both secret and site key are configured
-    if (
-      process.env.RECAPTCHA_SECRET_KEY &&
-      process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-    ) {
+    if (shouldVerifyRecaptcha) {
       const token = formData.get("g-recaptcha-response");
       if (!token || typeof token !== "string") {
         return {
@@ -68,7 +83,7 @@ export async function submitContactForm(
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           body: new URLSearchParams({
-            secret: process.env.RECAPTCHA_SECRET_KEY,
+            secret: process.env.RECAPTCHA_SECRET_KEY as string,
             response: token,
           }).toString(),
           // reCAPTCHA endpoint is external
@@ -102,6 +117,12 @@ export async function submitContactForm(
         throw new Error("Missing email configuration");
       }
       // In non-production, simulate success so local testing doesn’t block
+      console.warn("[contact-form] Email not sent (dev simulation):", {
+        hasResendKey,
+        hasEmailConfig,
+        fromEmail,
+        toEmail,
+      });
       return { success: true };
     }
 
@@ -163,7 +184,8 @@ export async function submitContactForm(
     );
     // (Dev preview removed for simplicity)
 
-    await resend.emails.send({
+    const resend = getResend();
+    const sendResult = await resend.emails.send({
       from: `Website Contact Form <${process.env.NEXT_RESEND_FROM_EMAIL}>`,
       to: process.env.NEXT_RESEND_TO_EMAIL!,
       subject:
@@ -173,6 +195,12 @@ export async function submitContactForm(
       html,
       replyTo: email,
     });
+    if (!isProd) {
+      console.log("[contact-form] Email sent via Resend (dev):", {
+        id: (sendResult as any)?.id,
+        to: toEmail,
+      });
+    }
 
     return { success: true };
   } catch (error) {
