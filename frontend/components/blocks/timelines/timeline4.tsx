@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import Icon from "@/components/icon";
@@ -45,15 +45,15 @@ export default function Timeline4({
         <div className="container flex flex-col gap-6 border-x py-4 max-lg:border-x lg:py-8">
           {tag && tag.text && (
             <Tag
-              title={tag.text || ""}
+              title={toText(tag.text) || ""}
               iconVariant={tag.iconVariant || "none"}
               type={tag.type as "title" | "badge"}
               element="p"
             />
           )}
-          {title && (
+          {toText(title) && (
             <h2 className="text-3xl leading-tight tracking-tight md:text-4xl lg:text-6xl">
-              {title}
+              {toText(title)}
             </h2>
           )}
           {description && (
@@ -69,19 +69,23 @@ export default function Timeline4({
           {columns.map((column, index) => (
             <div key={column._key} className="relative flex">
               <div
-                className={`flex w-full justify-center px-1 py-10 text-end md:gap-6 lg:gap-10 ${index % 2 === 0 ? "lg:flex-row-reverse lg:text-start" : ""} `}
+                className={`flex w-full justify-center px-1 py-10 text-end md:gap-6 lg:gap-10 ${
+                  index % 2 === 0 ? "lg:flex-row-reverse lg:text-start" : ""
+                } `}
               >
                 <div className="flex-1 max-lg:hidden">
-                  {column.title && (
+                  {toText(column.title) && (
                     <h3 className="text-2xl tracking-[-0.96px]">
-                      {column.title}
+                      {toText(column.title)}
                     </h3>
                   )}
-                  {column.description && (
+                  {toText(column.description) && (
                     <p
-                      className={`mt-2.5 max-w-[300px] tracking-[-0.32px] text-balance text-muted-foreground ${index % 2 === 0 ? "" : "ml-auto"}`}
+                      className={`mt-2.5 max-w-[300px] tracking-[-0.32px] text-balance text-muted-foreground ${
+                        index % 2 === 0 ? "" : "ml-auto"
+                      }`}
                     >
-                      {column.description}
+                      {toText(column.description)}
                     </p>
                   )}
                 </div>
@@ -100,14 +104,16 @@ export default function Timeline4({
                 </div>
                 <div className="flex-1 max-lg:-translate-x-4">
                   <div className="text-start lg:pointer-events-none lg:hidden">
-                    {column.title && (
+                    {toText(column.title) && (
                       <h3 className="text-2xl tracking-[-0.96px]">
-                        {column.title}
+                        {toText(column.title)}
                       </h3>
                     )}
-                    <p className="mt-2.5 mb-10 max-w-[300px] tracking-[-0.32px] text-balance text-muted-foreground">
-                      {column.description}
-                    </p>
+                    {toText(column.description) && (
+                      <p className="mt-2.5 mb-10 max-w-[300px] tracking-[-0.32px] text-balance text-muted-foreground">
+                        {toText(column.description)}
+                      </p>
+                    )}
                   </div>
                   <div className="flex items-start justify-start">
                     <div className={` ${index % 2 === 0 ? "lg:ml-auto" : ""}`}>
@@ -119,7 +125,7 @@ export default function Timeline4({
                         {column.image && column.image.asset?._id && (
                           <Image
                             src={urlFor(column.image).url()}
-                            alt={column.image.alt || ""}
+                            alt={toText(column.image.alt) || ""}
                             placeholder={
                               column.image?.asset?.metadata?.lqip
                                 ? "blur"
@@ -151,7 +157,11 @@ export default function Timeline4({
                 </div>
               </div>
               <div
-                className={`absolute z-[-2] h-full w-[3px] translate-x-5 rounded-full lg:left-1/2 lg:-translate-x-1/2 ${index === columns.length - 1 ? "bg-linear-to-b from-foreground/10 via-foreground/10 to-transparent" : "bg-foreground/10"}`}
+                className={`absolute z-[-2] h-full w-[3px] translate-x-5 rounded-full lg:left-1/2 lg:-translate-x-1/2 ${
+                  index === columns.length - 1
+                    ? "bg-linear-to-b from-foreground/10 via-foreground/10 to-transparent"
+                    : "bg-foreground/10"
+                }`}
               >
                 {index == 0 && (
                   <div className="h-4 w-[3px] -translate-y-full bg-linear-to-b from-transparent to-foreground/10"></div>

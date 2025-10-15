@@ -12,6 +12,7 @@ import SectionContainer from "@/components/ui/section-container";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import { toText } from "@/lib/utils";
 
 type Logos9Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -22,9 +23,9 @@ const Logos9 = ({ padding, title, images, testimonials }: Logos9Props) => {
   return (
     <SectionContainer padding={padding}>
       <div className="flex flex-col items-center text-center">
-        {title && (
+        {toText(title) && (
           <h1 className="my-6 text-lg font-semibold tracking-tight text-foreground">
-            {title}
+            {toText(title)}
           </h1>
         )}
       </div>
@@ -46,7 +47,7 @@ const Logos9 = ({ padding, title, images, testimonials }: Logos9Props) => {
                       <Image
                         key={image._key}
                         src={urlFor(image).url()}
-                        alt={image.alt || ""}
+                        alt={toText(image.alt) || ""}
                         placeholder={
                           image?.asset?.metadata?.lqip &&
                           image?.asset?.mimeType !== "image/svg+xml"
@@ -89,14 +90,16 @@ const Logos9 = ({ padding, title, images, testimonials }: Logos9Props) => {
                     {testimonial.text}
                   </h5>
                   <div className="mt-auto">
-                    <p className="text-lg font-semibold tracking-tight text-foreground">
-                      {testimonial.name}
-                    </p>
+                    {toText(testimonial.name) && (
+                      <p className="text-lg font-semibold tracking-tight text-foreground">
+                        {toText(testimonial.name)}
+                      </p>
+                    )}
                     {testimonial.image && (
                       <Image
                         key={testimonial.image.asset?._id}
                         src={urlFor(testimonial.image).url()}
-                        alt={testimonial.image.alt || ""}
+                        alt={toText(testimonial.image.alt) || ""}
                         placeholder={
                           testimonial.image?.asset?.metadata?.lqip &&
                           testimonial.image?.asset?.mimeType !== "image/svg+xml"

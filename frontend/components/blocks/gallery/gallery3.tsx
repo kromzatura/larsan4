@@ -14,7 +14,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import Icon from "@/components/icon";
 import { Badge } from "@/components/ui/badge";
 import SectionContainer from "@/components/ui/section-container";
@@ -57,9 +57,9 @@ export default function Gallery3({
     <SectionContainer padding={padding} withContainer={false}>
       <div className="container">
         <div className="mb-8 flex items-end justify-between md:mb-14 lg:mb-16">
-          {title && (
+          {toText(title) && (
             <h2 className="text-3xl font-medium tracking-tight md:text-4xl lg:text-5xl">
-              {title}
+              {toText(title)}
             </h2>
           )}
           <div className="shrink-0 gap-2 md:flex">
@@ -119,7 +119,7 @@ export default function Gallery3({
                             {item.image && item.image.asset?._id && (
                               <Image
                                 src={urlFor(item.image).url()}
-                                alt={item.image.alt || ""}
+                                alt={toText(item.image.alt) || ""}
                                 placeholder={
                                   item.image?.asset?.metadata?.lqip
                                     ? "blur"
@@ -146,18 +146,20 @@ export default function Gallery3({
                       </div>
                     </div>
                     <div className="mt-6">
-                      {item.categories && item.categories.length > 0 && (
-                        <Badge>{item.categories[0].title}</Badge>
-                      )}
+                      {item.categories &&
+                        item.categories.length > 0 &&
+                        toText(item.categories[0].title) && (
+                          <Badge>{toText(item.categories[0].title)}</Badge>
+                        )}
                     </div>
-                    {item.title && (
+                    {toText(item.title) && (
                       <div className="mb-2 line-clamp-3 pt-4 text-lg font-medium break-words md:mb-3 md:pt-4 md:text-xl lg:pt-4 lg:text-2xl">
-                        {item.title}
+                        {toText(item.title)}
                       </div>
                     )}
-                    {item.description && (
+                    {toText(item.description) && (
                       <div className="mb-8 line-clamp-2 text-sm text-muted-foreground md:mb-12 md:text-base lg:mb-9">
-                        {item.description}
+                        {toText(item.description)}
                       </div>
                     )}
                     <div
@@ -169,7 +171,7 @@ export default function Gallery3({
                         "w-fit"
                       )}
                     >
-                      {item.link?.title}
+                      {toText(item.link?.title) || ""}
                       <Icon
                         iconVariant={item.link?.iconVariant || "none"}
                         className="ml-2 transition-transform group-hover:translate-x-1"
