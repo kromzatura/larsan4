@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import ClickableRow from "@/components/blocks/products/all-products-16/clickable-row";
 import Pagination from "@/components/pagination";
 import AddToInquiryButton from "@/components/inquiry/add-to-inquiry-button";
@@ -130,11 +130,11 @@ export default function ProductsTable({
                         href={item.href}
                         className="font-semibold hover:underline line-clamp-2 break-words leading-tight"
                       >
-                        {item.title}
+                        {toText(item.title as unknown) || ""}
                       </Link>
-                      {item.sku && (
+                      {toText(item.sku as unknown) && (
                         <span className="text-xs text-muted-foreground truncate block whitespace-nowrap font-mono">
-                          {labels.labelSku}: {item.sku}
+                          {labels.labelSku}: {toText(item.sku as unknown)}
                         </span>
                       )}
                     </div>
@@ -159,7 +159,7 @@ export default function ProductsTable({
                             variant="secondary"
                             className="transition-colors hover:bg-secondary/80 rounded-full px-2.5 py-0.5 text-xs"
                           >
-                            {c?.title}
+                            {toText(c?.title as unknown) || ""}
                           </Badge>
                         </Link>
                       ))}
@@ -170,35 +170,37 @@ export default function ProductsTable({
                     {Array.isArray(item.features) &&
                       item.features
                         ?.slice(0, 3)
-                        .map((f, idx) => <li key={idx}>{f}</li>)}
+                        .map((f, idx) => (
+                          <li key={idx}>{toText(f as unknown) || ""}</li>
+                        ))}
                   </ul>
                 </td>
                 <td className="px-6 py-6 md:py-7 align-top">
                   <div className="relative z-10 flex flex-wrap items-center gap-2">
-                    {item.productAttributes && (
+                    {toText(item.productAttributes as unknown) && (
                       <Badge
                         variant="outline"
                         className="rounded-full px-2.5 py-0.5 text-xs"
                       >
-                        {item.productAttributes}
+                        {toText(item.productAttributes as unknown)}
                       </Badge>
                     )}
-                    {item.purity && (
+                    {toText(item.purity as unknown) && (
                       <Badge
                         variant="outline"
                         className="rounded-full px-2.5 py-0.5 text-xs"
                       >
-                        {labels.labelPurity}: {item.purity}
+                        {labels.labelPurity}: {toText(item.purity as unknown)}
                       </Badge>
                     )}
                   </div>
                 </td>
                 <td className="relative z-10 px-6 py-5 md:py-6 text-center align-middle">
-                  {item.sku && (
+                  {toText(item.sku as unknown) && (
                     <AddToInquiryButton
                       item={{
-                        id: item.sku,
-                        name: item.title || null,
+                        id: toText(item.sku as unknown)!,
+                        name: toText(item.title as unknown),
                         productId: item._id || null,
                         slug: item.slug || null,
                         imageUrl: item.imageUrl || null,

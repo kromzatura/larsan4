@@ -7,6 +7,7 @@ import { buildLocalizedPath } from "@/lib/i18n/routing";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { toText } from "@/lib/utils";
 
 type CategoriesBlockProps = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -62,7 +63,7 @@ export default async function ProductCategories16({
                 variant={active === c.slug?.current ? "secondary" : "outline"}
                 className="px-3 py-1 text-sm transition-colors hover:bg-secondary/80"
               >
-                {c.title}
+                {toText(c.title as unknown) || ""}
               </Badge>
             </Link>
           ))}
