@@ -68,7 +68,8 @@ export default function CompareProducts({
       return { headers: [], rows: [], cols: [] };
 
     const headers = columns.map((c, idx) => {
-      const t = (c?.product?.title || "").trim();
+      const rawTitle = c?.product?.title as unknown;
+      const t = (toText(rawTitle) ?? "").trim();
       return t || `Unnamed product ${idx + 1}`;
     });
 
@@ -225,7 +226,8 @@ export default function CompareProducts({
                                 columns?.[colIdx]?.product?._id ??
                                 `col-${colIdx}`
                             ),
-                            name: columns?.[colIdx]?.product?.title ?? null,
+                            name:
+                              toText(columns?.[colIdx]?.product?.title) ?? null,
                             productId: columns?.[colIdx]?.product?._id ?? null,
                             slug:
                               columns?.[colIdx]?.product?.slug?.current ?? null,
