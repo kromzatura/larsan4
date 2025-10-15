@@ -48,6 +48,16 @@ export default function PostsList({
   className,
   locale = FALLBACK_LOCALE,
 }: PostsListProps) {
+  const toText = (v: unknown): string | null => {
+    if (typeof v === "string") return v;
+    if (typeof v === "number") return String(v);
+    if (v && typeof v === "object") {
+      const obj = v as Record<string, unknown>;
+      if (typeof obj.value === "string") return obj.value;
+    }
+    return null;
+  };
+
   const createPageUrl = (pageNum: number) => {
     const qp = new URLSearchParams(baseSearchParams || "");
     if (pageNum > 1) qp.set("page", String(pageNum));
@@ -71,12 +81,14 @@ export default function PostsList({
               </AvatarFallback>
             </Avatar>
             <div className="flex flex-col gap-1">
-              {post.author?.name && (
-                <span className="font-semibold">{post.author.name}</span>
+              {toText(post.author?.name) && (
+                <span className="font-semibold">
+                  {toText(post.author?.name)}
+                </span>
               )}
-              {post.author?.title && (
+              {toText(post.author?.title) && (
                 <span className="text-sm text-muted-foreground">
-                  {post.author.title}
+                  {toText(post.author?.title)}
                 </span>
               )}
             </div>
@@ -84,14 +96,17 @@ export default function PostsList({
           <div className="col-span-2 max-w-xl">
             <span className="mb-2 flex items-center gap-2 text-sm font-medium text-muted-foreground">
               {post.createdAt && <PostDate date={post.createdAt} />}
-              {post.author?.name && (
-                <span className="inline lg:hidden"> - {post.author.name}</span>
+              {toText(post.author?.name) && (
+                <span className="inline lg:hidden">
+                  {" "}
+                  - {toText(post.author?.name)}
+                </span>
               )}
             </span>
             <h3 className="text-2xl font-bold hover:underline lg:text-3xl">
-              {post.title && (
+              {toText(post.title) && (
                 <Link href={buildLocalizedPath(locale, `/blog/${post.slug}`)}>
-                  {post.title}
+                  {toText(post.title)}
                 </Link>
               )}
             </h3>
@@ -104,7 +119,8 @@ export default function PostsList({
                         `/blog/category/${category.slug.current}`
                       )
                     : undefined;
-                  const key = category._id || `${post._id}-${category.title}`;
+                  const catTitle = toText(category.title) || "";
+                  const key = category._id || `${post._id}-${catTitle}`;
                   const isActive =
                     Boolean(activeCategorySlug) &&
                     category.slug?.current === activeCategorySlug;
@@ -122,14 +138,14 @@ export default function PostsList({
                           : "text-muted-foreground hover:bg-muted"
                       )}
                     >
-                      {category.title}
+                      {catTitle}
                     </Link>
                   ) : (
                     <span
                       key={key}
                       className={cn(chipBase, "text-muted-foreground")}
                     >
-                      {category.title}
+                      {catTitle}
                     </span>
                   );
                 })}

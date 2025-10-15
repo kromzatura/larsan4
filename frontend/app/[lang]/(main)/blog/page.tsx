@@ -82,21 +82,31 @@ export default async function BlogIndex(props: LangAsyncPageProps) {
   const totalPages = Math.max(1, Math.ceil((totalCount || 0) / POSTS_PER_PAGE));
   if (page > totalPages) notFound();
 
+  const toText = (v: unknown): string | null => {
+    if (typeof v === "string") return v;
+    if (typeof v === "number") return String(v);
+    if (v && typeof v === "object") {
+      const obj = v as Record<string, unknown>;
+      if (typeof obj.value === "string") return obj.value;
+    }
+    return null;
+  };
+
   const items: PostsListItem[] = (posts || []).map((p) => ({
     _id: p._id || "",
     slug: p.slug?.current || "",
-    title: p.title || null,
+    title: toText(p.title),
     createdAt: p._createdAt || null,
-    excerpt: p.excerpt || null,
+    excerpt: toText(p.excerpt),
     author: {
-      name: p.author?.name || null,
-      title: p.author?.title || null,
+      name: toText(p.author?.name),
+      title: toText(p.author?.title),
       imageUrl: p.author?.image?.asset?.url || null,
     },
     categories: Array.isArray(p.categories)
       ? p.categories.map((c) => ({
           _id: c?._id || undefined,
-          title: c?.title || null,
+          title: toText(c?.title),
           slug: c?.slug || null,
         }))
       : null,
@@ -128,7 +138,7 @@ export default async function BlogIndex(props: LangAsyncPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
-  <h1 className="text-3xl font-serif font-semibold md:text-5xl">Blog</h1>
+      <h1 className="text-3xl font-serif font-semibold md:text-5xl">Blog</h1>
       <div className="mt-5 flex flex-wrap gap-2">
         <Link
           href={`${basePath}/rss.xml`}
