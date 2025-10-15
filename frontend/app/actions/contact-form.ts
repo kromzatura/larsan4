@@ -24,6 +24,7 @@ export async function submitContactForm(
   formData: FormData
 ): Promise<ContactFormState> {
   try {
+    const isProd = process.env.NODE_ENV === "production";
     // Determine locale from form (fallback-safe)
     const rawLocale = formData.get("locale");
     const locale: SupportedLocale = SUPPORTED_LOCALES.includes(
@@ -49,8 +50,11 @@ export async function submitContactForm(
       };
     }
 
-    // Verify reCAPTCHA if configured
-    if (process.env.RECAPTCHA_SECRET_KEY) {
+    // Verify reCAPTCHA only if both secret and site key are configured
+    if (
+      process.env.RECAPTCHA_SECRET_KEY &&
+      process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+    ) {
       const token = formData.get("g-recaptcha-response");
       if (!token || typeof token !== "string") {
         return {
@@ -87,14 +91,18 @@ export async function submitContactForm(
         };
       }
     }
-    if (!process.env.RESEND_API_KEY) {
-      throw new Error("Missing Resend API key");
-    }
-    if (
-      !process.env.NEXT_RESEND_FROM_EMAIL ||
-      !process.env.NEXT_RESEND_TO_EMAIL
-    ) {
-      throw new Error("Missing email configuration");
+    // Email configuration
+    const hasResendKey = !!process.env.RESEND_API_KEY;
+    const fromEmail = process.env.NEXT_RESEND_FROM_EMAIL;
+    const toEmail = process.env.NEXT_RESEND_TO_EMAIL;
+    const hasEmailConfig = !!fromEmail && !!toEmail;
+    if (!hasResendKey || !hasEmailConfig) {
+      if (isProd) {
+        if (!hasResendKey) throw new Error("Missing Resend API key");
+        throw new Error("Missing email configuration");
+      }
+      // In non-production, simulate success so local testing doesn’t block
+      return { success: true };
     }
 
     // Convert FormData to object
@@ -157,7 +165,7 @@ export async function submitContactForm(
 
     await resend.emails.send({
       from: `Website Contact Form <${process.env.NEXT_RESEND_FROM_EMAIL}>`,
-      to: process.env.NEXT_RESEND_TO_EMAIL,
+      to: process.env.NEXT_RESEND_TO_EMAIL!,
       subject:
         inquiryItems && inquiryItems.length
           ? `${dict.contact.email.headingSubmission} — ${firstName} ${lastName} (+${inquiryItems.length})`
