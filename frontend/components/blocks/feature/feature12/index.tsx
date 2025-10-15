@@ -52,7 +52,9 @@ export default function Feature12({
       <div className="container max-w-7xl">
         <Carousel className="w-full" setApi={setApi}>
           <div className="mb-4 flex justify-between px-1 md:mb-5">
-            {tagline && <p className="font-medium">{tagline}</p>}
+            {toText(tagline) && (
+              <p className="font-medium">{toText(tagline)}</p>
+            )}
             <div className="flex items-center space-x-2">
               <div className="mr-2 hidden items-center gap-3 text-xs text-muted-foreground md:flex">
                 <span>01</span>
