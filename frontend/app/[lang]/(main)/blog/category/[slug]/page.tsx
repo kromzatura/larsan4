@@ -53,11 +53,13 @@ export async function generateMetadata(
     lang: locale,
   });
   if (!cat) notFound();
+  const metaTitle = toText(cat.title) || undefined;
+  const metaDescription = toText(cat.description) || undefined;
   const basePath = buildLocalizedPath(locale, `/blog/category/${params.slug}`);
   // Category documents are not full page documents; cast for metadata helper which accepts broader page-like shapes.
   const base: MetadataWithAlternates = {
-    title: cat.title || undefined,
-    description: cat.description || undefined,
+    title: metaTitle,
+    description: metaDescription,
     alternates: { canonical: basePath },
   };
   const withFeeds: MetadataWithAlternates = {
