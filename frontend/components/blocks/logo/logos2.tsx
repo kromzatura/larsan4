@@ -80,7 +80,7 @@ const Logos2 = ({
                 <Image
                   key={image._key}
                   src={urlFor(image).url()}
-                  alt={image.alt || ""}
+                  alt={toText(image.alt) || ""}
                   placeholder={
                     image?.asset?.metadata?.lqip &&
                     image?.asset?.mimeType !== "image/svg+xml"

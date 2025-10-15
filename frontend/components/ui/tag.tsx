@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import Icon from "@/components/icon";
 
@@ -10,7 +10,7 @@ export default function Tag({
   className,
   large = false,
 }: {
-  title: string;
+  title: string | unknown;
   iconVariant?: string;
   type?: "title" | "badge";
   element?: "div" | "h1" | "h2" | "h3" | "p";
@@ -28,7 +28,7 @@ export default function Tag({
       )}
     >
       {type === "title" ? (
-        <span>{title}</span>
+        <span>{toText(title) || ""}</span>
       ) : (
         <Badge variant="outline">
           {iconVariant && (
@@ -38,7 +38,7 @@ export default function Tag({
               size={4}
             />
           )}
-          {title}
+          {toText(title) || ""}
         </Badge>
       )}
     </TagElement>

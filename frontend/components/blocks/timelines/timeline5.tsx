@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import Icon from "@/components/icon";
 import SectionContainer from "@/components/ui/section-container";
 import { ColorName, getColor } from "@/lib/color";
@@ -21,36 +21,39 @@ export default function Timeline5({
         {/* Left Column - Fixed Content */}
         <div className="lg:sticky lg:top-24 lg:self-start">
           <div className="max-w-lg">
-            {title && (title.title1 || title.title2 || title.title3) && (
-              <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl lg:text-5xl">
-                {title?.title1}{" "}
-                <span className="relative inline-block">
-                  {title?.title2 && (
-                    <>
-                      <span className="text-muted-foreground">
-                        {title.title2}
-                      </span>
-                      <Icon
-                        iconVariant={title.iconVariant || "none"}
-                        className={cn(
-                          "absolute -top-2 -right-4 stroke-none",
-                          getColor({
-                            color: title.color as ColorName,
-                            type: "fill",
-                          })
-                        )}
-                        size={5}
-                      />
-                    </>
-                  )}
-                </span>
-                <br />
-                {title?.title3}
-              </h2>
-            )}
-            {description && (
+            {title &&
+              (toText(title.title1) ||
+                toText(title.title2) ||
+                toText(title.title3)) && (
+                <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl lg:text-5xl">
+                  {toText(title?.title1) || ""}{" "}
+                  <span className="relative inline-block">
+                    {toText(title?.title2) && (
+                      <>
+                        <span className="text-muted-foreground">
+                          {toText(title.title2)}
+                        </span>
+                        <Icon
+                          iconVariant={title.iconVariant || "none"}
+                          className={cn(
+                            "absolute -top-2 -right-4 stroke-none",
+                            getColor({
+                              color: title.color as ColorName,
+                              type: "fill",
+                            })
+                          )}
+                          size={5}
+                        />
+                      </>
+                    )}
+                  </span>
+                  <br />
+                  {toText(title?.title3) || ""}
+                </h2>
+              )}
+            {toText(description) && (
               <p className="mt-12 text-base text-muted-foreground">
-                {description}
+                {toText(description)}
               </p>
             )}
           </div>
@@ -75,14 +78,14 @@ export default function Timeline5({
                     0{index + 1}
                   </div>
                   <div className="mt-6">
-                    {column.title && (
+                    {toText(column.title) && (
                       <h4 className="mb-2 text-2xl font-semibold text-primary">
-                        {column.title}
+                        {toText(column.title)}
                       </h4>
                     )}
-                    {column.description && (
+                    {toText(column.description) && (
                       <p className="mt-6 text-xs text-muted-foreground sm:text-base">
-                        {column.description}
+                        {toText(column.description)}
                       </p>
                     )}
                   </div>

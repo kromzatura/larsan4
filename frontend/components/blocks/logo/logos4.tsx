@@ -2,6 +2,7 @@ import SectionContainer from "@/components/ui/section-container";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import { toText } from "@/lib/utils";
 
 type Logos4Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -16,7 +17,7 @@ const Logos4 = ({ padding, images }: Logos4Props) => {
           <Image
             key={image._key}
             src={urlFor(image).url()}
-            alt={image.alt || ""}
+            alt={toText(image.alt) || ""}
             placeholder={
               image?.asset?.metadata?.lqip &&
               image?.asset?.mimeType !== "image/svg+xml"

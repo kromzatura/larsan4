@@ -3,7 +3,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -84,12 +84,14 @@ export default function Changelog5({
               Changelog
             </span>
             <div>
-              {(title || secondaryTitle) && (
+              {(toText(title) || toText(secondaryTitle)) && (
                 <h2 className="text-4xl font-normal">
-                  {title} <br />{" "}
-                  <span className="text-muted-foreground">
-                    {secondaryTitle}
-                  </span>
+                  {toText(title) || ""} <br />{" "}
+                  {toText(secondaryTitle) && (
+                    <span className="text-muted-foreground">
+                      {toText(secondaryTitle)}
+                    </span>
+                  )}
                 </h2>
               )}
               {links && links.length > 0 && (
@@ -108,7 +110,7 @@ export default function Changelog5({
                       )}
                     >
                       <div className="group flex items-center gap-1 underline">
-                        {link.title}
+                        {toText(link.title) || ""}
                         <ArrowUpRight className="size-4 transition-all group-hover:rotate-45" />
                       </div>
                     </Link>
@@ -158,7 +160,7 @@ export default function Changelog5({
                   {changelog.image && changelog.image.asset?._id && (
                     <Image
                       src={urlFor(changelog.image).url()}
-                      alt={changelog.image.alt || ""}
+                      alt={toText(changelog.image.alt) || ""}
                       placeholder={
                         changelog.image?.asset?.metadata?.lqip
                           ? "blur"
@@ -187,14 +189,16 @@ export default function Changelog5({
                         >
                           <span className="size-2 shrink-0 rounded-full border border-muted-foreground" />
                           <p className="text-sm text-muted-foreground">
-                            {category.title}
+                            {toText(category.title) || ""}
                           </p>
                         </span>
                       ))}
                     </div>
                   )}
-                  {changelog.title && (
-                    <h3 className="mt-2 mb-6 text-3xl">{changelog.title}</h3>
+                  {toText(changelog.title) && (
+                    <h3 className="mt-2 mb-6 text-3xl">
+                      {toText(changelog.title)}
+                    </h3>
                   )}
                   {changelog.body && (
                     <PortableTextRenderer
@@ -213,12 +217,16 @@ export default function Changelog5({
                           </Avatar>
                         )}
                       <div className="flex flex-col">
-                        <p className="text-sm font-medium">
-                          {changelog.author?.name}
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                          {changelog.author?.title}
-                        </p>
+                        {toText(changelog.author?.name) && (
+                          <p className="text-sm font-medium">
+                            {toText(changelog.author?.name)}
+                          </p>
+                        )}
+                        {toText(changelog.author?.title) && (
+                          <p className="text-sm text-muted-foreground">
+                            {toText(changelog.author?.title)}
+                          </p>
+                        )}
                       </div>
                     </div>
                     {changelog.date && (
