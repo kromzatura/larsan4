@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import {
-  fetchSanityProductCategoriesStaticParams,
   fetchSanityProductsByCategory,
   fetchSanityProductsCountByCategory,
   fetchSanityProductCategoryBySlug,
@@ -12,22 +11,16 @@ import ProductsTable, {
   ProductsTableItem,
 } from "@/components/products/products-table";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
-import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+// no FALLBACK_LOCALE needed
 import type { AsyncPageProps } from "@/lib/types/next";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { mapProductToProductsTableItem } from "@/sanity/lib/mappers";
 import { toText } from "@/lib/utils";
 
-const PAGE_SIZE = 12;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
-export async function generateStaticParams() {
-  const cats = await fetchSanityProductCategoriesStaticParams({
-    lang: FALLBACK_LOCALE,
-  });
-  return cats
-    .filter((c) => c.slug?.current)
-    .map((c) => ({ slug: c.slug!.current! }));
-}
+const PAGE_SIZE = 12;
 
 export async function generateMetadata(
   props: AsyncPageProps<{ slug: string; lang?: string }, { page?: string }>
@@ -36,34 +29,50 @@ export async function generateMetadata(
   const searchParams = (await props.searchParams) || {};
   const locale = normalizeLocale(params.lang);
   const pageNum = Math.max(1, Number(searchParams?.page || 1));
-  const cat = await fetchSanityProductCategoryBySlug({
-    slug: params.slug,
-    lang: locale,
-  });
-  if (!cat) notFound();
-  const base = await generatePageMetadata({
-    page: cat,
-    slug: `products/category/${params.slug}`,
-    type: "productCategory",
-    locale,
-  });
-  return {
-    ...base,
-    ...(pageNum > 1
-      ? {
-          robots: {
-            index: false,
-            follow: true,
-          },
-          alternates: {
-            canonical: buildLocalizedPath(
-              locale,
-              `/products/category/${params.slug}`
-            ),
-          },
-        }
-      : {}),
-  };
+  try {
+    const cat = await fetchSanityProductCategoryBySlug({
+      slug: params.slug,
+      lang: locale,
+    });
+    if (!cat) notFound();
+    const base = await generatePageMetadata({
+      page: cat,
+      slug: `products/category/${params.slug}`,
+      type: "productCategory",
+      locale,
+    });
+    return {
+      ...base,
+      ...(pageNum > 1
+        ? {
+            robots: {
+              index: false,
+              follow: true,
+            },
+            alternates: {
+              canonical: buildLocalizedPath(
+                locale,
+                `/products/category/${params.slug}`
+              ),
+            },
+          }
+        : {}),
+    };
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error("[metadata] product category failed", {
+      slug: params.slug,
+      locale,
+      error: message,
+    });
+    // Fail-safe: return empty metadata to avoid a 500 due to metadata errors
+    return {} as {
+      title?: string;
+      description?: string;
+      robots?: unknown;
+      alternates?: unknown;
+    };
+  }
 }
 
 export default async function CategoryPage(

@@ -2,14 +2,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import PostsList, { PostsListItem } from "@/components/posts/posts-list";
 import {
-  fetchSanityBlogCategoriesStaticParams,
   fetchSanityBlogCategoryBySlug,
   fetchSanityPostsByBlogCategory,
   fetchSanityPostsCountByBlogCategory,
 } from "@/sanity/lib/fetch";
 import { chipClass } from "@/components/ui/chip";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
-import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import type { AsyncPageProps, SearchParams } from "@/lib/types/next";
 import { toText } from "@/lib/utils";
 
@@ -24,17 +22,10 @@ interface MetadataWithAlternates {
   [key: string]: unknown;
 }
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 const POSTS_PER_PAGE = 6;
-
-export async function generateStaticParams() {
-  const cats = await fetchSanityBlogCategoriesStaticParams({
-    lang: FALLBACK_LOCALE,
-  });
-
-  return cats
-    .filter((c) => c.slug?.current)
-    .map((c) => ({ slug: c.slug.current }));
-}
 
 export async function generateMetadata(
   props: AsyncPageProps<{ slug: string; lang?: string }, SearchParams>

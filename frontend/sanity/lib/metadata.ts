@@ -2,6 +2,7 @@ import { urlFor } from "@/sanity/lib/image";
 import { getOgImageUrl } from "@/sanity/lib/fetch";
 import type { Metadata } from "next";
 import { buildCanonicalUrl } from "@/lib/url";
+import { toText } from "@/lib/utils";
 import {
   SUPPORTED_LOCALES,
   SupportedLocale,
@@ -59,15 +60,15 @@ export function generatePageMetadata({
   }, {} as Record<SupportedLocale, string>);
 
   return {
-    title: meta?.title ?? undefined,
-    description: meta?.description ?? undefined,
+    title: toText(meta?.title as unknown) ?? undefined,
+    description: toText(meta?.description as unknown) ?? undefined,
     alternates: {
       canonical: canonicalUrl,
       languages: languageAlternates,
     },
     openGraph: {
-      title: meta?.title ?? undefined,
-      description: meta?.description ?? undefined,
+      title: toText(meta?.title as unknown) ?? undefined,
+      description: toText(meta?.description as unknown) ?? undefined,
       url: canonicalUrl,
       images: [
         {
