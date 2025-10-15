@@ -11,6 +11,7 @@ import Pagination from "@/components/pagination";
 import { buildLocalizedPath } from "@/lib/i18n/routing";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { toText } from "@/lib/utils";
 
 type AllPosts4Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -71,7 +72,7 @@ export default async function AllPosts4({
                     {post.image && post.image.asset?._id && (
                       <Image
                         src={urlFor(post.image).url()}
-                        alt={post.image.alt || ""}
+                        alt={toText(post.image.alt) || ""}
                         placeholder={
                           post.image?.asset?.metadata?.lqip ? "blur" : undefined
                         }
@@ -94,6 +95,7 @@ export default async function AllPosts4({
                   <div className="flex flex-wrap gap-2">
                     {post.categories.map((category) => {
                       const slug = category.slug?.current ?? undefined;
+                      const catTitle = toText(category.title);
                       return (
                         <Link
                           key={category._id}
@@ -106,33 +108,33 @@ export default async function AllPosts4({
                               : baseBlogPath
                           }
                         >
-                          <Badge>{category.title}</Badge>
+                          {catTitle && <Badge>{catTitle}</Badge>}
                         </Link>
                       );
                     })}
                   </div>
                 )}
-                {post.title && (
+                {toText(post.title) && (
                   <h2 className="mb-2 line-clamp-3 pt-4 text-lg font-medium break-words md:mb-3 md:pt-4 md:text-2xl lg:pt-4 lg:text-3xl">
-                    {post.title}
+                    {toText(post.title)}
                   </h2>
                 )}
-                {post.excerpt && (
+                {toText(post.excerpt) && (
                   <div className="mb-4 line-clamp-2 text-sm text-muted-foreground md:mb-5 md:text-base">
-                    {post.excerpt}
+                    {toText(post.excerpt)}
                   </div>
                 )}
                 <div className="flex items-center gap-2">
                   <Avatar className="size-12">
                     <AvatarImage src={post.author?.image?.asset?.url || ""} />
-                    <AvatarFallback>
-                      {post.author?.name?.slice(0, 2)}
-                    </AvatarFallback>
+                    <AvatarFallback>{(toText(post.author?.name) || "").slice(0, 2)}</AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col gap-px">
-                    <span className="text-xs font-medium">
-                      {post.author?.name}
-                    </span>
+                    {toText(post.author?.name) && (
+                      <span className="text-xs font-medium">
+                        {toText(post.author?.name)}
+                      </span>
+                    )}
                     <span className="text-xs text-muted-foreground">
                       <PostDate date={post._createdAt} />
                     </span>

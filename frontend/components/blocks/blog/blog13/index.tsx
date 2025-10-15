@@ -36,7 +36,7 @@ export default function Blog13({
                 {post.image && post.image.asset?._id && (
                   <Image
                     src={urlFor(post.image).url()}
-                    alt={post.image.alt || ""}
+                    alt={toText(post.image.alt) || ""}
                     placeholder={
                       post.image?.asset?.metadata?.lqip ? "blur" : undefined
                     }

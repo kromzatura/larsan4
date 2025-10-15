@@ -32,7 +32,7 @@ export default function Blog16({
                   <Avatar className="size-12">
                     <AvatarImage src={post.author?.image?.asset?.url || ""} />
                     <AvatarFallback>
-                      {post.author?.name?.slice(0, 2)}
+                      {(toText(post.author?.name) || "").slice(0, 2)}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col gap-1">

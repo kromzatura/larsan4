@@ -27,7 +27,7 @@ export default function Blog14({
           {posts[0].image && posts[0].image.asset?._id && (
             <Image
               src={urlFor(posts[0].image).url()}
-              alt={posts[0].image.alt || ""}
+              alt={toText(posts[0].image.alt) || ""}
               placeholder={
                 posts[0].image?.asset?.metadata?.lqip ? "blur" : undefined
               }
@@ -47,11 +47,12 @@ export default function Blog14({
                   const href = slug
                     ? buildLocalizedPath(locale, `/blog/category/${slug}`)
                     : buildLocalizedPath(locale, "/blog");
+                  const catTitle = toText(category.title);
                   return (
                     <Link key={category._id} href={href}>
-                      <Badge variant="secondary">
-                        {toText(category.title)}
-                      </Badge>
+                      {catTitle && (
+                        <Badge variant="secondary">{catTitle}</Badge>
+                      )}
                     </Link>
                   );
                 })}
@@ -104,7 +105,7 @@ export default function Blog14({
                 {post.image && post.image.asset?._id && (
                   <Image
                     src={urlFor(post.image).url()}
-                    alt={post.image.alt || ""}
+                    alt={toText(post.image.alt) || ""}
                     placeholder={
                       post.image?.asset?.metadata?.lqip ? "blur" : undefined
                     }
