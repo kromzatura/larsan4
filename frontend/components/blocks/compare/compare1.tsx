@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { Fragment } from "react";
 import SectionContainer from "@/components/ui/section-container";
 import Image from "next/image";
@@ -47,10 +47,14 @@ export default function Compare1({ padding, images, columns }: Compare1Props) {
                     </div>
                   )
               )}
-              {columns.map((column) => (
+              {columns.map((column) => {
+                const labelText = toText(column.label) ?? "";
+                const primaryText = toText(column.primary) ?? "";
+                const secondaryText = toText(column.secondary) ?? "";
+                return (
                 <Fragment key={column._key}>
                   <div className="flex items-center border-b p-3 text-base font-medium md:p-4 md:text-lg">
-                    {column.label}
+                    {labelText}
                   </div>
                   <div className="border-b bg-green-50 p-3 md:p-6">
                     <div className="flex items-center gap-2">
@@ -58,7 +62,7 @@ export default function Compare1({ padding, images, columns }: Compare1Props) {
                         <CheckCircle2 className="h-5 w-5 text-green-600" />
                       )}
                       <span className="text-base md:text-lg">
-                        {column.primary}
+                        {primaryText}
                       </span>
                     </div>
                   </div>
@@ -68,12 +72,13 @@ export default function Compare1({ padding, images, columns }: Compare1Props) {
                         <OctagonX className="h-5 w-5 text-red-600" />
                       )}
                       <span className="text-base md:text-lg">
-                        {column.secondary}
+                        {secondaryText}
                       </span>
                     </div>
                   </div>
                 </Fragment>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

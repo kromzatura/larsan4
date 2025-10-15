@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import Icon from "@/components/icon";
@@ -30,10 +30,10 @@ export default function Compare4({
       withContainer={false}
     >
       <div className="container grid grid-cols-4 gap-x-4 gap-y-8 md:grid-cols-8 lg:grid-cols-12">
-        {title && (
+        {toText(title) && (
           <div className="col-span-4 mb-8 max-w-4xl md:col-span-8 md:mb-12 lg:col-span-10 lg:col-start-2 lg:mb-16">
             <h2 className="mb-4 text-center text-3xl font-bold sm:text-left md:text-4xl lg:text-6xl">
-              {title}
+              {toText(title)}
             </h2>
           </div>
         )}
@@ -43,12 +43,12 @@ export default function Compare4({
             <div className="col-span-4 md:col-span-2" />
             <div className="col-span-2 ml-0 md:col-span-3 md:ml-32 lg:ml-40 xl:ml-48 2xl:ml-56">
               <h4 className="text-xs font-bold tracking-wider text-muted-foreground uppercase md:text-sm">
-                {titles?.primary}
+                {toText(titles?.primary) ?? ""}
               </h4>
             </div>
             <div className="col-span-2 ml-0 md:col-span-3 md:ml-32 lg:ml-40 xl:ml-48 2xl:ml-56">
               <h4 className="text-xs font-bold tracking-wider uppercase md:text-sm">
-                {titles?.secondary}
+                {toText(titles?.secondary) ?? ""}
               </h4>
             </div>
           </div>
@@ -56,60 +56,69 @@ export default function Compare4({
 
         {columns && columns?.length > 0 && (
           <div className="col-span-4 rounded-xl bg-background shadow-sm md:col-span-8 lg:col-span-10 lg:col-start-2">
-            {columns.map((column) => (
-              <div
-                key={column._key}
-                className="group border-t px-4 transition-colors first:rounded-t-xl first:border-t-0 last:rounded-b-xl hover:bg-muted/50"
-              >
-                <div className="grid grid-cols-4 items-start gap-4 py-6 md:grid-cols-8 md:py-8">
-                  {column.title && (
-                    <h3 className="col-span-4 mt-2 text-base font-bold md:col-span-2 md:text-lg">
-                      {column.title}
-                    </h3>
-                  )}
+            {columns.map((column) => {
+              const titleText = toText(column.title) ?? "";
+              const pVal = toText(column.primary?.value) ?? column.primary?.value ?? "";
+              const pUnit = toText(column.primary?.unit) ?? column.primary?.unit ?? "";
+              const pDesc = toText(column.primary?.description) ?? column.primary?.description ?? "";
+              const sVal = toText(column.secondary?.value) ?? column.secondary?.value ?? "";
+              const sUnit = toText(column.secondary?.unit) ?? column.secondary?.unit ?? "";
+              const sDesc = toText(column.secondary?.description) ?? column.secondary?.description ?? "";
+              return (
+                <div
+                  key={column._key}
+                  className="group border-t px-4 transition-colors first:rounded-t-xl first:border-t-0 last:rounded-b-xl hover:bg-muted/50"
+                >
+                  <div className="grid grid-cols-4 items-start gap-4 py-6 md:grid-cols-8 md:py-8">
+                    {titleText && (
+                      <h3 className="col-span-4 mt-2 text-base font-bold md:col-span-2 md:text-lg">
+                        {titleText}
+                      </h3>
+                    )}
 
-                  {column.primary && (
-                    <div className="col-span-2 flex flex-col md:col-span-3">
-                      <div className="ml-0 transition-colors group-hover:text-foreground md:ml-32 lg:ml-40 xl:ml-48 2xl:ml-56">
-                        <p className="mb-1 flex items-baseline text-2xl font-bold text-foreground md:mb-2 md:text-5xl">
-                          {column.primary.value}
-                          {column.primary.unit && (
-                            <sup className="ml-0.5 text-xs text-foreground md:text-sm">
-                              {column.primary.unit}
-                            </sup>
-                          )}
-                        </p>
-                        {column.primary.description && (
-                          <p className="text-xs leading-tight text-muted-foreground md:text-sm md:leading-normal">
-                            {column.primary.description}
+                    {column.primary && (
+                      <div className="col-span-2 flex flex-col md:col-span-3">
+                        <div className="ml-0 transition-colors group-hover:text-foreground md:ml-32 lg:ml-40 xl:ml-48 2xl:ml-56">
+                          <p className="mb-1 flex items-baseline text-2xl font-bold text-foreground md:mb-2 md:text-5xl">
+                            {pVal}
+                            {pUnit && (
+                              <sup className="ml-0.5 text-xs text-foreground md:text-sm">
+                                {pUnit}
+                              </sup>
+                            )}
                           </p>
-                        )}
+                          {pDesc && (
+                            <p className="text-xs leading-tight text-muted-foreground md:text-sm md:leading-normal">
+                              {pDesc}
+                            </p>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
-                  {column.secondary && (
-                    <div className="col-span-2 flex flex-col md:col-span-3">
-                      <div className="ml-0 transition-colors group-hover:text-accent-foreground md:ml-32 lg:ml-40 xl:ml-48 2xl:ml-56">
-                        <p className="mb-1 flex items-baseline text-2xl font-bold text-foreground md:mb-2 md:text-5xl">
-                          {column.secondary.value}
-                          {column.secondary.unit && (
-                            <sup className="ml-0.5 text-xs text-foreground md:text-sm">
-                              {column.secondary.unit}
-                            </sup>
-                          )}
-                        </p>
-                        {column.secondary.description && (
-                          <p className="text-xs leading-tight text-muted-foreground md:text-sm md:leading-normal">
-                            {column.secondary.description}
+                    {column.secondary && (
+                      <div className="col-span-2 flex flex-col md:col-span-3">
+                        <div className="ml-0 transition-colors group-hover:text-accent-foreground md:ml-32 lg:ml-40 xl:ml-48 2xl:ml-56">
+                          <p className="mb-1 flex items-baseline text-2xl font-bold text-foreground md:mb-2 md:text-5xl">
+                            {sVal}
+                            {sUnit && (
+                              <sup className="ml-0.5 text-xs text-foreground md:text-sm">
+                                {sUnit}
+                              </sup>
+                            )}
                           </p>
-                        )}
+                          {sDesc && (
+                            <p className="text-xs leading-tight text-muted-foreground md:text-sm md:leading-normal">
+                              {sDesc}
+                            </p>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
         <div className="col-span-4 md:col-span-8 lg:col-span-10 lg:col-start-2">

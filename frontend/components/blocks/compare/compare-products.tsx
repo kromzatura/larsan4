@@ -3,7 +3,7 @@
 import { useMemo, useState, type CSSProperties } from "react";
 import SectionContainer from "@/components/ui/section-container";
 import { SectionPadding } from "@/sanity.types";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AddToInquiryButton from "@/components/inquiry/add-to-inquiry-button";
 
@@ -162,7 +162,7 @@ export default function CompareProducts({
                 scope="col"
                 className="w-48 px-6 py-4 text-left align-top font-semibold text-primary"
               >
-                {title || "Attributes"}
+                {toText(title) ?? title ?? "Attributes"}
               </th>
               {normalized.headers.map((header, idx) => (
                 <th
@@ -188,7 +188,7 @@ export default function CompareProducts({
                 )}
               >
                 <td className="w-48 px-6 py-5 md:py-6 align-top font-medium text-muted-foreground/90 whitespace-normal">
-                  {rowLabel}
+                  {toText(rowLabel) ?? rowLabel}
                 </td>
                 {normalized.cols.map((c, colIdx) => {
                   const legacy = columns?.[colIdx]?.attributes?.[rowIdx]?.value;
