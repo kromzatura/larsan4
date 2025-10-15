@@ -1,5 +1,5 @@
 import SectionContainer from "@/components/ui/section-container";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import {
   Card,
   CardContent,
@@ -67,13 +67,15 @@ export default function Blog7({
                 <CardHeader>
                   <h3 className="text-lg font-semibold hover:underline md:text-xl">
                     <Link key={post._id} href={postHref}>
-                      {post.title}
+                      {toText(post.title)}
                     </Link>
                   </h3>
                 </CardHeader>
-                {post.excerpt && (
+                {toText(post.excerpt) && (
                   <CardContent>
-                    <p className="text-muted-foreground">{post.excerpt}</p>
+                    <p className="text-muted-foreground">
+                      {toText(post.excerpt)}
+                    </p>
                   </CardContent>
                 )}
                 <CardFooter>

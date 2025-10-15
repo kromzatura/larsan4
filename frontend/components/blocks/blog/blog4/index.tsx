@@ -1,5 +1,5 @@
 import SectionContainer from "@/components/ui/section-container";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
@@ -78,20 +78,20 @@ export default function Blog4({
                               : buildLocalizedPath(locale, "/blog")
                           }
                         >
-                          <Badge>{category.title}</Badge>
+                          <Badge>{toText(category.title)}</Badge>
                         </Link>
                       );
                     })}
                   </div>
                 )}
-                {post.title && (
+                {toText(post.title) && (
                   <h2 className="mb-2 line-clamp-3 pt-4 text-lg font-medium break-words md:mb-3 md:pt-4 md:text-2xl lg:pt-4 lg:text-3xl">
-                    {post.title}
+                    {toText(post.title)}
                   </h2>
                 )}
-                {post.excerpt && (
+                {toText(post.excerpt) && (
                   <div className="mb-4 line-clamp-2 text-sm text-muted-foreground md:mb-5 md:text-base">
-                    {post.excerpt}
+                    {toText(post.excerpt)}
                   </div>
                 )}
                 <div className="flex items-center gap-2">

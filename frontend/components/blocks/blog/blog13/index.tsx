@@ -1,6 +1,6 @@
 import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -67,7 +67,7 @@ export default function Blog13({
                             variant="secondary"
                             className="bg-background/70 px-3 py-1 text-sm backdrop-blur-sm hover:bg-background/90"
                           >
-                            {category.title}
+                            {toText(category.title)}
                           </Badge>
                         </Link>
                       );
@@ -76,7 +76,7 @@ export default function Blog13({
                 )}
               </div>
               <div className="flex h-full flex-col justify-between p-4">
-                {post.title && (
+                {toText(post.title) && (
                   <h2 className="mb-5 text-xl font-semibold">{post.title}</h2>
                 )}
                 <div className="flex justify-between gap-6 text-sm">

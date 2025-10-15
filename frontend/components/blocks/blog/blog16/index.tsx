@@ -1,7 +1,7 @@
 import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { Fragment } from "react";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ArrowRight, ChevronRight } from "lucide-react";
@@ -60,7 +60,7 @@ export default function Blog16({
                           `/blog/${post.slug?.current ?? ""}`
                         )}
                       >
-                        {post.title}
+                        {toText(post.title)}
                       </Link>
                     )}
                   </h3>
@@ -82,7 +82,7 @@ export default function Blog16({
                             }
                             className="flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors hover:bg-muted"
                           >
-                            {category.title}
+                            {toText(category.title)}
                             <ChevronRight className="h-4 w-4 text-muted-foreground" />
                           </Link>
                         );

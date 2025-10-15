@@ -1,5 +1,5 @@
 import SectionContainer from "@/components/ui/section-container";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
@@ -49,20 +49,22 @@ export default function Blog14({
                     : buildLocalizedPath(locale, "/blog");
                   return (
                     <Link key={category._id} href={href}>
-                      <Badge variant="secondary">{category.title}</Badge>
+                      <Badge variant="secondary">
+                        {toText(category.title)}
+                      </Badge>
                     </Link>
                   );
                 })}
               </div>
             )}
-            {posts[0].title && (
+            {toText(posts[0].title) && (
               <h2 className="text-2xl font-semibold text-balance md:max-w-lg lg:text-3xl">
-                {posts[0].title}
+                {toText(posts[0].title)}
               </h2>
             )}
-            {posts[0].excerpt && (
+            {toText(posts[0].excerpt) && (
               <p className="text-muted-foreground md:max-w-lg">
-                {posts[0].excerpt}
+                {toText(posts[0].excerpt)}
               </p>
             )}
             <div className="flex justify-between gap-6 text-sm">
@@ -86,8 +88,10 @@ export default function Blog14({
       )}
       {posts && posts?.length > 1 && (
         <div className="mt-16">
-          {title && (
-            <p className="mb-8 text-2xl font-medium md:text-3xl">{title}</p>
+          {toText(title) && (
+            <p className="mb-8 text-2xl font-medium md:text-3xl">
+              {toText(title)}
+            </p>
           )}
           <div
             className={cn(
@@ -123,20 +127,22 @@ export default function Blog14({
                         : buildLocalizedPath(locale, "/blog");
                       return (
                         <Link key={category._id} href={href}>
-                          <Badge variant="secondary">{category.title}</Badge>
+                          <Badge variant="secondary">
+                            {toText(category.title)}
+                          </Badge>
                         </Link>
                       );
                     })}
                   </div>
                 )}
-                {post.title && (
+                {toText(post.title) && (
                   <h3 className="text-xl font-semibold text-balance md:max-w-md">
-                    {post.title}
+                    {toText(post.title)}
                   </h3>
                 )}
-                {post.excerpt && (
+                {toText(post.excerpt) && (
                   <p className="text-muted-foreground md:max-w-md">
-                    {post.excerpt}
+                    {toText(post.excerpt)}
                   </p>
                 )}
                 <div className="flex justify-between gap-6 text-sm">
