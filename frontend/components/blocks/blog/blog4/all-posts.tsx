@@ -127,7 +127,9 @@ export default async function AllPosts4({
                 <div className="flex items-center gap-2">
                   <Avatar className="size-12">
                     <AvatarImage src={post.author?.image?.asset?.url || ""} />
-                    <AvatarFallback>{(toText(post.author?.name) || "").slice(0, 2)}</AvatarFallback>
+                    <AvatarFallback>
+                      {(toText(post.author?.name) || "").slice(0, 2)}
+                    </AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col gap-px">
                     {toText(post.author?.name) && (
