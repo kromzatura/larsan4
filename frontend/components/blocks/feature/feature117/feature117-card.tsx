@@ -67,7 +67,9 @@ export default function Feature117Card({
         </span>
         <div className="flex flex-col gap-5 text-background">
           {toText(title) && (
-            <h4 className="text-2xl font-semibold lg:text-3xl">{toText(title)}</h4>
+            <h4 className="text-2xl font-semibold lg:text-3xl">
+              {toText(title)}
+            </h4>
           )}
           <p className="flex items-center gap-1 font-medium">
             {toText(link?.title)}

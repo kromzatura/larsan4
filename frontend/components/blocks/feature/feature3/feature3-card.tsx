@@ -33,7 +33,9 @@ export default function Feature3Card({
           <h2 className="mb-1 text-lg font-semibold">{toText(title)}</h2>
         )}
         {toText(description) && (
-          <p className="leading-snug text-muted-foreground">{toText(description)}</p>
+          <p className="leading-snug text-muted-foreground">
+            {toText(description)}
+          </p>
         )}
       </CardContent>
       <CardFooter className="justify-end pr-0 pb-0">

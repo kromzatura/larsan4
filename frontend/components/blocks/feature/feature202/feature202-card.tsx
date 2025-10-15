@@ -71,7 +71,9 @@ export default function Feature202Card({
         </span>
         <div>
           {toText(title) && (
-            <h3 className="text-base font-medium text-background">{toText(title)}</h3>
+            <h3 className="text-base font-medium text-background">
+              {toText(title)}
+            </h3>
           )}
           {toText(description) && (
             <p className="mt-2 text-background/70">{toText(description)}</p>

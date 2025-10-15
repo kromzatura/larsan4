@@ -105,7 +105,9 @@ const Hero174 = ({
               <div className="flex items-center gap-3">
                 <div className="h-8 w-1 bg-white" />
                 <div className="text-sm font-medium">
-                  {toText(tag.title) && <p className="text-white">{toText(tag.title)}</p>}
+                  {toText(tag.title) && (
+                    <p className="text-white">{toText(tag.title)}</p>
+                  )}
                   {toText(tag.description) && (
                     <p className="text-white/50">{toText(tag.description)}</p>
                   )}
