@@ -84,10 +84,15 @@ export default function Compare6({
                   </TableCell>
                   {columns?.map((column) => {
                     const colName = toText(column.name) ?? "";
+                    const rawVal = column?.attributes?.[rowIdx]
+                      ?.value as unknown;
                     const valueText =
-                      toText(column?.attributes?.[rowIdx]?.value) ??
-                      column?.attributes?.[rowIdx]?.value ??
-                      "";
+                      toText(rawVal) ??
+                      (typeof rawVal === "number" || typeof rawVal === "boolean"
+                        ? String(rawVal)
+                        : typeof rawVal === "string"
+                        ? rawVal
+                        : "");
                     return (
                       <TableCell
                         key={column._key}

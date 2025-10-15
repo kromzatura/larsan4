@@ -146,6 +146,7 @@ export default function Compare4({
                 const target =
                   link?.isExternal && link?.target ? "_blank" : undefined;
                 const rel = target ? "noopener noreferrer" : undefined;
+                const linkTitle = toText(link.title) ?? "";
                 return (
                   <Link
                     key={link._key}
@@ -159,7 +160,7 @@ export default function Compare4({
                       "rounded-full px-8 transition-transform hover:scale-105"
                     )}
                   >
-                    {link.title}
+                    {linkTitle}
                     <Icon
                       iconVariant={link.iconVariant || "none"}
                       strokeWidth={1.5}
