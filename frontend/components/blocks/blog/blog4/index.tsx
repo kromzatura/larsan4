@@ -32,6 +32,9 @@ export default function Blog4({
           {posts.map((post) => {
             const postSlug = post.slug?.current ?? "";
             const postHref = buildLocalizedPath(locale, `/blog/${postSlug}`);
+            const titleText = toText(post.title);
+            const excerptText = toText(post.excerpt);
+            const authorName = toText(post.author?.name) || "";
             return (
               <Link
                 key={post._id}
@@ -66,6 +69,7 @@ export default function Blog4({
                   <div className="flex flex-wrap gap-2">
                     {post.categories.map((category) => {
                       const slug = category.slug?.current ?? undefined;
+                      const catTitle = toText(category.title);
                       return (
                         <Link
                           key={category._id}
@@ -78,32 +82,32 @@ export default function Blog4({
                               : buildLocalizedPath(locale, "/blog")
                           }
                         >
-                          <Badge>{toText(category.title)}</Badge>
+                          {catTitle && <Badge>{catTitle}</Badge>}
                         </Link>
                       );
                     })}
                   </div>
                 )}
-                {toText(post.title) && (
+                {titleText && (
                   <h2 className="mb-2 line-clamp-3 pt-4 text-lg font-medium break-words md:mb-3 md:pt-4 md:text-2xl lg:pt-4 lg:text-3xl">
-                    {toText(post.title)}
+                    {titleText}
                   </h2>
                 )}
-                {toText(post.excerpt) && (
+                {excerptText && (
                   <div className="mb-4 line-clamp-2 text-sm text-muted-foreground md:mb-5 md:text-base">
-                    {toText(post.excerpt)}
+                    {excerptText}
                   </div>
                 )}
                 <div className="flex items-center gap-2">
                   <Avatar className="size-12">
                     <AvatarImage src={post.author?.image?.asset?.url || ""} />
                     <AvatarFallback>
-                      {post.author?.name?.slice(0, 2)}
+                      {authorName.slice(0, 2)}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col gap-px">
                     <span className="text-xs font-medium">
-                      {post.author?.name}
+                      {authorName}
                     </span>
                     <span className="text-xs text-muted-foreground">
                       <PostDate date={post._createdAt} />

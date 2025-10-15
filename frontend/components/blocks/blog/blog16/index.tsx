@@ -36,10 +36,14 @@ export default function Blog16({
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col gap-1">
-                    <span className="font-semibold">{post.author?.name}</span>
-                    {post.author?.title && (
+                    {toText(post.author?.name) && (
+                      <span className="font-semibold">
+                        {toText(post.author?.name)}
+                      </span>
+                    )}
+                    {toText(post.author?.title) && (
                       <span className="text-sm text-muted-foreground">
-                        {post.author?.title}
+                        {toText(post.author?.title)}
                       </span>
                     )}
                   </div>
@@ -47,10 +51,11 @@ export default function Blog16({
                 <div className="col-span-2 max-w-xl">
                   <span className="mb-2 flex items-center gap-2 text-sm font-medium text-muted-foreground">
                     <PostDate date={post._createdAt} />
-                    <span className="inline lg:hidden">
-                      {" "}
-                      - {post.author?.name}
-                    </span>
+                    {toText(post.author?.name) && (
+                      <span className="inline lg:hidden">
+                        {" "}- {toText(post.author?.name)}
+                      </span>
+                    )}
                   </span>
                   <h3 className="text-2xl font-bold hover:underline lg:text-3xl">
                     {post.title && (
