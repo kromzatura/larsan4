@@ -15,6 +15,7 @@ import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import { buildLocalizedPath } from "@/lib/i18n/routing";
 import { resolveLinkHref } from "@/lib/resolveHref";
 import type { SETTINGS_QUERYResult } from "@/sanity.types";
+import type { PortableTextProps } from "@portabletext/react";
 
 interface Footer2Props {
   className?: string;
@@ -76,7 +77,18 @@ export default function Footer2({
                   />
                 ) : null}
               </Link>
-              <p className="mt-4 font-bold">{toText(settings?.description)}</p>
+              {Array.isArray(settings?.description) ? (
+                <div className="mt-4 text-sm text-muted-foreground [&>p]:m-0">
+                  <PortableTextRenderer
+                    value={settings.description as PortableTextProps["value"]}
+                    locale={locale}
+                  />
+                </div>
+              ) : toText(settings?.description as unknown) ? (
+                <p className="mt-4 font-bold">
+                  {toText(settings?.description as unknown)}
+                </p>
+              ) : null}
             </div>
             {footerNavItems?.map((section) => {
               if (!isNavGroup(section)) return null;
