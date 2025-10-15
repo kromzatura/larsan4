@@ -113,7 +113,7 @@ export default function ProductsTable({
                       <Link href={item.href} className="relative z-10 shrink-0">
                         <Image
                           src={item.imageUrl}
-                          alt={item.title || "Product image"}
+                          alt={toText(item.title as unknown) || "Product image"}
                           width={320}
                           height={213}
                           className="h-16 w-24 rounded object-cover ring-1 ring-border transition duration-200 ease-out group-hover:ring-primary/40 group-hover:shadow-sm group-hover:scale-[1.02]"
