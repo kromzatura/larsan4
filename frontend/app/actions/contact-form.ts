@@ -2,7 +2,6 @@
 
 import { Resend } from "resend";
 import { contactFormSchema } from "@/lib/schemas/contact-form";
-import ContactFormEmail from "@/emails/contact-form";
 import { render } from "@react-email/render";
 import { z } from "zod";
 import {
@@ -27,6 +26,8 @@ export async function submitContactForm(
   formData: FormData
 ): Promise<ContactFormState> {
   try {
+    // Lazily import the email template to avoid bundling @react-email Html into Next.js pages build
+    const { default: ContactFormEmail } = await import("@/emails/contact-form");
     const isProd = process.env.NODE_ENV === "production";
     const recaptchaVerifyInDev = process.env.RECAPTCHA_VERIFY_IN_DEV === "true";
     const haveRecaptchaKeys =
