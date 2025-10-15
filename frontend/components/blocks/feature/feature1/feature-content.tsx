@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
@@ -39,21 +39,21 @@ export default function FeatureContent({
             <Icon iconVariant={iconVariant} strokeWidth={2} />
           </span>
         )}
-        {tag && tag.text && (
+        {tag && toText(tag.text) && (
           <Tag
-            title={tag.text || ""}
-            type={tag.type as "title" | "badge"}
+            title={toText(tag.text) || ""}
+            type={(tag.type as "title" | "badge") || "title"}
             element="h2"
             className="mb-6"
           />
         )}
-        {title &&
+        {toText(title) &&
           createElement(
-            tag?.text ? "h3" : "h2",
+            toText(tag?.text) ? "h3" : "h2",
             {
               className: cn("mb-6 text-3xl font-bold text-pretty lg:text-4xl"),
             },
-            title
+            toText(title)
           )}
         {body && (
           <div className="max-w-xl text-muted-foreground lg:text-lg">
@@ -80,7 +80,7 @@ export default function FeatureContent({
                   target={target}
                   rel={rel}
                 >
-                  {link.title}
+                  {toText(link.title)}
                 </Link>
               );
             })}

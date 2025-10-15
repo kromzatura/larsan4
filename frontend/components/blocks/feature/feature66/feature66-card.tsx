@@ -1,4 +1,5 @@
 import { urlFor } from "@/sanity/lib/image";
+import { toText } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
 import { PAGE_QUERYResult } from "@/sanity.types";
@@ -56,7 +57,11 @@ export default function Feature66Card({
               quality={100}
             />
           )}
-          <p className="text-xl font-semibold text-white">{link?.title}</p>
+          {toText(link?.title) && (
+            <p className="text-xl font-semibold text-white">
+              {toText(link?.title)}
+            </p>
+          )}
         </div>
       </div>
     </Link>
