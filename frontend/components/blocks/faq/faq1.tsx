@@ -9,6 +9,7 @@ import PortableTextRenderer from "@/components/portable-text-renderer";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { toText } from "@/lib/utils";
 
 type FAQProps = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -28,7 +29,7 @@ export default function FAQ1({
             {faqs.map((faq) => (
               <AccordionItem key={faq._id} value={`item-${faq._id}`}>
                 <AccordionTrigger className="font-semibold hover:no-underline">
-                  {faq.title}
+                  {toText(faq.title)}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground">
                   <PortableTextRenderer

@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { SVGProps, useId } from "react";
 
 import SectionContainer from "@/components/ui/section-container";
@@ -92,24 +92,27 @@ export default function FAQ14({
     <SectionContainer padding={padding} className="relative overflow-hidden">
       <div className="mx-auto max-w-5xl rounded-lg bg-card border p-8 md:p-10">
         <div className="text-center">
-          {title && title.text && (
+          {title && toText(title.text) && (
             <Element className={cn(titleSizeClasses, titleWeightClasses)}>
-              {title.text}
+              {toText(title.text)}
             </Element>
           )}
-          {description && (
+          {toText(description) && (
             <p className="mt-4 text-2xl text-muted-foreground md:text-3xl">
-              {description}
+              {toText(description)}
             </p>
           )}
         </div>
         {sections && sections?.length > 0 && (
           <div className="mx-auto mt-8 max-w-2xl space-y-12 md:mt-12 lg:mt-20">
             {sections.map((section) => (
-              <Card key={section.title} className="border-hidden bg-muted">
+              <Card
+                key={toText(section.title) || "section"}
+                className="border-hidden bg-muted"
+              >
                 <CardHeader className="pb-0">
                   <h3 className="border-b pb-4 font-mono text-sm font-medium tracking-widest text-accent-foreground uppercase">
-                    {section.title}
+                    {toText(section.title)}
                   </h3>
                 </CardHeader>
                 <CardContent>
@@ -122,7 +125,7 @@ export default function FAQ14({
                           className="border-b border-muted last:border-0"
                         >
                           <AccordionTrigger className="text-start text-base font-medium hover:no-underline">
-                            {faq.title}
+                            {toText(faq.title)}
                           </AccordionTrigger>
                           <AccordionContent className="text-base font-medium text-muted-foreground">
                             <PortableTextRenderer

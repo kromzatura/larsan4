@@ -9,6 +9,7 @@ import PortableTextRenderer from "@/components/portable-text-renderer";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { toText } from "@/lib/utils";
 
 type FAQProps = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -31,7 +32,7 @@ export default function FAQ9({
               className="mb-2 rounded-md border-b-0 bg-muted px-5 py-2 md:mb-4"
             >
               <AccordionTrigger className="text-left">
-                {faq.title}
+                {toText(faq.title)}
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground">
                 <PortableTextRenderer value={faq.body || []} locale={locale} />

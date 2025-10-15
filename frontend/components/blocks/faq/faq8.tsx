@@ -9,6 +9,7 @@ import PortableTextRenderer from "@/components/portable-text-renderer";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { toText } from "@/lib/utils";
 
 type FAQProps = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -29,12 +30,12 @@ export default function FAQ8({
               key={section._key}
               className="grid gap-4 border-t pt-4 md:grid-cols-3 md:gap-10"
             >
-              <h3 className="text-xl font-medium">{section.title}</h3>
+              <h3 className="text-xl font-medium">{toText(section.title)}</h3>
               <Accordion type="multiple" className="md:col-span-2">
                 {section.faqs?.map((faq, idx) => (
                   <AccordionItem key={idx} value={`item-${idx}`}>
                     <AccordionTrigger className="text-left">
-                      {faq.title}
+                      {toText(faq.title)}
                     </AccordionTrigger>
                     <AccordionContent>
                       <PortableTextRenderer
