@@ -14,10 +14,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import Icon from "@/components/icon";
 import { Badge } from "@/components/ui/badge";
-import { toText } from "@/lib/utils";
 import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { resolveLinkHref } from "@/lib/resolveHref";
@@ -57,19 +56,22 @@ export default function Gallery4({
     };
   }, [carouselApi]);
 
+  const titleText = toText(title);
+  const descriptionText = toText(description);
+
   return (
     <SectionContainer padding={padding} withContainer={false}>
       <div className="container">
         <div className="mb-8 flex items-end justify-between md:mb-14 lg:mb-16">
           <div className="flex flex-col gap-4">
-            {title && (
+            {titleText && (
               <h2 className="text-3xl font-medium md:text-4xl lg:text-5xl">
-                {toText(title)}
+                {titleText}
               </h2>
             )}
-            {toText(description) && (
+            {descriptionText && (
               <p className="max-w-lg text-muted-foreground">
-                {toText(description)}
+                {descriptionText}
               </p>
             )}
           </div>
@@ -112,83 +114,90 @@ export default function Gallery4({
             }}
           >
             <CarouselContent className="ml-0 2xl:mr-[max(0rem,calc(50vw-700px))] 2xl:ml-[max(8rem,calc(50vw-700px))]">
-              {columns.map((item) => (
-                <CarouselItem
-                  key={item._key}
-                  className="max-w-[320px] pl-[20px] lg:max-w-[360px]"
-                >
-                  <Link
-                    href={resolveLinkHref(item.link, locale) || "#"}
-                    target={item.link?.target ? "_blank" : undefined}
-                    rel={item.link?.target ? "noopener" : undefined}
-                    className="group rounded-xl"
+              {columns.map((item) => {
+                const categoryTitle = toText(item.categories?.[0]?.title);
+                const itemTitle = toText(item.title);
+                const itemDescription = toText(item.description);
+                const linkTitle = toText(item.link?.title);
+                return (
+                  <CarouselItem
+                    key={item._key}
+                    className="max-w-[320px] pl-[20px] lg:max-w-[360px]"
                   >
-                    <div className="group relative h-full min-h-[27rem] max-w-full overflow-hidden rounded-xl md:aspect-[5/4] lg:aspect-[16/9]">
-                      {item.image && item.image.asset?._id && (
-                        <Image
-                          src={urlFor(item.image).url()}
-                          alt={item.image.alt || ""}
-                          placeholder={
-                            item.image?.asset?.metadata?.lqip
-                              ? "blur"
-                              : undefined
-                          }
-                          blurDataURL={item.image?.asset?.metadata?.lqip || ""}
-                          className="absolute h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
-                          sizes="(min-width: 1024px) 33vw, 100vw"
-                          width={
-                            item.image.asset?.metadata?.dimensions?.width || 500
-                          }
-                          height={
-                            item.image.asset?.metadata?.dimensions?.height ||
-                            500
-                          }
-                          quality={100}
-                        />
-                      )}
-                      <div className="absolute inset-0 h-full bg-[linear-gradient(transparent_20%,var(--primary)_100%)] mix-blend-multiply" />
-                      <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-6 text-primary-foreground md:p-8">
-                        {item.categories &&
-                          item.categories.length > 0 &&
-                          toText(item.categories[0].title) && (
+                    <Link
+                      href={resolveLinkHref(item.link, locale) || "#"}
+                      target={item.link?.target ? "_blank" : undefined}
+                      rel={item.link?.target ? "noopener" : undefined}
+                      className="group rounded-xl"
+                    >
+                      <div className="group relative h-full min-h-[27rem] max-w-full overflow-hidden rounded-xl md:aspect-[5/4] lg:aspect-[16/9]">
+                        {item.image && item.image.asset?._id && (
+                          <Image
+                            src={urlFor(item.image).url()}
+                            alt={item.image.alt || ""}
+                            placeholder={
+                              item.image?.asset?.metadata?.lqip
+                                ? "blur"
+                                : undefined
+                            }
+                            blurDataURL={
+                              item.image?.asset?.metadata?.lqip || ""
+                            }
+                            className="absolute h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                            sizes="(min-width: 1024px) 33vw, 100vw"
+                            width={
+                              item.image.asset?.metadata?.dimensions?.width ||
+                              500
+                            }
+                            height={
+                              item.image.asset?.metadata?.dimensions?.height ||
+                              500
+                            }
+                            quality={100}
+                          />
+                        )}
+                        <div className="absolute inset-0 h-full bg-[linear-gradient(transparent_20%,var(--primary)_100%)] mix-blend-multiply" />
+                        <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-6 text-primary-foreground md:p-8">
+                          {categoryTitle && (
                             <Badge className="bg-primary-foreground/30">
-                              {toText(item.categories[0].title)}
+                              {categoryTitle}
                             </Badge>
                           )}
-                        {toText(item.title) && (
-                          <div className="mb-2 pt-4 text-xl font-semibold md:mb-3 md:pt-4 lg:pt-4">
-                            {toText(item.title)}
-                          </div>
-                        )}
-                        {toText(item.description) && (
-                          <div className="mb-8 line-clamp-2 md:mb-12 lg:mb-9">
-                            {toText(item.description)}
-                          </div>
-                        )}
-                        <div
-                          className={cn(
-                            buttonVariants({
-                              variant: item.link?.buttonVariant || "default",
-                              size: "sm",
-                            }),
-                            item.link?.buttonVariant === "ghost" &&
-                              "hover:bg-transparent hover:text-primary-foreground",
-                            "flex items-center text-sm !p-0"
+                          {itemTitle && (
+                            <div className="mb-2 pt-4 text-xl font-semibold md:mb-3 md:pt-4 lg:pt-4">
+                              {itemTitle}
+                            </div>
                           )}
-                        >
-                          {toText(item.link?.title)}
-                          <Icon
-                            iconVariant={item.link?.iconVariant || "none"}
-                            className="ml-2 transition-transform group-hover:translate-x-1"
-                            strokeWidth={2}
-                            size={5}
-                          />
+                          {itemDescription && (
+                            <div className="mb-8 line-clamp-2 md:mb-12 lg:mb-9">
+                              {itemDescription}
+                            </div>
+                          )}
+                          <div
+                            className={cn(
+                              buttonVariants({
+                                variant: item.link?.buttonVariant || "default",
+                                size: "sm",
+                              }),
+                              item.link?.buttonVariant === "ghost" &&
+                                "hover:bg-transparent hover:text-primary-foreground",
+                              "flex items-center text-sm !p-0"
+                            )}
+                          >
+                            {linkTitle}
+                            <Icon
+                              iconVariant={item.link?.iconVariant || "none"}
+                              className="ml-2 transition-transform group-hover:translate-x-1"
+                              strokeWidth={2}
+                              size={5}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Link>
-                </CarouselItem>
-              ))}
+                    </Link>
+                  </CarouselItem>
+                );
+              })}
             </CarouselContent>
           </Carousel>
           <div className="mt-8 flex justify-center gap-2">
