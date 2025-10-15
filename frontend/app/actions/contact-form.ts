@@ -196,8 +196,10 @@ export async function submitContactForm(
       replyTo: email,
     });
     if (!isProd) {
+      const maybeId = (sendResult as unknown as { id?: unknown })?.id;
+      const sendId = typeof maybeId === "string" ? maybeId : undefined;
       console.log("[contact-form] Email sent via Resend (dev):", {
-        id: (sendResult as any)?.id,
+        id: sendId,
         to: toEmail,
       });
     }

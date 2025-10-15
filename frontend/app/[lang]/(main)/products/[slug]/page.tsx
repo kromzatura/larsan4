@@ -284,13 +284,16 @@ export default async function ProductPage(
                         // Normalize legacy objects or non-strings to strings
                         if (typeof kf === "string") return kf.trim();
                         if (kf && typeof kf === "object") {
-                          const anyKf = kf as any;
-                          const text =
-                            anyKf.featureText ||
-                            anyKf.text ||
-                            anyKf.title ||
-                            "";
-                          return typeof text === "string" ? text.trim() : "";
+                          const obj = kf as Record<string, unknown>;
+                          const candidates = [
+                            obj.featureText,
+                            obj.text,
+                            obj.title,
+                          ];
+                          const str = candidates.find(
+                            (v): v is string => typeof v === "string"
+                          );
+                          return str ? str.trim() : "";
                         }
                         return "";
                       })
