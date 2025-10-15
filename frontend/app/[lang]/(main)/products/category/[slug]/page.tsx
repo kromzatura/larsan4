@@ -16,6 +16,7 @@ import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import type { AsyncPageProps } from "@/lib/types/next";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { mapProductToProductsTableItem } from "@/sanity/lib/mappers";
+import { toText } from "@/lib/utils";
 
 const PAGE_SIZE = 12;
 
@@ -99,13 +100,16 @@ export default async function CategoryPage(
   if (sort) baseSearchParams.set("sort", sort);
 
   const productsPath = buildLocalizedPath(locale, "/products");
+  const catTitle =
+    toText(cat.title) || dictionary.products.categoryPage.breadcrumbCategory;
+  const catDescription = toText(cat.description);
   const links = [
     {
       label: dictionary.products.categoryPage.breadcrumbProducts,
       href: productsPath,
     },
     {
-      label: cat.title ?? dictionary.products.categoryPage.breadcrumbCategory,
+      label: catTitle ?? dictionary.products.categoryPage.breadcrumbCategory,
       href: baseUrl,
     },
   ];
@@ -116,11 +120,11 @@ export default async function CategoryPage(
       <div className="mt-7 flex items-end justify-between gap-4">
         <div>
           <h1 className="text-3xl font-serif font-semibold md:text-5xl">
-            {cat.title}
+            {catTitle}
           </h1>
-          {cat.description && (
+          {catDescription && (
             <p className="mt-3 max-w-3xl text-muted-foreground">
-              {cat.description}
+              {catDescription}
             </p>
           )}
         </div>

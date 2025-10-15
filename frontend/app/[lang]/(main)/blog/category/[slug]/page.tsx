@@ -11,6 +11,7 @@ import { chipClass } from "@/components/ui/chip";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import type { AsyncPageProps, SearchParams } from "@/lib/types/next";
+import { toText } from "@/lib/utils";
 
 type BlogSort = "newest" | "az" | "za";
 interface BlogCategorySearchParams {
@@ -103,6 +104,9 @@ export default async function BlogCategoryPage(
   const totalPages = Math.max(1, Math.ceil((totalCount || 0) / POSTS_PER_PAGE));
   if (page > totalPages) notFound();
 
+  const catTitle = toText(cat.title) || "Category";
+  const catDescription = toText(cat.description);
+
   const items: PostsListItem[] = (posts || []).map((p) => ({
     _id: p._id || "",
     slug: p.slug?.current || "",
@@ -146,7 +150,7 @@ export default async function BlogCategoryPage(
       {
         "@type": "ListItem",
         position: 3,
-        name: cat.title || "Category",
+        name: catTitle,
         item: `${SITE_URL}${baseUrl}`,
       },
     ],
@@ -158,17 +162,17 @@ export default async function BlogCategoryPage(
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
-  <h1 className="text-3xl font-serif font-semibold md:text-5xl">{cat.title}</h1>
-      {cat.description && (
-        <p className="mt-3 max-w-3xl text-muted-foreground">
-          {cat.description}
-        </p>
+      <h1 className="text-3xl font-serif font-semibold md:text-5xl">
+        {catTitle}
+      </h1>
+      {catDescription && (
+        <p className="mt-3 max-w-3xl text-muted-foreground">{catDescription}</p>
       )}
       <div className="mt-5 flex flex-wrap gap-2">
         <Link
           href={`${baseUrl}/rss.xml`}
           prefetch
-          aria-label={`Subscribe to ${cat.title ?? "this category"} RSS feed`}
+          aria-label={`Subscribe to ${catTitle ?? "this category"} RSS feed`}
           className="inline-flex items-center rounded-md border px-3 py-1.5 text-sm text-muted-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background"
         >
           Subscribe (RSS)
@@ -176,7 +180,7 @@ export default async function BlogCategoryPage(
         <Link
           href={`${baseUrl}/feed.json`}
           prefetch
-          aria-label={`Subscribe to ${cat.title ?? "this category"} JSON feed`}
+          aria-label={`Subscribe to ${catTitle ?? "this category"} JSON feed`}
           className="inline-flex items-center rounded-md border px-3 py-1.5 text-sm text-muted-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background"
         >
           Subscribe (JSON)
