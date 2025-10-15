@@ -9,6 +9,7 @@ import {
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { chipClass } from "@/components/ui/chip";
 import { buildLocalizedPath, normalizeLocale } from "@/lib/i18n/routing";
+import { toText } from "@/lib/utils";
 import type { LangAsyncPageProps } from "@/lib/types/next";
 
 type BlogSort = "newest" | "az" | "za";
@@ -81,16 +82,6 @@ export default async function BlogIndex(props: LangAsyncPageProps) {
   ]);
   const totalPages = Math.max(1, Math.ceil((totalCount || 0) / POSTS_PER_PAGE));
   if (page > totalPages) notFound();
-
-  const toText = (v: unknown): string | null => {
-    if (typeof v === "string") return v;
-    if (typeof v === "number") return String(v);
-    if (v && typeof v === "object") {
-      const obj = v as Record<string, unknown>;
-      if (typeof obj.value === "string") return obj.value;
-    }
-    return null;
-  };
 
   const items: PostsListItem[] = (posts || []).map((p) => ({
     _id: p._id || "",

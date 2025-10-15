@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import Pagination from "@/components/pagination";
 import PostDate from "@/components/post-date";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -48,16 +48,6 @@ export default function PostsList({
   className,
   locale = FALLBACK_LOCALE,
 }: PostsListProps) {
-  const toText = (v: unknown): string | null => {
-    if (typeof v === "string") return v;
-    if (typeof v === "number") return String(v);
-    if (v && typeof v === "object") {
-      const obj = v as Record<string, unknown>;
-      if (typeof obj.value === "string") return obj.value;
-    }
-    return null;
-  };
-
   const createPageUrl = (pageNum: number) => {
     const qp = new URLSearchParams(baseSearchParams || "");
     if (pageNum > 1) qp.set("page", String(pageNum));
@@ -75,7 +65,10 @@ export default function PostsList({
         >
           <div className="hidden items-center gap-3 self-start lg:flex">
             <Avatar className="size-12">
-              <AvatarImage src={post.author?.imageUrl || ""} />
+              <AvatarImage
+                src={post.author?.imageUrl || ""}
+                alt={toText(post.author?.name) || "Author avatar"}
+              />
               <AvatarFallback>
                 {(post.author?.name || "").slice(0, 2)}
               </AvatarFallback>
@@ -155,6 +148,11 @@ export default function PostsList({
           <Link
             href={buildLocalizedPath(locale, `/blog/${post.slug}`)}
             className="ml-auto hidden items-center gap-2 text-sm text-muted-foreground hover:text-foreground lg:flex"
+            aria-label={
+              toText(post.title)
+                ? `Read more: ${toText(post.title)}`
+                : "Read more"
+            }
           >
             Read more
           </Link>
