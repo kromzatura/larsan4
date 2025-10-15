@@ -11,6 +11,7 @@ import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { toText } from "@/lib/utils";
 
 const getTextFromChildren = (children: ReactNode): string => {
   if (Array.isArray(children)) {
@@ -32,11 +33,12 @@ const makePortableTextComponents = (
     image: ({ value }) => {
       const { url, metadata } = value.asset;
       const { lqip, dimensions } = metadata;
+      const alt = toText(value?.alt as unknown) || "Image";
       return (
         <Image
           className="m-auto aspect-video rounded-xl"
           src={url}
-          alt={value.alt || "Image"}
+          alt={alt}
           width={dimensions.width}
           height={dimensions.height}
           placeholder={lqip ? "blur" : undefined}
@@ -54,10 +56,11 @@ const makePortableTextComponents = (
       );
     },
     code: ({ value }) => {
+      const filename = toText(value?.filename as unknown) || "";
       return (
         <div className="min-w-full grid my-4 overflow-x-auto rounded-lg border border-border text-xs lg:text-sm bg-primary">
           <div className="flex items-center justify-between px-4 py-2 border-b border-border text-background font-mono">
-            <div>{value.filename || ""}</div>
+            <div>{filename}</div>
             <CopyButton code={value.code} />
           </div>
           <Highlight
@@ -88,7 +91,8 @@ const makePortableTextComponents = (
       );
     },
     alert: ({ value }) => {
-      const { title, description } = value;
+      const title = toText(value?.title as unknown);
+      const description = toText(value?.description as unknown);
       return (
         <Alert className="my-4">
           <Lightbulb className="h-4 w-4" />
