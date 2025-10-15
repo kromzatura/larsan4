@@ -1,14 +1,19 @@
-// Deprecated: ProductGrid was removed. This file is intentionally left blank.
 "use client";
 
 import ProductCard from "@/components/products/ProductCard";
 import Pagination from "@/components/pagination";
 import { cn } from "@/lib/utils";
-import type { ProductsTableItem, ProductsTableProps } from "@/components/products/products-table";
+import type {
+  ProductsTableItem,
+  ProductsTableProps,
+} from "@/components/products/products-table";
+import type { SupportedLocale } from "@/lib/i18n/config";
+import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 type ProductGridProps = Omit<ProductsTableProps, "labels" | "items"> & {
-  labels: ProductsTableProps["labels"];
+  labels: ProductsTableProps["labels"] & { labelPurity?: string };
   items: ProductsTableItem[];
+  locale?: SupportedLocale;
 };
 
 export default function ProductGrid({
@@ -20,6 +25,7 @@ export default function ProductGrid({
   baseSearchParams,
   emptyState,
   className,
+  locale = FALLBACK_LOCALE,
 }: ProductGridProps) {
   const hasItems = items && items.length > 0;
 
@@ -37,7 +43,15 @@ export default function ProductGrid({
     <div className={cn("w-full", className)}>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
         {items.map((item) => (
-          <ProductCard key={item._id} item={item} labels={{ labelSku: labels.labelSku }} />
+          <ProductCard
+            key={item._id}
+            item={item}
+            labels={{
+              labelSku: labels.labelSku,
+              labelPurity: labels.labelPurity,
+            }}
+            locale={locale}
+          />
         ))}
       </div>
 

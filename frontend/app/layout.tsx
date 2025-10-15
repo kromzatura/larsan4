@@ -3,6 +3,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
 import { DEFAULT_LOCALE } from "@/lib/i18n/config";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -24,6 +25,10 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
+        {/* Google Analytics – loads once globally for all pages */}
+        <GoogleAnalytics
+          gaId={process.env.NEXT_PUBLIC_GA_ID || "G-Z73RV8ZXQV"}
+        />
         {children}
         <Toaster position="top-center" richColors />
       </body>
