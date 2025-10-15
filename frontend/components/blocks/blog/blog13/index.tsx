@@ -77,7 +77,9 @@ export default function Blog13({
               </div>
               <div className="flex h-full flex-col justify-between p-4">
                 {toText(post.title) && (
-                  <h2 className="mb-5 text-xl font-semibold">{toText(post.title)}</h2>
+                  <h2 className="mb-5 text-xl font-semibold">
+                    {toText(post.title)}
+                  </h2>
                 )}
                 <div className="flex justify-between gap-6 text-sm">
                   <span className="flex items-center gap-1 text-muted-foreground">

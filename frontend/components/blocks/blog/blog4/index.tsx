@@ -101,14 +101,10 @@ export default function Blog4({
                 <div className="flex items-center gap-2">
                   <Avatar className="size-12">
                     <AvatarImage src={post.author?.image?.asset?.url || ""} />
-                    <AvatarFallback>
-                      {authorName.slice(0, 2)}
-                    </AvatarFallback>
+                    <AvatarFallback>{authorName.slice(0, 2)}</AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col gap-px">
-                    <span className="text-xs font-medium">
-                      {authorName}
-                    </span>
+                    <span className="text-xs font-medium">{authorName}</span>
                     <span className="text-xs text-muted-foreground">
                       <PostDate date={post._createdAt} />
                     </span>

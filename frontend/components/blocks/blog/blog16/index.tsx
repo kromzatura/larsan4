@@ -53,7 +53,8 @@ export default function Blog16({
                     <PostDate date={post._createdAt} />
                     {toText(post.author?.name) && (
                       <span className="inline lg:hidden">
-                        {" "}- {toText(post.author?.name)}
+                        {" "}
+                        - {toText(post.author?.name)}
                       </span>
                     )}
                   </span>
