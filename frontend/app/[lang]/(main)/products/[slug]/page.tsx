@@ -6,6 +6,7 @@ import Breadcrumbs from "@/components/ui/breadcrumbs";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import AddToInquiryButton from "@/components/inquiry/add-to-inquiry-button";
 import { Separator } from "@/components/ui/separator";
+// Badge intentionally unused for key features; categories still use Badge.
 import { Badge } from "@/components/ui/badge";
 import { Facebook, Linkedin, Twitter } from "lucide-react";
 import { Button } from "@/components/ui/button";

@@ -7,7 +7,9 @@ type ProductListItem = {
   _id?: string | null;
   title?: string | null;
   slug?: { current?: string | null } | null;
-  keyFeatures?: string[] | null;
+  // Older content or schema experiments may have stored keyFeatures as objects.
+  // Keep this broad here and normalize below so UI always receives string[]
+  keyFeatures?: Array<unknown> | null;
   specifications?: Array<{
     _id?: string | null;
     sku?: string | null;
@@ -54,7 +56,25 @@ export function mapProductToProductsTableItem(
     sku: spec?.sku || null,
     imageUrl,
     imageMeta: p.image?.asset?.metadata || null,
-    features: Array.isArray(p.keyFeatures) ? p.keyFeatures.slice(0, 3) : null,
+    features: Array.isArray(p.keyFeatures)
+      ? p.keyFeatures
+          .map((it: any) =>
+            typeof it === "string"
+              ? it
+              : typeof it?.featureText === "string"
+              ? it.featureText
+              : typeof it?.text === "string"
+              ? it.text
+              : typeof it?.title === "string"
+              ? it.title
+              : ""
+          )
+          .filter(
+            (s: unknown): s is string =>
+              typeof s === "string" && s.trim().length > 0
+          )
+          .slice(0, 3)
+      : null,
     productAttributes: spec?.productAttributes || null,
     purity: spec?.purity ?? null,
     categories: Array.isArray(p.categories)
