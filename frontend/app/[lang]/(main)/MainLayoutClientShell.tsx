@@ -4,7 +4,6 @@ import Navbar1 from "@/components/header/navbar-1";
 import Footer2 from "@/components/footer/footer-2";
 import Banner from "@/components/blocks/banner";
 import Banner5 from "@/components/blocks/banner/banner5";
-import { Toaster } from "@/components/ui/sonner";
 import { InquiryProvider } from "@/components/inquiry/InquiryContext";
 import { useLocale } from "@/lib/i18n/locale-context";
 import type { BANNER_QUERYResult, SETTINGS_QUERYResult } from "@/sanity.types";
@@ -46,7 +45,6 @@ export function MainLayoutClientShell({
         />
       )}
       <main className="flex-1">{children}</main>
-      <Toaster position="top-right" />
       <Footer2
         locale={locale}
         settings={settings}
