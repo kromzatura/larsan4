@@ -58,12 +58,24 @@ export default function Compare4({
           <div className="col-span-4 rounded-xl bg-background shadow-sm md:col-span-8 lg:col-span-10 lg:col-start-2">
             {columns.map((column) => {
               const titleText = toText(column.title) ?? "";
-              const pVal = toText(column.primary?.value) ?? column.primary?.value ?? "";
-              const pUnit = toText(column.primary?.unit) ?? column.primary?.unit ?? "";
-              const pDesc = toText(column.primary?.description) ?? column.primary?.description ?? "";
-              const sVal = toText(column.secondary?.value) ?? column.secondary?.value ?? "";
-              const sUnit = toText(column.secondary?.unit) ?? column.secondary?.unit ?? "";
-              const sDesc = toText(column.secondary?.description) ?? column.secondary?.description ?? "";
+              const pVal =
+                toText(column.primary?.value) ?? column.primary?.value ?? "";
+              const pUnit =
+                toText(column.primary?.unit) ?? column.primary?.unit ?? "";
+              const pDesc =
+                toText(column.primary?.description) ??
+                column.primary?.description ??
+                "";
+              const sVal =
+                toText(column.secondary?.value) ??
+                column.secondary?.value ??
+                "";
+              const sUnit =
+                toText(column.secondary?.unit) ?? column.secondary?.unit ?? "";
+              const sDesc =
+                toText(column.secondary?.description) ??
+                column.secondary?.description ??
+                "";
               return (
                 <div
                   key={column._key}

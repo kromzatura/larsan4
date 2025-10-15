@@ -52,31 +52,31 @@ export default function Compare1({ padding, images, columns }: Compare1Props) {
                 const primaryText = toText(column.primary) ?? "";
                 const secondaryText = toText(column.secondary) ?? "";
                 return (
-                <Fragment key={column._key}>
-                  <div className="flex items-center border-b p-3 text-base font-medium md:p-4 md:text-lg">
-                    {labelText}
-                  </div>
-                  <div className="border-b bg-green-50 p-3 md:p-6">
-                    <div className="flex items-center gap-2">
-                      {column.hasIcon && (
-                        <CheckCircle2 className="h-5 w-5 text-green-600" />
-                      )}
-                      <span className="text-base md:text-lg">
-                        {primaryText}
-                      </span>
+                  <Fragment key={column._key}>
+                    <div className="flex items-center border-b p-3 text-base font-medium md:p-4 md:text-lg">
+                      {labelText}
                     </div>
-                  </div>
-                  <div className="border-b bg-red-50 p-3 md:p-6">
-                    <div className="flex items-center gap-2">
-                      {column.hasIcon && (
-                        <OctagonX className="h-5 w-5 text-red-600" />
-                      )}
-                      <span className="text-base md:text-lg">
-                        {secondaryText}
-                      </span>
+                    <div className="border-b bg-green-50 p-3 md:p-6">
+                      <div className="flex items-center gap-2">
+                        {column.hasIcon && (
+                          <CheckCircle2 className="h-5 w-5 text-green-600" />
+                        )}
+                        <span className="text-base md:text-lg">
+                          {primaryText}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </Fragment>
+                    <div className="border-b bg-red-50 p-3 md:p-6">
+                      <div className="flex items-center gap-2">
+                        {column.hasIcon && (
+                          <OctagonX className="h-5 w-5 text-red-600" />
+                        )}
+                        <span className="text-base md:text-lg">
+                          {secondaryText}
+                        </span>
+                      </div>
+                    </div>
+                  </Fragment>
                 );
               })}
             </div>

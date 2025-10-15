@@ -23,7 +23,9 @@ export default function Compare2({ padding, columns }: Compare2Props) {
                 key={column._key}
                 className={cn(
                   "rounded-xl p-6",
-                  column.featured ? "bg-background border shadow" : "bg-border/40"
+                  column.featured
+                    ? "bg-background border shadow"
+                    : "bg-border/40"
                 )}
               >
                 <span className="flex items-center justify-center gap-2 font-medium">
@@ -58,7 +60,8 @@ export default function Compare2({ padding, columns }: Compare2Props) {
                           key={item._key}
                           className={cn(
                             "flex items-center gap-2",
-                            item.isMissing && "text-muted-foreground line-through"
+                            item.isMissing &&
+                              "text-muted-foreground line-through"
                           )}
                         >
                           {item.isMissing ? (

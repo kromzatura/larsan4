@@ -63,7 +63,8 @@ export default function Compare5({
                     )}
                     {linkTitle &&
                       (() => {
-                        const href = resolveLinkHref(column.link, locale) || "#";
+                        const href =
+                          resolveLinkHref(column.link, locale) || "#";
                         const target =
                           column.link?.isExternal && column.link?.target
                             ? "_blank"
@@ -76,7 +77,8 @@ export default function Compare5({
                             rel={rel}
                             className={cn(
                               buttonVariants({
-                                variant: column.link?.buttonVariant || "default",
+                                variant:
+                                  column.link?.buttonVariant || "default",
                               })
                             )}
                           >

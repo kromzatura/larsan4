@@ -27,7 +27,9 @@ export default function Compare6({
   rows,
   columns,
 }: Compare6Props) {
-  const [selectedTab, setSelectedTab] = useState(toText(columns?.[0]?.name) ?? "");
+  const [selectedTab, setSelectedTab] = useState(
+    toText(columns?.[0]?.name) ?? ""
+  );
 
   return (
     <SectionContainer padding={padding}>
@@ -82,7 +84,10 @@ export default function Compare6({
                   </TableCell>
                   {columns?.map((column) => {
                     const colName = toText(column.name) ?? "";
-                    const valueText = toText(column?.attributes?.[rowIdx]?.value) ?? column?.attributes?.[rowIdx]?.value ?? "";
+                    const valueText =
+                      toText(column?.attributes?.[rowIdx]?.value) ??
+                      column?.attributes?.[rowIdx]?.value ??
+                      "";
                     return (
                       <TableCell
                         key={column._key}
@@ -92,17 +97,20 @@ export default function Compare6({
                         )}
                       >
                         <div className="flex flex-col items-center gap-1 text-muted-foreground">
-                          {column?.attributes?.[rowIdx]?.status === "positive" && (
+                          {column?.attributes?.[rowIdx]?.status ===
+                            "positive" && (
                             <span className="flex size-8 items-center justify-center rounded-full border border-green-200 bg-green-100">
                               <CircleCheck className="size-4 text-green-700" />
                             </span>
                           )}
-                          {column?.attributes?.[rowIdx]?.status === "negative" && (
+                          {column?.attributes?.[rowIdx]?.status ===
+                            "negative" && (
                             <span className="flex size-8 items-center justify-center rounded-full border border-red-200 bg-red-100">
                               <CircleX className="size-4 text-red-700" />
                             </span>
                           )}
-                          {column?.attributes?.[rowIdx]?.status === "neutral" && (
+                          {column?.attributes?.[rowIdx]?.status ===
+                            "neutral" && (
                             <span className="flex size-8 items-center justify-center rounded-full border border-amber-200 bg-amber-100">
                               <CircleMinus className="size-4 text-amber-700" />
                             </span>
