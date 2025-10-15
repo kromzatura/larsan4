@@ -9,6 +9,7 @@ import { PAGE_QUERYResult } from "@/sanity.types";
 import { fetchSanityPosts, fetchSanityPostsCount } from "@/sanity/lib/fetch";
 import Pagination from "@/components/pagination";
 import { buildLocalizedPath } from "@/lib/i18n/routing";
+import { toText } from "@/lib/utils";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
@@ -60,7 +61,7 @@ export default async function AllPosts14({
               {post.image && post.image.asset?._id && (
                 <Image
                   src={urlFor(post.image).url()}
-                  alt={post.image.alt || ""}
+                  alt={toText(post.image.alt) || ""}
                   placeholder={
                     post.image?.asset?.metadata?.lqip ? "blur" : undefined
                   }
@@ -81,7 +82,9 @@ export default async function AllPosts14({
                       : baseBlogPath;
                     return (
                       <Link key={category._id} href={href}>
-                        <Badge variant="secondary">{category.title}</Badge>
+                        <Badge variant="secondary">
+                          {toText(category.title)}
+                        </Badge>
                       </Link>
                     );
                   })}
@@ -89,12 +92,12 @@ export default async function AllPosts14({
               )}
               {post.title && (
                 <h3 className="text-xl font-semibold text-balance md:max-w-md">
-                  {post.title}
+                  {toText(post.title)}
                 </h3>
               )}
               {post.excerpt && (
                 <p className="text-muted-foreground md:max-w-md">
-                  {post.excerpt}
+                  {toText(post.excerpt)}
                 </p>
               )}
               <div className="flex justify-between gap-6 text-sm">

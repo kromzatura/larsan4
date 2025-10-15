@@ -7,7 +7,7 @@ import type {
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import type { SupportedLocale } from "@/lib/i18n/config";
@@ -76,13 +76,15 @@ export default function Footer2({
                   />
                 ) : null}
               </Link>
-              <p className="mt-4 font-bold">{settings?.description}</p>
+              <p className="mt-4 font-bold">{toText(settings?.description)}</p>
             </div>
             {footerNavItems?.map((section) => {
               if (!isNavGroup(section)) return null;
               return (
                 <div key={section._key} className="px-0 lg:px-6">
-                  <h3 className="text-base mb-4 font-bold">{section.title}</h3>
+                  <h3 className="text-base mb-4 font-bold">
+                    {toText(section.title)}
+                  </h3>
                   <ul className="space-y-4 text-muted-foreground">
                     {section.links?.filter(isNavLink).map((link) => {
                       return (
@@ -99,7 +101,7 @@ export default function Footer2({
                                   })
                             )}
                           >
-                            {link.title}
+                            {toText(link.title)}
                           </Link>
                         </li>
                       );
@@ -138,7 +140,7 @@ export default function Footer2({
                             })
                       )}
                     >
-                      {link.title}
+                      {toText(link.title)}
                     </Link>
                   </li>
                 );

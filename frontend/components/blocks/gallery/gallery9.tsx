@@ -16,6 +16,7 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
+import { toText } from "@/lib/utils";
 
 type Gallery9Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -54,7 +55,7 @@ export default function Gallery9({ padding, columns }: Gallery9Props) {
                 {column.image && column.image.asset?._id && (
                   <Image
                     src={urlFor(column.image).url()}
-                    alt={column.image.alt || ""}
+                    alt={toText(column.image.alt) || ""}
                     placeholder={
                       column.image?.asset?.metadata?.lqip ? "blur" : undefined
                     }
@@ -76,9 +77,11 @@ export default function Gallery9({ padding, columns }: Gallery9Props) {
                     strokeWidth={2}
                     size={5}
                   />
-                  <div className="text-lg font-medium">{column.title}</div>
+                  <div className="text-lg font-medium">
+                    {toText(column.title)}
+                  </div>
                   <div className="text-lg text-muted-foreground">
-                    {column.description}
+                    {toText(column.description)}
                   </div>
                 </div>
               </CarouselItem>
@@ -96,11 +99,17 @@ export default function Gallery9({ padding, columns }: Gallery9Props) {
                   strokeWidth={2}
                   size={5}
                 />
-                <div className="text-lg font-medium">{column.title}</div>
+                <div className="text-lg font-medium">
+                  {toText(column.title)}
+                </div>
                 <div
-                  className={`text-lg ${index + 1 === current ? "text-muted-foreground" : "text-muted-foreground/50"} hover:text-muted-foreground`}
+                  className={`text-lg ${
+                    index + 1 === current
+                      ? "text-muted-foreground"
+                      : "text-muted-foreground/50"
+                  } hover:text-muted-foreground`}
                 >
-                  {column.description}
+                  {toText(column.description)}
                 </div>
               </div>
             ))}

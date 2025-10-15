@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { resolveLinkHref } from "@/lib/resolveHref";
+import { toText } from "@/lib/utils";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
@@ -49,7 +50,7 @@ export default function Gallery1({
                       {column.image && column.image.asset?._id && (
                         <Image
                           src={urlFor(column.image).url()}
-                          alt={column.image.alt || ""}
+                          alt={toText(column.image.alt) || ""}
                           placeholder={
                             column.image?.asset?.metadata?.lqip
                               ? "blur"
@@ -77,7 +78,7 @@ export default function Gallery1({
                     {column.logo && column.logo.asset?._id && (
                       <Image
                         src={urlFor(column.logo).url()}
-                        alt={column.logo.alt || ""}
+                        alt={toText(column.logo.alt) || ""}
                         placeholder={
                           column.logo?.asset?.metadata?.lqip
                             ? "blur"
@@ -105,7 +106,7 @@ export default function Gallery1({
                   <div className='flex h-[80px] items-center gap-2 p-4 transition-opacity delay-200 duration-500 lg:group-data-[state="closed"]:opacity-0'>
                     {column.categories?.map((category) => (
                       <Badge key={category._id} variant="secondary">
-                        {category.title}
+                        {toText(category.title)}
                       </Badge>
                     ))}
                   </div>
@@ -114,7 +115,7 @@ export default function Gallery1({
                       {column.logo && column.logo.asset?._id && (
                         <Image
                           src={urlFor(column.logo).url()}
-                          alt={column.logo.alt || ""}
+                          alt={toText(column.logo.alt) || ""}
                           placeholder={
                             column.logo?.asset?.metadata?.lqip
                               ? "blur"
@@ -138,7 +139,7 @@ export default function Gallery1({
                     <div className="flex items-center justify-between gap-2">
                       {column.title && (
                         <div className="text-base font-medium lg:text-lg">
-                          {column.title}
+                          {toText(column.title)}
                         </div>
                       )}
                       <div className="flex size-8 items-center justify-center rounded-full bg-background text-foreground transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 lg:size-10">

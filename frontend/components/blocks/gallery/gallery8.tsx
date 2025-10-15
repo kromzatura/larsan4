@@ -91,7 +91,7 @@ export default function Gallery8({
                       {column.image && column.image.asset?._id && (
                         <Image
                           src={urlFor(column.image).url()}
-                          alt={column.image.alt || ""}
+                          alt={toText(column.image.alt) || ""}
                           placeholder={
                             column.image?.asset?.metadata?.lqip
                               ? "blur"

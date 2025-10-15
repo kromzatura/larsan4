@@ -5,6 +5,7 @@ import PostDate from "@/components/post-date";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { fetchSanityChangelogs } from "@/sanity/lib/fetch";
 import PortableTextRenderer from "@/components/portable-text-renderer";
+import { toText } from "@/lib/utils";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
@@ -34,7 +35,7 @@ export default async function Changelog2({
               {changelog.image && changelog.image.asset?._id && (
                 <Image
                   src={urlFor(changelog.image).url()}
-                  alt={changelog.image.alt || ""}
+                  alt={toText(changelog.image.alt) || ""}
                   placeholder={
                     changelog.image?.asset?.metadata?.lqip ? "blur" : undefined
                   }

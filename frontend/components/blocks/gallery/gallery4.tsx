@@ -134,7 +134,7 @@ export default function Gallery4({
                         {item.image && item.image.asset?._id && (
                           <Image
                             src={urlFor(item.image).url()}
-                            alt={item.image.alt || ""}
+                            alt={toText(item.image.alt) || ""}
                             placeholder={
                               item.image?.asset?.metadata?.lqip
                                 ? "blur"
