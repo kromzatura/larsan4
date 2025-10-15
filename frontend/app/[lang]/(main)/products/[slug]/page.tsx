@@ -272,19 +272,25 @@ export default async function ProductPage(
                     {dictionary.productPage.sections.keyFeatures}
                   </h2>
                   <ul className="flex flex-col gap-2 text-sm">
-                    {product.keyFeatures.map((f, idx) => {
-                      const isBadge = /pesticide\s*-?free/i.test(f);
-                      return (
+                    {product.keyFeatures
+                      .map((kf) => {
+                        // Normalize legacy objects or non-strings to strings
+                        if (typeof kf === "string") return kf.trim();
+                        if (kf && typeof kf === "object") {
+                          const anyKf = kf as any;
+                          const text =
+                            anyKf.featureText || anyKf.text || anyKf.title || "";
+                          return typeof text === "string" ? text.trim() : "";
+                        }
+                        return "";
+                      })
+                      .filter((t) => t.length > 0)
+                      .map((f, idx) => (
                         <li key={idx} className="flex items-start gap-3">
                           <span className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-foreground/70" />
-                          {isBadge ? (
-                            <Badge variant="secondary">{f}</Badge>
-                          ) : (
-                            <p className="leading-5">{f}</p>
-                          )}
+                          <p className="leading-5">{f}</p>
                         </li>
-                      );
-                    })}
+                      ))}
                   </ul>
                 </div>
               )}
