@@ -43,7 +43,10 @@ export function ContactForm({
   const [isPending, startTransition] = useTransition();
   const [formState, setFormState] = useState<ContactFormState>({});
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-  const requireCaptcha = process.env.NEXT_PUBLIC_RECAPTCHA_REQUIRED === "true";
+  // Align with server: default to verifying in production when keys exist.
+  const isProd = process.env.NODE_ENV === "production";
+  const haveKeys = Boolean(siteKey);
+  const requireCaptcha = isProd ? haveKeys : process.env.NEXT_PUBLIC_RECAPTCHA_REQUIRED === "true" && haveKeys;
   const captchaRef = useRef<HTMLDivElement | null>(null);
   const widgetIdRef = useRef<number | null>(null);
   const resolveTokenRef = useRef<((token: string) => void) | null>(null);
@@ -81,7 +84,7 @@ export function ContactForm({
   });
 
   useEffect(() => {
-    if (!siteKey) return;
+    if (!requireCaptcha || !siteKey) return;
     const tryInit = () => {
       const grecaptcha = getGrecaptcha();
       const container = captchaRef.current;
@@ -105,12 +108,12 @@ export function ContactForm({
     tryInit();
     const id = window.setInterval(tryInit, 500);
     return () => window.clearInterval(id);
-  }, [getGrecaptcha, siteKey]);
+  }, [getGrecaptcha, siteKey, requireCaptcha]);
 
   // Unified token retrieval that supports v2 invisible (widget) and v3 fallback
   async function getRecaptchaToken(): Promise<string> {
     const grecaptcha = getGrecaptcha();
-    if (!siteKey || !grecaptcha) return "";
+  if (!requireCaptcha || !siteKey || !grecaptcha) return "";
     // Try v2 invisible via widget if available
     if (widgetIdRef.current != null) {
       try {
@@ -148,7 +151,7 @@ export function ContactForm({
         ) => Promise<string> | string;
         ready: (cb: () => void) => void;
       };
-      await new Promise<void>((r) => anyG.ready(() => r()));
+  await new Promise<void>((r) => anyG.ready(() => r()));
       const maybePromise = anyG.execute(siteKey, { action: "contact" });
       const token = await Promise.resolve(maybePromise).catch(() => "");
       return typeof token === "string" ? token : "";
@@ -164,12 +167,7 @@ export function ContactForm({
       const durationMs = Math.max(0, Date.now() - mountTime);
       formData.set("durationMs", String(durationMs));
 
-      if (
-        requireCaptcha &&
-        siteKey &&
-        typeof window !== "undefined" &&
-        getGrecaptcha()
-      ) {
+      if (requireCaptcha && siteKey && typeof window !== "undefined" && getGrecaptcha()) {
         const grecaptcha = getGrecaptcha();
         if (!siteKey || !grecaptcha) {
           setFormState({ error: dict.contact.form.captchaNotReady });
@@ -224,7 +222,7 @@ export function ContactForm({
       >
         {/* Ensure server action receives the active locale */}
         <input type="hidden" name="locale" value={locale} />
-        {siteKey && (
+        {requireCaptcha && siteKey && (
           <Script
             src="https://www.google.com/recaptcha/api.js?render=explicit"
             async
@@ -344,7 +342,7 @@ export function ContactForm({
             </p>
           )}
         </div>
-        {siteKey && (
+        {requireCaptcha && siteKey && (
           <div className="pt-2">
             <div ref={captchaRef} />
           </div>
