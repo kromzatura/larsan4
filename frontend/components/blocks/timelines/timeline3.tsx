@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import Image from "next/image";
@@ -27,14 +27,14 @@ export default function Timeline3({
     <SectionContainer padding={padding}>
       <div className="relative grid gap-16 md:grid-cols-2">
         <div className="top-40 h-fit md:sticky">
-          {title && (
+          {toText(title) && (
             <h2 className="mt-4 mb-6 text-4xl font-semibold md:text-5xl">
-              {title}
+              {toText(title)}
             </h2>
           )}
-          {description && (
+          {toText(description) && (
             <p className="font-medium text-muted-foreground md:text-xl">
-              {description}
+              {toText(description)}
             </p>
           )}
           {links && links.length > 0 && (
@@ -58,7 +58,7 @@ export default function Timeline3({
                     )}
                   >
                     <div className="flex items-center gap-2">
-                      {link.title}
+                      {toText(link.title)}
                       <Icon
                         iconVariant={link.iconVariant || "none"}
                         className="ml-2 h-4 transition-transform group-hover:translate-x-0.5"
@@ -94,14 +94,14 @@ export default function Timeline3({
                   />
                 )}
                 <div className="p-6">
-                  {column.title && (
+                  {toText(column.title) && (
                     <h3 className="mb-1 text-2xl font-semibold">
-                      {column.title}
+                      {toText(column.title)}
                     </h3>
                   )}
-                  {column.description && (
+                  {toText(column.description) && (
                     <p className="text-muted-foreground">
-                      {column.description}
+                      {toText(column.description)}
                     </p>
                   )}
                 </div>

@@ -15,7 +15,7 @@ import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { resolveLinkHref } from "@/lib/resolveHref";
@@ -44,7 +44,7 @@ export default function Gallery8({
                   <div className="flex flex-col gap-1">
                     {column.categories && column.categories.length > 0 && (
                       <div className="font-mono text-sm text-muted-foreground uppercase">
-                        {column.categories[0].title}
+                        {toText(column.categories[0].title)}
                       </div>
                     )}
                     <Link
@@ -53,7 +53,7 @@ export default function Gallery8({
                       rel={column.link?.target ? "noopener" : undefined}
                       className="group flex items-center gap-2 font-semibold"
                     >
-                      {column.link?.title}
+                      {toText(column.link?.title)}
                       <MoveRight className="mt-0.5 w-5 shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
                     </Link>
                   </div>
@@ -116,12 +116,12 @@ export default function Gallery8({
                       <div className="px-6 py-8">
                         {column.categories && column.categories.length > 0 && (
                           <div className="text-sm text-muted-foreground uppercase">
-                            {column.categories[0].title}
+                            {toText(column.categories[0].title)}
                           </div>
                         )}
                         {column.link?.title && (
                           <h3 className="mt-2 text-xl font-semibold lg:text-2xl">
-                            {column.link.title}
+                            {toText(column.link.title)}
                           </h3>
                         )}
                       </div>

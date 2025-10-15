@@ -13,7 +13,7 @@ import {
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { ColorName, getColor } from "@/lib/color";
 import SectionContainer from "@/components/ui/section-container";
@@ -65,11 +65,15 @@ export default function Gallery4({
         {/* Left Side: Text Content and Navigation Buttons */}
         <div className="flex flex-col justify-between lg:h-[460px] lg:w-[445px] lg:pr-10">
           <div className="flex flex-col gap-4">
-            {title && (
-              <h2 className="text-3xl font-semibold lg:text-4xl">{title}</h2>
+            {toText(title) && (
+              <h2 className="text-3xl font-semibold lg:text-4xl">
+                {toText(title)}
+              </h2>
             )}
-            {description && (
-              <p className="text-lg text-muted-foreground">{description}</p>
+            {toText(description) && (
+              <p className="text-lg text-muted-foreground">
+                {toText(description)}
+              </p>
             )}
           </div>
 

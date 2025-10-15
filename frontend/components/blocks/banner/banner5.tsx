@@ -2,7 +2,7 @@
 
 import { X } from "lucide-react";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { resolveLinkHref } from "@/lib/resolveHref";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { BannerUIProps } from "./index";
@@ -18,7 +18,7 @@ export default function Banner5({
   if (!isVisible) return null;
 
   const href = resolveLinkHref(link, locale);
-  const buttonLabel = link?.title ?? "View";
+  const buttonLabel = toText(link?.title) ?? "View";
   const buttonVariant = link?.buttonVariant ?? "default";
   const target = link?.isExternal && link?.target ? "_blank" : undefined;
   const rel = target ? "noopener noreferrer" : undefined;
@@ -39,8 +39,14 @@ export default function Banner5({
 
             <div className="flex flex-col items-start gap-3 pt-2 md:flex-row md:items-center md:pt-0">
               <div className="flex flex-col gap-1 md:flex-row md:items-center">
-                <p className="text-sm font-medium">{title}</p>
-                <p className="text-muted-foreground text-sm">{description}</p>
+                {toText(title) && (
+                  <p className="text-sm font-medium">{toText(title)}</p>
+                )}
+                {toText(description) && (
+                  <p className="text-muted-foreground text-sm">
+                    {toText(description)}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -58,14 +64,14 @@ export default function Banner5({
                   {buttonLabel}
                 </Link>
               )}
-              {!href && link?.title && (
+              {!href && link && toText(link.title) && (
                 <Button
                   variant={buttonVariant}
                   size="sm"
                   disabled
                   className="w-full md:w-auto"
                 >
-                  {link.title}
+                  {toText(link.title)}
                 </Button>
               )}
               <Button

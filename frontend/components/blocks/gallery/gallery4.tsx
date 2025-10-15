@@ -17,6 +17,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Icon from "@/components/icon";
 import { Badge } from "@/components/ui/badge";
+import { toText } from "@/lib/utils";
 import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { resolveLinkHref } from "@/lib/resolveHref";
@@ -63,11 +64,13 @@ export default function Gallery4({
           <div className="flex flex-col gap-4">
             {title && (
               <h2 className="text-3xl font-medium md:text-4xl lg:text-5xl">
-                {title}
+                {toText(title)}
               </h2>
             )}
-            {description && (
-              <p className="max-w-lg text-muted-foreground">{description}</p>
+            {toText(description) && (
+              <p className="max-w-lg text-muted-foreground">
+                {toText(description)}
+              </p>
             )}
           </div>
           <div className="hidden shrink-0 gap-2 md:flex">

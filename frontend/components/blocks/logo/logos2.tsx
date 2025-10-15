@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import Icon from "@/components/icon";
 import SectionContainer from "@/components/ui/section-container";
 import Image from "next/image";
@@ -28,12 +28,14 @@ const Logos2 = ({
       <div className="grid overflow-hidden rounded-xl border border-border md:grid-cols-2">
         <div className="my-auto px-6 py-10 sm:px-10 sm:py-12 lg:p-16">
           <div className="w-full md:max-w-md">
-            {title && (
+            {toText(title) && (
               <h2 className="mb-4 text-2xl font-semibold lg:text-3xl">
-                {title}
+                {toText(title)}
               </h2>
             )}
-            {description && <p className="text-lg">{description}</p>}
+            {toText(description) && (
+              <p className="text-lg">{toText(description)}</p>
+            )}
             {links && links.length > 0 && (
               <div className="mt-6 flex gap-3">
                 {links.map((link) => {
@@ -59,7 +61,7 @@ const Logos2 = ({
                           iconVariant={link.iconVariant || "none"}
                           className="ml-2 h-4 transition-transform group-hover:translate-x-0.5"
                         />
-                        {link.title}
+                        {toText(link.title)}
                       </div>
                     </Link>
                   );
