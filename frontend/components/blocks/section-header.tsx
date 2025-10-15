@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import SectionContainer from "@/components/ui/section-container";
 import Tag from "@/components/ui/tag";
 import { buttonVariants } from "@/components/ui/button";
@@ -73,14 +73,14 @@ export default function SectionHeader({
         )}
       >
         <div className="flex flex-col gap-4">
-          {tag && tag.text && (
+          {tag && toText(tag.text) && (
             <Tag
-              title={tag.text || ""}
+              title={toText(tag.text) || ""}
               type={tag.type as "title" | "badge"}
               element="p"
             />
           )}
-          {title && title.text && (
+          {title && toText(title.text) && (
             <Element
               className={cn(
                 titleSizeClasses,
@@ -89,11 +89,11 @@ export default function SectionHeader({
                 hasGroupDivider && "border-b pb-4"
               )}
             >
-              {title.text}
+              {toText(title.text)}
             </Element>
           )}
-          {description && (
-            <p className="text-muted-foreground">{description}</p>
+          {toText(description) && (
+            <p className="text-muted-foreground">{toText(description)}</p>
           )}
         </div>
         <div>
@@ -123,7 +123,7 @@ export default function SectionHeader({
                     )}
                   >
                     <div className="flex items-center gap-2">
-                      {link.title}
+                      {toText(link.title)}
                       <Icon
                         iconVariant={link.iconVariant || "none"}
                         strokeWidth={1.5}
@@ -142,7 +142,7 @@ export default function SectionHeader({
               )}
             >
               {links
-                .map((link) => link.description)
+                .map((link) => toText(link.description))
                 .filter((value): value is string => Boolean(value))
                 .map((description, index, arr) => (
                   <Fragment key={`${description}-${index}`}>
