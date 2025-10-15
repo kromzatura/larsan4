@@ -148,19 +148,21 @@ export default function Gallery4({
                       )}
                       <div className="absolute inset-0 h-full bg-[linear-gradient(transparent_20%,var(--primary)_100%)] mix-blend-multiply" />
                       <div className="absolute inset-x-0 bottom-0 flex flex-col items-start p-6 text-primary-foreground md:p-8">
-                        {item.categories && item.categories.length > 0 && (
-                          <Badge className="bg-primary-foreground/30">
-                            {item.categories[0].title}
-                          </Badge>
-                        )}
-                        {item.title && (
+                        {item.categories &&
+                          item.categories.length > 0 &&
+                          toText(item.categories[0].title) && (
+                            <Badge className="bg-primary-foreground/30">
+                              {toText(item.categories[0].title)}
+                            </Badge>
+                          )}
+                        {toText(item.title) && (
                           <div className="mb-2 pt-4 text-xl font-semibold md:mb-3 md:pt-4 lg:pt-4">
-                            {item.title}
+                            {toText(item.title)}
                           </div>
                         )}
-                        {item.description && (
+                        {toText(item.description) && (
                           <div className="mb-8 line-clamp-2 md:mb-12 lg:mb-9">
-                            {item.description}
+                            {toText(item.description)}
                           </div>
                         )}
                         <div
@@ -174,7 +176,7 @@ export default function Gallery4({
                             "flex items-center text-sm !p-0"
                           )}
                         >
-                          {item.link?.title}
+                          {toText(item.link?.title)}
                           <Icon
                             iconVariant={item.link?.iconVariant || "none"}
                             className="ml-2 transition-transform group-hover:translate-x-1"
