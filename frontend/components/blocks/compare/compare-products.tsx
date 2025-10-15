@@ -192,8 +192,9 @@ export default function CompareProducts({
                   {toText(rowLabel) ?? rowLabel}
                 </td>
                 {normalized.cols.map((c, colIdx) => {
-                  const legacy = columns?.[colIdx]?.attributes?.[rowIdx]?.value;
-                  const v: CellValue = c.values[rowIdx] ?? legacy ?? null;
+                  const legacy = columns?.[colIdx]?.attributes?.[rowIdx]?.value as unknown;
+                  const raw: unknown = c.values[rowIdx] ?? legacy ?? null;
+                  const v: CellValue = raw as any;
                   const isAction = v === "__actions__";
                   return (
                     <td
@@ -214,7 +215,14 @@ export default function CompareProducts({
                               : "text-muted-foreground"
                           )}
                         >
-                          {String(v ?? "—")}
+                          {
+                            toText(v) ??
+                              (typeof v === "number" || typeof v === "boolean"
+                                ? String(v)
+                                : typeof v === "string"
+                                ? v
+                                : "—")
+                          }
                         </span>
                       )}
                       {isAction && (
