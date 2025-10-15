@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { resolveLinkHref } from "@/lib/resolveHref";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
@@ -68,9 +68,11 @@ const Hero12 = ({
               </div>
             )}
             <div>
-              <h1 className="mb-6 text-2xl font-serif font-bold tracking-tight text-pretty lg:text-5xl">
-                {title}
-              </h1>
+              {toText(title) && (
+                <h1 className="mb-6 text-2xl font-serif font-bold tracking-tight text-pretty lg:text-5xl">
+                  {toText(title)}
+                </h1>
+              )}
               {body && (
                 <div className="max-w-3xl text-muted-foreground lg:text-xl">
                   <PortableTextRenderer value={body} locale={locale} />
@@ -98,7 +100,7 @@ const Hero12 = ({
                       )}
                     >
                       <div className="flex items-center gap-2">
-                        {link.title}
+                        {toText(link.title)}
                         <Icon
                           iconVariant={link.iconVariant || "none"}
                           className="ml-2 h-4 transition-transform group-hover:translate-x-0.5"
@@ -111,9 +113,9 @@ const Hero12 = ({
             )}
             {techLogos && techLogos.length > 0 && (
               <div className="mt-20 flex flex-col items-center gap-5">
-                {tagLine && (
+                {toText(tagLine) && (
                   <p className="font-medium text-muted-foreground lg:text-left">
-                    {tagLine}
+                    {toText(tagLine)}
                   </p>
                 )}
                 <div className="flex flex-wrap items-center justify-center gap-4">

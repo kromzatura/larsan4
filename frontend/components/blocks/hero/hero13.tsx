@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import PortableTextRenderer from "@/components/portable-text-renderer";
@@ -31,13 +31,13 @@ const Hero13 = ({
           <span className="mr-2 flex size-8 shrink-0 items-center justify-center rounded-full bg-accent">
             <Icon iconVariant={tag?.iconVariant || "none"} className="size-4" />
           </span>
-          {tag?.title && (
-            <p className="truncate whitespace-nowrap">{tag?.title}</p>
+          {toText(tag?.title) && (
+            <p className="truncate whitespace-nowrap">{toText(tag?.title)}</p>
           )}
         </Badge>
-        {title && (
+        {toText(title) && (
           <h1 className="mb-6 text-4xl leading-none font-bold tracking-tighter md:text-[7vw] lg:text-8xl">
-            {title}
+            {toText(title)}
           </h1>
         )}
         {body && (
@@ -67,7 +67,7 @@ const Hero13 = ({
                   )}
                 >
                   <div className="flex items-center gap-2">
-                    {link.title}
+                    {toText(link.title)}
                     <Icon
                       iconVariant={link.iconVariant || "none"}
                       className="ml-2 h-4 transition-transform group-hover:translate-x-0.5"

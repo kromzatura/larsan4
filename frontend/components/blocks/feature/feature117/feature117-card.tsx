@@ -4,7 +4,7 @@ import Image from "next/image";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import Icon from "@/components/icon";
 import { ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { resolveLinkHref } from "@/lib/resolveHref";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
@@ -63,12 +63,14 @@ export default function Feature117Card({
             className={cn("text-background", index === 1 && "text-foreground")}
             size={6}
           />
-          {tag?.text}
+          {toText(tag?.text)}
         </span>
         <div className="flex flex-col gap-5 text-background">
-          <h4 className="text-2xl font-semibold lg:text-3xl">{title}</h4>
+          {toText(title) && (
+            <h4 className="text-2xl font-semibold lg:text-3xl">{toText(title)}</h4>
+          )}
           <p className="flex items-center gap-1 font-medium">
-            {link?.title}
+            {toText(link?.title)}
             <ChevronRight className="h-auto w-4" />
           </p>
         </div>

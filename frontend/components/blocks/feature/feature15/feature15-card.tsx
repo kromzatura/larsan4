@@ -1,5 +1,6 @@
 import { PAGE_QUERYResult } from "@/sanity.types";
 import Icon from "@/components/icon";
+import { toText } from "@/lib/utils";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Feature15 = Extract<Block, { _type: "feature-15" }>;
@@ -29,8 +30,12 @@ export default function Feature15Card({
         <Icon iconVariant={iconVariant || "none"} strokeWidth={2} size={6} />
       </span>
       <div>
-        <h3 className="text-lg font-semibold md:text-2xl">{title}</h3>
-        <p className="mt-2 text-muted-foreground">{description}</p>
+        {toText(title) && (
+          <h3 className="text-lg font-semibold md:text-2xl">{toText(title)}</h3>
+        )}
+        {toText(description) && (
+          <p className="mt-2 text-muted-foreground">{toText(description)}</p>
+        )}
       </div>
     </div>
   );

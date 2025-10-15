@@ -8,6 +8,7 @@ import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import Icon from "@/components/icon";
+import { toText } from "@/lib/utils";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Feature3 = Extract<Block, { _type: "feature-3" }>;
@@ -28,8 +29,12 @@ export default function Feature3Card({
         <Icon iconVariant={iconVariant || "none"} />
       </CardHeader>
       <CardContent className="text-left">
-        <h2 className="mb-1 text-lg font-semibold">{title}</h2>
-        <p className="leading-snug text-muted-foreground">{description}</p>
+        {toText(title) && (
+          <h2 className="mb-1 text-lg font-semibold">{toText(title)}</h2>
+        )}
+        {toText(description) && (
+          <p className="leading-snug text-muted-foreground">{toText(description)}</p>
+        )}
       </CardContent>
       <CardFooter className="justify-end pr-0 pb-0">
         {image && image.asset?._id && (

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import PortableTextRenderer from "@/components/portable-text-renderer";
@@ -51,16 +51,16 @@ const Hero160 = ({
                 strokeWidth={1.5}
                 className="text-white/60"
               />
-              {tag.title && (
+              {toText(tag.title) && (
                 <p className="text-sm leading-normal font-light text-white/60">
-                  {tag.title}
+                  {toText(tag.title)}
                 </p>
               )}
             </Badge>
           )}
-          {title && (
+          {toText(title) && (
             <h1 className="from-muted to-muted/80 bg-gradient-to-tr w-full max-w-[37.5rem] bg-clip-text py-2 text-center text-4xl leading-tight font-normal text-transparent md:max-w-[50rem] md:text-5xl xl:max-w-[62.5rem] xl:text-[3.6rem]">
-              {title}
+              {toText(title)}
             </h1>
           )}
           {body && (
@@ -88,7 +88,7 @@ const Hero160 = ({
                     )}
                   >
                     <div className="flex items-center gap-2">
-                      {link.title}
+                      {toText(link.title)}
                       <Icon
                         iconVariant={link.iconVariant || "none"}
                         strokeWidth={1.5}
@@ -103,12 +103,12 @@ const Hero160 = ({
             <div className="flex flex-wrap items-center gap-3 md:flex-row">
               {links.map((link, index) => (
                 <Fragment key={link._key}>
-                  {link.description && (
+                  {toText(link.description) && (
                     <p key={link._key} className="text-sm text-white/60">
-                      {link.description}
+                      {toText(link.description)}
                     </p>
                   )}
-                  {index < links.length - 1 && link.description && (
+                  {index < links.length - 1 && toText(link.description) && (
                     <Circle className="h-1 w-1 fill-white/60" />
                   )}
                 </Fragment>

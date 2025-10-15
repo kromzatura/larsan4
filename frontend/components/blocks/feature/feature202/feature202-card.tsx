@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import Icon from "@/components/icon";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { resolveLinkHref } from "@/lib/resolveHref";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import type { ImageTreatment } from "@/sanity.types";
@@ -70,11 +70,11 @@ export default function Feature202Card({
           />
         </span>
         <div>
-          {title && (
-            <h3 className="text-base font-medium text-background">{title}</h3>
+          {toText(title) && (
+            <h3 className="text-base font-medium text-background">{toText(title)}</h3>
           )}
-          {description && (
-            <p className="mt-2 text-background/70">{description}</p>
+          {toText(description) && (
+            <p className="mt-2 text-background/70">{toText(description)}</p>
           )}
         </div>
       </div>

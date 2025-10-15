@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import Icon from "@/components/icon";
@@ -35,14 +35,14 @@ const Hero25 = ({
               className="mx-auto mb-6 h-14 w-14 md:mb-8 md:h-20 md:w-20 lg:mb-10 lg:h-24 lg:w-24"
             />
           )}
-          {tagLine && (
+          {toText(tagLine) && (
             <span className="mb-2 inline-block text-sm font-medium tracking-wider text-muted-foreground uppercase md:text-base">
-              {tagLine}
+              {toText(tagLine)}
             </span>
           )}
-          {title && (
+          {toText(title) && (
             <h1 className="mt-4 text-4xl leading-tight font-bold text-balance md:text-5xl lg:text-7xl lg:leading-[1.1]">
-              {title}
+              {toText(title)}
             </h1>
           )}
           {links && (
@@ -66,7 +66,7 @@ const Hero25 = ({
                       "px-8 py-6 text-base font-medium"
                     )}
                   >
-                    {link.title}
+                    {toText(link.title)}
                     <Icon
                       iconVariant={link.iconVariant || "none"}
                       strokeWidth={1.5}
@@ -89,7 +89,7 @@ const Hero25 = ({
                       className="size-5 text-primary"
                       strokeWidth={2}
                     />
-                    {tag.title}
+                    {toText(tag.title)}
                   </li>
                 ))}
               </ul>

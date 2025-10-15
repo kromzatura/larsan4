@@ -5,7 +5,7 @@ import AutoScroll from "embla-carousel-auto-scroll";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import PortableTextRenderer from "@/components/portable-text-renderer";
@@ -39,12 +39,12 @@ const Hero85 = ({
         <div className="grid items-center gap-16 lg:grid-cols-2">
           <div className="mx-auto">
             <div className="flex w-fit items-center gap-2 rounded-full border px-2.5 py-1.5 text-xs font-medium">
-              {tag?.title && <Badge>{tag.title}</Badge>}
-              {tag?.description}
+              {toText(tag?.title) && <Badge>{toText(tag?.title)}</Badge>}
+              {toText(tag?.description)}
             </div>
-            {title && (
+            {toText(title) && (
               <h1 className="mt-10 mb-4 text-3xl font-semibold lg:text-5xl">
-                {title}
+                {toText(title)}
               </h1>
             )}
             {body && (
@@ -73,7 +73,7 @@ const Hero85 = ({
                       )}
                     >
                       <div className="flex items-center gap-2">
-                        {link.title}
+                        {toText(link.title)}
                         <Icon iconVariant={link.iconVariant || "none"} />
                       </div>
                     </Link>

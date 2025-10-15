@@ -6,6 +6,7 @@ import { PAGE_QUERYResult } from "@/sanity.types";
 import { resolveLinkHref } from "@/lib/resolveHref";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { toText } from "@/lib/utils";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Feature157 = Extract<Block, { _type: "feature-157" }>;
@@ -46,9 +47,9 @@ export default function Feature157Card({
           strokeWidth={2}
           size={6}
         />
-        <div className="text-2xl font-semibold">{link?.title}</div>
+        <div className="text-2xl font-semibold">{toText(link?.title)}</div>
       </div>
-      <div>{link?.description}</div>
+      <div>{toText(link?.description)}</div>
     </Link>
   );
 }

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, toText } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import PortableTextRenderer from "@/components/portable-text-renderer";
@@ -56,9 +56,9 @@ const Hero174 = ({
       <div className="relative z-10 mx-auto flex size-full max-w-[125rem] px-4 py-9">
         <div className="flex w-full flex-col justify-between gap-10">
           <div className="mx-auto flex max-w-[31.25rem] flex-1 flex-col items-center justify-center gap-7 sm:max-w-[37.5rem] md:max-w-[50rem]">
-            {title && (
+            {toText(title) && (
               <h1 className="text-center text-4xl leading-tight font-medium text-white sm:text-5xl md:text-6xl">
-                {title}
+                {toText(title)}
               </h1>
             )}
             {body && (
@@ -88,7 +88,7 @@ const Hero174 = ({
                       )}
                     >
                       <div className="flex items-center gap-2">
-                        {link.title}
+                        {toText(link.title)}
                         <Icon
                           iconVariant={link.iconVariant || "none"}
                           strokeWidth={1.5}
@@ -105,9 +105,9 @@ const Hero174 = ({
               <div className="flex items-center gap-3">
                 <div className="h-8 w-1 bg-white" />
                 <div className="text-sm font-medium">
-                  {tag.title && <p className="text-white">{tag.title}</p>}
-                  {tag.description && (
-                    <p className="text-white/50">{tag.description}</p>
+                  {toText(tag.title) && <p className="text-white">{toText(tag.title)}</p>}
+                  {toText(tag.description) && (
+                    <p className="text-white/50">{toText(tag.description)}</p>
                   )}
                 </div>
               </div>

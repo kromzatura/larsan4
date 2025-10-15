@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import SectionContainer from "@/components/ui/section-container";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import Icon from "@/components/icon";
+import { toText } from "@/lib/utils";
 import type { SupportedLocale } from "@/lib/i18n/config";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -78,12 +79,16 @@ export default function Feature12({
                             strokeWidth={2}
                           />
                         </span>
-                        <p className="text-xl font-semibold md:text-2xl lg:text-2xl">
-                          {column.title}
-                        </p>
-                        <p className="pt-2 text-muted-foreground">
-                          {column.description}
-                        </p>
+                        {toText(column.title) && (
+                          <p className="text-xl font-semibold md:text-2xl lg:text-2xl">
+                            {toText(column.title)}
+                          </p>
+                        )}
+                        {toText(column.description) && (
+                          <p className="pt-2 text-muted-foreground">
+                            {toText(column.description)}
+                          </p>
+                        )}
                       </div>
                     </CardContent>
                   </Card>
