@@ -20,19 +20,11 @@ export const POST_QUERY = groq`
     body[]{
       ${bodyQuery}
     },
-    // Localized author by slug and current language
-    "author": select(
-      defined(author) => *[
-        _type == "author" &&
-        slug.current == author->slug.current &&
-        (language == $lang || (!defined(language) && $lang == $fallbackLang))
-      ] | order((language == $lang) desc, _updatedAt desc)[0]{
-        name,
-        title,
-        image { ${imageQuery} }
-      },
-      null
-    ),
+    author->{
+      name,
+      title,
+      image { ${imageQuery} }
+    },
     publishedAt,
     _createdAt,
     _updatedAt,
@@ -54,19 +46,11 @@ export const POSTS_QUERY = groq`
     title,
     slug,
     excerpt,
-    // Localized author by slug and current language
-    "author": select(
-      defined(author) => *[
-        _type == "author" &&
-        slug.current == author->slug.current &&
-        (language == $lang || (!defined(language) && $lang == $fallbackLang))
-      ] | order((language == $lang) desc, _updatedAt desc)[0]{
-        name,
-        title,
-        image { ${imageQuery} }
-      },
-      null
-    ),
+    author->{
+      name,
+      title,
+      image { ${imageQuery} }
+    },
     image{
       ${imageQuery}
     },
@@ -91,19 +75,11 @@ export const POSTS_QUERY_AZ = groq`
     title,
     slug,
     excerpt,
-    // Localized author by slug and current language
-    "author": select(
-      defined(author) => *[
-        _type == "author" &&
-        slug.current == author->slug.current &&
-        (language == $lang || (!defined(language) && $lang == $fallbackLang))
-      ] | order((language == $lang) desc, _updatedAt desc)[0]{
-        name,
-        title,
-        image { ${imageQuery} }
-      },
-      null
-    ),
+    author->{
+      name,
+      title,
+      image { ${imageQuery} }
+    },
     image{
       ${imageQuery}
     },
@@ -128,19 +104,11 @@ export const POSTS_QUERY_ZA = groq`
     title,
     slug,
     excerpt,
-    // Localized author by slug and current language
-    "author": select(
-      defined(author) => *[
-        _type == "author" &&
-        slug.current == author->slug.current &&
-        (language == $lang || (!defined(language) && $lang == $fallbackLang))
-      ] | order((language == $lang) desc, _updatedAt desc)[0]{
-        name,
-        title,
-        image { ${imageQuery} }
-      },
-      null
-    ),
+    author->{
+      name,
+      title,
+      image { ${imageQuery} }
+    },
     image{
       ${imageQuery}
     },
