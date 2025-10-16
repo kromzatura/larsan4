@@ -10,6 +10,7 @@ import {
 import ProductsTable, {
   ProductsTableItem,
 } from "@/components/products/products-table";
+import ProductGrid from "@/components/products/ProductGrid";
 import { fetchSanityProductCategoryBySlug } from "@/sanity/lib/fetch";
 import { buildLocalizedPath } from "@/lib/i18n/routing";
 import type { SupportedLocale } from "@/lib/i18n/config";
@@ -83,47 +84,65 @@ export default async function AllProducts16({
 
   return (
     <SectionContainer padding={padding}>
-      <ProductsTable
-        labels={{
-          headerProduct: dictionary.products.table.headerProduct,
-          headerCategory: dictionary.products.table.headerCategory,
-          headerKeyFeatures: dictionary.products.table.headerKeyFeatures,
-          headerAttributes: dictionary.products.table.headerAttributes,
-          headerAction: dictionary.products.table.headerAction,
-          labelSku: dictionary.products.table.labelSku,
-          labelPurity: dictionary.products.table.labelPurity,
-          emptyState: dictionary.products.table.emptyState,
-        }}
-        items={items}
-        page={currentPage}
-        pageCount={totalPages}
-        baseUrl={baseUrl}
-        baseSearchParams={baseSearchParams.toString()}
-        emptyState={
-          <div className="rounded-lg border p-8 text-center text-muted-foreground">
-            {activeCategory ? (
-              <>
-                <p>
-                  {isInvalidCategory
-                    ? dictionary.products.listingBlock
-                        .emptyStateCategoryNotFound
-                    : dictionary.products.listingBlock
-                        .emptyStateNoProductsInCategory}
-                </p>
-                <p className="mt-2">
-                  <Link className="underline" href={baseUrl}>
-                    {dictionary.products.listingBlock.actionClearFilter}
-                  </Link>
-                </p>
-              </>
-            ) : (
-              <p>{dictionary.products.listingBlock.emptyStateGeneral}</p>
-            )}
-          </div>
-        }
-        locale={locale}
-        className="mb-12"
-      />
+      {(() => {
+        const sharedProps = {
+          labels: {
+            headerProduct: dictionary.products.table.headerProduct,
+            headerCategory: dictionary.products.table.headerCategory,
+            headerKeyFeatures: dictionary.products.table.headerKeyFeatures,
+            headerAttributes: dictionary.products.table.headerAttributes,
+            headerAction: dictionary.products.table.headerAction,
+            labelSku: dictionary.products.table.labelSku,
+            labelPurity: dictionary.products.table.labelPurity,
+            emptyState: dictionary.products.table.emptyState,
+          },
+          items,
+          page: currentPage,
+          pageCount: totalPages,
+          baseUrl,
+          baseSearchParams: baseSearchParams.toString(),
+          emptyState: (
+            <div className="rounded-lg border p-8 text-center text-muted-foreground">
+              {activeCategory ? (
+                <>
+                  <p>
+                    {isInvalidCategory
+                      ? dictionary.products.listingBlock
+                          .emptyStateCategoryNotFound
+                      : dictionary.products.listingBlock
+                          .emptyStateNoProductsInCategory}
+                  </p>
+                  <p className="mt-2">
+                    <Link className="underline" href={baseUrl}>
+                      {dictionary.products.listingBlock.actionClearFilter}
+                    </Link>
+                  </p>
+                </>
+              ) : (
+                <p>{dictionary.products.listingBlock.emptyStateGeneral}</p>
+              )}
+            </div>
+          ),
+          locale,
+        } as const;
+
+        return (
+          <>
+            {/* Mobile: list inside ProductsTable */}
+            <div className="block md:hidden">
+              <ProductsTable {...sharedProps} className="mb-12" />
+            </div>
+            {/* Tablet: grid for visual layout */}
+            <div className="hidden md:block xl:hidden">
+              <ProductGrid {...sharedProps} className="mb-12" />
+            </div>
+            {/* Desktop: full table */}
+            <div className="hidden xl:block">
+              <ProductsTable {...sharedProps} className="mb-12" />
+            </div>
+          </>
+        );
+      })()}
     </SectionContainer>
   );
 }

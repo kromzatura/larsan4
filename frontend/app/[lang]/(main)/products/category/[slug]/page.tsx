@@ -10,6 +10,7 @@ import {
 import ProductsTable, {
   ProductsTableItem,
 } from "@/components/products/products-table";
+import ProductGrid from "@/components/products/ProductGrid";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
 // no FALLBACK_LOCALE needed
 import type { AsyncPageProps } from "@/lib/types/next";
@@ -126,9 +127,9 @@ export default async function CategoryPage(
   return (
     <section className="container py-16 xl:py-20">
       <Breadcrumbs links={links} locale={locale} />
-      <div className="mt-7 flex items-end justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-serif font-semibold md:text-5xl">
+      <div className="mt-7 grid gap-3 md:grid-cols-[1fr_auto] md:items-end md:gap-4">
+        <div className="min-w-0">
+          <h1 className="text-3xl font-serif font-semibold leading-tight md:text-5xl">
             {catTitle}
           </h1>
           {catDescription && (
@@ -137,13 +138,14 @@ export default async function CategoryPage(
             </p>
           )}
         </div>
-        <div className="ml-auto flex items-center gap-2 text-sm">
+        <div className="md:justify-end md:ml-0 ml-auto flex flex-wrap items-center gap-2 text-sm">
           <span className="text-muted-foreground">
             {dictionary.products.categoryPage.labelSort}
           </span>
           <Link
             href={`${baseUrl}?sort=newest`}
-            className={`rounded-md border px-2 py-1 ${
+            aria-pressed={sort === "newest"}
+            className={`inline-flex items-center rounded-md border px-2.5 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
               sort === "newest" ? "bg-muted" : "hover:bg-muted"
             }`}
           >
@@ -151,7 +153,8 @@ export default async function CategoryPage(
           </Link>
           <Link
             href={`${baseUrl}?sort=az`}
-            className={`rounded-md border px-2 py-1 ${
+            aria-pressed={sort === "az"}
+            className={`inline-flex items-center rounded-md border px-2.5 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
               sort === "az" ? "bg-muted" : "hover:bg-muted"
             }`}
           >
@@ -159,7 +162,8 @@ export default async function CategoryPage(
           </Link>
           <Link
             href={`${baseUrl}?sort=za`}
-            className={`rounded-md border px-2 py-1 ${
+            aria-pressed={sort === "za"}
+            className={`inline-flex items-center rounded-md border px-2.5 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
               sort === "za" ? "bg-muted" : "hover:bg-muted"
             }`}
           >
@@ -169,32 +173,51 @@ export default async function CategoryPage(
       </div>
 
       <div className="mt-10">
-        <ProductsTable
-          labels={{
-            headerProduct: dictionary.products.table.headerProduct,
-            headerCategory: dictionary.products.table.headerCategory,
-            headerKeyFeatures: dictionary.products.table.headerKeyFeatures,
-            headerAttributes: dictionary.products.table.headerAttributes,
-            headerAction: dictionary.products.table.headerAction,
-            labelSku: dictionary.products.table.labelSku,
-            labelPurity: dictionary.products.table.labelPurity,
-            emptyState: dictionary.products.table.emptyState,
-          }}
-          items={(products || []).map<ProductsTableItem>((p) =>
+        {(() => {
+          const items: ProductsTableItem[] = (products || []).map((p) =>
             mapProductToProductsTableItem(p, locale)
-          )}
-          page={page}
-          pageCount={totalPages}
-          baseUrl={baseUrl}
-          baseSearchParams={baseSearchParams.toString()}
-          emptyState={
-            <div className="rounded-lg border p-8 text-center text-muted-foreground">
-              {dictionary.products.categoryPage.emptyState}
-            </div>
-          }
-          locale={locale}
-          className="mb-12"
-        />
+          );
+          const sharedProps = {
+            labels: {
+              headerProduct: dictionary.products.table.headerProduct,
+              headerCategory: dictionary.products.table.headerCategory,
+              headerKeyFeatures: dictionary.products.table.headerKeyFeatures,
+              headerAttributes: dictionary.products.table.headerAttributes,
+              headerAction: dictionary.products.table.headerAction,
+              labelSku: dictionary.products.table.labelSku,
+              labelPurity: dictionary.products.table.labelPurity,
+              emptyState: dictionary.products.table.emptyState,
+            },
+            items,
+            page,
+            pageCount: totalPages,
+            baseUrl,
+            baseSearchParams: baseSearchParams.toString(),
+            emptyState: (
+              <div className="rounded-lg border p-8 text-center text-muted-foreground">
+                {dictionary.products.categoryPage.emptyState}
+              </div>
+            ),
+            locale,
+          } as const;
+
+          return (
+            <>
+              {/* Mobile: ProductsTable renders list */}
+              <div className="block md:hidden">
+                <ProductsTable {...sharedProps} className="mb-12" />
+              </div>
+              {/* Tablet: ProductGrid */}
+              <div className="hidden md:block xl:hidden">
+                <ProductGrid {...sharedProps} className="mb-12" />
+              </div>
+              {/* Desktop: ProductsTable renders full table */}
+              <div className="hidden xl:block">
+                <ProductsTable {...sharedProps} className="mb-12" />
+              </div>
+            </>
+          );
+        })()}
       </div>
     </section>
   );
