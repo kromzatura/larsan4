@@ -17,6 +17,7 @@ import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { mapProductToProductsTableItem } from "@/sanity/lib/mappers";
+import { toText } from "@/lib/utils";
 
 type AllProducts16Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -86,12 +87,8 @@ export default async function AllProducts16({
     mapProductToProductsTableItem(p, locale)
   );
 
-  const catTitle = activeCategory
-    ? (categoryDoc && (categoryDoc as any).title) || ""
-    : "";
-  const catDescription = activeCategory
-    ? (categoryDoc && (categoryDoc as any).description) || ""
-    : "";
+  const catTitle = activeCategory ? toText((categoryDoc as unknown as { title?: unknown })?.title) || "" : "";
+  const catDescription = activeCategory ? toText((categoryDoc as unknown as { description?: unknown })?.description) || "" : "";
 
   return (
     <SectionContainer padding={padding}>
@@ -102,9 +99,7 @@ export default async function AllProducts16({
               {catTitle || dictionary.products.categoryPage.breadcrumbCategory}
             </h2>
             {catDescription && (
-              <p className="mt-3 max-w-3xl text-muted-foreground">
-                {catDescription as any}
-              </p>
+              <p className="mt-3 max-w-3xl text-muted-foreground">{catDescription}</p>
             )}
           </div>
           <div className="md:justify-end md:ml-0 ml-auto flex flex-wrap items-center gap-2 text-sm">
