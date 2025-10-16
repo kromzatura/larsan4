@@ -4,7 +4,7 @@ export const BLOG_CATEGORIES_QUERY = groq`
   *[
     _type == "category" &&
     defined(slug) &&
-    (!defined(language) || language in [$lang, $fallbackLang])
+    (language == $lang || (!defined(language) && $lang == $fallbackLang))
   ] | order(orderRank){
     _id,
     title,
@@ -17,7 +17,7 @@ export const BLOG_CATEGORY_BY_SLUG_QUERY = groq`
   *[
     _type == "category" &&
     slug.current == $slug &&
-    (!defined(language) || language in [$lang, $fallbackLang])
+    (language == $lang || (!defined(language) && $lang == $fallbackLang))
   ]
   | order((language == $lang) desc, _updatedAt desc)[0]{
     _id,
@@ -35,7 +35,7 @@ export const BLOG_CATEGORY_BY_SLUG_QUERY = groq`
   }
 `;
 
-const postsByCategoryFilter = `_type == "post" && references(*[_type == "category" && slug.current == $slug]._id) && (!defined(language) || language in [$lang, $fallbackLang])`;
+const postsByCategoryFilter = `_type == "post" && references(*[_type == "category" && slug.current == $slug]._id) && (language == $lang || (!defined(language) && $lang == $fallbackLang))`;
 
 export const POSTS_BY_BLOG_CATEGORY_QUERY_NEWEST = groq`
   *[
@@ -48,11 +48,19 @@ export const POSTS_BY_BLOG_CATEGORY_QUERY_NEWEST = groq`
     title,
     slug,
     excerpt,
-    author->{
-      name,
-      title,
-      image{ asset->{ _id, url } }
-    },
+    // Localized author by slug and current language
+    "author": select(
+      defined(author) => *[
+        _type == "author" &&
+        slug.current == author->slug.current &&
+        (language == $lang || (!defined(language) && $lang == $fallbackLang))
+      ] | order((language == $lang) desc, _updatedAt desc)[0]{
+        name,
+        title,
+        image{ asset->{ _id, url } }
+      },
+      null
+    ),
     categories[]->{ _id, title, slug },
   }
 `;
@@ -68,11 +76,18 @@ export const POSTS_BY_BLOG_CATEGORY_QUERY_AZ = groq`
     title,
     slug,
     excerpt,
-    author->{
-      name,
-      title,
-      image{ asset->{ _id, url } }
-    },
+    "author": select(
+      defined(author) => *[
+        _type == "author" &&
+        slug.current == author->slug.current &&
+        (language == $lang || (!defined(language) && $lang == $fallbackLang))
+      ] | order((language == $lang) desc, _updatedAt desc)[0]{
+        name,
+        title,
+        image{ asset->{ _id, url } }
+      },
+      null
+    ),
     categories[]->{ _id, title, slug },
   }
 `;
@@ -88,11 +103,18 @@ export const POSTS_BY_BLOG_CATEGORY_QUERY_ZA = groq`
     title,
     slug,
     excerpt,
-    author->{
-      name,
-      title,
-      image{ asset->{ _id, url } }
-    },
+    "author": select(
+      defined(author) => *[
+        _type == "author" &&
+        slug.current == author->slug.current &&
+        (language == $lang || (!defined(language) && $lang == $fallbackLang))
+      ] | order((language == $lang) desc, _updatedAt desc)[0]{
+        name,
+        title,
+        image{ asset->{ _id, url } }
+      },
+      null
+    ),
     categories[]->{ _id, title, slug },
   }
 `;
