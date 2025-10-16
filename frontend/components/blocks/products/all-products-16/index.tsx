@@ -31,6 +31,7 @@ export default async function AllProducts16({
   searchParams?: {
     page?: string;
     category?: string;
+    sort?: "newest" | "az" | "za";
   };
   locale?: SupportedLocale;
 }) {
@@ -39,6 +40,7 @@ export default async function AllProducts16({
   const params = searchParams;
   const currentPage = params?.page ? Math.max(1, parseInt(params.page)) : 1;
   const activeCategory = params?.category || undefined;
+  const sort = (params?.sort as "newest" | "az" | "za") || "newest";
 
   const [products, total] = await Promise.all(
     activeCategory
@@ -47,6 +49,7 @@ export default async function AllProducts16({
             slug: activeCategory,
             page: currentPage,
             limit: PAGE_SIZE,
+            sort,
             lang: locale,
           }),
           fetchSanityProductsCountByCategory({
@@ -77,13 +80,67 @@ export default async function AllProducts16({
   const baseUrl = buildLocalizedPath(locale, "/products");
   const baseSearchParams = new URLSearchParams();
   if (activeCategory) baseSearchParams.set("category", activeCategory);
+  if (activeCategory && sort) baseSearchParams.set("sort", sort);
 
   const items: ProductsTableItem[] = (products || []).map((p) =>
     mapProductToProductsTableItem(p, locale)
   );
 
+  const catTitle = activeCategory
+    ? (categoryDoc && (categoryDoc as any).title) || ""
+    : "";
+  const catDescription = activeCategory
+    ? (categoryDoc && (categoryDoc as any).description) || ""
+    : "";
+
   return (
     <SectionContainer padding={padding}>
+      {activeCategory && (
+        <div className="mb-6 mt-2 grid gap-3 md:grid-cols-[1fr_auto] md:items-end md:gap-4">
+          <div className="min-w-0">
+            <h2 className="text-2xl font-serif font-semibold leading-tight md:text-4xl">
+              {catTitle || dictionary.products.categoryPage.breadcrumbCategory}
+            </h2>
+            {catDescription && (
+              <p className="mt-3 max-w-3xl text-muted-foreground">
+                {catDescription as any}
+              </p>
+            )}
+          </div>
+          <div className="md:justify-end md:ml-0 ml-auto flex flex-wrap items-center gap-2 text-sm">
+            <span className="text-muted-foreground">
+              {dictionary.products.categoryPage.labelSort}
+            </span>
+            <Link
+              href={`${baseUrl}?category=${activeCategory}&sort=newest`}
+              aria-pressed={sort === "newest"}
+              className={`inline-flex items-center rounded-md border px-2.5 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                sort === "newest" ? "bg-muted" : "hover:bg-muted"
+              }`}
+            >
+              {dictionary.products.categoryPage.sortNewest}
+            </Link>
+            <Link
+              href={`${baseUrl}?category=${activeCategory}&sort=az`}
+              aria-pressed={sort === "az"}
+              className={`inline-flex items-center rounded-md border px-2.5 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                sort === "az" ? "bg-muted" : "hover:bg-muted"
+              }`}
+            >
+              {dictionary.products.categoryPage.sortAZ}
+            </Link>
+            <Link
+              href={`${baseUrl}?category=${activeCategory}&sort=za`}
+              aria-pressed={sort === "za"}
+              className={`inline-flex items-center rounded-md border px-2.5 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                sort === "za" ? "bg-muted" : "hover:bg-muted"
+              }`}
+            >
+              {dictionary.products.categoryPage.sortZA}
+            </Link>
+          </div>
+        </div>
+      )}
       {(() => {
         const sharedProps = {
           labels: {
