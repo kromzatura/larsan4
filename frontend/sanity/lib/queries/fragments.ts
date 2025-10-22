@@ -8,5 +8,5 @@ export const TRANSLATIONS_QUERY_FRAGMENT = groq`
   "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[] {
     "lang": _key,
     "slug": value->slug.current
-  } | filter(defined(slug) && defined(lang))
+  } [defined(slug) && defined(lang)]
 `;
