@@ -14,6 +14,7 @@ type SanitySlugData = {
   slug: string;
   lastModified: string;
   language?: string | null;
+  allTranslations?: Array<{ lang: string; slug: string }> | null;
 };
 
 type SitemapEntry = MetadataRoute.Sitemap[number];
@@ -24,7 +25,11 @@ async function getPageSlugs(): Promise<SanitySlugData[]> {
     query: groq`*[_type == 'page' && defined(slug.current) && coalesce(meta.noindex, false) == false]{
       "slug": slug.current,
       "lastModified": _updatedAt,
-      language
+      language,
+      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[]{
+        "lang": _key,
+        "slug": value->slug.current
+      } | filter(defined(slug) && defined(lang))
     }`,
     perspective: "published",
     stega: false,
@@ -37,7 +42,11 @@ async function getPostSlugs(): Promise<SanitySlugData[]> {
     query: groq`*[_type == 'post' && defined(slug.current) && coalesce(meta.noindex, false) == false]{
       "slug": slug.current,
       "lastModified": _updatedAt,
-      language
+      language,
+      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[]{
+        "lang": _key,
+        "slug": value->slug.current
+      } | filter(defined(slug) && defined(lang))
     }`,
     perspective: "published",
     stega: false,
@@ -50,7 +59,11 @@ async function getProductSlugs(): Promise<SanitySlugData[]> {
     query: groq`*[_type == 'product' && defined(slug.current) && coalesce(meta.noindex, false) == false]{
       "slug": slug.current,
       "lastModified": _updatedAt,
-      language
+      language,
+      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[]{
+        "lang": _key,
+        "slug": value->slug.current
+      } | filter(defined(slug) && defined(lang))
     }`,
     perspective: "published",
     stega: false,
@@ -63,7 +76,11 @@ async function getProductCategorySlugs(): Promise<SanitySlugData[]> {
     query: groq`*[_type == 'productCategory' && defined(slug.current) && coalesce(meta.noindex, false) == false]{
       "slug": slug.current,
       "lastModified": _updatedAt,
-      language
+      language,
+      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[]{
+        "lang": _key,
+        "slug": value->slug.current
+      } | filter(defined(slug) && defined(lang))
     }`,
     perspective: "published",
     stega: false,
@@ -76,7 +93,11 @@ async function getBlogCategorySlugs(): Promise<SanitySlugData[]> {
     query: groq`*[_type == 'category' && defined(slug.current) && coalesce(seo.noindex, false) == false]{
       "slug": slug.current,
       "lastModified": _updatedAt,
-      language
+      language,
+      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[]{
+        "lang": _key,
+        "slug": value->slug.current
+      } | filter(defined(slug) && defined(lang))
     }`,
     perspective: "published",
     stega: false,
@@ -96,11 +117,28 @@ function docsToEntries(
       ? (doc.language as SupportedLocale)
       : DEFAULT_LOCALE;
 
+    // Build alternates from translations for sitemap parity with on-page hreflang
+    const languages: Record<string, string> = {};
+    const translations = Array.isArray(doc.allTranslations)
+      ? doc.allTranslations
+      : [];
+    for (const t of translations) {
+      if (!isSupportedLocale(t.lang as SupportedLocale)) continue;
+      const path = buildPath(t.slug === "index" ? "" : t.slug);
+      languages[t.lang] = `${baseUrl}${buildLocalizedPath(
+        t.lang as SupportedLocale,
+        path
+      )}`;
+    }
+
     return {
       url: `${baseUrl}${buildLocalizedPath(locale, buildPath(doc.slug))}`,
       lastModified: doc.lastModified,
       changeFrequency,
       priority,
+      alternates: Object.keys(languages).length
+        ? { languages }
+        : undefined,
     };
   });
 }

@@ -7,6 +7,7 @@ import {
   fetchSanityPostsCountByBlogCategory,
 } from "@/sanity/lib/fetch";
 import { chipClass } from "@/components/ui/chip";
+import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
 import type { AsyncPageProps, SearchParams } from "@/lib/types/next";
 import { toText } from "@/lib/utils";
@@ -44,15 +45,14 @@ export async function generateMetadata(
     lang: locale,
   });
   if (!cat) notFound();
-  const metaTitle = toText(cat.title) || undefined;
-  const metaDescription = toText(cat.description) || undefined;
+  // Build base metadata (canonical + alternates) using centralized helper with translations
+  const base = generatePageMetadata({
+    page: cat as any,
+    slug: `blog/category/${params.slug}`,
+    type: "page",
+    locale,
+  }) as MetadataWithAlternates;
   const basePath = buildLocalizedPath(locale, `/blog/category/${params.slug}`);
-  // Category documents are not full page documents; cast for metadata helper which accepts broader page-like shapes.
-  const base: MetadataWithAlternates = {
-    title: metaTitle,
-    description: metaDescription,
-    alternates: { canonical: basePath },
-  };
   const withFeeds: MetadataWithAlternates = {
     ...base,
     alternates: {
