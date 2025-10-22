@@ -136,9 +136,7 @@ function docsToEntries(
       lastModified: doc.lastModified,
       changeFrequency,
       priority,
-      alternates: Object.keys(languages).length
-        ? { languages }
-        : undefined,
+      alternates: Object.keys(languages).length ? { languages } : undefined,
     };
   });
 }

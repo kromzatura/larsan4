@@ -49,7 +49,8 @@ type PageWithTranslations = (
   | CONTACT_QUERYResult
   | PRODUCT_QUERYResult
   | ProductCategory
-) & WithMetaAndTranslations;
+) &
+  WithMetaAndTranslations;
 // --- END ---
 
 export function generatePageMetadata({
