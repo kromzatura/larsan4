@@ -23,6 +23,17 @@ interface MetadataWithAlternates {
   [key: string]: unknown;
 }
 
+// Narrow structural type to satisfy generatePageMetadata without using `any`
+type CategoryForMeta = {
+  meta?: {
+    title?: unknown;
+    description?: unknown;
+    noindex?: boolean | null;
+    image?: unknown;
+  } | null;
+  allTranslations?: Array<{ lang: string; slug: string }>;
+};
+
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
@@ -47,7 +58,7 @@ export async function generateMetadata(
   if (!cat) notFound();
   // Build base metadata (canonical + alternates) using centralized helper with translations
   const base = generatePageMetadata({
-    page: cat as any,
+    page: cat as unknown as CategoryForMeta,
     slug: `blog/category/${params.slug}`,
     type: "page",
     locale,

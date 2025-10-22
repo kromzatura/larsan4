@@ -26,10 +26,10 @@ async function getPageSlugs(): Promise<SanitySlugData[]> {
       "slug": slug.current,
       "lastModified": _updatedAt,
       language,
-      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[]{
+      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[defined(value->slug.current) && defined(_key)]{
         "lang": _key,
         "slug": value->slug.current
-      } | filter(defined(slug) && defined(lang))
+      }
     }`,
     perspective: "published",
     stega: false,
@@ -43,10 +43,10 @@ async function getPostSlugs(): Promise<SanitySlugData[]> {
       "slug": slug.current,
       "lastModified": _updatedAt,
       language,
-      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[]{
+      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[defined(value->slug.current) && defined(_key)]{
         "lang": _key,
         "slug": value->slug.current
-      } | filter(defined(slug) && defined(lang))
+      }
     }`,
     perspective: "published",
     stega: false,
@@ -60,10 +60,10 @@ async function getProductSlugs(): Promise<SanitySlugData[]> {
       "slug": slug.current,
       "lastModified": _updatedAt,
       language,
-      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[]{
+      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[defined(value->slug.current) && defined(_key)]{
         "lang": _key,
         "slug": value->slug.current
-      } | filter(defined(slug) && defined(lang))
+      }
     }`,
     perspective: "published",
     stega: false,
@@ -77,10 +77,10 @@ async function getProductCategorySlugs(): Promise<SanitySlugData[]> {
       "slug": slug.current,
       "lastModified": _updatedAt,
       language,
-      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[]{
+      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[defined(value->slug.current) && defined(_key)]{
         "lang": _key,
         "slug": value->slug.current
-      } | filter(defined(slug) && defined(lang))
+      }
     }`,
     perspective: "published",
     stega: false,
@@ -94,10 +94,10 @@ async function getBlogCategorySlugs(): Promise<SanitySlugData[]> {
       "slug": slug.current,
       "lastModified": _updatedAt,
       language,
-      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[]{
+      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[defined(value->slug.current) && defined(_key)]{
         "lang": _key,
         "slug": value->slug.current
-      } | filter(defined(slug) && defined(lang))
+      }
     }`,
     perspective: "published",
     stega: false,

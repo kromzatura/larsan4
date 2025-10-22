@@ -43,14 +43,9 @@ type WithMetaAndTranslations = {
   allTranslations?: Translation[];
 };
 
-type PageWithTranslations = (
-  | PAGE_QUERYResult
-  | POST_QUERYResult
-  | CONTACT_QUERYResult
-  | PRODUCT_QUERYResult
-  | ProductCategory
-) &
-  WithMetaAndTranslations;
+// Accept any document shape that includes meta and translations. The caller
+// provides the specific content type via the `type` argument.
+type PageWithTranslations = WithMetaAndTranslations;
 // --- END ---
 
 export function generatePageMetadata({
@@ -59,13 +54,18 @@ export function generatePageMetadata({
   type,
   locale,
 }: {
-  page: PageWithTranslations;
+  page: PageWithTranslations | null;
   slug: string;
   type: "post" | "page" | "product" | "productCategory";
   locale: SupportedLocale;
 }): Metadata {
   const meta = page?.meta;
-  const imgAsset = meta?.image?.asset as SanityImageAsset | undefined;
+  // Type guard and helper types for Sanity image handling
+  type SanityImageLike = { asset: SanityImageAsset } & Record<string, unknown>;
+  const hasAsset = (v: unknown): v is SanityImageLike =>
+    !!v && typeof v === "object" && "asset" in v;
+
+  const imgAsset = hasAsset(meta?.image) ? meta!.image.asset : undefined;
 
   const robotsValue = (() => {
     if (!isProduction) return { index: false, follow: false } as const;
@@ -124,9 +124,10 @@ export function generatePageMetadata({
       url: canonicalUrl,
       images: [
         {
-          url: meta?.image
-            ? urlFor(meta.image).quality(100).url()
-            : getOgImageUrl({ type, slug }),
+          url:
+            meta?.image && hasAsset(meta.image)
+              ? urlFor(meta.image as SanityImageLike).quality(100).url()
+              : getOgImageUrl({ type, slug }),
           width: imgAsset?.metadata?.dimensions?.width ?? 1200,
           height: imgAsset?.metadata?.dimensions?.height ?? 630,
         },
