@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import PostsList, { PostsListItem } from "@/components/posts/posts-list";
+import SectionHeader from "@/components/blocks/section-header";
 import {
   fetchSanityPageBySlug,
   fetchSanityPosts,
@@ -11,6 +12,7 @@ import { chipClass } from "@/components/ui/chip";
 import { buildLocalizedPath, normalizeLocale } from "@/lib/i18n/routing";
 import { toText } from "@/lib/utils";
 import type { LangAsyncPageProps } from "@/lib/types/next";
+import type { PAGE_QUERYResult } from "@/sanity.types";
 
 type BlogSort = "newest" | "az" | "za";
 
@@ -80,6 +82,13 @@ export default async function BlogIndex(props: LangAsyncPageProps) {
     fetchSanityPosts({ page, limit: POSTS_PER_PAGE, sort, lang: locale }),
     fetchSanityPostsCount({ lang: locale }),
   ]);
+  // Fetch the blog page document to render an optional Section Header block
+  const pageDoc = await fetchSanityPageBySlug({ slug: "blog", lang: locale });
+  type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
+  const sectionHeader = (pageDoc?.blocks || []).find(
+    (b): b is Extract<Block, { _type: "section-header" }> =>
+      b?._type === "section-header"
+  );
   const totalPages = Math.max(1, Math.ceil((totalCount || 0) / POSTS_PER_PAGE));
   if (page > totalPages) notFound();
 
@@ -129,7 +138,11 @@ export default async function BlogIndex(props: LangAsyncPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
-      <h1 className="text-3xl font-serif font-semibold md:text-5xl">Blog</h1>
+      {sectionHeader ? (
+        <SectionHeader {...sectionHeader} locale={locale} />
+      ) : (
+        <h1 className="text-3xl font-serif font-semibold md:text-5xl">Blog</h1>
+      )}
       <div className="mt-5 flex flex-wrap gap-2">
         <Link
           href={`${basePath}/rss.xml`}
