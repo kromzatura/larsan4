@@ -2,11 +2,12 @@ import { groq } from "next-sanity";
 import { imageQuery } from "./shared/image";
 import { bodyQuery } from "./shared/body";
 import { metaQuery } from "./shared/meta";
+import { TRANSLATIONS_QUERY_FRAGMENT } from "../lib/queries/fragments";
 
 const productCategoryFilter = `
   _type == "productCategory" &&
   slug.current == $slug &&
-  (!defined(language) || language in [$lang, $fallbackLang])
+  language == $lang
 `;
 
 // @sanity-typegen-ignore
@@ -83,10 +84,12 @@ export const PRODUCT_QUERY = groq`
   *[
     _type == "product" &&
     slug.current == $slug &&
-    (!defined(language) || language in [$lang, $fallbackLang])
+    language == $lang
   ]
-  | order((language == $lang) desc, _updatedAt desc)[0]{
+  | order(_updatedAt desc)[0]{
     ${productProjection}
+    ,
+    ${TRANSLATIONS_QUERY_FRAGMENT}
   }
 `;
 
@@ -94,7 +97,7 @@ export const PRODUCTS_QUERY = groq`
   *[
     _type == "product" &&
     defined(slug) &&
-    (!defined(language) || language in [$lang, $fallbackLang])
+    language == $lang
   ]
   | order((language == $lang) desc, orderRank)[$offset...$end]{
     ${productListProjection}
@@ -105,7 +108,7 @@ export const PRODUCTS_SLUGS_QUERY = groq`
   *[
     _type == "product" &&
     defined(slug) &&
-    (!defined(language) || language in [$lang, $fallbackLang])
+    language == $lang
   ]{
     slug,
     language,
@@ -116,7 +119,7 @@ export const PRODUCTS_COUNT_QUERY = groq`
   count(*[
     _type == "product" &&
     defined(slug) &&
-    (!defined(language) || language in [$lang, $fallbackLang])
+    language == $lang
   ])
 `;
 
@@ -138,23 +141,24 @@ export const PRODUCT_CATEGORY_BY_SLUG_QUERY = groq`
   *[
     _type == "productCategory" &&
     slug.current == $slug &&
-    (!defined(language) || language in [$lang, $fallbackLang])
+    language == $lang
   ]
-  | order((language == $lang) desc, _updatedAt desc)[0]{
+  | order(_updatedAt desc)[0]{
     _id,
     _type,
     language,
     title,
     slug,
     description,
-    ${metaQuery}
+    ${metaQuery},
+    ${TRANSLATIONS_QUERY_FRAGMENT}
   }
 `;
 
 const productsByCategoryFilter = groq`
   _type == "product" &&
   defined(slug) &&
-  (!defined(language) || language in [$lang, $fallbackLang]) &&
+  language == $lang &&
   references(*[${productCategoryFilter}]._id)
 `;
 

@@ -1,6 +1,7 @@
 import { groq } from "next-sanity";
 import { metaQuery } from "./shared/meta";
 import { sectionHeaderQuery } from "./section-header";
+import { TRANSLATIONS_QUERY_FRAGMENT } from "../lib/queries/fragments";
 import { hero12Query } from "./hero/hero12";
 import { hero13Query } from "./hero/hero13";
 import { hero25Query } from "./hero/hero25";
@@ -74,11 +75,11 @@ export const PAGE_QUERY = groq`
   *[
     _type == "page" &&
     slug.current == $slug &&
-    (!defined(language) || language in [$lang, $fallbackLang]) &&
+    language == $lang &&
     defined(blocks[]) &&
     defined(title)
   ]
-  | order((language == $lang) desc, _updatedAt desc)[0]{
+  | order(_updatedAt desc)[0]{
     _id,
     _type,
     language,
@@ -155,6 +156,7 @@ export const PAGE_QUERY = groq`
       ${allProducts16Query},
     },
     ${metaQuery},
+    ${TRANSLATIONS_QUERY_FRAGMENT},
   }
 `;
 
@@ -162,7 +164,7 @@ export const PAGES_SLUGS_QUERY = groq`
   *[
     _type == "page" &&
     defined(slug) &&
-    (!defined(language) || language in [$lang, $fallbackLang])
+    language == $lang
   ]{
     slug,
     language,

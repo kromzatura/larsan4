@@ -1,10 +1,11 @@
 import { groq } from "next-sanity";
+import { TRANSLATIONS_QUERY_FRAGMENT } from "../lib/queries/fragments";
 
 export const BLOG_CATEGORIES_QUERY = groq`
   *[
     _type == "category" &&
     defined(slug) &&
-    (language == $lang || (!defined(language) && $lang == $fallbackLang))
+    language == $lang
   ] | order(orderRank){
     _id,
     title,
@@ -17,9 +18,9 @@ export const BLOG_CATEGORY_BY_SLUG_QUERY = groq`
   *[
     _type == "category" &&
     slug.current == $slug &&
-    (language == $lang || (!defined(language) && $lang == $fallbackLang))
+    language == $lang
   ]
-  | order((language == $lang) desc, _updatedAt desc)[0]{
+  | order(_updatedAt desc)[0]{
     _id,
     _type,
     title,
@@ -31,11 +32,12 @@ export const BLOG_CATEGORY_BY_SLUG_QUERY = groq`
       "description": seo.metaDescription,
       "noindex": coalesce(seo.noindex, false),
       "image": seo.image{ asset->{ _id, url, mimeType, metadata{ lqip, dimensions{ width, height } } } }
-    }
+    },
+    ${TRANSLATIONS_QUERY_FRAGMENT}
   }
 `;
 
-const postsByCategoryFilter = `_type == "post" && references(*[_type == "category" && slug.current == $slug]._id) && (language == $lang || (!defined(language) && $lang == $fallbackLang))`;
+const postsByCategoryFilter = `_type == "post" && references(*[_type == "category" && slug.current == $slug]._id) && language == $lang`;
 
 export const POSTS_BY_BLOG_CATEGORY_QUERY_NEWEST = groq`
   *[

@@ -20,7 +20,7 @@ import type {
 } from "@/lib/types/content";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
-import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { SUPPORTED_LOCALES } from "@/lib/i18n/config";
 import type { AsyncPageProps } from "@/lib/types/next";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { buildAbsoluteUrl } from "@/lib/url";
@@ -67,10 +67,18 @@ function SpecTable({
 }
 
 export async function generateStaticParams() {
-  const slugs = await fetchSanityProductSlugs({ lang: FALLBACK_LOCALE });
-  return slugs
-    .filter((s) => s.slug?.current)
-    .map((s) => ({ slug: s.slug!.current! }));
+  const params: { lang: string; slug: string }[] = [];
+
+  for (const locale of SUPPORTED_LOCALES) {
+    const slugs = await fetchSanityProductSlugs({ lang: locale });
+    for (const s of slugs) {
+      if (s.slug?.current) {
+        params.push({ slug: s.slug.current, lang: locale });
+      }
+    }
+  }
+
+  return params;
 }
 
 export async function generateMetadata(
