@@ -17,6 +17,8 @@ import type { AsyncPageProps } from "@/lib/types/next";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { mapProductToProductsTableItem } from "@/sanity/lib/mappers";
 import { toText } from "@/lib/utils";
+import { PageTranslationProvider } from "@/components/providers/page-translation-provider";
+import { DOC_TYPES } from "@/lib/docTypes";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -124,10 +126,19 @@ export default async function CategoryPage(
     },
   ];
 
+  // Filter out any translations with null slugs for type safety
+  const translations = cat.allTranslations?.filter(
+    (t): t is { lang: string; slug: string } => !!t?.slug
+  );
+
   return (
-    <section className="container py-16 xl:py-20">
-      <Breadcrumbs links={links} locale={locale} />
-      <div className="mt-7 grid gap-3 md:grid-cols-[1fr_auto] md:items-end md:gap-4">
+    <PageTranslationProvider
+      allTranslations={translations}
+      docType={DOC_TYPES.PRODUCT_CATEGORY}
+    >
+      <section className="container py-16 xl:py-20">
+        <Breadcrumbs links={links} locale={locale} />
+        <div className="mt-7 grid gap-3 md:grid-cols-[1fr_auto] md:items-end md:gap-4">
         <div className="min-w-0">
           <h1 className="text-3xl font-serif font-semibold leading-tight md:text-5xl">
             {catTitle}
@@ -220,5 +231,6 @@ export default async function CategoryPage(
         })()}
       </div>
     </section>
+    </PageTranslationProvider>
   );
 }

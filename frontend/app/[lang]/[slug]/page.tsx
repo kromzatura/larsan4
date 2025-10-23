@@ -9,6 +9,8 @@ import { normalizeLocale, isSupportedLocale } from "@/lib/i18n/routing";
 import { FALLBACK_LOCALE, SUPPORTED_LOCALES } from "@/lib/i18n/config";
 import type { AsyncPageProps, SearchParams } from "@/lib/types/next";
 import type { PAGE_QUERYResult } from "@/sanity.types";
+import { PageTranslationProvider } from "@/components/providers/page-translation-provider";
+import { DOC_TYPES } from "@/lib/docTypes";
 
 // Strong local type: ensure title and blocks are present for typed rendering
 type PageBlocks = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>;
@@ -73,30 +75,40 @@ export default async function Page(
     notFound();
   }
 
+  // Filter out any translations with null slugs for type safety
+  const translations = page.allTranslations?.filter(
+    (t): t is { lang: string; slug: string } => !!t?.slug
+  );
+
   // Comparison datasheet enhancement: wrap entire page content if slug indicates comparison page
   const isComparisonPage = /compare|comparison|mustard/i.test(params.slug);
   return (
-    <div className={isComparisonPage ? "container py-12" : undefined}>
-      {isComparisonPage ? (
-        <div className="mx-auto rounded-lg border bg-card p-8 md:p-10 shadow-sm">
+    <PageTranslationProvider
+      allTranslations={translations}
+      docType={DOC_TYPES.PAGE}
+    >
+      <div className={isComparisonPage ? "container py-12" : undefined}>
+        {isComparisonPage ? (
+          <div className="mx-auto rounded-lg border bg-card p-8 md:p-10 shadow-sm">
+            <Blocks
+              blocks={page.blocks}
+              searchParams={
+                ((await props.searchParams) as { page?: string } | undefined) ||
+                {}
+              }
+              locale={locale}
+            />
+          </div>
+        ) : (
           <Blocks
             blocks={page.blocks}
             searchParams={
-              ((await props.searchParams) as { page?: string } | undefined) ||
-              {}
+              ((await props.searchParams) as { page?: string } | undefined) || {}
             }
             locale={locale}
           />
-        </div>
-      ) : (
-        <Blocks
-          blocks={page.blocks}
-          searchParams={
-            ((await props.searchParams) as { page?: string } | undefined) || {}
-          }
-          locale={locale}
-        />
-      )}
-    </div>
+        )}
+      </div>
+    </PageTranslationProvider>
   );
 }

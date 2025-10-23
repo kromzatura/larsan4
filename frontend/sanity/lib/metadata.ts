@@ -32,6 +32,11 @@ type SanityImageAsset = NonNullable<
 // --- NEW TYPE HELPERS ---
 type Translation = {
   lang: string;
+  slug: string | null;
+};
+
+type ValidTranslation = {
+  lang: string;
   slug: string;
 };
 
@@ -42,7 +47,7 @@ type WithMetaAndTranslations = {
     noindex?: boolean | null;
     image?: unknown;
   } | null;
-  allTranslations?: Translation[];
+  allTranslations?: Translation[] | null;
 };
 
 // Accept any document shape that includes meta and translations. The caller
@@ -87,8 +92,9 @@ export function generatePageMetadata({
   const canonicalUrl = buildCanonicalUrl(locale, canonicalPath);
 
   // Build alternates from actual translations to avoid slug mismatches
+  // Filter out any translations with null slugs
   const allTranslations = (page?.allTranslations ?? []).filter(
-    (t): t is Translation => !!t?.lang && !!t?.slug
+    (t): t is ValidTranslation => !!t?.lang && !!t?.slug
   );
   const languageAlternates: Record<string, string> = {};
   const ogAlternateLocales: string[] = [];

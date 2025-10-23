@@ -44,7 +44,10 @@ import {
   PRODUCTS_QUERYResult as PRODUCTS_LIST_QUERYResult,
   PRODUCTS_SLUGS_QUERYResult,
   PRODUCT_CATEGORIES_QUERYResult,
+  PRODUCT_CATEGORY_BY_SLUG_QUERYResult,
   ProductCategory,
+  // Blog
+  BLOG_CATEGORY_BY_SLUG_QUERYResult,
 } from "@/sanity.types";
 import {
   BLOG_CATEGORIES_QUERY,
@@ -307,7 +310,7 @@ export const fetchSanityProductCategoryBySlug = async ({
 }: {
   slug: string;
   lang?: SupportedLocale;
-}): Promise<ProductCategoryWithMeta> => {
+}): Promise<PRODUCT_CATEGORY_BY_SLUG_QUERYResult> => {
   const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
   const { data } = await sanityFetch({
     query: PRODUCT_CATEGORY_BY_SLUG_QUERY,
@@ -315,7 +318,7 @@ export const fetchSanityProductCategoryBySlug = async ({
     perspective: "published",
     stega: false,
   });
-  return data as ProductCategoryWithMeta;
+  return data;
 };
 
 export const fetchSanityProductsCount = async ({
@@ -411,7 +414,7 @@ export const fetchSanityBlogCategoryBySlug = async ({
 }: {
   slug: string;
   lang?: SupportedLocale;
-}) => {
+}): Promise<BLOG_CATEGORY_BY_SLUG_QUERYResult> => {
   const { lang: queryLang, fallbackLang } = resolveLocaleParams(lang);
   const { data } = await sanityFetch({
     query: BLOG_CATEGORY_BY_SLUG_QUERY,
@@ -419,13 +422,7 @@ export const fetchSanityBlogCategoryBySlug = async ({
     perspective: "published",
     stega: false,
   });
-  return data as {
-    _id: string;
-    title?: string | null;
-    slug?: { current?: string } | null;
-    description?: string | null;
-    language?: string | null;
-  } | null;
+  return data;
 };
 
 export const fetchSanityPostsByBlogCategory = async ({

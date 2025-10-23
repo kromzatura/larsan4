@@ -26,6 +26,8 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { buildAbsoluteUrl } from "@/lib/url";
 import { fetchSanitySettings } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
+import { PageTranslationProvider } from "@/components/providers/page-translation-provider";
+import { DOC_TYPES } from "@/lib/docTypes";
 
 type SpecPair = { label: string; value?: string | number | null };
 
@@ -218,14 +220,23 @@ export default async function ProductPage(
       : undefined,
   };
 
+  // Filter out any translations with null slugs for type safety
+  const translations = product.allTranslations?.filter(
+    (t): t is { lang: string; slug: string } => !!t?.slug
+  );
+
   return (
-    <section className="container py-16 xl:py-20">
-      <article>
-        <script
-          type="application/ld+json"
-          // JSON-LD improves SEO. Keep minimal fields since pricing/availability are not part of this B2B flow.
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+    <PageTranslationProvider
+      allTranslations={translations}
+      docType={DOC_TYPES.PRODUCT}
+    >
+      <section className="container py-16 xl:py-20">
+        <article>
+          <script
+            type="application/ld+json"
+            // JSON-LD improves SEO. Keep minimal fields since pricing/availability are not part of this B2B flow.
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
         <Breadcrumbs links={links} locale={locale} />
 
         {product.title && (
@@ -464,5 +475,6 @@ export default async function ProductPage(
         </div>
       </article>
     </section>
+    </PageTranslationProvider>
   );
 }

@@ -17,6 +17,8 @@ import { SUPPORTED_LOCALES } from "@/lib/i18n/config";
 import type { AsyncPageProps } from "@/lib/types/next";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { buildAbsoluteUrl } from "@/lib/url";
+import { PageTranslationProvider } from "@/components/providers/page-translation-provider";
+import { DOC_TYPES } from "@/lib/docTypes";
 
 type BreadcrumbLink = {
   label: string;
@@ -175,17 +177,26 @@ export default async function PostPage(
     ],
   } as const;
 
+  // Filter out any translations with null slugs for type safety
+  const translations = post.allTranslations?.filter(
+    (t): t is { lang: string; slug: string } => !!t?.slug
+  );
+
   return (
-    <section className="container py-16 xl:py-20">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
-      <article>
+    <PageTranslationProvider
+      allTranslations={translations}
+      docType={DOC_TYPES.POST}
+    >
+      <section className="container py-16 xl:py-20">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+        />
+        <article>
         <Breadcrumbs links={links} locale={locale} />
 
         {post.title && (
@@ -294,5 +305,6 @@ export default async function PostPage(
         )}
       </article>
     </section>
+    </PageTranslationProvider>
   );
 }

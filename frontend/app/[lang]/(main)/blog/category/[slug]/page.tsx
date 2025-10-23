@@ -11,6 +11,8 @@ import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
 import type { AsyncPageProps, SearchParams } from "@/lib/types/next";
 import { toText } from "@/lib/utils";
+import { PageTranslationProvider } from "@/components/providers/page-translation-provider";
+import { DOC_TYPES } from "@/lib/docTypes";
 
 type BlogSort = "newest" | "az" | "za";
 interface BlogCategorySearchParams {
@@ -160,17 +162,26 @@ export default async function BlogCategoryPage(
     ],
   } as const;
 
+  // Filter out any translations with null slugs for type safety
+  const translations = cat.allTranslations?.filter(
+    (t): t is { lang: string; slug: string } => !!t?.slug
+  );
+
   return (
-    <section className="container py-16 xl:py-20">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
-      <h1 className="text-3xl font-serif font-semibold md:text-5xl">
-        {catTitle}
-      </h1>
-      {catDescription && (
-        <p className="mt-3 max-w-3xl text-muted-foreground">{catDescription}</p>
+    <PageTranslationProvider
+      allTranslations={translations}
+      docType={DOC_TYPES.CATEGORY}
+    >
+      <section className="container py-16 xl:py-20">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+        />
+        <h1 className="text-3xl font-serif font-semibold md:text-5xl">
+          {catTitle}
+        </h1>
+        {catDescription && (
+          <p className="mt-3 max-w-3xl text-muted-foreground">{catDescription}</p>
       )}
       <div className="mt-5 flex flex-wrap gap-2">
         <Link
@@ -239,5 +250,6 @@ export default async function BlogCategoryPage(
         )}
       </div>
     </section>
+    </PageTranslationProvider>
   );
 }

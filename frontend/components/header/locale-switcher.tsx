@@ -14,6 +14,8 @@ import {
   type SupportedLocale,
 } from "@/lib/i18n/config";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "@/lib/contexts/translation-context";
+import { resolveHref } from "@/lib/resolveHref";
 
 type Props = {
   locale: SupportedLocale;
@@ -29,6 +31,7 @@ export default function LocaleSwitcher({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { allTranslations, currentDocType } = useTranslations();
 
   const queryString = useMemo(() => {
     if (!searchParams) return "";
@@ -43,14 +46,38 @@ export default function LocaleSwitcher({
 
   const onSelect = useCallback(
     (target: SupportedLocale) => {
+      // Set locale cookie
       try {
         document.cookie = `${LOCALE_COOKIE_NAME}=${target}; path=/; max-age=${LOCALE_COOKIE_MAX_AGE}`;
       } catch {}
+
+      // Translation-aware routing: check if we have translation data
+      if (allTranslations && currentDocType) {
+        const translation = allTranslations.find((t) => t.lang === target);
+
+        if (translation?.slug) {
+          // Use resolveHref to build correct URL with route prefixes
+          const href = resolveHref(currentDocType, translation.slug, target);
+
+          if (href) {
+            router.push(href + queryString);
+            return;
+          }
+        }
+
+        // If target translation not found, go to locale home
+        // This handles cases where content doesn't exist in target language
+        router.push(buildLocalizedPath(target, "/"));
+        return;
+      }
+
+      // Fallback: path-based switching for static routes (home, contact, etc.)
+      // This works fine for routes that don't have locale-specific slugs
       const { path } = stripLocalePrefix(currentPath);
       const href = buildLocalizedPath(target, path) + queryString;
       router.push(href);
     },
-    [currentPath, queryString, router]
+    [currentPath, queryString, router, allTranslations, currentDocType]
   );
 
   if (variant === "menu") {
