@@ -13,7 +13,7 @@ import { Separator } from "@/components/ui/separator";
 import { Clock, Facebook, Twitter, Linkedin } from "lucide-react";
 import { POST_QUERYResult } from "@/sanity.types";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
-import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { SUPPORTED_LOCALES } from "@/lib/i18n/config";
 import type { AsyncPageProps } from "@/lib/types/next";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { buildAbsoluteUrl } from "@/lib/url";
@@ -72,11 +72,18 @@ function extractHeadings(blocks: BlockContent): Heading[] {
 }
 
 export async function generateStaticParams() {
-  const posts = await fetchSanityPostsStaticParams({ lang: FALLBACK_LOCALE });
+  const params: { lang: string; slug: string }[] = [];
 
-  return posts
-    .filter((post) => Boolean(post.slug?.current))
-    .map((post) => ({ slug: post.slug?.current }));
+  for (const locale of SUPPORTED_LOCALES) {
+    const posts = await fetchSanityPostsStaticParams({ lang: locale });
+    for (const post of posts) {
+      if (post.slug?.current) {
+        params.push({ slug: post.slug.current, lang: locale });
+      }
+    }
+  }
+
+  return params;
 }
 
 export async function generateMetadata(
