@@ -46,7 +46,7 @@ export default function LocaleSwitcher({
 
   const currentPath = pathname || "/";
 
-  const onSelect = useCallback(
+  const handleLocaleSwitch = useCallback(
     (target: SupportedLocale) => {
       // Set locale cookie
       try {
@@ -54,7 +54,8 @@ export default function LocaleSwitcher({
       } catch {}
 
       // Translation-aware routing: check if we have translation data
-      if (allTranslations && currentDocType) {
+      // Note: This only works when LocaleSwitcher is rendered inside PageTranslationProvider
+      if (allTranslations && allTranslations.length > 0 && currentDocType) {
         const translation = allTranslations.find((t) => t.lang === target);
 
         if (translation?.slug) {
@@ -68,15 +69,19 @@ export default function LocaleSwitcher({
           }
         }
 
-        // If target translation not found, go to locale home
-        // This handles cases where content doesn't exist in target language
+        // If target translation not found but we have translations array,
+        // it means the content doesn't exist in the target language
+        // Go to locale home as fallback
         router.push(buildLocalizedPath(target, "/"));
         onCloseMenu?.();
         return;
       }
 
-      // Fallback: path-based switching for static routes (home, contact, etc.)
-      // This works fine for routes that don't have locale-specific slugs
+      // Default: Simple path-based switching
+      // Works for:
+      // - Static routes (home, contact, about)
+      // - Product categories (when slugs are identical across languages)
+      // - Any route where LocaleSwitcher is outside PageTranslationProvider
       const { path } = stripLocalePrefix(currentPath);
       const href = buildLocalizedPath(target, path) + queryString;
       router.push(href);
@@ -91,6 +96,8 @@ export default function LocaleSwitcher({
       onCloseMenu,
     ]
   );
+
+  const onSelect = handleLocaleSwitch;
 
   if (variant === "menu") {
     // Simple select for mobile/drawer usage
