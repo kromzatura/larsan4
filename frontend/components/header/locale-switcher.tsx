@@ -89,7 +89,7 @@ export default function LocaleSwitcher({
     // Simple select for mobile/drawer usage
     return (
       <label className={cn("flex items-center gap-2", className)}>
-        <span className="text-sm font-medium">{LOCALE_LABELS[locale]}</span>
+        <span className="text-sm font-medium">Language:</span>
         <select
           className="ml-2 rounded-md border bg-background px-2 py-1 text-sm"
           value={locale}
