@@ -34,9 +34,6 @@ type CategoryForMeta = {
   allTranslations?: Array<{ lang: string; slug: string }>;
 };
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
 const POSTS_PER_PAGE = 6;
 
 export async function generateMetadata(

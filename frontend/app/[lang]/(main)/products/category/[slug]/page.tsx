@@ -18,9 +18,6 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { mapProductToProductsTableItem } from "@/sanity/lib/mappers";
 import { toText } from "@/lib/utils";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
 const PAGE_SIZE = 12;
 
 export async function generateMetadata(
