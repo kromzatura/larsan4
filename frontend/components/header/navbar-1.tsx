@@ -42,7 +42,7 @@ import {
 import { Menu } from "lucide-react";
 import InquiryBadge from "@/components/inquiry/inquiry-badge";
 import LocaleSwitcher from "@/components/header/locale-switcher";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import type { SETTINGS_QUERYResult } from "@/sanity.types";
 
 type NavigationItem = (SanityLink | SanityLinkGroup | SanityLinkIcon) & {
@@ -71,6 +71,13 @@ export default function Navbar1({
   actionItems,
 }: Navbar1Props) {
   // All data is provided by the server shell for performance and correctness
+  
+  // State for controlling mobile menu
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
 
   const renderMenuItem = (item: NavigationItem) => {
     if (isLinkGroup(item)) {
@@ -120,7 +127,11 @@ export default function Navbar1({
             <div className="flex flex-col gap-4">
               {item.links?.map((subItem) => (
                 <DialogClose asChild key={subItem._key}>
-                  <SubMenuLink item={subItem} locale={locale} />
+                  <SubMenuLink
+                    item={subItem}
+                    locale={locale}
+                    onLinkClick={closeMobileMenu}
+                  />
                 </DialogClose>
               ))}
             </div>
@@ -130,18 +141,20 @@ export default function Navbar1({
     }
 
     return (
-      <Link
-        key={item._key}
-        href={resolveLinkHref(item, locale) || "#"}
-        target={item.target ? "_blank" : undefined}
-        className={cn(
-          item.buttonVariant === "ghost"
-            ? "text-md font-semibold hover:text-accent-foreground"
-            : buttonVariants({ variant: item.buttonVariant, size: "default" })
-        )}
-      >
-        {item.title}
-      </Link>
+      <DialogClose asChild key={item._key}>
+        <Link
+          href={resolveLinkHref(item, locale) || "#"}
+          target={item.target ? "_blank" : undefined}
+          onClick={closeMobileMenu}
+          className={cn(
+            item.buttonVariant === "ghost"
+              ? "text-md font-semibold hover:text-accent-foreground"
+              : buttonVariants({ variant: item.buttonVariant, size: "default" })
+          )}
+        >
+          {item.title}
+        </Link>
+      </DialogClose>
     );
   };
 
@@ -241,7 +254,7 @@ export default function Navbar1({
                 />
               ) : null}
             </Link>
-            <Sheet>
+            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon">
                   <Menu className="size-4" />
@@ -250,35 +263,37 @@ export default function Navbar1({
               <SheetContent className="overflow-y-auto">
                 <SheetHeader>
                   <SheetTitle>
-                    <Link
-                      href={buildLocalizedPath(locale, "/")}
-                      className="flex items-center gap-2"
-                    >
-                      {settings?.logo ? (
-                        <Image
-                          src={urlFor(settings.logo).url()}
-                          alt={settings.logo.alt ?? ""}
-                          width={
-                            (settings.logo.width as number) ??
-                            settings.logo?.asset?.metadata?.dimensions?.width
-                          }
-                          height={
-                            (settings.logo.height as number) ??
-                            settings.logo?.asset?.metadata?.dimensions?.height
-                          }
-                          title={settings.siteName || ""}
-                          placeholder={
-                            settings.logo.asset?.metadata?.lqip
-                              ? "blur"
-                              : undefined
-                          }
-                          blurDataURL={
-                            settings.logo.asset?.metadata?.lqip || undefined
-                          }
-                          quality={100}
-                        />
-                      ) : null}
-                    </Link>
+                    <DialogClose asChild>
+                      <Link
+                        href={buildLocalizedPath(locale, "/")}
+                        className="flex items-center gap-2"
+                      >
+                        {settings?.logo ? (
+                          <Image
+                            src={urlFor(settings.logo).url()}
+                            alt={settings.logo.alt ?? ""}
+                            width={
+                              (settings.logo.width as number) ??
+                              settings.logo?.asset?.metadata?.dimensions?.width
+                            }
+                            height={
+                              (settings.logo.height as number) ??
+                              settings.logo?.asset?.metadata?.dimensions?.height
+                            }
+                            title={settings.siteName || ""}
+                            placeholder={
+                              settings.logo.asset?.metadata?.lqip
+                                ? "blur"
+                                : undefined
+                            }
+                            blurDataURL={
+                              settings.logo.asset?.metadata?.lqip || undefined
+                            }
+                            quality={100}
+                          />
+                        ) : null}
+                      </Link>
+                    </DialogClose>
                   </SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-6 p-4">
@@ -293,18 +308,25 @@ export default function Navbar1({
                   </Accordion>
                   <div className="flex flex-col gap-3">
                     {actionItems?.map((item) => (
-                      <LinkButton
-                        key={item._key}
-                        link={item as SanityLink}
+                      <DialogClose asChild key={item._key}>
+                        <LinkButton
+                          link={item as SanityLink}
+                          locale={locale}
+                        />
+                      </DialogClose>
+                    ))}
+                    <DialogClose asChild>
+                      <InquiryBadge
+                        className="w-full justify-center"
                         locale={locale}
                       />
-                    ))}
-                    <InquiryBadge
-                      className="w-full justify-center"
-                      locale={locale}
-                    />
+                    </DialogClose>
                     <Suspense fallback={null}>
-                      <LocaleSwitcher locale={locale} variant="menu" />
+                      <LocaleSwitcher 
+                        locale={locale} 
+                        variant="menu"
+                        onCloseMenu={closeMobileMenu}
+                      />
                     </Suspense>
                   </div>
                 </div>
@@ -320,15 +342,18 @@ export default function Navbar1({
 const SubMenuLink = ({
   item,
   locale = FALLBACK_LOCALE,
+  onLinkClick,
 }: {
   item: SanityLink | SanityLinkIcon;
   locale?: SupportedLocale;
+  onLinkClick?: () => void;
 }) => {
   return (
     <Link
       href={resolveLinkHref(item, locale) || "#"}
       className="flex w-full flex-row gap-4 rounded-md p-3 text-sm font-medium no-underline transition-colors hover:bg-accent hover:text-accent-foreground"
       target={item.target ? "_blank" : undefined}
+      onClick={onLinkClick}
     >
       <div className="text-foreground">
         <Icon
