@@ -56,6 +56,7 @@ const typeToDocType: Record<string, string> = {
   product: DOC_TYPES.PRODUCT,
   productCategory: DOC_TYPES.PRODUCT_CATEGORY,
   page: DOC_TYPES.PAGE,
+  blogCategory: DOC_TYPES.BLOG_CATEGORY,
 };
 
 export function generatePageMetadata({
@@ -66,7 +67,7 @@ export function generatePageMetadata({
 }: {
   page: PageWithTranslations | null;
   slug: string;
-  type: "post" | "page" | "product" | "productCategory";
+  type: "post" | "page" | "product" | "productCategory" | "blogCategory";
   locale: SupportedLocale;
 }): Metadata {
   const meta = page?.meta;
@@ -102,11 +103,7 @@ export function generatePageMetadata({
     (t) => t.lang === DEFAULT_LOCALE
   );
   if (defaultTranslation) {
-    const href = resolveHref(
-      docType,
-      defaultTranslation.slug,
-      DEFAULT_LOCALE
-    );
+    const href = resolveHref(docType, defaultTranslation.slug, DEFAULT_LOCALE);
     if (href) {
       languageAlternates["x-default"] = `${baseUrl}${href}`;
     }
@@ -143,8 +140,17 @@ export function generatePageMetadata({
         {
           url:
             meta?.image && hasAsset(meta.image)
-              ? urlFor(meta.image as SanityImageLike).quality(100).url()
-              : getOgImageUrl({ type, slug }),
+              ? urlFor(meta.image as SanityImageLike)
+                  .quality(100)
+                  .url()
+              : getOgImageUrl({
+                  type: (type === "blogCategory" ? "page" : type) as
+                    | "post"
+                    | "page"
+                    | "product"
+                    | "productCategory",
+                  slug,
+                }),
           width: imgAsset?.metadata?.dimensions?.width ?? 1200,
           height: imgAsset?.metadata?.dimensions?.height ?? 630,
         },

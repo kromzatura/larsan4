@@ -57,7 +57,7 @@ export async function generateMetadata(
   const base = generatePageMetadata({
     page: cat as unknown as CategoryForMeta,
     slug: `blog/category/${params.slug}`,
-    type: "page",
+    type: "blogCategory",
     locale,
   }) as MetadataWithAlternates;
   const basePath = buildLocalizedPath(locale, `/blog/category/${params.slug}`);
