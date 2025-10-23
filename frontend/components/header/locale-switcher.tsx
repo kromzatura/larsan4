@@ -21,12 +21,14 @@ type Props = {
   locale: SupportedLocale;
   className?: string;
   variant?: "inline" | "menu";
+  onCloseMenu?: () => void;
 };
 
 export default function LocaleSwitcher({
   locale,
   className,
   variant = "inline",
+  onCloseMenu,
 }: Props) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -61,6 +63,7 @@ export default function LocaleSwitcher({
 
           if (href) {
             router.push(href + queryString);
+            onCloseMenu?.();
             return;
           }
         }
@@ -68,6 +71,7 @@ export default function LocaleSwitcher({
         // If target translation not found, go to locale home
         // This handles cases where content doesn't exist in target language
         router.push(buildLocalizedPath(target, "/"));
+        onCloseMenu?.();
         return;
       }
 
@@ -76,8 +80,9 @@ export default function LocaleSwitcher({
       const { path } = stripLocalePrefix(currentPath);
       const href = buildLocalizedPath(target, path) + queryString;
       router.push(href);
+      onCloseMenu?.();
     },
-    [currentPath, queryString, router, allTranslations, currentDocType]
+    [currentPath, queryString, router, allTranslations, currentDocType, onCloseMenu]
   );
 
   if (variant === "menu") {
