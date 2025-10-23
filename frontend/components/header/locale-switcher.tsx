@@ -82,7 +82,14 @@ export default function LocaleSwitcher({
       router.push(href);
       onCloseMenu?.();
     },
-    [currentPath, queryString, router, allTranslations, currentDocType, onCloseMenu]
+    [
+      currentPath,
+      queryString,
+      router,
+      allTranslations,
+      currentDocType,
+      onCloseMenu,
+    ]
   );
 
   if (variant === "menu") {
