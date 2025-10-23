@@ -16,6 +16,8 @@ import type {
   PRODUCT_QUERYResult,
   ProductCategory,
 } from "@/sanity.types";
+import { resolveHref } from "@/lib/resolveHref";
+import { DOC_TYPES } from "@/lib/docTypes";
 
 const isProduction = process.env.NEXT_PUBLIC_SITE_ENV === "production";
 
@@ -47,6 +49,14 @@ type WithMetaAndTranslations = {
 // provides the specific content type via the `type` argument.
 type PageWithTranslations = WithMetaAndTranslations;
 // --- END ---
+
+// Map metadata types to document types for routing consistency
+const typeToDocType: Record<string, string> = {
+  post: DOC_TYPES.POST,
+  product: DOC_TYPES.PRODUCT,
+  productCategory: DOC_TYPES.PRODUCT_CATEGORY,
+  page: DOC_TYPES.PAGE,
+};
 
 export function generatePageMetadata({
   page,
@@ -83,26 +93,33 @@ export function generatePageMetadata({
   const languageAlternates: Record<string, string> = {};
   const ogAlternateLocales: string[] = [];
 
+  // Use resolveHref to build correct paths for each content type
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const docType = typeToDocType[type] || DOC_TYPES.PAGE;
+
   // Set x-default when default locale translation exists
   const defaultTranslation = allTranslations.find(
     (t) => t.lang === DEFAULT_LOCALE
   );
   if (defaultTranslation) {
-    const defaultPath =
-      defaultTranslation.slug === "index" ? "/" : `/${defaultTranslation.slug}`;
-    languageAlternates["x-default"] = buildCanonicalUrl(
-      DEFAULT_LOCALE,
-      defaultPath
+    const href = resolveHref(
+      docType,
+      defaultTranslation.slug,
+      DEFAULT_LOCALE
     );
+    if (href) {
+      languageAlternates["x-default"] = `${baseUrl}${href}`;
+    }
   }
 
-  // Add all available language alternates from data
+  // Add all available language alternates using resolveHref for consistency
   for (const t of allTranslations) {
-    const path = t.slug === "index" ? "/" : `/${t.slug}`;
-    languageAlternates[t.lang] = buildCanonicalUrl(
-      t.lang as SupportedLocale,
-      path
-    );
+    const href = resolveHref(docType, t.slug, t.lang as SupportedLocale);
+    if (href) {
+      languageAlternates[t.lang] = `${baseUrl}${href}`;
+    }
+
+    // Build OpenGraph alternate locales
     if (t.lang !== locale) {
       const og = FORMAT_LOCALE_MAP[t.lang as SupportedLocale];
       if (og) ogAlternateLocales.push(og);
