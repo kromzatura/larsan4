@@ -56,21 +56,18 @@ export default function LocaleSwitcher({
   if (variant === "menu") {
     // Simple select for mobile/drawer usage
     return (
-      <label className={cn("flex items-center gap-2", className)}>
-        <span className="text-sm font-medium">{LOCALE_LABELS[locale]}</span>
-        <select
-          className="ml-2 rounded-md border bg-background px-2 py-1 text-sm"
-          value={locale}
-          onChange={(e) => onSelect(e.target.value as SupportedLocale)}
-          aria-label="Select language"
-        >
-          {SUPPORTED_LOCALES.map((l) => (
-            <option key={l} value={l}>
-              {LOCALE_LABELS[l]}
-            </option>
-          ))}
-        </select>
-      </label>
+      <select
+        className={cn("w-full rounded-md border bg-background px-3 py-2 text-sm", className)}
+        value={locale}
+        onChange={(e) => onSelect(e.target.value as SupportedLocale)}
+        aria-label="Select language"
+      >
+        {SUPPORTED_LOCALES.map((l) => (
+          <option key={l} value={l}>
+            {LOCALE_LABELS[l]}
+          </option>
+        ))}
+      </select>
     );
   }
 

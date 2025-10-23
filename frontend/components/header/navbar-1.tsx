@@ -130,18 +130,19 @@ export default function Navbar1({
     }
 
     return (
-      <Link
-        key={item._key}
-        href={resolveLinkHref(item, locale) || "#"}
-        target={item.target ? "_blank" : undefined}
-        className={cn(
-          item.buttonVariant === "ghost"
-            ? "text-md font-semibold hover:text-accent-foreground"
-            : buttonVariants({ variant: item.buttonVariant, size: "default" })
-        )}
-      >
-        {item.title}
-      </Link>
+      <DialogClose asChild key={item._key}>
+        <Link
+          href={resolveLinkHref(item, locale) || "#"}
+          target={item.target ? "_blank" : undefined}
+          className={cn(
+            item.buttonVariant === "ghost"
+              ? "text-md font-semibold hover:text-accent-foreground"
+              : buttonVariants({ variant: item.buttonVariant, size: "default" })
+          )}
+        >
+          {item.title}
+        </Link>
+      </DialogClose>
     );
   };
 
@@ -293,16 +294,19 @@ export default function Navbar1({
                   </Accordion>
                   <div className="flex flex-col gap-3">
                     {actionItems?.map((item) => (
-                      <LinkButton
-                        key={item._key}
-                        link={item as SanityLink}
+                      <DialogClose asChild key={item._key}>
+                        <LinkButton
+                          link={item as SanityLink}
+                          locale={locale}
+                        />
+                      </DialogClose>
+                    ))}
+                    <DialogClose asChild>
+                      <InquiryBadge
+                        className="w-full justify-center"
                         locale={locale}
                       />
-                    ))}
-                    <InquiryBadge
-                      className="w-full justify-center"
-                      locale={locale}
-                    />
+                    </DialogClose>
                     <Suspense fallback={null}>
                       <LocaleSwitcher locale={locale} variant="menu" />
                     </Suspense>
