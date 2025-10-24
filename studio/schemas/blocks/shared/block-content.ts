@@ -156,5 +156,11 @@ export default defineType({
         ],
       },
     }),
+    // Product Callout card embedded inside article content
+    defineArrayMember({
+      type: "product-callout",
+      name: "product-callout",
+      title: "Product Callout",
+    }),
   ],
 });
