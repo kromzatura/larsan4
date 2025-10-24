@@ -160,6 +160,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     getBlogCategorySlugs(),
   ]);
 
+  // --- DEBUG LOGGING ---
+  console.log(`Sitemap: Fetched ${pageSlugs.length} page slugs.`);
+  console.log(`Sitemap: Fetched ${postSlugs.length} post slugs.`);
+  console.log(`Sitemap: Fetched ${productSlugs.length} product slugs.`);
+  console.log(
+    `Sitemap: Fetched ${productCategorySlugs.length} product category slugs.`
+  );
+  console.log(
+    `Sitemap: Fetched ${blogCategorySlugs.length} blog category slugs.`
+  );
+  // --- END DEBUG LOGGING ---
+
   // Static routes present regardless of Sanity docs
   // Only include static routes that have no corresponding Sanity document
   const staticPaths = ["/blog", "/products", "/contact", "/inquiry"] as const;
