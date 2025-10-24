@@ -13,6 +13,7 @@
     "contrast": "ts-node ./scripts/contrast-check.ts",
     "check:hreflang": "ts-node ./scripts/verify-hreflang.ts",
     "check:hreflang:sitemap": "ts-node ./scripts/verify-hreflang-sitemap.ts",
+    "check:lang": "ts-node ./scripts/verify-lang-consistency.ts",
     "check:titles": "ts-node ./scripts/verify-titles.ts",
     "test": "vitest run",
     "test:watch": "vitest",

@@ -34,6 +34,10 @@ type Translation = {
   lang: string;
   slug: string;
 };
+type TranslationRaw = {
+  lang: string;
+  slug: string | null;
+};
 
 type WithMetaAndTranslations = {
   meta?: {
@@ -42,7 +46,7 @@ type WithMetaAndTranslations = {
     noindex?: boolean | null;
     image?: unknown;
   } | null;
-  allTranslations?: Translation[];
+  allTranslations?: TranslationRaw[] | null;
 };
 
 // Accept any document shape that includes meta and translations. The caller
