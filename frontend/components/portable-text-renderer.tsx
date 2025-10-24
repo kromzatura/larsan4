@@ -5,7 +5,7 @@ import { YouTubeEmbed } from "@next/third-parties/google";
 import { Highlight, themes } from "prism-react-renderer";
 import { CopyButton } from "@/components/ui/copy-button";
 import { Lightbulb } from "lucide-react";
-import { ReactNode, createElement } from "react";
+import { ReactNode } from "react";
 import { resolveHref, resolveLinkHref } from "@/lib/resolveHref";
 import { DOC_TYPES } from "@/lib/docTypes";
 import type { SupportedLocale } from "@/lib/i18n/config";
@@ -13,9 +13,26 @@ import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { toText } from "@/lib/utils";
-import Tag from "@/components/ui/tag";
 import { buttonVariants } from "@/components/ui/button";
 import Icon from "@/components/icon";
+
+// Minimal types for PT product-callout to avoid `any`
+type ProductLike = {
+  _id?: string | null;
+  title?: unknown;
+  excerpt?: unknown;
+  slug?: { current?: string | null } | null;
+  sku?: string | null;
+  image?: {
+    asset?: {
+      url?: string | null;
+      metadata?: {
+        lqip?: string | null;
+        dimensions?: { width?: number | null; height?: number | null } | null;
+      } | null;
+    } | null;
+  } | null;
+};
 // ProductCard not used anymore for product-callout (featured-only layout)
 
 const getTextFromChildren = (children: ReactNode): string => {
@@ -106,106 +123,6 @@ const makePortableTextComponents = (
         </Alert>
       );
     },
-    "section-header": ({ value }) => {
-      // Portable Text-friendly rendering of the shared Section Header block
-      const stackAlign = (value?.stackAlign as string) || "left";
-      const sectionWidth = (value?.sectionWidth as string) || "default";
-      const isNarrow = sectionWidth === "narrow";
-      const tag = value?.tag as { text?: string; type?: "title" | "badge" };
-      const title = value?.title as {
-        text?: string;
-        element?: string;
-        size?: "small" | "default" | "large";
-        weight?: "normal" | "medium" | "semibold" | "bold";
-      };
-      const description = toText(value?.description as unknown);
-      const links = (value?.links as any[]) || [];
-
-      const titleSize = title?.size || "default";
-      const titleWeight = title?.weight || "bold";
-      const ElementTag = (title?.element as string) || "h2";
-
-      const titleSizeClasses = {
-        small: "text-2xl md:text-3xl",
-        default: "text-3xl md:text-4xl",
-        large: "text-4xl md:text-6xl",
-      }[titleSize];
-
-      const titleWeightClasses = {
-        normal: "font-normal",
-        medium: "font-medium",
-        semibold: "font-semibold",
-        bold: "font-bold",
-      }[titleWeight];
-
-      return (
-        <div
-          className={[
-            stackAlign === "center" ? "text-center" : undefined,
-            isNarrow ? "max-w-3xl mx-auto" : "",
-            "my-8 flex flex-col gap-4",
-          ]
-            .filter(Boolean)
-            .join(" ")}
-        >
-          <div className="flex flex-col gap-4">
-            {tag && toText(tag.text) && (
-              <Tag
-                title={toText(tag.text) || ""}
-                type={(tag.type as "title" | "badge") || "title"}
-                element="p"
-              />
-            )}
-            {title &&
-              toText(title.text) &&
-              createElement(
-                ElementTag,
-                { className: [titleSizeClasses, titleWeightClasses].join(" ") },
-                toText(title.text)
-              )}
-            {description && (
-              <p className="text-muted-foreground">{description}</p>
-            )}
-          </div>
-          {links && links.length > 0 && (
-            <div
-              className={[
-                stackAlign === "center" ? "justify-center" : undefined,
-                "flex flex-row flex-wrap items-center gap-4",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-            >
-              {links.map((link) => {
-                const href = resolveLinkHref(link, locale);
-                const target =
-                  link?.isExternal && link?.target ? "_blank" : undefined;
-                const rel = target ? "noopener noreferrer" : undefined;
-                return (
-                  <a
-                    key={link._key}
-                    href={href || "#"}
-                    target={target}
-                    rel={rel}
-                    className={buttonVariants({
-                      variant: link.buttonVariant || "default",
-                    })}
-                  >
-                    <span className="flex items-center gap-2">
-                      {toText(link.title)}
-                      <Icon
-                        iconVariant={link.iconVariant || "none"}
-                        strokeWidth={1.5}
-                      />
-                    </span>
-                  </a>
-                );
-              })}
-            </div>
-          )}
-        </div>
-      );
-    },
     "product-callout": ({ value }) => {
       const align = (value?.align as string) || "left";
       const showImage = value?.showImage !== false;
@@ -213,7 +130,7 @@ const makePortableTextComponents = (
       const blurb = toText(value?.blurb as unknown) || null;
       const ctaLabel = toText(value?.ctaLabel as unknown) || "View product";
 
-      const product = value?.product as any;
+  const product = (value?.product as unknown as ProductLike) || null;
       if (!product) {
         return (
           <div className="my-6 rounded border p-4 text-sm text-muted-foreground">
@@ -222,8 +139,8 @@ const makePortableTextComponents = (
         );
       }
 
-      const href =
-        resolveHref(DOC_TYPES.PRODUCT, product?.slug?.current, locale) || "#";
+      const slugCurrent = product?.slug?.current || undefined;
+      const href = resolveHref(DOC_TYPES.PRODUCT, slugCurrent, locale) || "#";
       const imageUrl = product?.image?.asset?.url || null;
       const imageMeta = product?.image?.asset?.metadata || null;
       const computedTitle =
