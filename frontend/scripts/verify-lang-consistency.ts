@@ -36,9 +36,10 @@ function extractHtmlLang(html: string): string | undefined {
 }
 
 function extractCanonical(html: string): string | undefined {
-  const m = /<link[^>]+rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*>/i.exec(
-    html
-  );
+  const m =
+    /<link[^>]+rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*>/i.exec(
+      html
+    );
   return m?.[1];
 }
 
@@ -104,17 +105,23 @@ async function checkUrl(url: string): Promise<Result> {
 
     const selfHref = canonical || url;
     const hasSelfAlt = alts.some(
-      (a) => a.hreflang.toLowerCase() === (expectedLocale || "") && sameUrl(a.href, selfHref)
+      (a) =>
+        a.hreflang.toLowerCase() === (expectedLocale || "") &&
+        sameUrl(a.href, selfHref)
     );
 
     const errors: string[] = [];
     if (!expectedLocale) errors.push("No locale in URL path");
     if (!htmlLang) errors.push("No <html lang> attribute found");
     if (expectedLocale && htmlPrimary && expectedLocale !== htmlPrimary) {
-      errors.push(`Mismatch: URL locale=${expectedLocale} vs html lang=${htmlLang}`);
+      errors.push(
+        `Mismatch: URL locale=${expectedLocale} vs html lang=${htmlLang}`
+      );
     }
     if (expectedLocale && !hasSelfAlt) {
-      errors.push(`Missing self hreflang=${expectedLocale} pointing to ${selfHref}`);
+      errors.push(
+        `Missing self hreflang=${expectedLocale} pointing to ${selfHref}`
+      );
     }
 
     return {
