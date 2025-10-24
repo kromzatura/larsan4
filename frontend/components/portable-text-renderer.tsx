@@ -130,7 +130,7 @@ const makePortableTextComponents = (
       const blurb = toText(value?.blurb as unknown) || null;
       const ctaLabel = toText(value?.ctaLabel as unknown) || "View product";
 
-  const product = (value?.product as unknown as ProductLike) || null;
+      const product = (value?.product as unknown as ProductLike) || null;
       if (!product) {
         return (
           <div className="my-6 rounded border p-4 text-sm text-muted-foreground">
