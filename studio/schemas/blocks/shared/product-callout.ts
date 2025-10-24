@@ -6,14 +6,16 @@ export default defineType({
   title: "Product Callout",
   type: "object",
   icon: PackageOpen,
-  description: "Highlight a product inside article content with an image, title and CTA.",
+  description:
+    "Highlight a product inside article content with an image, title and CTA.",
   fields: [
     defineField({
       name: "product",
       type: "reference",
       title: "Product",
       to: [{ type: "product" }],
-      validation: (rule) => rule.required().error("Select a product to feature"),
+      validation: (rule) =>
+        rule.required().error("Select a product to feature"),
     }),
     defineField({
       name: "title",
@@ -34,7 +36,8 @@ export default defineType({
       name: "ctaLabel",
       type: "string",
       title: "CTA Label",
-      description: "Button label linking to the product page (defaults to 'View product')",
+      description:
+        "Button label linking to the product page (defaults to 'View product')",
     }),
     defineField({
       name: "variant",
