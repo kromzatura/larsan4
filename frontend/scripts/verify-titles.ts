@@ -7,6 +7,8 @@
 
 /* eslint-disable no-console */
 
+export {};
+
 type Result = {
   url: string;
   title?: string;
