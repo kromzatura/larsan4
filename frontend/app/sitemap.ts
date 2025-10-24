@@ -22,7 +22,11 @@ type SitemapEntry = MetadataRoute.Sitemap[number];
 // Fetchers: return slug, lastModified, and language when available
 async function getPageSlugs(): Promise<SanitySlugData[]> {
   const { data } = await sanityFetch({
-    query: groq`*[_type == 'page' && defined(slug.current) && coalesce(meta.noindex, false) == false]{
+    query: groq`*[_type == 'page'
+      && defined(slug.current)
+      && coalesce(meta.noindex, false) == false
+      && !(slug.current in ['blog','products','contact','inquiry','index','home'])
+    ]{
       "slug": slug.current,
       "lastModified": _updatedAt,
       language,

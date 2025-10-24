@@ -16,10 +16,9 @@ export async function generateMetadata(
   const page = await fetchSanityPageBySlug({ slug: "products", lang: locale });
   if (!page) notFound();
   const sp = (props.searchParams ? await props.searchParams : undefined) as
-    | { page?: string; category?: string }
+    | { page?: string }
     | undefined;
   const pageNum = sp?.page ? Number(sp.page) : 1;
-  const category = sp?.category || "";
   const base = generatePageMetadata({
     page,
     slug: "products",
@@ -27,14 +26,11 @@ export async function generateMetadata(
     locale,
   });
   if (pageNum && pageNum > 1) {
-    const isFilteredCategory = Boolean(category);
     return {
       ...base,
       robots: "noindex",
       alternates: {
-        canonical: isFilteredCategory
-          ? buildLocalizedPath(locale, `/products/category/${category}`)
-          : buildLocalizedPath(locale, "/products"),
+        canonical: buildLocalizedPath(locale, "/products"),
       },
     };
   }
@@ -53,9 +49,10 @@ export default async function ProductsPage(props: LangAsyncPageProps) {
     <Blocks
       blocks={page?.blocks ?? []}
       searchParams={
-        ((await props.searchParams) as
-          | { page?: string; category?: string }
-          | undefined) || {}
+        // Only allow pagination on All Products; ignore any category param to avoid duplicate content
+        (((await props.searchParams) as { page?: string } | undefined) &&
+          { page: (await props.searchParams)?.page as string | undefined }) ||
+        {}
       }
       locale={locale}
     />
