@@ -15,7 +15,6 @@ export const bodyQuery = `
   _type == "product-callout" => {
     _type,
     _key,
-    variant,
     align,
     showImage,
     title,

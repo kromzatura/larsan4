@@ -40,19 +40,6 @@ export default defineType({
         "Button label linking to the product page (defaults to 'View product')",
     }),
     defineField({
-      name: "variant",
-      type: "string",
-      title: "Variant",
-      options: {
-        list: [
-          { title: "Compact", value: "compact" },
-          { title: "Featured", value: "featured" },
-        ],
-        layout: "radio",
-      },
-      initialValue: "compact",
-    }),
-    defineField({
       name: "align",
       type: "string",
       title: "Alignment",
