@@ -83,6 +83,10 @@ export async function GET(
           w ? ` width="${w}"` : ""
         }${h ? ` height="${h}"` : ""} />`
       : "";
+    // Some social tools prefer <enclosure> for images; include for better compatibility.
+    const enclosure = imgUrl
+      ? `<enclosure url="${imgUrl}"${imgType ? ` type="${imgType}"` : ""} length="0" />`
+      : "";
 
     return `
       <item>
@@ -96,6 +100,7 @@ export async function GET(
           html || p.excerpt || ""
         }]]></content:encoded>
         ${media}
+        ${enclosure}
         ${categories}
       </item>`;
   });

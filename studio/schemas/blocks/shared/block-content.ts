@@ -156,5 +156,11 @@ export default defineType({
         ],
       },
     }),
+    // Reusable Section Header block (same type used in page builders)
+    defineArrayMember({
+      type: "section-header",
+      name: "section-header",
+      title: "Section Header",
+    }),
   ],
 });
