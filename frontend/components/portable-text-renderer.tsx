@@ -6,7 +6,8 @@ import { Highlight, themes } from "prism-react-renderer";
 import { CopyButton } from "@/components/ui/copy-button";
 import { Lightbulb } from "lucide-react";
 import { ReactNode, createElement } from "react";
-import { resolveLinkHref } from "@/lib/resolveHref";
+import { resolveHref, resolveLinkHref } from "@/lib/resolveHref";
+import { DOC_TYPES } from "@/lib/docTypes";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
@@ -199,6 +200,153 @@ const makePortableTextComponents = (
                   </a>
                 );
               })}
+            </div>
+          )}
+        </div>
+      );
+    },
+    "product-callout": ({ value }) => {
+      const variant = (value?.variant as string) || "compact";
+      const align = (value?.align as string) || "left";
+      const showImage = value?.showImage !== false;
+      const overrideTitle = toText(value?.title as unknown) || null;
+      const blurb = toText(value?.blurb as unknown) || null;
+      const ctaLabel = toText(value?.ctaLabel as unknown) || "View product";
+
+      const product = value?.product as any;
+      if (!product) {
+        return (
+          <div className="my-6 rounded border p-4 text-sm text-muted-foreground">
+            Missing product (product-callout)
+          </div>
+        );
+      }
+
+      const href =
+        resolveHref(DOC_TYPES.PRODUCT, product?.slug?.current, locale) || "#";
+      const imageUrl = product?.image?.asset?.url || null;
+      const imageMeta = product?.image?.asset?.metadata || null;
+      const computedTitle = overrideTitle || toText(product?.title as unknown) || "";
+      const computedBlurb = blurb || toText(product?.excerpt as unknown) || "";
+
+      // Build minimal item shape for existing ProductCard component
+      const item = {
+        _id: product?._id || product?.slug?.current || Math.random().toString(),
+        slug: product?.slug?.current || "",
+        title: computedTitle,
+        sku: product?.sku || null,
+        imageUrl: showImage ? imageUrl : null,
+        imageMeta,
+        features: null,
+        productAttributes: null,
+        purity: null,
+        categories: Array.isArray(product?.categories)
+          ? product.categories.map((c: any) => ({
+              _id: c?._id || null,
+              title: c?.title || null,
+              slug: c?.slug?.current || c?.slug || null,
+              href:
+                c?.slug?.current || c?.slug
+                  ? resolveHref(
+                      DOC_TYPES.PRODUCT_CATEGORY,
+                      c?.slug?.current || c?.slug,
+                      locale
+                    )
+                  : null,
+            }))
+          : null,
+        href,
+      } as any;
+
+      // Layout wrappers
+      const wrapperClasses = [
+        "my-6",
+        align === "center" ? "mx-auto max-w-3xl" : undefined,
+        variant === "featured" ? "max-w-5xl" : undefined,
+      ]
+        .filter(Boolean)
+        .join(" ");
+
+      if (variant === "featured") {
+        // Side-by-side layout with bigger image and content
+        return (
+          <div
+            className={[
+              wrapperClasses,
+              "rounded-xl border p-4 md:p-6 bg-background",
+            ].join(" ")}
+         >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
+              {showImage && imageUrl ? (
+                <div className={align === "center" ? "mx-auto" : undefined}>
+                  <Image
+                    src={imageUrl}
+                    alt={computedTitle || "Product image"}
+                    width={960}
+                    height={720}
+                    className="w-full h-auto rounded-lg object-cover"
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    placeholder={imageMeta?.lqip ? "blur" : undefined}
+                    blurDataURL={imageMeta?.lqip || undefined}
+                  />
+                </div>
+              ) : null}
+              <div className={[align === "center" ? "text-center" : undefined].join(" ")}>
+                <h3 className="text-2xl md:text-3xl font-semibold tracking-tight">
+                  {computedTitle}
+                </h3>
+                {computedBlurb && (
+                  <p className="mt-3 text-muted-foreground">{computedBlurb}</p>
+                )}
+                <div
+                  className={[
+                    "mt-5 flex flex-wrap gap-3",
+                    align === "center" ? "justify-center" : undefined,
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                >
+                  <a href={href} className={buttonVariants({ variant: "default" })}>
+                    <span className="flex items-center gap-2">
+                      {ctaLabel}
+                      <Icon iconVariant="arrow-right" strokeWidth={1.5} />
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      // Compact: reuse ProductCard + optional text/CTA below
+      return (
+        <div className={wrapperClasses}>
+          {/* Reuse existing ProductCard for consistent styling */}
+          {/* @ts-expect-error: lazy import type shape */}
+          <ProductCard item={item} locale={locale} />
+          {(blurb || ctaLabel) && (
+            <div
+              className={[
+                "mt-3 flex flex-col gap-3",
+                align === "center" ? "items-center text-center" : undefined,
+              ]
+                .filter(Boolean)
+                .join(" ")}
+            >
+              {blurb && (
+                <p className="text-sm text-muted-foreground max-w-3xl">
+                  {blurb}
+                </p>
+              )}
+              {href && (
+                <a href={href} className={buttonVariants({ variant: "default" })}>
+                  <span className="flex items-center gap-2">
+                    {ctaLabel}
+                    <Icon iconVariant="arrow-right" strokeWidth={1.5} />
+                  </span>
+                </a>
+              )}
             </div>
           )}
         </div>
