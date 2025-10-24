@@ -15,7 +15,7 @@ import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { toText } from "@/lib/utils";
- 
+
 
 const getTextFromChildren = (children: ReactNode): string => {
   if (Array.isArray(children)) {
@@ -59,6 +59,52 @@ const makePortableTextComponents = (
         </div>
       );
     },
+    code: ({ value }) => {
+      const filename = toText(value?.filename as unknown) || "";
+      return (
+        <div className="min-w-full grid my-4 overflow-x-auto rounded-lg border border-border text-xs lg:text-sm bg-primary">
+          <div className="flex items-center justify-between px-4 py-2 border-b border-border text-background font-mono">
+            <div>{filename}</div>
+            <CopyButton code={value.code} />
+          </div>
+          <Highlight
+            theme={themes.vsLight}
+            code={value.code}
+            language={value.language || "typescript"}
+          >
+            {({ style, tokens, getLineProps, getTokenProps }) => (
+              <pre
+                style={{
+                  ...style,
+                  padding: "1.5rem",
+                  margin: 0,
+                  overflow: "auto",
+                }}
+              >
+                {tokens.map((line, i) => (
+                  <div key={i} {...getLineProps({ line })}>
+                    {line.map((token, key) => (
+                      <span key={key} {...getTokenProps({ token })} />
+                    ))}
+                  </div>
+                ))}
+              </pre>
+            )}
+          </Highlight>
+        </div>
+      );
+    },
+    alert: ({ value }) => {
+      const title = toText(value?.title as unknown);
+      const description = toText(value?.description as unknown);
+      return (
+        <Alert className="my-4">
+          <Lightbulb className="h-4 w-4" />
+          {title && <AlertTitle>{title}</AlertTitle>}
+          {description && <AlertDescription>{description}</AlertDescription>}
+        </Alert>
+      );
+    },
     "product-callout": ({ value }) => {
       const align = (value?.align as string) || "left";
       const showImage = value?.showImage !== false;
@@ -66,7 +112,7 @@ const makePortableTextComponents = (
       const blurb = toText(value?.blurb as unknown) || null;
       const ctaLabel = toText(value?.ctaLabel as unknown) || "View product";
 
-      const product = value?.product as any;
+    const product = value?.product as any;
       if (!product) {
         return (
           <div className="my-6 rounded border p-4 text-sm text-muted-foreground">
@@ -75,8 +121,8 @@ const makePortableTextComponents = (
         );
       }
 
-      const href =
-        resolveHref(DOC_TYPES.PRODUCT, product?.slug?.current, locale) || "#";
+      const slugCurrent = product?.slug?.current || undefined;
+      const href = resolveHref(DOC_TYPES.PRODUCT, slugCurrent, locale) || "#";
       const imageUrl = product?.image?.asset?.url || null;
       const imageMeta = product?.image?.asset?.metadata || null;
       const computedTitle =

@@ -167,12 +167,6 @@ export default defineType({
         ],
       },
     }),
-    // Reusable Section Header block (same type used in page builders)
-    defineArrayMember({
-      type: "section-header",
-      name: "section-header",
-      title: "Section Header",
-    }),
     // Product Callout card embedded inside article content
     defineArrayMember({
       type: "product-callout",
