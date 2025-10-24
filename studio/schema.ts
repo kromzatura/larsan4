@@ -144,7 +144,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     productCategory,
     product,
     specification,
-  theme,
+    theme,
     // shared objects
     blockContent,
     link,
@@ -152,7 +152,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     linkGroup,
     buttonVariant,
     sectionPadding,
-  imageTreatment,
+    imageTreatment,
     // blocks
     sectionHeader,
     productCallout,

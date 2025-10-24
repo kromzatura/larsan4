@@ -9,9 +9,7 @@ export default defineType({
   type: "array",
   options: {
     insertMenu: {
-      groups: [
-        { name: "products", of: ["product-callout"] },
-      ],
+      groups: [{ name: "products", of: ["product-callout"] }],
       views: [{ name: "list" }],
     },
   },
