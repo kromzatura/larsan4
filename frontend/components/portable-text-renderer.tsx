@@ -259,7 +259,11 @@ const makePortableTextComponents = (
                 />
               </div>
             ) : null}
-            <div className={[align === "center" ? "text-center" : undefined].join(" ")}>
+            <div
+              className={[align === "center" ? "text-center" : undefined].join(
+                " "
+              )}
+            >
               <h3 className="text-2xl md:text-3xl font-semibold tracking-tight">
                 {computedTitle}
               </h3>
@@ -274,7 +278,10 @@ const makePortableTextComponents = (
                   .filter(Boolean)
                   .join(" ")}
               >
-                <a href={href} className={buttonVariants({ variant: "default" })}>
+                <a
+                  href={href}
+                  className={buttonVariants({ variant: "default" })}
+                >
                   <span className="flex items-center gap-2">
                     {ctaLabel}
                     <Icon iconVariant="arrow-right" strokeWidth={1.5} />
