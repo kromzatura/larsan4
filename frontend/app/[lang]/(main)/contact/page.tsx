@@ -135,13 +135,10 @@ export default async function ContactPage(props: LangAsyncPageProps) {
             ))}
           </div>
           <div className="mx-auto flex w-full flex-col gap-6 rounded-lg border bg-card p-8 lg:max-w-[32rem] shadow-sm">
-            {/* ContactInquiryWrapper does not currently accept styling override props; we style via inherited classes inside ContactForm */}
-            <div className="space-y-6 [&_input]:w-full [&_input]:rounded-md [&_input]:border [&_input]:bg-background [&_input]:px-3 [&_input]:py-2 [&_input]:text-sm [&_input]:shadow-sm [&_input]:transition [&_input]:focus-visible:outline-none [&_input]:focus-visible:ring-2 [&_input]:focus-visible:ring-ring [&_textarea]:w-full [&_textarea]:rounded-md [&_textarea]:border [&_textarea]:bg-background [&_textarea]:px-3 [&_textarea]:py-2 [&_textarea]:text-sm [&_textarea]:shadow-sm [&_textarea]:transition [&_textarea]:focus-visible:outline-none [&_textarea]:focus-visible:ring-2 [&_textarea]:focus-visible:ring-ring [&_button[type=submit]]:w-full">
-              <ContactInquiryWrapper
-                initialInquiryItems={inquiryItems}
-                locale={locale}
-              />
-            </div>
+            <ContactInquiryWrapper
+              initialInquiryItems={inquiryItems}
+              locale={locale}
+            />
           </div>
         </div>
       </div>
