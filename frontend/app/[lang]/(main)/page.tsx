@@ -1,7 +1,7 @@
 import Blocks from "@/components/blocks";
 import { fetchSanityPageBySlug } from "@/sanity/lib/fetch";
 import { generatePageMetadata as generatePageMetadataUtil } from "@/sanity/lib/metadata";
-import MissingSanityPage from "@/components/ui/missing-sanity-page";
+import { notFound } from "next/navigation";
 import { normalizeLocale } from "@/lib/i18n/routing";
 import type { LangAsyncPageProps } from "@/lib/types/next";
 
@@ -10,7 +10,7 @@ export async function generateMetadata(props: LangAsyncPageProps) {
   const locale = normalizeLocale(resolved?.lang);
   const page = await fetchSanityPageBySlug({ slug: "index", lang: locale });
   if (!page) {
-    return { title: "Content not available in this language" };
+    notFound();
   }
   return generatePageMetadataUtil({
     page,
@@ -26,7 +26,7 @@ export default async function IndexPage(props: LangAsyncPageProps) {
   const page = await fetchSanityPageBySlug({ slug: "index", lang: locale });
 
   if (!page) {
-    return MissingSanityPage({ document: "page", slug: "index" });
+    notFound();
   }
 
   return <Blocks blocks={page?.blocks ?? []} locale={locale} />;

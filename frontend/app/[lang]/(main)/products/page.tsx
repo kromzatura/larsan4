@@ -14,7 +14,7 @@ export async function generateMetadata(
   const resolvedParams = props.params ? await props.params : undefined;
   const locale = normalizeLocale(resolvedParams?.lang);
   const page = await fetchSanityPageBySlug({ slug: "products", lang: locale });
-  if (!page) return {};
+  if (!page) notFound();
   const sp = (props.searchParams ? await props.searchParams : undefined) as
     | { page?: string; category?: string }
     | undefined;

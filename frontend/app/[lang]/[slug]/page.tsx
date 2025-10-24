@@ -41,9 +41,9 @@ export async function generateMetadata(
     lang: locale,
   })) as PageData | null;
 
-  // For metadata, prefer returning {} so Next can flow to the page's 404 guard
+  // If content is missing, signal a real 404 so crawlers don't flag metadata/head issues
   if (!page || !page.title || !page.blocks || page.blocks.length === 0) {
-    return {};
+    notFound();
   }
 
   return generatePageMetadata({
