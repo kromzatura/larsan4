@@ -10,6 +10,7 @@ vi.mock("@/sanity/lib/fetch", () => ({
 }));
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import type { SupportedLocale } from "@/lib/i18n/config";
+import { buildCanonicalUrl } from "@/lib/url";
 
 // Helper to read the title value consistently
 function getTitleValue(
@@ -64,5 +65,25 @@ describe("generatePageMetadata – title", () => {
     expect(langs).toBeTruthy();
     // Default base URL in test env is http://localhost:3000
     expect(langs?.["en"]).toBe("http://localhost:3000/en/contact");
+  });
+
+  it("adds x-default even when default translation missing (fallback to canonical)", () => {
+    const locale = "en" as SupportedLocale;
+    const meta = generatePageMetadata({
+      page: {
+        meta: { title: "Contact" },
+        // No translations present
+        allTranslations: [],
+      },
+      slug: "contact",
+      type: "page",
+      locale,
+    });
+
+    const langs = meta.alternates?.languages as
+      | Record<string, string>
+      | undefined;
+    expect(langs).toBeTruthy();
+    expect(langs?.["x-default"]).toBe(buildCanonicalUrl(locale, "/contact"));
   });
 });

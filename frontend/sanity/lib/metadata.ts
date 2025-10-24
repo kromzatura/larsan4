@@ -132,6 +132,16 @@ export function generatePageMetadata({
     languageAlternates[locale] = canonicalUrl;
   }
 
+  // Ensure x-default is present; if we couldn't resolve a default locale translation,
+  // fall back to the DEFAULT_LOCALE version of the same path. This yields a stable
+  // default experience and avoids missing x-default entirely.
+  if (!languageAlternates["x-default"]) {
+    languageAlternates["x-default"] = buildCanonicalUrl(
+      DEFAULT_LOCALE as SupportedLocale,
+      canonicalPath
+    );
+  }
+
   // Titles are authored without brand suffix; layout template adds the brand.
   const rawTitle = toText(meta?.title as unknown) ?? undefined;
   const title: Metadata["title"] = rawTitle;
