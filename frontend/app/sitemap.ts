@@ -137,10 +137,10 @@ function docsToEntries(
 
     return {
       url: `${baseUrl}${buildLocalizedPath(locale, buildPath(doc.slug))}`,
-      lastModified: doc.lastModified,
+      lastModified: new Date().toISOString(),
       changeFrequency,
       priority,
-      // alternates: Object.keys(languages).length ? { languages } : undefined,
+      alternates: Object.keys(languages).length ? { languages } : undefined,
     };
   });
 }
