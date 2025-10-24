@@ -11,6 +11,7 @@
     "typegen": "npx sanity schema extract && npx sanity typegen generate",
     "typecheck": "tsc --noEmit",
     "contrast": "ts-node ./scripts/contrast-check.ts",
+    "check:titles": "ts-node ./scripts/verify-titles.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "check:routes": "node ./scripts/check-duplicate-routes.mjs"
