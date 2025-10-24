@@ -11,7 +11,7 @@ export const FEED_POSTS_QUERY_NEWEST = groq`*[_type == "post" && defined(slug)] 
   excerpt,
   author->{ name },
   image{ ${imageQuery} },
-  body[]{
+  body[_type != "section-header"][]{
     ${bodyQuery}
   },
   categories[]->{ title }
@@ -28,7 +28,7 @@ export const FEED_POSTS_BY_CATEGORY_QUERY_NEWEST = groq`*[
   excerpt,
   author->{ name },
   image{ ${imageQuery} },
-  body[]{
+  body[_type != "section-header"][]{
     ${bodyQuery}
   },
   categories[]->{ title }
