@@ -140,7 +140,7 @@ function docsToEntries(
       lastModified: doc.lastModified,
       changeFrequency,
       priority,
-      alternates: Object.keys(languages).length ? { languages } : undefined,
+      // alternates: Object.keys(languages).length ? { languages } : undefined,
     };
   });
 }
@@ -159,18 +159,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     getProductCategorySlugs(),
     getBlogCategorySlugs(),
   ]);
-
-  // --- DEBUG LOGGING ---
-  console.log(`Sitemap: Fetched ${pageSlugs.length} page slugs.`);
-  console.log(`Sitemap: Fetched ${postSlugs.length} post slugs.`);
-  console.log(`Sitemap: Fetched ${productSlugs.length} product slugs.`);
-  console.log(
-    `Sitemap: Fetched ${productCategorySlugs.length} product category slugs.`
-  );
-  console.log(
-    `Sitemap: Fetched ${blogCategorySlugs.length} blog category slugs.`
-  );
-  // --- END DEBUG LOGGING ---
 
   // Static routes present regardless of Sanity docs
   // Only include static routes that have no corresponding Sanity document
@@ -217,7 +205,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     0.5
   );
 
-  const finalEntries = [
+  return [
     ...staticEntries,
     ...pageEntries,
     ...postEntries,
@@ -225,18 +213,4 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...blogCategoryEntries,
     ...productCategoryEntries,
   ];
-
-  console.log(`Sitemap: Generated ${staticEntries.length} static entries.`);
-  console.log(
-    `Sitemap: Generated ${pageEntries.length} page entries from ${pageSlugs.length} slugs.`
-  );
-  console.log(`Sitemap: Total entries to be returned: ${finalEntries.length}`);
-  if (finalEntries.length > 0) {
-    console.log(
-      "Sitemap: Sample of the first entry:",
-      JSON.stringify(finalEntries[0], null, 2)
-    );
-  }
-
-  return finalEntries;
 }
