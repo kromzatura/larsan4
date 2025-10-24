@@ -416,6 +416,16 @@ export type Compare4 = {
         _type: "reference";
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "product";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "productCategory";
       };
       href?: string;
       target?: boolean;
@@ -449,7 +459,11 @@ export type Compare4 = {
     _key: string;
   } | {
     _key: string;
-  } & Code>;
+  } & Code | {
+    _key: string;
+  } & SectionHeader | {
+    _key: string;
+  } & ProductCallout>;
   links?: Array<{
     _key: string;
   } & LinkIcon>;
@@ -1013,6 +1027,16 @@ export type FeatureContent = {
         _type: "reference";
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "product";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "productCategory";
       };
       href?: string;
       target?: boolean;
@@ -1046,7 +1070,11 @@ export type FeatureContent = {
     _key: string;
   } | {
     _key: string;
-  } & Code>;
+  } & Code | {
+    _key: string;
+  } & SectionHeader | {
+    _key: string;
+  } & ProductCallout>;
   links?: Array<{
     _key: string;
   } & Link>;
@@ -1267,6 +1295,16 @@ export type Hero174 = {
         _type: "reference";
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "product";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "productCategory";
       };
       href?: string;
       target?: boolean;
@@ -1300,7 +1338,11 @@ export type Hero174 = {
     _key: string;
   } | {
     _key: string;
-  } & Code>;
+  } & Code | {
+    _key: string;
+  } & SectionHeader | {
+    _key: string;
+  } & ProductCallout>;
   links?: Array<{
     _key: string;
   } & LinkIcon>;
@@ -1351,6 +1393,16 @@ export type Hero160 = {
         _type: "reference";
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "product";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "productCategory";
       };
       href?: string;
       target?: boolean;
@@ -1384,7 +1436,11 @@ export type Hero160 = {
     _key: string;
   } | {
     _key: string;
-  } & Code>;
+  } & Code | {
+    _key: string;
+  } & SectionHeader | {
+    _key: string;
+  } & ProductCallout>;
   links?: Array<{
     _key: string;
   } & LinkIcon>;
@@ -1431,6 +1487,16 @@ export type Hero85 = {
         _type: "reference";
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "product";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "productCategory";
       };
       href?: string;
       target?: boolean;
@@ -1464,7 +1530,11 @@ export type Hero85 = {
     _key: string;
   } | {
     _key: string;
-  } & Code>;
+  } & Code | {
+    _key: string;
+  } & SectionHeader | {
+    _key: string;
+  } & ProductCallout>;
   links?: Array<{
     _key: string;
   } & LinkIcon>;
@@ -1508,6 +1578,16 @@ export type Hero57 = {
         _type: "reference";
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "product";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "productCategory";
       };
       href?: string;
       target?: boolean;
@@ -1541,7 +1621,11 @@ export type Hero57 = {
     _key: string;
   } | {
     _key: string;
-  } & Code>;
+  } & Code | {
+    _key: string;
+  } & SectionHeader | {
+    _key: string;
+  } & ProductCallout>;
   links?: Array<{
     _key: string;
   } & LinkIcon>;
@@ -1609,6 +1693,16 @@ export type Hero13 = {
         _type: "reference";
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "product";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "productCategory";
       };
       href?: string;
       target?: boolean;
@@ -1642,7 +1736,11 @@ export type Hero13 = {
     _key: string;
   } | {
     _key: string;
-  } & Code>;
+  } & Code | {
+    _key: string;
+  } & SectionHeader | {
+    _key: string;
+  } & ProductCallout>;
   links?: Array<{
     _key: string;
   } & LinkIcon>;
@@ -1686,6 +1784,16 @@ export type Hero12 = {
         _type: "reference";
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "product";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "productCategory";
       };
       href?: string;
       target?: boolean;
@@ -1719,7 +1827,11 @@ export type Hero12 = {
     _key: string;
   } | {
     _key: string;
-  } & Code>;
+  } & Code | {
+    _key: string;
+  } & SectionHeader | {
+    _key: string;
+  } & ProductCallout>;
   image?: {
     asset?: {
       _ref: string;
@@ -1755,6 +1867,21 @@ export type Hero12 = {
     link?: Link;
     _key: string;
   }>;
+};
+
+export type ProductCallout = {
+  _type: "product-callout";
+  product?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "product";
+  };
+  title?: string;
+  blurb?: string;
+  ctaLabel?: string;
+  align?: "left" | "center";
+  showImage?: boolean;
 };
 
 export type SectionHeader = {
@@ -1825,6 +1952,16 @@ export type BlockContent = Array<{
       _type: "reference";
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "post";
+    } | {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "product";
+    } | {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "productCategory";
     };
     href?: string;
     target?: boolean;
@@ -1858,7 +1995,11 @@ export type BlockContent = Array<{
   _key: string;
 } | {
   _key: string;
-} & Code>;
+} & Code | {
+  _key: string;
+} & SectionHeader | {
+  _key: string;
+} & ProductCallout>;
 
 export type Theme = {
   _id: string;
@@ -2219,36 +2360,6 @@ export type Specification = {
   certification?: string;
   orderRank?: string;
   language?: string;
-};
-
-export type ProductCategory = {
-  _id: string;
-  _type: "productCategory";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  description?: string;
-  slug?: Slug;
-  language?: string;
-  meta?: {
-    title?: string;
-    description?: string;
-    noindex?: boolean;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
-  orderRank?: string;
 };
 
 export type Faq = {
@@ -2620,74 +2731,6 @@ export type LinkIcon = {
   buttonVariant?: ButtonVariant;
 };
 
-export type Product = {
-  _id: string;
-  _type: "product";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  specifications?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "specification";
-  }>;
-  keyFeatures?: Array<string>;
-  packagingOptions?: Array<{
-    sizeValue?: number;
-    sizeUnit?: "kg" | "ton";
-    packagingType?: "Paper bag" | "Papieren zak" | "Big Bag";
-    weightPerPallet?: string;
-    notes?: string;
-    _type: "packaging";
-    _key: string;
-  }>;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-  body?: BlockContent;
-  excerpt?: string;
-  categories?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "productCategory";
-  }>;
-  language?: string;
-  meta?: {
-    title?: string;
-    description?: string;
-    noindex?: boolean;
-    image?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    };
-  };
-  orderRank?: string;
-};
-
 export type Link = {
   _type: "link";
   isExternal?: boolean;
@@ -2784,6 +2827,104 @@ export type Post = {
       _type: "image";
     };
   };
+};
+
+export type Product = {
+  _id: string;
+  _type: "product";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  specifications?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "specification";
+  }>;
+  keyFeatures?: Array<string>;
+  packagingOptions?: Array<{
+    sizeValue?: number;
+    sizeUnit?: "kg" | "ton";
+    packagingType?: "Paper bag" | "Papieren zak" | "Big Bag";
+    weightPerPallet?: string;
+    notes?: string;
+    _type: "packaging";
+    _key: string;
+  }>;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  body?: BlockContent;
+  excerpt?: string;
+  categories?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "productCategory";
+  }>;
+  language?: string;
+  meta?: {
+    title?: string;
+    description?: string;
+    noindex?: boolean;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
+  orderRank?: string;
+};
+
+export type ProductCategory = {
+  _id: string;
+  _type: "productCategory";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+  slug?: Slug;
+  language?: string;
+  meta?: {
+    title?: string;
+    description?: string;
+    noindex?: boolean;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
+  orderRank?: string;
 };
 
 export type Author = {
@@ -2951,7 +3092,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = ProductCategories16 | AllProducts16 | Timeline6 | Timeline5 | Timeline4 | Timeline3 | Gallery10 | Gallery9 | Gallery8 | Gallery4 | Gallery3 | Gallery1 | CompareProducts | Compare6 | Compare5 | Compare4 | Compare2 | Compare1 | Team8 | Team6 | Team5 | Team4 | Team3 | Team2 | Team1 | Pricing16 | Pricing9 | Pricing7 | Pricing2 | Pricing1 | Changelog5 | Changelog3 | Changelog2 | Changelog1 | AllPosts16 | Blog16 | AllPosts14 | Blog14 | AllPosts13 | Blog13 | AllPosts7 | Blog7 | AllPosts4 | Blog4 | Feature202Card | Feature202 | Feature157Card | Feature157 | Feature117Card | Feature117 | Feature66Card | Feature66 | Feature15Card | Feature15 | Feature12Card | Feature12 | Feature3Card | Feature3 | FeatureImage | FeatureContent | Feature1 | Logos9 | Logos4 | Logos2 | Logos1 | Faq14 | Faq9 | Faq8 | Faq5 | Faq1 | Hero174 | Hero160 | Hero85 | Hero57 | Hero25 | Hero13 | Hero12 | SectionHeader | ImageTreatment | SectionPadding | ButtonVariant | LinkGroup | BlockContent | Theme | Testimonial | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | TranslationMetadata | InternationalizedArrayReferenceValue | Team | Navigation | Specification | ProductCategory | Faq | Changelog | Banner | Category | Contact | Settings | Page | LinkIcon | Product | Link | Post | Author | InternationalizedArrayReference | MediaTag | Code | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = ProductCategories16 | AllProducts16 | Timeline6 | Timeline5 | Timeline4 | Timeline3 | Gallery10 | Gallery9 | Gallery8 | Gallery4 | Gallery3 | Gallery1 | CompareProducts | Compare6 | Compare5 | Compare4 | Compare2 | Compare1 | Team8 | Team6 | Team5 | Team4 | Team3 | Team2 | Team1 | Pricing16 | Pricing9 | Pricing7 | Pricing2 | Pricing1 | Changelog5 | Changelog3 | Changelog2 | Changelog1 | AllPosts16 | Blog16 | AllPosts14 | Blog14 | AllPosts13 | Blog13 | AllPosts7 | Blog7 | AllPosts4 | Blog4 | Feature202Card | Feature202 | Feature157Card | Feature157 | Feature117Card | Feature117 | Feature66Card | Feature66 | Feature15Card | Feature15 | Feature12Card | Feature12 | Feature3Card | Feature3 | FeatureImage | FeatureContent | Feature1 | Logos9 | Logos4 | Logos2 | Logos1 | Faq14 | Faq9 | Faq8 | Faq5 | Faq1 | Hero174 | Hero160 | Hero85 | Hero57 | Hero25 | Hero13 | Hero12 | ProductCallout | SectionHeader | ImageTreatment | SectionPadding | ButtonVariant | LinkGroup | BlockContent | Theme | Testimonial | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | TranslationMetadata | InternationalizedArrayReferenceValue | Team | Navigation | Specification | Faq | Changelog | Banner | Category | Contact | Settings | Page | LinkIcon | Link | Post | Product | ProductCategory | Author | InternationalizedArrayReference | MediaTag | Code | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../frontend/sanity/queries/banner.ts
 // Variable: BANNER_QUERY
@@ -3128,7 +3269,7 @@ export type POSTS_COUNT_BY_BLOG_CATEGORY_QUERYResult = number;
 
 // Source: ../frontend/sanity/queries/changelog.ts
 // Variable: CHANGELOGS_QUERY
-// Query: *[_type == "changelog" && defined(slug)] | order(date desc){    _id,    title,    slug,    version,    date,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    author->{      name,      title,      image {          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      }    },    categories[]->{      _id,      title,      color    },}
+// Query: *[_type == "changelog" && defined(slug)] | order(date desc){    _id,    title,    slug,    version,    date,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }    },    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    author->{      name,      title,      image {          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      }    },    categories[]->{      _id,      title,      color    },}
 export type CHANGELOGS_QUERYResult = Array<{
   _id: string;
   title: string | null;
@@ -3162,12 +3303,22 @@ export type CHANGELOGS_QUERYResult = Array<{
         _type: "reference";
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "product";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "productCategory";
       };
       href: string | null;
       target?: boolean;
       _type: "link";
       _key: string;
-      internalType: "page" | "post" | null;
+      internalType: "page" | "post" | "product" | "productCategory" | null;
       internalSlug: string | null;
     }> | null;
     level?: number;
@@ -3200,6 +3351,71 @@ export type CHANGELOGS_QUERYResult = Array<{
     alt?: string;
     _type: "image";
     _key: string;
+    markDefs: null;
+  } | {
+    _key: string;
+    _type: "product-callout";
+    product: {
+      _id: string;
+      title: string | null;
+      slug: Slug | null;
+      sku: null;
+      excerpt: string | null;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      } | null;
+      categories: Array<{
+        _id: string;
+        title: string | null;
+        slug: Slug | null;
+      }> | null;
+    } | null;
+    title: string | null;
+    blurb: string | null;
+    ctaLabel: string | null;
+    align: "center" | "left" | null;
+    showImage: boolean | null;
+    markDefs: null;
+  } | {
+    _key: string;
+    _type: "section-header";
+    padding?: SectionPadding;
+    surface?: "default" | "surface-1";
+    sectionWidth?: "default" | "narrow";
+    stackAlign?: "center" | "left";
+    direction?: "column" | "row";
+    tag?: {
+      text?: string;
+      type?: "badge" | "title";
+    };
+    title?: {
+      text?: string;
+      element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+      size?: "default" | "large" | "small";
+      weight?: "bold" | "medium" | "normal" | "semibold";
+    };
+    description?: string;
+    links?: Array<{
+      _key: string;
+    } & LinkIcon>;
+    isDatasheetTitle?: boolean;
+    hasGroupDivider?: boolean;
     markDefs: null;
   } | {
     videoId?: string;
@@ -3337,7 +3553,7 @@ export type CONTACT_QUERYResult = {
 
 // Source: ../frontend/sanity/queries/feed.ts
 // Variable: FEED_POSTS_QUERY_NEWEST
-// Query: *[_type == "post" && defined(slug)] | order(coalesce(publishedAt, _createdAt) desc)[0...$limit]{  _id,  _createdAt,  publishedAt,  title,  slug,  excerpt,  author->{ name },  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  body[]{      ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }  },  categories[]->{ title }}
+// Query: *[_type == "post" && defined(slug)] | order(coalesce(publishedAt, _createdAt) desc)[0...$limit]{  _id,  _createdAt,  publishedAt,  title,  slug,  excerpt,  author->{ name },  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  body[]{      ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }  },  categories[]->{ title }}
 export type FEED_POSTS_QUERY_NEWESTResult = Array<{
   _id: string;
   _createdAt: string;
@@ -3394,12 +3610,22 @@ export type FEED_POSTS_QUERY_NEWESTResult = Array<{
         _type: "reference";
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "product";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "productCategory";
       };
       href: string | null;
       target?: boolean;
       _type: "link";
       _key: string;
-      internalType: "page" | "post" | null;
+      internalType: "page" | "post" | "product" | "productCategory" | null;
       internalSlug: string | null;
     }> | null;
     level?: number;
@@ -3434,6 +3660,71 @@ export type FEED_POSTS_QUERY_NEWESTResult = Array<{
     _key: string;
     markDefs: null;
   } | {
+    _key: string;
+    _type: "product-callout";
+    product: {
+      _id: string;
+      title: string | null;
+      slug: Slug | null;
+      sku: null;
+      excerpt: string | null;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      } | null;
+      categories: Array<{
+        _id: string;
+        title: string | null;
+        slug: Slug | null;
+      }> | null;
+    } | null;
+    title: string | null;
+    blurb: string | null;
+    ctaLabel: string | null;
+    align: "center" | "left" | null;
+    showImage: boolean | null;
+    markDefs: null;
+  } | {
+    _key: string;
+    _type: "section-header";
+    padding?: SectionPadding;
+    surface?: "default" | "surface-1";
+    sectionWidth?: "default" | "narrow";
+    stackAlign?: "center" | "left";
+    direction?: "column" | "row";
+    tag?: {
+      text?: string;
+      type?: "badge" | "title";
+    };
+    title?: {
+      text?: string;
+      element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+      size?: "default" | "large" | "small";
+      weight?: "bold" | "medium" | "normal" | "semibold";
+    };
+    description?: string;
+    links?: Array<{
+      _key: string;
+    } & LinkIcon>;
+    isDatasheetTitle?: boolean;
+    hasGroupDivider?: boolean;
+    markDefs: null;
+  } | {
     videoId?: string;
     _type: "youtube";
     _key: string;
@@ -3444,7 +3735,7 @@ export type FEED_POSTS_QUERY_NEWESTResult = Array<{
   }> | null;
 }>;
 // Variable: FEED_POSTS_BY_CATEGORY_QUERY_NEWEST
-// Query: *[  _type == "post" && references(*[_type == "category" && slug.current == $slug]._id)] | order(coalesce(publishedAt, _createdAt) desc)[0...$limit]{  _id,  _createdAt,  publishedAt,  title,  slug,  excerpt,  author->{ name },  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  body[]{      ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }  },  categories[]->{ title }}
+// Query: *[  _type == "post" && references(*[_type == "category" && slug.current == $slug]._id)] | order(coalesce(publishedAt, _createdAt) desc)[0...$limit]{  _id,  _createdAt,  publishedAt,  title,  slug,  excerpt,  author->{ name },  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  body[]{      ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }  },  categories[]->{ title }}
 export type FEED_POSTS_BY_CATEGORY_QUERY_NEWESTResult = Array<{
   _id: string;
   _createdAt: string;
@@ -3501,12 +3792,22 @@ export type FEED_POSTS_BY_CATEGORY_QUERY_NEWESTResult = Array<{
         _type: "reference";
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "product";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "productCategory";
       };
       href: string | null;
       target?: boolean;
       _type: "link";
       _key: string;
-      internalType: "page" | "post" | null;
+      internalType: "page" | "post" | "product" | "productCategory" | null;
       internalSlug: string | null;
     }> | null;
     level?: number;
@@ -3539,6 +3840,71 @@ export type FEED_POSTS_BY_CATEGORY_QUERY_NEWESTResult = Array<{
     alt?: string;
     _type: "image";
     _key: string;
+    markDefs: null;
+  } | {
+    _key: string;
+    _type: "product-callout";
+    product: {
+      _id: string;
+      title: string | null;
+      slug: Slug | null;
+      sku: null;
+      excerpt: string | null;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      } | null;
+      categories: Array<{
+        _id: string;
+        title: string | null;
+        slug: Slug | null;
+      }> | null;
+    } | null;
+    title: string | null;
+    blurb: string | null;
+    ctaLabel: string | null;
+    align: "center" | "left" | null;
+    showImage: boolean | null;
+    markDefs: null;
+  } | {
+    _key: string;
+    _type: "section-header";
+    padding?: SectionPadding;
+    surface?: "default" | "surface-1";
+    sectionWidth?: "default" | "narrow";
+    stackAlign?: "center" | "left";
+    direction?: "column" | "row";
+    tag?: {
+      text?: string;
+      type?: "badge" | "title";
+    };
+    title?: {
+      text?: string;
+      element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+      size?: "default" | "large" | "small";
+      weight?: "bold" | "medium" | "normal" | "semibold";
+    };
+    description?: string;
+    links?: Array<{
+      _key: string;
+    } & LinkIcon>;
+    isDatasheetTitle?: boolean;
+    hasGroupDivider?: boolean;
     markDefs: null;
   } | {
     videoId?: string;
@@ -3601,7 +3967,7 @@ export type NAVIGATION_QUERYResult = Array<{
 
 // Source: ../frontend/sanity/queries/page.ts
 // Variable: PAGE_QUERY
-// Query: *[    _type == "page" &&    slug.current == $slug &&    language == $lang &&    defined(blocks[]) &&    defined(title)  ]  | order(_updatedAt desc)[0]{    _id,    _type,    language,    title,    blocks[]{        _type == "section-header" => {    _type,    _key,    padding,    sectionWidth,    stackAlign,    direction,  surface,    tag,    title,    description,    isDatasheetTitle,    hasGroupDivider,    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "hero-12" => {    _type,    _key,    imageTreatment,    backgroundImage{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    tagLine,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },    techLogos[]{      _key,      title,      link,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      }    }  },        _type == "hero-13" => {    _type,    _key,    tag,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "hero-25" => {    _type,    _key,    tagLine,    title,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },    tags  },        _type == "hero-57" => {    _type,    _key,    title,    body,    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },    tags  },        _type == "hero-85" => {    _type,    _key,    tag{      title,      description    },    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "hero-160" => {    _type,    _key,    backgroundImage{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    tag,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },        _type == "hero-174" => {    _type,    _key,    imageTreatment,    backgroundImage{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },    tag  },        _type == "faq-1" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }      },    },  },        _type == "faq-5" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }      },    },  },        _type == "faq-8" => {    _type,    _key,    padding,    sections[]{      _type,      _key,      title,      faqs[]->{        _id,        title,        body[]{            ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }        }      }    }  },        _type == "faq-9" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }      },    },  },        _type == "faq-14" => {    _type,    _key,    padding,    title,    description,    sections[]{      _type,      _key,      title,      faqs[]->{        _id,        title,        body[]{            ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }        }      }    }  },        _type == "logos-1" => {    _type,    _key,    padding,    title,    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },        _type == "logos-2" => {    _type,    _key,    padding,    title,    description,    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },        _type == "logos-4" => {    _type,    _key,    padding,    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },        _type == "logos-9" => {    _type,    _key,    padding,    title,    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    testimonials[]->{      ...,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    }  },        _type == "feature-1" => {    _type,    _key,    padding,    columns[]{        _type == "feature-content" => {    _type,    _key,    padding,    iconVariant,    tag,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "feature-image" => {    _type,    _key,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },    },  },        _type == "feature-3" => {    _type,    _key,    padding,    columns[]{        _type == "feature-3-card" => {    _type,    _key,    iconVariant,    title,    description,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },    },  },        _type == "feature-12" => {    _type,    _key,    padding,    tagline,    columns[]{        _type == "feature-12-card" => {    _type,    _key,    iconVariant,    title,    description,  },    },  },        _type == "feature-15" => {    _type,    _key,    padding,    contrastVariant,    gridColumns,    columns[]{        _type == "feature-15-card" => {    _type,    _key,    iconVariant,    title,    description,  },    },  },        _type == "feature-66" => {    _type,    _key,    padding,    columns[]{        _type == "feature-66-card" => {    _type,    _key,    logo{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "feature-117" => {    _type,    _key,    padding,    columns[]{        _type == "feature-117-card" => {    _type,    _key,    tag,    title,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "feature-157" => {    _type,    _key,    padding,    columns[]{        _type == "feature-157-card" => {    _type,    _key,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "feature-202" => {    _type,    _key,    padding,    columns[]{        _type == "feature-202-card" => {    _type,    _key,    imageTreatment,    iconVariant,    title,    description,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "blog-4" => {    _type,    _key,    padding,    gridColumns,    posts[]->{      _id,      _createdAt,      title,      slug,      excerpt,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      categories[]->{        _id,        title,        slug,      },      author->{        _id,        name,        image{            ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }        }      }    },  },        _type == "all-posts-4" => {    _type,    _key,    padding  },        _type == "blog-7" => {    _type,    _key,    padding,    gridColumns,    posts[]->{      _id,      _createdAt,      title,      slug,      excerpt,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    },  },        _type == "all-posts-7" => {    _type,    _key,    padding  },        _type == "blog-13" => {    _type,    _key,    padding,    gridColumns,    posts[]->{      _id,      _createdAt,      title,      slug,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      categories[]->{        _id,        title,        slug,      },    },  },        _type == "all-posts-13" => {    _type,    _key,    padding  },        _type == "blog-14" => {    _type,    _key,    padding,    gridColumns,    title,    posts[]->{      _id,      _createdAt,      title,      slug,      excerpt,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      categories[]->{        _id,        title,        slug,      },      author->{        _id,        name,        image{            ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }        }      }    },  },        _type == "all-posts-14" => {    _type,    _key,    padding  },        _type == "blog-16" => {    _type,    _key,    padding,    posts[]->{      _id,      _createdAt,      title,      slug,      categories[]->{        _id,        title,        slug,      },      author->{        _id,        name,        title,        image{            ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }        }      }    },  },        _type == "all-posts-16" => {    _type,    _key,    padding  },        _type == "changelog-1" => {    _type,    _key,    padding  },        _type == "changelog-2" => {    _type,    _key,    padding  },        _type == "changelog-3" => {    _type,    _key,    padding  },        _type == "changelog-5" => {    _type,    _key,    padding,    title,    secondaryTitle,    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "pricing-1" => {    _type,    _key,    padding,    columns[]{      _key,      featured,      title,      description,      price{        value,        note,      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      listTitle,      list,    },  },        _type == "pricing-2" => {    _type,    _key,    padding,    columns[]{      _key,      title,      description,      price{        monthly,        yearly,      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      listTitle,      list,    },  },        _type == "pricing-7" => {    _type,    _key,    padding,    badge,    columns[]{      _key,      title,      description,      price{        monthly,        yearly,      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      listTitle,      list,    },  },        _type == "pricing-9" => {    _type,    _key,    padding,    columns[]{      _key,      featured,      title,      description,      price{        monthly,        yearly,      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },    },    sections[]{      _key,      title,      features[]{        _key,        name,        tiers,        tooltip,      },    },  },        _type == "pricing-16" => {    _type,    _key,    padding,    title,    tag,    columns[]{      _key,      featured,      title,      description,      price{        value,        discount,      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      listTitle,      list,    },  },        _type == "team-1" => {    _type,    _key,    padding  },        _type == "team-2" => {    _type,    _key,    padding  },        _type == "team-3" => {    _type,    _key,    padding  },        _type == "team-4" => {    _type,    _key,    padding  },        _type == "team-5" => {    _type,    _key,    padding  },        _type == "team-6" => {    _type,    _key,    padding  },        _type == "team-8" => {    _type,    _key,    padding  },        _type == "compare-1" => {    _type,    _key,    padding,    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    columns[]{      _key,      label,      primary,      secondary,      hasIcon,    },  },        _type == "compare-2" => {    _type,    _key,    padding,    columns[]{      _key,      featured,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      title,      list,    },  },        _type == "compare-4" => {    _type,    _key,    padding,    title,    titles,    columns[]{      _key,      title,      primary,      secondary    },    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "compare-5" => {    _type,    _key,    padding,    columns[]{      _key,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      title,      description,      link {          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)      },    },  },      _type == "compare-6" => {    _type,    _key,    padding,    title,    rows,    columns[]{      _key,      name,      attributes[]{        _key,        value,        status,      },    },  },      _type == "compare-products" => {    _type,    _key,    padding,    title,    productFields,    columns[]{      _key,      product->{        _id,        title,        "slug": slug.current,        // First specification projected under 'spec'        "spec": specifications[0]->{          sku,          bestFor,          pungency,          bindingCapacity,          fatContent        }      },      overrides{        sku,        bestFor,        pungency,        bindingCapacity,        fatContent      },    },  },        _type == "gallery-1" => {    _type,    _key,    padding,    columns[]{      _key,      title,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      logo{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      categories[]->{        _id,        title,        color      },    },  },        _type == "gallery-3" => {    _type,    _key,    padding,    title,    columns[]{      _key,      title,      description,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      categories[]->{        _id,        title,        color      },    },  },        _type == "gallery-4" => {    _type,    _key,    padding,    title,    description,    columns[]{      _key,      title,      description,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      categories[]->{        _id,        title,        color      },    },  },        _type == "gallery-8" => {    _type,    _key,    padding,    link{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),    },    columns[]{      _key,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      categories[]->{        _id,        title,        color      },    },  },        _type == "gallery-9" => {    _type,    _key,    padding,    columns[]{      _key,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      title,      description,      iconVariant,    },  },        _type == "gallery-10" => {    _type,    _key,    padding,    title,    description,    testimonials[]->{      ...,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    }  },        _type == "timeline-3" => {    _type,    _key,    padding,    title,    description,    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),    },    columns[]{      _key,      title,      description,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    },  },        _type == "timeline-4" => {    _type,    _key,    padding,    tag,    title,    description,    columns[]{      _key,      title,      description,      iconVariant,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    },  },        _type == "timeline-5" => {    _type,    _key,    padding,    title,    description,    columns[]{      _key,      iconVariant,      title,      description,    },  },        _type == "timeline-6" => {    _type,    _key,    padding,    title,    description,    columns[]{      _key,      iconVariant,      title,      description,    },  },        _type == "product-categories-16" => {    _type,    _key,    padding  },        _type == "all-products-16" => {    _type,    _key,    padding  },    },      meta{    title,    description,    noindex,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[] {    "lang": _key,    "slug": value->slug.current  } [defined(slug) && defined(lang)],  }
+// Query: *[    _type == "page" &&    slug.current == $slug &&    language == $lang &&    defined(blocks[]) &&    defined(title)  ]  | order(_updatedAt desc)[0]{    _id,    _type,    language,    title,    blocks[]{        _type == "section-header" => {    _type,    _key,    padding,    sectionWidth,    stackAlign,    direction,  surface,    tag,    title,    description,    isDatasheetTitle,    hasGroupDivider,    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "hero-12" => {    _type,    _key,    imageTreatment,    backgroundImage{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    tagLine,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }    },    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },    techLogos[]{      _key,      title,      link,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      }    }  },        _type == "hero-13" => {    _type,    _key,    tag,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "hero-25" => {    _type,    _key,    tagLine,    title,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },    tags  },        _type == "hero-57" => {    _type,    _key,    title,    body,    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },    tags  },        _type == "hero-85" => {    _type,    _key,    tag{      title,      description    },    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }    },    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "hero-160" => {    _type,    _key,    backgroundImage{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    tag,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },        _type == "hero-174" => {    _type,    _key,    imageTreatment,    backgroundImage{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },    tag  },        _type == "faq-1" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }      },    },  },        _type == "faq-5" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }      },    },  },        _type == "faq-8" => {    _type,    _key,    padding,    sections[]{      _type,      _key,      title,      faqs[]->{        _id,        title,        body[]{            ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }        }      }    }  },        _type == "faq-9" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }      },    },  },        _type == "faq-14" => {    _type,    _key,    padding,    title,    description,    sections[]{      _type,      _key,      title,      faqs[]->{        _id,        title,        body[]{            ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }        }      }    }  },        _type == "logos-1" => {    _type,    _key,    padding,    title,    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },        _type == "logos-2" => {    _type,    _key,    padding,    title,    description,    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },        _type == "logos-4" => {    _type,    _key,    padding,    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },        _type == "logos-9" => {    _type,    _key,    padding,    title,    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    testimonials[]->{      ...,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    }  },        _type == "feature-1" => {    _type,    _key,    padding,    columns[]{        _type == "feature-content" => {    _type,    _key,    padding,    iconVariant,    tag,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "feature-image" => {    _type,    _key,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },    },  },        _type == "feature-3" => {    _type,    _key,    padding,    columns[]{        _type == "feature-3-card" => {    _type,    _key,    iconVariant,    title,    description,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },    },  },        _type == "feature-12" => {    _type,    _key,    padding,    tagline,    columns[]{        _type == "feature-12-card" => {    _type,    _key,    iconVariant,    title,    description,  },    },  },        _type == "feature-15" => {    _type,    _key,    padding,    contrastVariant,    gridColumns,    columns[]{        _type == "feature-15-card" => {    _type,    _key,    iconVariant,    title,    description,  },    },  },        _type == "feature-66" => {    _type,    _key,    padding,    columns[]{        _type == "feature-66-card" => {    _type,    _key,    logo{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "feature-117" => {    _type,    _key,    padding,    columns[]{        _type == "feature-117-card" => {    _type,    _key,    tag,    title,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "feature-157" => {    _type,    _key,    padding,    columns[]{        _type == "feature-157-card" => {    _type,    _key,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "feature-202" => {    _type,    _key,    padding,    columns[]{        _type == "feature-202-card" => {    _type,    _key,    imageTreatment,    iconVariant,    title,    description,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "blog-4" => {    _type,    _key,    padding,    gridColumns,    posts[]->{      _id,      _createdAt,      title,      slug,      excerpt,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      categories[]->{        _id,        title,        slug,      },      author->{        _id,        name,        image{            ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }        }      }    },  },        _type == "all-posts-4" => {    _type,    _key,    padding  },        _type == "blog-7" => {    _type,    _key,    padding,    gridColumns,    posts[]->{      _id,      _createdAt,      title,      slug,      excerpt,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    },  },        _type == "all-posts-7" => {    _type,    _key,    padding  },        _type == "blog-13" => {    _type,    _key,    padding,    gridColumns,    posts[]->{      _id,      _createdAt,      title,      slug,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      categories[]->{        _id,        title,        slug,      },    },  },        _type == "all-posts-13" => {    _type,    _key,    padding  },        _type == "blog-14" => {    _type,    _key,    padding,    gridColumns,    title,    posts[]->{      _id,      _createdAt,      title,      slug,      excerpt,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      categories[]->{        _id,        title,        slug,      },      author->{        _id,        name,        image{            ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }        }      }    },  },        _type == "all-posts-14" => {    _type,    _key,    padding  },        _type == "blog-16" => {    _type,    _key,    padding,    posts[]->{      _id,      _createdAt,      title,      slug,      categories[]->{        _id,        title,        slug,      },      author->{        _id,        name,        title,        image{            ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }        }      }    },  },        _type == "all-posts-16" => {    _type,    _key,    padding  },        _type == "changelog-1" => {    _type,    _key,    padding  },        _type == "changelog-2" => {    _type,    _key,    padding  },        _type == "changelog-3" => {    _type,    _key,    padding  },        _type == "changelog-5" => {    _type,    _key,    padding,    title,    secondaryTitle,    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "pricing-1" => {    _type,    _key,    padding,    columns[]{      _key,      featured,      title,      description,      price{        value,        note,      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      listTitle,      list,    },  },        _type == "pricing-2" => {    _type,    _key,    padding,    columns[]{      _key,      title,      description,      price{        monthly,        yearly,      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      listTitle,      list,    },  },        _type == "pricing-7" => {    _type,    _key,    padding,    badge,    columns[]{      _key,      title,      description,      price{        monthly,        yearly,      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      listTitle,      list,    },  },        _type == "pricing-9" => {    _type,    _key,    padding,    columns[]{      _key,      featured,      title,      description,      price{        monthly,        yearly,      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },    },    sections[]{      _key,      title,      features[]{        _key,        name,        tiers,        tooltip,      },    },  },        _type == "pricing-16" => {    _type,    _key,    padding,    title,    tag,    columns[]{      _key,      featured,      title,      description,      price{        value,        discount,      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      listTitle,      list,    },  },        _type == "team-1" => {    _type,    _key,    padding  },        _type == "team-2" => {    _type,    _key,    padding  },        _type == "team-3" => {    _type,    _key,    padding  },        _type == "team-4" => {    _type,    _key,    padding  },        _type == "team-5" => {    _type,    _key,    padding  },        _type == "team-6" => {    _type,    _key,    padding  },        _type == "team-8" => {    _type,    _key,    padding  },        _type == "compare-1" => {    _type,    _key,    padding,    images[]{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    columns[]{      _key,      label,      primary,      secondary,      hasIcon,    },  },        _type == "compare-2" => {    _type,    _key,    padding,    columns[]{      _key,      featured,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      title,      list,    },  },        _type == "compare-4" => {    _type,    _key,    padding,    title,    titles,    columns[]{      _key,      title,      primary,      secondary    },    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "compare-5" => {    _type,    _key,    padding,    columns[]{      _key,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      title,      description,      link {          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)      },    },  },      _type == "compare-6" => {    _type,    _key,    padding,    title,    rows,    columns[]{      _key,      name,      attributes[]{        _key,        value,        status,      },    },  },      _type == "compare-products" => {    _type,    _key,    padding,    title,    productFields,    columns[]{      _key,      product->{        _id,        title,        "slug": slug.current,        // First specification projected under 'spec'        "spec": specifications[0]->{          sku,          bestFor,          pungency,          bindingCapacity,          fatContent        }      },      overrides{        sku,        bestFor,        pungency,        bindingCapacity,        fatContent      },    },  },        _type == "gallery-1" => {    _type,    _key,    padding,    columns[]{      _key,      title,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      logo{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      categories[]->{        _id,        title,        color      },    },  },        _type == "gallery-3" => {    _type,    _key,    padding,    title,    columns[]{      _key,      title,      description,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      categories[]->{        _id,        title,        color      },    },  },        _type == "gallery-4" => {    _type,    _key,    padding,    title,    description,    columns[]{      _key,      title,      description,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      categories[]->{        _id,        title,        color      },    },  },        _type == "gallery-8" => {    _type,    _key,    padding,    link{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),    },    columns[]{      _key,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      link{          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),      },      categories[]->{        _id,        title,        color      },    },  },        _type == "gallery-9" => {    _type,    _key,    padding,    columns[]{      _key,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      title,      description,      iconVariant,    },  },        _type == "gallery-10" => {    _type,    _key,    padding,    title,    description,    testimonials[]->{      ...,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    }  },        _type == "timeline-3" => {    _type,    _key,    padding,    title,    description,    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null),    },    columns[]{      _key,      title,      description,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    },  },        _type == "timeline-4" => {    _type,    _key,    padding,    tag,    title,    description,    columns[]{      _key,      title,      description,      iconVariant,      image{          ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },    },  },        _type == "timeline-5" => {    _type,    _key,    padding,    title,    description,    columns[]{      _key,      iconVariant,      title,      description,    },  },        _type == "timeline-6" => {    _type,    _key,    padding,    title,    description,    columns[]{      _key,      iconVariant,      title,      description,    },  },        _type == "product-categories-16" => {    _type,    _key,    padding  },        _type == "all-products-16" => {    _type,    _key,    padding  },    },      meta{    title,    description,    noindex,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[] {    "lang": _key,    "slug": value->slug.current  } [defined(slug) && defined(lang)],  }
 export type PAGE_QUERYResult = {
   _id: string;
   _type: "page";
@@ -4030,12 +4396,22 @@ export type PAGE_QUERYResult = {
           _type: "reference";
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
         };
         href: string | null;
         target?: boolean;
         _type: "link";
         _key: string;
-        internalType: "page" | "post" | null;
+        internalType: "page" | "post" | "product" | "productCategory" | null;
         internalSlug: string | null;
       }> | null;
       level?: number;
@@ -4068,6 +4444,71 @@ export type PAGE_QUERYResult = {
       alt?: string;
       _type: "image";
       _key: string;
+      markDefs: null;
+    } | {
+      _key: string;
+      _type: "product-callout";
+      product: {
+        _id: string;
+        title: string | null;
+        slug: Slug | null;
+        sku: null;
+        excerpt: string | null;
+        image: {
+          asset: {
+            _id: string;
+            url: string | null;
+            mimeType: string | null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
+          } | null;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt?: string;
+          _type: "image";
+        } | null;
+        categories: Array<{
+          _id: string;
+          title: string | null;
+          slug: Slug | null;
+        }> | null;
+      } | null;
+      title: string | null;
+      blurb: string | null;
+      ctaLabel: string | null;
+      align: "center" | "left" | null;
+      showImage: boolean | null;
+      markDefs: null;
+    } | {
+      _key: string;
+      _type: "section-header";
+      padding?: SectionPadding;
+      surface?: "default" | "surface-1";
+      sectionWidth?: "default" | "narrow";
+      stackAlign?: "center" | "left";
+      direction?: "column" | "row";
+      tag?: {
+        text?: string;
+        type?: "badge" | "title";
+      };
+      title?: {
+        text?: string;
+        element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+        size?: "default" | "large" | "small";
+        weight?: "bold" | "medium" | "normal" | "semibold";
+      };
+      description?: string;
+      links?: Array<{
+        _key: string;
+      } & LinkIcon>;
+      isDatasheetTitle?: boolean;
+      hasGroupDivider?: boolean;
       markDefs: null;
     } | {
       videoId?: string;
@@ -4266,12 +4707,22 @@ export type PAGE_QUERYResult = {
             _type: "reference";
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "post";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "product";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "productCategory";
           };
           href: string | null;
           target?: boolean;
           _type: "link";
           _key: string;
-          internalType: "page" | "post" | null;
+          internalType: "page" | "post" | "product" | "productCategory" | null;
           internalSlug: string | null;
         }> | null;
         level?: number;
@@ -4304,6 +4755,71 @@ export type PAGE_QUERYResult = {
         alt?: string;
         _type: "image";
         _key: string;
+        markDefs: null;
+      } | {
+        _key: string;
+        _type: "product-callout";
+        product: {
+          _id: string;
+          title: string | null;
+          slug: Slug | null;
+          sku: null;
+          excerpt: string | null;
+          image: {
+            asset: {
+              _id: string;
+              url: string | null;
+              mimeType: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt?: string;
+            _type: "image";
+          } | null;
+          categories: Array<{
+            _id: string;
+            title: string | null;
+            slug: Slug | null;
+          }> | null;
+        } | null;
+        title: string | null;
+        blurb: string | null;
+        ctaLabel: string | null;
+        align: "center" | "left" | null;
+        showImage: boolean | null;
+        markDefs: null;
+      } | {
+        _key: string;
+        _type: "section-header";
+        padding?: SectionPadding;
+        surface?: "default" | "surface-1";
+        sectionWidth?: "default" | "narrow";
+        stackAlign?: "center" | "left";
+        direction?: "column" | "row";
+        tag?: {
+          text?: string;
+          type?: "badge" | "title";
+        };
+        title?: {
+          text?: string;
+          element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+          size?: "default" | "large" | "small";
+          weight?: "bold" | "medium" | "normal" | "semibold";
+        };
+        description?: string;
+        links?: Array<{
+          _key: string;
+        } & LinkIcon>;
+        isDatasheetTitle?: boolean;
+        hasGroupDivider?: boolean;
         markDefs: null;
       } | {
         videoId?: string;
@@ -4357,12 +4873,22 @@ export type PAGE_QUERYResult = {
               _type: "reference";
               _weak?: boolean;
               [internalGroqTypeReferenceTo]?: "post";
+            } | {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "product";
+            } | {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "productCategory";
             };
             href: string | null;
             target?: boolean;
             _type: "link";
             _key: string;
-            internalType: "page" | "post" | null;
+            internalType: "page" | "post" | "product" | "productCategory" | null;
             internalSlug: string | null;
           }> | null;
           level?: number;
@@ -4395,6 +4921,71 @@ export type PAGE_QUERYResult = {
           alt?: string;
           _type: "image";
           _key: string;
+          markDefs: null;
+        } | {
+          _key: string;
+          _type: "product-callout";
+          product: {
+            _id: string;
+            title: string | null;
+            slug: Slug | null;
+            sku: null;
+            excerpt: string | null;
+            image: {
+              asset: {
+                _id: string;
+                url: string | null;
+                mimeType: string | null;
+                metadata: {
+                  lqip: string | null;
+                  dimensions: {
+                    width: number | null;
+                    height: number | null;
+                  } | null;
+                } | null;
+              } | null;
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              alt?: string;
+              _type: "image";
+            } | null;
+            categories: Array<{
+              _id: string;
+              title: string | null;
+              slug: Slug | null;
+            }> | null;
+          } | null;
+          title: string | null;
+          blurb: string | null;
+          ctaLabel: string | null;
+          align: "center" | "left" | null;
+          showImage: boolean | null;
+          markDefs: null;
+        } | {
+          _key: string;
+          _type: "section-header";
+          padding?: SectionPadding;
+          surface?: "default" | "surface-1";
+          sectionWidth?: "default" | "narrow";
+          stackAlign?: "center" | "left";
+          direction?: "column" | "row";
+          tag?: {
+            text?: string;
+            type?: "badge" | "title";
+          };
+          title?: {
+            text?: string;
+            element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+            size?: "default" | "large" | "small";
+            weight?: "bold" | "medium" | "normal" | "semibold";
+          };
+          description?: string;
+          links?: Array<{
+            _key: string;
+          } & LinkIcon>;
+          isDatasheetTitle?: boolean;
+          hasGroupDivider?: boolean;
           markDefs: null;
         } | {
           videoId?: string;
@@ -4438,12 +5029,22 @@ export type PAGE_QUERYResult = {
             _type: "reference";
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "post";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "product";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "productCategory";
           };
           href: string | null;
           target?: boolean;
           _type: "link";
           _key: string;
-          internalType: "page" | "post" | null;
+          internalType: "page" | "post" | "product" | "productCategory" | null;
           internalSlug: string | null;
         }> | null;
         level?: number;
@@ -4476,6 +5077,71 @@ export type PAGE_QUERYResult = {
         alt?: string;
         _type: "image";
         _key: string;
+        markDefs: null;
+      } | {
+        _key: string;
+        _type: "product-callout";
+        product: {
+          _id: string;
+          title: string | null;
+          slug: Slug | null;
+          sku: null;
+          excerpt: string | null;
+          image: {
+            asset: {
+              _id: string;
+              url: string | null;
+              mimeType: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt?: string;
+            _type: "image";
+          } | null;
+          categories: Array<{
+            _id: string;
+            title: string | null;
+            slug: Slug | null;
+          }> | null;
+        } | null;
+        title: string | null;
+        blurb: string | null;
+        ctaLabel: string | null;
+        align: "center" | "left" | null;
+        showImage: boolean | null;
+        markDefs: null;
+      } | {
+        _key: string;
+        _type: "section-header";
+        padding?: SectionPadding;
+        surface?: "default" | "surface-1";
+        sectionWidth?: "default" | "narrow";
+        stackAlign?: "center" | "left";
+        direction?: "column" | "row";
+        tag?: {
+          text?: string;
+          type?: "badge" | "title";
+        };
+        title?: {
+          text?: string;
+          element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+          size?: "default" | "large" | "small";
+          weight?: "bold" | "medium" | "normal" | "semibold";
+        };
+        description?: string;
+        links?: Array<{
+          _key: string;
+        } & LinkIcon>;
+        isDatasheetTitle?: boolean;
+        hasGroupDivider?: boolean;
         markDefs: null;
       } | {
         videoId?: string;
@@ -4522,12 +5188,22 @@ export type PAGE_QUERYResult = {
               _type: "reference";
               _weak?: boolean;
               [internalGroqTypeReferenceTo]?: "post";
+            } | {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "product";
+            } | {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "productCategory";
             };
             href: string | null;
             target?: boolean;
             _type: "link";
             _key: string;
-            internalType: "page" | "post" | null;
+            internalType: "page" | "post" | "product" | "productCategory" | null;
             internalSlug: string | null;
           }> | null;
           level?: number;
@@ -4560,6 +5236,71 @@ export type PAGE_QUERYResult = {
           alt?: string;
           _type: "image";
           _key: string;
+          markDefs: null;
+        } | {
+          _key: string;
+          _type: "product-callout";
+          product: {
+            _id: string;
+            title: string | null;
+            slug: Slug | null;
+            sku: null;
+            excerpt: string | null;
+            image: {
+              asset: {
+                _id: string;
+                url: string | null;
+                mimeType: string | null;
+                metadata: {
+                  lqip: string | null;
+                  dimensions: {
+                    width: number | null;
+                    height: number | null;
+                  } | null;
+                } | null;
+              } | null;
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              alt?: string;
+              _type: "image";
+            } | null;
+            categories: Array<{
+              _id: string;
+              title: string | null;
+              slug: Slug | null;
+            }> | null;
+          } | null;
+          title: string | null;
+          blurb: string | null;
+          ctaLabel: string | null;
+          align: "center" | "left" | null;
+          showImage: boolean | null;
+          markDefs: null;
+        } | {
+          _key: string;
+          _type: "section-header";
+          padding?: SectionPadding;
+          surface?: "default" | "surface-1";
+          sectionWidth?: "default" | "narrow";
+          stackAlign?: "center" | "left";
+          direction?: "column" | "row";
+          tag?: {
+            text?: string;
+            type?: "badge" | "title";
+          };
+          title?: {
+            text?: string;
+            element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+            size?: "default" | "large" | "small";
+            weight?: "bold" | "medium" | "normal" | "semibold";
+          };
+          description?: string;
+          links?: Array<{
+            _key: string;
+          } & LinkIcon>;
+          isDatasheetTitle?: boolean;
+          hasGroupDivider?: boolean;
           markDefs: null;
         } | {
           videoId?: string;
@@ -4603,12 +5344,22 @@ export type PAGE_QUERYResult = {
             _type: "reference";
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "post";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "product";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "productCategory";
           };
           href: string | null;
           target?: boolean;
           _type: "link";
           _key: string;
-          internalType: "page" | "post" | null;
+          internalType: "page" | "post" | "product" | "productCategory" | null;
           internalSlug: string | null;
         }> | null;
         level?: number;
@@ -4641,6 +5392,71 @@ export type PAGE_QUERYResult = {
         alt?: string;
         _type: "image";
         _key: string;
+        markDefs: null;
+      } | {
+        _key: string;
+        _type: "product-callout";
+        product: {
+          _id: string;
+          title: string | null;
+          slug: Slug | null;
+          sku: null;
+          excerpt: string | null;
+          image: {
+            asset: {
+              _id: string;
+              url: string | null;
+              mimeType: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt?: string;
+            _type: "image";
+          } | null;
+          categories: Array<{
+            _id: string;
+            title: string | null;
+            slug: Slug | null;
+          }> | null;
+        } | null;
+        title: string | null;
+        blurb: string | null;
+        ctaLabel: string | null;
+        align: "center" | "left" | null;
+        showImage: boolean | null;
+        markDefs: null;
+      } | {
+        _key: string;
+        _type: "section-header";
+        padding?: SectionPadding;
+        surface?: "default" | "surface-1";
+        sectionWidth?: "default" | "narrow";
+        stackAlign?: "center" | "left";
+        direction?: "column" | "row";
+        tag?: {
+          text?: string;
+          type?: "badge" | "title";
+        };
+        title?: {
+          text?: string;
+          element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+          size?: "default" | "large" | "small";
+          weight?: "bold" | "medium" | "normal" | "semibold";
+        };
+        description?: string;
+        links?: Array<{
+          _key: string;
+        } & LinkIcon>;
+        isDatasheetTitle?: boolean;
+        hasGroupDivider?: boolean;
         markDefs: null;
       } | {
         videoId?: string;
@@ -4690,12 +5506,22 @@ export type PAGE_QUERYResult = {
             _type: "reference";
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "post";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "product";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "productCategory";
           };
           href: string | null;
           target?: boolean;
           _type: "link";
           _key: string;
-          internalType: "page" | "post" | null;
+          internalType: "page" | "post" | "product" | "productCategory" | null;
           internalSlug: string | null;
         }> | null;
         level?: number;
@@ -4728,6 +5554,71 @@ export type PAGE_QUERYResult = {
         alt?: string;
         _type: "image";
         _key: string;
+        markDefs: null;
+      } | {
+        _key: string;
+        _type: "product-callout";
+        product: {
+          _id: string;
+          title: string | null;
+          slug: Slug | null;
+          sku: null;
+          excerpt: string | null;
+          image: {
+            asset: {
+              _id: string;
+              url: string | null;
+              mimeType: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt?: string;
+            _type: "image";
+          } | null;
+          categories: Array<{
+            _id: string;
+            title: string | null;
+            slug: Slug | null;
+          }> | null;
+        } | null;
+        title: string | null;
+        blurb: string | null;
+        ctaLabel: string | null;
+        align: "center" | "left" | null;
+        showImage: boolean | null;
+        markDefs: null;
+      } | {
+        _key: string;
+        _type: "section-header";
+        padding?: SectionPadding;
+        surface?: "default" | "surface-1";
+        sectionWidth?: "default" | "narrow";
+        stackAlign?: "center" | "left";
+        direction?: "column" | "row";
+        tag?: {
+          text?: string;
+          type?: "badge" | "title";
+        };
+        title?: {
+          text?: string;
+          element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+          size?: "default" | "large" | "small";
+          weight?: "bold" | "medium" | "normal" | "semibold";
+        };
+        description?: string;
+        links?: Array<{
+          _key: string;
+        } & LinkIcon>;
+        isDatasheetTitle?: boolean;
+        hasGroupDivider?: boolean;
         markDefs: null;
       } | {
         videoId?: string;
@@ -5647,12 +6538,22 @@ export type PAGE_QUERYResult = {
           _type: "reference";
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
         };
         href: string | null;
         target?: boolean;
         _type: "link";
         _key: string;
-        internalType: "page" | "post" | null;
+        internalType: "page" | "post" | "product" | "productCategory" | null;
         internalSlug: string | null;
       }> | null;
       level?: number;
@@ -5685,6 +6586,71 @@ export type PAGE_QUERYResult = {
       alt?: string;
       _type: "image";
       _key: string;
+      markDefs: null;
+    } | {
+      _key: string;
+      _type: "product-callout";
+      product: {
+        _id: string;
+        title: string | null;
+        slug: Slug | null;
+        sku: null;
+        excerpt: string | null;
+        image: {
+          asset: {
+            _id: string;
+            url: string | null;
+            mimeType: string | null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
+          } | null;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt?: string;
+          _type: "image";
+        } | null;
+        categories: Array<{
+          _id: string;
+          title: string | null;
+          slug: Slug | null;
+        }> | null;
+      } | null;
+      title: string | null;
+      blurb: string | null;
+      ctaLabel: string | null;
+      align: "center" | "left" | null;
+      showImage: boolean | null;
+      markDefs: null;
+    } | {
+      _key: string;
+      _type: "section-header";
+      padding?: SectionPadding;
+      surface?: "default" | "surface-1";
+      sectionWidth?: "default" | "narrow";
+      stackAlign?: "center" | "left";
+      direction?: "column" | "row";
+      tag?: {
+        text?: string;
+        type?: "badge" | "title";
+      };
+      title?: {
+        text?: string;
+        element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+        size?: "default" | "large" | "small";
+        weight?: "bold" | "medium" | "normal" | "semibold";
+      };
+      description?: string;
+      links?: Array<{
+        _key: string;
+      } & LinkIcon>;
+      isDatasheetTitle?: boolean;
+      hasGroupDivider?: boolean;
       markDefs: null;
     } | {
       videoId?: string;
@@ -5814,12 +6780,22 @@ export type PAGE_QUERYResult = {
           _type: "reference";
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
         };
         href: string | null;
         target?: boolean;
         _type: "link";
         _key: string;
-        internalType: "page" | "post" | null;
+        internalType: "page" | "post" | "product" | "productCategory" | null;
         internalSlug: string | null;
       }> | null;
       level?: number;
@@ -5852,6 +6828,71 @@ export type PAGE_QUERYResult = {
       alt?: string;
       _type: "image";
       _key: string;
+      markDefs: null;
+    } | {
+      _key: string;
+      _type: "product-callout";
+      product: {
+        _id: string;
+        title: string | null;
+        slug: Slug | null;
+        sku: null;
+        excerpt: string | null;
+        image: {
+          asset: {
+            _id: string;
+            url: string | null;
+            mimeType: string | null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
+          } | null;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt?: string;
+          _type: "image";
+        } | null;
+        categories: Array<{
+          _id: string;
+          title: string | null;
+          slug: Slug | null;
+        }> | null;
+      } | null;
+      title: string | null;
+      blurb: string | null;
+      ctaLabel: string | null;
+      align: "center" | "left" | null;
+      showImage: boolean | null;
+      markDefs: null;
+    } | {
+      _key: string;
+      _type: "section-header";
+      padding?: SectionPadding;
+      surface?: "default" | "surface-1";
+      sectionWidth?: "default" | "narrow";
+      stackAlign?: "center" | "left";
+      direction?: "column" | "row";
+      tag?: {
+        text?: string;
+        type?: "badge" | "title";
+      };
+      title?: {
+        text?: string;
+        element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+        size?: "default" | "large" | "small";
+        weight?: "bold" | "medium" | "normal" | "semibold";
+      };
+      description?: string;
+      links?: Array<{
+        _key: string;
+      } & LinkIcon>;
+      isDatasheetTitle?: boolean;
+      hasGroupDivider?: boolean;
       markDefs: null;
     } | {
       videoId?: string;
@@ -5957,12 +6998,22 @@ export type PAGE_QUERYResult = {
           _type: "reference";
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
         };
         href: string | null;
         target?: boolean;
         _type: "link";
         _key: string;
-        internalType: "page" | "post" | null;
+        internalType: "page" | "post" | "product" | "productCategory" | null;
         internalSlug: string | null;
       }> | null;
       level?: number;
@@ -5995,6 +7046,71 @@ export type PAGE_QUERYResult = {
       alt?: string;
       _type: "image";
       _key: string;
+      markDefs: null;
+    } | {
+      _key: string;
+      _type: "product-callout";
+      product: {
+        _id: string;
+        title: string | null;
+        slug: Slug | null;
+        sku: null;
+        excerpt: string | null;
+        image: {
+          asset: {
+            _id: string;
+            url: string | null;
+            mimeType: string | null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
+          } | null;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt?: string;
+          _type: "image";
+        } | null;
+        categories: Array<{
+          _id: string;
+          title: string | null;
+          slug: Slug | null;
+        }> | null;
+      } | null;
+      title: string | null;
+      blurb: string | null;
+      ctaLabel: string | null;
+      align: "center" | "left" | null;
+      showImage: boolean | null;
+      markDefs: null;
+    } | {
+      _key: string;
+      _type: "section-header";
+      padding?: SectionPadding;
+      surface?: "default" | "surface-1";
+      sectionWidth?: "default" | "narrow";
+      stackAlign?: "center" | "left";
+      direction?: "column" | "row";
+      tag?: {
+        text?: string;
+        type?: "badge" | "title";
+      };
+      title?: {
+        text?: string;
+        element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+        size?: "default" | "large" | "small";
+        weight?: "bold" | "medium" | "normal" | "semibold";
+      };
+      description?: string;
+      links?: Array<{
+        _key: string;
+      } & LinkIcon>;
+      isDatasheetTitle?: boolean;
+      hasGroupDivider?: boolean;
       markDefs: null;
     } | {
       videoId?: string;
@@ -6116,12 +7232,22 @@ export type PAGE_QUERYResult = {
           _type: "reference";
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
         };
         href: string | null;
         target?: boolean;
         _type: "link";
         _key: string;
-        internalType: "page" | "post" | null;
+        internalType: "page" | "post" | "product" | "productCategory" | null;
         internalSlug: string | null;
       }> | null;
       level?: number;
@@ -6154,6 +7280,71 @@ export type PAGE_QUERYResult = {
       alt?: string;
       _type: "image";
       _key: string;
+      markDefs: null;
+    } | {
+      _key: string;
+      _type: "product-callout";
+      product: {
+        _id: string;
+        title: string | null;
+        slug: Slug | null;
+        sku: null;
+        excerpt: string | null;
+        image: {
+          asset: {
+            _id: string;
+            url: string | null;
+            mimeType: string | null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
+          } | null;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt?: string;
+          _type: "image";
+        } | null;
+        categories: Array<{
+          _id: string;
+          title: string | null;
+          slug: Slug | null;
+        }> | null;
+      } | null;
+      title: string | null;
+      blurb: string | null;
+      ctaLabel: string | null;
+      align: "center" | "left" | null;
+      showImage: boolean | null;
+      markDefs: null;
+    } | {
+      _key: string;
+      _type: "section-header";
+      padding?: SectionPadding;
+      surface?: "default" | "surface-1";
+      sectionWidth?: "default" | "narrow";
+      stackAlign?: "center" | "left";
+      direction?: "column" | "row";
+      tag?: {
+        text?: string;
+        type?: "badge" | "title";
+      };
+      title?: {
+        text?: string;
+        element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+        size?: "default" | "large" | "small";
+        weight?: "bold" | "medium" | "normal" | "semibold";
+      };
+      description?: string;
+      links?: Array<{
+        _key: string;
+      } & LinkIcon>;
+      isDatasheetTitle?: boolean;
+      hasGroupDivider?: boolean;
       markDefs: null;
     } | {
       videoId?: string;
@@ -6290,6 +7481,10 @@ export type PAGE_QUERYResult = {
     body: Array<{
       _key: string;
     } & Code | {
+      _key: string;
+    } & ProductCallout | {
+      _key: string;
+    } & SectionHeader | {
       title?: string;
       description?: string;
       _type: "alert";
@@ -6315,6 +7510,16 @@ export type PAGE_QUERYResult = {
           _type: "reference";
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
         };
         href?: string;
         target?: boolean;
@@ -6427,12 +7632,22 @@ export type PAGE_QUERYResult = {
           _type: "reference";
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
         };
         href: string | null;
         target?: boolean;
         _type: "link";
         _key: string;
-        internalType: "page" | "post" | null;
+        internalType: "page" | "post" | "product" | "productCategory" | null;
         internalSlug: string | null;
       }> | null;
       level?: number;
@@ -6465,6 +7680,71 @@ export type PAGE_QUERYResult = {
       alt?: string;
       _type: "image";
       _key: string;
+      markDefs: null;
+    } | {
+      _key: string;
+      _type: "product-callout";
+      product: {
+        _id: string;
+        title: string | null;
+        slug: Slug | null;
+        sku: null;
+        excerpt: string | null;
+        image: {
+          asset: {
+            _id: string;
+            url: string | null;
+            mimeType: string | null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
+          } | null;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt?: string;
+          _type: "image";
+        } | null;
+        categories: Array<{
+          _id: string;
+          title: string | null;
+          slug: Slug | null;
+        }> | null;
+      } | null;
+      title: string | null;
+      blurb: string | null;
+      ctaLabel: string | null;
+      align: "center" | "left" | null;
+      showImage: boolean | null;
+      markDefs: null;
+    } | {
+      _key: string;
+      _type: "section-header";
+      padding?: SectionPadding;
+      surface?: "default" | "surface-1";
+      sectionWidth?: "default" | "narrow";
+      stackAlign?: "center" | "left";
+      direction?: "column" | "row";
+      tag?: {
+        text?: string;
+        type?: "badge" | "title";
+      };
+      title?: {
+        text?: string;
+        element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+        size?: "default" | "large" | "small";
+        weight?: "bold" | "medium" | "normal" | "semibold";
+      };
+      description?: string;
+      links?: Array<{
+        _key: string;
+      } & LinkIcon>;
+      isDatasheetTitle?: boolean;
+      hasGroupDivider?: boolean;
       markDefs: null;
     } | {
       videoId?: string;
@@ -7310,7 +8590,7 @@ export type PAGES_SLUGS_QUERYResult = Array<{
 
 // Source: ../frontend/sanity/queries/post.ts
 // Variable: POST_QUERY
-// Query: *[    _type == "post" &&    slug.current == $slug &&    language == $lang  ]  | order(_updatedAt desc)[0]{    _id,    language,    title,    slug,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  }    },    author->{      name,      title,      image {   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } }    },    publishedAt,    _createdAt,    _updatedAt,      meta{    title,    description,    noindex,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },    "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180 ),      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[] {    "lang": _key,    "slug": value->slug.current  } [defined(slug) && defined(lang)],  }
+// Query: *[    _type == "post" &&    slug.current == $slug &&    language == $lang  ]  | order(_updatedAt desc)[0]{    _id,    language,    title,    slug,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }    },    author->{      name,      title,      image {   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } }    },    publishedAt,    _createdAt,    _updatedAt,      meta{    title,    description,    noindex,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },    "estimatedReadingTime": round(length(pt::text(body)) / 5 / 180 ),      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[] {    "lang": _key,    "slug": value->slug.current  } [defined(slug) && defined(lang)],  }
 export type POST_QUERYResult = {
   _id: string;
   language: string | null;
@@ -7362,12 +8642,22 @@ export type POST_QUERYResult = {
         _type: "reference";
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "product";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "productCategory";
       };
       href: string | null;
       target?: boolean;
       _type: "link";
       _key: string;
-      internalType: "page" | "post" | null;
+      internalType: "page" | "post" | "product" | "productCategory" | null;
       internalSlug: string | null;
     }> | null;
     level?: number;
@@ -7400,6 +8690,71 @@ export type POST_QUERYResult = {
     alt?: string;
     _type: "image";
     _key: string;
+    markDefs: null;
+  } | {
+    _key: string;
+    _type: "product-callout";
+    product: {
+      _id: string;
+      title: string | null;
+      slug: Slug | null;
+      sku: null;
+      excerpt: string | null;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      } | null;
+      categories: Array<{
+        _id: string;
+        title: string | null;
+        slug: Slug | null;
+      }> | null;
+    } | null;
+    title: string | null;
+    blurb: string | null;
+    ctaLabel: string | null;
+    align: "center" | "left" | null;
+    showImage: boolean | null;
+    markDefs: null;
+  } | {
+    _key: string;
+    _type: "section-header";
+    padding?: SectionPadding;
+    surface?: "default" | "surface-1";
+    sectionWidth?: "default" | "narrow";
+    stackAlign?: "center" | "left";
+    direction?: "column" | "row";
+    tag?: {
+      text?: string;
+      type?: "badge" | "title";
+    };
+    title?: {
+      text?: string;
+      element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+      size?: "default" | "large" | "small";
+      weight?: "bold" | "medium" | "normal" | "semibold";
+    };
+    description?: string;
+    links?: Array<{
+      _key: string;
+    } & LinkIcon>;
+    isDatasheetTitle?: boolean;
+    hasGroupDivider?: boolean;
     markDefs: null;
   } | {
     videoId?: string;
@@ -7645,7 +9000,7 @@ export type POSTS_COUNT_QUERYResult = number;
 
 // Source: ../frontend/sanity/queries/product.ts
 // Variable: PRODUCT_QUERY
-// Query: *[    _type == "product" &&    slug.current == $slug &&    language == $lang  ]  | order(_updatedAt desc)[0]{      _id,  language,  orderRank,  _createdAt,  title,  slug,  specifications[]->{    _id,    name,    sku,    bestFor,    pungency,    bindingCapacity,    fatContent,    purity,    moisture,    hsCode,    minOrder,    origin,    botanicalName,    shelfLife,    allergenInfo,    productAttributes,    certification  },  keyFeatures[],  packagingOptions[]{    ...  },  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  body[]{   ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  } },  excerpt,  categories[]->{      _id,  title,  slug,  language  },    meta{    title,    description,    noindex,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  }    ,      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[] {    "lang": _key,    "slug": value->slug.current  } [defined(slug) && defined(lang)]  }
+// Query: *[    _type == "product" &&    slug.current == $slug &&    language == $lang  ]  | order(_updatedAt desc)[0]{      _id,  language,  orderRank,  _createdAt,  title,  slug,  specifications[]->{    _id,    name,    sku,    bestFor,    pungency,    bindingCapacity,    fatContent,    purity,    moisture,    hsCode,    minOrder,    origin,    botanicalName,    shelfLife,    allergenInfo,    productAttributes,    certification  },  keyFeatures[],  packagingOptions[]{    ...  },  image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  body[]{   ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  } },  excerpt,  categories[]->{      _id,  title,  slug,  language  },    meta{    title,    description,    noindex,    image{        ...,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  }    ,      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[] {    "lang": _key,    "slug": value->slug.current  } [defined(slug) && defined(lang)]  }
 export type PRODUCT_QUERYResult = {
   _id: string;
   language: string | null;
@@ -7728,12 +9083,22 @@ export type PRODUCT_QUERYResult = {
         _type: "reference";
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "product";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "productCategory";
       };
       href: string | null;
       target?: boolean;
       _type: "link";
       _key: string;
-      internalType: "page" | "post" | null;
+      internalType: "page" | "post" | "product" | "productCategory" | null;
       internalSlug: string | null;
     }> | null;
     level?: number;
@@ -7766,6 +9131,71 @@ export type PRODUCT_QUERYResult = {
     alt?: string;
     _type: "image";
     _key: string;
+    markDefs: null;
+  } | {
+    _key: string;
+    _type: "product-callout";
+    product: {
+      _id: string;
+      title: string | null;
+      slug: Slug | null;
+      sku: null;
+      excerpt: string | null;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      } | null;
+      categories: Array<{
+        _id: string;
+        title: string | null;
+        slug: Slug | null;
+      }> | null;
+    } | null;
+    title: string | null;
+    blurb: string | null;
+    ctaLabel: string | null;
+    align: "center" | "left" | null;
+    showImage: boolean | null;
+    markDefs: null;
+  } | {
+    _key: string;
+    _type: "section-header";
+    padding?: SectionPadding;
+    surface?: "default" | "surface-1";
+    sectionWidth?: "default" | "narrow";
+    stackAlign?: "center" | "left";
+    direction?: "column" | "row";
+    tag?: {
+      text?: string;
+      type?: "badge" | "title";
+    };
+    title?: {
+      text?: string;
+      element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+      size?: "default" | "large" | "small";
+      weight?: "bold" | "medium" | "normal" | "semibold";
+    };
+    description?: string;
+    links?: Array<{
+      _key: string;
+    } & LinkIcon>;
+    isDatasheetTitle?: boolean;
+    hasGroupDivider?: boolean;
     markDefs: null;
   } | {
     videoId?: string;
@@ -8252,20 +9682,20 @@ declare module "@sanity/client" {
     "\n  *[\n    _type == \"post\" && references(*[_type == \"category\" && slug.current == $slug]._id) && language == $lang\n  ]\n  | order((language == $lang) desc, title asc)[$offset...$end]{\n    _id,\n    language,\n    _createdAt,\n    title,\n    slug,\n    excerpt,\n    author->{\n      name,\n      title,\n      image{ asset->{ _id, url } }\n    },\n    categories[]->{ _id, title, slug },\n  }\n": POSTS_BY_BLOG_CATEGORY_QUERY_AZResult;
     "\n  *[\n    _type == \"post\" && references(*[_type == \"category\" && slug.current == $slug]._id) && language == $lang\n  ]\n  | order((language == $lang) desc, title desc)[$offset...$end]{\n    _id,\n    language,\n    _createdAt,\n    title,\n    slug,\n    excerpt,\n    author->{\n      name,\n      title,\n      image{ asset->{ _id, url } }\n    },\n    categories[]->{ _id, title, slug },\n  }\n": POSTS_BY_BLOG_CATEGORY_QUERY_ZAResult;
     "\n  count(*[\n    _type == \"post\" && references(*[_type == \"category\" && slug.current == $slug]._id) && language == $lang\n  ])\n": POSTS_COUNT_BY_BLOG_CATEGORY_QUERYResult;
-    "*[_type == \"changelog\" && defined(slug)] | order(date desc){\n    _id,\n    title,\n    slug,\n    version,\n    date,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    author->{\n      name,\n      title,\n      image {\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    },\n    categories[]->{\n      _id,\n      title,\n      color\n    },\n}": CHANGELOGS_QUERYResult;
+    "*[_type == \"changelog\" && defined(slug)] | order(date desc){\n    _id,\n    title,\n    slug,\n    version,\n    date,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    author->{\n      name,\n      title,\n      image {\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    },\n    categories[]->{\n      _id,\n      title,\n      color\n    },\n}": CHANGELOGS_QUERYResult;
     "\n  *[\n    _type == \"contact\" &&\n    (!defined(language) || language in [$lang, $fallbackLang])\n  ]\n  | order(\n    (language == $lang) desc,\n    (language == $fallbackLang) desc,\n    _updatedAt desc\n  )[0]{\n    tagline,\n    title,\n    description,\n    contactMethods[]{\n      icon,\n      title,\n      description,\n      link {\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n      }\n    },\n    \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n  }\n": CONTACT_QUERYResult;
-    "*[_type == \"post\" && defined(slug)] | order(coalesce(publishedAt, _createdAt) desc)[0...$limit]{\n  _id,\n  _createdAt,\n  publishedAt,\n  title,\n  slug,\n  excerpt,\n  author->{ name },\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  body[]{\n    \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n  },\n  categories[]->{ title }\n}": FEED_POSTS_QUERY_NEWESTResult;
-    "*[\n  _type == \"post\" && references(*[_type == \"category\" && slug.current == $slug]._id)\n] | order(coalesce(publishedAt, _createdAt) desc)[0...$limit]{\n  _id,\n  _createdAt,\n  publishedAt,\n  title,\n  slug,\n  excerpt,\n  author->{ name },\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  body[]{\n    \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n  },\n  categories[]->{ title }\n}": FEED_POSTS_BY_CATEGORY_QUERY_NEWESTResult;
+    "*[_type == \"post\" && defined(slug)] | order(coalesce(publishedAt, _createdAt) desc)[0...$limit]{\n  _id,\n  _createdAt,\n  publishedAt,\n  title,\n  slug,\n  excerpt,\n  author->{ name },\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  body[]{\n    \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n  },\n  categories[]->{ title }\n}": FEED_POSTS_QUERY_NEWESTResult;
+    "*[\n  _type == \"post\" && references(*[_type == \"category\" && slug.current == $slug]._id)\n] | order(coalesce(publishedAt, _createdAt) desc)[0...$limit]{\n  _id,\n  _createdAt,\n  publishedAt,\n  title,\n  slug,\n  excerpt,\n  author->{ name },\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  body[]{\n    \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n  },\n  categories[]->{ title }\n}": FEED_POSTS_BY_CATEGORY_QUERY_NEWESTResult;
     "\n  *[\n    _type == \"navigation\" &&\n    (!defined(language) || language in [$lang, $fallbackLang])\n  ]\n  | order((language == $lang) desc, (language == $fallbackLang) desc, orderRank asc){\n    _type,\n    _key,\n    title,\n    language,\n    links[]{\n      \n  _key,\n  _type,\n  title,\n  buttonVariant,\n  target,\n  isExternal,\n  \"href\": select(isExternal => href, null),\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  iconVariant,\n  description\n,\n      _type == \"link-group\" => {\n        links[]{\n          \n  _key,\n  _type,\n  title,\n  buttonVariant,\n  target,\n  isExternal,\n  \"href\": select(isExternal => href, null),\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  iconVariant,\n  description\n\n        }\n      }\n    }\n  }\n": NAVIGATION_QUERYResult;
-    "\n  *[\n    _type == \"page\" &&\n    slug.current == $slug &&\n    language == $lang &&\n    defined(blocks[]) &&\n    defined(title)\n  ]\n  | order(_updatedAt desc)[0]{\n    _id,\n    _type,\n    language,\n    title,\n    blocks[]{\n      \n  _type == \"section-header\" => {\n    _type,\n    _key,\n    padding,\n    sectionWidth,\n    stackAlign,\n    direction,\n  surface,\n    tag,\n    title,\n    description,\n    isDatasheetTitle,\n    hasGroupDivider,\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"hero-12\" => {\n    _type,\n    _key,\n    imageTreatment,\n    backgroundImage{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    tagLine,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n    techLogos[]{\n      _key,\n      title,\n      link,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n      \n  _type == \"hero-13\" => {\n    _type,\n    _key,\n    tag,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"hero-25\" => {\n    _type,\n    _key,\n    tagLine,\n    title,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n    tags\n  }\n,\n      \n  _type == \"hero-57\" => {\n    _type,\n    _key,\n    title,\n    body,\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n    tags\n  }\n,\n      \n  _type == \"hero-85\" => {\n    _type,\n    _key,\n    tag{\n      title,\n      description\n    },\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"hero-160\" => {\n    _type,\n    _key,\n    backgroundImage{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    tag,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n      \n  _type == \"hero-174\" => {\n    _type,\n    _key,\n    imageTreatment,\n    backgroundImage{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n    tag\n  }\n,\n      \n  _type == \"faq-1\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-5\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-8\" => {\n    _type,\n    _key,\n    padding,\n    sections[]{\n      _type,\n      _key,\n      title,\n      faqs[]->{\n        _id,\n        title,\n        body[]{\n          \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n        }\n      }\n    }\n  }\n,\n      \n  _type == \"faq-9\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-14\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    sections[]{\n      _type,\n      _key,\n      title,\n      faqs[]->{\n        _id,\n        title,\n        body[]{\n          \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n        }\n      }\n    }\n  }\n,\n      \n  _type == \"logos-1\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n      \n  _type == \"logos-2\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n      \n  _type == \"logos-4\" => {\n    _type,\n    _key,\n    padding,\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n      \n  _type == \"logos-9\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    testimonials[]->{\n      ...,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    }\n  }\n,\n      \n  _type == \"feature-1\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-content\" => {\n    _type,\n    _key,\n    padding,\n    iconVariant,\n    tag,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"feature-image\" => {\n    _type,\n    _key,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-3\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-3-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-12\" => {\n    _type,\n    _key,\n    padding,\n    tagline,\n    columns[]{\n      \n  _type == \"feature-12-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-15\" => {\n    _type,\n    _key,\n    padding,\n    contrastVariant,\n    gridColumns,\n    columns[]{\n      \n  _type == \"feature-15-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-66\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-66-card\" => {\n    _type,\n    _key,\n    logo{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-117\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-117-card\" => {\n    _type,\n    _key,\n    tag,\n    title,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-157\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-157-card\" => {\n    _type,\n    _key,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-202\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-202-card\" => {\n    _type,\n    _key,\n    imageTreatment,\n    iconVariant,\n    title,\n    description,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"blog-4\" => {\n    _type,\n    _key,\n    padding,\n    gridColumns,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      excerpt,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      categories[]->{\n        _id,\n        title,\n        slug,\n      },\n      author->{\n        _id,\n        name,\n        image{\n          \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n        }\n      }\n    },\n  }\n,\n      \n  _type == \"all-posts-4\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"blog-7\" => {\n    _type,\n    _key,\n    padding,\n    gridColumns,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      excerpt,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"all-posts-7\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"blog-13\" => {\n    _type,\n    _key,\n    padding,\n    gridColumns,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      categories[]->{\n        _id,\n        title,\n        slug,\n      },\n    },\n  }\n,\n      \n  _type == \"all-posts-13\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"blog-14\" => {\n    _type,\n    _key,\n    padding,\n    gridColumns,\n    title,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      excerpt,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      categories[]->{\n        _id,\n        title,\n        slug,\n      },\n      author->{\n        _id,\n        name,\n        image{\n          \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n        }\n      }\n    },\n  }\n,\n      \n  _type == \"all-posts-14\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"blog-16\" => {\n    _type,\n    _key,\n    padding,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      categories[]->{\n        _id,\n        title,\n        slug,\n      },\n      author->{\n        _id,\n        name,\n        title,\n        image{\n          \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n        }\n      }\n    },\n  }\n,\n      \n  _type == \"all-posts-16\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"changelog-1\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"changelog-2\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"changelog-3\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"changelog-5\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    secondaryTitle,\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"pricing-1\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      featured,\n      title,\n      description,\n      price{\n        value,\n        note,\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      listTitle,\n      list,\n    },\n  }\n,\n      \n  _type == \"pricing-2\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      title,\n      description,\n      price{\n        monthly,\n        yearly,\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      listTitle,\n      list,\n    },\n  }\n,\n      \n  _type == \"pricing-7\" => {\n    _type,\n    _key,\n    padding,\n    badge,\n    columns[]{\n      _key,\n      title,\n      description,\n      price{\n        monthly,\n        yearly,\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      listTitle,\n      list,\n    },\n  }\n,\n      \n  _type == \"pricing-9\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      featured,\n      title,\n      description,\n      price{\n        monthly,\n        yearly,\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n    },\n    sections[]{\n      _key,\n      title,\n      features[]{\n        _key,\n        name,\n        tiers,\n        tooltip,\n      },\n    },\n  }\n,\n      \n  _type == \"pricing-16\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    tag,\n    columns[]{\n      _key,\n      featured,\n      title,\n      description,\n      price{\n        value,\n        discount,\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      listTitle,\n      list,\n    },\n  }\n,\n      \n  _type == \"team-1\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-2\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-3\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-4\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-5\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-6\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-8\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"compare-1\" => {\n    _type,\n    _key,\n    padding,\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    columns[]{\n      _key,\n      label,\n      primary,\n      secondary,\n      hasIcon,\n    },\n  }\n,\n      \n  _type == \"compare-2\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      featured,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      title,\n      list,\n    },\n  }\n,\n      \n  _type == \"compare-4\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    titles,\n    columns[]{\n      _key,\n      title,\n      primary,\n      secondary\n    },\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"compare-5\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      title,\n      description,\n      link {\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n      },\n    },\n  }\n,\n    \n  _type == \"compare-6\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    rows,\n    columns[]{\n      _key,\n      name,\n      attributes[]{\n        _key,\n        value,\n        status,\n      },\n    },\n  }\n,\n    \n  _type == \"compare-products\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    productFields,\n    columns[]{\n      _key,\n      product->{\n        _id,\n        title,\n        \"slug\": slug.current,\n        // First specification projected under 'spec'\n        \"spec\": specifications[0]->{\n          sku,\n          bestFor,\n          pungency,\n          bindingCapacity,\n          fatContent\n        }\n      },\n      overrides{\n        sku,\n        bestFor,\n        pungency,\n        bindingCapacity,\n        fatContent\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-1\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      title,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      logo{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      categories[]->{\n        _id,\n        title,\n        color\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-3\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    columns[]{\n      _key,\n      title,\n      description,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      categories[]->{\n        _id,\n        title,\n        color\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-4\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    columns[]{\n      _key,\n      title,\n      description,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      categories[]->{\n        _id,\n        title,\n        color\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-8\" => {\n    _type,\n    _key,\n    padding,\n    link{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n    },\n    columns[]{\n      _key,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      categories[]->{\n        _id,\n        title,\n        color\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-9\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      title,\n      description,\n      iconVariant,\n    },\n  }\n,\n      \n  _type == \"gallery-10\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    testimonials[]->{\n      ...,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    }\n  }\n,\n      \n  _type == \"timeline-3\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n    },\n    columns[]{\n      _key,\n      title,\n      description,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"timeline-4\" => {\n    _type,\n    _key,\n    padding,\n    tag,\n    title,\n    description,\n    columns[]{\n      _key,\n      title,\n      description,\n      iconVariant,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"timeline-5\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    columns[]{\n      _key,\n      iconVariant,\n      title,\n      description,\n    },\n  }\n,\n      \n  _type == \"timeline-6\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    columns[]{\n      _key,\n      iconVariant,\n      title,\n      description,\n    },\n  }\n,\n      \n  _type == \"product-categories-16\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"all-products-16\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n    },\n    \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n    \n  \"allTranslations\": *[_type == \"translation.metadata\" && ^._id in translations[].value._ref][0].translations[] {\n    \"lang\": _key,\n    \"slug\": value->slug.current\n  } [defined(slug) && defined(lang)]\n,\n  }\n": PAGE_QUERYResult;
+    "\n  *[\n    _type == \"page\" &&\n    slug.current == $slug &&\n    language == $lang &&\n    defined(blocks[]) &&\n    defined(title)\n  ]\n  | order(_updatedAt desc)[0]{\n    _id,\n    _type,\n    language,\n    title,\n    blocks[]{\n      \n  _type == \"section-header\" => {\n    _type,\n    _key,\n    padding,\n    sectionWidth,\n    stackAlign,\n    direction,\n  surface,\n    tag,\n    title,\n    description,\n    isDatasheetTitle,\n    hasGroupDivider,\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"hero-12\" => {\n    _type,\n    _key,\n    imageTreatment,\n    backgroundImage{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    tagLine,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n    techLogos[]{\n      _key,\n      title,\n      link,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      }\n    }\n  }\n,\n      \n  _type == \"hero-13\" => {\n    _type,\n    _key,\n    tag,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"hero-25\" => {\n    _type,\n    _key,\n    tagLine,\n    title,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n    tags\n  }\n,\n      \n  _type == \"hero-57\" => {\n    _type,\n    _key,\n    title,\n    body,\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n    tags\n  }\n,\n      \n  _type == \"hero-85\" => {\n    _type,\n    _key,\n    tag{\n      title,\n      description\n    },\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n    },\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"hero-160\" => {\n    _type,\n    _key,\n    backgroundImage{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    tag,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n      \n  _type == \"hero-174\" => {\n    _type,\n    _key,\n    imageTreatment,\n    backgroundImage{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n    tag\n  }\n,\n      \n  _type == \"faq-1\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-5\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-8\" => {\n    _type,\n    _key,\n    padding,\n    sections[]{\n      _type,\n      _key,\n      title,\n      faqs[]->{\n        _id,\n        title,\n        body[]{\n          \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n      \n  _type == \"faq-9\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-14\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    sections[]{\n      _type,\n      _key,\n      title,\n      faqs[]->{\n        _id,\n        title,\n        body[]{\n          \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n      \n  _type == \"logos-1\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n      \n  _type == \"logos-2\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n      \n  _type == \"logos-4\" => {\n    _type,\n    _key,\n    padding,\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n      \n  _type == \"logos-9\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    testimonials[]->{\n      ...,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    }\n  }\n,\n      \n  _type == \"feature-1\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-content\" => {\n    _type,\n    _key,\n    padding,\n    iconVariant,\n    tag,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"feature-image\" => {\n    _type,\n    _key,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-3\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-3-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-12\" => {\n    _type,\n    _key,\n    padding,\n    tagline,\n    columns[]{\n      \n  _type == \"feature-12-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-15\" => {\n    _type,\n    _key,\n    padding,\n    contrastVariant,\n    gridColumns,\n    columns[]{\n      \n  _type == \"feature-15-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-66\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-66-card\" => {\n    _type,\n    _key,\n    logo{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-117\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-117-card\" => {\n    _type,\n    _key,\n    tag,\n    title,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-157\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-157-card\" => {\n    _type,\n    _key,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-202\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-202-card\" => {\n    _type,\n    _key,\n    imageTreatment,\n    iconVariant,\n    title,\n    description,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"blog-4\" => {\n    _type,\n    _key,\n    padding,\n    gridColumns,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      excerpt,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      categories[]->{\n        _id,\n        title,\n        slug,\n      },\n      author->{\n        _id,\n        name,\n        image{\n          \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n        }\n      }\n    },\n  }\n,\n      \n  _type == \"all-posts-4\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"blog-7\" => {\n    _type,\n    _key,\n    padding,\n    gridColumns,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      excerpt,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"all-posts-7\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"blog-13\" => {\n    _type,\n    _key,\n    padding,\n    gridColumns,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      categories[]->{\n        _id,\n        title,\n        slug,\n      },\n    },\n  }\n,\n      \n  _type == \"all-posts-13\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"blog-14\" => {\n    _type,\n    _key,\n    padding,\n    gridColumns,\n    title,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      excerpt,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      categories[]->{\n        _id,\n        title,\n        slug,\n      },\n      author->{\n        _id,\n        name,\n        image{\n          \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n        }\n      }\n    },\n  }\n,\n      \n  _type == \"all-posts-14\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"blog-16\" => {\n    _type,\n    _key,\n    padding,\n    posts[]->{\n      _id,\n      _createdAt,\n      title,\n      slug,\n      categories[]->{\n        _id,\n        title,\n        slug,\n      },\n      author->{\n        _id,\n        name,\n        title,\n        image{\n          \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n        }\n      }\n    },\n  }\n,\n      \n  _type == \"all-posts-16\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"changelog-1\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"changelog-2\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"changelog-3\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"changelog-5\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    secondaryTitle,\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"pricing-1\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      featured,\n      title,\n      description,\n      price{\n        value,\n        note,\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      listTitle,\n      list,\n    },\n  }\n,\n      \n  _type == \"pricing-2\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      title,\n      description,\n      price{\n        monthly,\n        yearly,\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      listTitle,\n      list,\n    },\n  }\n,\n      \n  _type == \"pricing-7\" => {\n    _type,\n    _key,\n    padding,\n    badge,\n    columns[]{\n      _key,\n      title,\n      description,\n      price{\n        monthly,\n        yearly,\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      listTitle,\n      list,\n    },\n  }\n,\n      \n  _type == \"pricing-9\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      featured,\n      title,\n      description,\n      price{\n        monthly,\n        yearly,\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n    },\n    sections[]{\n      _key,\n      title,\n      features[]{\n        _key,\n        name,\n        tiers,\n        tooltip,\n      },\n    },\n  }\n,\n      \n  _type == \"pricing-16\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    tag,\n    columns[]{\n      _key,\n      featured,\n      title,\n      description,\n      price{\n        value,\n        discount,\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      listTitle,\n      list,\n    },\n  }\n,\n      \n  _type == \"team-1\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-2\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-3\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-4\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-5\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-6\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"team-8\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"compare-1\" => {\n    _type,\n    _key,\n    padding,\n    images[]{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    columns[]{\n      _key,\n      label,\n      primary,\n      secondary,\n      hasIcon,\n    },\n  }\n,\n      \n  _type == \"compare-2\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      featured,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      title,\n      list,\n    },\n  }\n,\n      \n  _type == \"compare-4\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    titles,\n    columns[]{\n      _key,\n      title,\n      primary,\n      secondary\n    },\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"compare-5\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      title,\n      description,\n      link {\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n      },\n    },\n  }\n,\n    \n  _type == \"compare-6\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    rows,\n    columns[]{\n      _key,\n      name,\n      attributes[]{\n        _key,\n        value,\n        status,\n      },\n    },\n  }\n,\n    \n  _type == \"compare-products\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    productFields,\n    columns[]{\n      _key,\n      product->{\n        _id,\n        title,\n        \"slug\": slug.current,\n        // First specification projected under 'spec'\n        \"spec\": specifications[0]->{\n          sku,\n          bestFor,\n          pungency,\n          bindingCapacity,\n          fatContent\n        }\n      },\n      overrides{\n        sku,\n        bestFor,\n        pungency,\n        bindingCapacity,\n        fatContent\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-1\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      title,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      logo{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      categories[]->{\n        _id,\n        title,\n        color\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-3\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    columns[]{\n      _key,\n      title,\n      description,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      categories[]->{\n        _id,\n        title,\n        color\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-4\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    columns[]{\n      _key,\n      title,\n      description,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      categories[]->{\n        _id,\n        title,\n        color\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-8\" => {\n    _type,\n    _key,\n    padding,\n    link{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n    },\n    columns[]{\n      _key,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      link{\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n      },\n      categories[]->{\n        _id,\n        title,\n        color\n      },\n    },\n  }\n,\n      \n  _type == \"gallery-9\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      title,\n      description,\n      iconVariant,\n    },\n  }\n,\n      \n  _type == \"gallery-10\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    testimonials[]->{\n      ...,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    }\n  }\n,\n      \n  _type == \"timeline-3\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n,\n    },\n    columns[]{\n      _key,\n      title,\n      description,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"timeline-4\" => {\n    _type,\n    _key,\n    padding,\n    tag,\n    title,\n    description,\n    columns[]{\n      _key,\n      title,\n      description,\n      iconVariant,\n      image{\n        \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"timeline-5\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    columns[]{\n      _key,\n      iconVariant,\n      title,\n      description,\n    },\n  }\n,\n      \n  _type == \"timeline-6\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    columns[]{\n      _key,\n      iconVariant,\n      title,\n      description,\n    },\n  }\n,\n      \n  _type == \"product-categories-16\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n      \n  _type == \"all-products-16\" => {\n    _type,\n    _key,\n    padding\n  }\n,\n    },\n    \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n    \n  \"allTranslations\": *[_type == \"translation.metadata\" && ^._id in translations[].value._ref][0].translations[] {\n    \"lang\": _key,\n    \"slug\": value->slug.current\n  } [defined(slug) && defined(lang)]\n,\n  }\n": PAGE_QUERYResult;
     "\n  *[\n    _type == \"page\" &&\n    defined(slug) &&\n    language == $lang\n  ]{\n    slug,\n    language,\n  }\n": PAGES_SLUGS_QUERYResult;
-    "\n  *[\n    _type == \"post\" &&\n    slug.current == $slug &&\n    language == $lang\n  ]\n  | order(_updatedAt desc)[0]{\n    _id,\n    language,\n    title,\n    slug,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n\n    },\n    author->{\n      name,\n      title,\n      image { \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n }\n    },\n    publishedAt,\n    _createdAt,\n    _updatedAt,\n    \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n    \"estimatedReadingTime\": round(length(pt::text(body)) / 5 / 180 ),\n    \n  \"allTranslations\": *[_type == \"translation.metadata\" && ^._id in translations[].value._ref][0].translations[] {\n    \"lang\": _key,\n    \"slug\": value->slug.current\n  } [defined(slug) && defined(lang)]\n,\n  }\n": POST_QUERYResult;
+    "\n  *[\n    _type == \"post\" &&\n    slug.current == $slug &&\n    language == $lang\n  ]\n  | order(_updatedAt desc)[0]{\n    _id,\n    language,\n    title,\n    slug,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n    },\n    author->{\n      name,\n      title,\n      image { \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n }\n    },\n    publishedAt,\n    _createdAt,\n    _updatedAt,\n    \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n    \"estimatedReadingTime\": round(length(pt::text(body)) / 5 / 180 ),\n    \n  \"allTranslations\": *[_type == \"translation.metadata\" && ^._id in translations[].value._ref][0].translations[] {\n    \"lang\": _key,\n    \"slug\": value->slug.current\n  } [defined(slug) && defined(lang)]\n,\n  }\n": POST_QUERYResult;
     "\n  *[\n    _type == \"post\" &&\n    defined(slug) &&\n    language == $lang\n  ]\n  | order((language == $lang) desc, coalesce(publishedAt, _createdAt) desc)[$offset...$end]{\n    _id,\n    language,\n    _createdAt,\n    title,\n    slug,\n    excerpt,\n    author->{\n      name,\n      title,\n      image { \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n }\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    categories[]->{\n      _id,\n      title,\n      slug,\n    },\n  }\n": POSTS_QUERYResult;
     "\n  *[\n    _type == \"post\" &&\n    defined(slug) &&\n    language == $lang\n  ]\n  | order((language == $lang) desc, title asc)[$offset...$end]{\n    _id,\n    language,\n    _createdAt,\n    title,\n    slug,\n    excerpt,\n    author->{\n      name,\n      title,\n      image { \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n }\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    categories[]->{\n      _id,\n      title,\n      slug,\n    },\n  }\n": POSTS_QUERY_AZResult;
     "\n  *[\n    _type == \"post\" &&\n    defined(slug) &&\n    language == $lang\n  ]\n  | order((language == $lang) desc, title desc)[$offset...$end]{\n    _id,\n    language,\n    _createdAt,\n    title,\n    slug,\n    excerpt,\n    author->{\n      name,\n      title,\n      image { \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n }\n    },\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    categories[]->{\n      _id,\n      title,\n      slug,\n    },\n  }\n": POSTS_QUERY_ZAResult;
     "\n  *[\n    _type == \"post\" &&\n    defined(slug) &&\n    language == $lang\n  ]{\n    slug,\n    language,\n  }\n": POSTS_SLUGS_QUERYResult;
     "\n  count(*[\n    _type == \"post\" &&\n    defined(slug) &&\n    language == $lang\n  ])\n": POSTS_COUNT_QUERYResult;
-    "\n  *[\n    _type == \"product\" &&\n    slug.current == $slug &&\n    language == $lang\n  ]\n  | order(_updatedAt desc)[0]{\n    \n  _id,\n  language,\n  orderRank,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    name,\n    sku,\n    bestFor,\n    pungency,\n    bindingCapacity,\n    fatContent,\n    purity,\n    moisture,\n    hsCode,\n    minOrder,\n    origin,\n    botanicalName,\n    shelfLife,\n    allergenInfo,\n    productAttributes,\n    certification\n  },\n  keyFeatures[],\n  packagingOptions[]{\n    ...\n  },\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  body[]{ \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  }\n },\n  excerpt,\n  categories[]->{\n    \n  _id,\n  title,\n  slug,\n  language\n\n  },\n  \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n\n\n    ,\n    \n  \"allTranslations\": *[_type == \"translation.metadata\" && ^._id in translations[].value._ref][0].translations[] {\n    \"lang\": _key,\n    \"slug\": value->slug.current\n  } [defined(slug) && defined(lang)]\n\n  }\n": PRODUCT_QUERYResult;
+    "\n  *[\n    _type == \"product\" &&\n    slug.current == $slug &&\n    language == $lang\n  ]\n  | order(_updatedAt desc)[0]{\n    \n  _id,\n  language,\n  orderRank,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    name,\n    sku,\n    bestFor,\n    pungency,\n    bindingCapacity,\n    fatContent,\n    purity,\n    moisture,\n    hsCode,\n    minOrder,\n    origin,\n    botanicalName,\n    shelfLife,\n    allergenInfo,\n    productAttributes,\n    certification\n  },\n  keyFeatures[],\n  packagingOptions[]{\n    ...\n  },\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  body[]{ \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n },\n  excerpt,\n  categories[]->{\n    \n  _id,\n  title,\n  slug,\n  language\n\n  },\n  \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n\n\n    ,\n    \n  \"allTranslations\": *[_type == \"translation.metadata\" && ^._id in translations[].value._ref][0].translations[] {\n    \"lang\": _key,\n    \"slug\": value->slug.current\n  } [defined(slug) && defined(lang)]\n\n  }\n": PRODUCT_QUERYResult;
     "\n  *[\n    _type == \"product\" &&\n    defined(slug) &&\n    language == $lang\n  ]\n  | order((language == $lang) desc, orderRank)[$offset...$end]{\n    \n  _id,\n  language,\n  orderRank,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    sku,\n    purity,\n    productAttributes\n  },\n  keyFeatures[],\n  excerpt,\n  image{ \n  ...,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  categories[]->{\n    \n  _id,\n  title,\n  slug,\n  language\n\n  }\n\n  }\n": PRODUCTS_QUERYResult;
     "\n  *[\n    _type == \"product\" &&\n    defined(slug) &&\n    language == $lang\n  ]{\n    slug,\n    language,\n  }\n": PRODUCTS_SLUGS_QUERYResult;
     "\n  count(*[\n    _type == \"product\" &&\n    defined(slug) &&\n    language == $lang\n  ])\n": PRODUCTS_COUNT_QUERYResult;
