@@ -127,6 +127,11 @@ export function generatePageMetadata({
     }
   }
 
+  // Ensure a self hreflang is always present for the current locale
+  if (!languageAlternates[locale]) {
+    languageAlternates[locale] = canonicalUrl;
+  }
+
   // Titles are authored without brand suffix; layout template adds the brand.
   const rawTitle = toText(meta?.title as unknown) ?? undefined;
   const title: Metadata["title"] = rawTitle;

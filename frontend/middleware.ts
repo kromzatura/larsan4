@@ -14,8 +14,14 @@ export function middleware(req: NextRequest) {
   // Only consider safe idempotent requests for redirect
   if (method !== "GET" && method !== "HEAD") return NextResponse.next();
 
-  // Already localized
-  if (hasSupportedLocalePrefix(pathname)) return NextResponse.next();
+  // Already localized: forward the detected locale to the app via a request header
+  if (hasSupportedLocalePrefix(pathname)) {
+    const m = pathname.match(/^\/([a-z]{2})(?:\/|$)/i);
+    const locale = (m?.[1] || "").toLowerCase();
+    const headers = new Headers(req.headers);
+    headers.set("x-locale", locale);
+    return NextResponse.next({ request: { headers } });
+  }
 
   // Redirect root and any non-prefixed path to DEFAULT_LOCALE
   const url = nextUrl.clone();

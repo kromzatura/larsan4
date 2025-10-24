@@ -31,9 +31,22 @@ export default async function RootLayout({
   // Derive locale from the current pathname (e.g., /en/..., /nl/..., with or without trailing slash)
   // Fallback to DEFAULT_LOCALE when no 2-letter segment is present
   const h = await headers();
-  const pathname = h.get("next-url") ?? h.get("Next-Url") ?? "";
-  const langMatch = pathname.match(/^\/([a-z]{2})/);
-  const extracted = (langMatch?.[1] ?? DEFAULT_LOCALE).toLowerCase();
+  // Prefer explicit locale forwarded by middleware
+  const forwarded = h.get("x-locale");
+  // Try a few known header keys that may contain the requested path
+  const pathname =
+    h.get("x-pathname") ||
+    h.get("x-invoke-path") ||
+    h.get("x-matched-path") ||
+    h.get("next-url") ||
+    h.get("Next-Url") ||
+    "";
+  const langMatch = pathname.match(/^\/([a-z]{2})(?:\/|$)/);
+  const extracted = (
+    forwarded ||
+    langMatch?.[1] ||
+    DEFAULT_LOCALE
+  ).toLowerCase();
   const locale = (SUPPORTED_LOCALES as readonly string[]).includes(extracted)
     ? extracted
     : DEFAULT_LOCALE;
