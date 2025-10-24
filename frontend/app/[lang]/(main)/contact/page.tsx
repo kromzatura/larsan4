@@ -43,7 +43,9 @@ function parseInquiryParam(searchParams: {
           name: typeof x.name === "string" ? x.name : null,
         }));
     }
-  } catch {
+  } catch (err) {
+    // Log parse errors to help debug malformed inquiry URLs
+    console.error("Failed to parse inquiry param:", err);
     return [];
   }
   return [];
