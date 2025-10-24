@@ -10,30 +10,12 @@ import { resolveHref, resolveLinkHref } from "@/lib/resolveHref";
 import { DOC_TYPES } from "@/lib/docTypes";
 import { buttonVariants } from "@/components/ui/button";
 import Icon from "@/components/icon";
-import ProductCard from "@/components/products/ProductCard";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { toText } from "@/lib/utils";
-
-// Minimal types for PT product-callout to avoid `any`
-type ProductLike = {
-  _id?: string | null;
-  title?: unknown;
-  excerpt?: unknown;
-  slug?: { current?: string | null } | null;
-  sku?: string | null;
-  image?: {
-    asset?: {
-      url?: string | null;
-      metadata?: {
-        lqip?: string | null;
-        dimensions?: { width?: number | null; height?: number | null } | null;
-      } | null;
-    } | null;
-  } | null;
-};
+ 
 
 const getTextFromChildren = (children: ReactNode): string => {
   if (Array.isArray(children)) {
@@ -77,54 +59,7 @@ const makePortableTextComponents = (
         </div>
       );
     },
-    code: ({ value }) => {
-      const filename = toText(value?.filename as unknown) || "";
-      return (
-        <div className="min-w-full grid my-4 overflow-x-auto rounded-lg border border-border text-xs lg:text-sm bg-primary">
-          <div className="flex items-center justify-between px-4 py-2 border-b border-border text-background font-mono">
-            <div>{filename}</div>
-            <CopyButton code={value.code} />
-          </div>
-          <Highlight
-            theme={themes.vsLight}
-            code={value.code}
-            language={value.language || "typescript"}
-          >
-            {({ style, tokens, getLineProps, getTokenProps }) => (
-              <pre
-                style={{
-                  ...style,
-                  padding: "1.5rem",
-                  margin: 0,
-                  overflow: "auto",
-                }}
-              >
-                {tokens.map((line, i) => (
-                  <div key={i} {...getLineProps({ line })}>
-                    {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token })} />
-                    ))}
-                  </div>
-                ))}
-              </pre>
-            )}
-          </Highlight>
-        </div>
-      );
-    },
-    alert: ({ value }) => {
-      const title = toText(value?.title as unknown);
-      const description = toText(value?.description as unknown);
-      return (
-        <Alert className="my-4">
-          <Lightbulb className="h-4 w-4" />
-          {title && <AlertTitle>{title}</AlertTitle>}
-          {description && <AlertDescription>{description}</AlertDescription>}
-        </Alert>
-      );
-    },
     "product-callout": ({ value }) => {
-      const variant = (value?.variant as string) || "compact";
       const align = (value?.align as string) || "left";
       const showImage = value?.showImage !== false;
       const overrideTitle = toText(value?.title as unknown) || null;
@@ -148,135 +83,59 @@ const makePortableTextComponents = (
         overrideTitle || toText(product?.title as unknown) || "";
       const computedBlurb = blurb || toText(product?.excerpt as unknown) || "";
 
-      // Build minimal item shape for existing ProductCard component
-      const item = {
-        _id: product?._id || product?.slug?.current || Math.random().toString(),
-        slug: product?.slug?.current || "",
-        title: computedTitle,
-        sku: product?.sku || null,
-        imageUrl: showImage ? imageUrl : null,
-        imageMeta,
-        features: null,
-        productAttributes: null,
-        purity: null,
-        categories: Array.isArray(product?.categories)
-          ? product.categories.map((c: any) => ({
-              _id: c?._id || null,
-              title: c?.title || null,
-              slug: c?.slug?.current || c?.slug || null,
-              href:
-                c?.slug?.current || c?.slug
-                  ? resolveHref(
-                      DOC_TYPES.PRODUCT_CATEGORY,
-                      c?.slug?.current || c?.slug,
-                      locale
-                    )
-                  : null,
-            }))
-          : null,
-        href,
-      } as any;
-
-      // Layout wrappers
       const wrapperClasses = [
         "my-6",
-        align === "center" ? "mx-auto max-w-3xl" : undefined,
-        variant === "featured" ? "max-w-5xl" : undefined,
+        align === "center" ? "mx-auto max-w-5xl" : "max-w-5xl",
       ]
         .filter(Boolean)
         .join(" ");
 
-      if (variant === "featured") {
-        // Side-by-side layout with bigger image and content
-        return (
-          <div
-            className={[
-              wrapperClasses,
-              "rounded-xl border p-4 md:p-6 bg-background",
-            ].join(" ")}
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
-              {showImage && imageUrl ? (
-                <div className={align === "center" ? "mx-auto" : undefined}>
-                  <Image
-                    src={imageUrl}
-                    alt={computedTitle || "Product image"}
-                    width={960}
-                    height={720}
-                    className="w-full h-auto rounded-lg object-cover"
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                    placeholder={imageMeta?.lqip ? "blur" : undefined}
-                    blurDataURL={imageMeta?.lqip || undefined}
-                  />
-                </div>
-              ) : null}
+      return (
+        <div
+          className={[
+            wrapperClasses,
+            "rounded-xl border p-4 md:p-6 bg-background",
+          ].join(" ")}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
+            {showImage && imageUrl ? (
+              <div className={align === "center" ? "mx-auto" : undefined}>
+                <Image
+                  src={imageUrl}
+                  alt={computedTitle || "Product image"}
+                  width={960}
+                  height={720}
+                  className="w-full h-auto rounded-lg object-cover"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  placeholder={imageMeta?.lqip ? "blur" : undefined}
+                  blurDataURL={imageMeta?.lqip || undefined}
+                />
+              </div>
+            ) : null}
+            <div className={[align === "center" ? "text-center" : undefined].join(" ")}>
+              <h3 className="text-2xl md:text-3xl font-semibold tracking-tight">
+                {computedTitle}
+              </h3>
+              {computedBlurb && (
+                <p className="mt-3 text-muted-foreground">{computedBlurb}</p>
+              )}
               <div
                 className={[
-                  align === "center" ? "text-center" : undefined,
-                ].join(" ")}
+                  "mt-5 flex flex-wrap gap-3",
+                  align === "center" ? "justify-center" : undefined,
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
               >
-                <h3 className="text-2xl md:text-3xl font-semibold tracking-tight">
-                  {computedTitle}
-                </h3>
-                {computedBlurb && (
-                  <p className="mt-3 text-muted-foreground">{computedBlurb}</p>
-                )}
-                <div
-                  className={[
-                    "mt-5 flex flex-wrap gap-3",
-                    align === "center" ? "justify-center" : undefined,
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
-                >
-                  <a
-                    href={href}
-                    className={buttonVariants({ variant: "default" })}
-                  >
-                    <span className="flex items-center gap-2">
-                      {ctaLabel}
-                      <Icon iconVariant="arrow-right" strokeWidth={1.5} />
-                    </span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      }
-
-      // Compact: reuse ProductCard + optional text/CTA below
-      return (
-        <div className={wrapperClasses}>
-          {/* Reuse existing ProductCard for consistent styling */}
-          <ProductCard item={item} locale={locale} />
-          {(blurb || ctaLabel) && (
-            <div
-              className={[
-                "mt-3 flex flex-col gap-3",
-                align === "center" ? "items-center text-center" : undefined,
-              ]
-                .filter(Boolean)
-                .join(" ")}
-            >
-              {blurb && (
-                <p className="text-sm text-muted-foreground max-w-3xl">
-                  {blurb}
-                </p>
-              )}
-              {href && (
-                <a
-                  href={href}
-                  className={buttonVariants({ variant: "default" })}
-                >
+                <a href={href} className={buttonVariants({ variant: "default" })}>
                   <span className="flex items-center gap-2">
                     {ctaLabel}
                     <Icon iconVariant="arrow-right" strokeWidth={1.5} />
                   </span>
                 </a>
-              )}
+              </div>
             </div>
-          )}
+          </div>
         </div>
       );
     },
