@@ -7,6 +7,14 @@ export default defineType({
   title: "Block Content",
   name: "block-content",
   type: "array",
+  options: {
+    insertMenu: {
+      groups: [
+        { name: "products", of: ["product-callout"] },
+      ],
+      views: [{ name: "list" }],
+    },
+  },
   of: [
     defineArrayMember({
       title: "Block",
@@ -160,6 +168,18 @@ export default defineType({
           { title: "SQL", value: "sql" },
         ],
       },
+    }),
+    // Reusable Section Header block (same type used in page builders)
+    defineArrayMember({
+      type: "section-header",
+      name: "section-header",
+      title: "Section Header",
+    }),
+    // Product Callout card embedded inside article content
+    defineArrayMember({
+      type: "product-callout",
+      name: "product-callout",
+      title: "Product Callout",
     }),
   ],
 });

@@ -27,6 +27,7 @@ import sectionPadding from "./schemas/blocks/shared/section-padding";
 import imageTreatment from "./schemas/blocks/shared/image-treatment";
 // Schema UI objects
 import sectionHeader from "./schemas/blocks/section-header";
+import productCallout from "./schemas/blocks/shared/product-callout";
 import hero12 from "./schemas/blocks/hero/hero12";
 import hero13 from "./schemas/blocks/hero/hero13";
 import hero25 from "./schemas/blocks/hero/hero25";
@@ -154,6 +155,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
   imageTreatment,
     // blocks
     sectionHeader,
+    productCallout,
     hero12,
     hero13,
     hero25,
