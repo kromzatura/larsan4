@@ -123,19 +123,9 @@ export function generatePageMetadata({
     }
   }
 
-  // Title strategy: allow switching to "bare" titles via env once content is cleaned in Sanity
+  // Titles are authored without brand suffix; layout template adds the brand.
   const rawTitle = toText(meta?.title as unknown) ?? undefined;
-  const titlesAreBare =
-    process.env.SANITY_TITLES_ARE_BARE === "true" ||
-    process.env.NEXT_PUBLIC_TITLES_BARE === "true";
-  const title: Metadata["title"] = (() => {
-    if (!rawTitle) return undefined;
-    if (titlesAreBare) return rawTitle;
-    // Guard to avoid double brand suffix while editors still include brand in titles
-    const brandSuffixRegex =
-      /\s*(?:[|\-–—])?\s*LAR\s+Group(?:\s+B\.?V\.?)?\s*$/i;
-    return brandSuffixRegex.test(rawTitle) ? { absolute: rawTitle } : rawTitle;
-  })();
+  const title: Metadata["title"] = rawTitle;
 
   return {
     title,
