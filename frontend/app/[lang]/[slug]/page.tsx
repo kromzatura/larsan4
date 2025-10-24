@@ -73,8 +73,16 @@ export default async function Page(
     notFound();
   }
 
-  // Comparison datasheet enhancement: wrap entire page content if slug indicates comparison page
-  const isComparisonPage = /compare|comparison|mustard/i.test(params.slug);
+  // Comparison datasheet enhancement: prefer detecting compare blocks, fallback to slug heuristic
+  const hasCompareBlock = Array.isArray(page?.blocks)
+    ? page!.blocks.some(
+        (b) =>
+          typeof b?._type === "string" &&
+          (b._type.startsWith("compare-") || b._type === "compare-products")
+      )
+    : false;
+  const isComparisonPage =
+    hasCompareBlock || /compare|comparison|mustard/i.test(params.slug);
   return (
     <div className={isComparisonPage ? "container py-12" : undefined}>
       {isComparisonPage ? (
