@@ -85,7 +85,9 @@ export async function GET(
       : "";
     // Some social tools prefer <enclosure> for images; include for better compatibility.
     const enclosure = imgUrl
-      ? `<enclosure url="${imgUrl}"${imgType ? ` type="${imgType}"` : ""} length="0" />`
+      ? `<enclosure url="${imgUrl}"${
+          imgType ? ` type="${imgType}"` : ""
+        } length="0" />`
       : "";
 
     return `

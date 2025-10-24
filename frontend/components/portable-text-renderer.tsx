@@ -121,7 +121,7 @@ const makePortableTextComponents = (
 
       const titleSize = title?.size || "default";
       const titleWeight = title?.weight || "bold";
-  const ElementTag = (title?.element as string) || "h2";
+      const ElementTag = (title?.element as string) || "h2";
 
       const titleSizeClasses = {
         small: "text-2xl md:text-3xl",
@@ -154,7 +154,8 @@ const makePortableTextComponents = (
                 element="p"
               />
             )}
-            {title && toText(title.text) &&
+            {title &&
+              toText(title.text) &&
               createElement(
                 ElementTag,
                 { className: [titleSizeClasses, titleWeightClasses].join(" ") },
@@ -175,7 +176,8 @@ const makePortableTextComponents = (
             >
               {links.map((link) => {
                 const href = resolveLinkHref(link, locale);
-                const target = link?.isExternal && link?.target ? "_blank" : undefined;
+                const target =
+                  link?.isExternal && link?.target ? "_blank" : undefined;
                 const rel = target ? "noopener noreferrer" : undefined;
                 return (
                   <a
@@ -183,11 +185,16 @@ const makePortableTextComponents = (
                     href={href || "#"}
                     target={target}
                     rel={rel}
-                    className={buttonVariants({ variant: link.buttonVariant || "default" })}
+                    className={buttonVariants({
+                      variant: link.buttonVariant || "default",
+                    })}
                   >
                     <span className="flex items-center gap-2">
                       {toText(link.title)}
-                      <Icon iconVariant={link.iconVariant || "none"} strokeWidth={1.5} />
+                      <Icon
+                        iconVariant={link.iconVariant || "none"}
+                        strokeWidth={1.5}
+                      />
                     </span>
                   </a>
                 );
