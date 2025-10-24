@@ -217,7 +217,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     0.5
   );
 
-  return [
+  const finalEntries = [
     ...staticEntries,
     ...pageEntries,
     ...postEntries,
@@ -225,4 +225,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...blogCategoryEntries,
     ...productCategoryEntries,
   ];
+
+  console.log(`Sitemap: Generated ${staticEntries.length} static entries.`);
+  console.log(
+    `Sitemap: Generated ${pageEntries.length} page entries from ${pageSlugs.length} slugs.`
+  );
+  console.log(`Sitemap: Total entries to be returned: ${finalEntries.length}`);
+  if (finalEntries.length > 0) {
+    console.log(
+      "Sitemap: Sample of the first entry:",
+      JSON.stringify(finalEntries[0], null, 2)
+    );
+  }
+
+  return finalEntries;
 }
