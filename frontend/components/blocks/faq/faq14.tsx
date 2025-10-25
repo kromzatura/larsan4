@@ -1,5 +1,5 @@
 import { cn, toText } from "@/lib/utils";
-import { SVGProps, useId } from "react";
+import { useId } from "react";
 
 import SectionContainer from "@/components/ui/section-container";
 import {
@@ -14,11 +14,11 @@ import { PAGE_QUERYResult } from "@/sanity.types";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
-interface PlusSignsProps extends SVGProps<SVGSVGElement> {
+interface PlusSignsProps {
   className?: string;
 }
 
-const PlusSigns = ({ className, ...props }: PlusSignsProps) => {
+const PlusSigns = ({ className }: PlusSignsProps) => {
   const GAP = 16;
   const STROKE_WIDTH = 1;
   const PLUS_SIZE = 6;
@@ -26,7 +26,12 @@ const PlusSigns = ({ className, ...props }: PlusSignsProps) => {
   const patternId = `plus-pattern-${id}`;
 
   return (
-    <svg width={GAP * 2} height={GAP * 2} className={className} {...props}>
+    <svg
+      width={GAP * 2}
+      height={GAP * 2}
+      className={className}
+      aria-hidden="true"
+    >
       <defs>
         <pattern
           id={patternId}
