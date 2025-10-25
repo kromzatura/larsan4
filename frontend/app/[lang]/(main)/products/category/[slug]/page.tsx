@@ -50,7 +50,11 @@ export async function generateMetadata(
           }
         : {}),
     };
-    if (pageNum > 1 && (process.env.LOG_HREFLANG === "1" || process.env.NEXT_PUBLIC_LOG_HREFLANG === "1")) {
+    if (
+      pageNum > 1 &&
+      (process.env.LOG_HREFLANG === "1" ||
+        process.env.NEXT_PUBLIC_LOG_HREFLANG === "1")
+    ) {
       // eslint-disable-next-line no-console
       console.info(
         JSON.stringify(
@@ -61,7 +65,10 @@ export async function generateMetadata(
             locale,
             slug: params.slug,
             pageNum,
-            canonical: buildLocalizedPath(locale, `/products/category/${params.slug}`),
+            canonical: buildLocalizedPath(
+              locale,
+              `/products/category/${params.slug}`
+            ),
           },
           null,
           2

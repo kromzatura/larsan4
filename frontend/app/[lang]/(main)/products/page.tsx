@@ -26,7 +26,10 @@ export async function generateMetadata(
     locale,
   });
   if (pageNum && pageNum > 1) {
-    if (process.env.LOG_HREFLANG === "1" || process.env.NEXT_PUBLIC_LOG_HREFLANG === "1") {
+    if (
+      process.env.LOG_HREFLANG === "1" ||
+      process.env.NEXT_PUBLIC_LOG_HREFLANG === "1"
+    ) {
       // eslint-disable-next-line no-console
       console.info(
         JSON.stringify(
@@ -64,8 +67,9 @@ export default async function ProductsPage(props: LangAsyncPageProps) {
       blocks={page?.blocks ?? []}
       searchParams={
         // Only allow pagination on All Products; ignore any category param to avoid duplicate content
-        (((await props.searchParams) as { page?: string } | undefined) &&
-          { page: (await props.searchParams)?.page as string | undefined }) ||
+        (((await props.searchParams) as { page?: string } | undefined) && {
+          page: (await props.searchParams)?.page as string | undefined,
+        }) ||
         {}
       }
       locale={locale}
