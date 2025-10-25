@@ -9,6 +9,14 @@ export async function generateMetadata(props: LangAsyncPageProps) {
   const resolved = props.params ? await props.params : undefined;
   const locale = normalizeLocale(resolved?.lang);
   const page = await fetchSanityPageBySlug({ slug: "index", lang: locale });
+
+  // --- DEBUG LOGGING ---
+  console.log(
+    "Homepage Metadata: Received page data:",
+    JSON.stringify(page, null, 2)
+  );
+  // --- END DEBUG LOGGING ---
+
   if (!page) {
     notFound();
   }
