@@ -75,9 +75,7 @@ export const PAGE_QUERY = groq`
   *[
     _type == "page" &&
     slug.current == $slug &&
-    language == $lang &&
-    defined(blocks[]) &&
-    defined(title)
+    language == $lang
   ]
   | order(_updatedAt desc)[0]{
     _id,

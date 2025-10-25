@@ -41,18 +41,10 @@ export async function generateMetadata(
     lang: locale,
   })) as PageData | null;
 
-  // --- DEBUG LOGGING ---
-  console.log(
-    `Dynamic Page Metadata for slug "${params.slug}": Received page data:`,
-    JSON.stringify(page, null, 2)
-  );
-  // --- END DEBUG LOGGING ---
-
   // If content is missing, signal a real 404 so crawlers don't flag metadata/head issues
   if (!page || !page.title || !page.blocks || page.blocks.length === 0) {
     notFound();
   }
-
   return generatePageMetadata({
     page,
     slug: params.slug,
