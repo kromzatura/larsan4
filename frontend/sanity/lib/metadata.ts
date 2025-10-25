@@ -142,6 +142,42 @@ export function generatePageMetadata({
     );
   }
 
+  // Optional debug output to investigate hreflang conflicts in production scans
+  // Enable by setting LOG_HREFLANG=1 or NEXT_PUBLIC_LOG_HREFLANG=1
+  try {
+    const shouldLog =
+      process.env.LOG_HREFLANG === "1" ||
+      process.env.NEXT_PUBLIC_LOG_HREFLANG === "1";
+    if (shouldLog) {
+      // Detect duplicate hrefs mapped to different hreflang codes (often flagged by auditors)
+      const hrefToLangs = new Map<string, string[]>();
+      for (const [code, href] of Object.entries(languageAlternates)) {
+        const key = href.split("#")[0];
+        hrefToLangs.set(key, [...(hrefToLangs.get(key) || []), code]);
+      }
+      const duplicates: Array<{ href: string; langs: string[] }> = [];
+      for (const [href, codes] of hrefToLangs.entries()) {
+        if (codes.length > 1) duplicates.push({ href, langs: codes });
+      }
+      // eslint-disable-next-line no-console
+      console.info(
+        JSON.stringify(
+          {
+            tag: "hreflang",
+            type,
+            locale,
+            slug,
+            canonicalUrl,
+            languages: languageAlternates,
+            duplicateHrefGroups: duplicates,
+          },
+          null,
+          2
+        )
+      );
+    }
+  } catch {}
+
   // Titles are authored without brand suffix; layout template adds the brand.
   const rawTitle = toText(meta?.title as unknown) ?? undefined;
   const title: Metadata["title"] = rawTitle;

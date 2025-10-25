@@ -39,7 +39,7 @@ export async function generateMetadata(
       type: "productCategory",
       locale,
     });
-    return {
+    const result = {
       ...base,
       ...(pageNum > 1
         ? {
@@ -47,15 +47,28 @@ export async function generateMetadata(
               index: false,
               follow: true,
             },
-            alternates: {
-              canonical: buildLocalizedPath(
-                locale,
-                `/products/category/${params.slug}`
-              ),
-            },
           }
         : {}),
     };
+    if (pageNum > 1 && (process.env.LOG_HREFLANG === "1" || process.env.NEXT_PUBLIC_LOG_HREFLANG === "1")) {
+      // eslint-disable-next-line no-console
+      console.info(
+        JSON.stringify(
+          {
+            tag: "hreflang",
+            note: "pagination category page returning canonical-only alternates",
+            page: "product-category",
+            locale,
+            slug: params.slug,
+            pageNum,
+            canonical: buildLocalizedPath(locale, `/products/category/${params.slug}`),
+          },
+          null,
+          2
+        )
+      );
+    }
+    return result;
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : String(err);
     console.error("[metadata] product category failed", {
