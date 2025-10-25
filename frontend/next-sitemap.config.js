@@ -1,56 +1,42 @@
-const { groq } = require("next-sanity");
-// Note: The require paths might need adjustment based on your project structure.
-// This assumes `sanityFetch` and i18n helpers can be correctly required in a CJS context.
-const { sanityFetch } = require("./sanity/lib/live");
-const { SUPPORTED_LOCALES, DEFAULT_LOCALE } = require("./lib/i18n/config");
-const { buildLocalizedPath, isSupportedLocale } = require("./lib/i18n/routing");
-
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-
-async function getAllDocumentsForSitemap() {
-  const query = groq`*[_type in ['page', 'post', 'product', 'productCategory', 'category'] && defined(slug.current) && !(_id in path("drafts.**"))]{
-    "slug": slug.current,
-    "docType": _type,
-    "lastModified": _updatedAt,
-    language,
-    "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[defined(value->slug.current) && defined(_key)]{
-      "lang": _key,
-      "slug": value->slug.current
-    }
-  }`;
-
-  try {
-    const data = await sanityFetch({
-      query,
-      perspective: "published",
-      stega: false,
-    });
-    return data || [];
-  } catch (error) {
-    console.error("Error fetching documents for sitemap:", error);
-    return [];
-  }
-}
-
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: baseUrl,
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://largeseeds.nl",
   generateRobotsTxt: true,
-
-  // We are generating all paths dynamically, so we can exclude the default Next.js pages.
-  exclude: [
-    "/404",
-    "/[lang]",
-    "/[lang]/[slug]",
-    "/[lang]/blog/[slug]",
-    "/[lang]/products/[slug]",
-    "/[lang]/blog/category/[slug]",
-    "/[lang]/products/category/[slug]",
-  ],
-
-  // The main function to generate all dynamic sitemap paths
+  // The rest of your config will come from the async function below
+  // This is a workaround for ESM modules in a CJS file
+  transform: async (config, path) => {
+    return {
+      loc: path,
+      changefreq: config.changefreq,
+      priority: config.priority,
+      lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
+      alternateRefs: [],
+    };
+  },
   additionalPaths: async (config) => {
-    const documents = await getAllDocumentsForSitemap();
+    const { groq } = await import("next-sanity");
+    const { sanityFetch } = await import("./sanity/lib/live.js");
+    const { buildLocalizedPath, isSupportedLocale } = await import(
+      "./lib/i18n/routing.js"
+    );
+    const { DEFAULT_LOCALE } = await import("./lib/i18n/config.js");
+
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+    const query = groq`*[_type in ['page', 'post', 'product', 'productCategory', 'category'] && defined(slug.current) && !(_id in path("drafts.**"))]{
+      "slug": slug.current,
+      "docType": _type,
+      "lastModified": _updatedAt,
+      language,
+      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[defined(value->slug.current) && defined(_key)]{
+        "lang": _key,
+        "slug": value->slug.current
+      }
+    }`;
+
+    const documents =
+      (await sanityFetch({ query, perspective: "published", stega: false })) ||
+      [];
     const paths = [];
 
     for (const doc of documents) {

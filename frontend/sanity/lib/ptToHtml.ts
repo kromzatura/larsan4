@@ -40,7 +40,24 @@ interface AlertBlock {
   description?: string;
 }
 
-type CustomBlocks = ImageBlock | CodeBlock | YouTubeBlock | AlertBlock;
+interface ProductCalloutBlock {
+  _type: "product-callout";
+  product?: {
+    title?: string;
+    slug?: { current?: string };
+    image?: { asset?: { url?: string } };
+  };
+  title?: string;
+  blurb?: string;
+  ctaLabel?: string;
+}
+
+type CustomBlocks =
+  | ImageBlock
+  | CodeBlock
+  | YouTubeBlock
+  | AlertBlock
+  | ProductCalloutBlock;
 type AnyBlock = PortableTextBlockBase | CustomBlocks;
 
 interface LinkMarkDef {
@@ -63,7 +80,10 @@ export function ptBlocksToHtml(blocks: unknown[] | null | undefined): string {
     },
     list: ({ children, value }) => {
       const blockValue = value as PortableTextBlockBase | undefined;
-      const type = blockValue?.listItem === "number" ? "number" : (blockValue as { list?: string } | undefined)?.list || "bullet"; // fallback
+      const type =
+        blockValue?.listItem === "number"
+          ? "number"
+          : (blockValue as { list?: string } | undefined)?.list || "bullet"; // fallback
       if (type === "number") return `<ol>${children}</ol>`;
       return `<ul>${children}</ul>`;
     },
@@ -72,7 +92,9 @@ export function ptBlocksToHtml(blocks: unknown[] | null | undefined): string {
       image: ({ value }) => {
         const v = value as ImageBlock;
         return v?.asset?.url
-          ? `<p><img src="${v.asset.url}" alt="${escapeHtml(v.alt || "")}"/></p>`
+          ? `<p><img src="${v.asset.url}" alt="${escapeHtml(
+              v.alt || ""
+            )}"/></p>`
           : "";
       },
       code: ({ value }) => {
@@ -91,9 +113,35 @@ export function ptBlocksToHtml(blocks: unknown[] | null | undefined): string {
       alert: (opts) => {
         const v = (opts as { value: AlertBlock }).value;
         const children = (opts as { children?: string }).children;
-        const title = v?.title ? `<strong>${escapeHtml(v.title)}</strong> ` : "";
+        const title = v?.title
+          ? `<strong>${escapeHtml(v.title)}</strong> `
+          : "";
         const desc = v?.description ? escapeHtml(v.description) : "";
         return `<div class=\"alert\">${title}${desc}${children ?? ""}</div>`;
+      },
+      "product-callout": ({ value }) => {
+        const v = value as ProductCalloutBlock;
+        const product = v.product;
+        if (!product) return "";
+
+        const title = v.title || product.title || "";
+        const url = product.slug?.current
+          ? `/products/${product.slug.current}`
+          : "#";
+        const imageUrl = product.image?.asset?.url;
+        const cta = v.ctaLabel || "View Product";
+
+        let html = `<div class="product-callout">`;
+        if (imageUrl) {
+          html += `<img src="${imageUrl}" alt="${escapeHtml(title)}" />`;
+        }
+        html += `<h3>${escapeHtml(title)}</h3>`;
+        if (v.blurb) {
+          html += `<p>${escapeHtml(v.blurb)}</p>`;
+        }
+        html += `<a href="${url}">${escapeHtml(cta)}</a>`;
+        html += `</div>`;
+        return html;
       },
     },
     marks: {
@@ -108,7 +156,12 @@ export function ptBlocksToHtml(blocks: unknown[] | null | undefined): string {
   return toHTML(typedBlocks as Parameters<typeof toHTML>[0], { components });
 }
 
-export function getLanguageFromSettings(settings: { language?: string; siteLanguage?: string; locale?: string } | null | undefined): string {
+export function getLanguageFromSettings(
+  settings:
+    | { language?: string; siteLanguage?: string; locale?: string }
+    | null
+    | undefined
+): string {
   const lang = settings?.language || settings?.siteLanguage || settings?.locale;
   if (typeof lang === "string" && lang.trim()) return lang;
   return "en-US";
