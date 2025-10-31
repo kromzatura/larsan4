@@ -129,6 +129,7 @@ export default defineType({
         { type: "timeline-6" },
         { type: "all-products-16" },
         { type: "product-categories-16" },
+        { type: "banner-block" },
       ],
       options: {
         insertMenu: {
@@ -240,6 +241,10 @@ export default defineType({
             {
               name: "products",
               of: ["product-categories-16", "all-products-16"],
+            },
+            {
+              name: "banner",
+              of: ["banner-block"],
             },
           ],
           views: [

@@ -126,6 +126,7 @@ import timeline6 from "./schemas/blocks/timelines/timeline6";
 // Products blocks
 import allProducts16 from "./schemas/blocks/products/all-products-16";
 import productCategories16 from "./schemas/blocks/products/product-categories-16";
+import bannerBlock from "./schemas/blocks/banner/banner-block";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -255,5 +256,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     // Products
     allProducts16,
     productCategories16,
+    bannerBlock,
   ],
 };

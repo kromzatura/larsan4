@@ -43,6 +43,8 @@ export default defineType({
         { type: "faq-8" },
         { type: "faq-9" },
         { type: "faq-14" },
+        // Banner
+        { type: "banner-block" },
       ],
       options: {
         insertMenu: {
@@ -67,6 +69,10 @@ export default defineType({
             {
               name: "faq",
               of: ["faq-1", "faq-5", "faq-8", "faq-9", "faq-14"],
+            },
+            {
+              name: "banner",
+              of: ["banner-block"],
             },
           ],
           views: [

@@ -17,6 +17,7 @@ import { feature66Query } from "../queries/feature/feature66";
 import { feature117Query } from "../queries/feature/feature117";
 import { feature157Query } from "../queries/feature/feature157";
 import { feature202Query } from "../queries/feature/feature202";
+import { bannerBlockQuery } from "../queries/banner/banner-block";
 
 const productCategoryFilter = `
   _type == "productCategory" &&
@@ -178,6 +179,7 @@ export const PRODUCT_CATEGORY_BY_SLUG_QUERY = groq`
       ${faq8Query},
       ${faq9Query},
       ${faq14Query},
+      ${bannerBlockQuery},
     },
     description,
     ${metaQuery},

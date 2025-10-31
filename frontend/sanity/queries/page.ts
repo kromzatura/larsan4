@@ -70,6 +70,7 @@ import { timeline5Query } from "./timelines/timeline5";
 import { timeline6Query } from "./timelines/timeline6";
 import { allProducts16Query } from "./products/all-products-16";
 import { productCategories16Query } from "./products/product-categories-16";
+import { bannerBlockQuery } from "./banner/banner-block";
 
 export const PAGE_QUERY = groq`
   *[
@@ -152,6 +153,7 @@ export const PAGE_QUERY = groq`
       ${timeline6Query},
       ${productCategories16Query},
       ${allProducts16Query},
+      ${bannerBlockQuery},
     },
     ${metaQuery},
     ${TRANSLATIONS_QUERY_FRAGMENT},
