@@ -86,6 +86,7 @@ export default defineConfig({
         "changelog",
         "faq",
         "page",
+        "testimonial",
         "product",
         "productCategory",
         "specification",

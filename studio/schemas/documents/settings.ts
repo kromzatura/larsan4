@@ -45,6 +45,25 @@ export default defineType({
       description: "The description of your site. Used in the footer.",
     }),
     defineField({
+      name: "socialLinks",
+      title: "Social Profiles",
+      type: "array",
+      description:
+        "Links to your official social profiles (used for Organization sameAs).",
+      of: [
+        defineField({
+          name: "url",
+          type: "url",
+          title: "Profile URL",
+          validation: (Rule) =>
+            Rule.uri({ scheme: ["http", "https"] }).warning(
+              "Use full https:// URLs"
+            ),
+        }),
+      ],
+      validation: (Rule) => Rule.max(10).warning("Keep to top 10 profiles"),
+    }),
+    defineField({
       name: "copyright",
       type: "block-content",
       description: "The copyright text to display in the footer",

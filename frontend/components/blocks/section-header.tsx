@@ -9,6 +9,7 @@ import Icon from "@/components/icon";
 import { resolveLinkHref } from "@/lib/resolveHref";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import PortableTextRenderer from "@/components/portable-text-renderer";
 
 import { PAGE_QUERYResult } from "@/sanity.types";
 
@@ -19,24 +20,77 @@ type SectionHeaderProps = Extract<
   locale?: SupportedLocale;
 };
 
-export default function SectionHeader({
-  padding,
-  sectionWidth = "default",
-  stackAlign = "left",
-  direction = "column",
-  tag,
-  title,
-  description,
-  links,
-  surface,
-  isDatasheetTitle,
-  hasGroupDivider,
-  locale = FALLBACK_LOCALE,
-}: SectionHeaderProps & {
-  surface?: "default" | "surface-1" | null;
-  isDatasheetTitle?: boolean | null;
-  hasGroupDivider?: boolean | null;
-}) {
+export default function SectionHeader(
+  props: SectionHeaderProps & {
+    surface?: "default" | "surface-1" | null;
+    isDatasheetTitle?: boolean | null;
+    hasGroupDivider?: boolean | null;
+    locale?: SupportedLocale;
+  }
+) {
+  const {
+    padding,
+    sectionWidth = "default",
+    stackAlign = "left",
+    direction = "column",
+    tag,
+    title,
+    description,
+    links,
+    surface,
+    isDatasheetTitle,
+    hasGroupDivider,
+    locale = FALLBACK_LOCALE,
+  } = props;
+
+  // Read optional richDescription (added in schema) without hard-typing
+  const richDescription = (
+    props as unknown as {
+      richDescription?: unknown;
+    }
+  ).richDescription;
+
+  // Graceful fallback: if editors pasted bullets into the legacy plain
+  // description, render lines starting with "- " as a list.
+  const renderPlainDescription = (desc: unknown) => {
+    const text = toText(desc);
+    if (!text) return null;
+    const lines = text.split(/\r?\n/);
+    const nodes: React.ReactNode[] = [];
+    let bullets: string[] = [];
+
+    const flushBullets = () => {
+      if (bullets.length) {
+        nodes.push(
+          <ul key={`ul-${nodes.length}`} className="list-disc pl-5">
+            {bullets.map((b, i) => (
+              <li key={i}>{b}</li>
+            ))}
+          </ul>
+        );
+        bullets = [];
+      }
+    };
+
+    for (const raw of lines) {
+      const line = raw.trim();
+      if (!line) {
+        // paragraph break
+        flushBullets();
+        continue;
+      }
+      if (line.startsWith("- ")) {
+        bullets.push(line.slice(2));
+      } else {
+        flushBullets();
+        nodes.push(<p key={`p-${nodes.length}`}>{line}</p>);
+      }
+    }
+
+    flushBullets();
+    if (!nodes.length) return null;
+    return <div className="space-y-2">{nodes}</div>;
+  };
   const isNarrow = sectionWidth === "narrow";
   const titleSize = title?.size || "default";
   const titleWeight = title?.weight || "bold";
@@ -56,6 +110,10 @@ export default function SectionHeader({
   }[titleWeight];
 
   const isSurface1 = surface === "surface-1";
+
+  const descriptionClass = isSurface1
+    ? "text-foreground"
+    : "text-muted-foreground";
 
   return (
     <SectionContainer
@@ -92,9 +150,15 @@ export default function SectionHeader({
               {toText(title.text)}
             </Element>
           )}
-          {toText(description) && (
-            <p className="text-muted-foreground">{toText(description)}</p>
-          )}
+          {Array.isArray(richDescription) ? (
+            <div className={descriptionClass}>
+              <PortableTextRenderer value={richDescription} locale={locale} />
+            </div>
+          ) : toText(description) ? (
+            <div className={descriptionClass}>
+              {renderPlainDescription(description)}
+            </div>
+          ) : null}
         </div>
         <div>
           {links && links.length > 0 && (

@@ -5,6 +5,7 @@ import { generatePageMetadata } from "@/sanity/lib/metadata";
 import type { Metadata } from "next";
 import { buildLocalizedPath, normalizeLocale } from "@/lib/i18n/routing";
 import type { LangAsyncPageProps } from "@/lib/types/next";
+import { buildAbsoluteUrl } from "@/lib/url";
 
 export const revalidate = 60;
 
@@ -62,17 +63,35 @@ export default async function ProductsPage(props: LangAsyncPageProps) {
     notFound();
   }
 
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const homeUrl = buildAbsoluteUrl(locale, "/");
+  const productsUrl = `${SITE_URL}${buildLocalizedPath(locale, "/products")}`;
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: homeUrl },
+      { "@type": "ListItem", position: 2, name: "Products", item: productsUrl },
+    ],
+  } as const;
+
   return (
-    <Blocks
-      blocks={page?.blocks ?? []}
-      searchParams={
-        // Only allow pagination on All Products; ignore any category param to avoid duplicate content
-        (((await props.searchParams) as { page?: string } | undefined) && {
-          page: (await props.searchParams)?.page as string | undefined,
-        }) ||
-        {}
-      }
-      locale={locale}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+      <Blocks
+        blocks={page?.blocks ?? []}
+        searchParams={
+          // Only allow pagination on All Products; ignore any category param to avoid duplicate content
+          (((await props.searchParams) as { page?: string } | undefined) && {
+            page: (await props.searchParams)?.page as string | undefined,
+          }) ||
+          {}
+        }
+        locale={locale}
+      />
+    </>
   );
 }

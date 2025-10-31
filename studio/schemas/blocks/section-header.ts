@@ -119,6 +119,15 @@ export default defineType({
     defineField({
       name: "description",
       type: "text",
+      description:
+        "Plain text description (legacy). Prefer the Rich Description field below for formatting.",
+    }),
+    defineField({
+      name: "richDescription",
+      type: "inline-rich-text",
+      title: "Description (Rich Text)",
+      description:
+        "Supports bold, italic, and links. Use this instead of the plain description to preserve formatting.",
     }),
     defineField({
       name: "links",

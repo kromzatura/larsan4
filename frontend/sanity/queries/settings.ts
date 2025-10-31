@@ -14,6 +14,7 @@ export const SETTINGS_QUERY = groq`
       ${imageQuery}
     },
     description,
-    copyright
+    copyright,
+    socialLinks
   }
 `;

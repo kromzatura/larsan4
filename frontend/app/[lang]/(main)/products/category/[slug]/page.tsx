@@ -17,6 +17,7 @@ import type { AsyncPageProps } from "@/lib/types/next";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { mapProductToProductsTableItem } from "@/sanity/lib/mappers";
 import { toText } from "@/lib/utils";
+import { buildAbsoluteUrl } from "@/lib/url";
 
 const PAGE_SIZE = 12;
 
@@ -141,8 +142,30 @@ export default async function CategoryPage(
     },
   ];
 
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const homeUrl = buildAbsoluteUrl(locale, "/");
+  const productsUrl = `${SITE_URL}${buildLocalizedPath(locale, "/products")}`;
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: homeUrl },
+      { "@type": "ListItem", position: 2, name: "Products", item: productsUrl },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: catTitle,
+        item: `${SITE_URL}${baseUrl}`,
+      },
+    ],
+  } as const;
+
   return (
     <section className="container py-16 xl:py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <Breadcrumbs links={links} locale={locale} />
       <div className="mt-7 grid gap-3 md:grid-cols-[1fr_auto] md:items-end md:gap-4">
         <div className="min-w-0">

@@ -218,6 +218,28 @@ export default async function ProductPage(
       : undefined,
   };
 
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const productsUrl = `${SITE_URL}${buildLocalizedPath(locale, "/products")}`;
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: `${SITE_URL}${buildLocalizedPath(locale, "/")}`,
+      },
+      { "@type": "ListItem", position: 2, name: "Products", item: productsUrl },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.title || "Product",
+        item: shareUrl,
+      },
+    ],
+  } as const;
+
   return (
     <section className="container py-16 xl:py-20">
       <article>
@@ -225,6 +247,10 @@ export default async function ProductPage(
           type="application/ld+json"
           // JSON-LD improves SEO. Keep minimal fields since pricing/availability are not part of this B2B flow.
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
         />
         <Breadcrumbs links={links} locale={locale} />
 

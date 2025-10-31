@@ -25,6 +25,7 @@ import linkGroup from "./schemas/blocks/shared/link-group";
 import { buttonVariant } from "./schemas/blocks/shared/button-variant";
 import sectionPadding from "./schemas/blocks/shared/section-padding";
 import imageTreatment from "./schemas/blocks/shared/image-treatment";
+import inlineRichText from "./schemas/blocks/shared/inline-rich-text";
 // Schema UI objects
 import sectionHeader from "./schemas/blocks/section-header";
 import productCallout from "./schemas/blocks/shared/product-callout";
@@ -153,6 +154,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     buttonVariant,
     sectionPadding,
     imageTreatment,
+    inlineRichText,
     // blocks
     sectionHeader,
     productCallout,
