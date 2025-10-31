@@ -55,4 +55,5 @@ export const ICON_VARIANTS = [
   { title: "XCircle", value: "x-circle" },
   { title: "Zap", value: "zap" },
   { title: "ZoomIn", value: "zoom-in" },
+  { title: "Truck", value: "truck" },
 ];

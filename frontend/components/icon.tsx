@@ -55,6 +55,7 @@ import {
   XCircle,
   Zap,
   ZoomIn,
+  Truck,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -122,6 +123,7 @@ const iconComponents: Record<string, LucideIcon> = {
   "x-circle": XCircle,
   zap: Zap,
   "zoom-in": ZoomIn,
+  truck: Truck,
 };
 
 export default function Icon({
