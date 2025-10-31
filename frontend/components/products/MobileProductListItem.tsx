@@ -24,6 +24,10 @@ export default function MobileProductListItem({
   labels: MobileLabels;
   locale?: SupportedLocale;
 }) {
+  const imageAlt =
+    (item.imageAlt && item.imageAlt.trim()) ||
+    toText(item.title as unknown) ||
+    "Product image";
   return (
     <div className="rounded-lg border p-4">
       <div className="flex gap-4">
@@ -31,7 +35,7 @@ export default function MobileProductListItem({
           <Link href={item.href} className="relative z-10 shrink-0">
             <Image
               src={item.imageUrl}
-              alt={toText(item.title as unknown) || "Product image"}
+              alt={imageAlt}
               width={160}
               height={106}
               className="h-20 w-32 rounded object-cover ring-1 ring-border"
