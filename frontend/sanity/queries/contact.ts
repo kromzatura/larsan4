@@ -1,6 +1,7 @@
 import { groq } from "next-sanity";
 import { linkQuery } from "./shared/link";
 import { metaQuery } from "./shared/meta";
+import { TRANSLATIONS_QUERY_FRAGMENT } from "../lib/queries/fragments";
 
 export const CONTACT_QUERY = groq`
   *[
@@ -24,5 +25,6 @@ export const CONTACT_QUERY = groq`
       }
     },
     ${metaQuery},
+    ${TRANSLATIONS_QUERY_FRAGMENT},
   }
 `;

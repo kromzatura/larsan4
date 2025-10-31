@@ -131,14 +131,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
 
   const staticPaths = ["/blog", "/products", "/contact", "/inquiry"] as const;
-  const staticEntries: SitemapEntry[] = staticPaths.flatMap((path) =>
-    SUPPORTED_LOCALES.map((locale) => ({
-      url: `${baseUrl}${buildLocalizedPath(locale, path)}`,
+  const staticEntries: SitemapEntry[] = staticPaths.flatMap((path) => {
+    // Build a full languages map for alternates across supported locales
+    const languages: Record<string, string> = {};
+    for (const loc of SUPPORTED_LOCALES) {
+      languages[loc] = `${baseUrl}${buildLocalizedPath(loc, path)}`;
+    }
+
+    // Emit an entry per locale with the shared alternates map
+    return SUPPORTED_LOCALES.map((locale) => ({
+      url: languages[locale],
       lastModified: new Date().toISOString(),
       changeFrequency: "daily" as const,
       priority: 0.8,
-    }))
-  );
+      alternates: { languages },
+    }));
+  });
 
   return [...staticEntries, ...dynamicEntries];
 }
