@@ -4555,21 +4555,6 @@
                   },
                   "rest": {
                     "type": "inline",
-                    "name": "section-header"
-                  }
-                },
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
                     "name": "product-callout"
                   }
                 }
@@ -9653,21 +9638,6 @@
                   },
                   "rest": {
                     "type": "inline",
-                    "name": "section-header"
-                  }
-                },
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
                     "name": "product-callout"
                   }
                 }
@@ -11420,21 +11390,6 @@
                   },
                   "rest": {
                     "type": "inline",
-                    "name": "section-header"
-                  }
-                },
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
                     "name": "product-callout"
                   }
                 }
@@ -12311,21 +12266,6 @@
                   },
                   "rest": {
                     "type": "inline",
-                    "name": "section-header"
-                  }
-                },
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
                     "name": "product-callout"
                   }
                 }
@@ -12953,21 +12893,6 @@
                   },
                   "rest": {
                     "type": "inline",
-                    "name": "section-header"
-                  }
-                },
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
                     "name": "product-callout"
                   }
                 }
@@ -13572,21 +13497,6 @@
                   "rest": {
                     "type": "inline",
                     "name": "code"
-                  }
-                },
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
-                    "name": "section-header"
                   }
                 },
                 {
@@ -15046,21 +14956,6 @@
                   },
                   "rest": {
                     "type": "inline",
-                    "name": "section-header"
-                  }
-                },
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
                     "name": "product-callout"
                   }
                 }
@@ -15659,21 +15554,6 @@
                   "rest": {
                     "type": "inline",
                     "name": "code"
-                  }
-                },
-                {
-                  "type": "object",
-                  "attributes": {
-                    "_key": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "rest": {
-                    "type": "inline",
-                    "name": "section-header"
                   }
                 },
                 {
@@ -16908,21 +16788,6 @@
             "rest": {
               "type": "inline",
               "name": "code"
-            }
-          },
-          {
-            "type": "object",
-            "attributes": {
-              "_key": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                }
-              }
-            },
-            "rest": {
-              "type": "inline",
-              "name": "section-header"
             }
           },
           {
