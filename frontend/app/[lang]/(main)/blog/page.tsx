@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import PostsList, { PostsListItem } from "@/components/posts/posts-list";
 import SectionHeader from "@/components/blocks/section-header";
+import Blocks from "@/components/blocks";
 import {
   fetchSanityPageBySlug,
   fetchSanityPosts,
@@ -105,6 +106,10 @@ export default async function BlogIndex(props: LangAsyncPageProps) {
   // Fetch the blog page document to render an optional Section Header block
   const pageDoc = await fetchSanityPageBySlug({ slug: "blog", lang: locale });
   type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
+  // Extract hero blocks so they can render above the list
+  const heroBlocks = (pageDoc?.blocks || []).filter(
+    (b) => typeof b?._type === "string" && b._type.startsWith("hero-")
+  ) as unknown as Block[];
   const sectionHeader = (pageDoc?.blocks || []).find(
     (b): b is Extract<Block, { _type: "section-header" }> =>
       b?._type === "section-header"
@@ -158,6 +163,11 @@ export default async function BlogIndex(props: LangAsyncPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
+      {page === 1 && sort === "newest" && heroBlocks.length > 0 && (
+        <div className="mb-8">
+          <Blocks blocks={heroBlocks} locale={locale} />
+        </div>
+      )}
       {sectionHeader ? (
         <SectionHeader {...sectionHeader} locale={locale} />
       ) : (
