@@ -6,12 +6,33 @@ import { Highlight, themes } from "prism-react-renderer";
 import { CopyButton } from "@/components/ui/copy-button";
 import { Lightbulb } from "lucide-react";
 import { ReactNode } from "react";
-import { resolveLinkHref } from "@/lib/resolveHref";
+import { resolveHref, resolveLinkHref } from "@/lib/resolveHref";
+import { DOC_TYPES } from "@/lib/docTypes";
+import { buttonVariants } from "@/components/ui/button";
+import Icon from "@/components/icon";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { toText } from "@/lib/utils";
+
+// Minimal types for PT product-callout to avoid `any`
+type ProductLike = {
+  _id?: string | null;
+  title?: unknown;
+  excerpt?: unknown;
+  slug?: { current?: string | null } | null;
+  sku?: string | null;
+  image?: {
+    asset?: {
+      url?: string | null;
+      metadata?: {
+        lqip?: string | null;
+        dimensions?: { width?: number | null; height?: number | null } | null;
+      } | null;
+    } | null;
+  } | null;
+};
 
 const getTextFromChildren = (children: ReactNode): string => {
   if (Array.isArray(children)) {
@@ -99,6 +120,93 @@ const makePortableTextComponents = (
           {title && <AlertTitle>{title}</AlertTitle>}
           {description && <AlertDescription>{description}</AlertDescription>}
         </Alert>
+      );
+    },
+    "product-callout": ({ value }) => {
+      const align = (value?.align as string) || "left";
+      const showImage = value?.showImage !== false;
+      const overrideTitle = toText(value?.title as unknown) || null;
+      const blurb = toText(value?.blurb as unknown) || null;
+      const ctaLabel = toText(value?.ctaLabel as unknown) || "View product";
+
+      const product = (value?.product as unknown as ProductLike) || null;
+      if (!product) {
+        return (
+          <div className="my-6 rounded border p-4 text-sm text-muted-foreground">
+            Missing product (product-callout)
+          </div>
+        );
+      }
+
+      const slugCurrent = product?.slug?.current || undefined;
+      const href = resolveHref(DOC_TYPES.PRODUCT, slugCurrent, locale) || "#";
+      const imageUrl = product?.image?.asset?.url || null;
+      const imageMeta = product?.image?.asset?.metadata || null;
+      const computedTitle =
+        overrideTitle || toText(product?.title as unknown) || "";
+      const computedBlurb = blurb || toText(product?.excerpt as unknown) || "";
+
+      const wrapperClasses = [
+        "my-6",
+        align === "center" ? "mx-auto max-w-5xl" : "max-w-5xl",
+      ]
+        .filter(Boolean)
+        .join(" ");
+
+      return (
+        <div
+          className={[
+            wrapperClasses,
+            "rounded-xl border p-4 md:p-6 bg-background",
+          ].join(" ")}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
+            {showImage && imageUrl ? (
+              <div className={align === "center" ? "mx-auto" : undefined}>
+                <Image
+                  src={imageUrl}
+                  alt={computedTitle || "Product image"}
+                  width={960}
+                  height={720}
+                  className="w-full h-auto rounded-lg object-cover"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  placeholder={imageMeta?.lqip ? "blur" : undefined}
+                  blurDataURL={imageMeta?.lqip || undefined}
+                />
+              </div>
+            ) : null}
+            <div
+              className={[align === "center" ? "text-center" : undefined].join(
+                " "
+              )}
+            >
+              <h3 className="text-2xl md:text-3xl font-semibold tracking-tight">
+                {computedTitle}
+              </h3>
+              {computedBlurb && (
+                <p className="mt-3 text-muted-foreground">{computedBlurb}</p>
+              )}
+              <div
+                className={[
+                  "mt-5 flex flex-wrap gap-3",
+                  align === "center" ? "justify-center" : undefined,
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+              >
+                <a
+                  href={href}
+                  className={buttonVariants({ variant: "default" })}
+                >
+                  <span className="flex items-center gap-2">
+                    {ctaLabel}
+                    <Icon iconVariant="arrow-right" strokeWidth={1.5} />
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       );
     },
   },

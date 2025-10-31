@@ -18,7 +18,7 @@ export const POST_QUERY = groq`
     image{
       ${imageQuery}
     },
-    body[]{
+    body[_type != "section-header"][]{
       ${bodyQuery}
     },
     author->{
