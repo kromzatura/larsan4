@@ -7,15 +7,13 @@ type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 type Feature15 = Extract<Block, { _type: "feature-15" }>;
 type FeatureColumn = NonNullable<NonNullable<Feature15["columns"]>[number]>;
 
-  const componentMap: {
-    [K in FeatureColumn["_type"]]: React.ComponentType<
-      Extract<FeatureColumn, { _type: K }> & { invert?: boolean }
-    >;
-  } = {
-    "feature-15-card": Feature15Card as React.ComponentType<
-      Feature15CardProps
-    >,
-  };
+const componentMap: {
+  [K in FeatureColumn["_type"]]: React.ComponentType<
+    Extract<FeatureColumn, { _type: K }> & { invert?: boolean }
+  >;
+} = {
+  "feature-15-card": Feature15Card as React.ComponentType<Feature15CardProps>,
+};
 
 export default function Feature15({
   padding,
@@ -48,13 +46,7 @@ export default function Feature15({
               );
               return <div data-type={column._type} key={column._key} />;
             }
-            return (
-              <Component
-                  {...column}
-                invert={invert}
-                key={column._key}
-              />
-            );
+            return <Component {...column} invert={invert} key={column._key} />;
           })}
         </div>
       )}
