@@ -13,7 +13,15 @@ export const sectionHeaderQuery = groq`
     tag,
     title,
     description,
-    richDescription,
+    richDescription[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "link" => {
+          ${linkQuery}
+        }
+      }
+    },
     isDatasheetTitle,
     hasGroupDivider,
     links[]{
