@@ -134,6 +134,12 @@ export default async function BlogCategoryPage(
     _id: p._id || "",
     slug: p.slug?.current || "",
     title: p.title || null,
+    imageUrl: p.image?.asset?.url || null,
+    imageAlt: (() => {
+      const alt = (p.image as { alt?: unknown } | null | undefined)?.alt;
+      return typeof alt === "string" ? alt : null;
+    })(),
+    imageMeta: p.image?.asset?.metadata || null,
     createdAt: p._createdAt || null,
     excerpt: p.excerpt || null,
     author: {

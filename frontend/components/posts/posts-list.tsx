@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { cn, toText } from "@/lib/utils";
 import Pagination from "@/components/pagination";
 import PostDate from "@/components/post-date";
@@ -15,6 +16,12 @@ export type PostsListItem = {
   title: string | null;
   createdAt?: string | null;
   excerpt?: string | null;
+  imageUrl?: string | null;
+  imageAlt?: string | null;
+  imageMeta?: {
+    lqip?: string | null;
+    dimensions?: { width?: number | null; height?: number | null } | null;
+  } | null;
   author?: {
     name?: string | null;
     title?: string | null;
@@ -96,6 +103,28 @@ export default function PostsList({
                 </span>
               )}
             </span>
+            {post.imageUrl ? (
+              <Link
+                href={buildLocalizedPath(locale, `/blog/${post.slug}`)}
+                className="mb-3 block overflow-hidden rounded-lg"
+                aria-label={toText(post.title) || "Read post"}
+              >
+                <Image
+                  src={post.imageUrl}
+                  alt={
+                    (post.imageAlt && post.imageAlt.trim()) ||
+                    toText(post.title) ||
+                    "Post image"
+                  }
+                  width={(post.imageMeta?.dimensions?.width as number) || 1200}
+                  height={(post.imageMeta?.dimensions?.height as number) || 675}
+                  className="h-auto w-full object-cover"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  placeholder={post.imageMeta?.lqip ? "blur" : undefined}
+                  blurDataURL={post.imageMeta?.lqip || undefined}
+                />
+              </Link>
+            ) : null}
             <h3 className="text-2xl font-bold hover:underline lg:text-3xl">
               {toText(post.title) && (
                 <Link href={buildLocalizedPath(locale, `/blog/${post.slug}`)}>

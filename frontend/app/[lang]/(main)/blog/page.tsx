@@ -123,6 +123,12 @@ export default async function BlogIndex(props: LangAsyncPageProps) {
     title: toText(p.title),
     createdAt: p._createdAt || null,
     excerpt: toText(p.excerpt),
+    imageUrl: p.image?.asset?.url || null,
+    imageAlt: (() => {
+      const alt = (p.image as { alt?: unknown } | null | undefined)?.alt;
+      return typeof alt === "string" ? alt : null;
+    })(),
+    imageMeta: p.image?.asset?.metadata || null,
     author: {
       name: toText(p.author?.name),
       title: toText(p.author?.title),
