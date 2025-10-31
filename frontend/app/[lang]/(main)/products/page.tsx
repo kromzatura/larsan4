@@ -1,4 +1,5 @@
 import Blocks from "@/components/blocks";
+import Breadcrumbs from "@/components/ui/breadcrumbs";
 import { fetchSanityPageBySlug } from "@/sanity/lib/fetch";
 import { notFound } from "next/navigation";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
@@ -6,6 +7,7 @@ import type { Metadata } from "next";
 import { buildLocalizedPath, normalizeLocale } from "@/lib/i18n/routing";
 import type { LangAsyncPageProps } from "@/lib/types/next";
 import { buildAbsoluteUrl } from "@/lib/url";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
 export const revalidate = 60;
 
@@ -62,6 +64,7 @@ export default async function ProductsPage(props: LangAsyncPageProps) {
   if (!page) {
     notFound();
   }
+  const dictionary = await getDictionary(locale);
 
   const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const homeUrl = buildAbsoluteUrl(locale, "/");
@@ -77,10 +80,21 @@ export default async function ProductsPage(props: LangAsyncPageProps) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
+      <section className="container py-16 xl:py-20">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+        />
+        <Breadcrumbs
+          links={[
+            {
+              label: dictionary.products.categoryPage.breadcrumbProducts,
+              href: buildLocalizedPath(locale, "/products"),
+            },
+          ]}
+          locale={locale}
+        />
+      </section>
       <Blocks
         blocks={page?.blocks ?? []}
         searchParams={
