@@ -45,6 +45,7 @@ export async function generateMetadata(
   if (!page || !page.title || !page.blocks || page.blocks.length === 0) {
     notFound();
   }
+
   return generatePageMetadata({
     page,
     slug: params.slug,

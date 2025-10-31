@@ -9,7 +9,6 @@ export async function generateMetadata(props: LangAsyncPageProps) {
   const resolved = props.params ? await props.params : undefined;
   const locale = normalizeLocale(resolved?.lang);
   const page = await fetchSanityPageBySlug({ slug: "index", lang: locale });
-
   if (!page) {
     notFound();
   }
