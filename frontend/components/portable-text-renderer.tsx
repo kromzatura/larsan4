@@ -16,6 +16,18 @@ import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { toText } from "@/lib/utils";
 
+// Minimal product shape used by the product-callout renderer
+type ProductRef = {
+  slug?: { current?: string | null } | null;
+  image?: {
+    asset?: {
+      url?: string | null;
+      metadata?: { lqip?: string | null } | null;
+    } | null;
+  } | null;
+  title?: unknown;
+  excerpt?: unknown;
+};
 
 const getTextFromChildren = (children: ReactNode): string => {
   if (Array.isArray(children)) {
@@ -112,7 +124,7 @@ const makePortableTextComponents = (
       const blurb = toText(value?.blurb as unknown) || null;
       const ctaLabel = toText(value?.ctaLabel as unknown) || "View product";
 
-    const product = value?.product as any;
+      const product = (value?.product as ProductRef) || null;
       if (!product) {
         return (
           <div className="my-6 rounded border p-4 text-sm text-muted-foreground">
