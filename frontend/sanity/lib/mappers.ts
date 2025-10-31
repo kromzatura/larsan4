@@ -18,6 +18,7 @@ type ProductListItem = {
     productAttributes?: string | null;
   }> | null;
   image?: {
+    alt?: string | null;
     asset?: {
       _id?: string | null;
       metadata?: {
@@ -49,6 +50,10 @@ export function mapProductToProductsTableItem(
         .fit("crop")
         .url()
     : undefined;
+  const imageAlt =
+    typeof p.image?.alt === "string" && p.image.alt.trim()
+      ? p.image.alt.trim()
+      : null;
 
   return {
     _id: p._id || "",
@@ -56,6 +61,7 @@ export function mapProductToProductsTableItem(
     title: toText(p.title as unknown) || null,
     sku: spec?.sku || null,
     imageUrl,
+    imageAlt,
     imageMeta: p.image?.asset?.metadata || null,
     features: Array.isArray(p.keyFeatures)
       ? p.keyFeatures

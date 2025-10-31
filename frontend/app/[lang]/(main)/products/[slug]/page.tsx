@@ -271,7 +271,12 @@ export default async function ProductPage(
                     .height(800)
                     .fit("crop")
                     .url()}
-                  alt={product.image.alt || product.title || "Product image"}
+                  alt={
+                    (typeof product.image?.alt === "string" &&
+                      product.image.alt.trim()) ||
+                    product.title ||
+                    "Product image"
+                  }
                   width={1200}
                   height={800}
                   className="aspect-video w-full rounded-lg object-cover shadow-md"

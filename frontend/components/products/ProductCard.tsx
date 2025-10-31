@@ -22,6 +22,8 @@ export default function ProductCard({
 }) {
   const title = toText(item.title as unknown) || "";
   const sku = toText(item.sku as unknown);
+  const imageAlt =
+    (item.imageAlt && item.imageAlt.trim()) || title || "Product image";
 
   return (
     <Card className="overflow-hidden">
@@ -29,7 +31,7 @@ export default function ProductCard({
         <Link href={item.href} className="relative block aspect-[4/3]">
           <Image
             src={item.imageUrl}
-            alt={title || "Product image"}
+            alt={imageAlt}
             fill
             className="object-cover"
             sizes="(min-width: 1280px) 25vw, (min-width: 768px) 45vw, 90vw"

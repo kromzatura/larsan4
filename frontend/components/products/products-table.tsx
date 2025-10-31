@@ -18,6 +18,7 @@ export type ProductsTableItem = {
   title: string | null;
   sku?: string | null;
   imageUrl?: string | null;
+  imageAlt?: string | null;
   imageMeta?: {
     lqip?: string | null;
     dimensions?: { width?: number | null; height?: number | null } | null;
@@ -134,7 +135,11 @@ export default function ProductsTable({
                       <Link href={item.href} className="relative z-10 shrink-0">
                         <Image
                           src={item.imageUrl}
-                          alt={toText(item.title as unknown) || "Product image"}
+                          alt={
+                            (item.imageAlt && item.imageAlt.trim()) ||
+                            toText(item.title as unknown) ||
+                            "Product image"
+                          }
                           width={320}
                           height={213}
                           className="h-16 w-24 rounded object-cover ring-1 ring-border transition duration-200 ease-out group-hover:ring-primary/40 group-hover:shadow-sm group-hover:scale-[1.02]"
