@@ -3,6 +3,20 @@ import { imageQuery } from "./shared/image";
 import { bodyQuery } from "./shared/body";
 import { metaQuery } from "./shared/meta";
 import { TRANSLATIONS_QUERY_FRAGMENT } from "../lib/queries/fragments";
+import { sectionHeaderQuery } from "../queries/section-header";
+import { faq1Query } from "../queries/faq/faq1";
+import { faq5Query } from "../queries/faq/faq5";
+import { faq8Query } from "../queries/faq/faq8";
+import { faq9Query } from "../queries/faq/faq9";
+import { faq14Query } from "../queries/faq/faq14";
+import { feature1Query } from "../queries/feature/feature1";
+import { feature3Query } from "../queries/feature/feature3";
+import { feature12Query } from "../queries/feature/feature12";
+import { feature15Query } from "../queries/feature/feature15";
+import { feature66Query } from "../queries/feature/feature66";
+import { feature117Query } from "../queries/feature/feature117";
+import { feature157Query } from "../queries/feature/feature157";
+import { feature202Query } from "../queries/feature/feature202";
 
 const productCategoryFilter = `
   _type == "productCategory" &&
@@ -149,6 +163,22 @@ export const PRODUCT_CATEGORY_BY_SLUG_QUERY = groq`
     language,
     title,
     slug,
+    blocks[]{
+      ${sectionHeaderQuery},
+      ${feature1Query},
+      ${feature3Query},
+      ${feature12Query},
+      ${feature15Query},
+      ${feature66Query},
+      ${feature117Query},
+      ${feature157Query},
+      ${feature202Query},
+      ${faq1Query},
+      ${faq5Query},
+      ${faq8Query},
+      ${faq9Query},
+      ${faq14Query},
+    },
     description,
     ${metaQuery},
     ${TRANSLATIONS_QUERY_FRAGMENT}

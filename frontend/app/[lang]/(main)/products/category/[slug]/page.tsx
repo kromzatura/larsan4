@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
+import Blocks from "@/components/blocks";
+import { PAGE_QUERYResult } from "@/sanity.types";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import {
   fetchSanityProductsByCategory,
@@ -160,6 +162,10 @@ export default async function CategoryPage(
     ],
   } as const;
 
+  const categoryBlocks = (cat.blocks ?? []) as NonNullable<
+    NonNullable<PAGE_QUERYResult>["blocks"]
+  >;
+
   return (
     <section className="container py-16 xl:py-20">
       <script
@@ -167,18 +173,59 @@ export default async function CategoryPage(
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
       <Breadcrumbs links={links} locale={locale} />
-      <div className="mt-7 grid gap-3 md:grid-cols-[1fr_auto] md:items-end md:gap-4">
-        <div className="min-w-0">
-          <h1 className="text-3xl font-serif font-semibold leading-tight md:text-5xl">
-            {catTitle}
-          </h1>
-          {catDescription && (
-            <p className="mt-3 max-w-3xl text-muted-foreground">
-              {catDescription}
-            </p>
-          )}
+      {Array.isArray(cat.blocks) && cat.blocks.length > 0 ? (
+        <div className="mt-7">
+          <Blocks blocks={categoryBlocks} locale={locale} />
         </div>
-        <div className="md:justify-end md:ml-0 ml-auto flex flex-wrap items-center gap-2 text-sm">
+      ) : (
+        <div className="mt-7 grid gap-3 md:grid-cols-[1fr_auto] md:items-end md:gap-4">
+          <div className="min-w-0">
+            <h1 className="text-3xl font-serif font-semibold leading-tight md:text-5xl">
+              {catTitle}
+            </h1>
+            {catDescription && (
+              <p className="mt-3 max-w-3xl text-muted-foreground">
+                {catDescription}
+              </p>
+            )}
+          </div>
+          <div className="md:justify-end md:ml-0 ml-auto flex flex-wrap items-center gap-2 text-sm">
+            <span className="text-muted-foreground">
+              {dictionary.products.categoryPage.labelSort}
+            </span>
+            <Link
+              href={`${baseUrl}?sort=newest`}
+              aria-pressed={sort === "newest"}
+              className={`inline-flex items-center rounded-md border px-2.5 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                sort === "newest" ? "bg-muted" : "hover:bg-muted"
+              }`}
+            >
+              {dictionary.products.categoryPage.sortNewest}
+            </Link>
+            <Link
+              href={`${baseUrl}?sort=az`}
+              aria-pressed={sort === "az"}
+              className={`inline-flex items-center rounded-md border px-2.5 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                sort === "az" ? "bg-muted" : "hover:bg-muted"
+              }`}
+            >
+              {dictionary.products.categoryPage.sortAZ}
+            </Link>
+            <Link
+              href={`${baseUrl}?sort=za`}
+              aria-pressed={sort === "za"}
+              className={`inline-flex items-center rounded-md border px-2.5 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                sort === "za" ? "bg-muted" : "hover:bg-muted"
+              }`}
+            >
+              {dictionary.products.categoryPage.sortZA}
+            </Link>
+          </div>
+        </div>
+      )}
+      {/* When a Section Header is used, keep the sort toolbar accessible below */}
+      {Array.isArray(cat.blocks) && cat.blocks.length > 0 && (
+        <div className="mt-6 md:flex md:justify-end ml-auto flex flex-wrap items-center gap-2 text-sm">
           <span className="text-muted-foreground">
             {dictionary.products.categoryPage.labelSort}
           </span>
@@ -210,7 +257,7 @@ export default async function CategoryPage(
             {dictionary.products.categoryPage.sortZA}
           </Link>
         </div>
-      </div>
+      )}
 
       <div className="mt-10">
         {(() => {

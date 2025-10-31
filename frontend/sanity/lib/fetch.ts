@@ -65,8 +65,11 @@ function resolveLocaleParams(lang?: SupportedLocale) {
   };
 }
 
+type PageBlock = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
+
 export type ProductCategoryWithMeta = ProductCategory & {
   description?: string | null;
+  blocks?: PageBlock[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;

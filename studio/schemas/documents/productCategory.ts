@@ -20,6 +20,66 @@ export default defineType({
       validation: (Rule) => Rule.required().error("Title is required"),
     }),
     defineField({
+      name: "blocks",
+      title: "Blocks",
+      type: "array",
+      group: "content",
+      description:
+        "Use a Section Header to control the H1 and description for the category page. You can add additional blocks as needed.",
+      of: [
+        { type: "section-header" },
+        // Feature blocks
+        { type: "feature-1" },
+        { type: "feature-3" },
+        { type: "feature-12" },
+        { type: "feature-15" },
+        { type: "feature-66" },
+        { type: "feature-117" },
+        { type: "feature-157" },
+        { type: "feature-202" },
+        // FAQ blocks
+        { type: "faq-1" },
+        { type: "faq-5" },
+        { type: "faq-8" },
+        { type: "faq-9" },
+        { type: "faq-14" },
+      ],
+      options: {
+        insertMenu: {
+          groups: [
+            {
+              name: "section-header",
+              of: ["section-header"],
+            },
+            {
+              name: "feature",
+              of: [
+                "feature-1",
+                "feature-3",
+                "feature-12",
+                "feature-15",
+                "feature-66",
+                "feature-117",
+                "feature-157",
+                "feature-202",
+              ],
+            },
+            {
+              name: "faq",
+              of: ["faq-1", "faq-5", "faq-8", "faq-9", "faq-14"],
+            },
+          ],
+          views: [
+            {
+              name: "grid",
+              previewImageUrl: (block) => `/static/images/preview/${block}.jpg`,
+            },
+            { name: "list" },
+          ],
+        },
+      },
+    }),
+    defineField({
       name: "description",
       type: "text",
       rows: 3,
