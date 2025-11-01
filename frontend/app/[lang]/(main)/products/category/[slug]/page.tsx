@@ -165,6 +165,9 @@ export default async function CategoryPage(
   const categoryBlocks = (cat.blocks ?? []) as NonNullable<
     NonNullable<PAGE_QUERYResult>["blocks"]
   >;
+  const categoryBlocksAfter = (cat as unknown as {
+    blocksAfter?: NonNullable<PAGE_QUERYResult>["blocks"];
+  }).blocksAfter || ([] as NonNullable<PAGE_QUERYResult>["blocks"]);
 
   return (
     <section className="container py-16 xl:py-20">
@@ -302,6 +305,12 @@ export default async function CategoryPage(
               <div className="hidden xl:block">
                 <ProductsTable {...sharedProps} className="mb-12" />
               </div>
+              {Array.isArray(categoryBlocksAfter) &&
+                categoryBlocksAfter.length > 0 && (
+                  <div className="mt-12">
+                    <Blocks blocks={categoryBlocksAfter} locale={locale} />
+                  </div>
+                )}
             </>
           );
         })()}
