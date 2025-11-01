@@ -215,9 +215,15 @@ export function generatePageMetadata({
   }
   const title: Metadata["title"] = rawTitle;
 
+  const descriptionText =
+    toText(meta?.description as unknown) ??
+    (type === "product" || type === "post"
+      ? toText((page as any)?.excerpt as unknown)
+      : undefined);
+
   return {
     title,
-    description: toText(meta?.description as unknown) ?? undefined,
+    description: descriptionText ?? undefined,
     alternates: {
       canonical: canonicalUrl,
       languages: Object.keys(languageAlternates).length
@@ -226,7 +232,7 @@ export function generatePageMetadata({
     },
     openGraph: {
       title: rawTitle ?? undefined,
-      description: toText(meta?.description as unknown) ?? undefined,
+      description: descriptionText ?? undefined,
       url: canonicalUrl,
       images: [
         {
@@ -255,5 +261,8 @@ export function generatePageMetadata({
       type: "website",
     },
     robots: robotsValue,
+    twitter: {
+      card: "summary_large_image",
+    },
   };
 }

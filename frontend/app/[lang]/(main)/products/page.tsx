@@ -51,7 +51,10 @@ export async function generateMetadata(
     }
     return {
       ...base,
-      robots: "noindex",
+      robots: {
+        index: false,
+        follow: true,
+      },
     };
   }
   return base;

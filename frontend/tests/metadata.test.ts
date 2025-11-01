@@ -142,4 +142,41 @@ describe("generatePageMetadata – title", () => {
     const title = getTitleValue(meta.title);
     expect(title).toBe("Black Mustard");
   });
+
+  it("uses product excerpt as description fallback when meta.description is missing", () => {
+    const locale = "en" as SupportedLocale;
+    const excerpt = "Short product summary for SEO.";
+    const meta = generatePageMetadata({
+      page: {
+        meta: {},
+        excerpt,
+        allTranslations: [{ lang: "en", slug: "products/test-product" }],
+      } as any,
+      slug: "products/test-product",
+      type: "product",
+      locale,
+    });
+
+    expect(meta.description).toBe(excerpt);
+    expect(meta.openGraph?.description).toBe(excerpt);
+  });
+
+  it("uses post excerpt as description fallback and sets Twitter card", () => {
+    const locale = "en" as SupportedLocale;
+    const excerpt = "Short blog summary for SEO.";
+    const meta = generatePageMetadata({
+      page: {
+        meta: {},
+        excerpt,
+        allTranslations: [{ lang: "en", slug: "blog/hello-world" }],
+      } as any,
+      slug: "blog/hello-world",
+      type: "post",
+      locale,
+    });
+
+    expect(meta.description).toBe(excerpt);
+    expect(meta.openGraph?.description).toBe(excerpt);
+    expect((meta as any).twitter?.card).toBe("summary_large_image");
+  });
 });
