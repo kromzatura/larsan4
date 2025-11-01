@@ -1,3 +1,4 @@
+import ExternalLink from "@/components/ui/external-link";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
 import PortableTextRenderer from "@/components/portable-text-renderer";
@@ -249,43 +250,37 @@ export default async function PostPage(
                 </p>
                 <ul className="flex gap-2">
                   <li>
-                    <a
+                    <ExternalLink
                       href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
                         shareUrl
                       )}`}
-                      target="_blank"
-                      rel="noopener"
                       title={dictionary.postPage.share.facebook}
                       className="inline-flex rounded-full border p-2 transition-colors hover:bg-muted"
                     >
                       <Facebook className="h-4 w-4" />
-                    </a>
+                    </ExternalLink>
                   </li>
                   <li>
-                    <a
-                      href={`https://x.com/intent/tweet?url=${encodeURIComponent(
+                    <ExternalLink
+                      href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
                         shareUrl
                       )}`}
-                      target="_blank"
-                      rel="noopener"
                       title={dictionary.postPage.share.twitter}
                       className="inline-flex rounded-full border p-2 transition-colors hover:bg-muted"
                     >
                       <Twitter className="h-4 w-4" />
-                    </a>
+                    </ExternalLink>
                   </li>
                   <li>
-                    <a
+                    <ExternalLink
                       href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
                         shareUrl
                       )}`}
-                      target="_blank"
-                      rel="noopener"
                       title={dictionary.postPage.share.linkedin}
                       className="inline-flex rounded-full border p-2 transition-colors hover:bg-muted"
                     >
                       <Linkedin className="h-4 w-4" />
-                    </a>
+                    </ExternalLink>
                   </li>
                 </ul>
               </div>

@@ -1,6 +1,7 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://largeseeds.nl",
+  // Ensure the default matches the live domain exactly
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://largseeds.nl",
   generateRobotsTxt: true,
   // The rest of your config will come from the async function below
   // This is a workaround for ESM modules in a CJS file

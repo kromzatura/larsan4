@@ -74,9 +74,18 @@ function docsToEntries(
           path
         )}`;
       }
+      // Provide x-default pointing at the default-locale URL
+      const canonicalUrl = `${baseUrl}${buildLocalizedPath(
+        locale,
+        buildPath(doc.slug)
+      )}`;
+      languages["x-default"] = `${baseUrl}${buildLocalizedPath(
+        DEFAULT_LOCALE,
+        buildPath(doc.slug)
+      )}`;
 
       return {
-        url: `${baseUrl}${buildLocalizedPath(locale, buildPath(doc.slug))}`,
+        url: canonicalUrl,
         lastModified: new Date(doc.lastModified).toISOString(),
         changeFrequency,
         priority,
@@ -137,6 +146,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const loc of SUPPORTED_LOCALES) {
       languages[loc] = `${baseUrl}${buildLocalizedPath(loc, path)}`;
     }
+    languages["x-default"] = `${baseUrl}${buildLocalizedPath(
+      DEFAULT_LOCALE,
+      path
+    )}`;
 
     // Emit an entry per locale with the shared alternates map
     return SUPPORTED_LOCALES.map((locale) => ({
