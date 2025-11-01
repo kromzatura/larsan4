@@ -102,14 +102,26 @@ export function generatePageMetadata({
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const docType = typeToDocType[type] || DOC_TYPES.PAGE;
 
-  // Set x-default when default locale translation exists
-  const defaultTranslation = allTranslations.find(
-    (t) => t.lang === DEFAULT_LOCALE
-  );
-  if (defaultTranslation) {
-    const href = resolveHref(docType, defaultTranslation.slug, DEFAULT_LOCALE);
-    if (href) {
-      languageAlternates["x-default"] = `${baseUrl}${href}`;
+  // Set x-default
+  // Policy:
+  // - For homepage (slug === "index"), point x-default to the bare site root (no locale segment)
+  //   to avoid duplicate hrefs (e.g., en and x-default both being /en) and follow common auditor guidance.
+  // - For other pages, point x-default to the default-locale version of the same path when available.
+  if (slug === "index") {
+    languageAlternates["x-default"] = `${baseUrl}/`;
+  } else {
+    const defaultTranslation = allTranslations.find(
+      (t) => t.lang === DEFAULT_LOCALE
+    );
+    if (defaultTranslation) {
+      const href = resolveHref(
+        docType,
+        defaultTranslation.slug,
+        DEFAULT_LOCALE
+      );
+      if (href) {
+        languageAlternates["x-default"] = `${baseUrl}${href}`;
+      }
     }
   }
 
@@ -136,10 +148,10 @@ export function generatePageMetadata({
   // fall back to the DEFAULT_LOCALE version of the same path. This yields a stable
   // default experience and avoids missing x-default entirely.
   if (!languageAlternates["x-default"]) {
-    languageAlternates["x-default"] = buildCanonicalUrl(
-      DEFAULT_LOCALE as SupportedLocale,
-      canonicalPath
-    );
+    languageAlternates["x-default"] =
+      slug === "index"
+        ? `${baseUrl}/`
+        : buildCanonicalUrl(DEFAULT_LOCALE as SupportedLocale, canonicalPath);
   }
 
   // Optional debug output to investigate hreflang conflicts in production scans

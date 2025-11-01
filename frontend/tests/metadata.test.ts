@@ -179,4 +179,25 @@ describe("generatePageMetadata – title", () => {
     expect(meta.openGraph?.description).toBe(excerpt);
     expect((meta as any).twitter?.card).toBe("summary_large_image");
   });
+
+  it("sets x-default to bare site root for homepage to avoid duplicates", () => {
+    const locale = "en" as SupportedLocale;
+    const meta = generatePageMetadata({
+      page: {
+        meta: {},
+        allTranslations: [
+          { lang: "en", slug: "index" },
+          { lang: "nl", slug: "index" },
+        ],
+      } as any,
+      slug: "index",
+      type: "page",
+      locale,
+    });
+    const langs = (meta.alternates as any)?.languages;
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+    expect(langs?.["x-default"]).toBe(`${baseUrl}/`);
+    expect(langs?.en).toBe(`${baseUrl}/en`);
+    expect(langs?.nl).toBe(`${baseUrl}/nl`);
+  });
 });
