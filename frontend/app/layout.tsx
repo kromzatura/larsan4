@@ -23,6 +23,10 @@ export const metadata: Metadata = {
     "Betrek premium agrarische ingrediënten met LAR Group. Zorg voor kwaliteit, veiligheid en duurzaamheid.",
 };
 
+// Force Node.js runtime globally to avoid potential edge incompatibilities with
+// upstream Sanity requests and certain hosting providers.
+export const runtime = "nodejs";
+
 export default async function RootLayout({
   children,
 }: {

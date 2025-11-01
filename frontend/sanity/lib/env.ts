@@ -11,7 +11,10 @@ export const projectId = assertValue(
   "Missing environment variable: NEXT_PUBLIC_SANITY_PROJECT_ID"
 );
 
-export const useCdn = false;
+// Prefer the Sanity CDN in production for published content to reduce latency
+// and improve resiliency of SSR/ISR routes. Draft/live previews still use tokens
+// and bypass CDN as needed via next-sanity/live.
+export const useCdn = process.env.NODE_ENV === "production";
 
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {
