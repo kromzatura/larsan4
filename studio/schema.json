@@ -481,10 +481,6 @@
                     {
                       "type": "string",
                       "value": "zoom-in"
-                    },
-                    {
-                      "type": "string",
-                      "value": "truck"
                     }
                   ]
                 },
@@ -816,10 +812,6 @@
                       {
                         "type": "string",
                         "value": "zoom-in"
-                      },
-                      {
-                        "type": "string",
-                        "value": "truck"
                       }
                     ]
                   },
@@ -1133,10 +1125,6 @@
                     {
                       "type": "string",
                       "value": "zoom-in"
-                    },
-                    {
-                      "type": "string",
-                      "value": "truck"
                     }
                   ]
                 },
@@ -1468,10 +1456,6 @@
                       {
                         "type": "string",
                         "value": "zoom-in"
-                      },
-                      {
-                        "type": "string",
-                        "value": "truck"
                       }
                     ]
                   },
@@ -1795,10 +1779,6 @@
                     {
                       "type": "string",
                       "value": "zoom-in"
-                    },
-                    {
-                      "type": "string",
-                      "value": "truck"
                     }
                   ]
                 },
@@ -2071,10 +2051,6 @@
                       {
                         "type": "string",
                         "value": "zoom-in"
-                      },
-                      {
-                        "type": "string",
-                        "value": "truck"
                       }
                     ]
                   },
@@ -2776,10 +2752,6 @@
                       {
                         "type": "string",
                         "value": "zoom-in"
-                      },
-                      {
-                        "type": "string",
-                        "value": "truck"
                       }
                     ]
                   },
@@ -7005,10 +6977,6 @@
               {
                 "type": "string",
                 "value": "zoom-in"
-              },
-              {
-                "type": "string",
-                "value": "truck"
               }
             ]
           },
@@ -7553,10 +7521,6 @@
                     {
                       "type": "string",
                       "value": "zoom-in"
-                    },
-                    {
-                      "type": "string",
-                      "value": "truck"
                     }
                   ]
                 },
@@ -8176,10 +8140,6 @@
               {
                 "type": "string",
                 "value": "zoom-in"
-              },
-              {
-                "type": "string",
-                "value": "truck"
               }
             ]
           },
@@ -8196,133 +8156,6 @@
           "type": "objectAttribute",
           "value": {
             "type": "string"
-          },
-          "optional": true
-        },
-        "richDescription": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "array",
-            "of": {
-              "type": "object",
-              "attributes": {
-                "children": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "array",
-                    "of": {
-                      "type": "object",
-                      "attributes": {
-                        "marks": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "array",
-                            "of": {
-                              "type": "string"
-                            }
-                          },
-                          "optional": true
-                        },
-                        "text": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string"
-                          },
-                          "optional": true
-                        },
-                        "_type": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string",
-                            "value": "span"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "object",
-                        "attributes": {
-                          "_key": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "optional": true
-                },
-                "style": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "union",
-                    "of": [
-                      {
-                        "type": "string",
-                        "value": "normal"
-                      }
-                    ]
-                  },
-                  "optional": true
-                },
-                "listItem": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "union",
-                    "of": []
-                  },
-                  "optional": true
-                },
-                "markDefs": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "array",
-                    "of": {
-                      "type": "object",
-                      "attributes": {
-                        "_key": {
-                          "type": "objectAttribute",
-                          "value": {
-                            "type": "string"
-                          }
-                        }
-                      },
-                      "rest": {
-                        "type": "inline",
-                        "name": "link"
-                      }
-                    }
-                  },
-                  "optional": true
-                },
-                "level": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "number"
-                  },
-                  "optional": true
-                },
-                "_type": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "string",
-                    "value": "block"
-                  }
-                }
-              },
-              "rest": {
-                "type": "object",
-                "attributes": {
-                  "_key": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
           },
           "optional": true
         }
@@ -8650,10 +8483,6 @@
               {
                 "type": "string",
                 "value": "zoom-in"
-              },
-              {
-                "type": "string",
-                "value": "truck"
               }
             ]
           },
@@ -8970,10 +8799,6 @@
               {
                 "type": "string",
                 "value": "zoom-in"
-              },
-              {
-                "type": "string",
-                "value": "truck"
               }
             ]
           },
@@ -9459,10 +9284,6 @@
               {
                 "type": "string",
                 "value": "zoom-in"
-              },
-              {
-                "type": "string",
-                "value": "truck"
               }
             ]
           },
@@ -12113,10 +11934,6 @@
                     {
                       "type": "string",
                       "value": "zoom-in"
-                    },
-                    {
-                      "type": "string",
-                      "value": "truck"
                     }
                   ]
                 },
@@ -14125,10 +13942,6 @@
                       {
                         "type": "string",
                         "value": "zoom-in"
-                      },
-                      {
-                        "type": "string",
-                        "value": "truck"
                       }
                     ]
                   },
@@ -14527,10 +14340,6 @@
                       {
                         "type": "string",
                         "value": "zoom-in"
-                      },
-                      {
-                        "type": "string",
-                        "value": "truck"
                       }
                     ]
                   },
@@ -14815,10 +14624,6 @@
                     {
                       "type": "string",
                       "value": "zoom-in"
-                    },
-                    {
-                      "type": "string",
-                      "value": "truck"
                     }
                   ]
                 },
@@ -22167,10 +21972,6 @@
               {
                 "type": "string",
                 "value": "zoom-in"
-              },
-              {
-                "type": "string",
-                "value": "truck"
               }
             ]
           },

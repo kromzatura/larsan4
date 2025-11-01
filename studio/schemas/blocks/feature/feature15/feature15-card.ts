@@ -26,13 +26,6 @@ export default defineType({
       name: "description",
       type: "text",
     }),
-    defineField({
-      name: "richDescription",
-      title: "Description (Rich Text)",
-      type: "inline-rich-text",
-      description:
-        "Prefer this for formatting (bold, italic, links). Legacy plain description remains as fallback.",
-    }),
   ],
   preview: {
     select: {
