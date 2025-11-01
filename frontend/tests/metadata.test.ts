@@ -126,4 +126,20 @@ describe("generatePageMetadata – title", () => {
     const title = getTitleValue(meta.title);
     expect(title).toBe("Category: Oilseeds");
   });
+
+  it("falls back to humanized slug for product when meta.title and title are missing", () => {
+    const locale = "en" as SupportedLocale;
+    const meta = generatePageMetadata({
+      page: {
+        meta: {},
+        allTranslations: [{ lang: "en", slug: "products/black-mustard" }],
+      },
+      slug: "products/black-mustard",
+      type: "product",
+      locale,
+    });
+
+    const title = getTitleValue(meta.title);
+    expect(title).toBe("Black Mustard");
+  });
 });
