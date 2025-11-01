@@ -86,4 +86,44 @@ describe("generatePageMetadata – title", () => {
     expect(langs).toBeTruthy();
     expect(langs?.["x-default"]).toBe(buildCanonicalUrl(locale, "/contact"));
   });
+
+  it("falls back to a humanized slug when meta.title and page.title are missing (generic page)", () => {
+    const locale = "en" as SupportedLocale;
+    const meta = generatePageMetadata({
+      page: {
+        meta: {
+          // no title
+          description: "FAQ",
+        },
+        allTranslations: [{ lang: "en", slug: "faq" }],
+      },
+      slug: "faq",
+      type: "page",
+      locale,
+    });
+
+    const title = getTitleValue(meta.title);
+    expect(title).toBe("Faq");
+  });
+
+  it("uses type-aware fallback for productCategory (Category: <Slug>) when title is missing", () => {
+    const locale = "en" as SupportedLocale;
+    const meta = generatePageMetadata({
+      page: {
+        meta: {
+          // no title
+        },
+        allTranslations: [
+          { lang: "en", slug: "products/category/oilseeds" },
+          { lang: "nl", slug: "products/category/oilseeds" },
+        ],
+      },
+      slug: "products/category/oilseeds",
+      type: "productCategory",
+      locale,
+    });
+
+    const title = getTitleValue(meta.title);
+    expect(title).toBe("Category: Oilseeds");
+  });
 });

@@ -30,70 +30,54 @@ export async function generateMetadata(
   const searchParams = (await props.searchParams) || {};
   const locale = normalizeLocale(params.lang);
   const pageNum = Math.max(1, Number(searchParams?.page || 1));
-  try {
-    const cat = await fetchSanityProductCategoryBySlug({
-      slug: params.slug,
-      lang: locale,
-    });
-    if (!cat) notFound();
-    const base = await generatePageMetadata({
-      page: cat,
-      slug: `products/category/${params.slug}`,
-      type: "productCategory",
-      locale,
-    });
-    const result = {
-      ...base,
-      ...(pageNum > 1
-        ? {
-            robots: {
-              index: false,
-              follow: true,
-            },
-          }
-        : {}),
-    };
-    if (
-      pageNum > 1 &&
-      (process.env.LOG_HREFLANG === "1" ||
-        process.env.NEXT_PUBLIC_LOG_HREFLANG === "1")
-    ) {
-      // eslint-disable-next-line no-console
-      console.info(
-        JSON.stringify(
-          {
-            tag: "hreflang",
-            note: "pagination category page returning canonical-only alternates",
-            page: "product-category",
-            locale,
-            slug: params.slug,
-            pageNum,
-            canonical: buildLocalizedPath(
-              locale,
-              `/products/category/${params.slug}`
-            ),
+  const cat = await fetchSanityProductCategoryBySlug({
+    slug: params.slug,
+    lang: locale,
+  });
+  if (!cat) notFound();
+  const base = await generatePageMetadata({
+    page: cat,
+    slug: `products/category/${params.slug}`,
+    type: "productCategory",
+    locale,
+  });
+  const result = {
+    ...base,
+    ...(pageNum > 1
+      ? {
+          robots: {
+            index: false,
+            follow: true,
           },
-          null,
-          2
-        )
-      );
-    }
-    return result;
-  } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : String(err);
-    console.error("[metadata] product category failed", {
-      slug: params.slug,
-      locale,
-      error: message,
-    });
-    // Fail-safe: return empty metadata to avoid a 500 due to metadata errors
-    return {} as {
-      title?: string;
-      description?: string;
-      robots?: unknown;
-      alternates?: unknown;
-    };
+        }
+      : {}),
+  };
+  if (
+    pageNum > 1 &&
+    (process.env.LOG_HREFLANG === "1" ||
+      process.env.NEXT_PUBLIC_LOG_HREFLANG === "1")
+  ) {
+    // eslint-disable-next-line no-console
+    console.info(
+      JSON.stringify(
+        {
+          tag: "hreflang",
+          note: "pagination category page returning canonical-only alternates",
+          page: "product-category",
+          locale,
+          slug: params.slug,
+          pageNum,
+          canonical: buildLocalizedPath(
+            locale,
+            `/products/category/${params.slug}`
+          ),
+        },
+        null,
+        2
+      )
+    );
   }
+  return result;
 }
 
 export default async function CategoryPage(

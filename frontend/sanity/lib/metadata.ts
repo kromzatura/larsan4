@@ -179,7 +179,40 @@ export function generatePageMetadata({
   } catch {}
 
   // Titles are authored without brand suffix; layout template adds the brand.
-  const rawTitle = toText(meta?.title as unknown) ?? undefined;
+  // Provide resilient fallbacks so <title> is never missing in crawls.
+  const pageTitleField = (page as any)?.title as unknown | undefined;
+  const coerceString = (v: unknown): string | undefined => {
+    const t = toText(v as any);
+    return t && typeof t === "string" && t.trim() ? t.trim() : undefined;
+  };
+  const humanizeSlug = (s: string): string =>
+    s
+      .replace(/^\/+|\/+$/g, "")
+      .split("/")
+      .pop()!
+      .replace(/[-_]+/g, " ")
+      .replace(/\s+/g, " ")
+      .replace(/\b\w/g, (m) => m.toUpperCase());
+
+  let rawTitle = coerceString(meta?.title);
+  if (!rawTitle) rawTitle = coerceString(pageTitleField);
+  if (!rawTitle) {
+    // Sensible defaults per type/slug to avoid empty titles
+    if (type === "productCategory") {
+      rawTitle = `Category: ${humanizeSlug(slug)}`;
+    } else if (type === "product") {
+      rawTitle = humanizeSlug(slug);
+    } else if (type === "post" || type === "blogCategory") {
+      rawTitle = humanizeSlug(slug);
+    } else if (slug === "products") {
+      rawTitle = "Products";
+    } else if (slug === "index" || slug === "") {
+      // Let layout default apply on home if nothing authored
+      rawTitle = undefined as unknown as string | undefined;
+    } else {
+      rawTitle = humanizeSlug(slug);
+    }
+  }
   const title: Metadata["title"] = rawTitle;
 
   return {
