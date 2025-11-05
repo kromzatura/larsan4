@@ -2,6 +2,9 @@
 
 import Script from "next/script";
 import type { SupportedLocale } from "@/lib/i18n/config";
+import SiteNavigationJsonLd, {
+  type SiteNavItem,
+} from "./site-navigation-json-ld";
 
 type Props = {
   locale: SupportedLocale;
@@ -9,6 +12,8 @@ type Props = {
   siteName?: string | null;
   logoUrl?: string | null;
   sameAs?: string[] | null;
+  // Optional list of primary navigation items (absolute URLs) to render as SiteNavigationElement
+  siteNavigation?: SiteNavItem[];
 };
 
 /**
@@ -21,6 +26,7 @@ export default function HomeJsonLd({
   siteName,
   logoUrl,
   sameAs,
+  siteNavigation,
 }: Props) {
   const scripts: Array<{ id: string; json: Record<string, unknown> }> = [];
 
@@ -74,6 +80,10 @@ export default function HomeJsonLd({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }}
         />
       ))}
+      {/* Option A: only emit SiteNavigationElement on the homepage */}
+      {Array.isArray(siteNavigation) && siteNavigation.length > 0 ? (
+        <SiteNavigationJsonLd locale={locale} items={siteNavigation} />
+      ) : null}
     </>
   );
 }

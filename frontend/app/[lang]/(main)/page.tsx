@@ -6,6 +6,11 @@ import { notFound } from "next/navigation";
 import { normalizeLocale } from "@/lib/i18n/routing";
 import { buildAbsoluteUrl } from "@/lib/url";
 import { urlFor } from "@/sanity/lib/image";
+import {
+  getNavigationItems,
+  type NavigationItem,
+  type NavGroup,
+} from "@/lib/getNavigationItems";
 import type { LangAsyncPageProps } from "@/lib/types/next";
 
 export async function generateMetadata(props: LangAsyncPageProps) {
@@ -27,9 +32,10 @@ export async function generateMetadata(props: LangAsyncPageProps) {
 export default async function IndexPage(props: LangAsyncPageProps) {
   const resolved = props.params ? await props.params : undefined;
   const locale = normalizeLocale(resolved?.lang);
-  const [page, settings] = await Promise.all([
+  const [page, settings, headerNav] = await Promise.all([
     fetchSanityPageBySlug({ slug: "index", lang: locale }),
     fetchSanitySettings({ lang: locale }),
+    getNavigationItems("header", locale),
   ]);
 
   if (!page) {
@@ -49,6 +55,27 @@ export default async function IndexPage(props: LangAsyncPageProps) {
       )
     : undefined;
 
+  // Build SiteNavigationElement items from the header navigation (limited to 10)
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const isGroup = (i: NavigationItem): i is NavGroup => i._type === "link-group";
+  const flatten = (items: NavigationItem[]): Array<{ name: string; url: string }> => {
+    const out: Array<{ name: string; url: string }> = [];
+    for (const item of items) {
+      if (isGroup(item) && Array.isArray(item.links)) {
+        out.push(...flatten(item.links.filter(Boolean)));
+      } else {
+        const title = item.title as string | undefined;
+        const href = item.href as string | null | undefined;
+        if (title && href) {
+          const abs = href.startsWith("http") ? href : `${SITE_URL}${href}`;
+          out.push({ name: title, url: abs });
+        }
+      }
+    }
+    return out;
+  };
+  const siteNavigation = flatten(headerNav).slice(0, 10);
+
   return (
     <>
       <HomeJsonLd
@@ -57,6 +84,7 @@ export default async function IndexPage(props: LangAsyncPageProps) {
         siteName={siteName}
         logoUrl={logoUrl}
         sameAs={sameAs}
+        siteNavigation={siteNavigation}
       />
       <Blocks blocks={page?.blocks ?? []} locale={locale} />
     </>
