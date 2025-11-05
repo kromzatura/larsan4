@@ -164,11 +164,38 @@ export default async function BlogIndex(props: LangAsyncPageProps) {
     ],
   } as const;
 
+  // JSON-LD: CollectionPage with ItemList of current page's posts
+  const collectionLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    inLanguage: locale,
+    name: "Blog",
+    url: `${SITE_URL}${basePath}`,
+    description: toText((pageDoc as unknown as { meta?: { description?: unknown } })?.meta?.description) || undefined,
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: totalCount || 0,
+      itemListElement: (posts || []).map((p, idx) => ({
+        "@type": "ListItem",
+        position: (page - 1) * POSTS_PER_PAGE + idx + 1,
+        name: toText(p.title) || undefined,
+        url: `${SITE_URL}${buildLocalizedPath(
+          locale,
+          `/blog/${p.slug?.current ?? ""}`
+        )}`,
+      })),
+    },
+  };
+
   return (
     <section className="container py-16 xl:py-20">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }}
       />
       {page === 1 && sort === "newest" && heroBlocks.length > 0 && (
         <div className="mb-8">
