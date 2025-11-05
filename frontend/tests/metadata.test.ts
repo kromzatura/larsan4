@@ -200,4 +200,40 @@ describe("generatePageMetadata – title", () => {
     expect(langs?.en).toBe(`${baseUrl}/en`);
     expect(langs?.nl).toBe(`${baseUrl}/nl`);
   });
+
+  it("uses a concrete fallback title for homepage in en when no title is authored", () => {
+    const locale = "en" as SupportedLocale;
+    const meta = generatePageMetadata({
+      page: {
+        meta: {},
+        allTranslations: [
+          { lang: "en", slug: "index" },
+          { lang: "nl", slug: "index" },
+        ],
+      } as any,
+      slug: "index",
+      type: "page",
+      locale,
+    });
+    const title = getTitleValue(meta.title);
+    expect(title).toBe("Home");
+  });
+
+  it("uses a concrete fallback title for homepage in nl when no title is authored", () => {
+    const locale = "nl" as SupportedLocale;
+    const meta = generatePageMetadata({
+      page: {
+        meta: {},
+        allTranslations: [
+          { lang: "en", slug: "index" },
+          { lang: "nl", slug: "index" },
+        ],
+      } as any,
+      slug: "index",
+      type: "page",
+      locale,
+    });
+    const title = getTitleValue(meta.title);
+    expect(title).toBe("Startpagina");
+  });
 });

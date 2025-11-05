@@ -63,6 +63,18 @@ const typeToDocType: Record<string, string> = {
   blogCategory: DOC_TYPES.BLOG_CATEGORY,
 };
 
+// Provide a locale-aware default homepage title to ensure crawlers never see an empty title
+function getDefaultHomepageTitle(lang: SupportedLocale): string {
+  switch (lang) {
+    case "nl":
+      return "Startpagina";
+    case "en":
+      return "Home";
+    default:
+      return "Home"; // Safe default for unmapped locales
+  }
+}
+
 export function generatePageMetadata({
   page,
   slug,
@@ -219,8 +231,8 @@ export function generatePageMetadata({
     } else if (slug === "products") {
       rawTitle = "Products";
     } else if (slug === "index" || slug === "") {
-      // Let layout default apply on home if nothing authored
-      rawTitle = undefined as unknown as string | undefined;
+      // Homepage: ensure a concrete, locale-aware fallback instead of undefined
+      rawTitle = getDefaultHomepageTitle(locale);
     } else {
       rawTitle = humanizeSlug(slug);
     }
