@@ -147,6 +147,29 @@ export default async function CategoryPage(
     ],
   } as const;
 
+  // JSON-LD: CollectionPage with ItemList of the current page's products
+  const collectionLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    inLanguage: locale,
+    name: catTitle,
+    url: `${SITE_URL}${baseUrl}`,
+    description: catDescription || undefined,
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: totalCount || 0,
+      itemListElement: (products || []).map((p, idx) => ({
+        "@type": "ListItem",
+        position: (page - 1) * PAGE_SIZE + idx + 1,
+        name: p?.title || undefined,
+        url: `${SITE_URL}${buildLocalizedPath(
+          locale,
+          `/products/${p?.slug?.current ?? ""}`
+        )}`,
+      })),
+    },
+  };
+
   const categoryBlocks = (cat.blocks ?? []) as NonNullable<
     NonNullable<PAGE_QUERYResult>["blocks"]
   >;
@@ -159,6 +182,10 @@ export default async function CategoryPage(
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }}
       />
       <Breadcrumbs links={links} locale={locale} />
       {Array.isArray(cat.blocks) && cat.blocks.length > 0 ? (
