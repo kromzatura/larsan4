@@ -163,6 +163,7 @@ export default async function BlogCategoryPage(
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    inLanguage: locale,
     itemListElement: [
       {
         "@type": "ListItem",

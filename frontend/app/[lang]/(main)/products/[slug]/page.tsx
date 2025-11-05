@@ -190,6 +190,7 @@ export default async function ProductPage(
   interface ProductJsonLd {
     "@context": string;
     "@type": string;
+    inLanguage?: string;
     "@id": string;
     url: string;
     name?: string;
@@ -203,6 +204,7 @@ export default async function ProductPage(
   const jsonLd: ProductJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
+    inLanguage: locale,
     "@id": shareUrl,
     url: shareUrl,
     name: product.title || undefined,
@@ -224,6 +226,7 @@ export default async function ProductPage(
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    inLanguage: locale,
     itemListElement: [
       {
         "@type": "ListItem",

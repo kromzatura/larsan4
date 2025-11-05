@@ -58,6 +58,7 @@ export default function HomeJsonLd({
     json: {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
+      inLanguage: locale,
       itemListElement: [
         {
           "@type": "ListItem",

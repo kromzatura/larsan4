@@ -139,6 +139,7 @@ export default async function PostPage(
   const articleLd = {
     "@context": "https://schema.org",
     "@type": "Article",
+    inLanguage: locale,
     headline: post.title || undefined,
     author: post.author?.name
       ? { "@type": "Person", name: post.author.name }
@@ -154,6 +155,7 @@ export default async function PostPage(
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    inLanguage: locale,
     itemListElement: [
       {
         "@type": "ListItem",

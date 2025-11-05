@@ -75,6 +75,7 @@ export default async function ProductsPage(props: LangAsyncPageProps) {
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    inLanguage: locale,
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: homeUrl },
       { "@type": "ListItem", position: 2, name: "Products", item: productsUrl },
