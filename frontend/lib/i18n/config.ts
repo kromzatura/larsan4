@@ -28,3 +28,10 @@ export const FORMAT_LOCALE_MAP: Record<SupportedLocale, string> = {
 export function getFallbackLocale(locale: SupportedLocale): SupportedLocale {
   return LOCALE_FALLBACKS[locale] ?? DEFAULT_LOCALE;
 }
+
+// Default per-locale homepage titles used when no authored title exists.
+// Keeping strings centralized avoids sprinkling literals and eases future locales.
+export const HOMEPAGE_TITLE_FALLBACKS: Partial<Record<SupportedLocale, string>> = {
+  en: "Home",
+  nl: "Startpagina",
+};

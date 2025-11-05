@@ -8,6 +8,7 @@ import {
   SupportedLocale,
   FORMAT_LOCALE_MAP,
   DEFAULT_LOCALE,
+  HOMEPAGE_TITLE_FALLBACKS,
 } from "@/lib/i18n/config";
 import type {
   PAGE_QUERYResult,
@@ -65,14 +66,7 @@ const typeToDocType: Record<string, string> = {
 
 // Provide a locale-aware default homepage title to ensure crawlers never see an empty title
 function getDefaultHomepageTitle(lang: SupportedLocale): string {
-  switch (lang) {
-    case "nl":
-      return "Startpagina";
-    case "en":
-      return "Home";
-    default:
-      return "Home"; // Safe default for unmapped locales
-  }
+  return HOMEPAGE_TITLE_FALLBACKS[lang] ?? "Home";
 }
 
 export function generatePageMetadata({
