@@ -29,7 +29,10 @@ export async function submitContactForm(
     // Lazily import the email template to avoid bundling @react-email Html into Next.js pages build
     const { default: ContactFormEmail } = await import("@/emails/contact-form");
     const isProd = process.env.NODE_ENV === "production";
-    const recaptchaVerifyInDev = process.env.RECAPTCHA_VERIFY_IN_DEV === "true";
+    // Allow either private (server-only) or public (client) flag to opt-in during development
+    const recaptchaVerifyInDev =
+      process.env.RECAPTCHA_VERIFY_IN_DEV === "true" ||
+      process.env.NEXT_PUBLIC_RECAPTCHA_REQUIRED === "true";
     const haveRecaptchaKeys =
       !!process.env.RECAPTCHA_SECRET_KEY &&
       !!process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
@@ -38,6 +41,8 @@ export async function submitContactForm(
     const shouldVerifyRecaptcha = isProd
       ? haveRecaptchaKeys
       : recaptchaVerifyInDev && haveRecaptchaKeys;
+    const recaptchaDebug =
+      process.env.RECAPTCHA_DEBUG === "true" || !isProd;
     // Determine locale from form (fallback-safe)
     const rawLocale = formData.get("locale");
     const locale: SupportedLocale = SUPPORTED_LOCALES.includes(
@@ -55,7 +60,7 @@ export async function submitContactForm(
     // When captcha verification is disabled (typical for local/dev), apply a small
     // minimum time-on-form heuristic to reduce bot spam. Keep this lenient to avoid
     // flagging real users during testing.
-    const MIN_DURATION_MS = 0;
+  const MIN_DURATION_MS = 2000; // basic heuristic: 2s minimum when captcha disabled
     if (typeof honeypot === "string" && honeypot.trim().length > 0) {
       return {
         success: false,
@@ -73,6 +78,9 @@ export async function submitContactForm(
     if (shouldVerifyRecaptcha) {
       const token = formData.get("g-recaptcha-response");
       if (!token || typeof token !== "string") {
+        if (recaptchaDebug) {
+          console.warn("[contact-form] Missing reCAPTCHA token on submission");
+        }
         return {
           success: false,
           error: dict.contact.form.captchaFailed,
@@ -100,6 +108,15 @@ export async function submitContactForm(
         "error-codes"?: string[];
       };
       const verifyJson = (await verifyRes.json()) as RecaptchaVerifyResponse;
+      if (recaptchaDebug) {
+        console.log("[contact-form] reCAPTCHA verify result", {
+          success: verifyJson.success,
+          hostname: verifyJson.hostname,
+          action: verifyJson.action,
+          score: verifyJson.score,
+          errorCodes: verifyJson["error-codes"],
+        });
+      }
       if (!verifyJson.success) {
         return {
           success: false,

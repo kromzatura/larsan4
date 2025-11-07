@@ -46,10 +46,13 @@ export function ContactForm({
   // Align with server: default to verifying in production when keys exist.
   const isProd = process.env.NODE_ENV === "production";
   const haveKeys = Boolean(siteKey);
-  const requireCaptcha = isProd ? haveKeys : process.env.NEXT_PUBLIC_RECAPTCHA_REQUIRED === "true" && haveKeys;
+  const requireCaptcha = isProd
+    ? haveKeys
+    : process.env.NEXT_PUBLIC_RECAPTCHA_REQUIRED === "true" && haveKeys;
   const captchaRef = useRef<HTMLDivElement | null>(null);
   const widgetIdRef = useRef<number | null>(null);
   const resolveTokenRef = useRef<((token: string) => void) | null>(null);
+  const [captchaReady, setCaptchaReady] = useState(false);
   const mountTime = useMemo(() => Date.now(), []);
 
   // reCAPTCHA helper types and accessor (shared between effect + submit handler)
@@ -89,6 +92,7 @@ export function ContactForm({
       const grecaptcha = getGrecaptcha();
       const container = captchaRef.current;
       if (!grecaptcha || !container || widgetIdRef.current !== null) {
+        if (grecaptcha && widgetIdRef.current !== null) setCaptchaReady(true);
         return;
       }
       try {
@@ -102,6 +106,7 @@ export function ContactForm({
               resolveTokenRef.current?.(token);
             },
           });
+          setCaptchaReady(true);
         });
       } catch {}
     };
@@ -113,61 +118,54 @@ export function ContactForm({
   // Unified token retrieval that supports v2 invisible (widget) and v3 fallback
   async function getRecaptchaToken(): Promise<string> {
     const grecaptcha = getGrecaptcha();
-  if (!requireCaptcha || !siteKey || !grecaptcha) return "";
-    // Try v2 invisible via widget if available
-    if (widgetIdRef.current != null) {
-      try {
-        const token = await new Promise<string>((resolve) => {
-          // Timeout as a safety valve
-          const timeout = window.setTimeout(() => resolve(""), 8000);
-          resolveTokenRef.current = (t: string) => {
-            window.clearTimeout(timeout);
-            resolve(t);
-          };
-          try {
-            const execResult = grecaptcha.execute(
-              widgetIdRef.current ?? undefined
-            );
-            Promise.resolve(execResult).catch(() => {
-              // swallow; resolve via callback
-            });
-          } catch {
-            window.clearTimeout(timeout);
-            resolve("");
-          }
-        });
-        resolveTokenRef.current = null;
-        if (token) return token;
-      } catch {
-        // fall through to v3
-      }
-    }
-    // Fallback: try v3 style execute
+    if (!requireCaptcha || !siteKey || !grecaptcha) return "";
+    if (widgetIdRef.current == null) return ""; // not ready yet
     try {
-      const anyG = grecaptcha as unknown as {
-        execute: (
-          siteKey: string,
-          params?: { action?: string }
-        ) => Promise<string> | string;
-        ready: (cb: () => void) => void;
-      };
-  await new Promise<void>((r) => anyG.ready(() => r()));
-      const maybePromise = anyG.execute(siteKey, { action: "contact" });
-      const token = await Promise.resolve(maybePromise).catch(() => "");
-      return typeof token === "string" ? token : "";
+      const token = await new Promise<string>((resolve) => {
+        const timeout = window.setTimeout(() => resolve(""), 8000);
+        resolveTokenRef.current = (t: string) => {
+          window.clearTimeout(timeout);
+          resolve(t);
+        };
+        try {
+          const execResult = grecaptcha.execute(widgetIdRef.current!);
+          Promise.resolve(execResult).catch(() => {
+            /* ignore; rely on callback */
+          });
+        } catch {
+          window.clearTimeout(timeout);
+          resolve("");
+        }
+      });
+      resolveTokenRef.current = null;
+      return token;
     } catch {
       return "";
     }
   }
 
-  async function handleAction(formData: FormData) {
+  // New client-side submit handler invoked by react-hook-form
+  async function onClientSubmit(values: ContactFormValues) {
     form.clearErrors();
+    // Build FormData for server action
+    const formData = new FormData();
+    formData.set("firstName", values.firstName);
+    formData.set("lastName", values.lastName);
+    formData.set("email", values.email);
+    formData.set("message", values.message);
+    formData.set("locale", locale);
+
     startTransition(async () => {
       // Add timing info
       const durationMs = Math.max(0, Date.now() - mountTime);
       formData.set("durationMs", String(durationMs));
 
-      if (requireCaptcha && siteKey && typeof window !== "undefined" && getGrecaptcha()) {
+      if (
+        requireCaptcha &&
+        siteKey &&
+        typeof window !== "undefined" &&
+        getGrecaptcha()
+      ) {
         const grecaptcha = getGrecaptcha();
         if (!siteKey || !grecaptcha) {
           setFormState({ error: dict.contact.form.captchaNotReady });
@@ -188,18 +186,12 @@ export function ContactForm({
           form.reset();
           onSuccess?.();
         } else if (result.errors) {
-          const currentValues = form.getValues();
           Object.entries(result.errors).forEach(([key, message]) => {
             const fieldKey = key as keyof ContactFormValues;
-            const fieldValue = currentValues[fieldKey];
-            try {
-              contactFormSchema.shape[fieldKey].parse(fieldValue);
-            } catch {
-              form.setError(fieldKey, {
-                type: "server",
-                message,
-              });
-            }
+            form.setError(fieldKey, {
+              type: "server",
+              message,
+            });
           });
         }
       } catch (e) {
@@ -216,7 +208,7 @@ export function ContactForm({
   return (
     <Form {...form}>
       <form
-        action={handleAction}
+        onSubmit={form.handleSubmit(onClientSubmit)}
         className="space-y-6"
         suppressHydrationWarning
       >
@@ -224,7 +216,7 @@ export function ContactForm({
         <input type="hidden" name="locale" value={locale} />
         {requireCaptcha && siteKey && (
           <Script
-            src="https://www.google.com/recaptcha/api.js?render=explicit"
+            src={`https://www.google.com/recaptcha/api.js?render=explicit&hl=${locale}`}
             async
             defer
             strategy="afterInteractive"
@@ -347,7 +339,11 @@ export function ContactForm({
             <div ref={captchaRef} />
           </div>
         )}
-        <Button className="w-full" type="submit" disabled={isPending}>
+        <Button
+          className="w-full"
+          type="submit"
+          disabled={isPending || (requireCaptcha && !captchaReady)}
+        >
           {isPending ? dict.contact.form.sending : dict.contact.form.submit}
         </Button>
       </form>
