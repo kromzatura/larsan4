@@ -97,6 +97,7 @@ export default {
       pungency: "Pungency",
       bindingCapacity: "Binding capacity",
       fatContent: "Fat content",
+      purity: "Purity",
       moisture: "Moisture",
       shelfLife: "Shelf life",
       allergenInfo: "Allergen info",

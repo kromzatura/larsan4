@@ -101,6 +101,7 @@ export type UIDictionary = {
       pungency: string;
       bindingCapacity: string;
       fatContent: string;
+      purity: string;
       moisture: string;
       shelfLife: string;
       allergenInfo: string;

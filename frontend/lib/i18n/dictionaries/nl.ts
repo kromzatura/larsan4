@@ -98,6 +98,7 @@ export default {
       pungency: "Scherpte",
       bindingCapacity: "Bindvermogen",
       fatContent: "Vetgehalte",
+      purity: "Zuiverheid",
       moisture: "Vocht",
       shelfLife: "Houdbaarheid",
       allergenInfo: "Allergeeninformatie",

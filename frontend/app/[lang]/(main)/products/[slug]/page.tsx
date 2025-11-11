@@ -159,6 +159,10 @@ export default async function ProductPage(
           ? `${spec.fatContent}%`
           : undefined,
     },
+    {
+      label: dictionary.productPage.specLabels.purity,
+      value: spec?.purity,
+    },
   ];
 
   const other: SpecPair[] = [
