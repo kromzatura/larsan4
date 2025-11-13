@@ -12,7 +12,9 @@
   },
   "homepage": "https://www.shadcnblocks.com/",
   "dependencies": {
-    "@portabletext/to-html": "^3.0.0"
+    "@portabletext/to-html": "^3.0.0",
+    "@babel/runtime": "^7.26.0",
+    "follow-redirects": "^1.15.6"
   },
   "pnpm": {
     "overrides": {
