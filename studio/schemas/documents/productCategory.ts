@@ -37,6 +37,13 @@ export default defineType({
         { type: "feature-117" },
         { type: "feature-157" },
         { type: "feature-202" },
+        // Compare blocks
+        { type: "compare-1" },
+        { type: "compare-2" },
+        { type: "compare-4" },
+        { type: "compare-5" },
+        { type: "compare-6" },
+        { type: "compare-products" },
         // FAQ blocks
         { type: "faq-1" },
         { type: "faq-5" },
@@ -64,6 +71,17 @@ export default defineType({
                 "feature-117",
                 "feature-157",
                 "feature-202",
+              ],
+            },
+            {
+              name: "compare",
+              of: [
+                "compare-1",
+                "compare-2",
+                "compare-4",
+                "compare-5",
+                "compare-6",
+                "compare-products",
               ],
             },
             {
@@ -102,6 +120,13 @@ export default defineType({
         { type: "feature-117" },
         { type: "feature-157" },
         { type: "feature-202" },
+        // Compare blocks
+        { type: "compare-1" },
+        { type: "compare-2" },
+        { type: "compare-4" },
+        { type: "compare-5" },
+        { type: "compare-6" },
+        { type: "compare-products" },
         // FAQ blocks
         { type: "faq-1" },
         { type: "faq-5" },
@@ -125,6 +150,17 @@ export default defineType({
                 "feature-117",
                 "feature-157",
                 "feature-202",
+              ],
+            },
+            {
+              name: "compare",
+              of: [
+                "compare-1",
+                "compare-2",
+                "compare-4",
+                "compare-5",
+                "compare-6",
+                "compare-products",
               ],
             },
             { name: "faq", of: ["faq-1", "faq-5", "faq-8", "faq-9", "faq-14"] },
