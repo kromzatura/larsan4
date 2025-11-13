@@ -4,6 +4,12 @@ import { bodyQuery } from "./shared/body";
 import { metaQuery } from "./shared/meta";
 import { TRANSLATIONS_QUERY_FRAGMENT } from "../lib/queries/fragments";
 import { sectionHeaderQuery } from "../queries/section-header";
+import { compare1Query } from "./compare/compare1";
+import { compare2Query } from "./compare/compare2";
+import { compare4Query } from "./compare/compare4";
+import { compare5Query } from "./compare/compare5";
+import { compare6Query } from "./compare/compare6";
+import { compareProductsQuery } from "./compare/compare-products";
 import { faq1Query } from "../queries/faq/faq1";
 import { faq5Query } from "../queries/faq/faq5";
 import { faq8Query } from "../queries/faq/faq8";
@@ -174,6 +180,12 @@ export const PRODUCT_CATEGORY_BY_SLUG_QUERY = groq`
       ${feature117Query},
       ${feature157Query},
       ${feature202Query},
+      ${compare1Query},
+      ${compare2Query},
+      ${compare4Query},
+      ${compare5Query},
+      ${compare6Query},
+      ${compareProductsQuery},
       ${faq1Query},
       ${faq5Query},
       ${faq8Query},
@@ -190,6 +202,12 @@ export const PRODUCT_CATEGORY_BY_SLUG_QUERY = groq`
       ${feature117Query},
       ${feature157Query},
       ${feature202Query},
+      ${compare1Query},
+      ${compare2Query},
+      ${compare4Query},
+      ${compare5Query},
+      ${compare6Query},
+      ${compareProductsQuery},
       ${faq1Query},
       ${faq5Query},
       ${faq8Query},
