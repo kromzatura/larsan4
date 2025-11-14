@@ -276,10 +276,7 @@ export default async function ProductPage(
         <Breadcrumbs links={links} locale={locale} />
         {hasBlocks ? (
           <div className="mt-7">
-            <Blocks
-              blocks={productBlocks}
-              locale={locale}
-            />
+            <Blocks blocks={productBlocks} locale={locale} />
           </div>
         ) : (
           product.title && (
