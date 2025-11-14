@@ -4,6 +4,8 @@ import { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
+import Blocks from "@/components/blocks";
+import { PAGE_QUERYResult, PRODUCT_QUERYResult } from "@/sanity.types";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import AddToInquiryButton from "@/components/inquiry/add-to-inquiry-button";
 import { Separator } from "@/components/ui/separator";
@@ -43,6 +45,7 @@ function SpecTable({
     (r) => r.value !== undefined && r.value !== null && r.value !== ""
   );
   if (filtered.length === 0) return null;
+
   return (
     <div className="mb-6 rounded-lg border bg-card p-6">
       <h2 className="mb-4 text-lg font-semibold text-foreground">{title}</h2>
@@ -248,6 +251,16 @@ export default async function ProductPage(
     ],
   } as const;
 
+  // Type-safe access to optional product blocks via local type extension
+  type ProductWithBlocks = PRODUCT_QUERYResult & {
+    blocks?: NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>;
+  };
+  const productWithBlocks = product as ProductWithBlocks;
+  const productBlocks = (productWithBlocks.blocks || []) as NonNullable<
+    NonNullable<PAGE_QUERYResult>["blocks"]
+  >;
+  const hasBlocks = Array.isArray(productBlocks) && productBlocks.length > 0;
+
   return (
     <section className="container py-16 xl:py-20">
       <article>
@@ -261,11 +274,19 @@ export default async function ProductPage(
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
         />
         <Breadcrumbs links={links} locale={locale} />
-
-        {product.title && (
-          <h1 className="mt-7 font-serif text-4xl font-extrabold md:text-5xl lg:text-6xl">
-            {product.title}
-          </h1>
+        {hasBlocks ? (
+          <div className="mt-7">
+            <Blocks
+              blocks={productBlocks}
+              locale={locale}
+            />
+          </div>
+        ) : (
+          product.title && (
+            <h1 className="mt-7 font-serif text-4xl font-extrabold md:text-5xl lg:text-6xl">
+              {product.title}
+            </h1>
+          )
         )}
 
         <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
@@ -301,8 +322,8 @@ export default async function ProductPage(
               </div>
             )}
 
-            {/* Mobile excerpt */}
-            {product.excerpt && (
+            {/* Mobile excerpt (hidden if Section Header is used) */}
+            {!hasBlocks && product.excerpt && (
               <p className="text-muted-foreground mb-6 lg:hidden">
                 {product.excerpt}
               </p>

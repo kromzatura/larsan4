@@ -17,22 +17,7 @@ export type BannerBlock = {
   _type: "banner-block";
   padding?: SectionPadding;
   title?: string;
-  description?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal";
-    listItem?: never;
-    markDefs?: Array<{
-      _key: string;
-    } & Link>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
+  description?: InlineRichText;
   link?: Link;
 };
 
@@ -52,13 +37,13 @@ export type Timeline6 = {
   title?: {
     title1?: string;
     title2?: string;
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | "truck";
     color?: "red" | "redLight" | "amber" | "amberLight" | "green" | "greenLight" | "blue" | "blueLight" | "indigo" | "indigoLight" | "purple" | "purpleLight" | "cyan" | "cyanLight" | "orange" | "orangeLight";
     title3?: string;
   };
   description?: string;
   columns?: Array<{
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | "truck";
     title?: string;
     description?: string;
     _type: "column";
@@ -72,13 +57,13 @@ export type Timeline5 = {
   title?: {
     title1?: string;
     title2?: string;
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | "truck";
     color?: "red" | "redLight" | "amber" | "amberLight" | "green" | "greenLight" | "blue" | "blueLight" | "indigo" | "indigoLight" | "purple" | "purpleLight" | "cyan" | "cyanLight" | "orange" | "orangeLight";
     title3?: string;
   };
   description?: string;
   columns?: Array<{
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | "truck";
     title?: string;
     description?: string;
     _type: "column";
@@ -92,14 +77,14 @@ export type Timeline4 = {
   tag?: {
     text?: string;
     type?: "title" | "badge";
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | "truck";
   };
   title?: string;
   description?: string;
   columns?: Array<{
     title?: string;
     description?: string;
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | "truck";
     image?: {
       asset?: {
         _ref: string;
@@ -178,7 +163,7 @@ export type Gallery9 = {
       alt?: string;
       _type: "image";
     };
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | "truck";
     title?: string;
     description?: string;
     _type: "column";
@@ -418,73 +403,7 @@ export type Compare4 = {
     _type: "column";
     _key: string;
   }>;
-  body?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      isExternal?: boolean;
-      internalLink?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "page";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "post";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "product";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "productCategory";
-      };
-      href?: string;
-      target?: boolean;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  } | {
-    title?: string;
-    description?: string;
-    _type: "alert";
-    _key: string;
-  } | {
-    videoId?: string;
-    _type: "youtube";
-    _key: string;
-  } | {
-    _key: string;
-  } & Code | {
-    _key: string;
-  } & ProductCallout>;
+  body?: BlockContent;
   links?: Array<{
     _key: string;
   } & LinkIcon>;
@@ -817,7 +736,7 @@ export type Blog4 = {
 export type Feature202Card = {
   _type: "feature-202-card";
   imageTreatment?: ImageTreatment;
-  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | "truck";
   title?: string;
   description?: string;
   image?: {
@@ -873,7 +792,7 @@ export type Feature157 = {
 export type Feature117Card = {
   _type: "feature-117-card";
   tag?: {
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | "truck";
     text?: string;
   };
   title?: string;
@@ -942,7 +861,7 @@ export type Feature66 = {
 
 export type Feature15Card = {
   _type: "feature-15-card";
-  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | "truck";
   title?: string;
   description?: string;
 };
@@ -959,7 +878,7 @@ export type Feature15 = {
 
 export type Feature12Card = {
   _type: "feature-12-card";
-  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | "truck";
   title?: string;
   description?: string;
 };
@@ -975,7 +894,7 @@ export type Feature12 = {
 
 export type Feature3Card = {
   _type: "feature-3-card";
-  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | "truck";
   title?: string;
   description?: string;
   image?: {
@@ -1021,79 +940,13 @@ export type FeatureImage = {
 export type FeatureContent = {
   _type: "feature-content";
   padding?: SectionPadding;
-  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | "truck";
   tag?: {
     text?: string;
     type?: "title" | "badge";
   };
   title?: string;
-  body?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      isExternal?: boolean;
-      internalLink?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "page";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "post";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "product";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "productCategory";
-      };
-      href?: string;
-      target?: boolean;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  } | {
-    title?: string;
-    description?: string;
-    _type: "alert";
-    _key: string;
-  } | {
-    videoId?: string;
-    _type: "youtube";
-    _key: string;
-  } | {
-    _key: string;
-  } & Code | {
-    _key: string;
-  } & ProductCallout>;
+  body?: BlockContent;
   links?: Array<{
     _key: string;
   } & Link>;
@@ -1293,73 +1146,7 @@ export type Hero174 = {
     _type: "image";
   };
   title?: string;
-  body?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      isExternal?: boolean;
-      internalLink?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "page";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "post";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "product";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "productCategory";
-      };
-      href?: string;
-      target?: boolean;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  } | {
-    title?: string;
-    description?: string;
-    _type: "alert";
-    _key: string;
-  } | {
-    videoId?: string;
-    _type: "youtube";
-    _key: string;
-  } | {
-    _key: string;
-  } & Code | {
-    _key: string;
-  } & ProductCallout>;
+  body?: BlockContent;
   links?: Array<{
     _key: string;
   } & LinkIcon>;
@@ -1385,77 +1172,11 @@ export type Hero160 = {
     _type: "image";
   };
   tag?: {
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | "truck";
     title?: string;
   };
   title?: string;
-  body?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      isExternal?: boolean;
-      internalLink?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "page";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "post";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "product";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "productCategory";
-      };
-      href?: string;
-      target?: boolean;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  } | {
-    title?: string;
-    description?: string;
-    _type: "alert";
-    _key: string;
-  } | {
-    videoId?: string;
-    _type: "youtube";
-    _key: string;
-  } | {
-    _key: string;
-  } & Code | {
-    _key: string;
-  } & ProductCallout>;
+  body?: BlockContent;
   links?: Array<{
     _key: string;
   } & LinkIcon>;
@@ -1481,73 +1202,7 @@ export type Hero85 = {
     description?: string;
   };
   title?: string;
-  body?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      isExternal?: boolean;
-      internalLink?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "page";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "post";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "product";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "productCategory";
-      };
-      href?: string;
-      target?: boolean;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  } | {
-    title?: string;
-    description?: string;
-    _type: "alert";
-    _key: string;
-  } | {
-    videoId?: string;
-    _type: "youtube";
-    _key: string;
-  } | {
-    _key: string;
-  } & Code | {
-    _key: string;
-  } & ProductCallout>;
+  body?: BlockContent;
   links?: Array<{
     _key: string;
   } & LinkIcon>;
@@ -1570,78 +1225,12 @@ export type Hero85 = {
 export type Hero57 = {
   _type: "hero-57";
   title?: string;
-  body?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      isExternal?: boolean;
-      internalLink?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "page";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "post";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "product";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "productCategory";
-      };
-      href?: string;
-      target?: boolean;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  } | {
-    title?: string;
-    description?: string;
-    _type: "alert";
-    _key: string;
-  } | {
-    videoId?: string;
-    _type: "youtube";
-    _key: string;
-  } | {
-    _key: string;
-  } & Code | {
-    _key: string;
-  } & ProductCallout>;
+  body?: BlockContent;
   links?: Array<{
     _key: string;
   } & LinkIcon>;
   tags?: Array<{
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | "truck";
     title?: string;
     _type: "tag";
     _key: string;
@@ -1669,7 +1258,7 @@ export type Hero25 = {
     _key: string;
   } & LinkIcon>;
   tags?: Array<{
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | "truck";
     title?: string;
     _type: "tag";
     _key: string;
@@ -1679,77 +1268,11 @@ export type Hero25 = {
 export type Hero13 = {
   _type: "hero-13";
   tag?: {
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | "truck";
     title?: string;
   };
   title?: string;
-  body?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      isExternal?: boolean;
-      internalLink?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "page";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "post";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "product";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "productCategory";
-      };
-      href?: string;
-      target?: boolean;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  } | {
-    title?: string;
-    description?: string;
-    _type: "alert";
-    _key: string;
-  } | {
-    videoId?: string;
-    _type: "youtube";
-    _key: string;
-  } | {
-    _key: string;
-  } & Code | {
-    _key: string;
-  } & ProductCallout>;
+  body?: BlockContent;
   links?: Array<{
     _key: string;
   } & LinkIcon>;
@@ -1772,73 +1295,7 @@ export type Hero12 = {
     _type: "image";
   };
   title?: string;
-  body?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      isExternal?: boolean;
-      internalLink?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "page";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "post";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "product";
-      } | {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "productCategory";
-      };
-      href?: string;
-      target?: boolean;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  } | {
-    title?: string;
-    description?: string;
-    _type: "alert";
-    _key: string;
-  } | {
-    videoId?: string;
-    _type: "youtube";
-    _key: string;
-  } | {
-    _key: string;
-  } & Code | {
-    _key: string;
-  } & ProductCallout>;
+  body?: BlockContent;
   image?: {
     asset?: {
       _ref: string;
@@ -1909,22 +1366,7 @@ export type SectionHeader = {
     weight?: "normal" | "medium" | "semibold" | "bold";
   };
   description?: string;
-  richDescription?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal";
-    listItem?: never;
-    markDefs?: Array<{
-      _key: string;
-    } & Link>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
+  richDescription?: InlineRichText;
   links?: Array<{
     _key: string;
   } & LinkIcon>;
@@ -1969,6 +1411,88 @@ export type LinkGroup = {
   links?: Array<{
     _key: string;
   } & LinkIcon>;
+};
+
+export type LinkIcon = {
+  _type: "link-icon";
+  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | "truck";
+  isExternal?: boolean;
+  internalLink?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "page";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "post";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "category";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "product";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "productCategory";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "contact";
+  };
+  title?: string;
+  description?: string;
+  href?: string;
+  target?: boolean;
+  buttonVariant?: ButtonVariant;
+};
+
+export type Link = {
+  _type: "link";
+  isExternal?: boolean;
+  internalLink?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "page";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "post";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "category";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "product";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "productCategory";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "contact";
+  };
+  title?: string;
+  href?: string;
+  target?: boolean;
+  buttonVariant?: ButtonVariant;
 };
 
 export type BlockContent = Array<{
@@ -2089,6 +1613,12 @@ export type Theme = {
   fontSans?: string;
   fontSerif?: string;
   fontMono?: string;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
 };
 
 export type SanityAssistInstructionTask = {
@@ -2218,11 +1748,13 @@ export type TranslationMetadata = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  translations?: Array<{
-    _key: string;
-  } & InternationalizedArrayReferenceValue>;
+  translations?: InternationalizedArrayReference;
   schemaTypes?: Array<string>;
 };
+
+export type InternationalizedArrayReference = Array<{
+  _key: string;
+} & InternationalizedArrayReferenceValue>;
 
 export type InternationalizedArrayReferenceValue = {
   _type: "internationalizedArrayReferenceValue";
@@ -2332,6 +1864,22 @@ export type Team = {
   } & LinkIcon>;
   language?: string;
   orderRank?: string;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
 };
 
 export type Navigation = {
@@ -2735,88 +2283,6 @@ export type Page = {
   orderRank?: string;
 };
 
-export type LinkIcon = {
-  _type: "link-icon";
-  iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "bell" | "beaker" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "leaf" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play" | "play-circle" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "smile" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
-  isExternal?: boolean;
-  internalLink?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "page";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "post";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "category";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "product";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "productCategory";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "contact";
-  };
-  title?: string;
-  description?: string;
-  href?: string;
-  target?: boolean;
-  buttonVariant?: ButtonVariant;
-};
-
-export type Link = {
-  _type: "link";
-  isExternal?: boolean;
-  internalLink?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "page";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "post";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "category";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "product";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "productCategory";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "contact";
-  };
-  title?: string;
-  href?: string;
-  target?: boolean;
-  buttonVariant?: ButtonVariant;
-};
-
 export type Post = {
   _id: string;
   _type: "post";
@@ -2882,6 +2348,11 @@ export type Product = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  blocks?: Array<{
+    _key: string;
+  } & SectionHeader | {
+    _key: string;
+  } & BannerBlock>;
   slug?: Slug;
   specifications?: Array<{
     _ref: string;
@@ -2970,6 +2441,59 @@ export type ProductCategory = {
     _key: string;
   } & Feature202 | {
     _key: string;
+  } & Compare1 | {
+    _key: string;
+  } & Compare2 | {
+    _key: string;
+  } & Compare4 | {
+    _key: string;
+  } & Compare5 | {
+    _key: string;
+  } & Compare6 | {
+    _key: string;
+  } & CompareProducts | {
+    _key: string;
+  } & Faq1 | {
+    _key: string;
+  } & Faq5 | {
+    _key: string;
+  } & Faq8 | {
+    _key: string;
+  } & Faq9 | {
+    _key: string;
+  } & Faq14 | {
+    _key: string;
+  } & BannerBlock>;
+  blocksAfter?: Array<{
+    _key: string;
+  } & Feature1 | {
+    _key: string;
+  } & Feature3 | {
+    _key: string;
+  } & Feature12 | {
+    _key: string;
+  } & Feature15 | {
+    _key: string;
+  } & Feature66 | {
+    _key: string;
+  } & Feature117 | {
+    _key: string;
+  } & Feature157 | {
+    _key: string;
+  } & Feature202 | {
+    _key: string;
+  } & Compare1 | {
+    _key: string;
+  } & Compare2 | {
+    _key: string;
+  } & Compare4 | {
+    _key: string;
+  } & Compare5 | {
+    _key: string;
+  } & Compare6 | {
+    _key: string;
+  } & CompareProducts | {
+    _key: string;
   } & Faq1 | {
     _key: string;
   } & Faq5 | {
@@ -3030,10 +2554,6 @@ export type Author = {
   orderRank?: string;
 };
 
-export type InternationalizedArrayReference = Array<{
-  _key: string;
-} & InternationalizedArrayReferenceValue>;
-
 export type MediaTag = {
   _id: string;
   _type: "media.tag";
@@ -3077,20 +2597,15 @@ export type SanityImageDimensions = {
   aspectRatio?: number;
 };
 
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
+export type SanityImageMetadata = {
+  _type: "sanity.imageMetadata";
+  location?: Geopoint;
+  dimensions?: SanityImageDimensions;
+  palette?: SanityImagePalette;
+  lqip?: string;
+  blurHash?: string;
+  hasAlpha?: boolean;
+  isOpaque?: boolean;
 };
 
 export type SanityFileAsset = {
@@ -3113,6 +2628,13 @@ export type SanityFileAsset = {
   path?: string;
   url?: string;
   source?: SanityAssetSourceData;
+};
+
+export type SanityAssetSourceData = {
+  _type: "sanity.assetSourceData";
+  name?: string;
+  id?: string;
+  url?: string;
 };
 
 export type SanityImageAsset = {
@@ -3138,17 +2660,6 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData;
 };
 
-export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
-};
-
 export type Geopoint = {
   _type: "geopoint";
   lat?: number;
@@ -3156,20 +2667,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
-export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
-};
-
-export type AllSanitySchemaTypes = BannerBlock | ProductCategories16 | AllProducts16 | Timeline6 | Timeline5 | Timeline4 | Timeline3 | Gallery10 | Gallery9 | Gallery8 | Gallery4 | Gallery3 | Gallery1 | CompareProducts | Compare6 | Compare5 | Compare4 | Compare2 | Compare1 | Team8 | Team6 | Team5 | Team4 | Team3 | Team2 | Team1 | Pricing16 | Pricing9 | Pricing7 | Pricing2 | Pricing1 | Changelog5 | Changelog3 | Changelog2 | Changelog1 | AllPosts16 | Blog16 | AllPosts14 | Blog14 | AllPosts13 | Blog13 | AllPosts7 | Blog7 | AllPosts4 | Blog4 | Feature202Card | Feature202 | Feature157Card | Feature157 | Feature117Card | Feature117 | Feature66Card | Feature66 | Feature15Card | Feature15 | Feature12Card | Feature12 | Feature3Card | Feature3 | FeatureImage | FeatureContent | Feature1 | Logos9 | Logos4 | Logos2 | Logos1 | Faq14 | Faq9 | Faq8 | Faq5 | Faq1 | Hero174 | Hero160 | Hero85 | Hero57 | Hero25 | Hero13 | Hero12 | ProductCallout | SectionHeader | InlineRichText | ImageTreatment | SectionPadding | ButtonVariant | LinkGroup | BlockContent | Theme | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | TranslationMetadata | InternationalizedArrayReferenceValue | Team | Navigation | Specification | Testimonial | Faq | Changelog | Banner | Category | Contact | Settings | Page | LinkIcon | Link | Post | Product | ProductCategory | Author | InternationalizedArrayReference | MediaTag | Code | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = BannerBlock | ProductCategories16 | AllProducts16 | Timeline6 | Timeline5 | Timeline4 | Timeline3 | Gallery10 | Gallery9 | Gallery8 | Gallery4 | Gallery3 | Gallery1 | CompareProducts | Compare6 | Compare5 | Compare4 | Compare2 | Compare1 | Team8 | Team6 | Team5 | Team4 | Team3 | Team2 | Team1 | Pricing16 | Pricing9 | Pricing7 | Pricing2 | Pricing1 | Changelog5 | Changelog3 | Changelog2 | Changelog1 | AllPosts16 | Blog16 | AllPosts14 | Blog14 | AllPosts13 | Blog13 | AllPosts7 | Blog7 | AllPosts4 | Blog4 | Feature202Card | Feature202 | Feature157Card | Feature157 | Feature117Card | Feature117 | Feature66Card | Feature66 | Feature15Card | Feature15 | Feature12Card | Feature12 | Feature3Card | Feature3 | FeatureImage | FeatureContent | Feature1 | Logos9 | Logos4 | Logos2 | Logos1 | Faq14 | Faq9 | Faq8 | Faq5 | Faq1 | Hero174 | Hero160 | Hero85 | Hero57 | Hero25 | Hero13 | Hero12 | ProductCallout | SectionHeader | InlineRichText | ImageTreatment | SectionPadding | ButtonVariant | LinkGroup | LinkIcon | Link | BlockContent | Theme | Slug | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | TranslationMetadata | InternationalizedArrayReference | InternationalizedArrayReferenceValue | Team | SanityImageCrop | SanityImageHotspot | Navigation | Specification | Testimonial | Faq | Changelog | Banner | Category | Contact | Settings | Page | Post | Product | ProductCategory | Author | MediaTag | Code | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../frontend/sanity/queries/banner.ts
 // Variable: BANNER_QUERY
@@ -3954,7 +3452,7 @@ export type NAVIGATION_QUERYResult = Array<{
       href: string | null;
       internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
       internalSlug: string | null;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       description: string | null;
     }> | null;
   } | {
@@ -4603,7 +4101,7 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
         _ref: string;
@@ -5432,7 +4930,7 @@ export type PAGE_QUERYResult = {
       _type: "feature-content";
       _key: string;
       padding: SectionPadding | null;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       tag: {
         text?: string;
         type?: "badge" | "title";
@@ -5633,7 +5131,7 @@ export type PAGE_QUERYResult = {
       _type: "feature-117-card";
       _key: string;
       tag: {
-        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
         text?: string;
       } | null;
       title: string | null;
@@ -5707,7 +5205,7 @@ export type PAGE_QUERYResult = {
     columns: Array<{
       _type: "feature-12-card";
       _key: string;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       title: string | null;
       description: string | null;
     }> | null;
@@ -5720,7 +5218,7 @@ export type PAGE_QUERYResult = {
     columns: Array<{
       _type: "feature-15-card";
       _key: string;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       title: string | null;
       description: string | null;
     }> | null;
@@ -5753,7 +5251,7 @@ export type PAGE_QUERYResult = {
       link: {
         _key: null;
         _type: "link-icon";
-        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
         isExternal?: boolean;
         internalLink?: {
           _ref: string;
@@ -5803,7 +5301,7 @@ export type PAGE_QUERYResult = {
       _type: "feature-202-card";
       _key: string;
       imageTreatment: ImageTreatment | null;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       title: string | null;
       description: string | null;
       image: {
@@ -5875,7 +5373,7 @@ export type PAGE_QUERYResult = {
     columns: Array<{
       _type: "feature-3-card";
       _key: string;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       title: string | null;
       description: string | null;
       image: {
@@ -6150,7 +5648,7 @@ export type PAGE_QUERYResult = {
       link: {
         _key: null;
         _type: "link-icon";
-        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
         isExternal?: boolean;
         internalLink?: {
           _ref: string;
@@ -6229,7 +5727,7 @@ export type PAGE_QUERYResult = {
       link: {
         _key: null;
         _type: "link-icon";
-        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
         isExternal?: boolean;
         internalLink?: {
           _ref: string;
@@ -6418,7 +5916,7 @@ export type PAGE_QUERYResult = {
       } | null;
       title: string | null;
       description: string | null;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
     }> | null;
   } | {
     _type: "hero-12";
@@ -6589,7 +6087,7 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
         _ref: string;
@@ -6658,7 +6156,7 @@ export type PAGE_QUERYResult = {
     _type: "hero-13";
     _key: string;
     tag: {
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       title?: string;
     } | null;
     title: string | null;
@@ -6787,7 +6285,7 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
         _ref: string;
@@ -6851,7 +6349,7 @@ export type PAGE_QUERYResult = {
       _type: "image";
     } | null;
     tag: {
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       title?: string;
     } | null;
     title: string | null;
@@ -6980,7 +6478,7 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
         _ref: string;
@@ -7189,7 +6687,7 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
         _ref: string;
@@ -7261,7 +6759,7 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
         _ref: string;
@@ -7303,7 +6801,7 @@ export type PAGE_QUERYResult = {
       internalSlug: string | null;
     }> | null;
     tags: Array<{
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       title?: string;
       _type: "tag";
       _key: string;
@@ -7312,77 +6810,11 @@ export type PAGE_QUERYResult = {
     _type: "hero-57";
     _key: string;
     title: string | null;
-    body: Array<{
-      _key: string;
-    } & Code | {
-      _key: string;
-    } & ProductCallout | {
-      title?: string;
-      description?: string;
-      _type: "alert";
-      _key: string;
-    } | {
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        isExternal?: boolean;
-        internalLink?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "page";
-        } | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "post";
-        } | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "product";
-        } | {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "productCategory";
-        };
-        href?: string;
-        target?: boolean;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    } | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: "image";
-      _key: string;
-    } | {
-      videoId?: string;
-      _type: "youtube";
-      _key: string;
-    }> | null;
+    body: BlockContent | null;
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
         _ref: string;
@@ -7424,7 +6856,7 @@ export type PAGE_QUERYResult = {
       internalSlug: string | null;
     }> | null;
     tags: Array<{
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       title?: string;
       _type: "tag";
       _key: string;
@@ -7582,7 +7014,7 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
         _ref: string;
@@ -7657,7 +7089,7 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
         _ref: string;
@@ -7937,7 +7369,7 @@ export type PAGE_QUERYResult = {
       link: {
         _key: null;
         _type: "link-icon";
-        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
         isExternal?: boolean;
         internalLink?: {
           _ref: string;
@@ -8002,7 +7434,7 @@ export type PAGE_QUERYResult = {
       link: {
         _key: null;
         _type: "link-icon";
-        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
         isExternal?: boolean;
         internalLink?: {
           _ref: string;
@@ -8199,7 +7631,7 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
         _ref: string;
@@ -8277,7 +7709,7 @@ export type PAGE_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
         _ref: string;
@@ -8349,7 +7781,7 @@ export type PAGE_QUERYResult = {
     tag: {
       text?: string;
       type?: "badge" | "title";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
     } | null;
     title: string | null;
     description: string | null;
@@ -8357,7 +7789,7 @@ export type PAGE_QUERYResult = {
       _key: string;
       title: string | null;
       description: string | null;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       image: {
         asset: {
           _id: string;
@@ -8385,14 +7817,14 @@ export type PAGE_QUERYResult = {
     title: {
       title1?: string;
       title2?: string;
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       color?: "amber" | "amberLight" | "blue" | "blueLight" | "cyan" | "cyanLight" | "green" | "greenLight" | "indigo" | "indigoLight" | "orange" | "orangeLight" | "purple" | "purpleLight" | "red" | "redLight";
       title3?: string;
     } | null;
     description: string | null;
     columns: Array<{
       _key: string;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       title: string | null;
       description: string | null;
     }> | null;
@@ -8403,14 +7835,14 @@ export type PAGE_QUERYResult = {
     title: {
       title1?: string;
       title2?: string;
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       color?: "amber" | "amberLight" | "blue" | "blueLight" | "cyan" | "cyanLight" | "green" | "greenLight" | "indigo" | "indigoLight" | "orange" | "orangeLight" | "purple" | "purpleLight" | "red" | "redLight";
       title3?: string;
     } | null;
     description: string | null;
     columns: Array<{
       _key: string;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       title: string | null;
       description: string | null;
     }> | null;
@@ -8839,7 +8271,7 @@ export type POSTS_COUNT_QUERYResult = number;
 
 // Source: ../frontend/sanity/queries/product.ts
 // Variable: PRODUCT_QUERY
-// Query: *[    _type == "product" &&    slug.current == $slug &&    language == $lang  ]  | order(_updatedAt desc)[0]{      _id,  language,  orderRank,  _createdAt,  title,  slug,  specifications[]->{    _id,    name,    sku,    bestFor,    pungency,    bindingCapacity,    fatContent,    purity,    moisture,    hsCode,    minOrder,    origin,    botanicalName,    shelfLife,    allergenInfo,    productAttributes,    certification  },  keyFeatures[],  packagingOptions[]{    ...  },  image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  body[]{   ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  } },  excerpt,  categories[]->{      _id,  title,  slug,  language  },    meta{    title,    description,    noindex,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  }    ,      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[] {    "lang": _key,    "slug": value->slug.current  } [defined(slug) && defined(lang)]  }
+// Query: *[    _type == "product" &&    slug.current == $slug &&    language == $lang  ]  | order(_updatedAt desc)[0]{      _id,  language,  orderRank,  _createdAt,  title,  slug,  blocks[]{      _type == "section-header" => {    _type,    _key,    padding,    sectionWidth,    stackAlign,    direction,  surface,    tag,    title,    description,    richDescription[]{      ...,      markDefs[]{        ...,        _type == "link" => {            _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)        }      }    },    isDatasheetTitle,    hasGroupDivider,    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },      _type == "banner-block" => {    _type,    _key,    padding,    title,    description[]{      ...,      markDefs[]{        ...,        _type == "link" => {            _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)        }      }    },    link{   _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null) },  },  },  specifications[]->{    _id,    name,    sku,    bestFor,    pungency,    bindingCapacity,    fatContent,    purity,    moisture,    hsCode,    minOrder,    origin,    botanicalName,    shelfLife,    allergenInfo,    productAttributes,    certification  },  keyFeatures[],  packagingOptions[]{    ...  },  image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },  body[]{   ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  } },  excerpt,  categories[]->{      _id,  title,  slug,  language  },    meta{    title,    description,    noindex,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  }    ,      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[] {    "lang": _key,    "slug": value->slug.current  } [defined(slug) && defined(lang)]  }
 export type PRODUCT_QUERYResult = {
   _id: string;
   language: string | null;
@@ -8847,6 +8279,229 @@ export type PRODUCT_QUERYResult = {
   _createdAt: string;
   title: string | null;
   slug: Slug | null;
+  blocks: Array<{
+    _type: "banner-block";
+    _key: string;
+    padding: SectionPadding | null;
+    title: string | null;
+    description: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs: Array<{
+        _key: string;
+        _type: "link";
+        isExternal?: boolean;
+        internalLink?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "contact";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "page";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
+        };
+        title?: string;
+        href: string | null;
+        target?: boolean;
+        buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
+      }> | null;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    link: {
+      _key: null;
+      _type: "link";
+      isExternal?: boolean;
+      internalLink?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contact";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "page";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "post";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "product";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "productCategory";
+      };
+      title?: string;
+      href: string | null;
+      target?: boolean;
+      buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
+    } | null;
+  } | {
+    _type: "section-header";
+    _key: string;
+    padding: SectionPadding | null;
+    sectionWidth: "default" | "narrow" | null;
+    stackAlign: "center" | "left" | null;
+    direction: "column" | "row" | null;
+    surface: "default" | "surface-1" | null;
+    tag: {
+      text?: string;
+      type?: "badge" | "title";
+    } | null;
+    title: {
+      text?: string;
+      element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+      size?: "default" | "large" | "small";
+      weight?: "bold" | "medium" | "normal" | "semibold";
+    } | null;
+    description: string | null;
+    richDescription: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs: Array<{
+        _key: string;
+        _type: "link";
+        isExternal?: boolean;
+        internalLink?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "contact";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "page";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
+        };
+        title?: string;
+        href: string | null;
+        target?: boolean;
+        buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
+      }> | null;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    isDatasheetTitle: boolean | null;
+    hasGroupDivider: boolean | null;
+    links: Array<{
+      _key: string;
+      _type: "link-icon";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      isExternal?: boolean;
+      internalLink?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contact";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "page";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "post";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "product";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "productCategory";
+      };
+      title?: string;
+      description?: string;
+      href: string | null;
+      target?: boolean;
+      buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
+    }> | null;
+  }> | null;
   specifications: Array<{
     _id: string;
     name: string | null;
@@ -9114,7 +8769,7 @@ export type PRODUCT_CATEGORIES_QUERYResult = Array<{
   language: string | null;
 }>;
 // Variable: PRODUCT_CATEGORY_BY_SLUG_QUERY
-// Query: *[    _type == "productCategory" &&    slug.current == $slug &&    language == $lang  ]  | order(_updatedAt desc)[0]{    _id,    _type,    language,    title,    slug,    blocks[]{        _type == "section-header" => {    _type,    _key,    padding,    sectionWidth,    stackAlign,    direction,  surface,    tag,    title,    description,    richDescription[]{      ...,      markDefs[]{        ...,        _type == "link" => {            _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)        }      }    },    isDatasheetTitle,    hasGroupDivider,    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "feature-1" => {    _type,    _key,    padding,    columns[]{        _type == "feature-content" => {    _type,    _key,    padding,    iconVariant,    tag,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "feature-image" => {    _type,    _key,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },    },  },        _type == "feature-3" => {    _type,    _key,    padding,    columns[]{        _type == "feature-3-card" => {    _type,    _key,    iconVariant,    title,    description,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },    },  },        _type == "feature-12" => {    _type,    _key,    padding,    tagline,    columns[]{        _type == "feature-12-card" => {    _type,    _key,    iconVariant,    title,    description,  },    },  },        _type == "feature-15" => {    _type,    _key,    padding,    contrastVariant,    gridColumns,    columns[]{        _type == "feature-15-card" => {    _type,    _key,    iconVariant,    title,    description,  },    },  },        _type == "feature-66" => {    _type,    _key,    padding,    columns[]{        _type == "feature-66-card" => {    _type,    _key,    logo{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "feature-117" => {    _type,    _key,    padding,    columns[]{        _type == "feature-117-card" => {    _type,    _key,    tag,    title,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "feature-157" => {    _type,    _key,    padding,    columns[]{        _type == "feature-157-card" => {    _type,    _key,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "feature-202" => {    _type,    _key,    padding,    columns[]{        _type == "feature-202-card" => {    _type,    _key,    imageTreatment,    iconVariant,    title,    description,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "faq-1" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }      },    },  },        _type == "faq-5" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }      },    },  },        _type == "faq-8" => {    _type,    _key,    padding,    sections[]{      _type,      _key,      title,      faqs[]->{        _id,        title,        body[]{            ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }        }      }    }  },        _type == "faq-9" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }      },    },  },        _type == "faq-14" => {    _type,    _key,    padding,    title,    description,    sections[]{      _type,      _key,      title,      faqs[]->{        _id,        title,        body[]{            ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }        }      }    }  },        _type == "banner-block" => {    _type,    _key,    padding,    title,    description[]{      ...,      markDefs[]{        ...,        _type == "link" => {            _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)        }      }    },    link{   _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null) },  },    },    description,      meta{    title,    description,    noindex,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[] {    "lang": _key,    "slug": value->slug.current  } [defined(slug) && defined(lang)]  }
+// Query: *[    _type == "productCategory" &&    slug.current == $slug &&    language == $lang  ]  | order(_updatedAt desc)[0]{    _id,    _type,    language,    title,    slug,    blocks[]{        _type == "section-header" => {    _type,    _key,    padding,    sectionWidth,    stackAlign,    direction,  surface,    tag,    title,    description,    richDescription[]{      ...,      markDefs[]{        ...,        _type == "link" => {            _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)        }      }    },    isDatasheetTitle,    hasGroupDivider,    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "feature-1" => {    _type,    _key,    padding,    columns[]{        _type == "feature-content" => {    _type,    _key,    padding,    iconVariant,    tag,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "feature-image" => {    _type,    _key,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },    },  },        _type == "feature-3" => {    _type,    _key,    padding,    columns[]{        _type == "feature-3-card" => {    _type,    _key,    iconVariant,    title,    description,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },    },  },        _type == "feature-12" => {    _type,    _key,    padding,    tagline,    columns[]{        _type == "feature-12-card" => {    _type,    _key,    iconVariant,    title,    description,  },    },  },        _type == "feature-15" => {    _type,    _key,    padding,    contrastVariant,    gridColumns,    columns[]{        _type == "feature-15-card" => {    _type,    _key,    iconVariant,    title,    description,  },    },  },        _type == "feature-66" => {    _type,    _key,    padding,    columns[]{        _type == "feature-66-card" => {    _type,    _key,    logo{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "feature-117" => {    _type,    _key,    padding,    columns[]{        _type == "feature-117-card" => {    _type,    _key,    tag,    title,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "feature-157" => {    _type,    _key,    padding,    columns[]{        _type == "feature-157-card" => {    _type,    _key,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "feature-202" => {    _type,    _key,    padding,    columns[]{        _type == "feature-202-card" => {    _type,    _key,    imageTreatment,    iconVariant,    title,    description,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "compare-1" => {    _type,    _key,    padding,    images[]{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    columns[]{      _key,      label,      primary,      secondary,      hasIcon,    },  },        _type == "compare-2" => {    _type,    _key,    padding,    columns[]{      _key,      featured,      image{          ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      title,      list,    },  },        _type == "compare-4" => {    _type,    _key,    padding,    title,    titles,    columns[]{      _key,      title,      primary,      secondary    },    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "compare-5" => {    _type,    _key,    padding,    columns[]{      _key,      image{          ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      title,      description,      link {          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)      },    },  },        _type == "compare-6" => {    _type,    _key,    padding,    title,    rows,    columns[]{      _key,      name,      attributes[]{        _key,        value,        status,      },    },  },        _type == "compare-products" => {    _type,    _key,    padding,    title,    productFields,    columns[]{      _key,      product->{        _id,        title,        "slug": slug.current,        // First specification projected under 'spec'        "spec": specifications[0]->{          sku,          bestFor,          pungency,          bindingCapacity,          fatContent        }      },      overrides{        sku,        bestFor,        pungency,        bindingCapacity,        fatContent      },    },  },        _type == "faq-1" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }      },    },  },        _type == "faq-5" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }      },    },  },        _type == "faq-8" => {    _type,    _key,    padding,    sections[]{      _type,      _key,      title,      faqs[]->{        _id,        title,        body[]{            ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }        }      }    }  },        _type == "faq-9" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }      },    },  },        _type == "faq-14" => {    _type,    _key,    padding,    title,    description,    sections[]{      _type,      _key,      title,      faqs[]->{        _id,        title,        body[]{            ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }        }      }    }  },        _type == "banner-block" => {    _type,    _key,    padding,    title,    description[]{      ...,      markDefs[]{        ...,        _type == "link" => {            _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)        }      }    },    link{   _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null) },  },    },    blocksAfter[]{        _type == "feature-1" => {    _type,    _key,    padding,    columns[]{        _type == "feature-content" => {    _type,    _key,    padding,    iconVariant,    tag,    title,    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "feature-image" => {    _type,    _key,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },  },    },  },        _type == "feature-3" => {    _type,    _key,    padding,    columns[]{        _type == "feature-3-card" => {    _type,    _key,    iconVariant,    title,    description,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },    },  },        _type == "feature-12" => {    _type,    _key,    padding,    tagline,    columns[]{        _type == "feature-12-card" => {    _type,    _key,    iconVariant,    title,    description,  },    },  },        _type == "feature-15" => {    _type,    _key,    padding,    contrastVariant,    gridColumns,    columns[]{        _type == "feature-15-card" => {    _type,    _key,    iconVariant,    title,    description,  },    },  },        _type == "feature-66" => {    _type,    _key,    padding,    columns[]{        _type == "feature-66-card" => {    _type,    _key,    logo{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "feature-117" => {    _type,    _key,    padding,    columns[]{        _type == "feature-117-card" => {    _type,    _key,    tag,    title,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "feature-157" => {    _type,    _key,    padding,    columns[]{        _type == "feature-157-card" => {    _type,    _key,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "feature-202" => {    _type,    _key,    padding,    columns[]{        _type == "feature-202-card" => {    _type,    _key,    imageTreatment,    iconVariant,    title,    description,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    link {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },    },  },        _type == "compare-1" => {    _type,    _key,    padding,    images[]{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    },    columns[]{      _key,      label,      primary,      secondary,      hasIcon,    },  },        _type == "compare-2" => {    _type,    _key,    padding,    columns[]{      _key,      featured,      image{          ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      title,      list,    },  },        _type == "compare-4" => {    _type,    _key,    padding,    title,    titles,    columns[]{      _key,      title,      primary,      secondary    },    body[]{        ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }    },    links[]{        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    },  },        _type == "compare-5" => {    _type,    _key,    padding,    columns[]{      _key,      image{          ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }      },      title,      description,      link {          _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)      },    },  },        _type == "compare-6" => {    _type,    _key,    padding,    title,    rows,    columns[]{      _key,      name,      attributes[]{        _key,        value,        status,      },    },  },        _type == "compare-products" => {    _type,    _key,    padding,    title,    productFields,    columns[]{      _key,      product->{        _id,        title,        "slug": slug.current,        // First specification projected under 'spec'        "spec": specifications[0]->{          sku,          bestFor,          pungency,          bindingCapacity,          fatContent        }      },      overrides{        sku,        bestFor,        pungency,        bindingCapacity,        fatContent      },    },  },        _type == "faq-1" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }      },    },  },        _type == "faq-5" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }      },    },  },        _type == "faq-8" => {    _type,    _key,    padding,    sections[]{      _type,      _key,      title,      faqs[]->{        _id,        title,        body[]{            ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }        }      }    }  },        _type == "faq-9" => {    _type,    _key,    padding,    faqs[]->{      _id,      title,      body[]{          ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }      },    },  },        _type == "faq-14" => {    _type,    _key,    padding,    title,    description,    sections[]{      _type,      _key,      title,      faqs[]->{        _id,        title,        body[]{            ...,  markDefs[]{    ...,    _type == "link" => {        _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)    }  },  _type == "image" => {      ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }  },  _type == "product-callout" => {    _type,    _key,    align,    showImage,    title,    blurb,    ctaLabel,    product->{      _id,      title,      slug,      // Optional fields commonly displayed in product UI      sku,      excerpt,      image{   ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  } },      categories[]->{ _id, title, slug }    }  }        }      }    }  },        _type == "banner-block" => {    _type,    _key,    padding,    title,    description[]{      ...,      markDefs[]{        ...,        _type == "link" => {            _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null)        }      }    },    link{   _key,  ...,  // Internal link metadata for runtime href resolution (external links keep provided href)  "internalType": internalLink->_type,  "internalSlug": internalLink->slug.current,  // Preserve original href only for explicit external links; internal href resolved in app code  "href": select(isExternal => href, null) },  },    },    description,      meta{    title,    description,    noindex,    image{        ...,  // Ensure custom fields like alt are present alongside asset  alt,  asset->{    _id,    url,    mimeType,    metadata {      lqip,      dimensions {        width,        height      }    }  }    }  },      "allTranslations": *[_type == "translation.metadata" && ^._id in translations[].value._ref][0].translations[] {    "lang": _key,    "slug": value->slug.current  } [defined(slug) && defined(lang)]  }
 export type PRODUCT_CATEGORY_BY_SLUG_QUERYResult = {
   _id: string;
   _type: "productCategory";
@@ -9223,6 +8878,373 @@ export type PRODUCT_CATEGORY_BY_SLUG_QUERYResult = {
       internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
       internalSlug: string | null;
     } | null;
+  } | {
+    _type: "compare-1";
+    _key: string;
+    padding: SectionPadding | null;
+    images: Array<{
+      asset: {
+        _id: string;
+        url: string | null;
+        mimeType: string | null;
+        metadata: {
+          lqip: string | null;
+          dimensions: {
+            width: number | null;
+            height: number | null;
+          } | null;
+        } | null;
+      } | null;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string | null;
+      _type: "image";
+      _key: string;
+    }> | null;
+    columns: Array<{
+      _key: string;
+      label: string | null;
+      primary: string | null;
+      secondary: string | null;
+      hasIcon: boolean | null;
+    }> | null;
+  } | {
+    _type: "compare-2";
+    _key: string;
+    padding: SectionPadding | null;
+    columns: Array<{
+      _key: string;
+      featured: boolean | null;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string | null;
+        _type: "image";
+      } | null;
+      title: string | null;
+      list: Array<{
+        title?: string;
+        isMissing?: boolean;
+        _type: "item";
+        _key: string;
+      }> | null;
+    }> | null;
+  } | {
+    _type: "compare-4";
+    _key: string;
+    padding: SectionPadding | null;
+    title: string | null;
+    titles: {
+      primary?: string;
+      secondary?: string;
+    } | null;
+    columns: Array<{
+      _key: string;
+      title: string | null;
+      primary: {
+        value?: string;
+        unit?: string;
+        description?: string;
+      } | null;
+      secondary: {
+        value?: string;
+        unit?: string;
+        description?: string;
+      } | null;
+    }> | null;
+    body: Array<{
+      title?: string;
+      description?: string;
+      _type: "alert";
+      _key: string;
+      markDefs: null;
+    } | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs: Array<{
+        isExternal?: boolean;
+        internalLink?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "page";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
+        };
+        href: string | null;
+        target?: boolean;
+        _type: "link";
+        _key: string;
+        internalType: "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
+      }> | null;
+      level?: number;
+      _type: "block";
+      _key: string;
+    } | {
+      _key: string;
+      _type: "code";
+      language?: string;
+      filename?: string;
+      code?: string;
+      highlightedLines?: Array<number>;
+      markDefs: null;
+    } | {
+      asset: {
+        _id: string;
+        url: string | null;
+        mimeType: string | null;
+        metadata: {
+          lqip: string | null;
+          dimensions: {
+            width: number | null;
+            height: number | null;
+          } | null;
+        } | null;
+      } | null;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string | null;
+      _type: "image";
+      _key: string;
+      markDefs: null;
+    } | {
+      _key: string;
+      _type: "product-callout";
+      product: {
+        _id: string;
+        title: string | null;
+        slug: Slug | null;
+        sku: null;
+        excerpt: string | null;
+        image: {
+          asset: {
+            _id: string;
+            url: string | null;
+            mimeType: string | null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
+          } | null;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt: string | null;
+          _type: "image";
+        } | null;
+        categories: Array<{
+          _id: string;
+          title: string | null;
+          slug: Slug | null;
+        }> | null;
+      } | null;
+      title: string | null;
+      blurb: string | null;
+      ctaLabel: string | null;
+      align: "center" | "left" | null;
+      showImage: boolean | null;
+      markDefs: null;
+    } | {
+      videoId?: string;
+      _type: "youtube";
+      _key: string;
+      markDefs: null;
+    }> | null;
+    links: Array<{
+      _key: string;
+      _type: "link-icon";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      isExternal?: boolean;
+      internalLink?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contact";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "page";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "post";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "product";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "productCategory";
+      };
+      title?: string;
+      description?: string;
+      href: string | null;
+      target?: boolean;
+      buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
+    }> | null;
+  } | {
+    _type: "compare-5";
+    _key: string;
+    padding: SectionPadding | null;
+    columns: Array<{
+      _key: string;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string | null;
+        _type: "image";
+      } | null;
+      title: string | null;
+      description: string | null;
+      link: {
+        _key: null;
+        _type: "link";
+        isExternal?: boolean;
+        internalLink?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "contact";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "page";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
+        };
+        title?: string;
+        href: string | null;
+        target?: boolean;
+        buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
+      } | null;
+    }> | null;
+  } | {
+    _type: "compare-6";
+    _key: string;
+    padding: SectionPadding | null;
+    title: string | null;
+    rows: Array<string> | null;
+    columns: Array<{
+      _key: string;
+      name: string | null;
+      attributes: Array<{
+        _key: string;
+        value: string | null;
+        status: "negative" | "neutral" | "positive" | null;
+      }> | null;
+    }> | null;
+  } | {
+    _type: "compare-products";
+    _key: string;
+    padding: SectionPadding | null;
+    title: string | null;
+    productFields: Array<string> | null;
+    columns: Array<{
+      _key: string;
+      product: {
+        _id: string;
+        title: string | null;
+        slug: string | null;
+        spec: {
+          sku: string | null;
+          bestFor: string | null;
+          pungency: string | null;
+          bindingCapacity: string | null;
+          fatContent: number | null;
+        } | null;
+      } | null;
+      overrides: {
+        sku: string | null;
+        bestFor: string | null;
+        pungency: string | null;
+        bindingCapacity: string | null;
+        fatContent: number | null;
+      } | null;
+    }> | null;
   } | {
     _type: "faq-1";
     _key: string;
@@ -9898,7 +9920,7 @@ export type PRODUCT_CATEGORY_BY_SLUG_QUERYResult = {
       _type: "feature-content";
       _key: string;
       padding: SectionPadding | null;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       tag: {
         text?: string;
         type?: "badge" | "title";
@@ -10099,7 +10121,7 @@ export type PRODUCT_CATEGORY_BY_SLUG_QUERYResult = {
       _type: "feature-117-card";
       _key: string;
       tag: {
-        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
         text?: string;
       } | null;
       title: string | null;
@@ -10173,7 +10195,7 @@ export type PRODUCT_CATEGORY_BY_SLUG_QUERYResult = {
     columns: Array<{
       _type: "feature-12-card";
       _key: string;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       title: string | null;
       description: string | null;
     }> | null;
@@ -10186,7 +10208,7 @@ export type PRODUCT_CATEGORY_BY_SLUG_QUERYResult = {
     columns: Array<{
       _type: "feature-15-card";
       _key: string;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       title: string | null;
       description: string | null;
     }> | null;
@@ -10219,7 +10241,7 @@ export type PRODUCT_CATEGORY_BY_SLUG_QUERYResult = {
       link: {
         _key: null;
         _type: "link-icon";
-        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
         isExternal?: boolean;
         internalLink?: {
           _ref: string;
@@ -10269,7 +10291,7 @@ export type PRODUCT_CATEGORY_BY_SLUG_QUERYResult = {
       _type: "feature-202-card";
       _key: string;
       imageTreatment: ImageTreatment | null;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       title: string | null;
       description: string | null;
       image: {
@@ -10341,7 +10363,7 @@ export type PRODUCT_CATEGORY_BY_SLUG_QUERYResult = {
     columns: Array<{
       _type: "feature-3-card";
       _key: string;
-      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
       title: string | null;
       description: string | null;
       image: {
@@ -10531,7 +10553,7 @@ export type PRODUCT_CATEGORY_BY_SLUG_QUERYResult = {
     links: Array<{
       _key: string;
       _type: "link-icon";
-      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
       isExternal?: boolean;
       internalLink?: {
         _ref: string;
@@ -10571,6 +10593,1705 @@ export type PRODUCT_CATEGORY_BY_SLUG_QUERYResult = {
       buttonVariant?: ButtonVariant;
       internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
       internalSlug: string | null;
+    }> | null;
+  }> | null;
+  blocksAfter: Array<{
+    _type: "banner-block";
+    _key: string;
+    padding: SectionPadding | null;
+    title: string | null;
+    description: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal";
+      listItem?: never;
+      markDefs: Array<{
+        _key: string;
+        _type: "link";
+        isExternal?: boolean;
+        internalLink?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "contact";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "page";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
+        };
+        title?: string;
+        href: string | null;
+        target?: boolean;
+        buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
+      }> | null;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }> | null;
+    link: {
+      _key: null;
+      _type: "link";
+      isExternal?: boolean;
+      internalLink?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contact";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "page";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "post";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "product";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "productCategory";
+      };
+      title?: string;
+      href: string | null;
+      target?: boolean;
+      buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
+    } | null;
+  } | {
+    _type: "compare-1";
+    _key: string;
+    padding: SectionPadding | null;
+    images: Array<{
+      asset: {
+        _id: string;
+        url: string | null;
+        mimeType: string | null;
+        metadata: {
+          lqip: string | null;
+          dimensions: {
+            width: number | null;
+            height: number | null;
+          } | null;
+        } | null;
+      } | null;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string | null;
+      _type: "image";
+      _key: string;
+    }> | null;
+    columns: Array<{
+      _key: string;
+      label: string | null;
+      primary: string | null;
+      secondary: string | null;
+      hasIcon: boolean | null;
+    }> | null;
+  } | {
+    _type: "compare-2";
+    _key: string;
+    padding: SectionPadding | null;
+    columns: Array<{
+      _key: string;
+      featured: boolean | null;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string | null;
+        _type: "image";
+      } | null;
+      title: string | null;
+      list: Array<{
+        title?: string;
+        isMissing?: boolean;
+        _type: "item";
+        _key: string;
+      }> | null;
+    }> | null;
+  } | {
+    _type: "compare-4";
+    _key: string;
+    padding: SectionPadding | null;
+    title: string | null;
+    titles: {
+      primary?: string;
+      secondary?: string;
+    } | null;
+    columns: Array<{
+      _key: string;
+      title: string | null;
+      primary: {
+        value?: string;
+        unit?: string;
+        description?: string;
+      } | null;
+      secondary: {
+        value?: string;
+        unit?: string;
+        description?: string;
+      } | null;
+    }> | null;
+    body: Array<{
+      title?: string;
+      description?: string;
+      _type: "alert";
+      _key: string;
+      markDefs: null;
+    } | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs: Array<{
+        isExternal?: boolean;
+        internalLink?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "page";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
+        };
+        href: string | null;
+        target?: boolean;
+        _type: "link";
+        _key: string;
+        internalType: "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
+      }> | null;
+      level?: number;
+      _type: "block";
+      _key: string;
+    } | {
+      _key: string;
+      _type: "code";
+      language?: string;
+      filename?: string;
+      code?: string;
+      highlightedLines?: Array<number>;
+      markDefs: null;
+    } | {
+      asset: {
+        _id: string;
+        url: string | null;
+        mimeType: string | null;
+        metadata: {
+          lqip: string | null;
+          dimensions: {
+            width: number | null;
+            height: number | null;
+          } | null;
+        } | null;
+      } | null;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string | null;
+      _type: "image";
+      _key: string;
+      markDefs: null;
+    } | {
+      _key: string;
+      _type: "product-callout";
+      product: {
+        _id: string;
+        title: string | null;
+        slug: Slug | null;
+        sku: null;
+        excerpt: string | null;
+        image: {
+          asset: {
+            _id: string;
+            url: string | null;
+            mimeType: string | null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
+          } | null;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt: string | null;
+          _type: "image";
+        } | null;
+        categories: Array<{
+          _id: string;
+          title: string | null;
+          slug: Slug | null;
+        }> | null;
+      } | null;
+      title: string | null;
+      blurb: string | null;
+      ctaLabel: string | null;
+      align: "center" | "left" | null;
+      showImage: boolean | null;
+      markDefs: null;
+    } | {
+      videoId?: string;
+      _type: "youtube";
+      _key: string;
+      markDefs: null;
+    }> | null;
+    links: Array<{
+      _key: string;
+      _type: "link-icon";
+      iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+      isExternal?: boolean;
+      internalLink?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "category";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "contact";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "page";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "post";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "product";
+      } | {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "productCategory";
+      };
+      title?: string;
+      description?: string;
+      href: string | null;
+      target?: boolean;
+      buttonVariant?: ButtonVariant;
+      internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+      internalSlug: string | null;
+    }> | null;
+  } | {
+    _type: "compare-5";
+    _key: string;
+    padding: SectionPadding | null;
+    columns: Array<{
+      _key: string;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string | null;
+        _type: "image";
+      } | null;
+      title: string | null;
+      description: string | null;
+      link: {
+        _key: null;
+        _type: "link";
+        isExternal?: boolean;
+        internalLink?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "contact";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "page";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
+        };
+        title?: string;
+        href: string | null;
+        target?: boolean;
+        buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
+      } | null;
+    }> | null;
+  } | {
+    _type: "compare-6";
+    _key: string;
+    padding: SectionPadding | null;
+    title: string | null;
+    rows: Array<string> | null;
+    columns: Array<{
+      _key: string;
+      name: string | null;
+      attributes: Array<{
+        _key: string;
+        value: string | null;
+        status: "negative" | "neutral" | "positive" | null;
+      }> | null;
+    }> | null;
+  } | {
+    _type: "compare-products";
+    _key: string;
+    padding: SectionPadding | null;
+    title: string | null;
+    productFields: Array<string> | null;
+    columns: Array<{
+      _key: string;
+      product: {
+        _id: string;
+        title: string | null;
+        slug: string | null;
+        spec: {
+          sku: string | null;
+          bestFor: string | null;
+          pungency: string | null;
+          bindingCapacity: string | null;
+          fatContent: number | null;
+        } | null;
+      } | null;
+      overrides: {
+        sku: string | null;
+        bestFor: string | null;
+        pungency: string | null;
+        bindingCapacity: string | null;
+        fatContent: number | null;
+      } | null;
+    }> | null;
+  } | {
+    _type: "faq-1";
+    _key: string;
+    padding: SectionPadding | null;
+    faqs: Array<{
+      _id: string;
+      title: string | null;
+      body: Array<{
+        title?: string;
+        description?: string;
+        _type: "alert";
+        _key: string;
+        markDefs: null;
+      } | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs: Array<{
+          isExternal?: boolean;
+          internalLink?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "page";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "post";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "product";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "productCategory";
+          };
+          href: string | null;
+          target?: boolean;
+          _type: "link";
+          _key: string;
+          internalType: "page" | "post" | "product" | "productCategory" | null;
+          internalSlug: string | null;
+        }> | null;
+        level?: number;
+        _type: "block";
+        _key: string;
+      } | {
+        _key: string;
+        _type: "code";
+        language?: string;
+        filename?: string;
+        code?: string;
+        highlightedLines?: Array<number>;
+        markDefs: null;
+      } | {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string | null;
+        _type: "image";
+        _key: string;
+        markDefs: null;
+      } | {
+        _key: string;
+        _type: "product-callout";
+        product: {
+          _id: string;
+          title: string | null;
+          slug: Slug | null;
+          sku: null;
+          excerpt: string | null;
+          image: {
+            asset: {
+              _id: string;
+              url: string | null;
+              mimeType: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt: string | null;
+            _type: "image";
+          } | null;
+          categories: Array<{
+            _id: string;
+            title: string | null;
+            slug: Slug | null;
+          }> | null;
+        } | null;
+        title: string | null;
+        blurb: string | null;
+        ctaLabel: string | null;
+        align: "center" | "left" | null;
+        showImage: boolean | null;
+        markDefs: null;
+      } | {
+        videoId?: string;
+        _type: "youtube";
+        _key: string;
+        markDefs: null;
+      }> | null;
+    }> | null;
+  } | {
+    _type: "faq-14";
+    _key: string;
+    padding: SectionPadding | null;
+    title: {
+      text?: string;
+      element?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p";
+      size?: "default" | "large" | "small";
+      weight?: "bold" | "medium" | "normal" | "semibold";
+    } | null;
+    description: string | null;
+    sections: Array<{
+      _type: "faqSection";
+      _key: string;
+      title: string | null;
+      faqs: Array<{
+        _id: string;
+        title: string | null;
+        body: Array<{
+          title?: string;
+          description?: string;
+          _type: "alert";
+          _key: string;
+          markDefs: null;
+        } | {
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+          listItem?: "bullet" | "number";
+          markDefs: Array<{
+            isExternal?: boolean;
+            internalLink?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "page";
+            } | {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "post";
+            } | {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "product";
+            } | {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "productCategory";
+            };
+            href: string | null;
+            target?: boolean;
+            _type: "link";
+            _key: string;
+            internalType: "page" | "post" | "product" | "productCategory" | null;
+            internalSlug: string | null;
+          }> | null;
+          level?: number;
+          _type: "block";
+          _key: string;
+        } | {
+          _key: string;
+          _type: "code";
+          language?: string;
+          filename?: string;
+          code?: string;
+          highlightedLines?: Array<number>;
+          markDefs: null;
+        } | {
+          asset: {
+            _id: string;
+            url: string | null;
+            mimeType: string | null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
+          } | null;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt: string | null;
+          _type: "image";
+          _key: string;
+          markDefs: null;
+        } | {
+          _key: string;
+          _type: "product-callout";
+          product: {
+            _id: string;
+            title: string | null;
+            slug: Slug | null;
+            sku: null;
+            excerpt: string | null;
+            image: {
+              asset: {
+                _id: string;
+                url: string | null;
+                mimeType: string | null;
+                metadata: {
+                  lqip: string | null;
+                  dimensions: {
+                    width: number | null;
+                    height: number | null;
+                  } | null;
+                } | null;
+              } | null;
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              alt: string | null;
+              _type: "image";
+            } | null;
+            categories: Array<{
+              _id: string;
+              title: string | null;
+              slug: Slug | null;
+            }> | null;
+          } | null;
+          title: string | null;
+          blurb: string | null;
+          ctaLabel: string | null;
+          align: "center" | "left" | null;
+          showImage: boolean | null;
+          markDefs: null;
+        } | {
+          videoId?: string;
+          _type: "youtube";
+          _key: string;
+          markDefs: null;
+        }> | null;
+      }> | null;
+    }> | null;
+  } | {
+    _type: "faq-5";
+    _key: string;
+    padding: SectionPadding | null;
+    faqs: Array<{
+      _id: string;
+      title: string | null;
+      body: Array<{
+        title?: string;
+        description?: string;
+        _type: "alert";
+        _key: string;
+        markDefs: null;
+      } | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs: Array<{
+          isExternal?: boolean;
+          internalLink?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "page";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "post";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "product";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "productCategory";
+          };
+          href: string | null;
+          target?: boolean;
+          _type: "link";
+          _key: string;
+          internalType: "page" | "post" | "product" | "productCategory" | null;
+          internalSlug: string | null;
+        }> | null;
+        level?: number;
+        _type: "block";
+        _key: string;
+      } | {
+        _key: string;
+        _type: "code";
+        language?: string;
+        filename?: string;
+        code?: string;
+        highlightedLines?: Array<number>;
+        markDefs: null;
+      } | {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string | null;
+        _type: "image";
+        _key: string;
+        markDefs: null;
+      } | {
+        _key: string;
+        _type: "product-callout";
+        product: {
+          _id: string;
+          title: string | null;
+          slug: Slug | null;
+          sku: null;
+          excerpt: string | null;
+          image: {
+            asset: {
+              _id: string;
+              url: string | null;
+              mimeType: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt: string | null;
+            _type: "image";
+          } | null;
+          categories: Array<{
+            _id: string;
+            title: string | null;
+            slug: Slug | null;
+          }> | null;
+        } | null;
+        title: string | null;
+        blurb: string | null;
+        ctaLabel: string | null;
+        align: "center" | "left" | null;
+        showImage: boolean | null;
+        markDefs: null;
+      } | {
+        videoId?: string;
+        _type: "youtube";
+        _key: string;
+        markDefs: null;
+      }> | null;
+    }> | null;
+  } | {
+    _type: "faq-8";
+    _key: string;
+    padding: SectionPadding | null;
+    sections: Array<{
+      _type: "faqSection";
+      _key: string;
+      title: string | null;
+      faqs: Array<{
+        _id: string;
+        title: string | null;
+        body: Array<{
+          title?: string;
+          description?: string;
+          _type: "alert";
+          _key: string;
+          markDefs: null;
+        } | {
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+          listItem?: "bullet" | "number";
+          markDefs: Array<{
+            isExternal?: boolean;
+            internalLink?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "page";
+            } | {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "post";
+            } | {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "product";
+            } | {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "productCategory";
+            };
+            href: string | null;
+            target?: boolean;
+            _type: "link";
+            _key: string;
+            internalType: "page" | "post" | "product" | "productCategory" | null;
+            internalSlug: string | null;
+          }> | null;
+          level?: number;
+          _type: "block";
+          _key: string;
+        } | {
+          _key: string;
+          _type: "code";
+          language?: string;
+          filename?: string;
+          code?: string;
+          highlightedLines?: Array<number>;
+          markDefs: null;
+        } | {
+          asset: {
+            _id: string;
+            url: string | null;
+            mimeType: string | null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
+          } | null;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt: string | null;
+          _type: "image";
+          _key: string;
+          markDefs: null;
+        } | {
+          _key: string;
+          _type: "product-callout";
+          product: {
+            _id: string;
+            title: string | null;
+            slug: Slug | null;
+            sku: null;
+            excerpt: string | null;
+            image: {
+              asset: {
+                _id: string;
+                url: string | null;
+                mimeType: string | null;
+                metadata: {
+                  lqip: string | null;
+                  dimensions: {
+                    width: number | null;
+                    height: number | null;
+                  } | null;
+                } | null;
+              } | null;
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              alt: string | null;
+              _type: "image";
+            } | null;
+            categories: Array<{
+              _id: string;
+              title: string | null;
+              slug: Slug | null;
+            }> | null;
+          } | null;
+          title: string | null;
+          blurb: string | null;
+          ctaLabel: string | null;
+          align: "center" | "left" | null;
+          showImage: boolean | null;
+          markDefs: null;
+        } | {
+          videoId?: string;
+          _type: "youtube";
+          _key: string;
+          markDefs: null;
+        }> | null;
+      }> | null;
+    }> | null;
+  } | {
+    _type: "faq-9";
+    _key: string;
+    padding: SectionPadding | null;
+    faqs: Array<{
+      _id: string;
+      title: string | null;
+      body: Array<{
+        title?: string;
+        description?: string;
+        _type: "alert";
+        _key: string;
+        markDefs: null;
+      } | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs: Array<{
+          isExternal?: boolean;
+          internalLink?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "page";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "post";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "product";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "productCategory";
+          };
+          href: string | null;
+          target?: boolean;
+          _type: "link";
+          _key: string;
+          internalType: "page" | "post" | "product" | "productCategory" | null;
+          internalSlug: string | null;
+        }> | null;
+        level?: number;
+        _type: "block";
+        _key: string;
+      } | {
+        _key: string;
+        _type: "code";
+        language?: string;
+        filename?: string;
+        code?: string;
+        highlightedLines?: Array<number>;
+        markDefs: null;
+      } | {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string | null;
+        _type: "image";
+        _key: string;
+        markDefs: null;
+      } | {
+        _key: string;
+        _type: "product-callout";
+        product: {
+          _id: string;
+          title: string | null;
+          slug: Slug | null;
+          sku: null;
+          excerpt: string | null;
+          image: {
+            asset: {
+              _id: string;
+              url: string | null;
+              mimeType: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt: string | null;
+            _type: "image";
+          } | null;
+          categories: Array<{
+            _id: string;
+            title: string | null;
+            slug: Slug | null;
+          }> | null;
+        } | null;
+        title: string | null;
+        blurb: string | null;
+        ctaLabel: string | null;
+        align: "center" | "left" | null;
+        showImage: boolean | null;
+        markDefs: null;
+      } | {
+        videoId?: string;
+        _type: "youtube";
+        _key: string;
+        markDefs: null;
+      }> | null;
+    }> | null;
+  } | {
+    _type: "feature-1";
+    _key: string;
+    padding: SectionPadding | null;
+    columns: Array<{
+      _type: "feature-content";
+      _key: string;
+      padding: SectionPadding | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      tag: {
+        text?: string;
+        type?: "badge" | "title";
+      } | null;
+      title: string | null;
+      body: Array<{
+        title?: string;
+        description?: string;
+        _type: "alert";
+        _key: string;
+        markDefs: null;
+      } | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs: Array<{
+          isExternal?: boolean;
+          internalLink?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "page";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "post";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "product";
+          } | {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "productCategory";
+          };
+          href: string | null;
+          target?: boolean;
+          _type: "link";
+          _key: string;
+          internalType: "page" | "post" | "product" | "productCategory" | null;
+          internalSlug: string | null;
+        }> | null;
+        level?: number;
+        _type: "block";
+        _key: string;
+      } | {
+        _key: string;
+        _type: "code";
+        language?: string;
+        filename?: string;
+        code?: string;
+        highlightedLines?: Array<number>;
+        markDefs: null;
+      } | {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string | null;
+        _type: "image";
+        _key: string;
+        markDefs: null;
+      } | {
+        _key: string;
+        _type: "product-callout";
+        product: {
+          _id: string;
+          title: string | null;
+          slug: Slug | null;
+          sku: null;
+          excerpt: string | null;
+          image: {
+            asset: {
+              _id: string;
+              url: string | null;
+              mimeType: string | null;
+              metadata: {
+                lqip: string | null;
+                dimensions: {
+                  width: number | null;
+                  height: number | null;
+                } | null;
+              } | null;
+            } | null;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt: string | null;
+            _type: "image";
+          } | null;
+          categories: Array<{
+            _id: string;
+            title: string | null;
+            slug: Slug | null;
+          }> | null;
+        } | null;
+        title: string | null;
+        blurb: string | null;
+        ctaLabel: string | null;
+        align: "center" | "left" | null;
+        showImage: boolean | null;
+        markDefs: null;
+      } | {
+        videoId?: string;
+        _type: "youtube";
+        _key: string;
+        markDefs: null;
+      }> | null;
+      links: Array<{
+        _key: string;
+        _type: "link";
+        isExternal?: boolean;
+        internalLink?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "contact";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "page";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
+        };
+        title?: string;
+        href: string | null;
+        target?: boolean;
+        buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
+      }> | null;
+    } | {
+      _type: "feature-image";
+      _key: string;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string | null;
+        _type: "image";
+      } | null;
+    }> | null;
+  } | {
+    _type: "feature-117";
+    _key: string;
+    padding: SectionPadding | null;
+    columns: Array<{
+      _type: "feature-117-card";
+      _key: string;
+      tag: {
+        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+        text?: string;
+      } | null;
+      title: string | null;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string | null;
+        _type: "image";
+      } | null;
+      link: {
+        _key: null;
+        _type: "link";
+        isExternal?: boolean;
+        internalLink?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "contact";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "page";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
+        };
+        title?: string;
+        href: string | null;
+        target?: boolean;
+        buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
+      } | null;
+    }> | null;
+  } | {
+    _type: "feature-12";
+    _key: string;
+    padding: SectionPadding | null;
+    tagline: string | null;
+    columns: Array<{
+      _type: "feature-12-card";
+      _key: string;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | {
+    _type: "feature-15";
+    _key: string;
+    padding: SectionPadding | null;
+    contrastVariant: "default" | "high-contrast" | null;
+    gridColumns: "grid-cols-2" | "grid-cols-3" | null;
+    columns: Array<{
+      _type: "feature-15-card";
+      _key: string;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | {
+    _type: "feature-157";
+    _key: string;
+    padding: SectionPadding | null;
+    columns: Array<{
+      _type: "feature-157-card";
+      _key: string;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string | null;
+        _type: "image";
+      } | null;
+      link: {
+        _key: null;
+        _type: "link-icon";
+        iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+        isExternal?: boolean;
+        internalLink?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "contact";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "page";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
+        };
+        title?: string;
+        description?: string;
+        href: string | null;
+        target?: boolean;
+        buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
+      } | null;
+    }> | null;
+  } | {
+    _type: "feature-202";
+    _key: string;
+    padding: SectionPadding | null;
+    columns: Array<{
+      _type: "feature-202-card";
+      _key: string;
+      imageTreatment: ImageTreatment | null;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      title: string | null;
+      description: string | null;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string | null;
+        _type: "image";
+      } | null;
+      link: {
+        _key: null;
+        _type: "link";
+        isExternal?: boolean;
+        internalLink?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "contact";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "page";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
+        };
+        title?: string;
+        href: string | null;
+        target?: boolean;
+        buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
+      } | null;
+    }> | null;
+  } | {
+    _type: "feature-3";
+    _key: string;
+    padding: SectionPadding | null;
+    columns: Array<{
+      _type: "feature-3-card";
+      _key: string;
+      iconVariant: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in" | null;
+      title: string | null;
+      description: string | null;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string | null;
+        _type: "image";
+      } | null;
+    }> | null;
+  } | {
+    _type: "feature-66";
+    _key: string;
+    padding: SectionPadding | null;
+    columns: Array<{
+      _type: "feature-66-card";
+      _key: string;
+      logo: {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string | null;
+        _type: "image";
+      } | null;
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          mimeType: string | null;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number | null;
+              height: number | null;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string | null;
+        _type: "image";
+      } | null;
+      link: {
+        _key: null;
+        _type: "link";
+        isExternal?: boolean;
+        internalLink?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "category";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "contact";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "page";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "post";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "product";
+        } | {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "productCategory";
+        };
+        title?: string;
+        href: string | null;
+        target?: boolean;
+        buttonVariant?: ButtonVariant;
+        internalType: "category" | "contact" | "page" | "post" | "product" | "productCategory" | null;
+        internalSlug: string | null;
+      } | null;
     }> | null;
   }> | null;
   description: string | null;
@@ -10846,7 +12567,7 @@ export type TEAM_QUERYResult = Array<{
   links: Array<{
     _key: string;
     _type: "link-icon";
-    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
+    iconVariant?: "arrow-down-to-line" | "arrow-right" | "arrow-up-down" | "award" | "beaker" | "bell" | "blocks" | "building-2" | "check-circle-2" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle-dot" | "cloud" | "code" | "compass" | "cpu" | "dribbble" | "external-link" | "git-branch" | "github" | "globe" | "handshake" | "home" | "infinity" | "landmark" | "layout-grid" | "layout-list" | "leaf" | "linkedin" | "list" | "locate-fixed" | "lock" | "messages-square" | "move-right" | "none" | "play-circle" | "play" | "redo" | "repeat" | "rocket" | "scaling" | "scan" | "smile" | "sparkles" | "star" | "timer" | "trophy" | "truck" | "twitter" | "users" | "wand-sparkles" | "wrench" | "x-circle" | "zap" | "zoom-in";
     isExternal?: boolean;
     internalLink?: {
       _ref: string;
@@ -10964,12 +12685,12 @@ declare module "@sanity/client" {
     "\n  *[\n    _type == \"post\" &&\n    defined(slug) &&\n    language == $lang\n  ]\n  | order((language == $lang) desc, title desc)[$offset...$end]{\n    _id,\n    language,\n    _createdAt,\n    title,\n    slug,\n    excerpt,\n    author->{\n      name,\n      title,\n      image { \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n }\n    },\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    categories[]->{\n      _id,\n      title,\n      slug,\n    },\n  }\n": POSTS_QUERY_ZAResult;
     "\n  *[\n    _type == \"post\" &&\n    defined(slug) &&\n    language == $lang\n  ]{\n    slug,\n    language,\n  }\n": POSTS_SLUGS_QUERYResult;
     "\n  count(*[\n    _type == \"post\" &&\n    defined(slug) &&\n    language == $lang\n  ])\n": POSTS_COUNT_QUERYResult;
-    "\n  *[\n    _type == \"product\" &&\n    slug.current == $slug &&\n    language == $lang\n  ]\n  | order(_updatedAt desc)[0]{\n    \n  _id,\n  language,\n  orderRank,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    name,\n    sku,\n    bestFor,\n    pungency,\n    bindingCapacity,\n    fatContent,\n    purity,\n    moisture,\n    hsCode,\n    minOrder,\n    origin,\n    botanicalName,\n    shelfLife,\n    allergenInfo,\n    productAttributes,\n    certification\n  },\n  keyFeatures[],\n  packagingOptions[]{\n    ...\n  },\n  image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  body[]{ \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n },\n  excerpt,\n  categories[]->{\n    \n  _id,\n  title,\n  slug,\n  language\n\n  },\n  \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n\n\n    ,\n    \n  \"allTranslations\": *[_type == \"translation.metadata\" && ^._id in translations[].value._ref][0].translations[] {\n    \"lang\": _key,\n    \"slug\": value->slug.current\n  } [defined(slug) && defined(lang)]\n\n  }\n": PRODUCT_QUERYResult;
+    "\n  *[\n    _type == \"product\" &&\n    slug.current == $slug &&\n    language == $lang\n  ]\n  | order(_updatedAt desc)[0]{\n    \n  _id,\n  language,\n  orderRank,\n  _createdAt,\n  title,\n  slug,\n  blocks[]{\n    \n  _type == \"section-header\" => {\n    _type,\n    _key,\n    padding,\n    sectionWidth,\n    stackAlign,\n    direction,\n  surface,\n    tag,\n    title,\n    description,\n    richDescription[]{\n      ...,\n      markDefs[]{\n        ...,\n        _type == \"link\" => {\n          \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n        }\n      }\n    },\n    isDatasheetTitle,\n    hasGroupDivider,\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n    \n  _type == \"banner-block\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description[]{\n      ...,\n      markDefs[]{\n        ...,\n        _type == \"link\" => {\n          \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n        }\n      }\n    },\n    link{ \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n },\n  }\n,\n  },\n  specifications[]->{\n    _id,\n    name,\n    sku,\n    bestFor,\n    pungency,\n    bindingCapacity,\n    fatContent,\n    purity,\n    moisture,\n    hsCode,\n    minOrder,\n    origin,\n    botanicalName,\n    shelfLife,\n    allergenInfo,\n    productAttributes,\n    certification\n  },\n  keyFeatures[],\n  packagingOptions[]{\n    ...\n  },\n  image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  body[]{ \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n },\n  excerpt,\n  categories[]->{\n    \n  _id,\n  title,\n  slug,\n  language\n\n  },\n  \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n\n\n    ,\n    \n  \"allTranslations\": *[_type == \"translation.metadata\" && ^._id in translations[].value._ref][0].translations[] {\n    \"lang\": _key,\n    \"slug\": value->slug.current\n  } [defined(slug) && defined(lang)]\n\n  }\n": PRODUCT_QUERYResult;
     "\n  *[\n    _type == \"product\" &&\n    defined(slug) &&\n    language == $lang\n  ]\n  | order((language == $lang) desc, orderRank)[$offset...$end]{\n    \n  _id,\n  language,\n  orderRank,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    sku,\n    purity,\n    productAttributes\n  },\n  keyFeatures[],\n  excerpt,\n  image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  categories[]->{\n    \n  _id,\n  title,\n  slug,\n  language\n\n  }\n\n  }\n": PRODUCTS_QUERYResult;
     "\n  *[\n    _type == \"product\" &&\n    defined(slug) &&\n    language == $lang\n  ]{\n    slug,\n    language,\n  }\n": PRODUCTS_SLUGS_QUERYResult;
     "\n  count(*[\n    _type == \"product\" &&\n    defined(slug) &&\n    language == $lang\n  ])\n": PRODUCTS_COUNT_QUERYResult;
     "\n  *[\n    _type == \"productCategory\" &&\n    defined(slug) &&\n    language == $lang\n  ]\n  | order(orderRank){\n    _id,\n    title,\n    slug,\n    language,\n  }\n": PRODUCT_CATEGORIES_QUERYResult;
-    "\n  *[\n    _type == \"productCategory\" &&\n    slug.current == $slug &&\n    language == $lang\n  ]\n  | order(_updatedAt desc)[0]{\n    _id,\n    _type,\n    language,\n    title,\n    slug,\n    blocks[]{\n      \n  _type == \"section-header\" => {\n    _type,\n    _key,\n    padding,\n    sectionWidth,\n    stackAlign,\n    direction,\n  surface,\n    tag,\n    title,\n    description,\n    richDescription[]{\n      ...,\n      markDefs[]{\n        ...,\n        _type == \"link\" => {\n          \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n        }\n      }\n    },\n    isDatasheetTitle,\n    hasGroupDivider,\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"feature-1\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-content\" => {\n    _type,\n    _key,\n    padding,\n    iconVariant,\n    tag,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"feature-image\" => {\n    _type,\n    _key,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-3\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-3-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-12\" => {\n    _type,\n    _key,\n    padding,\n    tagline,\n    columns[]{\n      \n  _type == \"feature-12-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-15\" => {\n    _type,\n    _key,\n    padding,\n    contrastVariant,\n    gridColumns,\n    columns[]{\n      \n  _type == \"feature-15-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-66\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-66-card\" => {\n    _type,\n    _key,\n    logo{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-117\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-117-card\" => {\n    _type,\n    _key,\n    tag,\n    title,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-157\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-157-card\" => {\n    _type,\n    _key,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-202\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-202-card\" => {\n    _type,\n    _key,\n    imageTreatment,\n    iconVariant,\n    title,\n    description,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"faq-1\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-5\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-8\" => {\n    _type,\n    _key,\n    padding,\n    sections[]{\n      _type,\n      _key,\n      title,\n      faqs[]->{\n        _id,\n        title,\n        body[]{\n          \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n      \n  _type == \"faq-9\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-14\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    sections[]{\n      _type,\n      _key,\n      title,\n      faqs[]->{\n        _id,\n        title,\n        body[]{\n          \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n      \n  _type == \"banner-block\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description[]{\n      ...,\n      markDefs[]{\n        ...,\n        _type == \"link\" => {\n          \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n        }\n      }\n    },\n    link{ \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n },\n  }\n,\n    },\n    description,\n    \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n    \n  \"allTranslations\": *[_type == \"translation.metadata\" && ^._id in translations[].value._ref][0].translations[] {\n    \"lang\": _key,\n    \"slug\": value->slug.current\n  } [defined(slug) && defined(lang)]\n\n  }\n": PRODUCT_CATEGORY_BY_SLUG_QUERYResult;
+    "\n  *[\n    _type == \"productCategory\" &&\n    slug.current == $slug &&\n    language == $lang\n  ]\n  | order(_updatedAt desc)[0]{\n    _id,\n    _type,\n    language,\n    title,\n    slug,\n    blocks[]{\n      \n  _type == \"section-header\" => {\n    _type,\n    _key,\n    padding,\n    sectionWidth,\n    stackAlign,\n    direction,\n  surface,\n    tag,\n    title,\n    description,\n    richDescription[]{\n      ...,\n      markDefs[]{\n        ...,\n        _type == \"link\" => {\n          \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n        }\n      }\n    },\n    isDatasheetTitle,\n    hasGroupDivider,\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"feature-1\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-content\" => {\n    _type,\n    _key,\n    padding,\n    iconVariant,\n    tag,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"feature-image\" => {\n    _type,\n    _key,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-3\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-3-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-12\" => {\n    _type,\n    _key,\n    padding,\n    tagline,\n    columns[]{\n      \n  _type == \"feature-12-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-15\" => {\n    _type,\n    _key,\n    padding,\n    contrastVariant,\n    gridColumns,\n    columns[]{\n      \n  _type == \"feature-15-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-66\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-66-card\" => {\n    _type,\n    _key,\n    logo{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-117\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-117-card\" => {\n    _type,\n    _key,\n    tag,\n    title,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-157\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-157-card\" => {\n    _type,\n    _key,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-202\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-202-card\" => {\n    _type,\n    _key,\n    imageTreatment,\n    iconVariant,\n    title,\n    description,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"compare-1\" => {\n    _type,\n    _key,\n    padding,\n    images[]{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    columns[]{\n      _key,\n      label,\n      primary,\n      secondary,\n      hasIcon,\n    },\n  }\n,\n      \n  _type == \"compare-2\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      featured,\n      image{\n        \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      title,\n      list,\n    },\n  }\n,\n      \n  _type == \"compare-4\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    titles,\n    columns[]{\n      _key,\n      title,\n      primary,\n      secondary\n    },\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"compare-5\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      image{\n        \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      title,\n      description,\n      link {\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n      },\n    },\n  }\n,\n      \n  _type == \"compare-6\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    rows,\n    columns[]{\n      _key,\n      name,\n      attributes[]{\n        _key,\n        value,\n        status,\n      },\n    },\n  }\n,\n      \n  _type == \"compare-products\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    productFields,\n    columns[]{\n      _key,\n      product->{\n        _id,\n        title,\n        \"slug\": slug.current,\n        // First specification projected under 'spec'\n        \"spec\": specifications[0]->{\n          sku,\n          bestFor,\n          pungency,\n          bindingCapacity,\n          fatContent\n        }\n      },\n      overrides{\n        sku,\n        bestFor,\n        pungency,\n        bindingCapacity,\n        fatContent\n      },\n    },\n  }\n,\n      \n  _type == \"faq-1\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-5\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-8\" => {\n    _type,\n    _key,\n    padding,\n    sections[]{\n      _type,\n      _key,\n      title,\n      faqs[]->{\n        _id,\n        title,\n        body[]{\n          \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n      \n  _type == \"faq-9\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-14\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    sections[]{\n      _type,\n      _key,\n      title,\n      faqs[]->{\n        _id,\n        title,\n        body[]{\n          \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n      \n  _type == \"banner-block\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description[]{\n      ...,\n      markDefs[]{\n        ...,\n        _type == \"link\" => {\n          \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n        }\n      }\n    },\n    link{ \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n },\n  }\n,\n    },\n    blocksAfter[]{\n      \n  _type == \"feature-1\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-content\" => {\n    _type,\n    _key,\n    padding,\n    iconVariant,\n    tag,\n    title,\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"feature-image\" => {\n    _type,\n    _key,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-3\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-3-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-12\" => {\n    _type,\n    _key,\n    padding,\n    tagline,\n    columns[]{\n      \n  _type == \"feature-12-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-15\" => {\n    _type,\n    _key,\n    padding,\n    contrastVariant,\n    gridColumns,\n    columns[]{\n      \n  _type == \"feature-15-card\" => {\n    _type,\n    _key,\n    iconVariant,\n    title,\n    description,\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-66\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-66-card\" => {\n    _type,\n    _key,\n    logo{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-117\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-117-card\" => {\n    _type,\n    _key,\n    tag,\n    title,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-157\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-157-card\" => {\n    _type,\n    _key,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"feature-202\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      \n  _type == \"feature-202-card\" => {\n    _type,\n    _key,\n    imageTreatment,\n    iconVariant,\n    title,\n    description,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    link {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  }\n,\n    },\n  }\n,\n      \n  _type == \"compare-1\" => {\n    _type,\n    _key,\n    padding,\n    images[]{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    },\n    columns[]{\n      _key,\n      label,\n      primary,\n      secondary,\n      hasIcon,\n    },\n  }\n,\n      \n  _type == \"compare-2\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      featured,\n      image{\n        \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      title,\n      list,\n    },\n  }\n,\n      \n  _type == \"compare-4\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    titles,\n    columns[]{\n      _key,\n      title,\n      primary,\n      secondary\n    },\n    body[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n    },\n    links[]{\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    },\n  }\n,\n      \n  _type == \"compare-5\" => {\n    _type,\n    _key,\n    padding,\n    columns[]{\n      _key,\n      image{\n        \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n      },\n      title,\n      description,\n      link {\n        \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n      },\n    },\n  }\n,\n      \n  _type == \"compare-6\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    rows,\n    columns[]{\n      _key,\n      name,\n      attributes[]{\n        _key,\n        value,\n        status,\n      },\n    },\n  }\n,\n      \n  _type == \"compare-products\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    productFields,\n    columns[]{\n      _key,\n      product->{\n        _id,\n        title,\n        \"slug\": slug.current,\n        // First specification projected under 'spec'\n        \"spec\": specifications[0]->{\n          sku,\n          bestFor,\n          pungency,\n          bindingCapacity,\n          fatContent\n        }\n      },\n      overrides{\n        sku,\n        bestFor,\n        pungency,\n        bindingCapacity,\n        fatContent\n      },\n    },\n  }\n,\n      \n  _type == \"faq-1\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-5\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-8\" => {\n    _type,\n    _key,\n    padding,\n    sections[]{\n      _type,\n      _key,\n      title,\n      faqs[]->{\n        _id,\n        title,\n        body[]{\n          \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n      \n  _type == \"faq-9\" => {\n    _type,\n    _key,\n    padding,\n    faqs[]->{\n      _id,\n      title,\n      body[]{\n        \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n      },\n    },\n  }\n,\n      \n  _type == \"faq-14\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description,\n    sections[]{\n      _type,\n      _key,\n      title,\n      faqs[]->{\n        _id,\n        title,\n        body[]{\n          \n  ...,\n  markDefs[]{\n    ...,\n    _type == \"link\" => {\n      \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n    }\n  },\n  _type == \"image\" => {\n    \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n  },\n  _type == \"product-callout\" => {\n    _type,\n    _key,\n    align,\n    showImage,\n    title,\n    blurb,\n    ctaLabel,\n    product->{\n      _id,\n      title,\n      slug,\n      // Optional fields commonly displayed in product UI\n      sku,\n      excerpt,\n      image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n      categories[]->{ _id, title, slug }\n    }\n  }\n\n        }\n      }\n    }\n  }\n,\n      \n  _type == \"banner-block\" => {\n    _type,\n    _key,\n    padding,\n    title,\n    description[]{\n      ...,\n      markDefs[]{\n        ...,\n        _type == \"link\" => {\n          \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n\n        }\n      }\n    },\n    link{ \n  _key,\n  ...,\n  // Internal link metadata for runtime href resolution (external links keep provided href)\n  \"internalType\": internalLink->_type,\n  \"internalSlug\": internalLink->slug.current,\n  // Preserve original href only for explicit external links; internal href resolved in app code\n  \"href\": select(isExternal => href, null)\n },\n  }\n,\n    },\n    description,\n    \n  meta{\n    title,\n    description,\n    noindex,\n    image{\n      \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n\n    }\n  }\n,\n    \n  \"allTranslations\": *[_type == \"translation.metadata\" && ^._id in translations[].value._ref][0].translations[] {\n    \"lang\": _key,\n    \"slug\": value->slug.current\n  } [defined(slug) && defined(lang)]\n\n  }\n": PRODUCT_CATEGORY_BY_SLUG_QUERYResult;
     "\n  _type == \"product\" &&\n  defined(slug) &&\n  language == $lang &&\n  references(*[\n  _type == \"productCategory\" &&\n  slug.current == $slug &&\n  language == $lang\n]._id)\n": ProductsByCategoryFilterResult;
     "\n  *[\n  _type == \"product\" &&\n  defined(slug) &&\n  language == $lang &&\n  references(*[\n  _type == \"productCategory\" &&\n  slug.current == $slug &&\n  language == $lang\n]._id)\n]\n  | order((language == $lang) desc, orderRank)[$offset...$end]{\n    \n  _id,\n  language,\n  orderRank,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    sku,\n    purity,\n    productAttributes\n  },\n  keyFeatures[],\n  excerpt,\n  image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  categories[]->{\n    \n  _id,\n  title,\n  slug,\n  language\n\n  }\n\n  }\n": PRODUCTS_BY_CATEGORY_QUERYResult;
     "\n  *[\n  _type == \"product\" &&\n  defined(slug) &&\n  language == $lang &&\n  references(*[\n  _type == \"productCategory\" &&\n  slug.current == $slug &&\n  language == $lang\n]._id)\n]\n  | order((language == $lang) desc, _createdAt desc)[$offset...$end]{\n    \n  _id,\n  language,\n  orderRank,\n  _createdAt,\n  title,\n  slug,\n  specifications[]->{\n    _id,\n    sku,\n    purity,\n    productAttributes\n  },\n  keyFeatures[],\n  excerpt,\n  image{ \n  ...,\n  // Ensure custom fields like alt are present alongside asset\n  alt,\n  asset->{\n    _id,\n    url,\n    mimeType,\n    metadata {\n      lqip,\n      dimensions {\n        width,\n        height\n      }\n    }\n  }\n },\n  categories[]->{\n    \n  _id,\n  title,\n  slug,\n  language\n\n  }\n\n  }\n": PRODUCTS_BY_CATEGORY_QUERY_NEWESTResult;

@@ -47,6 +47,10 @@ const productProjection = groq`
   _createdAt,
   title,
   slug,
+  blocks[]{
+    ${sectionHeaderQuery},
+    ${bannerBlockQuery},
+  },
   specifications[]->{
     _id,
     name,

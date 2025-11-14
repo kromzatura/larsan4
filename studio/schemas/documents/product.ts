@@ -23,6 +23,30 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "blocks",
+      title: "Blocks",
+      type: "array",
+      group: "content",
+      description:
+        "Optional blocks that render above the product content. Use a Section Header to control the H1 and description.",
+      of: [{ type: "section-header" }, { type: "banner-block" }],
+      options: {
+        insertMenu: {
+          groups: [
+            { name: "section-header", of: ["section-header"] },
+            { name: "banner", of: ["banner-block"] },
+          ],
+          views: [
+            {
+              name: "grid",
+              previewImageUrl: (block) => `/static/images/preview/${block}.jpg`,
+            },
+            { name: "list" },
+          ],
+        },
+      },
+    }),
+    defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
