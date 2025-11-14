@@ -33,7 +33,9 @@ import { urlFor } from "@/sanity/lib/image";
 
 type SpecPair = { label: string; value?: string | number | null };
 
-function formatPurity(val: string | number | null | undefined): string | undefined {
+function formatPurity(
+  val: string | number | null | undefined
+): string | undefined {
   if (val === null || val === undefined) return undefined;
   const s = String(val).trim();
   if (!s) return undefined;
@@ -329,11 +331,26 @@ export default async function ProductPage(
   ];
 
   const qualitySpecs: SpecPair[] = [
-    { label: dictionary.productPage.specLabels.purity, value: formatPurity(spec?.purity) },
-    { label: dictionary.productPage.specLabels.moisture, value: spec?.moisture },
-    { label: dictionary.productPage.specLabels.shelfLife, value: spec?.shelfLife },
-    { label: dictionary.productPage.specLabels.attributes, value: spec?.productAttributes },
-    { label: dictionary.productPage.specLabels.allergenInfo, value: spec?.allergenInfo },
+    {
+      label: dictionary.productPage.specLabels.purity,
+      value: formatPurity(spec?.purity),
+    },
+    {
+      label: dictionary.productPage.specLabels.moisture,
+      value: spec?.moisture,
+    },
+    {
+      label: dictionary.productPage.specLabels.shelfLife,
+      value: spec?.shelfLife,
+    },
+    {
+      label: dictionary.productPage.specLabels.attributes,
+      value: spec?.productAttributes,
+    },
+    {
+      label: dictionary.productPage.specLabels.allergenInfo,
+      value: spec?.allergenInfo,
+    },
   ];
 
   const productData: SpecPair[] = [
