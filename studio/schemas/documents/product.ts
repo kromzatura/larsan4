@@ -29,11 +29,44 @@ export default defineType({
       group: "content",
       description:
         "Optional blocks that render above the product content. Use a Section Header to control the H1 and description.",
-      of: [{ type: "section-header" }, { type: "banner-block" }],
+      of: [
+        { type: "section-header" },
+        // Feature blocks
+        { type: "feature-1" },
+        { type: "feature-3" },
+        { type: "feature-12" },
+        { type: "feature-15" },
+        { type: "feature-66" },
+        { type: "feature-117" },
+        { type: "feature-157" },
+        { type: "feature-202" },
+        // FAQ blocks
+        { type: "faq-1" },
+        { type: "faq-5" },
+        { type: "faq-8" },
+        { type: "faq-9" },
+        { type: "faq-14" },
+        // Banner
+        { type: "banner-block" },
+      ],
       options: {
         insertMenu: {
           groups: [
             { name: "section-header", of: ["section-header"] },
+            {
+              name: "feature",
+              of: [
+                "feature-1",
+                "feature-3",
+                "feature-12",
+                "feature-15",
+                "feature-66",
+                "feature-117",
+                "feature-157",
+                "feature-202",
+              ],
+            },
+            { name: "faq", of: ["faq-1", "faq-5", "faq-8", "faq-9", "faq-14"] },
             { name: "banner", of: ["banner-block"] },
           ],
           views: [
