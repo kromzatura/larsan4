@@ -11,7 +11,7 @@ import AddToInquiryButton from "@/components/inquiry/add-to-inquiry-button";
 import { Separator } from "@/components/ui/separator";
 // Badge intentionally unused for key features; categories still use Badge.
 import { Badge } from "@/components/ui/badge";
-import { Facebook, Linkedin, Twitter } from "lucide-react";
+import { Facebook, Linkedin, Twitter, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   fetchSanityProductBySlug,
@@ -26,47 +26,138 @@ import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
 import { SUPPORTED_LOCALES } from "@/lib/i18n/config";
 import type { AsyncPageProps } from "@/lib/types/next";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import type { UIDictionary } from "@/lib/i18n/dictionaries";
 import { buildAbsoluteUrl } from "@/lib/url";
 import { fetchSanitySettings } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
 
 type SpecPair = { label: string; value?: string | number | null };
 
-function SpecTable({
-  title,
-  rows,
-  monoValueLabels = [],
-}: {
-  title: string;
-  rows: SpecPair[];
-  monoValueLabels?: string[];
-}) {
-  const filtered = rows.filter(
-    (r) => r.value !== undefined && r.value !== null && r.value !== ""
-  );
-  if (filtered.length === 0) return null;
-
+function SectionCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="mb-6 rounded-lg border bg-card p-6">
       <h2 className="mb-4 text-lg font-semibold text-foreground">{title}</h2>
+      {children}
+    </div>
+  );
+}
+
+function KeyValueList({ rows }: { rows: SpecPair[] }) {
+  const filtered = rows.filter((r) => r.value !== undefined && r.value !== null && r.value !== "");
+  if (filtered.length === 0) return null;
+  return (
+    <div className="grid grid-cols-2 gap-y-2">
+      {filtered.map((r) => (
+        <Fragment key={`${r.label}`}>
+          <div className="text-sm font-medium text-muted-foreground">{r.label}</div>
+          <div className="text-right text-sm text-foreground">{r.value}</div>
+        </Fragment>
+      ))}
+    </div>
+  );
+}
+
+function NutritionTable({
+  title,
+  nutrition,
+  t,
+}: {
+  title: string;
+  nutrition?: {
+    energy?: number | null;
+    protein?: number | null;
+    carbohydrates?: number | null;
+    fat?: number | null;
+    fiber?: number | null;
+    magnesium?: number | null;
+    phosphorus?: number | null;
+  } | null;
+  t: UIDictionary["productPage"];
+}) {
+  if (!nutrition) return null;
+  const rows: { label: string; value?: string | null }[] = [
+    nutrition.energy != null
+      ? { label: t.specLabels.energy, value: `${nutrition.energy} ${t.specLabels.unit_kcal}` }
+      : null,
+    nutrition.protein != null
+      ? { label: t.specLabels.protein, value: `${nutrition.protein} ${t.specLabels.unit_g}` }
+      : null,
+    nutrition.carbohydrates != null
+      ? { label: t.specLabels.carbohydrates, value: `${nutrition.carbohydrates} ${t.specLabels.unit_g}` }
+      : null,
+    nutrition.fat != null
+      ? { label: t.specLabels.fatContent, value: `${nutrition.fat} ${t.specLabels.unit_g}` }
+      : null,
+    nutrition.fiber != null
+      ? { label: t.specLabels.fiber, value: `${nutrition.fiber} ${t.specLabels.unit_g}` }
+      : null,
+    nutrition.magnesium != null
+      ? { label: t.specLabels.magnesium, value: `${nutrition.magnesium} ${t.specLabels.unit_mg}` }
+      : null,
+    nutrition.phosphorus != null
+      ? { label: t.specLabels.phosphorus, value: `${nutrition.phosphorus} ${t.specLabels.unit_mg}` }
+      : null,
+  ].filter(Boolean) as { label: string; value: string }[];
+  if (rows.length === 0) return null;
+
+  return (
+    <SectionCard title={title}>
       <div className="grid grid-cols-2 gap-y-2">
-        {filtered.map((r) => (
-          <Fragment key={`${title}-${r.label}`}>
-            <div className="text-sm font-medium text-muted-foreground">
-              {r.label}
-            </div>
-            <div
-              className={
-                "text-right text-sm text-foreground" +
-                (monoValueLabels.includes(r.label) ? " font-mono" : "")
-              }
-            >
-              {r.value}
-            </div>
+        {rows.map((r) => (
+          <Fragment key={`nutrition-${r.label}`}>
+            <div className="text-sm font-medium text-muted-foreground">{r.label}</div>
+            <div className="text-right text-sm text-foreground">{r.value}</div>
           </Fragment>
         ))}
       </div>
-    </div>
+    </SectionCard>
+  );
+}
+
+function ComplianceList({
+  title,
+  flags,
+  t,
+}: {
+  title: string;
+  flags?: ProductSpecification["certificationsCompliance"];
+  t: UIDictionary["productPage"];
+}) {
+  if (!flags) return null;
+  const entries: Array<{ key: keyof typeof flags; label: string; value: string | null | undefined }> = [
+    { key: "ifsBrokerCertified", label: t.specLabels.ifsBrokerCertified, value: flags.ifsBrokerCertified },
+    { key: "glutenFreeCertified", label: t.specLabels.glutenFreeCertified, value: flags.glutenFreeCertified },
+    { key: "gmoFree", label: t.specLabels.gmoFree, value: flags.gmoFree },
+    { key: "pesticideFreeTested", label: t.specLabels.pesticideFreeTested, value: flags.pesticideFreeTested },
+    { key: "euFoodSafetyStandards", label: t.specLabels.euFoodSafetyStandards, value: flags.euFoodSafetyStandards },
+    { key: "haccpCompliant", label: t.specLabels.haccpCompliant, value: flags.haccpCompliant },
+    { key: "halalSuitable", label: t.specLabels.halalSuitable, value: flags.halalSuitable },
+    { key: "veganSuitable", label: t.specLabels.veganSuitable, value: flags.veganSuitable },
+    { key: "kosherSuitable", label: t.specLabels.kosherSuitable, value: flags.kosherSuitable },
+  ];
+  const filtered = entries.filter((e) => e.value === "yes" || e.value === "no");
+  if (filtered.length === 0) return null;
+  return (
+    <SectionCard title={title}>
+      <ul className="space-y-2">
+        {filtered.map((e) => {
+          const isYes = e.value === "yes";
+          return (
+            <li key={`flag-${String(e.key)}`} className="flex items-center justify-between">
+              <span className="text-sm text-foreground">{e.label}</span>
+              <span
+                className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs ${
+                  isYes ? "border-green-500 text-green-600" : "border-muted-foreground/30 text-muted-foreground"
+                }`}
+              >
+                {isYes ? <Check className="h-3.5 w-3.5" /> : <X className="h-3.5 w-3.5" />}
+                {isYes ? t.specLabels.yes : t.specLabels.no}
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+    </SectionCard>
   );
 }
 
@@ -131,63 +222,29 @@ export default async function ProductPage(
     },
   ];
 
-  const atAGlance: SpecPair[] = [
+  // Build new sections
+  const tradeLogistics: SpecPair[] = [
     { label: dictionary.productPage.specLabels.sku, value: spec?.sku },
     { label: dictionary.productPage.specLabels.hsCode, value: spec?.hsCode },
-    {
-      label: dictionary.productPage.specLabels.minOrder,
-      value: spec?.minOrder,
-    },
+    { label: dictionary.productPage.specLabels.minOrder, value: spec?.minOrder },
     { label: dictionary.productPage.specLabels.origin, value: spec?.origin },
-    {
-      label: dictionary.productPage.specLabels.botanicalName,
-      value: spec?.botanicalName,
-    },
-    { label: dictionary.productPage.specLabels.bestFor, value: spec?.bestFor },
   ];
 
-  const quality: SpecPair[] = [
-    {
-      label: dictionary.productPage.specLabels.pungency,
-      value: spec?.pungency,
-    },
-    {
-      label: dictionary.productPage.specLabels.bindingCapacity,
-      value: spec?.bindingCapacity,
-    },
+  const physicalProps: SpecPair[] = [
+    { label: dictionary.productPage.specLabels.seedSize, value: spec?.seedSize },
+    { label: dictionary.productPage.specLabels.color, value: spec?.color },
+    { label: dictionary.productPage.specLabels.moisture, value: spec?.moisture },
+    { label: dictionary.productPage.specLabels.shelfLife, value: spec?.shelfLife },
+  ];
+
+  const productData: SpecPair[] = [
+    { label: dictionary.productPage.specLabels.botanicalName, value: spec?.botanicalName },
+    { label: dictionary.productPage.specLabels.bestFor, value: spec?.bestFor },
+    { label: dictionary.productPage.specLabels.pungency, value: spec?.pungency },
+    { label: dictionary.productPage.specLabels.bindingCapacity, value: spec?.bindingCapacity },
     {
       label: dictionary.productPage.specLabels.fatContent,
-      value:
-        typeof spec?.fatContent === "number"
-          ? `${spec.fatContent}%`
-          : undefined,
-    },
-    {
-      label: dictionary.productPage.specLabels.purity,
-      value: spec?.purity,
-    },
-  ];
-
-  const other: SpecPair[] = [
-    {
-      label: dictionary.productPage.specLabels.moisture,
-      value: spec?.moisture,
-    },
-    {
-      label: dictionary.productPage.specLabels.shelfLife,
-      value: spec?.shelfLife,
-    },
-    {
-      label: dictionary.productPage.specLabels.allergenInfo,
-      value: spec?.allergenInfo,
-    },
-    {
-      label: dictionary.productPage.specLabels.attributes,
-      value: spec?.productAttributes,
-    },
-    {
-      label: dictionary.productPage.specLabels.certification,
-      value: spec?.certification,
+      value: typeof spec?.fatContent === "number" ? `${spec.fatContent}%` : undefined,
     },
   ];
 
@@ -384,22 +441,29 @@ export default async function ProductPage(
                 </div>
               )}
 
-            <SpecTable
-              title={dictionary.productPage.sections.atAGlance}
-              rows={atAGlance}
-              monoValueLabels={[
-                dictionary.productPage.specLabels.sku,
-                dictionary.productPage.specLabels.hsCode,
-              ]}
+            <SectionCard title={dictionary.productPage.sections.tradeLogistics}>
+              <KeyValueList rows={tradeLogistics} />
+            </SectionCard>
+
+            <SectionCard title={dictionary.productPage.sections.physicalProperties}>
+              <KeyValueList rows={physicalProps} />
+            </SectionCard>
+
+            <NutritionTable
+              title={dictionary.productPage.sections.nutritionPer100g}
+              nutrition={spec?.nutritionalValuesPer100g}
+              t={dictionary.productPage}
             />
-            <SpecTable
-              title={dictionary.productPage.sections.quality}
-              rows={quality}
+
+            <ComplianceList
+              title={dictionary.productPage.sections.certificationsCompliance}
+              flags={spec?.certificationsCompliance}
+              t={dictionary.productPage}
             />
-            <SpecTable
-              title={dictionary.productPage.sections.other}
-              rows={other}
-            />
+
+            <SectionCard title={dictionary.productPage.sections.productData}>
+              <KeyValueList rows={productData} />
+            </SectionCard>
 
             {/* Packaging */}
             {Array.isArray(product.packagingOptions) &&

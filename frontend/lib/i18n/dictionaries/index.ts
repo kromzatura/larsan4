@@ -71,9 +71,11 @@ export type UIDictionary = {
     };
     sections: {
       keyFeatures: string;
-      atAGlance: string;
-      quality: string;
-      other: string;
+      tradeLogistics: string;
+      physicalProperties: string;
+      nutritionPer100g: string;
+      certificationsCompliance: string;
+      productData: string;
       packaging: string;
       categories: string;
     };
@@ -106,7 +108,28 @@ export type UIDictionary = {
       shelfLife: string;
       allergenInfo: string;
       attributes: string;
-      certification: string;
+      seedSize: string;
+      color: string;
+      energy: string;
+      protein: string;
+      carbohydrates: string;
+      fiber: string;
+      magnesium: string;
+      phosphorus: string;
+      unit_g: string;
+      unit_mg: string;
+      unit_kcal: string;
+      yes: string;
+      no: string;
+      ifsBrokerCertified: string;
+      glutenFreeCertified: string;
+      gmoFree: string;
+      pesticideFreeTested: string;
+      euFoodSafetyStandards: string;
+      haccpCompliant: string;
+      halalSuitable: string;
+      veganSuitable: string;
+      kosherSuitable: string;
     };
   };
   contact: {

@@ -63,6 +63,8 @@ const productProjection = groq`
     _id,
     name,
     sku,
+    seedSize,
+    color,
     bestFor,
     pungency,
     bindingCapacity,
@@ -76,7 +78,26 @@ const productProjection = groq`
     shelfLife,
     allergenInfo,
     productAttributes,
-    certification
+    nutritionalValuesPer100g{
+      energy,
+      protein,
+      carbohydrates,
+      fat,
+      fiber,
+      magnesium,
+      phosphorus,
+    },
+    certificationsCompliance{
+      ifsBrokerCertified,
+      glutenFreeCertified,
+      gmoFree,
+      pesticideFreeTested,
+      euFoodSafetyStandards,
+      haccpCompliant,
+      halalSuitable,
+      veganSuitable,
+      kosherSuitable,
+    }
   },
   keyFeatures[],
   packagingOptions[]{

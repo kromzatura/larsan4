@@ -21,6 +21,20 @@ export default defineType({
       validation: (Rule) => Rule.required().error("Name is required"),
     }),
     defineField({
+      name: "seedSize",
+      title: "Seed Size",
+      type: "string",
+      group: "content",
+      description: "Example: Uniform, 2-3mm diameter",
+    }),
+    defineField({
+      name: "color",
+      title: "Color",
+      type: "string",
+      group: "content",
+      description: "Example: Yellow, natural (hulled)",
+    }),
+    defineField({
       name: "sku",
       title: "SKU",
       type: "string",
@@ -100,16 +114,170 @@ export default defineType({
       group: "content",
     }),
     defineField({
+      name: "nutritionalValuesPer100g",
+      title: "Nutritional Values (per 100 g)",
+      type: "object",
+      group: "content",
+      fields: [
+        defineField({
+          name: "energy",
+          title: "Energy (kcal)",
+          type: "number",
+          description: "Energy per 100 g in kcal",
+        }),
+        defineField({
+          name: "protein",
+          title: "Protein (g)",
+          type: "number",
+        }),
+        defineField({
+          name: "carbohydrates",
+          title: "Carbohydrates (g)",
+          type: "number",
+        }),
+        defineField({
+          name: "fat",
+          title: "Fat (g)",
+          type: "number",
+        }),
+        defineField({
+          name: "fiber",
+          title: "Fiber (g)",
+          type: "number",
+        }),
+        defineField({
+          name: "magnesium",
+          title: "Magnesium (mg)",
+          type: "number",
+        }),
+        defineField({
+          name: "phosphorus",
+          title: "Phosphorus (mg)",
+          type: "number",
+        }),
+      ],
+    }),
+    defineField({
       name: "productAttributes",
       title: "Product Attributes",
       type: "string",
       group: "content",
     }),
     defineField({
-      name: "certification",
-      title: "Certification",
-      type: "string",
+      name: "certificationsCompliance",
+      title: "Certifications & Compliance",
+      type: "object",
       group: "content",
+      fields: [
+        defineField({
+          name: "ifsBrokerCertified",
+          title: "IFS Broker Certified",
+          type: "string",
+          options: {
+            list: [
+              { title: "Yes", value: "yes" },
+              { title: "No", value: "no" },
+            ],
+            layout: "radio",
+          },
+        }),
+        defineField({
+          name: "glutenFreeCertified",
+          title: "Gluten-Free Certified (<20ppm)",
+          type: "string",
+          options: {
+            list: [
+              { title: "Yes", value: "yes" },
+              { title: "No", value: "no" },
+            ],
+            layout: "radio",
+          },
+        }),
+        defineField({
+          name: "gmoFree",
+          title: "GMO-Free (Non-GMO)",
+          type: "string",
+          options: {
+            list: [
+              { title: "Yes", value: "yes" },
+              { title: "No", value: "no" },
+            ],
+            layout: "radio",
+          },
+        }),
+        defineField({
+          name: "pesticideFreeTested",
+          title: "Pesticide-Free Tested",
+          type: "string",
+          options: {
+            list: [
+              { title: "Yes", value: "yes" },
+              { title: "No", value: "no" },
+            ],
+            layout: "radio",
+          },
+        }),
+        defineField({
+          name: "euFoodSafetyStandards",
+          title: "EU Food Safety Standards",
+          type: "string",
+          options: {
+            list: [
+              { title: "Yes", value: "yes" },
+              { title: "No", value: "no" },
+            ],
+            layout: "radio",
+          },
+        }),
+        defineField({
+          name: "haccpCompliant",
+          title: "HACCP Compliant",
+          type: "string",
+          options: {
+            list: [
+              { title: "Yes", value: "yes" },
+              { title: "No", value: "no" },
+            ],
+            layout: "radio",
+          },
+        }),
+        defineField({
+          name: "halalSuitable",
+          title: "Halal Suitable",
+          type: "string",
+          options: {
+            list: [
+              { title: "Yes", value: "yes" },
+              { title: "No", value: "no" },
+            ],
+            layout: "radio",
+          },
+        }),
+        defineField({
+          name: "veganSuitable",
+          title: "Vegan Suitable",
+          type: "string",
+          options: {
+            list: [
+              { title: "Yes", value: "yes" },
+              { title: "No", value: "no" },
+            ],
+            layout: "radio",
+          },
+        }),
+        defineField({
+          name: "kosherSuitable",
+          title: "Kosher Suitable",
+          type: "string",
+          options: {
+            list: [
+              { title: "Yes", value: "yes" },
+              { title: "No", value: "no" },
+            ],
+            layout: "radio",
+          },
+        }),
+      ],
     }),
     orderRankField({ type: "specification" }),
     defineField({

@@ -6,6 +6,7 @@ import { SanityLive } from "@/sanity/lib/live";
 import { MainLayoutClientShell } from "./MainLayoutClientShell";
 import type { SETTINGS_QUERYResult } from "@/sanity.types";
 import type { NavigationItem } from "@/lib/getNavigationItems";
+import type { SupportedLocale } from "@/lib/i18n/config";
 
 export default async function MainLayoutShell({
   children,
@@ -22,10 +23,10 @@ export default async function MainLayoutShell({
   headerAction: NavigationItem[];
   footerNav: NavigationItem[];
   footerBottomNav: NavigationItem[];
-  locale: string;
+  locale: SupportedLocale;
 }) {
   // Fetch locale-specific banner
-  const banner = await fetchSanityBanner({ lang: locale as any });
+  const banner = await fetchSanityBanner({ lang: locale });
   const { isEnabled: isDraftModeEnabled } = await draftMode();
 
   return (

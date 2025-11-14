@@ -63,8 +63,29 @@ export interface ProductSpecification {
   shelfLife?: string | null;
   allergenInfo?: string | null;
   productAttributes?: string | null;
-  certification?: string | null;
   purity?: string | null;
+  seedSize?: string | null;
+  color?: string | null;
+  nutritionalValuesPer100g?: {
+    energy?: number | null; // kcal
+    protein?: number | null; // g
+    carbohydrates?: number | null; // g
+    fat?: number | null; // g
+    fiber?: number | null; // g
+    magnesium?: number | null; // mg
+    phosphorus?: number | null; // mg
+  } | null;
+  certificationsCompliance?: {
+    ifsBrokerCertified?: string | null; // yes|no
+    glutenFreeCertified?: string | null; // yes|no
+    gmoFree?: string | null; // yes|no
+    pesticideFreeTested?: string | null; // yes|no
+    euFoodSafetyStandards?: string | null; // yes|no
+    haccpCompliant?: string | null; // yes|no
+    halalSuitable?: string | null; // yes|no
+    veganSuitable?: string | null; // yes|no
+    kosherSuitable?: string | null; // yes|no
+  } | null;
 }
 
 export interface ProductCategoryRef {
