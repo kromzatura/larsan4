@@ -254,12 +254,15 @@ export default async function ProductPage(
   // Type-safe access to optional product blocks via local type extension
   type ProductWithBlocks = PRODUCT_QUERYResult & {
     blocks?: NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>;
+    blocksAfterBody?: NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>;
   };
   const productWithBlocks = product as ProductWithBlocks;
   const productBlocks = (productWithBlocks.blocks || []) as NonNullable<
     NonNullable<PAGE_QUERYResult>["blocks"]
   >;
   const hasBlocks = Array.isArray(productBlocks) && productBlocks.length > 0;
+  const productAfterBodyBlocks = (productWithBlocks.blocksAfterBody ||
+    []) as NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>;
 
   return (
     <section className="container py-16 xl:py-20">
@@ -332,6 +335,14 @@ export default async function ProductPage(
                 <PortableTextRenderer value={product.body} locale={locale} />
               </div>
             )}
+
+            {/* After-body blocks: render under description in left column */}
+            {Array.isArray(productAfterBodyBlocks) &&
+              productAfterBodyBlocks.length > 0 && (
+                <div className="mt-8">
+                  <Blocks blocks={productAfterBodyBlocks} locale={locale} />
+                </div>
+              )}
           </div>
 
           {/* Right column */}

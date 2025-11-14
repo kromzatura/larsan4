@@ -25,8 +25,11 @@ export default async function LangLayout({
 
   return (
     <LocaleProvider locale={locale}>
-      {theme ? <style suppressHydrationWarning>{themeToCssVars(theme)}</style> : null}
+      {theme ? (
+        <style suppressHydrationWarning>{themeToCssVars(theme)}</style>
+      ) : null}
       <MainLayoutShell
+        locale={locale}
         settings={settings}
         headerNav={headerNav}
         headerAction={headerAction}

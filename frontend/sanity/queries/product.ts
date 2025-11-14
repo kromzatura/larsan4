@@ -49,14 +49,9 @@ const productProjection = groq`
   slug,
   blocks[]{
     ${sectionHeaderQuery},
-    ${feature1Query},
-    ${feature3Query},
-    ${feature12Query},
-    ${feature15Query},
-    ${feature66Query},
-    ${feature117Query},
-    ${feature157Query},
-    ${feature202Query},
+  },
+  blocksAfterBody[]{
+    ${sectionHeaderQuery},
     ${faq1Query},
     ${faq5Query},
     ${faq8Query},

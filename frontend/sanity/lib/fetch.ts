@@ -103,9 +103,17 @@ export const fetchSanityNavigation = async ({
   return data;
 };
 
-export const fetchSanityBanner = async (): Promise<BANNER_QUERYResult> => {
+export const fetchSanityBanner = async ({
+  lang,
+}: {
+  lang?: SupportedLocale;
+} = {}): Promise<BANNER_QUERYResult> => {
+  const { lang: queryLang } = resolveLocaleParams(lang);
   const { data } = await sanityFetch({
     query: BANNER_QUERY,
+    params: { lang: queryLang },
+    perspective: "published",
+    stega: false,
   });
   return data;
 };

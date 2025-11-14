@@ -14,6 +14,7 @@ export default async function MainLayoutShell({
   headerAction,
   footerNav,
   footerBottomNav,
+  locale,
 }: {
   children: React.ReactNode;
   settings: SETTINGS_QUERYResult;
@@ -21,9 +22,10 @@ export default async function MainLayoutShell({
   headerAction: NavigationItem[];
   footerNav: NavigationItem[];
   footerBottomNav: NavigationItem[];
+  locale: string;
 }) {
-  // Always fetch banner (not locale-dependent in our setup)
-  const banner = await fetchSanityBanner();
+  // Fetch locale-specific banner
+  const banner = await fetchSanityBanner({ lang: locale as any });
   const { isEnabled: isDraftModeEnabled } = await draftMode();
 
   return (

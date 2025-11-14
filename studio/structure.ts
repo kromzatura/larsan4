@@ -270,11 +270,39 @@ export const structure = (S: any, context: any) =>
             ])
         ),
       S.divider(),
+      // Banners (split per language)
       S.listItem()
-        .title("Banner")
+        .title("Banners")
         .icon(Info)
         .child(
-          S.editor().id("banner").schemaType("banner").documentId("banner")
+          S.list()
+            .title("Banners")
+            .items([
+              S.listItem()
+                .title("Banners (EN)")
+                .icon(Info)
+                .child(
+                  S.documentTypeList("banner")
+                    .title("Banners (EN)")
+                    .filter('_type == "banner" && language == $lang')
+                    .params({ lang: "en" })
+                    .defaultOrdering([
+                      { field: "_updatedAt", direction: "desc" },
+                    ])
+                ),
+              S.listItem()
+                .title("Banners (NL)")
+                .icon(Info)
+                .child(
+                  S.documentTypeList("banner")
+                    .title("Banners (NL)")
+                    .filter('_type == "banner" && language == $lang')
+                    .params({ lang: "nl" })
+                    .defaultOrdering([
+                      { field: "_updatedAt", direction: "desc" },
+                    ])
+                ),
+            ])
         ),
       S.listItem()
         .title("Contact")
