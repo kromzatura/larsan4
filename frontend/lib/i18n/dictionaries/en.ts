@@ -69,6 +69,7 @@ export default {
       keyFeatures: "Key features",
       tradeLogistics: "Trade & Logistics",
       physicalProperties: "Physical Properties",
+      qualitySpecs: "Quality & Specifications",
       nutritionPer100g: "Nutrition (per 100 g)",
       certificationsCompliance: "Certifications & Compliance",
       productData: "Product Data",

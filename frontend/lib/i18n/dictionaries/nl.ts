@@ -70,6 +70,7 @@ export default {
       keyFeatures: "Belangrijkste kenmerken",
       tradeLogistics: "Handel & logistiek",
       physicalProperties: "Fysieke eigenschappen",
+      qualitySpecs: "Kwaliteit & specificaties",
       nutritionPer100g: "Voedingswaarden (per 100 g)",
       certificationsCompliance: "Certificeringen & compliance",
       productData: "Productgegevens",

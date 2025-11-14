@@ -73,6 +73,7 @@ export type UIDictionary = {
       keyFeatures: string;
       tradeLogistics: string;
       physicalProperties: string;
+      qualitySpecs: string;
       nutritionPer100g: string;
       certificationsCompliance: string;
       productData: string;

@@ -104,7 +104,10 @@ export interface ProductDocument {
     asset?: {
       _id?: string | null;
       url?: string | null;
-      metadata?: { lqip?: string | null; dimensions?: { width?: number | null; height?: number | null } | null } | null;
+      metadata?: {
+        lqip?: string | null;
+        dimensions?: { width?: number | null; height?: number | null } | null;
+      } | null;
     } | null;
     alt?: string | null;
   } | null;
@@ -121,6 +124,8 @@ export interface ProductDocument {
 }
 
 // Utility type helpers
-export function firstSpec(specs: ProductSpecification[] | null | undefined): ProductSpecification | undefined {
+export function firstSpec(
+  specs: ProductSpecification[] | null | undefined
+): ProductSpecification | undefined {
   return Array.isArray(specs) && specs.length > 0 ? specs[0] : undefined;
 }
