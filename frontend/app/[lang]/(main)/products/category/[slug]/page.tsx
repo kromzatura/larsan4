@@ -22,6 +22,7 @@ import { toText } from "@/lib/utils";
 import { buildAbsoluteUrl } from "@/lib/url";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import type { BlockContent } from "@/sanity.types";
+import LdScript from "@/components/seo/ld-script";
 
 const PAGE_SIZE = 12;
 
@@ -179,9 +180,12 @@ export default async function CategoryPage(
       href: baseUrl,
     },
   ];
-  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const homeUrl = buildAbsoluteUrl(locale, "/");
-  const productsUrl = `${SITE_URL}${buildLocalizedPath(locale, "/products")}`;
+  const productsUrl = buildAbsoluteUrl(locale, "/products");
+  const categoryAbsUrl = buildAbsoluteUrl(
+    locale,
+    `/products/category/${params.slug}`
+  );
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -193,7 +197,7 @@ export default async function CategoryPage(
         "@type": "ListItem",
         position: 3,
         name: catTitle,
-        item: `${SITE_URL}${baseUrl}`,
+        item: categoryAbsUrl,
       },
     ],
   } as const;
@@ -204,7 +208,8 @@ export default async function CategoryPage(
     "@type": "CollectionPage",
     inLanguage: locale,
     name: catTitle,
-    url: `${SITE_URL}${baseUrl}`,
+    "@id": categoryAbsUrl,
+    url: categoryAbsUrl,
     description: jsonLdDescription || undefined,
     mainEntity: {
       "@type": "ItemList",
@@ -213,10 +218,7 @@ export default async function CategoryPage(
         "@type": "ListItem",
         position: (page - 1) * PAGE_SIZE + idx + 1,
         name: p?.title || undefined,
-        url: `${SITE_URL}${buildLocalizedPath(
-          locale,
-          `/products/${p?.slug?.current ?? ""}`
-        )}`,
+        url: buildAbsoluteUrl(locale, `/products/${p?.slug?.current ?? ""}`),
       })),
     },
   };
@@ -233,14 +235,8 @@ export default async function CategoryPage(
 
   return (
     <section className="container py-16 xl:py-20">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }}
-      />
+      <LdScript json={breadcrumbLd} />
+      <LdScript json={collectionLd} />
       <Breadcrumbs links={links} locale={locale} />
       {Array.isArray(cat.blocks) && cat.blocks.length > 0 ? (
         <div className="mt-7">

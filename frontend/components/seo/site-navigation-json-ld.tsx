@@ -1,7 +1,5 @@
-"use client";
-
-import Script from "next/script";
 import type { SupportedLocale } from "@/lib/i18n/config";
+import LdScript from "@/components/seo/ld-script";
 
 export type SiteNavItem = {
   name: string;
@@ -28,12 +26,5 @@ export default function SiteNavigationJsonLd({ locale, items }: Props) {
     inLanguage: locale,
   }));
 
-  return (
-    <Script
-      id="ld-site-navigation"
-      type="application/ld+json"
-      strategy="afterInteractive"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }}
-    />
-  );
+  return <LdScript id="ld-site-navigation" json={json} />;
 }

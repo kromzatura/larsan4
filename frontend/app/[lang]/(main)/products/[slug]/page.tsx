@@ -30,6 +30,7 @@ import type { UIDictionary } from "@/lib/i18n/dictionaries";
 import { buildAbsoluteUrl } from "@/lib/url";
 import { fetchSanitySettings } from "@/sanity/lib/fetch";
 import { urlFor } from "@/sanity/lib/image";
+import LdScript from "@/components/seo/ld-script";
 
 type SpecPair = { label: string; value?: string | number | null };
 
@@ -413,8 +414,8 @@ export default async function ProductPage(
       : undefined,
   };
 
-  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-  const productsUrl = `${SITE_URL}${buildLocalizedPath(locale, "/products")}`;
+  const homeAbs = buildAbsoluteUrl(locale, "/");
+  const productsUrl = buildAbsoluteUrl(locale, "/products");
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -424,7 +425,7 @@ export default async function ProductPage(
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: `${SITE_URL}${buildLocalizedPath(locale, "/")}`,
+        item: homeAbs,
       },
       { "@type": "ListItem", position: 2, name: "Products", item: productsUrl },
       {
@@ -452,15 +453,8 @@ export default async function ProductPage(
   return (
     <section className="container py-16 xl:py-20">
       <article>
-        <script
-          type="application/ld+json"
-          // JSON-LD improves SEO. Keep minimal fields since pricing/availability are not part of this B2B flow.
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-        />
+        <LdScript json={jsonLd} />
+        <LdScript json={breadcrumbLd} />
         <Breadcrumbs links={links} locale={locale} />
         {hasBlocks ? (
           <div className="mt-7">

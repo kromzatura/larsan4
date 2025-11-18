@@ -18,6 +18,9 @@ import { SUPPORTED_LOCALES } from "@/lib/i18n/config";
 import type { AsyncPageProps } from "@/lib/types/next";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { buildAbsoluteUrl } from "@/lib/url";
+import { toText } from "@/lib/utils";
+import { fetchSanitySettings } from "@/sanity/lib/fetch";
+import LdScript from "@/components/seo/ld-script";
 
 type BreadcrumbLink = {
   label: string;
@@ -133,14 +136,25 @@ export default async function PostPage(
     : [];
 
   const headings = extractHeadings(post.body);
-  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const postPath = `/blog/${post.slug?.current ?? ""}`;
   const shareUrl = buildAbsoluteUrl(locale, postPath);
+  const settings = await fetchSanitySettings({ lang: locale });
+  const articleDescription =
+    toText(
+      (post as unknown as { meta?: { description?: unknown } })?.meta
+        ?.description
+    ) ||
+    toText((post as unknown as { excerpt?: unknown })?.excerpt) ||
+    undefined;
   const articleLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     inLanguage: locale,
     headline: post.title || undefined,
+    description: articleDescription,
+    publisher: settings?.siteName
+      ? { "@type": "Organization", name: settings.siteName }
+      : undefined,
     author: post.author?.name
       ? { "@type": "Person", name: post.author.name }
       : undefined,
@@ -161,13 +175,13 @@ export default async function PostPage(
         "@type": "ListItem",
         position: 1,
         name: dictionary.postPage.breadcrumbs.home,
-        item: `${SITE_URL}${buildLocalizedPath(locale, "/")}`,
+        item: buildAbsoluteUrl(locale, "/"),
       },
       {
         "@type": "ListItem",
         position: 2,
         name: dictionary.postPage.breadcrumbs.blog,
-        item: `${SITE_URL}${blogPath}`,
+        item: buildAbsoluteUrl(locale, "/blog"),
       },
       {
         "@type": "ListItem",
@@ -180,14 +194,8 @@ export default async function PostPage(
 
   return (
     <section className="container py-16 xl:py-20">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
+      <LdScript json={articleLd} />
+      <LdScript json={breadcrumbLd} />
       <article>
         <Breadcrumbs links={links} locale={locale} />
 

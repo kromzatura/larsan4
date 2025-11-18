@@ -8,6 +8,7 @@ import { buildLocalizedPath, normalizeLocale } from "@/lib/i18n/routing";
 import type { LangAsyncPageProps } from "@/lib/types/next";
 import { buildAbsoluteUrl } from "@/lib/url";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import LdScript from "@/components/seo/ld-script";
 
 export const revalidate = 60;
 
@@ -69,9 +70,8 @@ export default async function ProductsPage(props: LangAsyncPageProps) {
   }
   const dictionary = await getDictionary(locale);
 
-  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const homeUrl = buildAbsoluteUrl(locale, "/");
-  const productsUrl = `${SITE_URL}${buildLocalizedPath(locale, "/products")}`;
+  const productsUrl = buildAbsoluteUrl(locale, "/products");
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -85,10 +85,7 @@ export default async function ProductsPage(props: LangAsyncPageProps) {
   return (
     <>
       <section className="container py-16 xl:py-20">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-        />
+        <LdScript json={breadcrumbLd} />
         <Breadcrumbs
           links={[
             {

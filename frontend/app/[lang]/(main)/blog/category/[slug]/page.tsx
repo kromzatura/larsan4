@@ -9,8 +9,10 @@ import {
 import { chipClass } from "@/components/ui/chip";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { normalizeLocale, buildLocalizedPath } from "@/lib/i18n/routing";
+import { buildAbsoluteUrl } from "@/lib/url";
 import type { AsyncPageProps, SearchParams } from "@/lib/types/next";
 import { toText } from "@/lib/utils";
+import LdScript from "@/components/seo/ld-script";
 
 type BlogSort = "newest" | "az" | "za";
 interface BlogCategorySearchParams {
@@ -159,7 +161,6 @@ export default async function BlogCategoryPage(
   const baseUrl = buildLocalizedPath(locale, `/blog/category/${params.slug}`);
   const blogPath = buildLocalizedPath(locale, "/blog");
   const baseSearchParams = sort && sort !== "newest" ? `sort=${sort}` : "";
-  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -169,29 +170,48 @@ export default async function BlogCategoryPage(
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: `${SITE_URL}${buildLocalizedPath(locale, "/")}`,
+        item: buildAbsoluteUrl(locale, "/"),
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Blog",
-        item: `${SITE_URL}${blogPath}`,
+        item: buildAbsoluteUrl(locale, "/blog"),
       },
       {
         "@type": "ListItem",
         position: 3,
         name: catTitle,
-        item: `${SITE_URL}${baseUrl}`,
+        item: buildAbsoluteUrl(locale, `/blog/category/${params.slug}`),
       },
     ],
   } as const;
 
+  // JSON-LD: CollectionPage with ItemList of current page's posts
+  const collectionLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    inLanguage: locale,
+    name: catTitle,
+    "@id": buildAbsoluteUrl(locale, `/blog/category/${params.slug}`),
+    url: buildAbsoluteUrl(locale, `/blog/category/${params.slug}`),
+    description: catDescription || undefined,
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: totalCount || 0,
+      itemListElement: (posts || []).map((p, idx) => ({
+        "@type": "ListItem",
+        position: (page - 1) * POSTS_PER_PAGE + idx + 1,
+        name: toText(p.title) || undefined,
+        url: buildAbsoluteUrl(locale, `/blog/${p.slug?.current ?? ""}`),
+      })),
+    },
+  } as const;
+
   return (
     <section className="container py-16 xl:py-20">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
+      <LdScript json={breadcrumbLd} />
+      <LdScript json={collectionLd} />
       <h1 className="text-3xl font-serif font-semibold md:text-5xl">
         {catTitle}
       </h1>

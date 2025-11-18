@@ -1,10 +1,8 @@
-"use client";
-
-import Script from "next/script";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import SiteNavigationJsonLd, {
   type SiteNavItem,
 } from "./site-navigation-json-ld";
+import LdScript from "@/components/seo/ld-script";
 
 type Props = {
   locale: SupportedLocale;
@@ -73,15 +71,8 @@ export default function HomeJsonLd({
   return (
     <>
       {scripts.map(({ id, json }) => (
-        <Script
-          id={id}
-          key={id}
-          type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }}
-        />
+        <LdScript id={id} key={id} json={json} />
       ))}
-      {/* Option A: only emit SiteNavigationElement on the homepage */}
       {Array.isArray(siteNavigation) && siteNavigation.length > 0 ? (
         <SiteNavigationJsonLd locale={locale} items={siteNavigation} />
       ) : null}

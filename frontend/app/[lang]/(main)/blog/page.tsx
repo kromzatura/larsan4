@@ -11,9 +11,11 @@ import {
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { chipClass } from "@/components/ui/chip";
 import { buildLocalizedPath, normalizeLocale } from "@/lib/i18n/routing";
+import { buildAbsoluteUrl } from "@/lib/url";
 import { toText } from "@/lib/utils";
 import type { LangAsyncPageProps } from "@/lib/types/next";
 import type { PAGE_QUERYResult } from "@/sanity.types";
+import LdScript from "@/components/seo/ld-script";
 
 type BlogSort = "newest" | "az" | "za";
 
@@ -143,7 +145,6 @@ export default async function BlogIndex(props: LangAsyncPageProps) {
       : null,
   }));
 
-  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -153,25 +154,52 @@ export default async function BlogIndex(props: LangAsyncPageProps) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: `${SITE_URL}${buildLocalizedPath(locale, "/")}`,
+        item: buildAbsoluteUrl(locale, "/"),
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Blog",
-        item: `${SITE_URL}${basePath}`,
+        item: buildAbsoluteUrl(locale, "/blog"),
       },
     ],
   } as const;
 
   // JSON-LD: CollectionPage with ItemList of current page's posts
+  // Derive description with fallback to Section Header rich/plain text
+  const sectionHeaderDescription = (() => {
+    if (!sectionHeader) return undefined;
+    const rich = (sectionHeader as unknown as { richDescription?: unknown })
+      .richDescription;
+    if (Array.isArray(rich)) {
+      const plain = (
+        rich as Array<{ _type?: string; children?: Array<{ text?: string }> }>
+      )
+        .filter((b) => b?._type === "block")
+        .flatMap((b) => (b.children ?? []).map((c) => c?.text ?? ""))
+        .join(" ")
+        .trim();
+      if (plain) return plain;
+    }
+    const desc = (sectionHeader as unknown as { description?: unknown })
+      .description;
+    return toText(desc) || undefined;
+  })();
+
   const collectionLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     inLanguage: locale,
     name: "Blog",
-    url: `${SITE_URL}${basePath}`,
-    description: toText((pageDoc as unknown as { meta?: { description?: unknown } })?.meta?.description) || undefined,
+    "@id": buildAbsoluteUrl(locale, "/blog"),
+    url: buildAbsoluteUrl(locale, "/blog"),
+    description:
+      toText(
+        (pageDoc as unknown as { meta?: { description?: unknown } })?.meta
+          ?.description
+      ) ||
+      sectionHeaderDescription ||
+      undefined,
     mainEntity: {
       "@type": "ItemList",
       numberOfItems: totalCount || 0,
@@ -179,24 +207,15 @@ export default async function BlogIndex(props: LangAsyncPageProps) {
         "@type": "ListItem",
         position: (page - 1) * POSTS_PER_PAGE + idx + 1,
         name: toText(p.title) || undefined,
-        url: `${SITE_URL}${buildLocalizedPath(
-          locale,
-          `/blog/${p.slug?.current ?? ""}`
-        )}`,
+        url: buildAbsoluteUrl(locale, `/blog/${p.slug?.current ?? ""}`),
       })),
     },
   };
 
   return (
     <section className="container py-16 xl:py-20">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }}
-      />
+      <LdScript json={breadcrumbLd} />
+      <LdScript json={collectionLd} />
       {page === 1 && sort === "newest" && heroBlocks.length > 0 && (
         <div className="mb-8">
           <Blocks blocks={heroBlocks} locale={locale} />

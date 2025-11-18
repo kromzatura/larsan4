@@ -56,9 +56,11 @@ export default async function IndexPage(props: LangAsyncPageProps) {
     : undefined;
 
   // Build SiteNavigationElement items from the header navigation (limited to 10)
-  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-  const isGroup = (i: NavigationItem): i is NavGroup => i._type === "link-group";
-  const flatten = (items: NavigationItem[]): Array<{ name: string; url: string }> => {
+  const isGroup = (i: NavigationItem): i is NavGroup =>
+    i._type === "link-group";
+  const flatten = (
+    items: NavigationItem[]
+  ): Array<{ name: string; url: string }> => {
     const out: Array<{ name: string; url: string }> = [];
     for (const item of items) {
       if (isGroup(item) && Array.isArray(item.links)) {
@@ -67,7 +69,9 @@ export default async function IndexPage(props: LangAsyncPageProps) {
         const title = item.title as string | undefined;
         const href = item.href as string | null | undefined;
         if (title && href) {
-          const abs = href.startsWith("http") ? href : `${SITE_URL}${href}`;
+          const abs = href.startsWith("http")
+            ? href
+            : buildAbsoluteUrl(locale, href);
           out.push({ name: title, url: abs });
         }
       }
