@@ -106,6 +106,7 @@ export default async function CategoryPage(
     }),
     fetchSanityProductsCountByCategory({ slug: params.slug, lang: locale }),
   ]);
+
   if (!cat) notFound();
   const totalPages = Math.max(1, Math.ceil((totalCount || 0) / PAGE_SIZE));
   const baseUrl = buildLocalizedPath(
@@ -133,6 +134,41 @@ export default async function CategoryPage(
   const catDescription = Array.isArray(cat.description)
     ? ptToPlainText(cat.description as BlockContent) || null
     : toText(cat.description);
+  // Prepare blocks and JSON-LD description fallback (Section Header rich text)
+  const categoryBlocks = (cat.blocks ?? []) as NonNullable<
+    NonNullable<PAGE_QUERYResult>["blocks"]
+  >;
+  type SectionHeaderBlock = Extract<
+    NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
+    { _type: "section-header" }
+  >;
+  const sectionHeader = categoryBlocks.find(
+    (b) => (b as { _type?: string })._type === "section-header"
+  ) as SectionHeaderBlock | undefined;
+  type MinimalPTBlock = {
+    _type?: string;
+    children?: Array<{ text?: string | undefined } | undefined> | undefined;
+  };
+  const toPlainFromMinimal = (blocks: ReadonlyArray<MinimalPTBlock>): string =>
+    blocks
+      .filter((b) => b?._type === "block")
+      .flatMap((b) => (b.children ?? []).map((c) => c?.text ?? ""))
+      .join(" ")
+      .trim();
+  let jsonLdDescription = catDescription;
+  if (!jsonLdDescription && sectionHeader) {
+    const shRich = (sectionHeader as unknown as { richDescription?: unknown })
+      .richDescription;
+    if (Array.isArray(shRich)) {
+      jsonLdDescription =
+        toPlainFromMinimal(shRich as MinimalPTBlock[]) || null;
+    }
+    if (!jsonLdDescription) {
+      const shPlain = (sectionHeader as unknown as { description?: unknown })
+        .description;
+      jsonLdDescription = toText(shPlain);
+    }
+  }
   const links = [
     {
       label: dictionary.products.categoryPage.breadcrumbProducts,
@@ -143,7 +179,6 @@ export default async function CategoryPage(
       href: baseUrl,
     },
   ];
-
   const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const homeUrl = buildAbsoluteUrl(locale, "/");
   const productsUrl = `${SITE_URL}${buildLocalizedPath(locale, "/products")}`;
@@ -170,7 +205,7 @@ export default async function CategoryPage(
     inLanguage: locale,
     name: catTitle,
     url: `${SITE_URL}${baseUrl}`,
-    description: catDescription || undefined,
+    description: jsonLdDescription || undefined,
     mainEntity: {
       "@type": "ItemList",
       numberOfItems: totalCount || 0,
@@ -186,9 +221,6 @@ export default async function CategoryPage(
     },
   };
 
-  const categoryBlocks = (cat.blocks ?? []) as NonNullable<
-    NonNullable<PAGE_QUERYResult>["blocks"]
-  >;
   const hasSectionHeader = (categoryBlocks || []).some(
     (b) => (b as { _type?: string })._type === "section-header"
   );
