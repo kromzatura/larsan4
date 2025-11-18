@@ -1381,7 +1381,7 @@ export type InlineRichText = Array<{
     _type: "span";
     _key: string;
   }>;
-  style?: "normal";
+  style?: "normal" | "h1" | "h2" | "h3";
   listItem?: never;
   markDefs?: Array<{
     _key: string;
@@ -3548,7 +3548,7 @@ export type PAGE_QUERYResult = {
         _type: "span";
         _key: string;
       }>;
-      style?: "normal";
+      style?: "h1" | "h2" | "h3" | "normal";
       listItem?: never;
       markDefs: Array<{
         _key: string;
@@ -7612,7 +7612,7 @@ export type PAGE_QUERYResult = {
         _type: "span";
         _key: string;
       }>;
-      style?: "normal";
+      style?: "h1" | "h2" | "h3" | "normal";
       listItem?: never;
       markDefs: Array<{
         _key: string;
@@ -8339,7 +8339,7 @@ export type PRODUCT_QUERYResult = {
         _type: "span";
         _key: string;
       }>;
-      style?: "normal";
+      style?: "h1" | "h2" | "h3" | "normal";
       listItem?: never;
       markDefs: Array<{
         _key: string;
@@ -8446,7 +8446,7 @@ export type PRODUCT_QUERYResult = {
         _type: "span";
         _key: string;
       }>;
-      style?: "normal";
+      style?: "h1" | "h2" | "h3" | "normal";
       listItem?: never;
       markDefs: Array<{
         _key: string;
@@ -9229,7 +9229,7 @@ export type PRODUCT_QUERYResult = {
         _type: "span";
         _key: string;
       }>;
-      style?: "normal";
+      style?: "h1" | "h2" | "h3" | "normal";
       listItem?: never;
       markDefs: Array<{
         _key: string;
@@ -9631,7 +9631,7 @@ export type PRODUCT_CATEGORY_BY_SLUG_QUERYResult = {
         _type: "span";
         _key: string;
       }>;
-      style?: "normal";
+      style?: "h1" | "h2" | "h3" | "normal";
       listItem?: never;
       markDefs: Array<{
         _key: string;
@@ -11343,7 +11343,7 @@ export type PRODUCT_CATEGORY_BY_SLUG_QUERYResult = {
         _type: "span";
         _key: string;
       }>;
-      style?: "normal";
+      style?: "h1" | "h2" | "h3" | "normal";
       listItem?: never;
       markDefs: Array<{
         _key: string;
@@ -11450,7 +11450,7 @@ export type PRODUCT_CATEGORY_BY_SLUG_QUERYResult = {
         _type: "span";
         _key: string;
       }>;
-      style?: "normal";
+      style?: "h1" | "h2" | "h3" | "normal";
       listItem?: never;
       markDefs: Array<{
         _key: string;

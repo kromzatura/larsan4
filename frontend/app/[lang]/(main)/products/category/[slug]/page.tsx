@@ -189,6 +189,9 @@ export default async function CategoryPage(
   const categoryBlocks = (cat.blocks ?? []) as NonNullable<
     NonNullable<PAGE_QUERYResult>["blocks"]
   >;
+  const hasSectionHeader = (categoryBlocks || []).some(
+    (b) => (b as { _type?: string })._type === "section-header"
+  );
   const categoryBlocksAfter =
     (
       cat as unknown as {
@@ -209,6 +212,25 @@ export default async function CategoryPage(
       <Breadcrumbs links={links} locale={locale} />
       {Array.isArray(cat.blocks) && cat.blocks.length > 0 ? (
         <div className="mt-7">
+          {!hasSectionHeader && (
+            <div className="mb-6">
+              <h1 className="text-3xl font-serif font-semibold leading-tight md:text-5xl">
+                {catTitle}
+              </h1>
+              {Array.isArray(cat.description) ? (
+                <div className="mt-3 max-w-3xl">
+                  <PortableTextRenderer
+                    value={cat.description as BlockContent}
+                    locale={locale}
+                  />
+                </div>
+              ) : catDescription ? (
+                <p className="mt-3 max-w-3xl text-muted-foreground">
+                  {catDescription}
+                </p>
+              ) : null}
+            </div>
+          )}
           <Blocks blocks={categoryBlocks} locale={locale} />
         </div>
       ) : (
