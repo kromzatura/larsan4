@@ -20,6 +20,8 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { mapProductToProductsTableItem } from "@/sanity/lib/mappers";
 import { toText } from "@/lib/utils";
 import { buildAbsoluteUrl } from "@/lib/url";
+import PortableTextRenderer from "@/components/portable-text-renderer";
+import type { BlockContent } from "@/sanity.types";
 
 const PAGE_SIZE = 12;
 
@@ -116,7 +118,21 @@ export default async function CategoryPage(
   const productsPath = buildLocalizedPath(locale, "/products");
   const catTitle =
     toText(cat.title) || dictionary.products.categoryPage.breadcrumbCategory;
-  const catDescription = toText(cat.description);
+  // Derive a plain text description for JSON-LD from rich or legacy description
+  const isBlock = (
+    b: BlockContent[number]
+  ): b is Extract<BlockContent[number], { _type: "block" }> => {
+    return (b as { _type?: string })._type === "block";
+  };
+  const ptToPlainText = (blocks: BlockContent): string =>
+    blocks
+      .filter(isBlock)
+      .flatMap((b) => (b.children ?? []).map((c) => c.text ?? ""))
+      .join(" ")
+      .trim();
+  const catDescription = Array.isArray(cat.description)
+    ? ptToPlainText(cat.description as BlockContent) || null
+    : toText(cat.description);
   const links = [
     {
       label: dictionary.products.categoryPage.breadcrumbProducts,
@@ -173,9 +189,12 @@ export default async function CategoryPage(
   const categoryBlocks = (cat.blocks ?? []) as NonNullable<
     NonNullable<PAGE_QUERYResult>["blocks"]
   >;
-  const categoryBlocksAfter = (cat as unknown as {
-    blocksAfter?: NonNullable<PAGE_QUERYResult>["blocks"];
-  }).blocksAfter || ([] as NonNullable<PAGE_QUERYResult>["blocks"]);
+  const categoryBlocksAfter =
+    (
+      cat as unknown as {
+        blocksAfter?: NonNullable<PAGE_QUERYResult>["blocks"];
+      }
+    ).blocksAfter || ([] as NonNullable<PAGE_QUERYResult>["blocks"]);
 
   return (
     <section className="container py-16 xl:py-20">
@@ -198,11 +217,18 @@ export default async function CategoryPage(
             <h1 className="text-3xl font-serif font-semibold leading-tight md:text-5xl">
               {catTitle}
             </h1>
-            {catDescription && (
+            {Array.isArray(cat.description) ? (
+              <div className="mt-3 max-w-3xl">
+                <PortableTextRenderer
+                  value={cat.description as BlockContent}
+                  locale={locale}
+                />
+              </div>
+            ) : catDescription ? (
               <p className="mt-3 max-w-3xl text-muted-foreground">
                 {catDescription}
               </p>
-            )}
+            ) : null}
           </div>
           <div className="md:justify-end md:ml-0 ml-auto flex flex-wrap items-center gap-2 text-sm">
             <span className="text-muted-foreground">

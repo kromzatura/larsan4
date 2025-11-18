@@ -45,6 +45,7 @@ import {
   PRODUCTS_SLUGS_QUERYResult,
   PRODUCT_CATEGORIES_QUERYResult,
   ProductCategory,
+  BlockContent,
 } from "@/sanity.types";
 import {
   BLOG_CATEGORIES_QUERY,
@@ -68,7 +69,7 @@ function resolveLocaleParams(lang?: SupportedLocale) {
 type PageBlock = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 
 export type ProductCategoryWithMeta = ProductCategory & {
-  description?: string | null;
+  description?: BlockContent | string | null;
   blocks?: PageBlock[] | null;
   meta?: {
     title?: string | null;

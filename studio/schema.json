@@ -20395,7 +20395,8 @@
       "description": {
         "type": "objectAttribute",
         "value": {
-          "type": "string"
+          "type": "inline",
+          "name": "block-content"
         },
         "optional": true
       },

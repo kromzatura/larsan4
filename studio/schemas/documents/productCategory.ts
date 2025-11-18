@@ -178,10 +178,11 @@ export default defineType({
     }),
     defineField({
       name: "description",
-      type: "text",
-      rows: 3,
+      title: "Description",
+      type: "block-content",
       group: "content",
-      description: "Optional description shown on the category page",
+      description:
+        "Optional rich description shown on the category page. Supports headings, lists, images and links.",
     }),
     defineField({
       name: "slug",

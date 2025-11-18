@@ -248,7 +248,9 @@ export const PRODUCT_CATEGORY_BY_SLUG_QUERY = groq`
       ${faq14Query},
       ${bannerBlockQuery},
     },
-    description,
+    description[]{
+      ${bodyQuery}
+    },
     ${metaQuery},
     ${TRANSLATIONS_QUERY_FRAGMENT}
   }
