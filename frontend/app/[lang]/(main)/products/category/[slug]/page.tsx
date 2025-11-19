@@ -223,9 +223,19 @@ export default async function CategoryPage(
     },
   };
 
-  const hasSectionHeader = (categoryBlocks || []).some(
-    (b) => (b as { _type?: string })._type === "section-header"
-  );
+  const hasHeroOrSectionHeader = (categoryBlocks || []).some((b) => {
+    const t = (b as { _type?: string })._type;
+    return (
+      t === "section-header" ||
+      t === "hero-12" ||
+      t === "hero-13" ||
+      t === "hero-25" ||
+      t === "hero-57" ||
+      t === "hero-85" ||
+      t === "hero-160" ||
+      t === "hero-174"
+    );
+  });
   const categoryBlocksAfter =
     (
       cat as unknown as {
@@ -240,7 +250,7 @@ export default async function CategoryPage(
       <Breadcrumbs links={links} locale={locale} className="mb-4 md:mb-6" />
       {Array.isArray(cat.blocks) && cat.blocks.length > 0 ? (
         <div className="mt-7">
-          {!hasSectionHeader && (
+          {!hasHeroOrSectionHeader && (
             <div className="mb-6">
               <h1 className="text-3xl font-serif font-semibold leading-tight md:text-5xl">
                 {catTitle}

@@ -27,6 +27,14 @@ export default defineType({
       description:
         "Use a Section Header to control the H1 and description for the category page. You can add additional blocks as needed.",
       of: [
+        // Hero blocks
+        { type: "hero-12" },
+        { type: "hero-13" },
+        { type: "hero-25" },
+        { type: "hero-57" },
+        { type: "hero-85" },
+        { type: "hero-160" },
+        { type: "hero-174" },
         { type: "section-header" },
         // Feature blocks
         { type: "feature-1" },
@@ -56,6 +64,18 @@ export default defineType({
       options: {
         insertMenu: {
           groups: [
+            {
+              name: "hero",
+              of: [
+                "hero-12",
+                "hero-13",
+                "hero-25",
+                "hero-57",
+                "hero-85",
+                "hero-160",
+                "hero-174",
+              ],
+            },
             {
               name: "section-header",
               of: ["section-header"],

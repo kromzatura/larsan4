@@ -4,6 +4,13 @@ import { bodyQuery } from "./shared/body";
 import { metaQuery } from "./shared/meta";
 import { TRANSLATIONS_QUERY_FRAGMENT } from "../lib/queries/fragments";
 import { sectionHeaderQuery } from "../queries/section-header";
+import { hero12Query } from "../queries/hero/hero12";
+import { hero13Query } from "../queries/hero/hero13";
+import { hero25Query } from "../queries/hero/hero25";
+import { hero57Query } from "../queries/hero/hero57";
+import { hero85Query } from "../queries/hero/hero85";
+import { hero160Query } from "../queries/hero/hero160";
+import { hero174Query } from "../queries/hero/hero174";
 import { compare1Query } from "./compare/compare1";
 import { compare2Query } from "./compare/compare2";
 import { compare4Query } from "./compare/compare4";
@@ -205,6 +212,13 @@ export const PRODUCT_CATEGORY_BY_SLUG_QUERY = groq`
     slug,
     blocks[]{
       ${sectionHeaderQuery},
+      ${hero12Query},
+      ${hero13Query},
+      ${hero25Query},
+      ${hero57Query},
+      ${hero85Query},
+      ${hero160Query},
+      ${hero174Query},
       ${feature1Query},
       ${feature3Query},
       ${feature12Query},
