@@ -197,7 +197,7 @@ export default async function PostPage(
       <LdScript json={articleLd} />
       <LdScript json={breadcrumbLd} />
       <article>
-        <Breadcrumbs links={links} locale={locale} />
+        <Breadcrumbs links={links} locale={locale} className="mb-4 md:mb-6" />
 
         {post.title && (
           <h1 className="mt-7 mb-6 max-w-3xl text-3xl font-serif font-semibold md:text-5xl">

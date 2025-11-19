@@ -237,7 +237,7 @@ export default async function CategoryPage(
     <section className="container py-16 xl:py-20">
       <LdScript json={breadcrumbLd} />
       <LdScript json={collectionLd} />
-      <Breadcrumbs links={links} locale={locale} />
+      <Breadcrumbs links={links} locale={locale} className="mb-4 md:mb-6" />
       {Array.isArray(cat.blocks) && cat.blocks.length > 0 ? (
         <div className="mt-7">
           {!hasSectionHeader && (

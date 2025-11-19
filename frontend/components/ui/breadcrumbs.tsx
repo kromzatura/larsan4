@@ -41,13 +41,15 @@ const BreadcrumbCustomItem = ({
 export default function Breadcrumbs({
   links,
   locale = FALLBACK_LOCALE,
+  className,
 }: {
   links: BreadcrumbLinkType[];
   locale?: SupportedLocale;
+  className?: string;
 }) {
   const homeHref = buildLocalizedPath(locale, "/");
   return (
-    <Breadcrumb>
+    <Breadcrumb className={className}>
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink asChild>

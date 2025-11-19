@@ -455,7 +455,7 @@ export default async function ProductPage(
       <article>
         <LdScript json={jsonLd} />
         <LdScript json={breadcrumbLd} />
-        <Breadcrumbs links={links} locale={locale} />
+        <Breadcrumbs links={links} locale={locale} className="mb-4 md:mb-6" />
         {hasBlocks ? (
           <div className="mt-7">
             <Blocks blocks={productBlocks} locale={locale} />
