@@ -44,7 +44,10 @@ export default function PostCard14({
   const baseBlogPath = buildLocalizedPath(locale, "/blog");
   const titleText = toText(post?.title);
   const excerptText = toText(post?.excerpt);
-  const postHref = buildLocalizedPath(locale, `/blog/${post?.slug?.current || ""}`);
+  const postHref = buildLocalizedPath(
+    locale,
+    `/blog/${post?.slug?.current || ""}`
+  );
   const altText = toText(post?.image?.alt) || titleText || "";
   return (
     <div className="group flex flex-col items-start gap-4">
@@ -73,7 +76,12 @@ export default function PostCard14({
               ? buildLocalizedPath(locale, `/blog/category/${slug}`)
               : baseBlogPath;
             return (
-              <Link key={category?._id ?? slug ?? "cat"} href={href} aria-label={`View category: ${toText(category?.title)}`} className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background rounded-md">
+              <Link
+                key={category?._id ?? slug ?? "cat"}
+                href={href}
+                aria-label={`View category: ${toText(category?.title)}`}
+                className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background rounded-md"
+              >
                 <Badge variant="secondary">{toText(category?.title)}</Badge>
               </Link>
             );
