@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import PostsList, { PostsListItem } from "@/components/posts/posts-list";
+import Pagination from "@/components/pagination";
+import PostCard14 from "@/components/posts/post-card-14";
 import SectionHeader from "@/components/blocks/section-header";
 import Blocks from "@/components/blocks";
 import {
@@ -119,31 +120,14 @@ export default async function BlogIndex(props: LangAsyncPageProps) {
   const totalPages = Math.max(1, Math.ceil((totalCount || 0) / POSTS_PER_PAGE));
   if (page > totalPages) notFound();
 
-  const items: PostsListItem[] = (posts || []).map((p) => ({
-    _id: p._id || "",
-    slug: p.slug?.current || "",
-    title: toText(p.title),
-    createdAt: p._createdAt || null,
-    excerpt: toText(p.excerpt),
-    imageUrl: p.image?.asset?.url || null,
-    imageAlt: (() => {
-      const alt = (p.image as { alt?: unknown } | null | undefined)?.alt;
-      return typeof alt === "string" ? alt : null;
-    })(),
-    imageMeta: p.image?.asset?.metadata || null,
-    author: {
-      name: toText(p.author?.name),
-      title: toText(p.author?.title),
-      imageUrl: p.author?.image?.asset?.url || null,
-    },
-    categories: Array.isArray(p.categories)
-      ? p.categories.map((c) => ({
-          _id: c?._id || undefined,
-          title: toText(c?.title),
-          slug: c?.slug || null,
-        }))
-      : null,
-  }));
+  // Create page URL factory preserving sort param
+  const createPageUrl = (pageNum: number) => {
+    const params = new URLSearchParams();
+    if (sort && sort !== "newest") params.set("sort", sort);
+    if (pageNum > 1) params.set("page", String(pageNum));
+    const qs = params.toString();
+    return `${basePath}${qs ? `?${qs}` : ""}`;
+  };
 
   const breadcrumbLd = {
     "@context": "https://schema.org",
@@ -272,7 +256,7 @@ export default async function BlogIndex(props: LangAsyncPageProps) {
         </Link>
       </div>
       <div className="mt-8">
-        {items.length === 0 ? (
+        {(posts || []).length === 0 ? (
           <div className="rounded-md border p-6 text-sm text-muted-foreground">
             No posts found. Try adjusting your sort, or{" "}
             <Link
@@ -284,14 +268,24 @@ export default async function BlogIndex(props: LangAsyncPageProps) {
             .
           </div>
         ) : (
-          <PostsList
-            items={items}
-            page={page}
-            pageCount={totalPages}
-            baseUrl={basePath}
-            baseSearchParams={sort && sort !== "newest" ? `sort=${sort}` : ""}
-            locale={locale}
-          />
+          <>
+            <div className="grid grid-cols-1 gap-10 md:gap-6 lg:grid-cols-3">
+              {(posts || []).map((post, i) => (
+                <PostCard14
+                  key={post._id ?? post.slug?.current ?? "post"}
+                  post={post}
+                  locale={locale}
+                  priority={page === 1 && i === 0}
+                />
+              ))}
+            </div>
+            <Pagination
+              currentPage={page}
+              totalPages={totalPages}
+              createPageUrl={createPageUrl}
+              className="mt-8"
+            />
+          </>
         )}
       </div>
     </section>

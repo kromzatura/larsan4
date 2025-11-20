@@ -1,17 +1,11 @@
 import SectionContainer from "@/components/ui/section-container";
-import { Badge } from "@/components/ui/badge";
-import { Calendar, ChevronRight } from "lucide-react";
-import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
-import PostDate from "@/components/post-date";
-import Link from "next/link";
 import { PAGE_QUERYResult } from "@/sanity.types";
 import { fetchSanityPosts, fetchSanityPostsCount } from "@/sanity/lib/fetch";
 import Pagination from "@/components/pagination";
 import { buildLocalizedPath } from "@/lib/i18n/routing";
-import { toText } from "@/lib/utils";
 import type { SupportedLocale } from "@/lib/i18n/config";
 import { FALLBACK_LOCALE } from "@/lib/i18n/config";
+import PostCard14 from "@/components/posts/post-card-14";
 
 type AllPosts14Props = Extract<
   NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -56,67 +50,13 @@ export default async function AllPosts14({
     <SectionContainer padding={padding}>
       {posts && posts?.length > 0 && (
         <div className="grid grid-cols-1 gap-10 md:gap-6 lg:grid-cols-3">
-          {posts.map((post) => (
-            <div key={post._id} className="flex flex-col items-start gap-4">
-              {post.image && post.image.asset?._id && (
-                <Image
-                  src={urlFor(post.image).url()}
-                  alt={toText(post.image.alt) || ""}
-                  placeholder={
-                    post.image?.asset?.metadata?.lqip ? "blur" : undefined
-                  }
-                  blurDataURL={post.image?.asset?.metadata?.lqip || ""}
-                  className="aspect-video rounded-lg object-cover"
-                  sizes="(min-width: 1024px) 33vw, 100vw"
-                  width={post.image.asset?.metadata?.dimensions?.width || 700}
-                  height={post.image.asset?.metadata?.dimensions?.height || 400}
-                  quality={100}
-                />
-              )}
-              {post.categories && post.categories.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {post.categories.map((category) => {
-                    const slug = category.slug?.current ?? undefined;
-                    const href = slug
-                      ? buildLocalizedPath(locale, `/blog/category/${slug}`)
-                      : baseBlogPath;
-                    return (
-                      <Link key={category._id} href={href}>
-                        <Badge variant="secondary">
-                          {toText(category.title)}
-                        </Badge>
-                      </Link>
-                    );
-                  })}
-                </div>
-              )}
-              {post.title && (
-                <h3 className="text-xl font-semibold text-balance md:max-w-md">
-                  {toText(post.title)}
-                </h3>
-              )}
-              {post.excerpt && (
-                <p className="text-muted-foreground md:max-w-md">
-                  {toText(post.excerpt)}
-                </p>
-              )}
-              <div className="flex justify-between gap-6 text-sm">
-                <span className="flex items-center gap-1 text-muted-foreground">
-                  <Calendar className="h-4 w-4" />
-                  <PostDate date={post._createdAt} />
-                </span>
-                <Link
-                  href={buildLocalizedPath(
-                    locale,
-                    `/blog/${post.slug?.current || ""}`
-                  )}
-                  className="flex items-center gap-1"
-                >
-                  Read more
-                  <ChevronRight className="h-full w-3" />
-                </Link>
-              </div>
-            </div>
+          {posts.map((post, i) => (
+            <PostCard14
+              key={post._id}
+              post={post}
+              locale={locale}
+              priority={currentPage === 1 && i === 0}
+            />
           ))}
         </div>
       )}
