@@ -17,6 +17,7 @@ import Icon from "@/components/icon";
 import { resolveHref, resolveLinkHref } from "@/lib/resolveHref";
 import { DOC_TYPES } from "@/lib/docTypes";
 import { type SupportedLocale, FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 import { toText } from "@/lib/utils";
 
 // 1. IMPORT GENERATED TYPES
@@ -148,7 +149,9 @@ const ProductCallout = ({
   const title = toText(value?.title) || toText(product.title);
   // Cast as unknown to allow toText to handle potentially complex portable text blocks from the schema
   const blurb = toText(value?.blurb) || toText(product.excerpt as unknown);
-  const ctaLabel = toText(value?.ctaLabel) || "View product";
+  const dictionary = getDictionary(locale);
+  const ctaLabel =
+    toText(value?.ctaLabel) || dictionary.products.productCallout.viewProduct;
 
   const isCentered = align === "center";
 

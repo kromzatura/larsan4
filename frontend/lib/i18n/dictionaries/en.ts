@@ -8,6 +8,9 @@ export default {
     browse: "Browse Products",
   },
   products: {
+    productCallout: {
+      viewProduct: "View product",
+    },
     table: {
       headerProduct: "Products",
       headerCategory: "Category",

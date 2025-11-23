@@ -12,6 +12,9 @@ export type UIDictionary = {
     browse?: string;
   };
   products: {
+    productCallout: {
+      viewProduct: string;
+    };
     table: {
       headerProduct: string;
       headerCategory: string;
