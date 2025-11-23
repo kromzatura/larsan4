@@ -52,7 +52,20 @@ const makePortableTextComponents = (
   locale: SupportedLocale
 ): PortableTextProps["components"] => ({
   types: {
-    image: ({ value }) => {
+    image: ({
+      value,
+    }: {
+      value: {
+        asset: {
+          url: string;
+          metadata: {
+            lqip?: string | null;
+            dimensions: { width: number; height: number };
+          };
+        };
+        alt?: unknown;
+      };
+    }) => {
       const { url, metadata } = value.asset;
       const { lqip, dimensions } = metadata;
       const alt = toText(value?.alt as unknown) || "Image";
@@ -69,15 +82,19 @@ const makePortableTextComponents = (
         />
       );
     },
-    youtube: ({ value }) => {
+    youtube: ({ value }: { value: { videoId?: string } }) => {
       const { videoId } = value;
       return (
         <div className="aspect-video max-w-180 rounded-xl overflow-hidden mb-4">
-          <YouTubeEmbed videoid={videoId} params="rel=0" />
+          <YouTubeEmbed videoid={videoId || ""} params="rel=0" />
         </div>
       );
     },
-    code: ({ value }) => {
+    code: ({
+      value,
+    }: {
+      value: { filename?: unknown; code: string; language?: string };
+    }) => {
       const filename = toText(value?.filename as unknown) || "";
       return (
         <div className="min-w-full grid my-4 overflow-x-auto rounded-lg border border-border text-xs lg:text-sm bg-primary">
@@ -112,7 +129,11 @@ const makePortableTextComponents = (
         </div>
       );
     },
-    alert: ({ value }) => {
+    alert: ({
+      value,
+    }: {
+      value: { title?: unknown; description?: unknown };
+    }) => {
       const title = toText(value?.title as unknown);
       const description = toText(value?.description as unknown);
       return (
@@ -123,14 +144,25 @@ const makePortableTextComponents = (
         </Alert>
       );
     },
-    "product-callout": ({ value }) => {
+    "product-callout": ({
+      value,
+    }: {
+      value: {
+        align?: string;
+        showImage?: boolean;
+        title?: unknown;
+        blurb?: unknown;
+        ctaLabel?: unknown;
+        product?: ProductLike | null;
+      };
+    }) => {
       const align = (value?.align as string) || "left";
       const showImage = value?.showImage !== false;
       const overrideTitle = toText(value?.title as unknown) || null;
       const blurb = toText(value?.blurb as unknown) || null;
       const ctaLabel = toText(value?.ctaLabel as unknown) || "View product";
 
-      const product = (value?.product as unknown as ProductLike) || null;
+      const product = value?.product || null;
       if (!product) {
         return (
           <div className="my-6 rounded border p-4 text-sm text-muted-foreground">
