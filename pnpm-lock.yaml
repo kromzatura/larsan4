@@ -201,9 +201,6 @@ importers:
 
   studio:
     dependencies:
-      '@sanity/assist':
-        specifier: ^5.0.2
-        version: 5.0.2(@emotion/is-prop-valid@1.2.2)(@sanity/mutator@4.16.0(@types/react@19.1.8))(react-dom@19.1.0(react@19.1.0))(react-is@19.2.0)(react@19.1.0)(sanity@4.16.0(@emotion/is-prop-valid@1.2.2)(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@types/node@24.9.1)(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(immer@10.2.0)(jiti@2.6.1)(lightningcss@1.30.1)(postcss@8.5.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.9.3)(yaml@2.8.1))(styled-components@6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       '@sanity/client':
         specifier: 7.12.0
         version: 7.12.0(debug@4.4.3)
@@ -3395,15 +3392,6 @@ packages:
     resolution: {integrity: sha512-dlEmALjQ5iyQG0O8ZVmkkE3wUYCKfRmiyMvuuGN5SF9buAHxmseBOKJ/Iy2DU/8ef70mtUXlzeCRSlTN/nmZsg==}
     engines: {node: '>=18'}
 
-  '@sanity/assist@5.0.2':
-    resolution: {integrity: sha512-muTKp6WG1sQ6yR5F7uModOqN87Qlqyzm0vhjF5uw001eYr4gttJU+AxvmLBQwKyoRAzbLI2a3Jd73pUR8HLOqQ==}
-    engines: {node: '>=20'}
-    peerDependencies:
-      '@sanity/mutator': ^3.36.4 || ^4.0.0-0
-      react: ^18 || ^19
-      sanity: ^3.36.4 || ^4.0.0-0
-      styled-components: ^6.1
-
   '@sanity/bifur-client@0.4.1':
     resolution: {integrity: sha512-mHM8WR7pujbIw2qxuV0lzinS1izOoyLza/ejWV6quITTLpBhUoPIQGPER3Ar0SON5JV0VEEqkJGa1kjiYYgx2w==}
 
@@ -5019,9 +5007,6 @@ packages:
   date-fns@2.30.0:
     resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
     engines: {node: '>=0.11'}
-
-  date-fns@3.6.0:
-    resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
 
   date-fns@4.1.0:
     resolution: {integrity: sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==}
@@ -11112,9 +11097,27 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
+  '@portabletext/block-tools@4.0.2(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))':
+    dependencies:
+      '@portabletext/sanity-bridge': 1.2.2(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))
+      '@portabletext/schema': 2.0.0
+      '@sanity/types': 4.16.0(@types/react@19.1.8)(debug@4.4.3)
+      lodash: 4.17.21
+    transitivePeerDependencies:
+      - '@sanity/schema'
+
   '@portabletext/block-tools@4.0.2(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8))':
     dependencies:
       '@portabletext/sanity-bridge': 1.2.2(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8))
+      '@portabletext/schema': 2.0.0
+      '@sanity/types': 4.16.0(@types/react@19.1.8)(debug@4.4.3)
+      lodash: 4.17.21
+    transitivePeerDependencies:
+      - '@sanity/schema'
+
+  '@portabletext/block-tools@4.1.0(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))':
+    dependencies:
+      '@portabletext/sanity-bridge': 1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))
       '@portabletext/schema': 2.0.0
       '@sanity/types': 4.16.0(@types/react@19.1.8)(debug@4.4.3)
       lodash: 4.17.21
@@ -11129,6 +11132,33 @@ snapshots:
       lodash: 4.17.21
     transitivePeerDependencies:
       - '@sanity/schema'
+
+  '@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2)':
+    dependencies:
+      '@portabletext/block-tools': 4.1.0(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))
+      '@portabletext/keyboard-shortcuts': 2.1.0
+      '@portabletext/patches': 2.0.0
+      '@portabletext/sanity-bridge': 1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))
+      '@portabletext/schema': 2.0.0
+      '@portabletext/to-html': 4.0.1
+      '@sanity/schema': 4.16.0(@types/react@19.1.8)(debug@4.4.3)
+      '@sanity/types': 4.16.0(@types/react@19.1.8)(debug@4.4.3)
+      '@xstate/react': 6.0.0(@types/react@19.1.8)(react@19.1.0)(xstate@5.24.0)
+      debug: 4.4.3(supports-color@8.1.1)
+      immer: 10.2.0
+      lodash: 4.17.21
+      lodash.startcase: 4.4.0
+      react: 19.1.0
+      react-compiler-runtime: 1.0.0(react@19.1.0)
+      rxjs: 7.8.2
+      slate: 0.118.1
+      slate-dom: 0.119.0(slate@0.118.1)
+      slate-react: 0.119.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(slate-dom@0.119.0(slate@0.118.1))(slate@0.118.1)
+      xstate: 5.24.0
+    transitivePeerDependencies:
+      - '@types/react'
+      - react-dom
+      - supports-color
 
   '@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2)':
     dependencies:
@@ -11164,6 +11194,17 @@ snapshots:
       '@sanity/diff-match-patch': 3.2.0
       lodash: 4.17.21
 
+  '@portabletext/plugin-character-pair-decorator@4.0.5(@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2))(@types/react@19.1.8)(react@19.1.0)':
+    dependencies:
+      '@portabletext/editor': 3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2)
+      '@xstate/react': 6.0.0(@types/react@19.1.8)(react@19.1.0)(xstate@5.24.0)
+      react: 19.1.0
+      react-compiler-runtime: 1.0.0(react@19.1.0)
+      remeda: 2.32.0
+      xstate: 5.24.0
+    transitivePeerDependencies:
+      - '@types/react'
+
   '@portabletext/plugin-character-pair-decorator@4.0.5(@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2))(@types/react@19.1.8)(react@19.1.0)':
     dependencies:
       '@portabletext/editor': 3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2)
@@ -11171,6 +11212,16 @@ snapshots:
       react: 19.1.0
       react-compiler-runtime: 1.0.0(react@19.1.0)
       remeda: 2.32.0
+      xstate: 5.24.0
+    transitivePeerDependencies:
+      - '@types/react'
+
+  '@portabletext/plugin-input-rule@1.0.5(@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2))(@types/react@19.1.8)(react@19.1.0)':
+    dependencies:
+      '@portabletext/editor': 3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2)
+      '@xstate/react': 6.0.0(@types/react@19.1.8)(react@19.1.0)(xstate@5.24.0)
+      react: 19.1.0
+      react-compiler-runtime: 1.0.0(react@19.1.0)
       xstate: 5.24.0
     transitivePeerDependencies:
       - '@types/react'
@@ -11185,6 +11236,16 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
+  '@portabletext/plugin-markdown-shortcuts@4.0.5(@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2))(@types/react@19.1.8)(react@19.1.0)':
+    dependencies:
+      '@portabletext/editor': 3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2)
+      '@portabletext/plugin-character-pair-decorator': 4.0.5(@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2))(@types/react@19.1.8)(react@19.1.0)
+      '@portabletext/plugin-input-rule': 1.0.5(@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2))(@types/react@19.1.8)(react@19.1.0)
+      react: 19.1.0
+      react-compiler-runtime: 1.0.0(react@19.1.0)
+    transitivePeerDependencies:
+      - '@types/react'
+
   '@portabletext/plugin-markdown-shortcuts@4.0.5(@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2))(@types/react@19.1.8)(react@19.1.0)':
     dependencies:
       '@portabletext/editor': 3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2)
@@ -11195,11 +11256,26 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
+  '@portabletext/plugin-one-line@3.0.5(@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2))(react@19.1.0)':
+    dependencies:
+      '@portabletext/editor': 3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2)
+      react: 19.1.0
+      react-compiler-runtime: 1.0.0(react@19.1.0)
+
   '@portabletext/plugin-one-line@3.0.5(@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2))(react@19.1.0)':
     dependencies:
       '@portabletext/editor': 3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2)
       react: 19.1.0
       react-compiler-runtime: 1.0.0(react@19.1.0)
+
+  '@portabletext/plugin-typography@4.0.5(@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2))(@types/react@19.1.8)(react@19.1.0)':
+    dependencies:
+      '@portabletext/editor': 3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2)
+      '@portabletext/plugin-input-rule': 1.0.5(@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2))(@types/react@19.1.8)(react@19.1.0)
+      react: 19.1.0
+      react-compiler-runtime: 1.0.0(react@19.1.0)
+    transitivePeerDependencies:
+      - '@types/react'
 
   '@portabletext/plugin-typography@4.0.5(@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2))(@types/react@19.1.8)(react@19.1.0)':
     dependencies:
@@ -11228,7 +11304,21 @@ snapshots:
       '@portabletext/types': 3.0.0
       react: 19.1.0
 
+  '@portabletext/sanity-bridge@1.2.2(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))':
+    dependencies:
+      '@portabletext/schema': 2.0.0
+      '@sanity/schema': 4.16.0(@types/react@19.1.8)(debug@4.4.3)
+      '@sanity/types': 4.16.0(@types/react@19.1.8)(debug@4.4.3)
+      lodash.startcase: 4.4.0
+
   '@portabletext/sanity-bridge@1.2.2(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8))':
+    dependencies:
+      '@portabletext/schema': 2.0.0
+      '@sanity/schema': 4.16.0(@types/react@19.1.8)(debug@4.4.3)
+      '@sanity/types': 4.16.0(@types/react@19.1.8)(debug@4.4.3)
+      lodash.startcase: 4.4.0
+
+  '@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))':
     dependencies:
       '@portabletext/schema': 2.0.0
       '@sanity/schema': 4.16.0(@types/react@19.1.8)(debug@4.4.3)
@@ -12006,26 +12096,6 @@ snapshots:
   '@rushstack/eslint-patch@1.12.0': {}
 
   '@sanity/asset-utils@2.3.0': {}
-
-  '@sanity/assist@5.0.2(@emotion/is-prop-valid@1.2.2)(@sanity/mutator@4.16.0(@types/react@19.1.8))(react-dom@19.1.0(react@19.1.0))(react-is@19.2.0)(react@19.1.0)(sanity@4.16.0(@emotion/is-prop-valid@1.2.2)(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@types/node@24.9.1)(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(immer@10.2.0)(jiti@2.6.1)(lightningcss@1.30.1)(postcss@8.5.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.9.3)(yaml@2.8.1))(styled-components@6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
-    dependencies:
-      '@sanity/icons': 3.7.4(react@19.1.0)
-      '@sanity/incompatible-plugin': 1.0.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@sanity/mutator': 4.16.0(@types/react@19.1.8)
-      '@sanity/ui': 3.1.11(@emotion/is-prop-valid@1.2.2)(react-dom@19.1.0(react@19.1.0))(react-is@19.2.0)(react@19.1.0)(styled-components@6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
-      date-fns: 3.6.0
-      lodash: 4.17.21
-      lodash-es: 4.17.21
-      react: 19.1.0
-      react-fast-compare: 3.2.2
-      rxjs: 7.8.2
-      rxjs-exhaustmap-with-trailing: 2.1.1(rxjs@7.8.2)
-      sanity: 4.16.0(@emotion/is-prop-valid@1.2.2)(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@types/node@24.9.1)(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(immer@10.2.0)(jiti@2.6.1)(lightningcss@1.30.1)(postcss@8.5.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(typescript@5.9.3)(yaml@2.8.1)
-      styled-components: 6.1.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-    transitivePeerDependencies:
-      - '@emotion/is-prop-valid'
-      - react-dom
-      - react-is
 
   '@sanity/bifur-client@0.4.1':
     dependencies:
@@ -14222,8 +14292,6 @@ snapshots:
   date-fns@2.30.0:
     dependencies:
       '@babel/runtime': 7.28.4
-
-  date-fns@3.6.0: {}
 
   date-fns@4.1.0: {}
 
@@ -17381,12 +17449,12 @@ snapshots:
       '@isaacs/ttlcache': 1.4.1
       '@juggle/resize-observer': 3.4.0
       '@mux/mux-player-react': 3.8.0(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@portabletext/block-tools': 4.0.2(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8))
-      '@portabletext/editor': 3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2)
+      '@portabletext/block-tools': 4.0.2(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))
+      '@portabletext/editor': 3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2)
       '@portabletext/patches': 2.0.0
-      '@portabletext/plugin-markdown-shortcuts': 4.0.5(@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2))(@types/react@19.1.8)(react@19.1.0)
-      '@portabletext/plugin-one-line': 3.0.5(@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2))(react@19.1.0)
-      '@portabletext/plugin-typography': 4.0.5(@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2))(@types/react@19.1.8)(react@19.1.0)
+      '@portabletext/plugin-markdown-shortcuts': 4.0.5(@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2))(@types/react@19.1.8)(react@19.1.0)
+      '@portabletext/plugin-one-line': 3.0.5(@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2))(react@19.1.0)
+      '@portabletext/plugin-typography': 4.0.5(@portabletext/editor@3.0.5(@portabletext/sanity-bridge@1.2.3(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8)))(@sanity/schema@4.16.0(@types/react@19.1.8)(debug@4.4.3))(@sanity/types@4.16.0(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rxjs@7.8.2))(@types/react@19.1.8)(react@19.1.0)
       '@portabletext/react': 5.0.0(react@19.1.0)
       '@portabletext/toolkit': 4.0.0
       '@rexxars/react-json-inspector': 9.0.1(react@19.1.0)

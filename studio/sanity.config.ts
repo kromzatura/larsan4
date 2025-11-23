@@ -8,7 +8,6 @@ import { structureTool } from "sanity/structure";
 import { presentationTool } from "sanity/presentation";
 import { media } from "sanity-plugin-media";
 import { documentInternationalization } from "@sanity/document-internationalization";
-import { assist } from "@sanity/assist";
 import { codeInput } from "@sanity/code-input";
 
 import { schema } from "./schema";
@@ -82,14 +81,6 @@ export default defineConfig({
         "team",
       ],
       apiVersion: "2025-02-19",
-    }),
-    assist({
-      assist: {
-        localeSettings: () => Intl.DateTimeFormat().resolvedOptions(),
-        maxPathDepth: 4,
-        temperature: 0.3,
-      },
-      translate: {},
     }),
   ],
 });
