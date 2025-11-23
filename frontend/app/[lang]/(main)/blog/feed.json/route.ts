@@ -44,7 +44,10 @@ export async function GET(
         `/blog/${p.slug?.current ?? ""}`
       )}`;
       const content_html =
-        ptBlocksToHtml(Array.isArray(p.body) ? (p.body as unknown[]) : null) ||
+        ptBlocksToHtml(
+          Array.isArray(p.body) ? (p.body as unknown[]) : null,
+          language
+        ) ||
         p.excerpt ||
         "";
       return {

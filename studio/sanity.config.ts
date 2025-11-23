@@ -1,5 +1,5 @@
 /**
- * Full Sanity Studio configuration (restored from backup for plugin reintroduction test).
+ * Full Sanity Studio configuration (restored after minimal manifest test).
  */
 
 import { visionTool } from "@sanity/vision";

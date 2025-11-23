@@ -66,7 +66,10 @@ interface LinkMarkDef {
   href?: string;
 }
 
-export function ptBlocksToHtml(blocks: unknown[] | null | undefined): string {
+export function ptBlocksToHtml(
+  blocks: unknown[] | null | undefined,
+  language?: string
+): string {
   if (!Array.isArray(blocks) || blocks.length === 0) return "";
   const typedBlocks = blocks as AnyBlock[];
   const components: PortableTextComponents = {
@@ -129,7 +132,13 @@ export function ptBlocksToHtml(blocks: unknown[] | null | undefined): string {
           ? `/products/${product.slug.current}`
           : "#";
         const imageUrl = product.image?.asset?.url;
-        const cta = v.ctaLabel || "View Product";
+        // Derive a simple language code (e.g. nl from nl-NL)
+        const langCode = (language || "en").split("-")[0];
+        const defaultCtaMap: Record<string, string> = {
+          en: "View Product",
+          nl: "Bekijk product",
+        };
+        const cta = v.ctaLabel || defaultCtaMap[langCode] || "View Product";
 
         let html = `<div class="product-callout">`;
         if (imageUrl) {

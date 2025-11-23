@@ -68,7 +68,8 @@ export async function GET(
           .join("")
       : "";
     const html = ptBlocksToHtml(
-      Array.isArray(p.body) ? (p.body as unknown[]) : null
+      Array.isArray(p.body) ? (p.body as unknown[]) : null,
+      language
     );
     const creator = p.author?.name
       ? `<dc:creator>${escape(p.author.name)}</dc:creator>`
