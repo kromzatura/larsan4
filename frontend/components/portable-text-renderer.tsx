@@ -38,6 +38,32 @@ type PortableTextCode = {
   filename?: string;
 };
 
+type PortableTextProductCallout = {
+  align?: string;
+  showImage?: boolean;
+  title?: unknown;
+  blurb?: unknown;
+  ctaLabel?: unknown;
+  product?: ProductLike | null;
+};
+
+type ProductLike = {
+  _id?: string | null;
+  title?: unknown;
+  excerpt?: unknown;
+  slug?: { current?: string | null } | null;
+  sku?: string | null;
+  image?: {
+    asset?: {
+      url?: string | null;
+      metadata?: {
+        lqip?: string | null;
+        dimensions?: { width?: number | null; height?: number | null } | null;
+      } | null;
+    } | null;
+  } | null;
+};
+
 // --- Helpers ---
 
 const extractTextFromNode = (node: ReactNode): string => {
@@ -103,30 +129,7 @@ const ProductCallout = ({
   value,
   locale,
 }: {
-  value: {
-    align?: string;
-    showImage?: boolean;
-    title?: unknown;
-    blurb?: unknown;
-    ctaLabel?: unknown;
-    product?: {
-      slug?: { current?: string | null } | null;
-      title?: unknown;
-      excerpt?: unknown;
-      image?: {
-        asset?: {
-          url?: string | null;
-          metadata?: {
-            lqip?: string | null;
-            dimensions?: {
-              width?: number | null;
-              height?: number | null;
-            } | null;
-          } | null;
-        } | null;
-      } | null;
-    } | null;
-  };
+  value: PortableTextProductCallout;
   locale: SupportedLocale;
 }) => {
   const { align = "left", showImage = true, product } = value || {};
@@ -252,9 +255,11 @@ const PortableTextRenderer = ({
             <AlertDescription>{toText(value.description)}</AlertDescription>
           </Alert>
         ),
-        "product-callout": ({ value }) => (
-          <ProductCallout value={value} locale={locale} />
-        ),
+        "product-callout": ({
+          value,
+        }: {
+          value: PortableTextProductCallout;
+        }) => <ProductCallout value={value} locale={locale} />,
       },
       block: {
         normal: ({ children }) => <p className="mb-4 leading-7">{children}</p>,
