@@ -1,4 +1,4 @@
-import { useMemo, type ReactNode } from "react";
+import { useMemo, type ReactNode, isValidElement } from "react";
 import {
   PortableText,
   type PortableTextComponents,
@@ -19,6 +19,10 @@ import { DOC_TYPES } from "@/lib/docTypes";
 import { type SupportedLocale, FALLBACK_LOCALE } from "@/lib/i18n/config";
 import { toText } from "@/lib/utils";
 
+// 1. IMPORT GENERATED TYPES
+// This ensures if you change the schema, the build fails here (safely) instead of in production.
+import type { Product } from "@/sanity.types";
+
 // --- Types ---
 
 type PortableTextImage = {
@@ -38,30 +42,23 @@ type PortableTextCode = {
   filename?: string;
 };
 
+// 2. USE GENERATED TYPE
 type PortableTextProductCallout = {
   align?: string;
   showImage?: boolean;
   title?: unknown;
   blurb?: unknown;
   ctaLabel?: unknown;
-  product?: ProductLike | null;
+  // Replaced manual 'ProductLike' with the real generated 'Product'
+  product?: Product | null;
 };
 
-type ProductLike = {
-  _id?: string | null;
-  title?: unknown;
-  excerpt?: unknown;
-  slug?: { current?: string | null } | null;
-  sku?: string | null;
-  image?: {
-    asset?: {
-      url?: string | null;
-      metadata?: {
-        lqip?: string | null;
-        dimensions?: { width?: number | null; height?: number | null } | null;
-      } | null;
-    } | null;
-  } | null;
+type PortableTextLinkValue = {
+  _type?: "link";
+  isExternal?: boolean;
+  href?: string;
+  internalType?: string;
+  internalSlug?: string;
 };
 
 // --- Helpers ---
@@ -70,15 +67,14 @@ const extractTextFromNode = (node: ReactNode): string => {
   if (typeof node === "string") return node;
   if (typeof node === "number") return String(node);
   if (Array.isArray(node)) return node.map(extractTextFromNode).join("");
-  // Handle React Elements (deep traversal might be needed depending on complexity,
-  // but usually PT headings are flat strings/spans)
-  if (typeof node === "object" && node && "props" in node) {
-    const props = (node as { props?: { children?: ReactNode } }).props;
-    if (props && props.children) return extractTextFromNode(props.children);
+  if (isValidElement(node)) {
+    const props = node.props as { children?: ReactNode };
+    if (props.children) return extractTextFromNode(props.children);
   }
   return "";
 };
 
+// FIX: Pure function to prevent hydration mismatches
 const generateId = (children: ReactNode): string => {
   const text = extractTextFromNode(children);
   return text
@@ -141,11 +137,17 @@ const ProductCallout = ({
   const slugCurrent = product.slug?.current;
   const href =
     resolveHref(DOC_TYPES.PRODUCT, slugCurrent || undefined, locale) || "#";
-  const imageUrl = product.image?.asset?.url;
-  const imageMeta = product.image?.asset?.metadata;
+
+  // Note: Standard generated types might treat 'image' as a reference wrapper.
+  // We access safely assuming the GROQ query expanded the asset.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const imageUrl = (product.image?.asset as any)?.url;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const imageMeta = (product.image?.asset as any)?.metadata;
 
   const title = toText(value?.title) || toText(product.title);
-  const blurb = toText(value?.blurb) || toText(product.excerpt);
+  // Cast as unknown to allow toText to handle potentially complex portable text blocks from the schema
+  const blurb = toText(value?.blurb) || toText(product.excerpt as unknown);
   const ctaLabel = toText(value?.ctaLabel) || "View product";
 
   const isCentered = align === "center";
@@ -212,16 +214,21 @@ const PortableTextRenderer = ({
       types: {
         image: ({ value }: { value: PortableTextImage }) => {
           const { url, metadata } = value.asset;
+          // Guard against undefined dimensions
+          const dims = metadata?.dimensions;
+          const width = typeof dims?.width === "number" ? dims.width : 1200;
+          const height = typeof dims?.height === "number" ? dims.height : 675;
+
           return (
             <figure className="my-8">
               <Image
                 className="m-auto aspect-video rounded-xl object-cover"
                 src={url}
-                alt={value.alt || ""}
-                width={metadata.dimensions.width}
-                height={metadata.dimensions.height}
-                placeholder={metadata.lqip ? "blur" : "empty"}
-                blurDataURL={metadata.lqip || undefined}
+                alt={value.alt || "Image"}
+                width={width}
+                height={height}
+                placeholder={metadata?.lqip ? "blur" : "empty"}
+                blurDataURL={metadata?.lqip || undefined}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 700px"
               />
               {value.alt && (
@@ -262,8 +269,10 @@ const PortableTextRenderer = ({
         }) => <ProductCallout value={value} locale={locale} />,
       },
       block: {
-        normal: ({ children }) => <p className="mb-4 leading-7">{children}</p>,
-        h1: ({ children }) => (
+        normal: ({ children }: { children?: React.ReactNode }) => (
+          <p className="mb-4 leading-7">{children}</p>
+        ),
+        h1: ({ children }: { children?: React.ReactNode }) => (
           <h1
             id={generateId(children)}
             className="mt-8 mb-4 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl font-serif"
@@ -271,7 +280,7 @@ const PortableTextRenderer = ({
             {children}
           </h1>
         ),
-        h2: ({ children }) => (
+        h2: ({ children }: { children?: React.ReactNode }) => (
           <h2
             id={generateId(children)}
             className="mt-10 mb-4 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 font-serif"
@@ -279,7 +288,7 @@ const PortableTextRenderer = ({
             {children}
           </h2>
         ),
-        h3: ({ children }) => (
+        h3: ({ children }: { children?: React.ReactNode }) => (
           <h3
             id={generateId(children)}
             className="mt-8 mb-4 scroll-m-20 text-2xl font-semibold tracking-tight"
@@ -287,7 +296,7 @@ const PortableTextRenderer = ({
             {children}
           </h3>
         ),
-        h4: ({ children }) => (
+        h4: ({ children }: { children?: React.ReactNode }) => (
           <h4
             id={generateId(children)}
             className="mt-8 mb-4 scroll-m-20 text-xl font-semibold tracking-tight"
@@ -295,7 +304,7 @@ const PortableTextRenderer = ({
             {children}
           </h4>
         ),
-        h5: ({ children }) => (
+        h5: ({ children }: { children?: React.ReactNode }) => (
           <h5
             id={generateId(children)}
             className="mt-8 mb-4 text-lg font-semibold tracking-tight"
@@ -303,15 +312,21 @@ const PortableTextRenderer = ({
             {children}
           </h5>
         ),
-        blockquote: ({ children }) => (
+        blockquote: ({ children }: { children?: React.ReactNode }) => (
           <blockquote className="mt-6 border-l-2 pl-6 italic text-muted-foreground">
             {children}
           </blockquote>
         ),
       },
       marks: {
-        link: ({ value, children }) => {
-          const href = resolveLinkHref(
+        link: ({
+          value,
+          children,
+        }: {
+          value?: PortableTextLinkValue;
+          children?: React.ReactNode;
+        }) => {
+          const resolved = resolveLinkHref(
             {
               isExternal: value?.isExternal,
               href: value?.href,
@@ -320,14 +335,29 @@ const PortableTextRenderer = ({
             },
             locale
           );
+          const rawHref = value?.href || resolved || "#";
 
-          const isExternal = value?.isExternal || href?.startsWith("http");
+          const isExternal =
+            value?.isExternal ||
+            /^(?:https?:)?\/\//.test(rawHref) ||
+            /^(mailto:|tel:)/.test(rawHref);
+
+          if (isExternal) {
+            return (
+              <a
+                href={rawHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-primary underline underline-offset-4 hover:no-underline"
+              >
+                {children}
+              </a>
+            );
+          }
 
           return (
             <Link
-              href={href || "#"}
-              target={isExternal ? "_blank" : undefined}
-              rel={isExternal ? "noopener noreferrer" : undefined}
+              href={rawHref}
               className="font-medium text-primary underline underline-offset-4 hover:no-underline"
             >
               {children}
@@ -336,16 +366,20 @@ const PortableTextRenderer = ({
         },
       },
       list: {
-        bullet: ({ children }) => (
+        bullet: ({ children }: { children?: React.ReactNode }) => (
           <ul className="my-6 ml-6 list-disc [&>li]:mt-2">{children}</ul>
         ),
-        number: ({ children }) => (
+        number: ({ children }: { children?: React.ReactNode }) => (
           <ol className="my-6 ml-6 list-decimal [&>li]:mt-2">{children}</ol>
         ),
       },
       listItem: {
-        bullet: ({ children }) => <li>{children}</li>,
-        number: ({ children }) => <li>{children}</li>,
+        bullet: ({ children }: { children?: React.ReactNode }) => (
+          <li>{children}</li>
+        ),
+        number: ({ children }: { children?: React.ReactNode }) => (
+          <li>{children}</li>
+        ),
       },
     }),
     [locale]
