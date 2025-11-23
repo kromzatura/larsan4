@@ -1,339 +1,200 @@
-import { PortableText, PortableTextProps } from "@portabletext/react";
+import { useMemo, type ReactNode } from "react";
+import {
+  PortableText,
+  type PortableTextComponents,
+  type PortableTextProps,
+} from "@portabletext/react";
 import Image from "next/image";
 import Link from "next/link";
 import { YouTubeEmbed } from "@next/third-parties/google";
 import { Highlight, themes } from "prism-react-renderer";
-import { CopyButton } from "@/components/ui/copy-button";
 import { Lightbulb } from "lucide-react";
-import { ReactNode } from "react";
-import { resolveHref, resolveLinkHref } from "@/lib/resolveHref";
-import { DOC_TYPES } from "@/lib/docTypes";
-import type { SupportedLocale } from "@/lib/i18n/config";
-import { FALLBACK_LOCALE } from "@/lib/i18n/config";
 
+import { CopyButton } from "@/components/ui/copy-button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { toText } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import Icon from "@/components/icon";
+import { resolveHref, resolveLinkHref } from "@/lib/resolveHref";
+import { DOC_TYPES } from "@/lib/docTypes";
+import { type SupportedLocale, FALLBACK_LOCALE } from "@/lib/i18n/config";
+import { toText } from "@/lib/utils";
 
-// Minimal types for PT product-callout to avoid `any`
-type ProductLike = {
-  _id?: string | null;
-  title?: unknown;
-  excerpt?: unknown;
-  slug?: { current?: string | null } | null;
-  sku?: string | null;
-  image?: {
-    asset?: {
-      url?: string | null;
-      metadata?: {
-        lqip?: string | null;
-        dimensions?: { width?: number | null; height?: number | null } | null;
-      } | null;
-    } | null;
-  } | null;
+// --- Types ---
+
+type PortableTextImage = {
+  asset: {
+    url: string;
+    metadata: {
+      lqip?: string | null;
+      dimensions: { width: number; height: number };
+    };
+  };
+  alt?: string;
 };
-// ProductCard not used anymore for product-callout (featured-only layout)
 
-const getTextFromChildren = (children: ReactNode): string => {
-  if (Array.isArray(children)) {
-    return children
-      .map((child) => {
-        if (typeof child === "string") return child;
-        if (typeof child === "number") return String(child);
-        return "";
-      })
-      .join(" ");
+type PortableTextCode = {
+  code: string;
+  language?: string;
+  filename?: string;
+};
+
+// --- Helpers ---
+
+const extractTextFromNode = (node: ReactNode): string => {
+  if (typeof node === "string") return node;
+  if (typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(extractTextFromNode).join("");
+  // Handle React Elements (deep traversal might be needed depending on complexity,
+  // but usually PT headings are flat strings/spans)
+  if (typeof node === "object" && node && "props" in node) {
+    const props = (node as { props?: { children?: ReactNode } }).props;
+    if (props && props.children) return extractTextFromNode(props.children);
   }
   return "";
 };
 
-const makePortableTextComponents = (
-  locale: SupportedLocale
-): PortableTextProps["components"] => ({
-  types: {
-    image: ({
-      value,
-    }: {
-      value: {
-        asset: {
-          url: string;
-          metadata: {
-            lqip?: string | null;
-            dimensions: { width: number; height: number };
-          };
-        };
-        alt?: unknown;
-      };
-    }) => {
-      const { url, metadata } = value.asset;
-      const { lqip, dimensions } = metadata;
-      const alt = toText(value?.alt as unknown) || "Image";
-      return (
-        <Image
-          className="m-auto aspect-video rounded-xl"
-          src={url}
-          alt={alt}
-          width={dimensions.width}
-          height={dimensions.height}
-          placeholder={lqip ? "blur" : undefined}
-          blurDataURL={lqip || undefined}
-          quality={100}
-        />
-      );
-    },
-    youtube: ({ value }: { value: { videoId?: string } }) => {
-      const { videoId } = value;
-      return (
-        <div className="aspect-video max-w-180 rounded-xl overflow-hidden mb-4">
-          <YouTubeEmbed videoid={videoId || ""} params="rel=0" />
-        </div>
-      );
-    },
-    code: ({
-      value,
-    }: {
-      value: { filename?: unknown; code: string; language?: string };
-    }) => {
-      const filename = toText(value?.filename as unknown) || "";
-      return (
-        <div className="min-w-full grid my-4 overflow-x-auto rounded-lg border border-border text-xs lg:text-sm bg-primary">
-          <div className="flex items-center justify-between px-4 py-2 border-b border-border text-background font-mono">
-            <div>{filename}</div>
-            <CopyButton code={value.code} />
-          </div>
-          <Highlight
-            theme={themes.vsLight}
-            code={value.code}
-            language={value.language || "typescript"}
+const generateId = (children: ReactNode): string => {
+  const text = extractTextFromNode(children);
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+};
+
+// --- Sub-Components ---
+
+const CodeBlock = ({ value }: { value: PortableTextCode }) => {
+  return (
+    <div className="min-w-full grid my-4 overflow-x-auto rounded-lg border border-border text-xs lg:text-sm bg-primary/5">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-muted/50 font-mono text-foreground">
+        <span>{value.filename || ""}</span>
+        <CopyButton code={value.code} />
+      </div>
+      <Highlight
+        theme={themes.vsLight}
+        code={value.code}
+        language={value.language || "typescript"}
+      >
+        {({ style, tokens, getLineProps, getTokenProps }) => (
+          <pre
+            style={{
+              ...style,
+              padding: "1.5rem",
+              margin: 0,
+              overflow: "auto",
+              backgroundColor: "transparent",
+            }}
           >
-            {({ style, tokens, getLineProps, getTokenProps }) => (
-              <pre
-                style={{
-                  ...style,
-                  padding: "1.5rem",
-                  margin: 0,
-                  overflow: "auto",
-                }}
-              >
-                {tokens.map((line, i) => (
-                  <div key={i} {...getLineProps({ line })}>
-                    {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token })} />
-                    ))}
-                  </div>
+            {tokens.map((line, i) => (
+              <div key={i} {...getLineProps({ line })}>
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({ token })} />
                 ))}
-              </pre>
-            )}
-          </Highlight>
-        </div>
-      );
-    },
-    alert: ({
-      value,
-    }: {
-      value: { title?: unknown; description?: unknown };
-    }) => {
-      const title = toText(value?.title as unknown);
-      const description = toText(value?.description as unknown);
-      return (
-        <Alert className="my-4">
-          <Lightbulb className="h-4 w-4" />
-          {title && <AlertTitle>{title}</AlertTitle>}
-          {description && <AlertDescription>{description}</AlertDescription>}
-        </Alert>
-      );
-    },
-    "product-callout": ({
-      value,
-    }: {
-      value: {
-        align?: string;
-        showImage?: boolean;
-        title?: unknown;
-        blurb?: unknown;
-        ctaLabel?: unknown;
-        product?: ProductLike | null;
-      };
-    }) => {
-      const align = (value?.align as string) || "left";
-      const showImage = value?.showImage !== false;
-      const overrideTitle = toText(value?.title as unknown) || null;
-      const blurb = toText(value?.blurb as unknown) || null;
-      const ctaLabel = toText(value?.ctaLabel as unknown) || "View product";
-
-      const product = value?.product || null;
-      if (!product) {
-        return (
-          <div className="my-6 rounded border p-4 text-sm text-muted-foreground">
-            Missing product (product-callout)
-          </div>
-        );
-      }
-
-      const slugCurrent = product?.slug?.current || undefined;
-      const href = resolveHref(DOC_TYPES.PRODUCT, slugCurrent, locale) || "#";
-      const imageUrl = product?.image?.asset?.url || null;
-      const imageMeta = product?.image?.asset?.metadata || null;
-      const computedTitle =
-        overrideTitle || toText(product?.title as unknown) || "";
-      const computedBlurb = blurb || toText(product?.excerpt as unknown) || "";
-
-      const wrapperClasses = [
-        "my-6",
-        align === "center" ? "mx-auto max-w-5xl" : "max-w-5xl",
-      ]
-        .filter(Boolean)
-        .join(" ");
-
-      return (
-        <div
-          className={[
-            wrapperClasses,
-            "rounded-xl border p-4 md:p-6 bg-background",
-          ].join(" ")}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
-            {showImage && imageUrl ? (
-              <div className={align === "center" ? "mx-auto" : undefined}>
-                <Image
-                  src={imageUrl}
-                  alt={computedTitle || "Product image"}
-                  width={960}
-                  height={720}
-                  className="w-full h-auto rounded-lg object-cover"
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  placeholder={imageMeta?.lqip ? "blur" : undefined}
-                  blurDataURL={imageMeta?.lqip || undefined}
-                />
               </div>
-            ) : null}
-            <div
-              className={[align === "center" ? "text-center" : undefined].join(
-                " "
-              )}
+            ))}
+          </pre>
+        )}
+      </Highlight>
+    </div>
+  );
+};
+
+const ProductCallout = ({
+  value,
+  locale,
+}: {
+  value: {
+    align?: string;
+    showImage?: boolean;
+    title?: unknown;
+    blurb?: unknown;
+    ctaLabel?: unknown;
+    product?: {
+      slug?: { current?: string | null } | null;
+      title?: unknown;
+      excerpt?: unknown;
+      image?: {
+        asset?: {
+          url?: string | null;
+          metadata?: {
+            lqip?: string | null;
+            dimensions?: {
+              width?: number | null;
+              height?: number | null;
+            } | null;
+          } | null;
+        } | null;
+      } | null;
+    } | null;
+  };
+  locale: SupportedLocale;
+}) => {
+  const { align = "left", showImage = true, product } = value || {};
+
+  if (!product) {
+    return null;
+  }
+
+  const slugCurrent = product.slug?.current;
+  const href =
+    resolveHref(DOC_TYPES.PRODUCT, slugCurrent || undefined, locale) || "#";
+  const imageUrl = product.image?.asset?.url;
+  const imageMeta = product.image?.asset?.metadata;
+
+  const title = toText(value?.title) || toText(product.title);
+  const blurb = toText(value?.blurb) || toText(product.excerpt);
+  const ctaLabel = toText(value?.ctaLabel) || "View product";
+
+  const isCentered = align === "center";
+
+  return (
+    <div
+      className={`my-6 rounded-xl border bg-card p-4 md:p-6 ${
+        isCentered ? "mx-auto max-w-5xl" : "max-w-5xl"
+      }`}
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
+        {showImage !== false && imageUrl && (
+          <div className={isCentered ? "mx-auto" : undefined}>
+            <Image
+              src={imageUrl}
+              alt={title || "Product image"}
+              width={960}
+              height={720}
+              className="w-full h-auto rounded-lg object-cover"
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              placeholder={imageMeta?.lqip ? "blur" : "empty"}
+              blurDataURL={imageMeta?.lqip || undefined}
+            />
+          </div>
+        )}
+        <div className={isCentered ? "text-center" : undefined}>
+          <h3 className="text-2xl md:text-3xl font-semibold tracking-tight">
+            {title}
+          </h3>
+          {blurb && <p className="mt-3 text-muted-foreground">{blurb}</p>}
+          <div
+            className={`mt-5 flex flex-wrap gap-3 ${
+              isCentered ? "justify-center" : ""
+            }`}
+          >
+            <Link
+              href={href}
+              className={buttonVariants({ variant: "default" })}
             >
-              <h3 className="text-2xl md:text-3xl font-semibold tracking-tight">
-                {computedTitle}
-              </h3>
-              {computedBlurb && (
-                <p className="mt-3 text-muted-foreground">{computedBlurb}</p>
-              )}
-              <div
-                className={[
-                  "mt-5 flex flex-wrap gap-3",
-                  align === "center" ? "justify-center" : undefined,
-                ]
-                  .filter(Boolean)
-                  .join(" ")}
-              >
-                <a
-                  href={href}
-                  className={buttonVariants({ variant: "default" })}
-                >
-                  <span className="flex items-center gap-2">
-                    {ctaLabel}
-                    <Icon iconVariant="arrow-right" strokeWidth={1.5} />
-                  </span>
-                </a>
-              </div>
-            </div>
+              <span className="flex items-center gap-2">
+                {ctaLabel}
+                <Icon iconVariant="arrow-right" strokeWidth={1.5} />
+              </span>
+            </Link>
           </div>
         </div>
-      );
-    },
-  },
-  block: {
-    normal: ({ children }) => <p className="mb-4">{children}</p>,
-    h1: ({ children }) => {
-      const text = getTextFromChildren(children);
-      const id = text.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-      return (
-        <h1 id={id} className="my-4 font-serif font-semibold scroll-mt-20">
-          {children}
-        </h1>
-      );
-    },
-    h2: ({ children }) => {
-      const text = getTextFromChildren(children);
-      const id = text.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-      return (
-        <h2 id={id} className="my-4 font-serif font-semibold scroll-mt-20">
-          {children}
-        </h2>
-      );
-    },
-    h3: ({ children }) => {
-      const text = getTextFromChildren(children);
-      const id = text.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-      return (
-        <h3 id={id} className="my-4 font-semibold scroll-mt-20">
-          {children}
-        </h3>
-      );
-    },
-    h4: ({ children }) => {
-      const text = getTextFromChildren(children);
-      const id = text.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-      return (
-        <h4 id={id} className="my-4 font-semibold scroll-mt-20">
-          {children}
-        </h4>
-      );
-    },
-    h5: ({ children }) => {
-      const text = getTextFromChildren(children);
-      const id = text.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-      return (
-        <h5 id={id} className="my-4 font-semibold scroll-mt-20">
-          {children}
-        </h5>
-      );
-    },
-    blockquote: ({ children }) => (
-      <blockquote className="my-4 border-l-4 border-border pl-4 italic font-medium">
-        {children}
-      </blockquote>
-    ),
-  },
-  marks: {
-    link: ({ value, children }) => {
-      const href = resolveLinkHref(
-        {
-          isExternal: value?.isExternal ?? undefined,
-          href: value?.href ?? undefined,
-          internalType: value?.internalType ?? undefined,
-          internalSlug: value?.internalSlug ?? undefined,
-        },
-        locale
-      );
-      const target = value?.isExternal && value?.target ? "_blank" : undefined;
-      const rel = target ? "noopener noreferrer" : undefined;
-      return (
-        <Link
-          href={href || "#"}
-          target={target}
-          rel={rel}
-          className="underline"
-        >
-          {children}
-        </Link>
-      );
-    },
-  },
-  list: {
-    bullet: ({ children }) => (
-      <ul className="list-disc pl-4 mb-4">{children}</ul>
-    ),
-    number: ({ children }) => (
-      <ol className="list-decimal pl-4 mb-4">{children}</ol>
-    ),
-  },
-  listItem: {
-    bullet: ({ children }) => <li className="mb-2">{children}</li>,
-    number: ({ children }) => <li className="mb-2">{children}</li>,
-  },
-});
+      </div>
+    </div>
+  );
+};
+
+// --- Main Renderer ---
 
 const PortableTextRenderer = ({
   value,
@@ -342,12 +203,150 @@ const PortableTextRenderer = ({
   value: PortableTextProps["value"];
   locale?: SupportedLocale;
 }) => {
-  return (
-    <PortableText
-      value={value}
-      components={makePortableTextComponents(locale)}
-    />
+  // MEMOIZATION: Critical to prevent re-mounting components on every parent render
+  const components: PortableTextComponents = useMemo(
+    () => ({
+      types: {
+        image: ({ value }: { value: PortableTextImage }) => {
+          const { url, metadata } = value.asset;
+          return (
+            <figure className="my-8">
+              <Image
+                className="m-auto aspect-video rounded-xl object-cover"
+                src={url}
+                alt={value.alt || ""}
+                width={metadata.dimensions.width}
+                height={metadata.dimensions.height}
+                placeholder={metadata.lqip ? "blur" : "empty"}
+                blurDataURL={metadata.lqip || undefined}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 700px"
+              />
+              {value.alt && (
+                <figcaption className="mt-2 text-center text-sm text-muted-foreground">
+                  {value.alt}
+                </figcaption>
+              )}
+            </figure>
+          );
+        },
+        youtube: ({ value }: { value: { videoId?: string } }) => (
+          <div className="aspect-video w-full max-w-2xl mx-auto rounded-xl overflow-hidden my-8 bg-muted">
+            {value.videoId ? (
+              <YouTubeEmbed videoid={value.videoId} params="rel=0" />
+            ) : (
+              <div className="flex items-center justify-center h-full text-muted-foreground">
+                Video unavailable
+              </div>
+            )}
+          </div>
+        ),
+        code: CodeBlock,
+        alert: ({
+          value,
+        }: {
+          value: { title?: unknown; description?: unknown };
+        }) => (
+          <Alert className="my-6">
+            <Lightbulb className="h-4 w-4" />
+            <AlertTitle>{toText(value.title)}</AlertTitle>
+            <AlertDescription>{toText(value.description)}</AlertDescription>
+          </Alert>
+        ),
+        "product-callout": ({ value }) => (
+          <ProductCallout value={value} locale={locale} />
+        ),
+      },
+      block: {
+        normal: ({ children }) => <p className="mb-4 leading-7">{children}</p>,
+        h1: ({ children }) => (
+          <h1
+            id={generateId(children)}
+            className="mt-8 mb-4 scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl font-serif"
+          >
+            {children}
+          </h1>
+        ),
+        h2: ({ children }) => (
+          <h2
+            id={generateId(children)}
+            className="mt-10 mb-4 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 font-serif"
+          >
+            {children}
+          </h2>
+        ),
+        h3: ({ children }) => (
+          <h3
+            id={generateId(children)}
+            className="mt-8 mb-4 scroll-m-20 text-2xl font-semibold tracking-tight"
+          >
+            {children}
+          </h3>
+        ),
+        h4: ({ children }) => (
+          <h4
+            id={generateId(children)}
+            className="mt-8 mb-4 scroll-m-20 text-xl font-semibold tracking-tight"
+          >
+            {children}
+          </h4>
+        ),
+        h5: ({ children }) => (
+          <h5
+            id={generateId(children)}
+            className="mt-8 mb-4 text-lg font-semibold tracking-tight"
+          >
+            {children}
+          </h5>
+        ),
+        blockquote: ({ children }) => (
+          <blockquote className="mt-6 border-l-2 pl-6 italic text-muted-foreground">
+            {children}
+          </blockquote>
+        ),
+      },
+      marks: {
+        link: ({ value, children }) => {
+          const href = resolveLinkHref(
+            {
+              isExternal: value?.isExternal,
+              href: value?.href,
+              internalType: value?.internalType,
+              internalSlug: value?.internalSlug,
+            },
+            locale
+          );
+
+          const isExternal = value?.isExternal || href?.startsWith("http");
+
+          return (
+            <Link
+              href={href || "#"}
+              target={isExternal ? "_blank" : undefined}
+              rel={isExternal ? "noopener noreferrer" : undefined}
+              className="font-medium text-primary underline underline-offset-4 hover:no-underline"
+            >
+              {children}
+            </Link>
+          );
+        },
+      },
+      list: {
+        bullet: ({ children }) => (
+          <ul className="my-6 ml-6 list-disc [&>li]:mt-2">{children}</ul>
+        ),
+        number: ({ children }) => (
+          <ol className="my-6 ml-6 list-decimal [&>li]:mt-2">{children}</ol>
+        ),
+      },
+      listItem: {
+        bullet: ({ children }) => <li>{children}</li>,
+        number: ({ children }) => <li>{children}</li>,
+      },
+    }),
+    [locale]
   );
+
+  return <PortableText value={value} components={components} />;
 };
 
 export default PortableTextRenderer;

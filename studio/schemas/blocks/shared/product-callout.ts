@@ -6,8 +6,17 @@ export default defineType({
   title: "Product Callout",
   type: "object",
   icon: PackageOpen,
-  description:
-    "Highlight a product inside article content with an image, title and CTA.",
+  description: "Highlight a product inside article content.",
+
+  // Group visual settings to declutter the editor
+  fieldsets: [
+    {
+      name: "display",
+      title: "Display Settings",
+      options: { collapsible: true, collapsed: true },
+    },
+  ],
+
   fields: [
     defineField({
       name: "product",
@@ -21,13 +30,13 @@ export default defineType({
       name: "title",
       type: "string",
       title: "Override Title",
-      description: "Optional: override the product title shown in the callout",
+      description: "Leave empty to use the Product's actual title.",
     }),
     defineField({
       name: "blurb",
       type: "text",
-      title: "Blurb",
-      description: "Optional: short description below the title",
+      title: "Custom Blurb",
+      description: "Leave empty to use the Product's excerpt.",
       rows: 3,
       validation: (rule) =>
         rule.max(240).warning("Keep the blurb concise (≤ 240 characters)"),
@@ -36,13 +45,16 @@ export default defineType({
       name: "ctaLabel",
       type: "string",
       title: "CTA Label",
-      description:
-        "Button label linking to the product page (defaults to 'View product')",
+      placeholder: "View product",
+      description: "Defaults to 'View product' if left empty.",
     }),
+
+    // Display Settings Fieldset
     defineField({
       name: "align",
       type: "string",
       title: "Alignment",
+      fieldset: "display",
       options: {
         list: [
           { title: "Left", value: "left" },
@@ -55,20 +67,30 @@ export default defineType({
     defineField({
       name: "showImage",
       type: "boolean",
-      title: "Show Image",
+      title: "Show Product Image",
+      fieldset: "display",
       initialValue: true,
-      description: "Disable to hide the product image in the card",
     }),
   ],
+
+  // Enhanced Preview Logic
   preview: {
     select: {
-      title: "title",
-      productTitle: "product->title",
+      overrideTitle: "title",
+      productTitle: "product.title",
+      productImage: "product.image",
+      showImage: "showImage",
     },
-    prepare({ title, productTitle }) {
+    prepare({ overrideTitle, productTitle, productImage, showImage }) {
+      const title = overrideTitle || productTitle || "Select a product";
+      const subtitle = showImage
+        ? "Product Callout (with image)"
+        : "Product Callout (text only)";
+
       return {
-        title: "Product Callout",
-        subtitle: title || productTitle || "(select a product)",
+        title: title,
+        subtitle: subtitle,
+        media: productImage || PackageOpen,
       };
     },
   },
