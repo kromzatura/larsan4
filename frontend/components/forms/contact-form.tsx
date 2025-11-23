@@ -14,7 +14,7 @@ import {
   useState,
   useTransition,
 } from "react";
-import Script from "next/script";
+// Removed next/script usage due to type mismatch in CI build; dynamic injection used instead.
 import { useLocale } from "@/lib/i18n/locale-context";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import {
@@ -88,6 +88,20 @@ export function ContactForm({
 
   useEffect(() => {
     if (!requireCaptcha || !siteKey) return;
+    // Dynamically inject reCAPTCHA script once if not already present
+    if (typeof window !== "undefined") {
+      const marker = document.querySelector(
+        'script[data-recaptcha="true"]'
+      ) as HTMLScriptElement | null;
+      if (!marker) {
+        const script = document.createElement("script");
+        script.src = `https://www.google.com/recaptcha/api.js?render=explicit&hl=${locale}`;
+        script.async = true;
+        script.defer = true;
+        script.setAttribute("data-recaptcha", "true");
+        document.head.appendChild(script);
+      }
+    }
     const tryInit = () => {
       const grecaptcha = getGrecaptcha();
       const container = captchaRef.current;
@@ -113,7 +127,7 @@ export function ContactForm({
     tryInit();
     const id = window.setInterval(tryInit, 500);
     return () => window.clearInterval(id);
-  }, [getGrecaptcha, siteKey, requireCaptcha]);
+  }, [getGrecaptcha, siteKey, requireCaptcha, locale]);
 
   // Unified token retrieval that supports v2 invisible (widget) and v3 fallback
   async function getRecaptchaToken(): Promise<string> {
@@ -214,14 +228,8 @@ export function ContactForm({
       >
         {/* Ensure server action receives the active locale */}
         <input type="hidden" name="locale" value={locale} />
-        {requireCaptcha && siteKey && (
-          <Script
-            src={`https://www.google.com/recaptcha/api.js?render=explicit&hl=${locale}`}
-            async
-            defer
-            strategy="afterInteractive"
-          />
-        )}
+        {/* Load reCAPTCHA script dynamically via effect to avoid ScriptProps type mismatch */}
+        {requireCaptcha && siteKey && <></>}
         {children}
         {/* Honeypot field: visually hidden but present in DOM */}
         <div aria-hidden="true" className="hidden">
