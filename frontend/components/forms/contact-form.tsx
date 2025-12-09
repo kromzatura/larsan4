@@ -42,6 +42,7 @@ export function ContactForm({
   const dict = getDictionary(locale);
   const [isPending, startTransition] = useTransition();
   const [formState, setFormState] = useState<ContactFormState>({});
+  const formRef = useRef<HTMLFormElement | null>(null);
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
   // Align with server: default to verifying in production when keys exist.
   const isProd = process.env.NODE_ENV === "production";
@@ -161,8 +162,9 @@ export function ContactForm({
   // New client-side submit handler invoked by react-hook-form
   async function onClientSubmit(values: ContactFormValues) {
     form.clearErrors();
-    // Build FormData for server action
-    const formData = new FormData();
+    // Build FormData for server action (captures hidden children inputs)
+    const formElement = formRef.current;
+    const formData = formElement ? new FormData(formElement) : new FormData();
     formData.set("firstName", values.firstName);
     formData.set("lastName", values.lastName);
     formData.set("email", values.email);
@@ -222,6 +224,7 @@ export function ContactForm({
   return (
     <Form {...form}>
       <form
+        ref={formRef}
         onSubmit={form.handleSubmit(onClientSubmit)}
         className="space-y-6"
         suppressHydrationWarning
